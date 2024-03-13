@@ -6,7 +6,7 @@ spring:
   #DB datasource
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url:
+    url: 
     username: 
     password: 
 
