@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin/inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<main>
+    <section>
+        <h1 class="d:none">검색</h1>
+        <label>
+            <span>상품검색</span>
+            <input type="text">
+        </label>
+    </section>
+    <section>
+        <h1>상품선택목록</h1>
+        <div>
+            <div>
+                <input type="checkbox">
+                <span>전체선택</span>
+            </div>
+            <div>
+                <button>품절</button>
+                <button>숨김</button>
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="checkbox">
+            </div>
+            <div>
+                <div><img alt="상품썸네일"></div>
+                <div>
+                    <div>흙당근 2개입</div>
+                    <div>2500원</div>
+                    <div>
+                        <span>재고</span>
+                        <span>200</span>
+                        <span>상태</span>
+                        <span>활성화</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h1>상품추가</h1>
+        <button>추가</button>
+    </section>
+</main>
+</body>
+</html>

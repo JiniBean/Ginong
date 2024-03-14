@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin/product")
 public class ProductController {
 
+    @GetMapping("list")
+    public String list(){
+        return "admin/product/list";
+    }
+
     @GetMapping("reg")
     public String reg(){
         return "admin/product/reg";
