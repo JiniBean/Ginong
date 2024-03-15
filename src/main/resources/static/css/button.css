@@ -27,7 +27,7 @@
 
     /* btn-type:outline */
     --btn-outline-background-color-default: var(--color-base-1);
-    --btn-outline-background-color-hover: var(--color-base-2);
+    --btn-outline-background-color-hover: var(--color-base-1);
     --btn-outline-background-color-active: #F0F0F1;
     --btn-outline-border: 1px solid var(--color-main-6);
     --btn-outline-color: inherit;
@@ -39,4 +39,8 @@
     --btn-border-accent-default: 1px solid var(--color-accent-1);
     --btn-border-accent-hover: 1px solid var(--color-accent-1);
     --btn-color-accent: var(--color-base-1);
+}
+
+.n-btn-type\:outline:hover{
+    border-color: #FA6400;
 }

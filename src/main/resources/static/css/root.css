@@ -89,6 +89,7 @@
 /*========== border ==============================*/
    --border-color: var(--color-base-4);   /* 기본 색상 */
    --border-radius-1: 5px;
+   --border-radius-2: 10px;
 
 
 
