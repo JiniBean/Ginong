@@ -33,6 +33,13 @@
    --font-size-6 : 24px;
 
 
+/*========== icon-size ==============================*/
+   --icon-size-1: 16px;
+   --icon-size-2: 18px;
+   --icon-size-3: 20px;
+   --icon-size-4: 24px;
+   --icon-size-5: 32px;
+
 /*========== color ==============================*/
    --color-base-1: #FFFFFF;
    --color-base-2: #F5F5F5;
