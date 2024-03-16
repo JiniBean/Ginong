@@ -13,21 +13,21 @@
 <body>
 <main layout:fragment="main">
     <section>
-        <h1>카테고리</h1>
-        <div>
-            <button>카테고리 선택</button>
-            <ul>
-                <li>과채류</li>
-                <li>양념류</li>
-                <li>가공식품류</li>
-            </ul>
-        </div>
-    </section>
+        <h1>상품 정보</h1>
+        <form>
+            <fieldset>
+                <legend>카테고리</legend>
+                <button>카테고리 선택</button>
+                <ul>
+                    <li>과채류</li>
+                    <li>양념류</li>
+                    <li>가공식품류</li>
+                </ul>
+            </fieldset>
 
-    <section>
-        <h1>상품 설명</h1>
-        <div>
-            <form>
+
+            <fieldset>
+                <legend>상품 설명 텍스트</legend>
                 <div>
                     <span>상품명</span>
                     <input>
@@ -71,23 +71,34 @@
                     <input>
                     <input>
                 </div>
+            </fieldset>
+            <fieldset>
+                <legend>상품 설명 사진</legend>
                 <div>
                     <div>사진1</div>
                     <div>사진2</div>
                     <div>사진3</div>
                     <div>사진4</div>
                 </div>
-                <div><button>사진 첨부하기</button></div>
+                <div>
+                    <button>사진 첨부하기</button>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>상품 상태</legend>
                 <div>
                     <span>상태</span>
                     <input type="checkbox">
                 </div>
-            </form>
-        </div>
-        <div>
-            <button>삭제</button>
-            <button>수정</button>
-        </div>
+            </fieldset>
+            <fieldset>
+                <legend>버튼</legend>
+                <div>
+                    <button>삭제</button>
+                    <button>수정</button>
+                </div>
+            </fieldset>
+        </form>
     </section>
 </main>
 </body>

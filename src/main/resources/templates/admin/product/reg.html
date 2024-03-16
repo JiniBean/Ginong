@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="admin/inc/layout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin/inc/layout">
 
 <head>
     <meta charset="UTF-8">
@@ -11,85 +11,104 @@
 </head>
 
 <body>
-    <main layout:fragment="main">
-        <section>
-            <h1>카테고리</h1>
-            <div>
-                <button>카테고리 선택</button>
-                <ul>
-                    <li>과채류</li>
-                    <li>양념류</li>
-                    <li>가공식품류</li>
-                </ul>
-            </div>
-        </section>
+<main layout:fragment="main">
+    <section>
+        <h1>카테고리</h1>
+        <div>
+            <button>카테고리 선택</button>
+            <ul>
+                <li>과채류</li>
+                <li>양념류</li>
+                <li>가공식품류</li>
+            </ul>
+        </div>
+    </section>
 
-        <section>
-            <h1>상품 설명</h1>
-            <div>
-                <form>
-                    <div>
-                        <span>상품명</span>
-                        <input>
-                    </div>
-                    <div>
-                        <span>가격</span>
-                        <input>
-                    </div>
-                    <div>
-                        <span>중량</span>
-                        <input>
-                    </div>
-                    <div>
-                        <span>개수</span>
-                        <input>
-                    </div>
-                    <div>
-                        <span>재고</span>
-                        <input>
-                    </div>
-                    <div>
-                        <span>수확일</span>
-                        <input>
-                    </div>
-                    <div>
-                        <span>유통기한</span>
-                        <input>
-                        <input>
-                    </div>
-                    <div>
-                        <span>상품보관유형</span>
-                        <button>보관유형선택</button>
-                        <ul>
-                            <li>실온보관</li>
-                            <li>냉장보관</li>
-                            <li>냉동보관</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <span>상품설명</span>
-                        <input>
-                        <input>
-                    </div>
-                    <div>
-                        <div>사진1</div>
-                        <div>사진2</div>
-                        <div>사진3</div>
-                        <div>사진4</div>
-                    </div>
-                    <div><button>사진 첨부하기</button></div>
-                    <div>
-                        <span>상태</span>
-                        <input type="checkbox">
-                    </div>
-                </form>
-            </div>
-            <div>
-                <button>임시저장</button>
-                <button>저장</button>
-            </div>
-        </section>
-    </main>
+    <section>
+        <h1>상품 설명</h1>
+
+        <form>
+            <fieldset>
+                <legend>상품설명 텍스트</legend>
+                <div>
+                    <span>상품명</span>
+                    <input>
+                </div>
+                <div>
+                    <span>가격</span>
+                    <input>
+                </div>
+                <div>
+                    <span>중량</span>
+                    <input>
+                </div>
+                <div>
+                    <span>개수</span>
+                    <input>
+                </div>
+                <div>
+                    <span>재고</span>
+                    <input>
+                </div>
+                <div>
+                    <span>수확일</span>
+                    <input>
+                </div>
+                <div>
+                    <span>유통기한</span>
+                    <input>
+                    <input>
+                </div>
+                <div>
+                    <span>상품보관유형</span>
+                    <button>보관유형선택</button>
+                    <ul>
+                        <li>실온보관</li>
+                        <li>냉장보관</li>
+                        <li>냉동보관</li>
+                    </ul>
+                </div>
+                <div>
+                    <span>상품설명</span>
+                    <input>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+    <section>
+        <h1>사진</h1>
+        <form>
+            <fieldset>
+                <legend>상품설명 사진</legend>
+                <div>
+                    <div>사진1</div>
+                    <div>사진2</div>
+                    <div>사진3</div>
+                    <div>사진4</div>
+                </div>
+                <div>
+                    <button>사진 첨부하기</button>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+    <section>
+        <h1>상태</h1>
+        <div>
+            <span>상태</span>
+            <input type="checkbox">
+        </div>
+    </section>
+
+
+    <section>
+        <h1>버튼</h1>
+        <div>
+            <button>임시저장</button>
+            <button>저장</button>
+        </div>
+    </section>
+</main>
 </body>
 
 </html>
