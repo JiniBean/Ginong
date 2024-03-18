@@ -17,5 +17,10 @@ public class ProductController {
     public String reg(){
         return "admin/product/reg";
     }
-    
+
+    @GetMapping("update")
+    public String update(){
+        return "admin/product/update";
+    }
+
 }

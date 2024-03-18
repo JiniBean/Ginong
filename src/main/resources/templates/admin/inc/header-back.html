@@ -1,37 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <header>
-        <div>
-            <h1>뒤로가기 있는 헤더</h1>
-    
-            <section>
-                <h1>뒤로가기 있는 모바일</h1>
-                <ul>
-                    <li><a href="">뒤로가기</a></li>
-                    <li>페이지명</li>
-                    <li><a href="">햄버거</a></li>
-                </ul>
-            </section>
+    <header class="header h:5 md:h:6 max-w:10 w:10p">
+        <div class="d:flex jc:space-between h:5 md:h:6 ml:4 mr:4 md:ml:0 md:mr:0">
+            <h1 class="d:none md:d:flex ai:center"><a href="" class="fs:4 fw:3 ">기농이네 관리자</a></h1>
+            <div class="d:flex ai:center md:d:none"><a href="" class="icon icon:caret_left icon-size:5">뒤로가기</a></div>
 
-        </div>
-    </header>
-    <header>
-        <div>
-            <h1><a href="">기농이네 관리자 뒤로가기 헤더</a></h1>
-            <div><a href="">뒤로가기</a></div>
-            <div> 페이지명 </div>
-            <nav>
-                <h1>pc</h1>
-                <ul>
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">로그아웃</a></li>
-                    <li><a href="">개인정보수정</a></li>
+            <div class=" d:flex ai:center md:d:none fs:4 fw:3" >페이지명</div>
+
+            <nav class="d:none md:d:flex ai:center" >
+                <h1 class="d:none">pc</h1>
+                <ul class="d:flex gap:4">
+                    <li><a href="" class="color:main-6 fw:3">로그인</a></li>
+                    <li><a href="" class="color:main-6 fw:3">로그아웃</a></li>
+                    <li><a href="" class="color:main-6 fw:3">개인정보수정</a></li>
                 </ul>
             </nav>
 
-            <section>
-                <h1>모바일</h1>
-                <div><a href="">햄버거</a></div>
+            <section class="md:d:none d:flex ai:center">
+                <h1 class="d:none">모바일</h1>
+                <div><a href="" class="icon icon:list icon-size:5">햄버거</a></div>
             </section>
 
         </div>

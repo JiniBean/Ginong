@@ -1,16 +1,12 @@
-html
-,body{
-    height: 100%;
-}
-
 body{
-    
+
     font-size: var(--font-size-2);
     color:var(--color-base-9);
 
 
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 @media (min-width: 780px) {
@@ -21,8 +17,5 @@ body{
 
 main{
     flex-grow: 1;
-}
-
-*{
-    box-sizing: border-box;
+    width: 100%;
 }
