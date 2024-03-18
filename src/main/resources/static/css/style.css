@@ -16,6 +16,6 @@ body{
   }
 
 main{
-    flex-grow: 1;
+    height: auto;
     width: 100%;
 }
