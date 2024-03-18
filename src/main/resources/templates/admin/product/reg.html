@@ -8,56 +8,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        window.addEventListener("load", function () {
+            const dropdownButtonCategory = document.getElementById("dropdown-btn-category");
+            const dropdownListCategory = document.getElementById("dropdown-list-category");
+
+            dropdownButtonCategory.addEventListener("click", function () {
+                dropdownListCategory.classList.toggle("active");
+            });
+        });
+        window.addEventListener("load", function () {
+            const dropdownButtonKeepcase = document.getElementById("dropdown-btn-keepcase");
+            const dropdownListKeepcase = document.getElementById("dropdown-list-keepcase");
+
+            dropdownButtonKeepcase.addEventListener("click", function () {
+                dropdownListKeepcase.classList.toggle("active");
+            });
+        });
+    </script>
 </head>
 
-<body>
+<body class = "margin-left:4 margin-right:4">
 <main layout:fragment="main">
     <section>
-        <h1>상품 정보</h1>
-        <form>
-            <div>
-                <button>카테고리 선택</button>
-                <ul>
+        <h1 class="d:none">상품 정보</h1>
+        <form class="n-form-type:outline-none">
+            <div class="n-dropdown">
+                <button id="dropdown-btn-category" type="button" class="n-btn">카테고리 선택</button>
+                <ul id="dropdown-list-category">
                     <li>과채류</li>
                     <li>양념류</li>
                     <li>가공식품류</li>
                 </ul>
             </div>
             <fieldset>
-                <legend>상품 설명 텍스트</legend>
+                <legend class="d:none">상품 설명 텍스트</legend>
                 <div>
                     <span>상품명</span>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
                 <div>
                     <span>가격</span>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
                 <div>
                     <span>중량</span>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
                 <div>
                     <span>개수</span>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
                 <div>
                     <span>재고</span>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
                 <div>
                     <span>수확일</span>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
                 <div>
                     <span>유통기한</span>
-                    <input>
-                    <input>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
+                    <input
+                            type="text"
+                            class="n-textbox n-textbox-type:underline"
+                            placeholder="Underline Textbox"/>
                 </div>
-                <div>
+                <div class="n-dropdown display:flex flex-direction:column">
                     <span>상품보관유형</span>
-                    <button>보관유형선택</button>
-                    <ul>
+                    <button id="dropdown-btn-keepcase" type="button" class="n-btn">보관유형선택</button>
+                    <ul id="dropdown-list-keepcase">
                         <li>실온보관</li>
                         <li>냉장보관</li>
                         <li>냉동보관</li>
@@ -65,8 +107,7 @@
                 </div>
                 <div>
                     <span>상품설명</span>
-                    <input>
-                    <input>
+                    <textarea type="text" class="n-textbox" placeholder="Basic Textbox"></textarea>
                 </div>
             </fieldset>
             <div>
@@ -82,11 +123,11 @@
             </div>
             <div>
                 <span>상태</span>
-                <input type="checkbox">
+                <input type="checkbox" class="n-toggle n-toggle-type:slide"/>
             </div>
-            <div>
-                <button>임시저장</button>
-                <button>저장</button>
+            <div class = "display:flex flex-direction:row justify-content:space-between">
+                <button type="button" class="n-btn n-btn-size:2 min-w:3">임시저장</button>
+                <button type="button" class="n-btn n-btn-size:2 min-w:3">저장</button>
             </div>
         </form>
     </section>
