@@ -13,23 +13,18 @@
 <body>
 <main layout:fragment="main">
     <section>
-        <h1>카테고리</h1>
-        <div>
-            <button>카테고리 선택</button>
-            <ul>
-                <li>과채류</li>
-                <li>양념류</li>
-                <li>가공식품류</li>
-            </ul>
-        </div>
-    </section>
-
-    <section>
-        <h1>상품 설명</h1>
-
+        <h1>상품 정보</h1>
         <form>
+            <div>
+                <button>카테고리 선택</button>
+                <ul>
+                    <li>과채류</li>
+                    <li>양념류</li>
+                    <li>가공식품류</li>
+                </ul>
+            </div>
             <fieldset>
-                <legend>상품설명 텍스트</legend>
+                <legend>상품 설명 텍스트</legend>
                 <div>
                     <span>상품명</span>
                     <input>
@@ -71,15 +66,10 @@
                 <div>
                     <span>상품설명</span>
                     <input>
+                    <input>
                 </div>
             </fieldset>
-        </form>
-    </section>
-    <section>
-        <h1>사진</h1>
-        <form>
-            <fieldset>
-                <legend>상품설명 사진</legend>
+            <div>
                 <div>
                     <div>사진1</div>
                     <div>사진2</div>
@@ -89,24 +79,16 @@
                 <div>
                     <button>사진 첨부하기</button>
                 </div>
-            </fieldset>
+            </div>
+            <div>
+                <span>상태</span>
+                <input type="checkbox">
+            </div>
+            <div>
+                <button>임시저장</button>
+                <button>저장</button>
+            </div>
         </form>
-    </section>
-    <section>
-        <h1>상태</h1>
-        <div>
-            <span>상태</span>
-            <input type="checkbox">
-        </div>
-    </section>
-
-
-    <section>
-        <h1>버튼</h1>
-        <div>
-            <button>임시저장</button>
-            <button>저장</button>
-        </div>
     </section>
 </main>
 </body>
