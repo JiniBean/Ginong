@@ -1,0 +1,28 @@
+html
+,body{
+    height: 100%;
+}
+
+body{
+    
+    font-size: var(--font-size-2);
+    color:var(--color-base-9);
+
+
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 780px) {
+    body {
+        font-size : var(--font-size-3);
+    }
+  }
+
+main{
+    flex-grow: 1;
+}
+
+*{
+    box-sizing: border-box;
+}

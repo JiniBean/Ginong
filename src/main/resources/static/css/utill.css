@@ -31,3 +31,42 @@
     gap: var(--gap-20)  !important;
 }
 
+
+/*========== font-color ==============================*/
+
+.color\:main-1{
+   color: var(--color-main-1);
+   }
+.color\:main-2{
+   color: var(--color-main-2);
+   }
+.color\:main-3{
+   color: var(--color-main-3);
+   }
+.color\:main-4{
+   color: var(--color-main-4);
+   }        
+.color\:main-5{
+   color: var(--color-main-5);
+   }        
+.color\:main-6{
+   color: var(--color-main-6);
+   }  
+.color\:sub-1{
+   color: var(--color-sub-1); 
+   } 
+.color\:sub-2{
+   color: var(--color-sub-2);
+}   
+.color\:sub-3{
+   color: var(--color-sub-3) ;
+   } 
+.color\:sub-4{
+   color: var(--color-sub-4); 
+   } 
+.color\:sub-5{
+   color: var(--color-sub-5) ;
+   } 
+.color\:sub-6{
+   color: var(--color-sub-6);
+   }
