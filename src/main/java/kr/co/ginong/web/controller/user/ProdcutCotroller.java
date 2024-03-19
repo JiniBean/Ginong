@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user/product")
 public class ProdcutCotroller {
 
+    @GetMapping("list")
+    public String list(){
+        return "user/product/list";
+    }
 
     @GetMapping("detail")
     public String detail(){
