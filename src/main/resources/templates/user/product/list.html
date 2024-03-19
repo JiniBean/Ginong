@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="user/inc/layout">
 <head>
     <meta charset="UTF-8">
     <title>Product-List</title>
+    <a ></a>
 </head>
 <body>
+<main layout:fragment="main">
     <section>
         <h1 class="fs:1 ">정렬 카테고리</h1>
         <div>
@@ -31,5 +36,6 @@
                 </div>
             </div>
     </section>
+</main>
 </body>
 </html>
