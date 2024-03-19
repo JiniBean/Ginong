@@ -8,6 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"> </script>
+
     <script>
         window.addEventListener("load", function () {
             const dropdownButtonCategory = document.getElementById("dropdown-btn-category");
@@ -25,25 +28,69 @@
                 dropdownListKeepcase.classList.toggle("active");
             });
         });
+
     </script>
+    <style>
+        li {
+            list-style: none;
+        }
+
+        img {
+            width: 90px;
+            height: 90px;
+        }
+
+        .real-upload {
+            display: none;
+        }
+
+        .upload {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .upload::before {
+            content: url(/img/Camera.svg);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+
+            margin-right: 100px; /* 이미지와 텍스트 간격 조정 */
+        }
+
+        .text {
+            padding-left: 25px; /* 이미지 너비 + 간격만큼 텍스트를 이동시킴 */
+        }
+
+
+
+        .image-preview {
+            width: 1300px;
+            height: 90px;
+            background-color: #FFFFFF;
+            display: flex;
+            gap: 20px;
+        }
+    </style>
 </head>
 
-<body class = "margin-left:4 margin-right:4">
-<main layout:fragment="main">
+<body >
+<main class = "max-w:10 w:10p" layout:fragment="main">
     <section>
         <h1 class="d:none">상품 정보</h1>
-        <form class="n-form-type:outline-none">
+        <form class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div class="n-dropdown">
-                <button id="dropdown-btn-category" type="button" class="n-btn">카테고리 선택</button>
+                <button id="dropdown-btn-category" type="button" class="n-btn  min-w:5 jc:space-between"><span class="fl:fill">카테고리 선택</span><span>▽</span></button>
                 <ul id="dropdown-list-category">
                     <li>과채류</li>
                     <li>양념류</li>
                     <li>가공식품류</li>
                 </ul>
             </div>
-            <fieldset>
+            <fieldset class ="d:flex fl-dir:column gap:8">
                 <legend class="d:none">상품 설명 텍스트</legend>
-                <div>
+                <div >
                     <span>상품명</span>
                     <input
                             type="text"
@@ -78,28 +125,34 @@
                             class="n-textbox n-textbox-type:underline"
                             placeholder="Underline Textbox"/>
                 </div>
-                <div>
+                <div class="d:flex fl-dir:column">
                     <span>수확일</span>
-                    <input
-                            type="text"
-                            class="n-textbox n-textbox-type:underline"
-                            placeholder="Underline Textbox"/>
+                    <input type="text" class="n-textbox n-textbox-type:underline" name="foo2">
+                    <script>
+                        const elem2 = document.querySelector('input[name="foo2"]');
+                        const datepicker = new Datepicker(elem2, {
+                        });
+                    </script>
                 </div>
                 <div>
                     <span>유통기한</span>
-                    <input
-                            type="text"
-                            class="n-textbox n-textbox-type:underline"
-                            placeholder="Underline Textbox"/>
-                    <input
-                            type="text"
-                            class="n-textbox n-textbox-type:underline"
-                            placeholder="Underline Textbox"/>
+                    <div id="foo" class="d:flex fl-dir:row">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="start">
+                        <span>~</span>
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="end">
+                    </div>
+                    <script>
+                        const elem = document.getElementById('foo');
+                        const rangepicker = new DateRangePicker(elem, {
+                            // ...options
+                        });
+                    </script>
                 </div>
-                <div class="n-dropdown display:flex flex-direction:column">
-                    <span>상품보관유형</span>
-                    <button id="dropdown-btn-keepcase" type="button" class="n-btn">보관유형선택</button>
-                    <ul id="dropdown-list-keepcase">
+                <div class="n-dropdown">
+                    <label class="d:flex fl-dir:column">상품보관유형
+                    <button id="dropdown-btn-keepcase" type="button" class="n-btn  max-w:5 justify-content:space-between"><span class="flex:fill">보관유형선택</span><span>▽</span></button>
+                    </label>
+                    <ul id="dropdown-list-keepcase" class = "active">
                         <li>실온보관</li>
                         <li>냉장보관</li>
                         <li>냉동보관</li>
@@ -111,23 +164,70 @@
                 </div>
             </fieldset>
             <div>
-                <div>
-                    <div>사진1</div>
-                    <div>사진2</div>
-                    <div>사진3</div>
-                    <div>사진4</div>
-                </div>
-                <div>
-                    <button>사진 첨부하기</button>
-                </div>
+                <ul class="image-preview"></ul>
+                <input type="file" class="real-upload" accept="image/*" required multiple>
+                <div class="upload n-btn w:100p"><span class="text">사진 첨부하기</span></div>
+                <script>
+                    function getImageFiles(e) {
+                        const uploadFiles = [];
+                        const files = e.currentTarget.files;
+                        const imagePreview = document.querySelector('.image-preview');
+                        const docFrag = new DocumentFragment();
+
+                        const uploadedImagesCount = imagePreview.querySelectorAll('li').length;
+
+                        if (uploadedImagesCount + files.length > 4) {
+                            alert('이미지는 최대 4개 까지 업로드가 가능합니다.');
+                            return;
+                        }
+
+
+                        // 파일 타입 검사
+                        [...files].forEach(file => {
+                            if (!file.type.match("image/.*")) {
+                                alert('이미지 파일만 업로드가 가능합니다.');
+                                return
+                            }
+
+                            // 파일 갯수 검사
+                            if ([...files].length < 4) {
+                                uploadFiles.push(file);
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    const preview = createElement(e, file);
+                                    imagePreview.appendChild(preview);
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        });
+                    }
+
+                    function createElement(e, file) {
+                        const li = document.createElement('li');
+                        const img = document.createElement('img');
+                        img.setAttribute('src', e.target.result);
+                        img.setAttribute('data-file', file.name);
+                        li.appendChild(img);
+
+                        return li;
+                    }
+
+                    const realUpload = document.querySelector('.real-upload');
+                    const upload = document.querySelector('.upload');
+
+                    upload.addEventListener('click', () => realUpload.click());
+
+                    realUpload.addEventListener('change', getImageFiles);
+                </script>
+
             </div>
             <div>
                 <span>상태</span>
                 <input type="checkbox" class="n-toggle n-toggle-type:slide"/>
             </div>
-            <div class = "display:flex flex-direction:row justify-content:space-between">
-                <button type="button" class="n-btn n-btn-size:2 min-w:3">임시저장</button>
-                <button type="button" class="n-btn n-btn-size:2 min-w:3">저장</button>
+            <div class = "display:flex flex-direction:row w:100p gap:8">
+                <button type="button" class="n-btn n-btn-size:2 min-w:3 w:100p">임시저장</button>
+                <button type="button" class="n-btn n-btn-size:2 min-w:3 w:100p">저장</button>
             </div>
         </form>
     </section>
