@@ -17,5 +17,6 @@ body{
 
 main{
     height: auto;
+    max-width: var(--width-10);
     width: 100%;
 }
