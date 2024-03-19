@@ -8,33 +8,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    main section
+</style>
 <body>
-<main layout:fragment="main">
+<main layout:fragment="main" class="p:4 d:flex fl-dir:column gap:8">
     <section>
         <h1 class="d:none">검색</h1>
-        <label>
-            <span>상품검색</span>
-            <input type="text">
-        </label>
+<!--        style="width:374px;"-->
+        <div class="pos:relative">
+            <label>
+                <span class="d:none">상품검색</span>
+                <input type="text" class="n-textbox" placeholder="검색어를 입력해 주세요">
+            </label>
+            <button class="pos:absolute" style="top:4px; right:8px;"><span class="icon icon:magnifying_glass icon-size:4 icon-color:base-5"></span></button>
+        </div>
     </section>
     <section>
-        <h1>상품선택목록</h1>
-        <div>
-            <div>
-                <input type="checkbox">
-                <span>전체선택</span>
+            <h1 class="d:none">상품선택목록</h1>
+            <div class="d:flex jc:space-between">
+                <div>
+                    <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
+                    <span>전체선택</span>
+                </div>
+                <div>
+                    <button class="n-btn n-btn:outline">품절</button>
+                    <button class="n-btn">숨김</button>
+                </div>
             </div>
+    </section>
+    <section class="d:flex fl-dir:column gap:4">
+        <h1 class="d:none">상품카드 목록</h1>
+        <div class="d:flex ai:center fl-dir:row gap:3">
             <div>
-                <button>품절</button>
-                <button>숨김</button>
+                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
             </div>
-        </div>
-        <div>
-            <div>
-                <input type="checkbox">
-            </div>
-            <div>
-                <div><img alt="상품썸네일"></div>
+            <div class="d:flex n-item color:color-base-4 fl-grow:1">
+                <div><img src="/img/carrot.png" alt="상품썸네일"></div>
                 <div>
                     <div>흙당근 2개입</div>
                     <div>2500원</div>
@@ -47,10 +57,67 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section>
-        <h1>상품추가</h1>
-        <button>추가</button>
+        <!--<div class="d:flex ai:center">
+            <div>
+                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
+            </div>
+            <div class="d:flex n-item color:color-base-4">
+                <div><img src="/img/carrot.png" alt="상품썸네일"></div>
+                <div>
+                    <div>흙당근 2개입</div>
+                    <div>2500원</div>
+                    <div>
+                        <span>재고</span>
+                        <span>200</span>
+                        <span>상태</span>
+                        <span>활성화</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d:flex ai:center">
+            <div>
+                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
+            </div>
+            <div class="d:flex n-item color:color-base-4">
+                <div><img src="/img/carrot.png" alt="상품썸네일"></div>
+                <div>
+                    <div>흙당근 2개입</div>
+                    <div>2500원</div>
+                    <div>
+                        <span>재고</span>
+                        <span>200</span>
+                        <span>상태</span>
+                        <span>활성화</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d:flex ai:center">
+            <div>
+                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
+            </div>
+            <div class="d:flex n-item color:color-base-4">
+                <div><img src="/img/carrot.png" alt="상품썸네일"></div>
+                <div>
+                    <div>흙당근 2개입</div>
+                    <div>2500원</div>
+                    <div>
+                        <span>재고</span>
+                        <span>200</span>
+                        <span>상태</span>
+                        <span>활성화</span>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+       <!--<div>
+            <h1 class="d:none">상품추가</h1>
+            <button class="n-btn n-btn:outline border-color:base-4" style="width:336px; height:60px;"><span class="icon icon:plus"></span></button>
+        </div>-->
+        <div class="n-item color:color-base-4 ml:7">
+            <span class="icon icon:plus"></span>
+        </div>
     </section>
 </main>
 </body>
