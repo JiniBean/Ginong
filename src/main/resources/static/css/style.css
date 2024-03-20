@@ -12,11 +12,20 @@ body{
 @media (min-width: 780px) {
     body {
         font-size : var(--font-size-3);
+        padding-left: var(--gap-4);
+        padding-right: var(--gap-4);
     }
-  }
+}
 
 main{
     height: auto;
-    max-width: var(--width-10);
     width: 100%;
+}
+
+header,
+nav,
+main,
+aside,
+footer{
+    max-width: var(--width-10) !important;
 }

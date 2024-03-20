@@ -11,7 +11,7 @@
    --width-7: 450px;
    --width-8: 500px;    /* PC 버전 로그인, 회원가입 */
    --width-9: 680px;    /* PC 버전 컨텐츠 가로 기본 */
-   --width-10: 1200px;  /* PC 버전 컨텐츠 가로 최대 */
+   --width-10: 1240px;  /* PC 버전 컨텐츠 가로 최대 */
 
 
 /*========== height ==============================*/
@@ -96,9 +96,6 @@
    --border-color: var(--color-base-4);   /* 기본 색상 */
    --border-radius-1: 5px;
    --border-radius-2: 10px;
-
-
-
 
 
 
