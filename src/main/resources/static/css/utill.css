@@ -34,15 +34,6 @@
 
 /*========== font-color ==============================*/
 
-.color\:main-1{
-   color: var(--color-main-1);
-   }
-.color\:main-2{
-   color: var(--color-main-2);
-   }
-.color\:main-3{
-   color: var(--color-main-3);
-   }
 .color\:main-4{
    color: var(--color-main-4);
    }        
@@ -51,25 +42,39 @@
    }        
 .color\:main-6{
    color: var(--color-main-6);
-   }  
-.color\:sub-1{
-   color: var(--color-sub-1); 
-   } 
-.color\:sub-2{
-   color: var(--color-sub-2);
-}   
-.color\:sub-3{
-   color: var(--color-sub-3) ;
-   } 
-.color\:sub-4{
-   color: var(--color-sub-4); 
-   } 
-.color\:sub-5{
-   color: var(--color-sub-5) ;
-   } 
-.color\:sub-6{
-   color: var(--color-sub-6);
    }
 
 
 /*========== icon-color ==============================*/
+
+.icon-color\:main-4::before,
+.icon-color\:main-4::after {
+    background-color: var(--color-main-4);
+}
+
+.icon-color\:main-5::before,
+.icon-color\:main-5::after {
+    background-color: var(--color-main-5);
+}
+
+.icon-color\:main-6::before,
+.icon-color\:main-6::after {
+    background-color: var(--color-main-6);
+}
+
+
+.deco-color\:main-4::before,
+.deco-color\:main-4::after {
+    background-color: var(--color-main-4);
+}
+
+.deco-color\:main-5::before,
+.deco-color\:main-5::after {
+    background-color: var(--color-main-5);
+}
+
+.deco-color\:main-6::before,
+.deco-color\:main-6::after {
+    background-color: var(--color-main-6);
+}
+
