@@ -3,3 +3,25 @@
     -webkit-mask-image: url("../icon/RT.svg");
     mask-image: url("../icon/RT.svg");
 }
+
+
+.icon\:clap::before,
+.icon\:clap::after {
+    -webkit-mask-image: url("../icon/clap.svg");
+    mask-image: url("../icon/clap.svg");
+}
+
+.icon\:leaf::before,
+.icon\:leaf::after {
+    -webkit-mask-image: url("../icon/leaf.svg");
+    mask-image: url("../icon/leaf.svg");
+}
+
+
+.icon\:thumbsup::before,
+.icon\:thumbsup::after {
+    -webkit-mask-image: url("../icon/thumbsup.svg");
+    mask-image: url("../icon/thumbsup.svg");
+}
+
+

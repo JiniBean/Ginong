@@ -17,6 +17,49 @@ body{
     }
 }
 
+@media (min-width: 768px) {
+    .md\:gap\:11 {
+        gap: var(--gap-11)!important
+    }
+
+    .md\:gap\:12 {
+        gap: var(--gap-12)!important
+    }
+
+    .md\:gap\:13 {
+        gap: var(--gap-13)!important
+    }
+
+    .md\:gap\:14 {
+        gap: var(--gap-14)!important
+    }
+
+    .md\:gap\:15 {
+        gap: var(--gap-15)!important
+    }
+
+    .md\:gap\:16 {
+        gap: var(--gap-16)!important
+    }
+
+    .md\:gap\:17 {
+        gap: var(--gap-17)!important
+    }
+
+    .md\:gap\:18 {
+        gap: var(--gap-18)!important
+    }
+
+    .md\:gap\:19 {
+        gap: var(--gap-19)!important
+    }
+
+    .md\:gap\:20 {
+        gap: var(--gap-20)!important
+    }
+}
+
+
 main{
     height: auto;
     width: 100%;
