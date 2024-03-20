@@ -7,10 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
 <style>
-    main section
+    .bar:before  {
+        content: '';
+        width: 1px;
+        height: 14px;
+        background: #e0e0e0;
+        position: absolute;
+        top: 49.5%;
+        transform: translateY(-50%);
+    }
 </style>
+</head>
 <body>
 <main layout:fragment="main" class="p:4 d:flex fl-dir:column gap:8">
     <section>
@@ -19,9 +27,9 @@
         <div class="pos:relative">
             <label>
                 <span class="d:none">상품검색</span>
-                <input type="text" class="n-textbox" placeholder="검색어를 입력해 주세요">
+                <input type="text" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요">
             </label>
-            <button class="pos:absolute" style="top:4px; right:8px;"><span class="icon icon:magnifying_glass icon-size:4 icon-color:base-5"></span></button>
+            <button class="pos:absolute m-right:1" style="top:4px; right:8px;"><span class="icon icon:magnifying_glass icon-size:3 icon-color:base-5"></span></button>
         </div>
     </section>
     <section>
@@ -29,11 +37,11 @@
             <div class="d:flex jc:space-between ai:center">
                 <div>
                     <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
-                    <span>전체선택</span>
+                    <span class="fw:3">전체선택</span>
                 </div>
                 <div>
-                    <button class="n-btn n-btn:outline">품절</button>
-                    <button class="n-btn">숨김</button>
+                    <button class="n-btn n-btn:outline fw:3 color:main-6">품절</button>
+                    <button class="n-btn fw:3">숨김</button>
                 </div>
             </div>
     </section>
@@ -45,48 +53,13 @@
             </div>
             <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
                 <div><img src="/img/carrot.png" alt="상품썸네일"></div>
-                <div class="d:flex fl-dir:column gap:2">
+                <div class="d:flex fl-dir:column gap:2 w:100p">
                     <div>흙당근 2개입</div>
                     <div>2500원</div>
-                    <div>
+                    <div class="d:flex fl-dir:row gap:3 pos:relative">
                         <span>재고</span>
                         <span>200</span>
-                        <span>상태</span>
-                        <span>활성화</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d:flex ai:center fl-dir:row gap:3">
-            <div>
-                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
-            </div>
-            <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
-                <div><img src="/img/carrot.png" alt="상품썸네일"></div>
-                <div class="d:flex fl-dir:column gap:2">
-                    <div>흙당근 2개입</div>
-                    <div>2500원</div>
-                    <div>
-                        <span>재고</span>
-                        <span>200</span>
-                        <span>상태</span>
-                        <span>활성화</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d:flex ai:center fl-dir:row gap:3">
-            <div>
-                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
-            </div>
-            <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
-                <div><img src="/img/carrot.png" alt="상품썸네일"></div>
-                <div class="d:flex fl-dir:column gap:2">
-                    <div>흙당근 2개입</div>
-                    <div>2500원</div>
-                    <div>
-                        <span>재고</span>
-                        <span>200</span>
+                        <span class="bar"></span>
                         <span>상태</span>
                         <span>활성화</span>
                     </div>
