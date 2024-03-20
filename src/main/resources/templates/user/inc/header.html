@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko">
     <header class="header h:5 md:h:6 max-w:10 w:10p bg-color:base-1 top:1 pos:sticky bd-bottom bd-color:base-2 zi:1">
-        <div>
-          <h1><a href="" style="text-indent: -999px">
-                로고
-                <img src="../../../static/img/logo-leaf.png"/>
+        <div class="d:flex jc:space-between h:5 md:h:6 ml:4 mr:4 md:ml:0 md:mr:0">
+          <h1 class="d:flex ai:center" ><a href=""  class="w:10p h:10p">
+                <img src="/img/logo-leaf.png" class="w:9p h:9p"/>
               </a>
           </h1>
-          <div>
-            <nav>
-              <h1>top</h1>
-              <ul>
-                <li><a href="">로그인</a></li>
-                <li><a href="">로그아웃</a></li>
-                <li><a href="">회원가입</a></li>
+          <div class="d:flex fl-dir:column ac:center jc:center gap:2">
+            <nav class="d:none md:d:flex ai:center">
+              <h1 class="d:none">top</h1>
+              <ul class="d:flex gap:3">
+                <li><a href="" class="color:main-6 fw:3">로그인</a></li>
+                <li class="d:none"><a href="" class="color:main-6 fw:3">로그아웃</a></li>
+                <li><a href="" class="color:main-6 fw:3">회원가입</a></li>
               </ul>
             </nav>
   
-            <nav>
-              <h1>down</h1>
-              <ul>
-                <li><a href="">검색</a></li>
-                <li><a href="">마이페이지</a></li>
-                <li><a href="">장바구니</a></li>
-                <li><a href="">햄버거</a></li>
+            <nav class="d:flex ">
+              <h1 class="d:none">down</h1>
+              <ul class="d:flex gap:3">
+                <li><a href="" class="icon icon:magnifying_glass icon-size:5">검색</a></li>
+                <li class="d:none md:d:block"><a href="" class=" icon icon:user icon-size:5">마이페이지</a></li>
+                <li><a href="" class="icon icon:shopping_cart_simple icon-size:5">장바구니</a></li>
               </ul>
             </nav>
           </div>
