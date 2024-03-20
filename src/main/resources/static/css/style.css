@@ -28,4 +28,5 @@ main,
 aside,
 footer{
     max-width: var(--width-10) !important;
+    width: 100%;
 }
