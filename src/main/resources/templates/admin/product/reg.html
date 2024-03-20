@@ -72,10 +72,19 @@
             display: flex;
             gap: 20px;
         }
+        .input-wrapper {
+            display: flex;
+            align-items: center; /* 입력 필드와 버튼을 수직 중앙 정렬합니다. */
+        }
+
+        .input-wrapper input {
+            flex: 1; /* 입력 필드가 가능한 한 많은 공간을 차지하도록 설정합니다. */
+            margin-right: 8px; /* 입력 필드와 버튼 사이의 간격을 조절합니다. */
+        }
     </style>
 </head>
 
-<body>
+<body class="d:flex fl-dir:column gap:8">
 <main class= "max-w:10 w:10p" layout:fragment="main">
     <section class= "ml:4 mr:4 md:ml:0 md:mr:0">
         <h1 class="d:none">상품 정보</h1>
@@ -129,26 +138,40 @@
                 </div>
                 <div class="d:flex fl-dir:column">
                     <span>수확일</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="foo2">
+                    <div class="input-wrapper">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="foo2">
+                        <button><img src="/icon/calendar.svg" alt="달력 아이콘" class="calendar-icon" style="width: 32px; height: 32px;"></button>
+                    </div>
                     <script>
-                        const elem2 = document.querySelector('input[name="foo2"]');
-                        const datepicker = new Datepicker(elem2, {
+                        const button = document.querySelector('.calendar-icon');
+                        button.addEventListener('click', function()
+                        {
+                            const input = document.querySelector('input[name="foo2"]');
+                            const datepicker = new Datepicker(input, {});
+                            datepicker.show();
                         });
                     </script>
                 </div>
                 <div>
                     <span>유통기한</span>
-                    <div id="foo" class="d:flex fl-dir:row">
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="start">
+                    <div class="d:flex fl-dir:row ">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="start" value="01/01/2024">
+                        <button class="calendar-icon"><img src="/icon/calendar.svg" alt="달력 아이콘" style="width: 32px; height: 32px;"></button>
                         <span>~</span>
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="end">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="end" value="01/02/2024">
+                        <button class="calendar-icon"><img src="/icon/calendar.svg" alt="달력 아이콘" style="width: 32px; height: 32px;"></button>
                     </div>
                     <script>
-                        const elem = document.getElementById('foo');
-                        const rangepicker = new DateRangePicker(elem, {
-                            // ...options
+                        const buttons = document.querySelectorAll('.calendar-icon');
+                        buttons.forEach(button => {
+                            button.addEventListener('click', function() {
+                                const input = button.previousElementSibling; // 클릭된 버튼의 이전 형제 요소 (input)를 찾습니다.
+                                const datepicker = new Datepicker(input, {});
+                                datepicker.show();
+                            });
                         });
                     </script>
+
                 </div>
                 <div class="n-dropdown">
                     <label class="d:flex fl-dir:column gap:2">상품보관유형
@@ -168,7 +191,7 @@
             </fieldset>
             <div>
                 <ul class="image-preview"></ul>
-                <input type="file" class="real-upload" accept="image/*" required multiple>
+                <input type="file" class="real-upload" accept="image/*">
                 <div class="upload n-btn w:100p"><span class="text">사진 첨부하기</span></div>
                 <script>
                     function getImageFiles(e) {
@@ -235,8 +258,8 @@
                 </script>
 
             </div>
-            <div>
-                <span>상태</span>
+            <div class = "display:flex flex-direction:row gap:4">
+                <span class="d:flex ai:center">상태</span>
                 <input type="checkbox" class="n-toggle n-toggle-type:slide"/>
             </div>
             <div class = "display:flex flex-direction:row w:100p gap:8">
