@@ -155,24 +155,21 @@
                 </div>
                 <div>
                     <span>유통기한</span>
-                    <div class="d:flex fl-dir:row ">
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="start" value="01/01/2024">
-                        <button class="calendar-icon"><img src="/icon/calendar.svg" alt="달력 아이콘" style="width: 32px; height: 32px;"></button>
-                        <span>~</span>
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="end" value="01/02/2024">
-                        <button class="calendar-icon"><img src="/icon/calendar.svg" alt="달력 아이콘" style="width: 32px; height: 32px;"></button>
+                    <div>
+                        <div id="foo" class="d:flex fl-dir:row ">
+                            <input type="text" class="n-textbox n-textbox-type:underline" name="start" value="01/01/2024">
+                            <button><img src="/icon/calendar.svg" alt="달력 아이콘" class="calendar-icon" style="width: 32px; height: 32px;"></button>
+                            <span>~</span>
+                            <input type="text" class="n-textbox n-textbox-type:underline" name="end" value="01/02/2024">
+                            <button><img src="/icon/calendar.svg" alt="달력 아이콘" class="calendar-icon" style="width: 32px; height: 32px;"></button>
+                        </div>
                     </div>
                     <script>
-                        const buttons = document.querySelectorAll('.calendar-icon');
-                        buttons.forEach(button => {
-                            button.addEventListener('click', function() {
-                                const input = button.previousElementSibling; // 클릭된 버튼의 이전 형제 요소 (input)를 찾습니다.
-                                const datepicker = new Datepicker(input, {});
-                                datepicker.show();
-                            });
+                        const elem = document.getElementById('foo');
+                        const rangepicker = new DateRangePicker(elem, {
+                            // ...options
                         });
                     </script>
-
                 </div>
                 <div class="n-dropdown">
                     <label class="d:flex fl-dir:column gap:2">상품보관유형
@@ -264,7 +261,7 @@
                 <input type="checkbox" class="n-toggle n-toggle-type:slide"/>
             </div>
             <div class = "display:flex flex-direction:row w:100p gap:8">
-                <button type="button" class="n-btn n-btn-size:2 min-w:3 w:100p">임시저장</button>
+                <button type="button" class="n-btn n-btn-color:accent  n-btn-size:2 min-w:3 w:100p">삭제</button>
                 <button type="button" class="n-btn n-btn-size:2 min-w:3 w:100p">저장</button>
             </div>
         </form>
