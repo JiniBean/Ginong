@@ -50,7 +50,7 @@
         }
 
         .upload::before {
-            content: url(/img/Camera.svg);
+            content: url(/icon/camera.svg);
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -75,13 +75,15 @@
     </style>
 </head>
 
-<body >
-<main class = "max-w:10 w:10p" layout:fragment="main">
-    <section>
+<body>
+<main class= "max-w:10 w:10p" layout:fragment="main">
+    <section class= "ml:4 mr:4 md:ml:0 md:mr:0">
         <h1 class="d:none">상품 정보</h1>
         <form class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div class="n-dropdown">
-                <button id="dropdown-btn-category" type="button" class="n-btn  min-w:5 jc:space-between"><span class="fl:fill">카테고리 선택</span><span>▽</span></button>
+                <button id="dropdown-btn-category" type="button" class="n-btn  min-w:5 jc:space-between">
+                    <span class="fl:fill">카테고리 선택</span><span class="icon icon:triangle icon-size:1 icon-color:main-1"></span></button>
+
                 <ul id="dropdown-list-category">
                     <li>과채류</li>
                     <li>양념류</li>
@@ -152,7 +154,7 @@
                     <label class="d:flex fl-dir:column">상품보관유형
                     <button id="dropdown-btn-keepcase" type="button" class="n-btn  max-w:5 justify-content:space-between"><span class="flex:fill">보관유형선택</span><span>▽</span></button>
                     </label>
-                    <ul id="dropdown-list-keepcase" class = "active">
+                    <ul id="dropdown-list-keepcase">
                         <li>실온보관</li>
                         <li>냉장보관</li>
                         <li>냉동보관</li>
@@ -209,7 +211,18 @@
                         img.setAttribute('data-file', file.name);
                         li.appendChild(img);
 
+                        const removeBtn = document.createElement('span');
+                        removeBtn.innerText = 'x';
+                        removeBtn.classList.add('remove-btn');
+                        removeBtn.addEventListener('click', () => removeImage(li));
+                        li.appendChild(removeBtn);
+
+
                         return li;
+                    }
+
+                    function removeImage(li) {
+                        li.parentNode.removeChild(li);
                     }
 
                     const realUpload = document.querySelector('.real-upload');
