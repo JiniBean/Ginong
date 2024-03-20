@@ -1,5 +1,5 @@
-.icon\:triangle::before,
-.icon\:triangle::after {
+.icon\:RT::before,
+.icon\:RT::after {
     -webkit-mask-image: url("../icon/RT.svg");
     mask-image: url("../icon/RT.svg");
 }

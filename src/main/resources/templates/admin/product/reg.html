@@ -91,7 +91,7 @@
         <form class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div class="n-dropdown">
                 <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline min-w:5 jc:space-between">
-                    <span class="fl:fill">카테고리 선택</span><span class="icon icon:triangle icon-size:1 icon-color:main-6"></span></button>
+                    <span class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
 
                 <ul id="dropdown-list-category">
                     <li>과채류</li>
@@ -154,29 +154,26 @@
                 </div>
                 <div>
                     <span>유통기한</span>
-                    <div class="d:flex fl-dir:row ">
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="start" value="01/01/2024">
-                        <button class="calendar-icon"><img src="/icon/calendar.svg" alt="달력 아이콘" style="width: 32px; height: 32px;"></button>
-                        <span>~</span>
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="end" value="01/02/2024">
-                        <button class="calendar-icon"><img src="/icon/calendar.svg" alt="달력 아이콘" style="width: 32px; height: 32px;"></button>
+                    <div>
+                        <div id="foo" class="d:flex fl-dir:row ">
+                            <input type="text" class="n-textbox n-textbox-type:underline" name="start">
+                            <button><img src="/icon/calendar.svg" alt="달력 아이콘" class="calendar-icon" style="width: 32px; height: 32px;"></button>
+                            <span>~</span>
+                            <input type="text" class="n-textbox n-textbox-type:underline" name="end">
+                            <button><img src="/icon/calendar.svg" alt="달력 아이콘" class="calendar-icon" style="width: 32px; height: 32px;"></button>
+                        </div>
                     </div>
                     <script>
-                        const buttons = document.querySelectorAll('.calendar-icon');
-                        buttons.forEach(button => {
-                            button.addEventListener('click', function() {
-                                const input = button.previousElementSibling; // 클릭된 버튼의 이전 형제 요소 (input)를 찾습니다.
-                                const datepicker = new Datepicker(input, {});
-                                datepicker.show();
-                            });
+                        const elem = document.getElementById('foo');
+                        const rangepicker = new DateRangePicker(elem, {
+                            // ...options
                         });
                     </script>
-
                 </div>
                 <div class="n-dropdown">
                     <label class="d:flex fl-dir:column gap:2">상품보관유형
                         <button id="dropdown-btn-keepcase" type="button" class="n-btn n-btn:outline max-w:5 jc:space-between">
-                            <span class="flex:fill">보관유형선택</span><span class="icon icon:triangle icon-size:1 icon-color:main-6"></span></button>
+                            <span class="flex:fill">보관유형선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
                     </label>
                     <ul id="dropdown-list-keepcase">
                         <li>실온보관</li>
@@ -191,7 +188,7 @@
             </fieldset>
             <div>
                 <ul class="image-preview"></ul>
-                <input type="file" class="real-upload" accept="image/*">
+                <input type="file" class="real-upload" accept="image/*" required multiple>
                 <div class="upload n-btn w:100p"><span class="text">사진 첨부하기</span></div>
                 <script>
                     function getImageFiles(e) {
