@@ -15,22 +15,40 @@
     align-items: center;
     margin-right: 10px;
 
-    background-color: var(--color-icon-bg);
     border-radius: 999px;
-
+    background-color: var(--color-icon-bg);
     width: 36px;
     height: 36px;
 }
 
+
+
 @media (min-width: 768px) {
     .cart-section{
         height: 60px;
+    }
+
+    .cart-section:hover{
         background-color: rgb(255,255,255,0.5);
     }
 
     .cart-section > div{
-
+        background-color: var(--color-base-1);
         width: 44px;
         height: 44px;
     }
+
+    .cart-section > div:hover {
+        background-color: var(--color-icon-bg);
+    }
+
+    .cart-section > div:active {
+        background-color: var(--color-main-6);
+    }
+
+    .cart-section > div > a :hover {
+        color: var(--color-base-1);
+    }
+
+
 }
