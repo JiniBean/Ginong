@@ -1,139 +1,260 @@
 <!DOCTYPE html>
-<html lang="ko"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="user/inc/layout-back">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="user/inc/layout-back"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <main  layout:fragment="main">
-        <nav>
+    <style>
+      .bar:before {
+        content: "";
+        width: 1px;
+        height: 14px;
+        background: #333333;
+        position: absolute;
+        top: 49.5%;
+        transform: translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <main layout:fragment="main">
+      <nav>
         <h1>브래드 크럼</h1>
         <ul>
-            <li><a href="">홈</a></li>
-            <li><a href="">></a></li>
+          <li><a href="">홈</a></li>
+          <li><a href="">></a></li>
         </ul>
-        </nav>
+      </nav>
 
-        <section>
-            <h1>상품카드</h1>
+      <section>
+        <h1>상품카드</h1>
+        <div>
+          <div><img src="" alt="" />대표사진</div>
+          <div>
+            <div><a href="">사진1</a></div>
+            <div><a href="">사진2</a></div>
+            <div><a href="">사진3</a></div>
+            <div><a href="">사진4</a></div>
+          </div>
+        </div>
+        <div>
+          <div class="d:flex gap:3">
+            <div class="n-btn n-btn-type:outline n-btn-size:1 w:5p">
+              한줄설명
+            </div>
+            <div class="n-btn n-btn-color:sub n-btn-size:3 w:5p">상품명</div>
+            <div>상품가격</div>
             <div>
-                <div><img src="" alt="">대표사진</div>
-                <div>
-                <div><a href="">사진1</a></div>
-                <div><a href="">사진2</a></div>
-                <div><a href="">사진3</a></div>
-                <div><a href="">사진4</a></div>
-                </div>
+              <div>추천수</div>
+              <div><a href="">공유하기</a></div>
             </div>
             <div>
-                <div class="d:flex gap:3">
-                <div class="n-btn n-btn-type:outline n-btn-size:1 w:5p">한줄설명</div>
-                <div class="n-btn n-btn-color:sub n-btn-size:3 w:5p" >상품명</div>
-                <div>상품가격</div>
-                <div>
-                    <div>추천수</div>
-                    <div><a href="">공유하기</a></div>
-                </div>
-                <div>
-                    <span>용량</span>
-                    <span>5~6개입/1kg내외</span>
-                </div>
-                <div>
-                    <span>보관방법</span>
-                    <span>신선</span>
-                </div>
-                <div>
-                    <span>배송비</span>
-                    <span>가격(3만원 이상 무료)</span>
-                </div>
-
-                </div>
-                <nav>
-                <h1>버튼</h1>
-                <ul>
-                    <li><a href="">장바구니</a></li>
-                    <li><a href="">구매하기</a></li>
-                </ul>
-                </nav>
+              <span>용량</span>
+              <span>5~6개입/1kg내외</span>
             </div>
-        </section>
+            <div>
+              <span>보관방법</span>
+              <span>신선</span>
+            </div>
+            <div>
+              <span>배송비</span>
+              <span>가격(3만원 이상 무료)</span>
+            </div>
+          </div>
+          <nav>
+            <h1>버튼</h1>
+            <ul>
+              <li><a href="">장바구니</a></li>
+              <li><a href="">구매하기</a></li>
+            </ul>
+          </nav>
+        </div>
+      </section>
 
-        <nav>
+      <nav>
         <h1>탭</h1>
         <ul>
-            <li><a href="">상품정보</a></li>
-            <li><a href="">후기</a></li>
-            <li><a href="">Q&A</a></li>
+          <li><a href="">상품정보</a></li>
+          <li><a href="">후기</a></li>
+          <li><a href="">Q&A</a></li>
         </ul>
-        </nav>
+      </nav>
+
+      <section>
+        <h1>상품정보</h1>
+        <div><img src="" alt="" />사진</div>
+      </section>
+
+      <section>
+        <h1>후기</h1>
+        <div><img src="" alt="" />사진</div>
 
         <section>
-            <h1>상품정보</h1>
-            <div><img src="" alt="">사진</div>
+          <h1>사진 후기</h1>
+          <div><a href="">전체보기</a></div>
+          <div><a href="">사진</a></div>
         </section>
-
         <section>
-            <h1>후기</h1>
-            <div><img src="" alt="">사진</div>
-
-            <section>
-                <h1>사진 후기</h1>
-                <div><a href="">전체보기</a></div>
-                <div><a href="">사진</a></div>
-            </section>
-            <section>
-                <h1>후기</h1>
-                <ul>
-                    <li>
-                        <span>기농태그</span>
-                        <span>구매후기</span>
-                        <span>작성자</span>
-                        <span>작성일</span>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span>기농테그명</span>
-                            <span>구매후기 내용</span>
-                            <span>작성자명</span>
-                            <span>작성일자</span>
-                        </a>
-                    </li>
-                    <li>상세내용</li>
-                </ul>
-            </section>
+          <h1>후기</h1>
+          <ul>
+            <li>
+              <span>기농태그</span>
+              <span>구매후기</span>
+              <span>작성자</span>
+              <span>작성일</span>
+            </li>
+            <li>
+              <a href="">
+                <span>기농테그명</span>
+                <span>구매후기 내용</span>
+                <span>작성자명</span>
+                <span>작성일자</span>
+              </a>
+            </li>
+            <li>상세내용</li>
+          </ul>
         </section>
+      </section>
 
+      <section class="m-side d:flex fl-dir:column gap:7 md:d:none">
+        <h1 class="d:none">Q&A</h1>
         <section>
-            <h1>Q&A</h1>
-            <section>
-                <h1>상품 Q&A</h1>
-   
-                <div><button>문의 하기</button></div>                
-                <ul>
-                    <li>
-                        <span>문의 유형</span>
-                        <span>제목</span>
-                        <span>작성자</span>
-                        <span>답변 상태</span>
-                        <span>등록일</span>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span>문의유형명</span>
-                            <span>제목명</span>
-                            <span>작성자명</span>
-                            <span>답변상태</span>
-                            <span>등록날짜</span>
-                        </a>
-                    </li>
-                    <li>답변내용</li>
-                </ul>
-            </section>
+          <h1 class="d:none">상품 Q&A</h1>
+
+          <div>
+            <button
+              class="n-btn n-btn:outline fw:3 color:main-6 n-btn-size:2 w:10p"
+            >
+              문의하기
+            </button>
+          </div>
+
+          <div class="d:flex fl-dir:column gap:3">
+            <div class="bd-top bd-color:base-3 pt:3 pb:3">
+              <div class="d:flex fl-dir:column gap:1">
+                <div class="d:flex fl-dir:row jc:space-between">
+                  <span class="fw:3">답변완료</span>
+                  <div class="d:flex fl-dir:row gap:1 pos:relative">
+                    <span>***gyungin</span>
+                    <span class="bar"></span>
+                    <span>2024-01-01</span>
+                  </div>
+                </div>
+                <div class="fw:3">
+                  <span>[상품]</span>
+                  <span>햄버거에 넣어도 맛있을까요??</span>
+                </div>
+                <div class="bg-color:main-1 d:flex fl-dir:column gap:1 p:1">
+                  <span class="fw:3">기농이네 답변</span>
+                  <div class="">
+                    안녕하세요.<br />기농이네입니다.<br />문의 주셔서
+                    감사합니다.<br />
+                    주문하시면 후회하지 않으실 겁니다.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bd-top bd-color:base-3 pt:3 pb:3">
+              <div class="d:flex fl-dir:column gap:1">
+                <div class="d:flex fl-dir:row jc:space-between">
+                  <span class="fw:3">답변완료</span>
+                  <div class="d:flex fl-dir:row gap:1 pos:relative">
+                    <span>***gyungin</span>
+                    <span class="bar"></span>
+                    <span>2024-01-01</span>
+                  </div>
+                </div>
+                <div class="fw:3">
+                  <span>[상품]</span>
+                  <span>햄버거에 넣어도 맛있을까요??</span>
+                </div>
+              </div>
+            </div>
+            <div class="bd-top bd-color:base-3 pt:3 pb:3">
+              <div class="d:flex fl-dir:column gap:1">
+                <div class="d:flex fl-dir:row jc:space-between">
+                  <span class="fw:3">답변완료</span>
+                  <div class="d:flex fl-dir:row gap:1 pos:relative">
+                    <span>***gyungin</span>
+                    <span class="bar"></span>
+                    <span>2024-01-01</span>
+                  </div>
+                </div>
+                <div class="fw:3">
+                  <span>[상품]</span>
+                  <span>햄버거에 넣어도 맛있을까요??</span>
+                </div>
+              </div>
+            </div>
+            <div class="bd-top bd-color:base-3 pt:3 pb:3">
+              <div class="d:flex fl-dir:column gap:1">
+                <div class="d:flex fl-dir:row jc:space-between">
+                  <span class="fw:3">답변완료</span>
+                  <div class="d:flex fl-dir:row gap:1 pos:relative">
+                    <span>***gyungin</span>
+                    <span class="bar"></span>
+                    <span>2024-01-01</span>
+                  </div>
+                </div>
+                <div class="fw:3">
+                  <span>[상품]</span>
+                  <span>햄버거에 넣어도 맛있을까요??</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
-  </main>
-</body>
+      </section>
+
+      <section class="d:none md:d:flex fl-dir:column gap:20">
+        <h1 class="d:none">Q&A PC</h1>
+        <div class="d:flex fw:3 jc:center fs:6">Q&A</div>
+        <div class="d:flex ai:center">
+          <span class="fl-grow:1 fw:3">후기</span>
+          <button class="n-btn fw:3 n-btn-size:2">문의하기</button>
+        </div>
+        <section>
+          <h1 class="d:none">Q&A Table</h1>
+
+          <table
+            class="n-table n-row-height:3 n-table-border:none table-layout:auto"
+          >
+            <thead class="bg-color:base-3 fw:1">
+              <tr d:flex>
+                <th scope="col">문의 유형</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">답변 상태</th>
+                <th scope="col">등록일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">상품</th>
+                <td>햄버거에 넣어도 맛있나요.</td>
+                <td>***gyungin</td>
+                <td>[답변완료]</td>
+                <td>2024-01-01></td>
+              </tr>
+              <!-- <tr>
+                <th>dddd</th>
+              </tr> -->
+              <tr>
+                <th scope="row">배송</th>
+                <td>배송 언제 오나요?</td>
+                <td>***gyungin</td>
+                <td>[답변대기중]</td>
+                <td>2024-01-02</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+  </body>
 </html>
