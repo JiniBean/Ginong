@@ -44,14 +44,14 @@
    --icon-size-4: 24px;
    --icon-size-5: 32px;
 
-   /*========== deco-size ==============================*/
+/*========== deco-size ==============================*/
    --deco-size-1: 16px;
    --deco-size-2: 18px;
    --deco-size-3: 20px;
    --deco-size-4: 24px;
    --deco-size-5: 32px;
 
-   /*========== color ==============================*/
+/*========== color ==============================*/
    --color-base-1: #FFFFFF;
    --color-base-2: #F5F5F5;
    --color-base-3: #EEEEEE;
@@ -76,6 +76,8 @@
    --color-sub-4: #74B94C;  
    --color-sub-5: #28A745;  
    --color-sub-6: #0B623B;
+
+   --color-icon-bg: rgb(0,0,0,0.5);
 
    --color-accent-1: #DC3545;  /* 삭제 버튼 */
 

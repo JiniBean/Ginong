@@ -119,7 +119,9 @@
     background-color: var(--color-sub-6) !important;
 }
 
-
+.color\:cart-bg {
+    background-color: var(--color-icon-bg) !important;
+}
 /*========== padding-top ==============================*/
 
 .padding-top\:11,
