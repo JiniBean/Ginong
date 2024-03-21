@@ -52,3 +52,15 @@
         padding-right: var(--gap-0) !important;
     }
 }
+
+
+/*========== .bar =================*/  /* 텍스트 구분 선(세로) user/product/list.html 참고 */
+.bar:before {
+    content: '';
+    width: 2px;
+    height: 14px;
+    background: #e0e0e0;
+    position: absolute;
+    top: 49.5%;
+    transform: translateY(-50%);
+}
