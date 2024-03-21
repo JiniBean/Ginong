@@ -24,4 +24,9 @@
     mask-image: url("../icon/thumbsup.svg");
 }
 
+.icon\:recents::before,
+.icon\:recents::after {
+    -webkit-mask-image: url("../icon/recents.svg");
+    mask-image: url("../icon/recents.svg");
+}
 

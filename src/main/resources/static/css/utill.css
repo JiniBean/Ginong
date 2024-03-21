@@ -44,6 +44,16 @@
    color: var(--color-main-6) !important;
    }
 
+.color\:sub-4{
+    color: var(--color-sub-4);
+}
+.color\:sub-5{
+    color: var(--color-sub-5) ;
+}
+.color\:sub-6{
+    color: var(--color-sub-6);
+}
+
 
 /*========== icon-color ==============================*/
 
@@ -62,6 +72,22 @@
     background-color: var(--color-main-6) !important;
 }
 
+.icon-color\:sub-4::before,
+.icon-color\:sub-4::after {
+    background-color: var(--color-sub-4) !important;
+}
+
+.icon-color\:sub-5::before,
+.icon-color\:sub-5::after {
+    background-color: var(--color-sub-5) !important;
+}
+
+.icon-color\:sub-6::before,
+.icon-color\:sub-6::after {
+    background-color: var(--color-sub-6) !important;
+}
+
+
 
 .deco-color\:main-4::before,
 .deco-color\:main-4::after {
@@ -76,6 +102,21 @@
 .deco-color\:main-6::before,
 .deco-color\:main-6::after {
     background-color: var(--color-main-6) !important;
+}
+
+.deco-color\:sub-4::before,
+.deco-color\:sub-4::after {
+    background-color: var(--color-sub-4) !important;
+}
+
+.deco-color\:sub-5::before,
+.deco-color\:sub-5::after {
+    background-color: var(--color-sub-5) !important;
+}
+
+.deco-color\:sub-6::before,
+.deco-color\:sub-6::after {
+    background-color: var(--color-sub-6) !important;
 }
 
 
