@@ -1,0 +1,8 @@
+.n-tabbar {
+    --tabbar-border-width: 0 0 1px 0;
+    --tabbar-border-style: solid;
+    --tabbar-border-color: var(--color-base-3);
+    --tabbar-border-color-active: var(--color-main-6);
+
+    --tab-color-active: var(--color-base-9);
+}

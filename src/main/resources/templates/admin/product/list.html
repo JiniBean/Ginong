@@ -20,11 +20,11 @@
 </style>
 </head>
 <body>
-<main layout:fragment="main" class="main-admin pc:680 p-side pt:8 md:pt:13 d:flex fl-dir:column ">
-    <section class="md:d:flex md:jc:center">
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
+    <section class="d:flex jc:center w:10p">
         <h1 class="d:none">검색</h1>
 <!--        style="width:374px;"-->
-        <div class="pos:relative md:w:8">
+        <div class="pos:relative fl-grow:1 md:w:8">
             <label>
                 <span class="d:none">상품검색</span>
                 <input type="text" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요">
@@ -32,9 +32,9 @@
             <button class="pos:absolute m-right:1" style="top:4px; right:8px;"><span class="icon icon:magnifying_glass icon-size:3 icon-color:base-5"></span></button>
         </div>
     </section>
-    <section>
+    <section class="w:10p">
             <h1 class="d:none">상품선택목록</h1>
-            <div class="d:flex jc:space-between ai:center">
+            <div class="d:flex jc:space-between ai:center w:10p">
                 <div>
                     <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
                     <span class="fw:3">전체선택</span>
@@ -45,7 +45,7 @@
                 </div>
             </div>
     </section>
-    <section class="d:flex fl-dir:column gap:4">
+    <section class="d:flex fl-dir:column gap:4 w:10p">
         <h1 class="d:none">상품카드 목록</h1>
         <div class="d:flex ai:center fl-dir:row gap:3">
             <div>
