@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="user/inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Product-List</title>
+    <link rel="stylesheet" href="/css/user/product/list.css">
+</head>
+
+<body>
+
+    <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
+        <h1 class="d:none md:d:flex ac:center">주문하기</h1>
+        <section>
+            <h1 class="d:none">주문 상품 목록</h1>
+            <section class="w:10p">
+                <h1 class="d:none">상품 영역</h1>
+                <div class="d:flex w:10p gap:3">
+                    <div class="pos:relative">
+                        <a href="">
+                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
+                        </a>
+                    </div>
+                    <div class="d:flex fl-dir:column jc:center gap:3">
+                        <div class="d:flex fl-dir:column jc:center gap:1">
+                            <a href="">
+                                <span>텃밭 흙 당근, 2개입</span>
+                            </a>
+                        </div>
+                        <div>
+                            <div><span>2,500</span><span>원</span></div>
+                            <div>2개</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div>
+                <span>총 상품 금액</span>
+                <span>15,000</span>
+                <span>원</span>
+            </div>
+        </section>
+
+        <section>
+            <h1>쿠폰 사용</h1>
+            <div>
+                <div>사용 가능 쿠폰</div>
+                <div><span>0</span> <span>장</span></div>
+            </div>
+            <div class="n-dropdown">
+                <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline min-w:5 jc:space-between">
+                    <span class="fl:fill">사용할 수 있는 쿠폰</span> <span>0</span> <span>장</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                <ul id="dropdown-list-category" class="min-w:5">
+                    <li>회원 가입 감사 쿠폰</li>
+                    <li>생일 축하 쿠폰 </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h1>적립금 사용</h1>
+            <div><span>보유 적립금</span><span>0</span><span>P</span></div>
+
+        </section>
+
+        <nav>
+            <h1>버튼</h1>
+         
+        </nav>
+    </main>
+    
+</body>
+</html>

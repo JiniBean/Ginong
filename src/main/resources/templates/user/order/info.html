@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="user/inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Product-List</title>
+    <link rel="stylesheet" href="/css/user/product/list.css">
+</head>
+
+<body>
+
+    <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
+        <h1 class="d:none md:d:flex ac:center">주문하기</h1>
+        <section>
+            <h1 class="d:none">주문 상품 목록</h1>
+            <section class="w:10p">
+                <h1 class="d:none">상품 영역</h1>
+                <div class="d:flex w:10p gap:3">
+                    <div class="pos:relative">
+                        <a href="">
+                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
+                        </a>
+                    </div>
+                    <div class="d:flex fl-dir:column jc:center gap:3">
+                        <div class="d:flex fl-dir:column jc:center gap:1">
+                            <a href="">
+                                <span>텃밭 흙 당근, 2개입</span>
+                            </a>
+                        </div>
+                        <div>
+                            <div><span>2,500</span><span>원</span></div>
+                            <div>2개</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div>
+                <span>총 상품 금액</span>
+                <span>15,000</span>
+                <span>원</span>
+            </div>
+        </section>
+
+        <section>
+            <h1>주문자 정보</h1>
+            <div>주문자와 받는 사람이 다른 경우 송장에 주문자의 이름이 노출됩니다.</div>
+            <div>
+                <span>보내시는 분</span>
+                <span>이름</span>
+            </div>
+            <div>
+                <span>연락처</span>
+                <span>010-4567-4567</span>
+            </div>
+            
+        </section>
+
+        <section>
+            <div>
+                <h1>배송지</h1>
+                <button>변경</button>
+            </div>
+            <div>
+                <div><span>기본배송지</span></div>
+                <div>
+                    <div><span>우편번호</span><span>주소</span> <span>상세 주소</span></div>
+                    <div><span>이름</span><span>연락처</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h1>배송 요청 사항</h1>
+            <div class="n-dropdown">
+                <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline min-w:5 jc:space-between">
+                    <span class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                <ul id="dropdown-list-category">
+                    <li>직접 받을게요</li>
+                    <li>문 앞에 놓아주세요</li>
+                    <li>경비실에 맡겨주세요</li>
+                    <li>무인 택배함에 넣어주세요</li>
+                    <li>배송 전 연락주세요</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h1>공동현관 출입번호</h1>
+
+        </section>
+
+        <nav>
+            <h1>버튼</h1>
+            ul
+        </nav>
+    </main>
+    
+</body>
+</html>
