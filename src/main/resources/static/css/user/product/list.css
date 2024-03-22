@@ -50,5 +50,11 @@
         color: var(--color-base-1);
     }
 
+    .icon\:shopping_cart_simple:hover::before,
+    .icon\:shopping_cart_simple:active::before {
+        background-color: var(--color-base-1) !important;
+
+    }
+
 
 }

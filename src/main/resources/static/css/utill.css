@@ -161,6 +161,14 @@
     background-color: var(--color-sub-6) !important;
 }
 
+@media (min-width: 780px) {
+    .md\:icon-color\:base-9::before,
+    .md\icon-color\:base-9::after {
+        background-color: var(--color-base-9) !important;
+}
+
+}
+
 .color\:cart-bg {
     background-color: var(--color-icon-bg) !important;
 }
