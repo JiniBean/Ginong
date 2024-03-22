@@ -10,14 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .n-expander {
-        background-color: var(--expander-background-color);
-        border-radius: var(--expander-border-radius);
-        border: var(--expander-border);
-        display: grid;
-        overflow: hidden;
-        transition: grid-template-rows 0.2s;
-        grid-template-rows: auto 0fr;
+      .n-expander .n-expander-title:after {
+        background-image: none;
       }
     </style>
   </head>
@@ -413,7 +407,7 @@
       </section>
 
       <!--상품 Q&A PC버전-->
-      <section class="d:none md:d:flex fl-dir:column gap:20 w:10">
+      <section class="d:none md:d:flex fl-dir:column gap:20 w:10 pl:5 pr:5">
         <h1 class="d:none">Q&A PC</h1>
         <div class="d:flex fw:3 jc:center fs:6">Q&A</div>
         <div class="d:flex ai:center">
@@ -422,7 +416,6 @@
         </div>
         <section>
           <h1 class="d:none">Q&A 리스트</h1>
-
           <div
             class="d:flex fl-dir:row jc:space-around bg-color:base-2 bd-bottom bd-color:base-3 bd-bottom-w:1 h:4 ai:center"
           >
@@ -432,48 +425,58 @@
             <span class="w:1p">답변 상태</span>
             <span class="w:1p">등록일</span>
           </div>
-          <div
-            class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center"
-          >
-            <span class="w:1p">상품</span>
-            <span class="w:3p">햄버거에 넣어도 맛있나요.</span>
-            <span class="w:1p">***gyungin</span>
-            <span class="w:1p">[답변완료]</span>
-            <span class="w:1p">2024-01-01</span>
-          </div>
-          <div
-            class="bg-color:main-1 d:flex fl-dir:column gap:3 p:3 pl:10 pr:10"
-          >
-            <span class="fw:3">기농이네 답변</span>
-            <div class="">
-              안녕하세요.<br />기농이네입니다.<br />문의 주셔서 감사합니다.<br />
-              주문하시면 후회하지 않으실 겁니다.
+          <div class="n-expander ai:center">
+            <div
+              class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center jc:center n-expander-title"
+            >
+              <span class="w:1p">상품</span>
+              <span class="w:3p">햄버거에 넣어도 맛있나요.</span>
+              <span class="w:1p">***gyungin</span>
+              <span class="w:1p">[답변완료]</span>
+              <span class="w:1p">2024-01-01</span>
+              <input type="checkbox" class="n-expander-trigger" />
+            </div>
+            <div
+              class="bg-color:main-1 d:flex fl-dir:column gap:3 p:3 pl:10 pr:10 n-expander-content px:2"
+            >
+              <span class="fw:3">기농이네 답변</span>
+              <div class="">
+                안녕하세요.<br />기농이네입니다.<br />문의 주셔서 감사합니다.<br />
+                주문하시면 후회하지 않으실 겁니다.
+              </div>
             </div>
           </div>
-          <div
-            class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center"
-          >
-            <span class="w:1p">배송</span>
-            <span class="w:3p">배송 언제 오나요?</span>
-            <span class="w:1p">***gyungin</span>
-            <span class="w:1p">[답변대기중]</span>
-            <span class="w:1p">2024-01-02</span>
+          <div class="n-expander">
+            <div
+              class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center n-expander-title"
+            >
+              <span class="w:1p">배송</span>
+              <span class="w:3p">배송 언제 오나요?</span>
+              <span class="w:1p">***gyungin</span>
+              <span class="w:1p">[답변대기중]</span>
+              <span class="w:1p">2024-01-02</span>
+              <input type="checkbox" class="n-expander-trigger" />
+            </div>
+            <div
+              class="bg-color:main-1 d:flex fl-dir:column gap:3 p:3 pl:10 pr:10 n-expander-content"
+            ></div>
           </div>
-          <div
-            class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center"
-          >
-            <span class="w:1p">상품</span>
-            <span class="w:3p">한 개만 안 파나요?</span>
-            <span class="w:1p">***gyungin</span>
-            <span class="w:1p">[답변대기중]</span>
-            <span class="w:1p">2024-01-03</span>
+          <div class="n-expander">
+            <div
+              class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center n-expander-title"
+            >
+              <span class="w:1p">상품</span>
+              <span class="w:3p">한 개만 안 파나요?</span>
+              <span class="w:1p">***gyungin</span>
+              <span class="w:1p">[답변대기중]</span>
+              <span class="w:1p">2024-01-03</span>
+              <input type="checkbox" class="n-expander-trigger" />
+            </div>
+            <div
+              class="bg-color:main-1 d:flex fl-dir:column gap:3 p:3 pl:10 pr:10 n-expander-content"
+            ></div>
           </div>
         </section>
-      </section>
-
-      <section class="n-expander">
-        <h1><input type="checkbox" /> expander title</h1>
-        <div><div class="px:2 py3">exapnder content</div></div>
       </section>
     </main>
   </body>
