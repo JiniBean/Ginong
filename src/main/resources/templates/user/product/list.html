@@ -6,17 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product-List</title>
-    <style>
-        .bar:before {
-            content: '';
-            width: 2px;
-            height: 14px;
-            background: #e0e0e0;
-            position: absolute;
-            top: 49.5%;
-            transform: translateY(-50%);
-        }
-    </style>
+    <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 
 
@@ -34,7 +24,12 @@
                 <a href="#" class="icon icon:list_bullets">정렬버튼</a>
             </div>
             <div class="d:none md:d:block">
-                20개씩 보기
+                <select name="" id="">
+                    <option selected>20개씩 보기</option>
+                    <option >40개씩 보기</option>
+                    <option >60개씩 보기</option>
+                    <option >80개씩 보기</option>
+                </select>
             </div>
         </div>
 
@@ -47,45 +42,71 @@
 
 
     <!--  아이템 목록(리스트)  -->
-    <section class=" w:10p">
-        <h1 class="d:none">상품 영역</h1>
-        <div class="d:flex w:10p gap:3">
-            <div class="pos:relative">
-                <a href=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지"
-                                class="bd-radius:4"/></a>
-                <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:3p h:3p color:cart-bg"
-                     style="">
-                    <a href=""
-                       class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                    >장바구니 아이콘
-                    </a>
+    <section class="d:flex fl-dir:column w:10p gap:5 md:d:none">
+        <section class=" w:10p">
+            <h1 class="d:none">상품 영역</h1>
+            <div class="d:flex w:10p gap:3">
+                <div class="pos:relative">
+                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지"
+                                    class="bd-radius:4"/></a>
+                    <div class="cart-section">
+                        <div>
+                            <a href=""
+                               class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
+                                장바구니 아이콘 </a>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-            <div class="d:flex fl-dir:column jc:center gap:3">
-                <div class="d:flex fl-dir:column jc:center gap:1">
-                    <a href="">
-                        <span>텃밭 흙 당근, 2개입</span>
-                    </a>
-                    <a href="">
-                        <span class="fw:3">2,500원</span>
-                    </a>
+                <div class="d:flex fl-dir:column jc:center gap:3">
+                    <div class="d:flex fl-dir:column jc:center gap:1">
+                        <a href="">
+                            <span>텃밭 흙 당근, 2개입</span>
+                        </a>
+                        <a href="">
+                            <span class="fw:3">2,500원</span>
+                        </a>
+                    </div>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">300</div>
                 </div>
-                <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
             </div>
-        </div>
+        </section>
+        <section class=" w:10p">
+            <h1 class="d:none">상품 영역</h1>
+            <div class="d:flex w:10p gap:3">
+                <div class="pos:relative">
+                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지"
+                                    class="bd-radius:4"/></a>
+                    <div class="cart-section">
+                        <div>
+                            <a href=""
+                               class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
+                                장바구니 아이콘 </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d:flex fl-dir:column jc:center gap:3">
+                    <div class="d:flex fl-dir:column jc:center gap:1">
+                        <a href="">
+                            <span>텃밭 흙 당근, 2개입</span>
+                        </a>
+                        <a href="">
+                            <span class="fw:3">2,500원</span>
+                        </a>
+                    </div>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">1234</div>
+                </div>
+            </div>
+        </section>
     </section>
 
-
     <!--  아이템 목록(바둑판)  -->
-    <section class="d:flex flex-wrap:wrap ai:center gap:5">
+    <section class="d:flex flex-wrap:wrap ai:center gap:5 md:d:none">
         <section class="">
             <h1 class="d:none">상품 영역</h1>
             <div class="d:flex fl-dir:column w:10p gap:3">
                 <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
+                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="180px" width="180px"
+                                              alt="상품 이미지" class="bd-radius:2"/></a>
                     <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
                          style="">
                         <a href=""
@@ -93,7 +114,6 @@
                         >장바구니 아이콘
                         </a>
                     </div>
-                    <!--                <a class="circle"></a>-->
                 </div>
                 <div class="d:flex fl-dir:column jc:center gap:2">
                     <div class="d:flex fl-dir:column jc:center gap:1">
@@ -104,19 +124,17 @@
                             <span class="fw:3">2,500원</span>
                         </a>
                     </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">1234</div>
                 </div>
             </div>
         </section>
 
-        <!--   지워도 됌     -->
         <section class="">
             <h1 class="d:none">상품 영역</h1>
             <div class="d:flex fl-dir:column w:10p gap:3">
                 <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
+                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="180px" width="180px"
+                                              alt="상품 이미지" class="bd-radius:2"/></a>
                     <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
                          style="">
                         <a href=""
@@ -124,7 +142,6 @@
                         >장바구니 아이콘
                         </a>
                     </div>
-                    <!--                <a class="circle"></a>-->
                 </div>
                 <div class="d:flex fl-dir:column jc:center gap:2">
                     <div class="d:flex fl-dir:column jc:center gap:1">
@@ -135,248 +152,124 @@
                             <span class="fw:3">2,500원</span>
                         </a>
                     </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">1234</div>
                 </div>
             </div>
         </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <section class="">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
-                <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="../../../static/img/carrot.png"
-                                              height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/></a>
-                    <!--                    <div class="d:flex ai:center jc:center" style="background-color: rgb(0,0,0,0.5); border-radius: 999px; position:absolute; bottom:16px; right:16px; width:36px; height: 36px;">-->
-                    <div class="d:flex ai:center jc:center right:1p bottom:1p pos:absolute bd-radius:full w:2p h:2p color:cart-bg"
-                         style="">
-                        <a href=""
-                           class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4"
-                        >장바구니 아이콘
-                        </a>
-                    </div>
-                    <!--                <a class="circle"></a>-->
-                </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
-                        </a>
-                        <a href="">
-                            <span class="fw:3">2,500원</span>
-                        </a>
-                    </div>
-                    <span class="icon icon:thumbsup icon-color:sub-4 icon-size:1">기농태그</span>
-                </div>
-            </div>
-        </section>
-        <!--   지워도 됌     -->
+
     </section>
 
     <!--  PC버전  -->
-    <section>
-        <h1>상품영역</h1>
+    <section class="d:none md:d:flex flex-wrap:wrap ai:center gap:2">
+        <section class="font-size:3">
+            <h1 class="d:none">상품 영역</h1>
+            <div class="d:flex fl-dir:column w:10p gap:3">
+                <div class="pos:relative">
+                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px"
+                                              alt="상품 이미지" class="bd-radius:2"/></a>
+                    <div class="cart-section">
+                        <div>
+                            <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">장바구니 아이콘 </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d:flex fl-dir:column jc:center gap:2">
+                    <div class="d:flex fl-dir:column jc:center gap:1">
+                        <a href="">
+                            <span>텃밭 흙 당근, 2개입</span>
+                        </a>
+                        <a href="">
+                            <span class="fw:3">2,500원</span>
+                        </a>
+                    </div>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:4">1234</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="font-size:3">
+            <h1 class="d:none">상품 영역</h1>
+            <div class="d:flex fl-dir:column w:10p gap:3">
+                <div class="pos:relative">
+                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px"
+                                              alt="상품 이미지" class="bd-radius:2"/></a>
+                    <div class="cart-section">
+                        <div>
+                            <a href=""
+                               class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니
+                                아이콘 </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d:flex fl-dir:column jc:center gap:2">
+                    <div class="d:flex fl-dir:column jc:center gap:1">
+                        <a href="">
+                            <span>텃밭 흙 당근, 2개입</span>
+                        </a>
+                        <a href="">
+                            <span class="fw:3">2,500원</span>
+                        </a>
+                    </div>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:4">1234</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="font-size:3">
+            <h1 class="d:none">상품 영역</h1>
+            <div class="d:flex fl-dir:column w:10p gap:3">
+                <div class="pos:relative">
+                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px"
+                                              alt="상품 이미지" class="bd-radius:2"/></a>
+                    <div class="cart-section">
+                        <div>
+                            <a href=""
+                               class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니
+                                아이콘 </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d:flex fl-dir:column jc:center gap:2">
+                    <div class="d:flex fl-dir:column jc:center gap:1">
+                        <a href="">
+                            <span>텃밭 흙 당근, 2개입</span>
+                        </a>
+                        <a href="">
+                            <span class="fw:3">2,500원</span>
+                        </a>
+                    </div>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:4">1234</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="font-size:3">
+            <h1 class="d:none">상품 영역</h1>
+            <div class="d:flex fl-dir:column w:10p gap:3">
+                <div class="pos:relative">
+                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px"
+                                              alt="상품 이미지" class="bd-radius:2"/></a>
+                    <div class="cart-section">
+                        <div>
+                            <a href=""
+                               class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니
+                                아이콘 </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d:flex fl-dir:column jc:center gap:2">
+                    <div class="d:flex fl-dir:column jc:center gap:1">
+                        <a href="">
+                            <span>텃밭 흙 당근, 2개입</span>
+                        </a>
+                        <a href="">
+                            <span class="fw:3">2,500원</span>
+                        </a>
+                    </div>
+                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:4">1234</div>
+                </div>
+            </div>
+        </section>
 
     </section>
 
