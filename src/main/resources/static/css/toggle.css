@@ -1,0 +1,13 @@
+/* toggle.css */
+.n-toggle {
+
+    /* toggle-type:outline-box */
+    --toggle-outline-color: var(--color-main-6);
+    --toggle-outline-background-color: var(--color-base-1);
+    --toggle-outline-border-color: var(--color-main-6);
+    --toggle-outline-checked-color: var(--color-main-6);
+    --toggle-outline-background-color-checked: var(--color-main-6);
+    --toggle-outline-checked-background-color: var(--color-main-6);
+    --toggle-outline-checked-border-color: transparent;
+}
+
