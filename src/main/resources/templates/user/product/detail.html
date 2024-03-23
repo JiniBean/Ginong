@@ -13,7 +13,26 @@
       .n-expander .n-expander-title:after {
         background-image: none;
       }
+
+      /*수량inputbox*/
+
+      .numberBox a {
+        position: absolute;
+        top: 0;
+        width: 37px;
+        line-height: 34px;
+        text-align: center;
+      }
+
+      .numberBox .btnMinus::before {
+        content: '\2500';
+      }
+
+      .numberBox .btnPlus::before {
+        content: '\253C';
+      }
     </style>
+
   </head>
   <body>
     <main layout:fragment="main">
@@ -478,6 +497,48 @@
           </div>
         </section>
       </section>
+      <!--구매정보 안내팝업-->
+      <section class="w:100p d:flex jc:center">
+        <h1 class="d:none">구매정보안내팝업</h1>
+        <div class="n-item n-item:outline d:flex fl-dir:column gap:8 p:0" style="width:86%">
+          <div class="d:flex jc:center">
+              <span class="icon icon:caret_down icon-color:base-9"></span>
+          </div>
+          <div>
+            <div class="bg-color:base-3 p:5 d:flex fl-dir:column gap:3">
+              <div>국산 유기농 감 1kg 내외 (5~6개입)</div>
+              <div class="d:flex fl-dir:row ai:center jc:space-between">
+                <span class="numberBox bd bd-color:base-1 of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px;">
+                  <a href="#" class="btnMinus left:1"></a>
+                  <input type="text" class="w:100p h:100p fw:3 txt-al:center" style="line-height: 36px;" maxlength="3" value="1" return false;>
+                  <a href="#" class="btnPlus right:1"></a>
+                </span>
+                <span class="w:1/5 txt-al:right">10,000원</span>
+              </div>
+            </div>
+            <div class="d:flex fl-dir:row bd h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
+              <div>
+                <span class="fw:3">총 수량&emsp;<span class="color:sub-5">1</span>개</span>
+              </div>
+              <div>
+                <span class="color:sub-5 fw:3">10,000</span>
+                <span class="fw:3">원</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
+  <!-- 구매 버튼 영역-->
+<!--  <section class="d:flex fl-dir:row ai:center m:4 gap:2">-->
+<!--    <h1 class="d:none">구매버튼영역</h1>-->
+<!--    <div class="n-item n-item:outline" style="padding:13px;">-->
+<!--      <span class="icon icon:heart icon-color:main-6"></span>-->
+<!--    </div>-->
+<!--    <div class="d:flex fl-dir:row ai:center gap:1">-->
+<!--      <button class="n-btn n-btn-type:outline w:4 h:4">장바구니</button>-->
+<!--      <button class="n-btn n-btn-color:sub w:4 h:4">바로 구매하기</button>-->
+<!--    </div>-->
+<!--  </section>-->
 </html>
