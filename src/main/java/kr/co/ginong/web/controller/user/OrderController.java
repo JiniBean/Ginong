@@ -12,5 +12,8 @@ public class OrderController {
     public String info(){
         return "user/order/info";
     }
-    
+
+
+    @GetMapping("pay")
+    public String pay() { return "user/order/pay"; }
 }
