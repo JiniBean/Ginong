@@ -7,13 +7,23 @@
     <meta charset="UTF-8">
     <title>Product-List</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
+    <link rel="stylesheet" href="/css/toggle.css">
+    <script>
+        const form = document.getElementById("form");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            console.log(Object.fromEntries(formData));
+        });
+    </script>
 </head>
 
 <body>
 
     <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
         <h1 class="d:none md:d:flex ac:center">주문하기</h1>
-        <section>
+        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
             <h1 class="d:none">주문 상품 목록</h1>
             <section class="w:10p">
                 <h1 class="d:none">상품 영역</h1>
@@ -36,34 +46,43 @@
                     </div>
                 </div>
             </section>
-            <div>
-                <span>총 상품 금액</span>
-                <span>15,000</span>
-                <span>원</span>
+            <div class="w:10p d:flex jc:end gap:3">
+                <span class="fw:3">총 상품 금액</span>
+                <span class="color:main-6 fw:3">15,000</span>
+                <span class="fw:3">원</span>
             </div>
         </section>
 
-        <section>
-            <h1>주문자 정보</h1>
-            <div>주문자와 받는 사람이 다른 경우 송장에 주문자의 이름이 노출됩니다.</div>
-            <div>
-                <span>보내시는 분</span>
-                <span>이름</span>
-            </div>
-            <div>
-                <span>연락처</span>
-                <span>010-4567-4567</span>
-            </div>
-            
+        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+            <h1 class="fs:4 fw:3">주문자 정보</h1>
+            <div class="fs:1 color:base-7">주문자와 받는 사람이 다른 경우 송장에 주문자의 이름이 노출됩니다.</div>
+
+            <label class="fs:2">
+                보내시는 분
+                <input
+                        type="text"
+                        class="n-textbox  n-textbox-type:underline n-textbox-label:top"
+                        placeholder="이름"
+                />
+            </label>
+            <label class="fs:2">
+                연락처
+                <input
+                        type="text"
+                        class="n-textbox  n-textbox-type:underline n-textbox-label:top"
+                        placeholder="010-1234-6578"
+                />
+            </label>
+
         </section>
 
-        <section>
-            <div>
-                <h1>배송지</h1>
-                <button>변경</button>
+        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+            <div class="d:flex jc:space-between">
+                <h1 class="fs:4 fw:3">배송지</h1>
+                <button type="button" class="n-btn n-btn:outline color:main-6 ">변경</button>
             </div>
             <div>
-                <div><span>기본배송지</span></div>
+                <div><span class="n-btn n-btn-size:1">기본배송지</span></div>
                 <div>
                     <div><span>우편번호</span><span>주소</span> <span>상세 주소</span></div>
                     <div><span>이름</span><span>연락처</span></div>
@@ -71,8 +90,8 @@
             </div>
         </section>
 
-        <section>
-            <h1>배송 요청 사항</h1>
+        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+            <h1 class="fs:4 fw:3">배송 요청 사항</h1>
             <div class="n-dropdown">
                 <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline min-w:5 jc:space-between">
                     <span class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
@@ -86,16 +105,46 @@
             </div>
         </section>
 
-        <section>
-            <h1>공동현관 출입번호</h1>
+        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+<!--            <h1>공동현관 출입번호</h1>-->
+            <fieldset>
+                <legend class="fs:4 fw:3">공동 현관 비밀번호</legend>
+
+                <div class="d:flex">
+                    <input
+                            type="radio"
+                            id="huey"
+                            name="현관"
+                            value="huey"
+                            checked
+                            class="n-toggle n-toggle:dot"
+                    />
+                    <input
+                            name="현관"
+                            type="text"
+                            placeholder=""
+                            class="n-textbox n-textbox:underline"
+                    />
+                </div>
+                <div>
+                    <input
+                            type="radio"
+                            id="dewey"
+                            name="현관"
+                            value="비밀번호없음"
+                            class="n-toggle n-toggle:dot"
+                    />
+                    비밀번호 없이 자유 출입 가능해요
+                </div>
+            </fieldset>
+
 
         </section>
-
-        <nav>
-            <h1>버튼</h1>
-            ul
-        </nav>
+        <div class="d:flex jc:space-between">
+            <button class="n-btn n-btn-type:outline w:4">취소</button>
+            <button class="n-btn w:4">주문하기</button>
+        </div>
     </main>
-    
+
 </body>
 </html>
