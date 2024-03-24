@@ -30,7 +30,7 @@
     --btn-outline-background-color-hover: var(--color-base-1);
     --btn-outline-background-color-active: #F0F0F1;
     --btn-outline-border: 1px solid var(--color-main-6);
-    --btn-outline-color: inherit;
+    --btn-outline-color: var(--color-main-6);
 
 
     /* btn-color:accent */
@@ -43,4 +43,11 @@
 
 .n-btn-type\:outline:hover{
     border-color: #FA6400;
+}
+
+@media (min-width: 780px) {
+    .n-btn-size\:2{
+        --btn-height-2: 60px;
+        --btn-font-size-2: 16px;
+    }
 }

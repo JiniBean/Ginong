@@ -96,7 +96,7 @@
             <!-- ======= 여기까지 지우기 ===========  -->
         </section>
 
-        <form method="post">
+        <form method="post" class="d:flex fl-dir:column gap:10 md:gap:20">
             <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3">쿠폰 사용</h1>
                 <div class="d:flex jc:space-between w:10p">
@@ -163,14 +163,14 @@
                 <h1 class="fs:3 md:fs:4 fw:3">미출고 시 환불 방법</h1>
                 <div class="d:flex fl-dir:column gap:4 ml:4">
                     <div>
-                        <label class="fs:2 md:fs:3">
+                        <label>
                             <input type="radio" name="refund" id="refund-point" checked class="n-toggle n-toggle-type:dot ">
                             적립금으로 환불
                         </label>
-                        <span class="color:base-5 fs:1 md:fs:2  ">환불 금액의 5% 추가 적립</span>
+                        <span class="color:base-6 fs:1 md:fs:2 ml:6 ">미출고시 환불 금액의 5% 추가 적립됩니다.</span>
                     </div>
                     <div>
-                        <label class="fs:2 md:fs:3">
+                        <label>
                             <input type="radio" name="refund" id="refund-payment" class="n-toggle n-toggle-type:dot">
                             결제수단으로 환불
                         </label>
@@ -181,22 +181,46 @@
 
             <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3">결제 정보</h1>
+                <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p" >
+                    <div class="d:flex jc:space-between">
+                        <div>총 상품 금액</div>
+                        <div><span>15,000</span> <span>원</span></div>
+                    </div>
+                    <div class="d:flex jc:space-between">
+                        <div>쿠폰 적용 금액</div>
+                        <div><span>15,000</span> <span>원</span></div>
+                    </div>
+                    <div class="d:flex jc:space-between">
+                        <div>적립금 사용</div>
+                        <div><span>15,000</span> <span style="margin-left: 4px; margin-right:2px;">P</span></div>
+                    </div>
+                    <div class="d:flex jc:space-between">
+                        <div>배송비</div>
+                        <div><span>15,000</span> <span>원</span></div>
+                    </div>
+                </div>
             </section>
 
-            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+            <section class="d:flex jc:space-between gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3">총 결제 예정 금액</h1>
+                <div ><span class="fs:3 md:fs:4 fw:3 color:main-6" >15,000</span><span class="fs:3 md:fs:4 fw:3">원</span></div>
             </section>
 
-            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
-                <h1 class="d:none">주문 관련 사전 고지 및 동의 체크</h1>
+            <section class="d:flex fl-dir:column gap:4 md:gap:8 w:10p">
+                <h1 class="d:none">주문 동의 및 버튼</h1>
+                <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">
+                    <label>
+                        <input type="checkbox" class="n-toggle n-toggle-type:check-box 	bd-radius:full" />
+                        주문 내용을 확인하였으며 약관에 동의합니다.
+                    </label>
+                </div>
+                <div class="d:flex gap:8 md:gap:10 w:10p">
+                    <button class="n-btn n-btn:outline n-btn-size:2 fl-grow:1 fw:3">이전으로</button>
+                    <button class="n-btn n-btn-size:2 fl-grow:1 fw:3">결제하기</button>
+                </div>
             </section>
 
-            <nav>
-                <h1 class="d:none">버튼</h1>
-                <button>이전</button>
-                <button>결제하기</button>
 
-            </nav>
         </form>
     </main>
     

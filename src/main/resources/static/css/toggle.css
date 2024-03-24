@@ -1,10 +1,14 @@
 /* toggle.css */
 .n-toggle {
+    /* toggle-type:check */
+    --toggle-check-border-color: var(--color-base-5);
+    --toggle-check-background-color-checked: var(--color-main-6);
+    --toggle-check-checked-background-color: var(--color-main-6);
 
     /* toggle-type:dot */
     --toggle-dot-border-color: var(--color-base-5);
-    --toggle-dot-background-color-checked: var(--color-main-6);
     --toggle-dot-checked-border-color: var(--color-main-6);
+    --toggle-dot-background-color-checked: var(--color-main-6);
     --toggle-dot-checked-background-color: var(--color-main-6);
     --toggle-dot-border-color-checked : var(--color-main-6);
 
@@ -18,3 +22,8 @@
     --toggle-outline-checked-border-color: transparent;
 }
 
+@media (min-width: 780px) {
+    label:has(.n-toggle) {
+        font-size: var(--font-size-3);
+    }
+}
