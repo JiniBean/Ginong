@@ -18,14 +18,6 @@
             dropdownListCategory.classList.toggle("active");
         });
     });
-    window.addEventListener("load", function () {
-        const dropdownButtonKeepcase = document.getElementById("dropdown-btn-keepcase");
-        const dropdownListKeepcase = document.getElementById("dropdown-list-keepcase");
-
-        dropdownButtonKeepcase.addEventListener("click", function () {
-            dropdownListKeepcase.classList.toggle("active");
-        });
-    });
 
 </script>
 <body>
@@ -101,64 +93,111 @@
                 <span class="color:main-6 fw:3">15,000</span>
                 <span class="fw:3">원</span>
             </div>
-            <!-- ======= 지우기 ===========  -->
+            <!-- ======= 여기까지 지우기 ===========  -->
         </section>
 
-        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
-            <h1 class="fs:3 md:fs:4 fw:3">쿠폰 사용</h1>
-            <div class="d:flex jc:space-between w:10p">
-                <div>사용 가능 쿠폰</div>
-                <div class="color:main-6"><span>0</span> <span>장</span></div>
-            </div>
-            <div class="n-dropdown">
-                <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline w:10p jc:space-between">
-                    <span class="fl:fill">사용할 수 있는 쿠폰</span>
-                    <span>0</span><span>장</span>
-                    <span class="icon icon:RT icon-size:1 icon-color:main-6 ml:2 fl:fill"></span>
-                </button>
-                <ul id="dropdown-list-category" class="min-w:5">
-                    <li>회원 가입 감사 쿠폰</li>
-                    <li>생일 축하 쿠폰 </li>
-                </ul>
-            </div>
-        </section>
+        <form method="post">
+            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                <h1 class="fs:3 md:fs:4 fw:3">쿠폰 사용</h1>
+                <div class="d:flex jc:space-between w:10p">
+                    <div>사용 가능 쿠폰</div>
+                    <div class="color:main-6"><span>0</span> <span>장</span></div>
+                </div>
+                <div class="n-dropdown">
+                    <button id="dropdown-btn-category" type="button"
+                            class="n-btn n-btn:outline w:10p jc:space-between">
+                    <span class="fl:fill">
+                        <span>사용할 수 있는 쿠폰 </span>
+                        <span>0</span><span>장</span>
+                    </span>
+                        <span class="icon icon:RT icon-size:1 icon-color:main-6">아이콘</span>
+                    </button>
+                    <ul id="dropdown-list-category" >
+                        <li>회원 가입 감사 쿠폰</li>
+                        <li>생일 축하 쿠폰 </li>
+                    </ul>
+                </div>
+            </section>
 
-        <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
-            <h1 class="fs:3 md:fs:4 fw:3">적립금 사용</h1>
-            <div class="d:flex jc:end gap:2 md:3 w:10p">
-                <div class="fw:3">보유 적립금</div>
-                <div class="fw:3 color:main-6"><span>0</span><span>P</span></div>
-            </div>
+            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                <h1 class="fs:3 md:fs:4 fw:3">적립금 사용</h1>
+                <div class="d:flex jc:end gap:2 md:3 w:10p">
+                    <div class="fw:3">보유 적립금</div>
+                    <div class="fw:3 color:main-6"><span>0</span><span>P</span></div>
+                </div>
+                <div class="d:flex gap:10">
+                    <div class="d:flex fl:fill">
+                        <input type="text" class="n-textbox n-textbox-type:underline" placeholder="Underline Textbox">
+                        <span class="color:main-6 fw:3 as:end">P</span>
+                    </div>
+                    <div>
+                        <button type="button" class="n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3 w:3" >전액
+                            사용</button>
+                    </div>
+                </div>
+            </section>
 
-        </section>
+            <section class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
+                <h1 class="fs:3 md:fs:4 fw:3 w:10p">결제 수단</h1>
+                <div class="d:flex w:6 md:w:7 gap:4 jc:center gap:4 md:gap:7 fl-flow:wrap">
+                    <label class="n-toggle n-toggle-type:outline-box ai:center w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
+                        카카오페이
+                        <input type="radio" name="pay" id="1" value="k" class="d:none">
+                    </label>
+                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3 ">
+                        네이버페이
+                        <input type="radio" name="pay" id="2" value="n" class="d:none">
+                    </label>
+                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
+                        토스페이
+                        <input type="radio" name="pay" id="3" value="t" class="d:none">
+                    </label>
+                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
+                        페이코
+                        <input type="radio" name="pay" id="4" value="p" class="d:none">
+                    </label>
+                </div>
+            </section>
 
-        <section class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
-            <h1 class="fs:3 md:fs:4 fw:3 w:10p">결제 수단</h1>
-            <div class="d:flex w:6 md:w:7 gap:4 jc:center md:gap:18 fl-wrap:wrap">
-                <label class="n-toggle n-toggle-type:outline-box txt-al:center w:3 md:w:4 h:2 md:h:4  fw:3">
-                    카카오페이
-                    <input type="radio" name="pay" id="1" value="k" class="d:none">
-                </label>
-                <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3">
-                    네이버페이
-                    <input type="radio" name="pay" id="2" value="n" class="d:none">
-                </label>
-                <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3">
-                    토스페이
-                    <input type="radio" name="pay" id="3" value="t" class="d:none">
-                </label>
-                <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3">
-                    페이코
-                    <input type="radio" name="pay" id="4" value="p" class="d:none">
-                </label>
-            </div>
+            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                <h1 class="fs:3 md:fs:4 fw:3">미출고 시 환불 방법</h1>
+                <div class="d:flex fl-dir:column gap:4 ml:4">
+                    <div>
+                        <label class="fs:2 md:fs:3">
+                            <input type="radio" name="refund" id="refund-point" checked class="n-toggle n-toggle-type:dot ">
+                            적립금으로 환불
+                        </label>
+                        <span class="color:base-5 fs:1 md:fs:2  ">환불 금액의 5% 추가 적립</span>
+                    </div>
+                    <div>
+                        <label class="fs:2 md:fs:3">
+                            <input type="radio" name="refund" id="refund-payment" class="n-toggle n-toggle-type:dot">
+                            결제수단으로 환불
+                        </label>
+                    </div>
+                </div>
 
-        </section>
+            </section>
 
-        <nav>
-            <h1>버튼</h1>
-         
-        </nav>
+            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                <h1 class="fs:3 md:fs:4 fw:3">결제 정보</h1>
+            </section>
+
+            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                <h1 class="fs:3 md:fs:4 fw:3">총 결제 예정 금액</h1>
+            </section>
+
+            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                <h1 class="d:none">주문 관련 사전 고지 및 동의 체크</h1>
+            </section>
+
+            <nav>
+                <h1 class="d:none">버튼</h1>
+                <button>이전</button>
+                <button>결제하기</button>
+
+            </nav>
+        </form>
     </main>
     
 </body>
