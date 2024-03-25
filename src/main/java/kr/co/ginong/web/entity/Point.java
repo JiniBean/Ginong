@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Point {
     private long	id;
-    private String 	title;
+    private String 	name;
     private Date	date;
     private int	    cost;
     private String 	detail;
