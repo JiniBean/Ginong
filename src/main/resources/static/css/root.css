@@ -35,7 +35,7 @@
    --font-size-4 : 18px;   /* 모바일 제목 폰트 사아즈 */
    --font-size-5 : 20px;   /* PC 제목 폰트 사아즈 */
    --font-size-6 : 24px;
-
+   --font-weight-3: 600;
 
 /*========== icon-size ==============================*/
    --icon-size-1: 16px;

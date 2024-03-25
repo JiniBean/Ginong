@@ -22,6 +22,10 @@
     --toggle-outline-checked-border-color: transparent;
 }
 
+.n-toggle-type\:outline-box:before{
+    content: none;
+}
+
 @media (min-width: 780px) {
     label:has(.n-toggle) {
         font-size: var(--font-size-3);
