@@ -34,74 +34,145 @@
     </style>
   </head>
   <body>
-    <main layout:fragment="main">
-      <nav>
-        <h1>브래드 크럼</h1>
-        <ul>
-          <li><a href="">홈</a></li>
-          <li><a href="">></a></li>
-        </ul>
-      </nav>
-
-      <section>
-        <h1>상품카드</h1>
-        <div>
-          <div><img src="" alt="" />대표사진</div>
-          <div>
-            <div><a href="">사진1</a></div>
-            <div><a href="">사진2</a></div>
-            <div><a href="">사진3</a></div>
-            <div><a href="">사진4</a></div>
-          </div>
-        </div>
-        <div>
-          <div class="d:flex gap:3">
-            <div class="n-btn n-btn-type:outline n-btn-size:1 w:5p">
-              한줄설명
-            </div>
-            <div class="n-btn n-btn-color:sub n-btn-size:3 w:5p">상품명</div>
-            <div>상품가격</div>
-            <div>
-              <div>추천수</div>
-              <div><a href="">공유하기</a></div>
-            </div>
-            <div>
-              <span>용량</span>
-              <span>5~6개입/1kg내외</span>
-            </div>
-            <div>
-              <span>보관방법</span>
-              <span>신선</span>
-            </div>
-            <div>
-              <span>배송비</span>
-              <span>가격(3만원 이상 무료)</span>
-            </div>
-          </div>
+<!--  <main  class="main-user" layout:fragment="main">-->
+    <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:20  w:10p ">
+    <!--    Mobile================================================================================================-->
+    <section class="d:flex W:10p fl-dir:column gap: md:d:none">
+      <h1></h1>
+      <div class="d:flex fl-dir:column gap:7">
+        <div class="d:flex fl-dir:column gap:5">
           <nav>
-            <h1>버튼</h1>
-            <ul>
-              <li><a href="">장바구니</a></li>
-              <li><a href="">구매하기</a></li>
+            <h1 class="d:none">브래드 크럼</h1>
+            <ul style="display: flex">
+              <li><a href="">홈</a></li>
+              <li><a href="">></a></li>
             </ul>
           </nav>
+          <h1 class="d:none">상품카드</h1>
+          <div>
+            <div><img class="display:flex w:10p " src="/img/Meongmeong.jpg" alt=""></div>
+            <div class="d:none">
+              <div><a href="">사진1</a></div>
+              <div><a href="">사진2</a></div>
+              <div><a href="">사진3</a></div>
+              <div><a href="">사진4</a></div>
+            </div>
+          </div>
         </div>
-      </section>
+
+        <section>
+          <div class="d:flex fl-dir:column gap:5">
+
+            <div class="d:flex fl-dir:column gap:3">
+              <div class="fs:2">한줄설명</div>
+              <div class="fs:3">상품명</div>
+              <div class="fs:3">상품가격</div>
+            </div>
+
+            <div class="n-tabbar n-tab-grow ai:stretch">
+              <div class="n-tab">추천수</div>
+              <div class="n-tab"><a href="">공유하기</a></div>
+            </div>
+
+            <div class="d:flex fl-dir:column gap:3">
+              <div class="d:flex gap:11 jc:space-between fs:2">
+                <span>용량</span>
+                <span>5~6개입/1kg내외</span>
+              </div>
+              <div class="d:flex gap:11 jc:space-between fs:2">
+                <span>보관방법</span>
+                <span>신선</span>
+              </div>
+              <div class="d:flex gap:11 jc:space-between fs:2">
+                <span>배송비</span>
+                <span>가격(3만원 이상 무료)</span>
+              </div>
+              <div class="d:flex gap:11 jc:space-between fs:2">
+                <span>상품특징</span>
+                <span>국내산</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+    <!--    PC=================================================================================================-->
+    <section class="d:flex fl-dir:column gap: d:none md:d:block w:10p">
+      <h1 class="d:none"></h1>
+      <div class="d:flex fl-dir:column gap:7">
+        <div>
+          <nav>
+            <h1 class="d:none">브래드 크럼</h1>
+            <ul style="display: flex">
+              <li><a href="">홈</a></li>
+              <li><a href="">></a></li>
+            </ul>
+          </nav>
+          <div class="d:flex">
+            <div>
+              <img src="/img/Meongmeong.jpg" alt="" style="width: 414px; height: 360px;">
+              <div class="d:flex">
+                <div class="m:1">
+                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
+                </div>
+                <div class="m:1 ">
+                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진2" style="width: 90px; height: 90px;"></a>
+                </div>
+                <div class="m:1">
+                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진3" style="width: 90px; height: 90px;"></a>
+                </div>
+                <div class="m:1">
+                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진4" style="width: 90px; height: 90px;"></a>
+                </div>
+              </div>
+            </div>
+            <section class="d:flex fl-dir:column ml:9 jc:space-between w:10p">
+              <h1 class="d:none">상품 상세</h1>
+              <div class="d:flex fl-dir:column gap:7">
+                <div>
+                  <div>한줄설명</div>
+                  <div>상품명</div>
+                </div>
+                <div class="fs:5 fw:3 as:end">가격</div>
+                <div class="d:flex fl-dir:column gap:4">
+                  <div class="d:flex gap:11 jc:space-between">
+                    <span>용량</span>
+                    <span>5~6개입/1kg내외</span>
+                  </div>
+                  <div class="d:flex gap:11 jc:space-between">
+                    <span>보관방법</span>
+                    <span>신선</span>
+                  </div>
+                  <div class="d:flex gap:11 jc:space-between">
+                    <span>배송비</span>
+                    <span>가격(3만원 이상 무료)</span>
+                  </div>
+                  <div class="d:flex gap:11 jc:space-between">
+                    <span>상품특징</span>
+                    <span>국내산</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d:flex gap:13 w:10p col-gap:4">
+                <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">장바구니 담기</button></div>
+                <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">바로 결제하기</button></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--    ===================================================================================================-->
 
       <nav>
-        <h1>탭</h1>
-        <ul>
-          <li><a href="">상품정보</a></li>
+        <h1 class="d:none">탭</h1>
+        <ul class="n-tabbar n-tab-grow">
+          <li ><a href="">상품정보</a></li>
           <li><a href="">후기</a></li>
           <li><a href="">Q&A</a></li>
         </ul>
       </nav>
-
-      <section>
-        <h1>상품정보</h1>
-        <div><img src="" alt="" />사진</div>
-      </section>
-
       <!--=======================상품 후기 모바일 버전==================================-->
       <section class="d:flex fl-dir:column gap:7 md:d:none w:10p pl:5 pr:5">
         <h1 class="fs:5 fw:3 d:flex ai:center jc:center">상품 후기</h1>
@@ -137,6 +208,7 @@
                   width="100%"
               /></a>
             </div>
+
           </div>
         </section>
         <section class="d:flex fl-dir:column gap:1">
