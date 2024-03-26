@@ -22,7 +22,8 @@ public class Product {
     private int     quantity;
 
     private long    categoryId;
-    private long    unitId;
     private long    storageTypeId;
     private long    adminId;
+    private long    quantityCategoryId;
+    private long    weightCategoryId;
 }
