@@ -3,9 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.ReviewRepository">
+	<!-- 모든 후기. 후기는 회원별 혹은 상품별로 검색할 수도 있어야 함-->
     <select id="findAll" resultType="Review">
 		select
 			*
 		from review
-	</select>	
+		<where>
+			<if test="memberId != null">
+				member_id = #{memberId}
+			</if>
+			<if test="productId != null">
+				product_id = #{productId}
+			</if>
+		</where>
+	</select>
+
+	
+	<select id="findById" resultType="Review">
+		select
+			*
+		from review
+		where id = #{id}
+	</select>
 </mapper>

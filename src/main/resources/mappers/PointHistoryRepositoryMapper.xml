@@ -7,5 +7,10 @@
 		select
 			*
 		from point_history
+		<where>
+			<if test="memberId != null">
+				member_id = #{memberId}
+			</if>
+		</where>
 	</select>	
 </mapper>

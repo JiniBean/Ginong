@@ -6,6 +6,19 @@
     <select id="findAll" resultType="Location">
 		select
 			*
-		from coupon_history
-	</select>	
+		from Location
+		<where>
+			<if test="memberId != null">
+				member_id = #{memberId}
+			</if>
+		</where>
+	</select>
+
+	
+	<select id="findById" resultType="Location">
+		select
+			*
+		from Location
+		where id = #{id}
+	</select>
 </mapper>
