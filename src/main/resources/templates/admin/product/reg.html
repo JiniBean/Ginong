@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/dropdown.css">
+<!--    <link rel="stylesheet" href="/css/dropdown.css">-->
     <link rel="stylesheet" href="/css/admin/product/reg.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"> </script>
@@ -22,9 +22,9 @@
         <h1 class="d:none">상품 정보</h1>
         <form class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div class="n-dropdown">
-                <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline min-w:5 jc:space-between">
-                    <span class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
-                <ul id="dropdown-list-category " class="min-w:5 position:relative z-index:1">
+                <button id="dropdown-btn-category" type="button" class="n-select n-btn n-btn:outline min-w:5 jc:space-between">
+                    <span id="selected-category" class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                <ul id="dropdown-list-category" class="min-w:5 z-index:1">
                     <li><button>과채류</button></li>
                     <li><button>양념류</button></li>
                     <li><button>가공식품류</button></li>
@@ -32,6 +32,8 @@
             </div>
             <fieldset class ="d:flex fl-dir:column gap:8">
                 <legend class="d:none">상품 설명 텍스트</legend>
+
+
                 <div>
                     <span>상품명</span>
                     <input type="text" class="n-textbox n-textbox-type:underline" name="name"/>
@@ -40,13 +42,41 @@
                     <span>가격</span>
                     <input type="text" class="n-textbox n-textbox-type:underline" name="price" />
                 </div>
-                <div>
+                <div class ="d:flex fl-dir:column">
                     <span>중량</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="weight"/>
+                    <div class = "d:flex fl-dir:row gap:4">
+                        <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight"/></div>
+                        <div class="n-dropdown">
+                            <button id="dropdown-btn-weight" type="button"
+                                    class="n-btn n-btn:outline min-w:5 jc:space-between">
+                                <span id="selected-weight" class="fl:fill">중량 선택</span><span
+                                    class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                            <ul id="dropdown-list-weight" class="min-w:5 z-index:1">
+                                <li><button>kg</button></li>
+                                <li><button>g</button></li>
+                                <li><button>kg 내외</button></li>
+                                <li><button>g 내외</button></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div>
+                <div class ="d:flex fl-dir:column">
                     <span>개수</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="quantity"/>
+                    <div class = "d:flex fl-dir:row gap:4">
+                        <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight"/></div>
+                        <div class="n-dropdown">
+                            <button id="dropdown-btn-quantity" type="button"
+                                    class="n-btn n-btn:outline min-w:5 jc:space-between">
+                                <span id="selected-quantity" class="fl:fill">개수 선택</span><span
+                                    class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                            <ul id="dropdown-list-quantity" class="min-w:5 z-index:1">
+                                <li><button>통</button></li>
+                                <li><button>개</button></li>
+                                <li><button>봉</button></li>
+                                <li><button>팩</button></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <span>재고</span>
@@ -68,7 +98,7 @@
                 <div class="n-dropdown">
                     <label class="d:flex fl-dir:column gap:2">상품보관유형
                         <button id="dropdown-btn-keepcase" type="button" class="n-btn n-btn:outline max-w:5 jc:space-between">
-                            <span class="flex:fill">보관유형선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                            <span id="selected-keepcase" class="flex:fill">보관유형선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
                     </label>
                     <ul id="dropdown-list-keepcase" class="min-w:5"  th:each=" list : ${storagelist}">
                         <li th:data-id="${list.id}" th:text="${list.name}">실온보관</li>

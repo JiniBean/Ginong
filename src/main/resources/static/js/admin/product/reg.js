@@ -1,6 +1,14 @@
 window.addEventListener("load", function () {
     const dropdownButtonCategory = document.getElementById("dropdown-btn-category");
     const dropdownListCategory = document.getElementById("dropdown-list-category");
+    const selectedCategory = document.getElementById("selected-category");
+
+    dropdownListCategory.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", function () {
+            selectedCategory.textContent = this.textContent;
+            dropdownListCategory.classList.remove("active");
+        });
+    });
 
     dropdownButtonCategory.addEventListener("click", function () {
         dropdownListCategory.classList.toggle("active");
@@ -10,9 +18,51 @@ window.addEventListener("load", function () {
 window.addEventListener("load", function () {
     const dropdownButtonKeepcase = document.getElementById("dropdown-btn-keepcase");
     const dropdownListKeepcase = document.getElementById("dropdown-list-keepcase");
+    const selectedKeepcase = document.getElementById("selected-keepcase");
+
+    dropdownListKeepcase.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", function () {
+            selectedKeepcase.textContent = this.textContent;
+            dropdownListKeepcase.classList.remove("active");
+        });
+    });
 
     dropdownButtonKeepcase.addEventListener("click", function () {
         dropdownListKeepcase.classList.toggle("active");
+    });
+});
+
+window.addEventListener("load", function () {
+    const dropdownButtonWeight = document.getElementById("dropdown-btn-weight");
+    const dropdownListWeight = document.getElementById("dropdown-list-weight");
+    const selectedWeight = document.getElementById("selected-weight");
+
+    dropdownListWeight.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", function () {
+            selectedWeight.textContent = this.textContent;
+            dropdownListWeight.classList.remove("active");
+        });
+    });
+
+    dropdownButtonWeight.addEventListener("click", function () {
+        dropdownListWeight.classList.toggle("active");
+    });
+});
+
+window.addEventListener("load", function () {
+    const dropdownButtonQuantity = document.getElementById("dropdown-btn-quantity");
+    const dropdownListQuantity = document.getElementById("dropdown-list-quantity");
+    const selectedQuantity = document.getElementById("selected-quantity");
+
+    dropdownListQuantity.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", function () {
+            selectedQuantity.textContent = this.textContent;
+            dropdownListQuantity.classList.remove("active");
+        });
+    });
+
+    dropdownButtonQuantity.addEventListener("click", function () {
+        dropdownListQuantity.classList.toggle("active");
     });
 });
 
