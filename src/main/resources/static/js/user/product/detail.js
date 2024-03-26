@@ -2,6 +2,10 @@ window.addEventListener("load", function(){
 
     var numberBox = this.document.querySelector(".numberBox");
     var numberInput = numberBox.getElementsByClassName("number-input")[0];
+    var totalCount = this.document.querySelector(".total-count");
+    var price= this.document.querySelector(".price").value;
+    var totalPrice= this.document.getElementsByClassName("total-price")[0];
+    var totalPriceInput= this.document.getElementsByClassName("total-price")[1];
 
     numberBox.onclick = function (e) {
 
@@ -25,6 +29,12 @@ window.addEventListener("load", function(){
                 numberInput.value = currentValue+1;
                 break;
         }
+
+        totalCount.innerText = numberInput.value;
+
+        var totalSum = parseInt(numberInput.value) * parseInt(price);
+        totalPrice.innerText=totalSum;
+        totalPriceInput.value=totalSum;
 
     }
 
