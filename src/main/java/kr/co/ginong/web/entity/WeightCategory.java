@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Unit {
+public class WeightCategory {
     private long    id;
     private String  name;
 }
