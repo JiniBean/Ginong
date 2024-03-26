@@ -56,5 +56,11 @@
 
     }
 
+    .icon-color\:base-1:before {
+        background-color: var(--color-base-9);
+    }
+
+
+
 
 }
