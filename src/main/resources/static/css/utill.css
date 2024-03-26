@@ -161,17 +161,52 @@
     background-color: var(--color-sub-6) !important;
 }
 
+
+
+/*========== background-color ==============================*/
+
+.background-color\:main-4,
+.bg-color\:main-4 {
+    background-color: var(--color-main-4) !important;
+}
+
+.background-color\:main-5,
+.bg-color\:main-5 {
+    background-color: var(--color-main-5) !important;
+}
+
+.background-color\:main-6,
+.bg-color\:main-6 {
+    background-color: var(--color-main-6) !important;
+}
+
+.background-color\:sub-4,
+.bg-color\:sub-4{
+    background-color: var(--color-sub-4) !important;
+}
+
+.background-color\:sub-5,
+.bg-color\:sub-5 {
+    background-color: var(--color-sub-5) !important;
+}
+
+.background-color\:sub-6,
+.bg-color\:sub-6 {
+    background-color: var(--color-sub-6) !important;
+}
+
 @media (min-width: 780px) {
     .md\:icon-color\:base-9::before,
     .md\icon-color\:base-9::after {
         background-color: var(--color-base-9) !important;
-}
-
+    }
 }
 
 .color\:cart-bg {
     background-color: var(--color-icon-bg) !important;
 }
+
+
 /*========== padding-top ==============================*/
 
 .padding-top\:11,

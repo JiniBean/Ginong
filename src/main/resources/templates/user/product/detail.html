@@ -3,37 +3,13 @@
   lang="ko"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="user/inc/layout-back"
->
+  layout:decorate="user/inc/layout-detail">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="/js/user/product/detail.js"></script>
-
-    <style>
-      .n-expander .n-expander-title:after {
-        background-image: none;
-      }
-
-      /*수량inputbox*/
-
-      .numberBox a {
-        position: absolute;
-        top: 0;
-        width: 37px;
-        line-height: 34px;
-        text-align: center;
-      }
-
-      .numberBox .btnMinus::before {
-        content: "\2500";
-      }
-
-      .numberBox .btnPlus::before {
-        content: "\253C";
-      }
-    </style>
+    <link rel="stylesheet" href="/css/user/product/detail.css">
   </head>
   <body>
     <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:20  w:10p max-w:20">
@@ -62,7 +38,6 @@
           </div>
         </div>
 
-        <section>
           <div class="d:flex fl-dir:column gap:5">
 
             <div class="d:flex fl-dir:column gap:3">
@@ -77,6 +52,7 @@
             </div>
 
             <div class="d:flex fl-dir:column gap:3">
+
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>용량</span>
                 <span>5~6개입/1kg내외</span>
@@ -93,9 +69,10 @@
                 <span>상품특징</span>
                 <span>국내산</span>
               </div>
+
             </div>
+
           </div>
-        </section>
       </div>
     </section>
     <!--    PC=================================================================================================-->
@@ -211,28 +188,13 @@
           </div>
           <div class="d:flex fl-dir:row gap:5">
             <div>
-              <a href=""
-                ><img
-                  th:src="@{/img/Meongmeong.jpg}"
-                  height="100px"
-                  width="100%"
-              /></a>
+              <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="100px" width="100%"/></a>
             </div>
             <div>
-              <a href=""
-                ><img
-                  th:src="@{/img/Meongmeong.jpg}"
-                  height="100px"
-                  width="100%"
-              /></a>
+              <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="100px" width="100%"/></a>
             </div>
             <div>
-              <a href=""
-                ><img
-                  th:src="@{/img/Meongmeong.jpg}"
-                  height="100px"
-                  width="100%"
-              /></a>
+              <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="100px" width="100%"/></a>
             </div>
 
           </div>
@@ -241,22 +203,14 @@
           <h1>후기</h1>
           <div class="d:flex fl-dir:column gap:2 bd-top bd-color:base-5">
             <div class="d:flex fl-dir:row mt:2 gap:3 ai:center">
-              <span
-                class="deco icon:leaf deco-size:4 icon-color:sub-5 d:flex ai:center jc:center"
-                >신선해요</span
-              >
-              <span
-                class="n-btn n-btn-size:1"
-                style="background-color: var(--color-sub-5)"
-                >BEST</span
-              >
+              <span class="deco icon:leaf deco-size:4 icon-color:sub-5 d:flex ai:center jc:center">신선해요</span>
+              <span class="bg-color:sub-5 color:base-1 bd-radius:2 fs:1 pl:1 pr:1" style="padding-top: 4px;
+              padding-bottom:
+              4px">BEST</span>
             </div>
             <div class="d:flex fl-dir:column gap:1">
               <div class="pos:relative d:flex fl-dir:row gap:3 ai:center">
                 <span>godseokho</span>
-                <span class="bar"></span>
-                <span>2024.03.21</span>
-              </div>
               <div>
                 <p>와!!! 정말 맛있어요!!! 이 갓석호가 보증합니다!!</p>
               </div>
@@ -622,14 +576,6 @@
                 <span class="fw:3">원</span>
               </div>
             </div>
-          </div>
-        </div>
-        <!-- 구매버튼-->
-        <div class="pay-box d:flex fl-dir:row ai:center gap:2 w:10p">
-          <div class="icon icon:heart icon-color:main-6 icon-size:4 h:2 bd bd-color:base-3 bd-radius:2" style="width: 46px">찜버튼</div>
-          <div class="d:flex ai:center fl-grow:1 gap:1">
-            <button class="n-btn n-btn-type:outline w:10p">장바구니</button>
-            <button class="n-btn w:10p">바로 구매하기</button>
           </div>
         </div>
       </section>

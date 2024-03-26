@@ -3,12 +3,27 @@
     <nav class="category d:none md:d:flex w:10p max-w:10 top:3 pos:sticky bg-color:base-1 zi:1">
         <h1 class="d:none">PC 카테고리</h1>
         <ul class="n-tabbar d:flex h:4 jc:space-between fl-grow:1 md:mr:0 md:ml:0">
-          <li class="active h:10p"><a href="" class="h:10p fw:3 fs:3" th:data-id=1>과일/채소류</a></li>
-          <li class=" h:10p"><a href="" class="h:10p fs:3" th:data-id=2>양념/장류</a></li>
-          <li class="h:10p"><a href="" class="h:10p fs:3" th:data-id=3>반찬/가공식품류</a></li>
-          <li class="h:10p"><a href="/user/mypage/order/list" class="h:10p fs:3">주문 내역</a></li>
-          <li class="h:10p"><a href="/user/notice/list" class="h:10p fs:3">공지사항</a></li>
-          <li class="h:10p"><a href="/user/inquiry/faq" class="h:10p fs:3">고객센터</a></li>
+          <li class="h:10p" th:class="${{param.c}}==1 ? 'active h:10p' : 'h:10p'">
+            <a href="/user/product/list?c=1" class="h:10p fw:3 fs:3"
+               th:class="${{param.c}}==1 ? 'fw:3 fs:3 h:10p': 'fs:3 h:10p'" th:data-id=1>과일/채소류</a>
+          </li>
+          <li class="h:10p"  th:class="${{param.c}}==2 ? 'active h:10p' : 'h:10p'">
+            <a href="/user/product/list?c=2" class="h:10p"
+               th:class="${{param.c}}==2 ? 'fw:3 fs:3 h:10p': 'fs:3 h:10p'" th:data-id=1>양념/장류</a>
+          </li>
+          <li class="h:10p"  th:class="${{param.c}}==3 ? 'active h:10p' : 'h:10p'">
+            <a href="/user/product/list?c=3" class="h:10p"
+               th:class="${{param.c}}==3 ? 'fw:3 fs:3 h:10p': 'fs:3 h:10p'" th:data-id=1>반찬/가공식품류</a>
+          </li>
+          <li class="h:10p">
+            <a href="/user/mypage/order/list" class="fs:3 h:10p">주문 내역</a>
+          </li>
+          <li class="h:10p">
+            <a href="/user/notice/list" class="fs:3 h:10p">공지사항</a>
+          </li>
+          <li class="h:10p">
+            <a href="/user/inquiry/faq" class="fs:3 h:10p">고객센터</a>
+          </li>
         </ul>
 
       </nav>
@@ -16,9 +31,15 @@
       <nav class="category d:flex md:d:none w:10p bg-color:base-1 top:2 pos:sticky zi:1">
         <h1 class="d:none">모바일 카테고리</h1>
         <ul class="n-tabbar d:flex h:2 jc:space-between fl-grow:1 mr:4 ml:4">
-          <li class="h:10p"><a href="" class="h:10p fw:3" th:data-id=1>과채</a></li>
-          <li class="h:10p"><a href="" class="h:10p" th:data-id=2>양념</a></li>
-          <li class="h:10p"><a href="" class="h:10p" th:data-id=1>가공식품</a></li>
+          <li class="h:10p" th:class="${{param.c}}==1 ? 'active h:10p' : 'h:10p'">
+            <a href="/user/product/list?c=1" class="h:10p fw:3" th:class="${{param.c}}==1 ? 'fw:3 h:10p': 'h:10p'" th:data-id=1>과채</a>
+          </li>
+          <li class="h:10p" th:class="${{param.c}}==2 ? 'active h:10p' : 'h:10p'">
+            <a href="/user/product/list?c=2" class="h:10p fw:3" th:class="${{param.c}}==2 ? 'fw:3 h:10p': 'h:10p'" th:data-id=2>양념</a>
+          </li>
+          <li class="h:10p" th:class="${{param.c}}==3? 'active h:10p' : 'h:10p'">
+            <a href="/user/product/list?c=3" class="h:10p fw:3" th:class="${{param.c}}==3 ? 'fw:3 h:10p': 'h:10p'" th:data-id=3>가공식품</a>
+          </li>
           <li class="h:10p"><a href="/user/notice/list" class="h:10p">공지사항</a></li>
           <li class="h:10p"><a href="/user/inquiry/faq" class="h:10p">고객센터</a></li>
         </ul>
