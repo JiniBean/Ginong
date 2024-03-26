@@ -9,6 +9,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="/js/user/product/detail.js"></script>
+
     <style>
       .n-expander .n-expander-title:after {
         background-image: none;
@@ -597,7 +599,7 @@
       <!--구매정보 안내팝업(모바일)-->
       <section class="d:flex fl-dir:column gap:8 ai:center md:d:none m:4">
         <h1 class="d:none">구매정보안내팝업</h1>
-        <div class="n-item n-item:outline d:flex fl-dir:column ai:center gap:8 w:10p">
+        <div class="pay-pop d:none n-item n-item:outline d:flex fl-dir:column ai:center gap:8 w:10p">
           <div class=" icon icon:caret_down icon-size:4">닫기 아이콘 </div>
           <div class="w:10p">
             <div class="bg-color:base-3 p:5 d:flex fl-dir:column gap:3">
@@ -622,7 +624,8 @@
             </div>
           </div>
         </div>
-        <div class="d:flex fl-dir:row ai:center gap:2 w:10p">
+        <!-- 구매버튼-->
+        <div class="pay-box d:flex fl-dir:row ai:center gap:2 w:10p">
           <div class="icon icon:heart icon-color:main-6 icon-size:4 h:2 bd bd-color:base-3 bd-radius:2" style="width: 46px">찜버튼</div>
           <div class="d:flex ai:center fl-grow:1 gap:1">
             <button class="n-btn n-btn-type:outline w:10p">장바구니</button>
