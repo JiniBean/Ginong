@@ -19,6 +19,7 @@ public class Product {
     private String  exp;
     private String  desc;
     private boolean state;
+    private int     quantity;
 
     private long    categoryId;
     private long    unitId;
