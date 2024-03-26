@@ -17,5 +17,4 @@ public class CouponHistory {
     private Date usedDate;
     private long couponId;
     private long memberId;
-    private long categoryId;
 }
