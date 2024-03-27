@@ -28,7 +28,7 @@
           </nav>
           <h1 class="d:none">상품카드</h1>
           <div>
-            <div><img class="display:flex w:10p " src="/img/Meongmeong.jpg" alt=""></div>
+            <div><img class="display:flex w:10p " th:src="@{/img/Meongmeong.jpg}" src="/img/Meongmeong.jpg" alt=""></div>
             <div class="d:none">
               <div><a href="">사진1</a></div>
               <div><a href="">사진2</a></div>
@@ -41,13 +41,13 @@
           <div class="d:flex fl-dir:column gap:5">
 
             <div class="d:flex fl-dir:column gap:3">
-              <div class="fs:2">한줄설명</div>
-              <div class="fs:3">상품명</div>
-              <div class="fs:3">상품가격</div>
+              <div class="fs:2" th:text="${product.desc}">한줄설명</div>
+              <div class="fs:3" th:text="${product.name}">상품명</div>
+              <div class="fs:3" th:text="${product.price}">상품가격</div>
             </div>
 
             <div class="n-tabbar n-tab-grow ai:stretch">
-              <div class="n-tab">추천수</div>
+              <div class="n-tab" th:text="${product.likeCount}">추천수</div>
               <div class="n-tab"><a href="">공유하기</a></div>
             </div>
 
@@ -55,19 +55,15 @@
 
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>용량</span>
-                <span>5~6개입/1kg내외</span>
+                <span th:text="${product.quantity + product.quantityCategory +'/'+product.weight+product.weightCategory}">5~6개입/1kg내외</span>
               </div>
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>보관방법</span>
-                <span>신선</span>
+                <span th:text="${product.storageType}">신선</span>
               </div>
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>배송비</span>
                 <span>가격(3만원 이상 무료)</span>
-              </div>
-              <div class="d:flex gap:11 jc:space-between fs:2">
-                <span>상품특징</span>
-                <span>국내산</span>
               </div>
 
             </div>
@@ -89,7 +85,7 @@
         </nav>
         <div class="d:flex">
           <div class="d:flex fl-dir:column jc:space-between">
-              <div><img src="/img/Meongmeong.jpg" alt="" style="width: 414px; height: 440px;"></div>
+              <div><img src="/img/Meongmeong.jpg" th:src="@{/img/Meongmeong.jpg}" alt="" style="width: 414px; height: 440px;"></div>
               <div class="d:flex jc:space-between">
                 <div>
                   <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
@@ -109,29 +105,25 @@
               <h1 class="d:none">상품 상세</h1>
               <div class="d:flex fl-dir:column gap:7">
                 <div class="d:flex fl-dir:column gap:3">
-                  <div>껍질째 드실 수 있는 달콤하고 신선한 감</div>
-                  <div class="fw:3 fs:4">[신선해요] 감*1kg내외(5~6입)</div>
+                  <div th:text="${product.desc}">껍질째 드실 수 있는 달콤하고 신선한 감</div>
+                  <div class="fw:3 fs:4" th:text="${product.name+'*'+product.weight+product.weightCategory+'('+product.quantity+product.quantityCategory+')'}">[신선해요] 감*1kg내외(5~6입)</div>
                 </div>
                 <div class="fs:5 fw:3 as:end">
-                  <span>10,000원</span>
+                  <span th:text="${product.price+'원'}">10,000원</span>
                   <input type="hidden" class="price" th:value="10000">
                 </div>
                 <div class="d:flex fl-dir:column gap:4">
                   <div class="d:flex gap:11 jc:space-between">
                     <span>용량</span>
-                    <span>5~6개입/1kg내외</span>
+                    <span th:text="${product.quantity + product.quantityCategory +'/'+product.weight+product.weightCategory}">5~6개입/1kg내외</span>
                   </div>
                   <div class="d:flex gap:11 jc:space-between">
                     <span>보관방법</span>
-                    <span>신선</span>
+                    <span th:text="${product.storageType}">신선</span>
                   </div>
                   <div class="d:flex gap:11 jc:space-between">
                     <span>배송비</span>
                     <span>가격(3만원 이상 무료)</span>
-                  </div>
-                  <div class="d:flex gap:11 jc:space-between">
-                    <span>상품특징</span>
-                    <span>국내산</span>
                   </div>
                 </div>
               </div>
