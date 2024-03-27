@@ -56,6 +56,7 @@ public class ProductController {
         model.addAttribute("count", count);
         model.addAttribute("list", list);
         System.out.println(list.size());
+        System.out.println(list.toString());
 
         return "user/product/list";
     }

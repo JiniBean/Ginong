@@ -13,6 +13,7 @@ public class ProductView {
     private long    id;
     private String  name;
     private int     price;
+    private int     quantity;
     private int     weight;
     private String  thumbnailName;
     private String  thumbnailPath;

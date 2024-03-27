@@ -30,3 +30,10 @@
     mask-image: url("../icon/recents.svg");
 }
 
+
+.icon\:smile::before,
+.icon\:smile::after {
+    -webkit-mask-image: url("../icon/smile.svg");
+    mask-image: url("../icon/smile.svg");
+}
+

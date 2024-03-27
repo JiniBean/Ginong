@@ -17,6 +17,7 @@
 
 
     <!--  카테고리  -->
+
     <section class="w:10p d:flex ai:center jc:space-between">
         <h1 class="d:none">정렬 카테고리</h1>
         <div>
@@ -43,10 +44,10 @@
 
     <!--  아이템 목록(리스트 / 확인)  -->
 
-    <section>
+    <section class="menu-card-row d:flex fl-dir:column md:d:none gap:5">
         <h1 class="d:none">상품 컨테이너 - row</h1>
 
-        <section th:each="m:${list}" class="menu-card-row d:flex md:d:none flex-wrap:wrap ai:center gap:5" >
+        <section th:each="m:${list}" >
             <h1 class="d:none">상품 영역-row</h1>
             <div class="d:flex w:10p gap:3">
                 <div class="pos:relative">
@@ -62,13 +63,14 @@
                 <div class="d:flex fl-dir:column jc:center gap:3">
                     <div class="d:flex fl-dir:column jc:center gap:1">
                         <a href="">
-                            <span th:text="${m.name + ', ' + m.weight + '개입' + '(' + m.quantity + '내외' + ')'}">텃밭 흙 당근, 2개입</span>
+                            <span th:text="${m.name + ', ' + m.quantity + '개입' + '(' + m.weight + 'g' + ')'}">텃밭 흙 당근, 2개입</span>
                         </a>
                         <a href="">
-                            <span th:text="${m.price}" class="fw:3">2,500원</span>
+<!--                            <span th:text="${m.price} + '원'" class="fw:3">2,500원</span>-->
+                            <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')} + ' 원'" class="fw:3">2,500원</span>
                         </a>
                     </div>
-                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">1234</div>
+                    <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:1">1234</div>
                 </div>
             </div>
         </section>
@@ -100,7 +102,7 @@
                             <span class="fw:3">2,500원</span>
                         </a>
                     </div>
-                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">1234</div>
+<!--                    <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:1">1234</div>-->
                 </div>
             </div>
         </section>
@@ -110,28 +112,29 @@
     <!--  PC버전 / 확인 -->
     <section class="d:none md:d:flex flex-wrap:wrap ai:center gap:2">
         <h1 class="d:none">상품컨테이너 - pc</h1>
-        <section class="font-size:3">
+        <section th:each="m : ${list}" class="font-size:3">
             <h1 class="d:none">상품 영역</h1>
             <div class="d:flex fl-dir:column w:10p gap:3">
                 <div class="pos:relative">
-                    <a href="#" class=""><img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
+                    <a href="#" class=""><img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
                     <div class="cart-section">
                         <div>
-                            <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">장바구니
-                                아이콘</a>
+                            <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">
+                                장바구니 아이콘
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column jc:center gap:2">
                     <div class="d:flex fl-dir:column jc:center gap:1">
                         <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
+                            <span th:text="${m.name + ', ' + m.quantity + '개입' + '(' + m.weight + 'g' + ')'}" >텃밭 흙 당근, 2개입</span>
                         </a>
                         <a href="">
-                            <span class="fw:3">2,500원</span>
+                            <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')} + ' 원'" class="fw:3">2,500원</span>
                         </a>
                     </div>
-                    <div class="deco icon:thumbsup deco-color:sub-4 deco-size:4">1234</div>
+                    <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:4">1234</div>
                 </div>
             </div>
         </section>
