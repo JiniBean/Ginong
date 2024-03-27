@@ -18,10 +18,11 @@ public interface ProductRepository {
     Product findById(Long id);
     int count(Long categoryId, String query);
 
-    /*
+
     void save(Product product);
     void update(Product product);
-    void delete(long id);
 
-    */
+    //void delete(long id);
+
+
 }
