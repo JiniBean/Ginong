@@ -19,11 +19,11 @@ public class ProductView {
     private String  exp;
     private String  desc;
     private boolean state;
-    private int     quantity;
     private int     likeCount;
 
-    private long    categoryId;
-    private long    unitId;
-    private long    storageTypeId;
-    private long    adminId;
+    private String  category;
+    private String  storageType;
+    private String  admin;
+    private String  quantityCategory;
+    private String  weightCategory;
 }
