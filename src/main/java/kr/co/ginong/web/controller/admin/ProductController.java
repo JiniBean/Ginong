@@ -21,7 +21,6 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-
     @GetMapping("list")
     public String list(Model model){
 
