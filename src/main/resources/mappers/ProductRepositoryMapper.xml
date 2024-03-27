@@ -7,7 +7,7 @@
 	<select id="findAll" resultType="ProductView">
 		select
 			*
-		from product_view
+		from PRODUCT_VIEW
 		<where>
 			<if test="categoryId != null">
 				category_id = #{categoryId}
@@ -22,14 +22,14 @@
 	<select id="findById" resultType="Product">
 		select
 			*
-		from product
+		from PRODUCT
 		where id = #{id}
 	</select>
 	
 	<select id="count" resultType="Integer">
 		select
 			count(id)
-		from Product
+		from PRODUCT
 
 		<where>
 			<if test="categoryId != null">
