@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Product-List</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
+    <script src="/js/user/product/list.js"></script>
 </head>
 
 
@@ -25,10 +26,10 @@
             </div>
             <div class="d:none md:d:block">
                 <select name="" id="">
-                    <option selected>20개씩 보기</option>
-                    <option>40개씩 보기</option>
-                    <option>60개씩 보기</option>
-                    <option>80개씩 보기</option>
+                    <option selected value="20">20개씩 보기</option>
+                    <option value="40">40개씩 보기</option>
+                    <option value="60">60개씩 보기</option>
+                    <option value="80">80개씩 보기</option>
                 </select>
             </div>
         </div>
@@ -45,7 +46,7 @@
     <section>
         <h1 class="d:none">상품 컨테이너 - row</h1>
 
-        <section class="menu-card-row d:flex md:d:none flex-wrap:wrap ai:center gap:5">
+        <section th:each="m:${list}" class="menu-card-row d:flex md:d:none flex-wrap:wrap ai:center gap:5" >
             <h1 class="d:none">상품 영역-row</h1>
             <div class="d:flex w:10p gap:3">
                 <div class="pos:relative">
@@ -54,18 +55,17 @@
                     </a>
                     <div class="cart-section">
                         <div>
-                            <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                장바구니아이콘 </a>
+                            <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘 </a>
                         </div>
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column jc:center gap:3">
                     <div class="d:flex fl-dir:column jc:center gap:1">
                         <a href="">
-                            <span>텃밭 흙 당근, 2개입</span>
+                            <span th:text="${m.name + ', ' + m.weight + '개입' + '(' + m.quantity + '내외' + ')'}">텃밭 흙 당근, 2개입</span>
                         </a>
                         <a href="">
-                            <span class="fw:3">2,500원</span>
+                            <span th:text="${m.price}" class="fw:3">2,500원</span>
                         </a>
                     </div>
                     <div class="deco icon:thumbsup deco-color:sub-4 deco-size:1">1234</div>
