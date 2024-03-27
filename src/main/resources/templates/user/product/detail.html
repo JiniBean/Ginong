@@ -112,7 +112,10 @@
                   <div>껍질째 드실 수 있는 달콤하고 신선한 감</div>
                   <div class="fw:3 fs:4">[신선해요] 감*1kg내외(5~6입)</div>
                 </div>
-                <div class="fs:5 fw:3 as:end">10,000<span>원</span></div>
+                <div class="fs:5 fw:3 as:end">
+                  <span>10,000원</span>
+                  <input type="hidden" class="price" th:value="10000">
+                </div>
                 <div class="d:flex fl-dir:column gap:4">
                   <div class="d:flex gap:11 jc:space-between">
                     <span>용량</span>
@@ -132,28 +135,30 @@
                   </div>
                 </div>
               </div>
-              <!--<div class="d:flex fl-dir:column gap:5 pt:10 pb:10 bd-top">
+              <!--구매정보 안내(pc버전)-->
+             <div class="d:flex fl-dir:column gap:5 pt:10 pb:10 bd-top">
                   <div class="d:flex fl-dir:row ai:center jc:space-between">
                   <span class="numberBox bd of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
-                    <a href="#" class="btnMinus left:1"></a>
-                    <input type="text" class="w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" value="1" return false; />
-                    <a href="#" class="btnPlus right:1"></a>
+                    <a th:data-btn="minus" class="btnMinus left:1"></a>
+                    <input type="text" class="number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" value="1" return false; />
+                    <a th:data-btn="plus" class="btnPlus right:1"></a>
                   </span>
                   </div>
                   <div class="d:flex fl-dir:row bd h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
                     <div>
-                      <span class="fw:3" >총 수량&emsp;<span class="color:sub-5">1</span>개</span>
+                      <span class="fw:3" >총 수량&emsp;<span class="total-count color:sub-5">1</span>개</span>
                     </div>
                     <div>
-                      <span class="color:sub-5 fw:3">10,000</span>
+                      <span class="total-price color:sub-5 fw:3" th:text="10000">10,000</span>
                       <span class="fw:3">원</span>
+                      <input type="hidden" class="total-price" name="totalPrice" th:value="10000">
                     </div>
                   </div>
               </div>
               <div class="d:flex gap:13 w:10p col-gap:4">
                 <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">장바구니 담기</button></div>
                 <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">바로 결제하기</button></div>
-              </div>-->
+              </div>
             </section>
           </div>
         </div>
@@ -553,29 +558,29 @@
       <!--구매정보 안내팝업(모바일)-->
       <section class=" d:flex fl-dir:column gap:8 ai:center md:d:none m:4">
         <h1 class="d:none">구매정보안내팝업</h1>
-        <div class="pay-content-mobile n-item n-item:outline d:flex fl-dir:column ai:center gap:8 w:10p">
+        <div class="n-item n-item:outline d:flex fl-dir:column ai:center gap:8 w:10p">
           <div class=" icon icon:caret_down icon-size:4">닫기 아이콘 </div>
           <div class="w:10p">
             <div class="bg-color:base-3 p:5 d:flex fl-dir:column gap:3">
               <div>국산 유기농 감 1kg 내외 (5~6개입)</div>
               <div class="d:flex fl-dir:row ai:center jc:space-between">
-                <span class="numberBox bd bd-color:base-1 of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
+                <span class="m-numberBox bd bd-color:base-1 of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
                   <a th:data-btn="minus" class="btnMinus left:1"></a>
-                  <input type="text" class="number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" th:value=1 return false; />
+                  <input type="text" class="m-number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" th:value=1 return false; />
                   <a th:data-btn="plus" class="btnPlus right:1"></a>
                 </span>
                 <span class="w:1/5 txt-al:right">10,000원</span>
-                <input type="hidden" class="price" th:value="10000">
+                <input type="hidden" class="m-price" th:value="10000">
               </div>
             </div>
             <div class="d:flex bd bd-color:base-3 h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
               <div class="total">
-                <span class="fw:3">총 수량&emsp;<span class="total-count color:sub-5" th:text="1">1</span>개</span>
+                <span class="fw:3">총 수량&emsp;<span class="m-total-count color:sub-5" th:text="1">1</span>개</span>
               </div>
               <div>
-                <span class="total-price color:sub-5 fw:3" th:text="10000">10,000</span>
+                <span class="m-total-price color:sub-5 fw:3" th:text="10000">10,000</span>
                 <span class="fw:3">원</span>
-                <input type="hidden" class="total-price" name="totalPrice" th:value="10000">
+                <input type="hidden" class="m-total-price" name="m-totalPrice" th:value="10000">
               </div>
             </div>
           </div>
