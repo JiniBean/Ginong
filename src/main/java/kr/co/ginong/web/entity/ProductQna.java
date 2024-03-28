@@ -19,5 +19,5 @@ public class ProductQna {
     private boolean answerState;
     private long	memberId;
     private long	productId;
-        
+    private long    categoryId;
 }

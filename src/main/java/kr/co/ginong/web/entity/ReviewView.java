@@ -18,8 +18,6 @@ public class ReviewView {
     private boolean	tagFresh;
     private boolean	tagThumbs;
     private String 	content;
-    private long	memberId;
-    private long	productId;
 
     private String  userName;
     private String  productName;
