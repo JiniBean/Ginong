@@ -8,8 +8,9 @@ public class ProductQnaView {
     private String 	content;
     private boolean	state;
     private boolean answerState;
-    
+
     private String  userName;
     private String  productName;
     private String  qnaCategory;
+    private String  answer;
 }
