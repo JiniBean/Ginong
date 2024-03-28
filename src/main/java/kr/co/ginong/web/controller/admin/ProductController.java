@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,11 @@ public class ProductController {
     }
 
     @GetMapping("update")
-    public String update(){
+    public String update(@RequestParam(value = "id")Long productId, Model model){
+
+        ProductView productView = service.get(productId);
+
+        model.addAttribute("productView",productView);
 
         return "admin/product/update";
     }
@@ -54,7 +59,6 @@ public class ProductController {
     @PostMapping("update")
     public String update(Product product){
         service.update(product);
-
         return "redirect:admin/product/list";
     }
 

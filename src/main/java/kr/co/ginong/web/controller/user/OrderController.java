@@ -26,9 +26,5 @@ public class OrderController {
         return "user/order/pay";
     }
 
-    @GetMapping("complete")
-    public String complete() {
-        return "user/order/complete";
-    }
 
 }

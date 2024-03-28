@@ -31,5 +31,12 @@ public class ProductServiceImp implements ProductService {
         repository.update(product);
     }
 
+    @Override
+    public ProductView get(Long productId) {
+        ProductView productView = repository.findById(productId);
+
+        return productView;
+    }
+
 }
 

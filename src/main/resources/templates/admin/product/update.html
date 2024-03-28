@@ -17,58 +17,88 @@
 </head>
 
 <body>
-<main layout:fragment="main" class= "d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p " >
-    <section class= "w:10p mr:4 ml:4 md:mr:0 md:ml:0">
+<main layout:fragment="main" class= "d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pl:4 pr:4 md:pl:0 md:pr:0" >
+    <section class= "w:10p">
         <h1 class="d:none">상품 정보</h1>
         <form class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div class="n-dropdown">
-                <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline min-w:5 jc:space-between">
-                    <span class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
-                <ul id="dropdown-list-category" class="min-w:5">
-                    <li>과채류</li>
-                    <li>양념류</li>
-                    <li>가공식품류</li>
+                <button id="dropdown-btn-category" type="button" class="n-select n-btn n-btn:outline min-w:5 jc:space-between">
+                    <span id="selected-category" class="fl:fill">카테고리 선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                <ul id="dropdown-list-category" class="min-w:5 z-index:1">
+                    <li><button>과채류</button></li>
+                    <li><button>양념류</button></li>
+                    <li><button>가공식품류</button></li>
                 </ul>
             </div>
             <fieldset class ="d:flex fl-dir:column gap:8">
                 <legend class="d:none">상품 설명 텍스트</legend>
+
+
                 <div>
                     <span>상품명</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="name" th:value="${list.name}"/>
+                    <input type="text" class="n-textbox n-textbox-type:underline" name="name"/>
                 </div>
                 <div>
                     <span>가격</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="price" th:value="${list.price}"/>
+                    <input type="text" class="n-textbox n-textbox-type:underline" name="price" />
                 </div>
-                <div>
+                <div class ="d:flex fl-dir:column">
                     <span>중량</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="weight" th:value="${list.weight}"/>
+                    <div class = "d:flex fl-dir:row gap:4">
+                        <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight"/></div>
+                        <div class="n-dropdown">
+                            <button id="dropdown-btn-weight" type="button"
+                                    class="n-btn n-btn:outline min-w:5 jc:space-between">
+                                <span id="selected-weight" class="fl:fill">중량 선택</span><span
+                                    class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                            <ul id="dropdown-list-weight" class="min-w:5 z-index:1">
+                                <li><button>kg</button></li>
+                                <li><button>g</button></li>
+                                <li><button>kg 내외</button></li>
+                                <li><button>g 내외</button></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div>
+                <div class ="d:flex fl-dir:column">
                     <span>개수</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="quantity" th:value="${list.quantity}"/>
+                    <div class = "d:flex fl-dir:row gap:4">
+                        <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight"/></div>
+                        <div class="n-dropdown">
+                            <button id="dropdown-btn-quantity" type="button"
+                                    class="n-btn n-btn:outline min-w:5 jc:space-between">
+                                <span id="selected-quantity" class="fl:fill">개수 선택</span><span
+                                    class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                            <ul id="dropdown-list-quantity" class="min-w:5 z-index:1">
+                                <li><button>통</button></li>
+                                <li><button>개</button></li>
+                                <li><button>봉</button></li>
+                                <li><button>팩</button></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <span>재고</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline"  name="amount" th:value="${list.amount}"/> <!--stock의 수량-->
+                    <input type="text" class="n-textbox n-textbox-type:underline"  name="amount"/> <!--stock의 수량-->
                 </div>
                 <div>
                     <span>유통기한</span>
                     <div class="input-wrapper">
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="exp" th:value="${list.exp}">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="exp">
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column">
                     <span>수확일</span>
                     <div class="input-wrapper">
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="madeDate" th:value="${list.madeDate}">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="madeDate">
                         <button><img src="/icon/calendar.svg" alt="달력 아이콘" class="calendar-icon" style="width: 32px; height: 32px;"></button>
                     </div>
                 </div>
                 <div class="n-dropdown">
                     <label class="d:flex fl-dir:column gap:2">상품보관유형
                         <button id="dropdown-btn-keepcase" type="button" class="n-btn n-btn:outline max-w:5 jc:space-between">
-                            <span class="flex:fill">보관유형선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
+                            <span id="selected-keepcase" class="flex:fill">보관유형선택</span><span class="icon icon:RT icon-size:1 icon-color:main-6"></span></button>
                     </label>
                     <ul id="dropdown-list-keepcase" class="min-w:5"  th:each=" list : ${storagelist}">
                         <li th:data-id="${list.id}" th:text="${list.name}">실온보관</li>
@@ -78,20 +108,20 @@
                 </div>
                 <div>
                     <span>상품설명</span>
-                    <textarea type="text" class="n-textbox" name="desc" th:value="${list.desc}"></textarea>
+                    <textarea type="text" class="n-textbox" name="desc"></textarea>
                 </div>
             </fieldset>
             <div>
                 <ul class="image-preview"></ul>
                 <input type="file" class="real-upload" accept="image/*" required multiple>
-                <div class="upload n-btn w:100p"><span class="text">사진 첨부하기</span></div>
+                <div class="upload n-btn w:100p"><span class="text color:main-1">사진 첨부하기</span></div>
             </div>
             <div class = "display:flex flex-direction:row gap:4">
                 <span class="d:flex ai:center">상태</span>
-                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state" th:value="${list.state}"/>
+                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
             </div>
             <div class = "display:flex flex-direction:row w:100p gap:8">
-                <button type="button" class="n-btn n-btn-size:2 min-w:3 w:100p">임시저장</button>
+                <button type="button" class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:100p">임시저장</button>
                 <button type="button" class="n-btn n-btn-size:2 min-w:3 w:100p">저장</button>
             </div>
         </form>
