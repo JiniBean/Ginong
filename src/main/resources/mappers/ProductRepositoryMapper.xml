@@ -19,10 +19,10 @@
 		limit #{offset}, #{size}
 	</select>
 
-	<select id="findById" resultType="Product">
+	<select id="findById" resultType="ProductView">
 		select
 			*
-		from PRODUCT
+		from PRODUCT_VIEW
 		where id = #{id}
 	</select>
 	

@@ -30,7 +30,6 @@ public class ProductController {
             @RequestParam(name = "c", required = false) Long categoryId
             , @RequestParam(name = "q", required = false) String query
             , @RequestParam(name = "p", required = false, defaultValue = "1") Integer page
-            , @RequestParam(name = "s", required = false, defaultValue = "20") Integer size
             , Model model) {
 
         List<ProductView> list = new ArrayList<>();
@@ -65,8 +64,8 @@ public class ProductController {
     public String detail(@RequestParam(value = "id") Long productId, Model model) {
         // 배송비 및 신선해요 태그 등 product 테이블에 없는 정보가 있어 view 필요
 
-        Product product = service.get(productId);
-        model.addAttribute("product", product);
+        ProductView productView = service.get(productId);
+        model.addAttribute("productView", productView);
 
         return "user/product/detail";
     }

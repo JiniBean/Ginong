@@ -75,9 +75,9 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Product get(Long productId) {
-        Product product = repository.findById(productId);
+    public ProductView get(Long productId) {
+        ProductView productView = repository.findById(productId);
 
-        return product;
+        return productView;
     }
 }

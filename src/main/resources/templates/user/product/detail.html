@@ -41,13 +41,13 @@
           <div class="d:flex fl-dir:column gap:5">
 
             <div class="d:flex fl-dir:column gap:3">
-              <div class="fs:2" th:text="${product.desc}">한줄설명</div>
-              <div class="fs:3" th:text="${product.name}">상품명</div>
-              <div class="fs:3" th:text="${product.price}">상품가격</div>
+              <div class="fs:2" th:text="${productView.desc}">한줄설명</div>
+              <div class="fs:3" th:text="${productView.name}">상품명</div>
+              <div class="fs:3" th:text="${productView.price}">상품가격</div>
             </div>
 
             <div class="n-tabbar n-tab-grow ai:stretch">
-              <div class="n-tab" th:text="${product.likeCount}">추천수</div>
+              <div class="n-tab" th:text="${productView.likeCount}">추천수</div>
               <div class="n-tab"><a href="">공유하기</a></div>
             </div>
 
@@ -55,11 +55,11 @@
 
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>용량</span>
-                <span th:text="${product.quantity + product.quantityCategory +'/'+product.weight+product.weightCategory}">5~6개입/1kg내외</span>
+                <span th:text="${productView.quantity + productView.quantityCategory +'/'+productView.weight+productView.weightCategory}">5~6개입/1kg내외</span>
               </div>
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>보관방법</span>
-                <span th:text="${product.storageType}">신선</span>
+                <span th:text="${productView.storageType}">신선</span>
               </div>
               <div class="d:flex gap:11 jc:space-between fs:2">
                 <span>배송비</span>
@@ -105,21 +105,21 @@
               <h1 class="d:none">상품 상세</h1>
               <div class="d:flex fl-dir:column gap:7">
                 <div class="d:flex fl-dir:column gap:3">
-                  <div th:text="${product.desc}">껍질째 드실 수 있는 달콤하고 신선한 감</div>
-                  <div class="fw:3 fs:4" th:text="${product.name+'*'+product.weight+product.weightCategory+'('+product.quantity+product.quantityCategory+')'}">[신선해요] 감*1kg내외(5~6입)</div>
+                  <div th:text="${productView.desc}">껍질째 드실 수 있는 달콤하고 신선한 감</div>
+                  <div class="fw:3 fs:4" th:text="${productView.name+'*'+productView.weight+productView.weightCategory+'('+productView.quantity+productView.quantityCategory+')'}">[신선해요] 감*1kg내외(5~6입)</div>
                 </div>
                 <div class="fs:5 fw:3 as:end">
-                  <span th:text="${product.price+'원'}">10,000원</span>
+                  <span th:text="${productView.price+'원'}">10,000원</span>
                   <input type="hidden" class="price" th:value="10000">
                 </div>
                 <div class="d:flex fl-dir:column gap:4">
                   <div class="d:flex gap:11 jc:space-between">
                     <span>용량</span>
-                    <span th:text="${product.quantity + product.quantityCategory +'/'+product.weight+product.weightCategory}">5~6개입/1kg내외</span>
+                    <span th:text="${productView.quantity + productView.quantityCategory +'/'+productView.weight+productView.weightCategory}">5~6개입/1kg내외</span>
                   </div>
                   <div class="d:flex gap:11 jc:space-between">
                     <span>보관방법</span>
-                    <span th:text="${product.storageType}">신선</span>
+                    <span th:text="${productView.storageType}">신선</span>
                   </div>
                   <div class="d:flex gap:11 jc:space-between">
                     <span>배송비</span>

@@ -1,6 +1,5 @@
 package kr.co.ginong.web.service.user;
 
-import kr.co.ginong.web.entity.Product;
 import kr.co.ginong.web.entity.ProductView;
 
 import java.util.List;
@@ -17,5 +16,5 @@ public interface ProductService {
     int count(String query);
     int count(Long categoryId, String query);
 
-    Product get(Long productId);
+    ProductView get(Long productId);
 }

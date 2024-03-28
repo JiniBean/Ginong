@@ -15,7 +15,7 @@ public interface ProductRepository {
                         , int offset
                         , int size);
 
-    Product findById(Long id);
+    ProductView findById(Long id);
     int count(Long categoryId, String query);
 
 
