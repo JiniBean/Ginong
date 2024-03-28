@@ -61,6 +61,11 @@
 
     --tab-color-active: var(--color-base-9);
 }
+@media (min-width: 780px) {
+    .n-tabbar .n-tab, .n-tabbar>li>a, .n-tabbar>li>button  {
+        font-size: var(--font-size-3);
+    }
+}
 
 /*===================================================================================*/
 /* toggle.css */
