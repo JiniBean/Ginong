@@ -19,5 +19,4 @@ public class ProductQnaAnswer {
     private long	modDate;
     
     private long    productQnaId;
-    private long    categoryId;
 }

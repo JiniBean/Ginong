@@ -19,4 +19,5 @@ public class PointHistory {
     private Date	date;
     private long	pointId;
     private long	memberId;
+    private long    orderId;
 }
