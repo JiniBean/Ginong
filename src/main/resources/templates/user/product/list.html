@@ -44,79 +44,79 @@
 
     <!--  아이템 목록(리스트 / 확인)  -->
 
- <section id="prd-list">
-     <h1 class="d:none">상품 리스트</h1>
+    <section id="prd-list">
+        <h1 class="d:none">상품 리스트</h1>
 
-     <section class="menu-card-row d:flex fl-dir:column md:d:none gap:5">
-         <h1 class="d:none">상품 컨테이너 - row</h1>
+        <section class="menu-card-row d:flex fl-dir:column md:d:none gap:5">
+            <h1 class="d:none">상품 컨테이너 - row</h1>
 
-         <div th:each="m:${list}" >
-             <div class="d:flex w:10p gap:3">
-                 <div class="pos:relative">
-                     <a href="">
-                         <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
-                     </a>
-                     <div class="cart-section">
-                         <div>
-                             <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘 </a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="d:flex fl-dir:column jc:center gap:3">
-                     <div class="d:flex fl-dir:column jc:center gap:1">
-                         <a href="">
-                             <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근,2개입</span>
-                         </a>
-                         <a href="">
-                             <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')}" class="fw:3">2,500</span>
-                             <span class="fw:3">원</span>
-                         </a>
-                     </div>
-                     <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:1">1234</div>
-                 </div>
-             </div>
-         </div>
-     </section>
+            <div th:each="m:${list}">
+                <div class="d:flex w:10p gap:3">
+                    <div class="pos:relative">
+                        <a href="">
+                            <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
+                        </a>
+                        <div class="cart-section">
+                            <div>
+                                <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘 </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d:flex fl-dir:column jc:center gap:3">
+                        <div class="d:flex fl-dir:column jc:center gap:1">
+                            <a href="">
+                                <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근,2개입</span>
+                            </a>
+                            <a href="">
+                                <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')}" class="fw:3">2,500</span>
+                                <span class="fw:3">원</span>
+                            </a>
+                        </div>
+                        <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:1">1234</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-     <!--           아이템 목록(바둑판) / 확인-->
-     <section class="menu-card-col d:flex flex-wrap:wrap ai:center gap:5 md:d:none d:none">
-         <h1 class="d:none">상품영역 - col</h1>
+        <!--           아이템 목록(바둑판) / 확인-->
+        <section class="menu-card-col d:flex flex-wrap:wrap ai:center gap:5 md:d:none d:none">
+            <h1 class="d:none">상품영역 - col</h1>
 
-         <div th:each="m:${list}">
-             <div class="d:flex fl-dir:column gap:3" style="width: 180px">
-                 <div class="pos:relative">
-                     <a href="#" class="">
-                         <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
-                     </a>
-                     <div class="cart-section">
-                         <div>
-                             <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니
-                                 아이콘</a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="d:flex fl-dir:column jc:center gap:2">
-                     <div class="d:flex fl-dir:column jc:center gap:1">
-                         <a href="">
-                             <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
-                         </a>
-                         <a href="">
-                             <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')}" class="fw:3">2,500</span>
-                             <span class="fw:3">원</span>
-                         </a>
-                     </div>
-                     <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:1">1234</div>
-                 </div>
-             </div>
-         </div>
-     </section>
+            <div th:each="m:${list}">
+                <div class="d:flex fl-dir:column gap:3" style="width: 180px">
+                    <div class="pos:relative">
+                        <a href="#" class="">
+                            <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
+                        </a>
+                        <div class="cart-section">
+                            <div>
+                                <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니
+                                    아이콘</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d:flex fl-dir:column jc:center gap:2">
+                        <div class="d:flex fl-dir:column jc:center gap:1">
+                            <a href="">
+                                <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
+                            </a>
+                            <a href="">
+                                <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')}" class="fw:3">2,500</span>
+                                <span class="fw:3">원</span>
+                            </a>
+                        </div>
+                        <div th:text="${m.likeCount}" class="deco icon:smile deco-color:sub-4 deco-size:1">1234</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
- </section>
+    </section>
 
     <!--  PC버전 / 확인 -->
-    <section class="d:none md:d:flex flex-wrap:wrap ai:center gap:2">
+    <section class="d:none md:d:flex flex-wrap:wrap row-gap:20 ai:center gap:2">
         <h1 class="d:none">상품컨테이너 - pc</h1>
-        <section th:each="m : ${list}" class="font-size:3">
+        <section th:each="m : ${list}" class="font-size:3" style="width:280px; ">
             <h1 class="d:none">상품 영역</h1>
             <div class="d:flex fl-dir:column w:10p gap:3">
                 <div class="pos:relative">
@@ -132,7 +132,7 @@
                 <div class="d:flex fl-dir:column jc:center gap:2">
                     <div class="d:flex fl-dir:column jc:center gap:1">
                         <a href="">
-                            <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}" >텃밭 흙 당근, 2개입</span>
+                            <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
                         </a>
                         <a href="">
                             <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')} + ' 원'" class="fw:3">2,500원</span>

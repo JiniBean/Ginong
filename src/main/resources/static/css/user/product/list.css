@@ -28,7 +28,7 @@
         height: 60px;
     }
 
-    .cart-section:hover{
+    div:has(div.cart-section):hover > div.cart-section{
         background-color: rgb(255,255,255,0.5);
     }
 
@@ -42,12 +42,12 @@
         background-color: var(--color-icon-bg);
     }
 
-    .cart-section > div:active {
-        background-color: var(--color-main-6);
+    .cart-section > div:hover .icon\:shopping_cart_simple::before {
+        background-color: var(--color-base-1);
     }
 
-    .cart-section > div > a :hover {
-        color: var(--color-base-1);
+    .cart-section > div:active {
+        background-color: var(--color-main-6);
     }
 
     .icon\:shopping_cart_simple:hover::before,
@@ -59,6 +59,7 @@
     .icon-color\:base-1:before {
         background-color: var(--color-base-9);
     }
+
 
 
 

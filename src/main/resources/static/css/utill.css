@@ -31,6 +31,7 @@
     gap: var(--gap-20)  !important;
 }
 
+
 @media (min-width: 768px) {
     .md\:gap\:11 {
         gap: var(--gap-11)!important
@@ -73,6 +74,37 @@
     }
 }
 
+/*========== row-gap ==============================*/
+.row-gap\:11{
+    row-gap: var(--gap-11) !important;
+}
+.row-gap\:12{
+    row-gap: var(--gap-12) !important;
+}
+.row-gap\:13{
+    row-gap: var(--gap-13) !important;
+}
+.row-gap\:14{
+    row-gap: var(--gap-14) !important;
+}
+.row-gap\:15{
+    row-gap: var(--gap-15) !important;
+}
+.row-gap\:16{
+    row-gap: var(--gap-16) !important;
+}
+.row-gap\:17{
+    row-gap: var(--gap-17) !important;
+}
+.row-gap\:18{
+    row-gap: var(--gap-18) !important;
+}
+.row-gap\:19{
+    row-gap: var(--gap-19) !important;
+}
+.row-gap\:20{
+    row-gap: var(--gap-20) !important;
+}
 
 /*========== font-color ==============================*/
 
