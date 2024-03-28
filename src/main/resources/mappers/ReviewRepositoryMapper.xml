@@ -4,10 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.ReviewRepository">
 	<!-- 모든 후기. 후기는 회원별 혹은 상품별로 검색할 수도 있어야 함-->
-    <select id="findAll" resultType="Review">
+    <select id="findAll" resultType="ReviewView">
 		select
 			*
-		from review
+		from REVIEW_VIEW
 		<where>
 			<if test="memberId != null">
 				member_id = #{memberId}
@@ -22,7 +22,23 @@
 	<select id="findById" resultType="Review">
 		select
 			*
-		from review
+		from REVIEW
 		where id = #{id}
+	</select>
+
+
+	<select id="count" resultType="Integer">
+		select
+			count(id)
+		from REVIEW
+
+		<where>
+			<if test="categoryId != null">
+				category_id = #{categoryId}
+			</if>
+			<if test="query != null">
+				name like '%${query}%'
+			</if>
+		</where>
 	</select>
 </mapper>
