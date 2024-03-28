@@ -82,38 +82,40 @@ window.addEventListener("load", function (){
 
     if (previousBtn === "colBtn") {
         console.log("콜롬 버튼 저장됨");
-        colBtn.click();
+        col();
     } else if (previousBtn === "rowBtn") {
-
-        rowBtn.click();
+        row();
     }
 
-
+    // 세로형 상품 카드로 바꾸기
     colBtn.onclick = function (e) {
+        col();
+        cookie.set("previousBtn","colBtn");
+        e.preventDefault();
+    }
+
+    // 가로형 상품 카드로 바꾸기
+    rowBtn.onclick = function (e){
+        row();
+        cookie.set("previousBtn","rowBtn");
+        e.preventDefault();
+    }
+
+    function col() {
         rowBtn.classList.remove("d:none");
         colSection.classList.remove("d:none");
 
         colBtn.classList.add("d:none");
         rowSection.classList.add("d:none");
-
-        cookie.set("previousBtn","colBtn");
-
-        e.preventDefault();
     }
 
-    rowBtn.onclick = function (e){
+    function row(){
         colBtn.classList.remove("d:none");
         rowSection.classList.remove("d:none");
 
         rowBtn.classList.add("d:none");
         colSection.classList.add("d:none");
-
-        cookie.set("previousBtn","rowBtn");
-        e.preventDefault();
     }
-
-
-
 
 });
 

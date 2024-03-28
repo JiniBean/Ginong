@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/user/product/detail.css">
   </head>
   <body>
-    <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:20  w:10p max-w:20">
+    <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:20 w:10 max-w:20">
     <!--    Mobile================================================================================================-->
     <section class="d:flex W:10p fl-dir:column gap: md:d:none">
       <h1></h1>
@@ -72,89 +72,93 @@
       </div>
     </section>
     <!--    PC=================================================================================================-->
-    <section class="d:flex fl-dir:column gap: d:none md:d:block w:10p">
+    <section class="md:d:flex fl-dir:column gap:7 d:none w:10p">
       <h1 class="d:none"></h1>
-      <div class="d:flex fl-dir:column gap:7">
-        <nav>
-          <h1 class="d:none">브래드 크럼</h1>
-          <ul style="display: flex">
-            <li><a href="">홈</a></li>
-            <li><a href="">></a></li>
-            <li><a href="">과일/채소류</a></li>
-          </ul>
-        </nav>
-        <div class="d:flex">
-          <div class="d:flex fl-dir:column jc:space-between">
-              <div><img src="/img/Meongmeong.jpg" th:src="@{/img/Meongmeong.jpg}" alt="" style="width: 414px; height: 440px;"></div>
-              <div class="d:flex jc:space-between">
-                <div>
-                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
+      <nav class="mt:1">
+        <h1 class="d:none">브래드 크럼</h1>
+        <ul class="d:flex">
+          <li><a href="">홈</a></li>
+          <li><a href="">></a></li>
+          <li><a href="">과일/채소류</a></li>
+        </ul>
+      </nav>
+      <div class="d:flex gap:9">
+        <div class="d:flex fl-dir:column jc:space-between">
+            <div><img src="/img/Meongmeong.jpg" th:src="@{/img/Meongmeong.jpg}" alt="" style="width: 414px; height: 440px;"></div>
+            <div class="d:flex jc:space-between">
+              <div>
+                <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
+              </div>
+              <div>
+                <a href=""><img src="/img/Meongmeong.jpg" alt="사진2" style="width: 90px; height: 90px;"></a>
+              </div>
+              <div>
+                <a href=""><img src="/img/Meongmeong.jpg" alt="사진3" style="width: 90px; height: 90px;"></a>
+              </div>
+              <div>
+                <a href=""><img src="/img/Meongmeong.jpg" alt="사진4" style="width: 90px; height: 90px;"></a>
+              </div>
+            </div>
+          </div>
+          <section class="d:flex fl-dir:column jc:space-between w:10p gap:7">
+            <h1 class="d:none">상품 상세</h1>
+            <div class="d:flex fl-dir:column gap:7">
+              <div class="d:flex fl-dir:column gap:3">
+                <div th:text="${productView.desc}">껍질째 드실 수 있는 달콤하고 신선한 감</div>
+                <div class="fw:3 fs:4" th:text="${productView.name+'*'+productView.weight+productView.weightCategory+'('+productView.quantity+productView.quantityCategory+')'}">[신선해요] 감*1kg내외(5~6입)</div>
+              </div>
+              <div class="fs:5 fw:3 as:end">
+                <span th:text="${productView.price+'원'}">10,000원</span>
+                <input type="hidden" class="price" th:value="10000">
+              </div>
+              <div class="d:flex fl-dir:column gap:4">
+                <div class="d:flex gap:11 jc:space-between">
+                  <span>용량</span>
+                  <span th:text="${productView.quantity + productView.quantityCategory +'/'+productView.weight+productView.weightCategory}">5~6개입/1kg내외</span>
                 </div>
-                <div>
-                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진2" style="width: 90px; height: 90px;"></a>
+                <div class="d:flex gap:11 jc:space-between">
+                  <span>보관방법</span>
+                  <span th:text="${productView.storageType}">신선</span>
                 </div>
-                <div>
-                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진3" style="width: 90px; height: 90px;"></a>
-                </div>
-                <div>
-                  <a href=""><img src="/img/Meongmeong.jpg" alt="사진4" style="width: 90px; height: 90px;"></a>
+                <div class="d:flex gap:11 jc:space-between">
+                  <span>배송비</span>
+                  <span>가격(3만원 이상 무료)</span>
                 </div>
               </div>
             </div>
-            <section class="d:flex fl-dir:column ml:9 jc:space-between w:10p gap:7">
-              <h1 class="d:none">상품 상세</h1>
-              <div class="d:flex fl-dir:column gap:7">
-                <div class="d:flex fl-dir:column gap:3">
-                  <div th:text="${productView.desc}">껍질째 드실 수 있는 달콤하고 신선한 감</div>
-                  <div class="fw:3 fs:4" th:text="${productView.name+'*'+productView.weight+productView.weightCategory+'('+productView.quantity+productView.quantityCategory+')'}">[신선해요] 감*1kg내외(5~6입)</div>
+<!--            <div class="numberBox bd of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">-->
+<!--              <a th:data-btn="minus" class="btnMinus left:1"></a>-->
+<!--              <input type="text" class="number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" value="1" return false; />-->
+<!--              <a th:data-btn="plus" class="btnPlus right:1"></a>-->
+<!--            </div>-->
+            <!--구매정보 안내(pc버전)-->
+           <div class="d:flex fl-dir:column gap:5 pt:10 pb:10 bd-top">
+                <div class="d:flex fl-dir:row ai:center jc:space-between">
+                <span class="numberBox bd of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
+                  <a th:data-btn="minus" class="btnMinus left:1"></a>
+                  <input type="text" class="number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" value="1" return false; />
+                  <a th:data-btn="plus" class="btnPlus right:1"></a>
+                </span>
                 </div>
-                <div class="fs:5 fw:3 as:end">
-                  <span th:text="${productView.price+'원'}">10,000원</span>
-                  <input type="hidden" class="price" th:value="10000">
-                </div>
-                <div class="d:flex fl-dir:column gap:4">
-                  <div class="d:flex gap:11 jc:space-between">
-                    <span>용량</span>
-                    <span th:text="${productView.quantity + productView.quantityCategory +'/'+productView.weight+productView.weightCategory}">5~6개입/1kg내외</span>
+
+                <div class="d:flex fl-dir:row bd h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
+                  <div>
+                    <span class="fw:3" >총 수량&emsp;<span class="total-count color:sub-5">1</span>개</span>
                   </div>
-                  <div class="d:flex gap:11 jc:space-between">
-                    <span>보관방법</span>
-                    <span th:text="${productView.storageType}">신선</span>
-                  </div>
-                  <div class="d:flex gap:11 jc:space-between">
-                    <span>배송비</span>
-                    <span>가격(3만원 이상 무료)</span>
+                  <div>
+                    <span class="total-price color:sub-5 fw:3" th:text="10000">10,000</span>
+                    <span class="fw:3">원</span>
+                    <input type="hidden" class="total-price" name="totalPrice" th:value="10000">
                   </div>
                 </div>
-              </div>
-              <!--구매정보 안내(pc버전)-->
-             <div class="d:flex fl-dir:column gap:5 pt:10 pb:10 bd-top">
-                  <div class="d:flex fl-dir:row ai:center jc:space-between">
-                  <span class="numberBox bd of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
-                    <a th:data-btn="minus" class="btnMinus left:1"></a>
-                    <input type="text" class="number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" value="1" return false; />
-                    <a th:data-btn="plus" class="btnPlus right:1"></a>
-                  </span>
-                  </div>
-                  <div class="d:flex fl-dir:row bd h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
-                    <div>
-                      <span class="fw:3" >총 수량&emsp;<span class="total-count color:sub-5">1</span>개</span>
-                    </div>
-                    <div>
-                      <span class="total-price color:sub-5 fw:3" th:text="10000">10,000</span>
-                      <span class="fw:3">원</span>
-                      <input type="hidden" class="total-price" name="totalPrice" th:value="10000">
-                    </div>
-                  </div>
-              </div>
-              <div class="d:flex gap:13 w:10p col-gap:4">
-                <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">장바구니 담기</button></div>
-                <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">바로 결제하기</button></div>
-              </div>
-            </section>
-          </div>
+            </div>
+            <div class="d:flex gap:13 w:10p col-gap:4">
+              <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">장바구니 담기</button></div>
+              <div class="fl-grow:1"><button type="button" class="n-btn n-btn-type:filled w:10p">바로 결제하기</button></div>
+            </div>
+          </section>
         </div>
-      </div>
+
     </section>
 
     <!--    ===================================================================================================-->
