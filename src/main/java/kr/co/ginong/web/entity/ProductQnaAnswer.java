@@ -18,4 +18,6 @@ public class ProductQnaAnswer {
     private boolean	regDate;
     private long	modDate;
     
+    private long    productQnaId;
+    private long    categoryId;
 }

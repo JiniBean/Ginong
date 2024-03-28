@@ -16,6 +16,7 @@ public class ProductQna {
     private Date	regDate;
     private String 	content;
     private boolean	state;
+    private boolean answerState;
     private long	memberId;
     private long	productId;
         
