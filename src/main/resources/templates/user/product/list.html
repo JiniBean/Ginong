@@ -36,7 +36,7 @@
         </div>
 
         <div class="pos:relative d:flex gap:3">
-            <a href="" class="price">가격순</a>
+            <a href="" class="price color:main-6">가격순</a>
             <span class="bar"></span>
             <a href="" class="recommend">추천순</a>
         </div>
@@ -83,7 +83,7 @@
             <h1 class="d:none">상품영역 - col</h1>
 
             <div th:each="m:${list}">
-                <div class="d:flex fl-dir:column gap:3" style="width: 180px">
+                <div class="d:flex fl-dir:column gap:3" style="width: 180px; height: 294px">
                     <div class="pos:relative">
                         <a href="#" class="">
                             <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
@@ -95,9 +95,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d:flex fl-dir:column jc:center gap:2">
-                        <div class="d:flex fl-dir:column jc:center gap:1">
-                            <a href="">
+                    <div class="d:flex fl-grow:1 fl-dir:column jc:center jc:space-between">
+                        <div class="d:flex fl-dir:column jc:center gap:2">
+                            <a href="" style="height: 34px;">
                                 <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
                             </a>
                             <a href="">
@@ -116,9 +116,9 @@
     <!--  PC버전 / 확인 -->
     <section class="prd-list-pc d:none md:d:flex flex-wrap:wrap row-gap:20 ai:center gap:2">
         <h1 class="d:none">상품컨테이너 - pc</h1>
-        <section th:each="m : ${list}" class="font-size:3" style="width:280px; ">
+        <section th:each="m : ${list}" class="font-size:3" style="width:280px; height:404px">
             <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex fl-dir:column w:10p gap:3">
+            <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
                 <div class="pos:relative">
                     <a href="#" class=""><img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
                     <div class="cart-section">
@@ -129,10 +129,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="d:flex fl-dir:column jc:center gap:2">
-                    <div class="d:flex fl-dir:column jc:center gap:1">
-                        <a href="">
-                            <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
+                <div class="d:flex fl-dir:column jc:center gap:4">
+                    <div class="d:flex fl-dir:column jc:center gap:2">
+                        <a href="" class="h:2" >
+                            <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}" >텃밭 흙 당근, 2개입</span>
                         </a>
                         <a href="">
                             <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')} + ' 원'" class="fw:3">2,500원</span>
