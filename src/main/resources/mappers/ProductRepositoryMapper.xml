@@ -16,6 +16,14 @@
 				name like '%${query}%'
 			</if>
 		</where>
+		<choose>
+			<when test="sortType == 1">
+				order by PRICE
+			</when>
+			<when test="sortType == 2">
+				order by LIKE_COUNT DESC
+			</when>
+		</choose>
 		limit #{offset}, #{size}
 	</select>
 
@@ -40,4 +48,5 @@
 			</if>
 		</where>
 	</select>
+
 </mapper>
