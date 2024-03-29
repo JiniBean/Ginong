@@ -53,7 +53,7 @@
             <div th:each="m:${list}">
                 <div class="d:flex w:10p gap:3">
                     <div class="pos:relative">
-                        <a href="">
+                        <a href="" th:href="@{/user/product/detail(id=${m.id})}">
                             <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
                         </a>
                         <div class="cart-section">
@@ -64,10 +64,10 @@
                     </div>
                     <div class="d:flex fl-dir:column jc:center gap:3">
                         <div class="d:flex fl-dir:column jc:center gap:1">
-                            <a href="">
+                            <a href="" th:href="@{/user/product/detail(id=${m.id})}">
                                 <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근,2개입</span>
                             </a>
-                            <a href="">
+                            <a href="" th:href="@{/user/product/detail(id=${m.id})}">
                                 <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')}" class="fw:3">2,500</span>
                                 <span class="fw:3">원</span>
                             </a>
@@ -85,7 +85,7 @@
             <div th:each="m:${list}">
                 <div class="d:flex fl-dir:column gap:3" style="width: 180px; height: 294px">
                     <div class="pos:relative">
-                        <a href="#" class="">
+                        <a href="#" th:href="@{/user/product/detail(id=${m.id})}" class="">
                             <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
                         </a>
                         <div class="cart-section">
@@ -97,10 +97,10 @@
                     </div>
                     <div class="d:flex fl-grow:1 fl-dir:column jc:center jc:space-between">
                         <div class="d:flex fl-dir:column jc:center gap:2">
-                            <a href="" style="height: 34px;">
+                            <a href="" th:href="@{/user/product/detail(id=${m.id})}" style="height: 34px;">
                                 <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
                             </a>
-                            <a href="">
+                            <a href="" th:href="@{/user/product/detail(id=${m.id})}">
                                 <span th:text="${#numbers.formatInteger(m.price, 3, 'COMMA')}" class="fw:3">2,500</span>
                                 <span class="fw:3">원</span>
                             </a>
@@ -120,7 +120,8 @@
             <h1 class="d:none">상품 영역</h1>
             <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
                 <div class="pos:relative">
-                    <a href="#" class=""><img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
+                    <a href="#" th:href="@{/user/product/detail(id=${m.id})}" class=""><img
+                            th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
                     <div class="cart-section">
                         <div>
                             <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">
@@ -131,7 +132,7 @@
                 </div>
                 <div class="d:flex fl-dir:column jc:center gap:4">
                     <div class="d:flex fl-dir:column jc:center gap:2">
-                        <a href="" class="h:2" >
+                        <a href="" th:href="@{/user/product/detail(id=${m.id})}" class="h:2" >
                             <span th:text="${m.name + ', ' + m.quantity + m.quantityCategory + '(' + m.weight + m.weightCategory + ')'}" >텃밭 흙 당근, 2개입</span>
                         </a>
                         <a href="">
