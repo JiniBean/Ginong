@@ -68,6 +68,7 @@ window.addEventListener("load", function () {
     var rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
     var colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
     var rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
+    var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
 
 
     var priceBtn = sortSection.querySelector(".price"); //가격순
@@ -168,7 +169,8 @@ window.addEventListener("load", function () {
     function bind(list) {
         rowSection.innerHTML = "";
         colSection.innerHTML = "";
-
+        pcSection.innerHTML = "";
+        
         // 가로형 카드 렌더링
         for (var m of list) {
 
@@ -217,7 +219,7 @@ window.addEventListener("load", function () {
             var colSectionHTML = `
 <!--                <div class="menu-card-col">-->
                 <div>
-                    <div class="d:flex fl-dir:column gap:3" style="width: 180px">
+                    <div class="d:flex fl-dir:column gap:3" style="width: 180px; height: 294px">
                         <div class="pos:relative">
                             <a href="#" class="">
                                 <img src="${m.thumbnailPath}/Meongmeong.jpg" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
@@ -230,7 +232,7 @@ window.addEventListener("load", function () {
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:2">
                             <div class="d:flex fl-dir:column jc:center gap:1">
-                                <a href="">
+                                <a href="" style="height: 34px;">
                                     <span>${m.name}</span>
                                     <span>, </span>
                                     <span>${m.quantity}</span>
@@ -252,7 +254,47 @@ window.addEventListener("load", function () {
 
             colSection.insertAdjacentHTML("beforeend", colSectionHTML);
         }
+        
+        // PC버전 카드 렌더링
+        for (var m of list) {
 
+            var pcSectiondHTML = `
+<!--                <div class="menu-card-row">-->
+                <section class="font-size:3" style="width:280px; height:404px">
+                    <h1 class="d:none">상품 영역</h1>
+                    <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
+                        <div class="pos:relative">
+                            <a href="#" class=""><img src="${m.thumbnailPath}/Meongmeong.jpg" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
+                            <div class="cart-section">
+                                <div>
+                                    <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">장바구니 아이콘</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d:flex fl-dir:column jc:center gap:4">
+                            <div class="d:flex fl-dir:column jc:center gap:2">
+                                <a href="" class="h:2" >
+                                    <span>${m.name}</span>
+                                    <span>, </span>
+                                    <span>${m.quantity}</span>
+                                    <span>${m.quantityCategory}</span>
+                                    <span>(</span>
+                                    <span>${m.weight}</span>
+                                    <span>${m.weightCategory}</span>
+                                    <span>)</span>
+                                </a>
+                                <a href="">
+                                    <span class="fw:3">${m.price}</span>
+                                    <span>원</span>
+                                </a>
+                            </div>
+                            <div class="deco icon:smile deco-color:sub-4 deco-size:4">${m.likeCount}</div>
+                        </div>
+                    </div>
+                </section>`;
+
+            pcSection.insertAdjacentHTML("beforeend", pcSectiondHTML);
+        }
 
 
     }
