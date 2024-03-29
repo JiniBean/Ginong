@@ -159,7 +159,7 @@
 
     <!--    ===================================================================================================-->
 
-      <nav style="border-top: 6px solid var(--color-base-2);">
+      <nav style="border-top: 6px solid var(--color-base-2);" class="w:10p">
         <h1 class="d:none">탭</h1>
         <ul class="n-tabbar n-tab-grow">
           <li><a href="" class="h:4">상품정보</a></li>
@@ -487,37 +487,6 @@
             <div class="bg-color:main-1 d:flex fl-dir:column gap:3 pl:10 pr:10 n-expander-content"></div>
           </div>
         </section>
-      </section>
-      <!--구매정보 안내팝업(모바일)-->
-      <section class=" d:flex fl-dir:column gap:8 ai:center md:d:none w:9p bottom:2 pos:sticky">
-        <h1 class="d:none">구매정보안내팝업</h1>
-        <div class="n-item n-item:outline d:flex fl-dir:column ai:center gap:8 w:10p">
-          <div class=" icon icon:caret_down icon-size:4">닫기 아이콘 </div>
-          <div class="w:10p d:flex fl-dir:column">
-            <div class="bg-color:base-3 p:5 d:flex fl-dir:column gap:3 fl-grow:1">
-              <div>국산 유기농 감 1kg 내외 (5~6개입)</div>
-              <div class="d:flex fl-dir:row ai:center jc:space-between">
-                <span class="m-numberBox bd bd-color:base-1 of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
-                  <a th:data-btn="minus" class="btnMinus left:1"></a>
-                  <input type="text" class="m-number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" th:value=1 return false; />
-                  <a th:data-btn="plus" class="btnPlus right:1"></a>
-                </span>
-                <span class="w:1/5 txt-al:right">10,000원</span>
-                <input type="hidden" class="m-price" th:value="10000">
-              </div>
-            </div>
-            <div class="d:flex bd bd-color:base-3 h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
-              <div class="total">
-                <span class="fw:3">총 수량&emsp;<span class="m-total-count color:sub-5" th:text="1">1</span>개</span>
-              </div>
-              <div>
-                <span class="m-total-price color:sub-5 fw:3" th:text="10000">10,000</span>
-                <span class="fw:3">원</span>
-                <input type="hidden" class="m-total-price" name="m-totalPrice" th:value="10000">
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
     </main>
   </body>

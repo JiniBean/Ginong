@@ -33,20 +33,25 @@ public class ProductController {
         if (categoryId != null && query != null) {
             list = service.getList(page, categoryId, query);
             count = service.count(categoryId, query);
-        } else if (sortType != null) {
-            list = service.getList(page, sortType);
-            count = service.count(categoryId, query);
+        } else if (categoryId != null && sortType != null) {
+            list = service.getList(page, categoryId, sortType);
+            count = service.count(categoryId);
         } else if (categoryId != null) {
             list = service.getList(page, categoryId);
             count = service.count(categoryId);
+        } else if (query != null && sortType != null) {
+            list = service.getList(page, query, sortType);
+            count = service.count(query);
         } else if (query != null) {
             list = service.getList(page, query);
             count = service.count(query);
+        } else if (sortType != null) {
+            list = service.getList(page, sortType);
+            count = service.count();
         } else {
             list = service.getList(page);
             count = service.count();
         }
-
 
         return list;
     }
