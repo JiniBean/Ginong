@@ -49,4 +49,48 @@
 		</where>
 	</select>
 
+	<insert id="save" parameterType="Product">
+    	INSERT INTO PRODUCT(
+			name, price, quantity, weight, thumbnail_name, thumbnail_path, 
+			exp, `desc`, state, category_id, storage_type_id, admin_id, 
+			quantity_category_id, weight_category_id) 
+		VALUES(
+			#{name}, #{price}, #{quantity}, #{weight}, #{thumbnailName}, #{thumbnail_path},
+			#{exp}, #{desc}, #{state}, #{categoryId}, #{storageTypeId}, #{adminId},
+			#{quantityCategoryId}, #{weightCategoryId} )
+   </insert>
+
+   <update id="update" parameterType="Product">
+		<set>
+			<if test="name != null"> name = #{name} </if>
+			<if test="price != null"> price = #{price} </if>
+			<if test="weight != null"> weight = #{weight} </if>
+			<if test="thumbnailName != null"> thumbnail_name = #{thumbnailName} </if>
+			<if test="thumbnailPath != null"> thumbnail_path = #{thumbnailPath} </if>
+			<if test="exp != null"> exp = #{exp} </if>
+			<if test="desc != null"> `desc` = #{desc} </if>
+			<if test="state != null"> state = #{state} </if>
+			<if test="quantity != null"> quantity = #{quantity} </if>
+			<if test="categoryId != null"> category_id = #{categoryId} </if>
+			<if test="storageTypeId != null"> storage_type_id = #{storageTypeId} </if>
+			<if test="adminId != null"> admin_id = #{adminId} </if>
+			<if test="quantityCategoryId != null"> quantity_category_id = #{quantityCategoryId} </if>
+			<if test="weightCategoryId != null"> weight_category_id = #{weightCategoryId} </if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+   </update>
+
+   <delete id="delete" parameterType="Product">
+		delete from PRODUCT
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>	
+		</where>
+   </delete>
+
 </mapper>
