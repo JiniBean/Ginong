@@ -124,9 +124,8 @@ window.addEventListener("load", function () {
 
         priceBtn.classList.add("color:main-6");
         recommendBtn.classList.remove("color:main-6");
-
-
-        var url = `http://localhost:8080/user/api/product?q=&p=1`;
+        var sortType = 1;
+        var url = `http://localhost:8080/user/api/product?p=1&s=${sortType}`;
 
         request(url, function (list) {
             bind(list);
@@ -139,8 +138,8 @@ window.addEventListener("load", function () {
 
         priceBtn.classList.remove("color:main-6");
         recommendBtn.classList.add("color:main-6");
-
-        var url = `http://localhost:8080/user/api/product?q=&p=1`;
+        var sortType = 2;
+        var url = `http://localhost:8080/user/api/product?p=1&s=${sortType}`;
 
         request(url, function (list) {
             bind(list);

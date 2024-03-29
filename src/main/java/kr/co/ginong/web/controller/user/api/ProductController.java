@@ -23,6 +23,7 @@ public class ProductController {
             @RequestParam(name = "c", required = false) Long categoryId
             , @RequestParam(name = "q", required = false) String query
             , @RequestParam(name = "p", required = false, defaultValue = "1") Integer page
+            , @RequestParam(name = "s", required = false) Integer sortType
     ) {
 
         List<ProductView> list = new ArrayList<>();
@@ -31,13 +32,21 @@ public class ProductController {
 
         if (categoryId != null && query != null) {
             list = service.getList(page, categoryId, query);
+            count = service.count(categoryId, query);
+        } else if (sortType != null) {
+            list = service.getList(page, sortType);
+            count = service.count(categoryId, query);
         } else if (categoryId != null) {
             list = service.getList(page, categoryId);
+            count = service.count(categoryId);
         } else if (query != null) {
             list = service.getList(page, query);
+            count = service.count(query);
         } else {
             list = service.getList(page);
+            count = service.count();
         }
+
 
         return list;
     }

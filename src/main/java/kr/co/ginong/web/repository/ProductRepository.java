@@ -14,7 +14,8 @@ public interface ProductRepository {
     List<ProductView> findAll(Long categoryId
                         , String query
                         , int offset
-                        , int size);
+                        , int size
+                        , Integer sortType);
 
     int count(Long categoryId, String query);
 

@@ -7,6 +7,7 @@ import java.util.List;
 public interface ProductService {
 
     List<ProductView> getList(Integer page);
+    List<ProductView> getList(Integer page, Integer sortType);
     List<ProductView> getList(Integer page, String query);
     List<ProductView> getList(Integer page, Long categoryId);
     List<ProductView> getList(Integer page, Long categoryId, String query);
