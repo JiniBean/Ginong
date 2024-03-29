@@ -125,12 +125,12 @@ window.addEventListener("load", function () {
         recommendBtn.classList.remove("color:main-6");
 
 
-        // var url = `http://localhost:8080/user/api/product?q=&p=1`;
-        //
-        // request(url, function (list) {
-        //     bind(list);
-        //     console.log("가격순 정렬 리로드");
-        // });
+        var url = `http://localhost:8080/user/api/product?q=&p=1`;
+
+        request(url, function (list) {
+            bind(list);
+            console.log("가격순 정렬 리로드");
+        });
     }
 
     recommendBtn.onclick = function (e) {
@@ -139,12 +139,12 @@ window.addEventListener("load", function () {
         priceBtn.classList.remove("color:main-6");
         recommendBtn.classList.add("color:main-6");
 
-        // var url = `http://localhost:8080/user/api/product?q=&p=1`;
-        //
-        // request(url, function (list) {
-        //     bind(list);
-        //     console.log("추천순 정렬 리로드");
-        // });
+        var url = `http://localhost:8080/user/api/product?q=&p=1`;
+
+        request(url, function (list) {
+            bind(list);
+            console.log("추천순 정렬 리로드");
+        });
     }
 
 
@@ -166,184 +166,95 @@ window.addEventListener("load", function () {
     }
 
     function bind(list) {
-        prdList.innerHTML = "";
+        rowSection.innerHTML = "";
+        colSection.innerHTML = "";
+
+        // 가로형 카드 렌더링
         for (var m of list) {
 
-            var mobileCardSectionHTML = `
-                <h1 class="d:none">상품 리스트</h1>
-
-                <section class="menu-card-row d:flex fl-dir:column md:d:none gap:5">
-                    <h1 class="d:none">상품 컨테이너 - row</h1>
-        
-                    <div>
-                        <div class="d:flex w:10p gap:3">
-                            <div class="pos:relative">
+            var rowSectiondHTML = `
+<!--                <div class="menu-card-row">-->
+                <div>
+                    <div class="d:flex w:10p gap:3">
+                        <div class="pos:relative">
+                            <a href="">
+                                <img src="${m.thumbnailPath}/Meongmeong.jpg" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
+                            </a>
+                            <div class="cart-section">
+                                <div>
+                                    <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘 </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d:flex fl-dir:column jc:center gap:3">
+                            <div class="d:flex fl-dir:column jc:center gap:1">
                                 <a href="">
-<!--                                    <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>-->
-                                    <img src="${m.thumbnailPath}/Meongmeong.jpg" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
-                                    
+                                    <span>${m.name}</span>
+                                    <span>, </span>
+                                    <span>${m.quantity}</span>
+                                    <span>${m.quantityCategory}</span>
+                                    <span>(</span>
+                                    <span>${m.weight}</span>
+                                    <span>${m.weightCategory}</span>
+                                    <span>)</span>
                                 </a>
-                                <div class="cart-section">
-                                    <div>
-                                        <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘 </a>
-                                    </div>
-                                </div>
+                                <a href="">
+                                    <span class="fw:3">${m.price}</span>
+                                    <span class="fw:3">원</span>
+                                </a>
                             </div>
-                            <div class="d:flex fl-dir:column jc:center gap:3">
-                                <div class="d:flex fl-dir:column jc:center gap:1">
-                                    <a href="">
-                                        <span>${m.name}</span>
-                                        <span>,&nbsp</span>
-                                        <span>${m.quantity}</span>
-                                        <span>${m.quantityCategory}</span>
-                                        <span>(</span>
-                                        <span>${m.weight}</span>
-                                        <span>${m.weightCategory}</span>
-                                        <span>)</span>
-                                    </a>
-                                    <a href="">
-                                        <span class="fw:3">${m.price}</span>
-                                        <span class="fw:3">원</span>
-                                    </a>
-                                </div>
-                                <div class="deco icon:smile deco-color:sub-4 deco-size:1">${m.likeCount}</div>
-                            </div>
+                            <div class="deco icon:smile deco-color:sub-4 deco-size:1">${m.likeCount}</div>
                         </div>
                     </div>
-                </section>
-        
-                <!--           아이템 목록(바둑판) / 확인-->
-                <section class="menu-card-col d:flex flex-wrap:wrap ai:center gap:5 md:d:none d:none">
-                    <h1 class="d:none">상품영역 - col</h1>
-        
-                    <div th:each="m:${list}">
-                        <div class="d:flex fl-dir:column gap:3" style="width: 180px">
-                            <div class="pos:relative">
-                                <a href="#" class="">
-                                    <img src="${m.thumbnailPath}/Meongmeong.jpg" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
-                                </a>
-                                <div class="cart-section">
-                                    <div>
-                                        <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니 아이콘
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d:flex fl-dir:column jc:center gap:2">
-                                <div class="d:flex fl-dir:column jc:center gap:1">
-                                    <a href="">
-                                         <span>${m.name}</span>
-                                        <span>,&nbsp</span>
-                                        <span>${m.quantity}</span>
-                                        <span>${m.quantityCategory}</span>
-                                        <span>(</span>
-                                        <span>${m.weight}</span>
-                                        <span>${m.weightCategory}</span>
-                                        <span>)</span>
-                                    </a>
-                                    <a href="">
-                                        <span class="fw:3">${m.price}</span>
-                                        <span class="fw:3">원</span>
-                                    </a>
-                                </div>
-                                <div class="deco icon:smile deco-color:sub-4 deco-size:1">${m.likeCount}</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>`;
+                </div>`;
 
-            prdList.insertAdjacentHTML("beforeend", mobileCardSectionHTML);
+            rowSection.insertAdjacentHTML("beforeend", rowSectiondHTML);
         }
-
+        
+        // 세로형 카드 렌더링
         for (var m of list) {
 
-            var mobileCardSectionHTML = `
-                <h1 class="d:none">상품 리스트</h1>
-
-                <section class="menu-card-row d:flex fl-dir:column md:d:none gap:5">
-                    <h1 class="d:none">상품 컨테이너 - row</h1>
-        
-                    <div>
-                        <div class="d:flex w:10p gap:3">
-                            <div class="pos:relative">
+            var colSectionHTML = `
+<!--                <div class="menu-card-col">-->
+                <div>
+                    <div class="d:flex fl-dir:column gap:3" style="width: 180px">
+                        <div class="pos:relative">
+                            <a href="#" class="">
+                                <img src="${m.thumbnailPath}/Meongmeong.jpg" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
+                            </a>
+                            <div class="cart-section">
+                                <div>
+                                    <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d:flex fl-dir:column jc:center gap:2">
+                            <div class="d:flex fl-dir:column jc:center gap:1">
                                 <a href="">
-<!--                                    <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>-->
-                                    <img src="${m.thumbnailPath}/Meongmeong.jpg" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
-                                    
+                                    <span>${m.name}</span>
+                                    <span>, </span>
+                                    <span>${m.quantity}</span>
+                                    <span>${m.quantityCategory}</span>
+                                    <span>(</span>
+                                    <span>${m.weight}</span>
+                                    <span>${m.weightCategory}</span>
+                                    <span>)</span>
                                 </a>
-                                <div class="cart-section">
-                                    <div>
-                                        <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘 </a>
-                                    </div>
-                                </div>
+                                <a href="">
+                                    <span class="fw:3">${m.price}</span>
+                                    <span class="fw:3">원</span>
+                                </a>
                             </div>
-                            <div class="d:flex fl-dir:column jc:center gap:3">
-                                <div class="d:flex fl-dir:column jc:center gap:1">
-                                    <a href="">
-                                        <span>${m.name}</span>
-                                        <span>,&nbsp</span>
-                                        <span>${m.quantity}</span>
-                                        <span>${m.quantityCategory}</span>
-                                        <span>(</span>
-                                        <span>${m.weight}</span>
-                                        <span>${m.weightCategory}</span>
-                                        <span>)</span>
-                                    </a>
-                                    <a href="">
-                                        <span class="fw:3">${m.price}</span>
-                                        <span class="fw:3">원</span>
-                                    </a>
-                                </div>
-                                <div class="deco icon:smile deco-color:sub-4 deco-size:1">${m.likeCount}</div>
-                            </div>
+                            <div class="deco icon:smile deco-color:sub-4 deco-size:1">${m.likeCount}</div>
                         </div>
                     </div>
-                </section>
-        
-                <!--           아이템 목록(바둑판) / 확인-->
-                <section class="menu-card-col d:flex flex-wrap:wrap ai:center gap:5 md:d:none d:none">
-                    <h1 class="d:none">상품영역 - col</h1>
-        
-                    <div th:each="m:${list}">
-                        <div class="d:flex fl-dir:column gap:3" style="width: 180px">
-                            <div class="pos:relative">
-                                <a href="#" class="">
-                                    <img src="${m.thumbnailPath}/Meongmeong.jpg" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
-                                </a>
-                                <div class="cart-section">
-                                    <div>
-                                        <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니 아이콘
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d:flex fl-dir:column jc:center gap:2">
-                                <div class="d:flex fl-dir:column jc:center gap:1">
-                                    <a href="">
-                                         <span>${m.name}</span>
-                                        <span>,&nbsp</span>
-                                        <span>${m.quantity}</span>
-                                        <span>${m.quantityCategory}</span>
-                                        <span>(</span>
-                                        <span>${m.weight}</span>
-                                        <span>${m.weightCategory}</span>
-                                        <span>)</span>
-                                    </a>
-                                    <a href="">
-                                        <span class="fw:3">${m.price}</span>
-                                        <span class="fw:3">원</span>
-                                    </a>
-                                </div>
-                                <div class="deco icon:smile deco-color:sub-4 deco-size:1">${m.likeCount}</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>`;
+                </div>`;
 
-            prdList.insertAdjacentHTML("beforeend", mobileCardSectionHTML);
+            colSection.insertAdjacentHTML("beforeend", colSectionHTML);
         }
+
+
+
     }
 
 
