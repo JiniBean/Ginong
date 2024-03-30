@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +39,23 @@ public class ProductController {
         return "admin/product/reg";
     }
     @PostMapping("reg")
-    public String save(Product product){
+    public String save(
+                        Product product
+//                        @RequestParam("img-file") MultipartFile thumbnailName,
+//                        String category,
+//                        String madeDate,
+//                        String amount
+                        ){
         //product 및 productCategory ... product img 를 받아와야 함 - 구조체 만들기
 
-        service.save(product);
+//        service.save(product);
+
+//        String imgName = thumbnailName.getOriginalFilename();
+        System.out.println("dd");
+//        System.out.println(category);
+//        System.out.println(madeDate);
+//        System.out.println(amount);
+//        System.out.println(imgName);
 
         return "redirect:admin/product/list";
     }
