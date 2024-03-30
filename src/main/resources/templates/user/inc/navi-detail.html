@@ -7,12 +7,12 @@
         <div class="close icon icon:caret_down icon-size:4">닫기 아이콘 </div>
         <div class="w:10p d:flex fl-dir:column">
             <div class="bg-color:base-3 p:5 d:flex fl-dir:column gap:3 fl-grow:1">
-                <div>국산 유기농 감 1kg 내외 (5~6개입)</div>
+                <div th:text="${productView.name+'*'+productView.weight+productView.weightCategory+'('+productView.quantity+productView.quantityCategory+')'}">국산 유기농 감 1kg 내외 (5~6개입)</div>
                 <div class="d:flex fl-dir:row ai:center jc:space-between">
                 <span class="numberBox bd bd-color:base-1 of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
-                  <a th:data-btn="minus" class="btnMinus left:1"></a>
+                  <a th:data-btn="minus" class="btn-minus left:1"></a>
                   <input type="text" class="quantity-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" th:value=1 />
-                  <a th:data-btn="plus" class="btnPlus right:1"></a>
+                  <a th:data-btn="plus" class="btn-plus right:1"></a>
                 </span>
                 <span class="w:1/5 txt-al:right" th:text="${#numbers.formatInteger(productView.price, 3, 'COMMA') +'원'}">10,000원</span>
                 </div>
