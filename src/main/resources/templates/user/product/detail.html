@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="/css/user/product/detail.css">
   </head>
   <body>
-    <main layout:fragment="main" class=" d:flex fl-dir:column ai:center gap:8 md:gap:20 w:10p max-w:20">
+    <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:20 w:10p max-w:20">
     <!--    Mobile================================================================================================-->
-    <section class="d:flex w:10p fl-dir:column gap:7 md:d:none">
+    <section class="d:flex w:10p fl-dir:column gap:7 md:d:none ">
       <h1 class="d:none">상품 정보</h1>
       <nav class="mr:4 ml:4">
         <h1 class="d:none">브래드 크럼</h1>
@@ -69,7 +69,7 @@
       </div>
     </section>
     <!--    PC=================================================================================================-->
-    <section class="md:d:flex fl-dir:column gap:7 d:none w:10p max-w:10">
+    <section class="md:d:flex fl-dir:column gap:7 d:none w:10p">
       <h1 class="d:none">상품 정보</h1>
       <nav class="mt:1">
         <h1 class="d:none">브래드 크럼</h1>
@@ -159,22 +159,22 @@
 
     <!--    ===================================================================================================-->
 
-      <nav style="border-top: 6px solid var(--color-base-2);" class="w:10p">
+      <nav style="border-top: 6px solid var(--color-base-2);">
         <h1 class="d:none">탭</h1>
-        <ul class="n-tabbar n-tab-grow">
-          <li><a href="" class="h:4">상품정보</a></li>
-          <li><a href="" class="h:4">후기</a></li>
-          <li><a href="" class="h:4">Q&A</a></li>
+        <ul id='tabbar' class="n-tabbar n-tab-grow">
+          <li><a href="#" class="h:4">상품정보</a></li>
+          <li><a href="#" class="h:4">후기</a></li>
+          <li><a href="#" class="h:4">Q&A</a></li>
         </ul>
       </nav>
 
-      <section class="d:flex jc:center mr:4 ml:4 md:mr:0 md:ml:0">
+      <section class="d:flex jc:center mr:4 ml:4 md:mr:0 md:ml:0 m-info">
         <h1 class="d:none">상품정보</h1>
         <div><img src="/img/test.gif" alt="상품 상세정보" class="w:10p" /></div>
       </section>
 
       <!--=======================상품 후기 모바일 버전==================================-->
-      <section class="d:flex fl-dir:column gap:7 md:d:none w:10p pl:5 pr:5">
+      <section class="d:none d:flex fl-dir:column gap:7 md:d:none w:10p pl:5 pr:5 m-review">
         <h1 class="fs:5 fw:3 d:flex ai:center jc:center">상품 후기</h1>
 
         <section class="d:flex fl-dir:column gap:2">
@@ -204,7 +204,7 @@
               <span class="bg-color:sub-5 color:base-1 bd-radius:2 fs:1 pl:1 pr:1" style="padding-top: 4px;
               padding-bottom:4px">BEST</span>
             </div>
-            <div class="d:flex fl-dir:column gap:1 mt:2">
+            <div class="d:flex fl-dir:column gap:1">
               <div class="pos:relative d:flex fl-dir:row gap:3 ai:center">
                 <span>godseokho</span>
               <div>
@@ -212,7 +212,7 @@
               </div>
             </div>
           </div>
-          <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1 pt:2">
+          <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1">
             <div class="d:flex fl-dir:row gap:3 ai:center">
               <span class="deco icon:leaf deco-size:4 icon-color:base-7">신선해요</span>
               <span class="d:none">BEST</span>
@@ -226,7 +226,7 @@
               <p>갓석호 추천으로 믿고 먹어봤는데 역시 맛있네요!</p>
             </div>
           </div>
-          <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1 pt:2">
+          <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1">
             <div class="d:flex fl-dir:row gap:3 ai:center">
               <span class="deco icon:clap deco-size:4 icon-color:base-7">추천해요</span>
               <span class="d:none">BEST</span>
@@ -240,7 +240,7 @@
               <p>석호 오빠 사랑해요!!!!!!!!꺅!!!</p>
             </div>
           </div>
-          <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1 pt:2">
+          <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1">
             <div class="d:flex fl-dir:row gap:3 ai:center">
               <span class="deco icon:thumbsup deco-size:4 icon-color:base-7">최고에요</span>
               <span class="d:none">BEST</span>
@@ -258,7 +258,7 @@
       </section>
 
       <!--        ============================================상품 후기 PC버전========================================-->
-      <section class="d:none md:d:flex fl-dir:column gap:20 w:10 pl:5 pr:5">
+      <section class="d:none md:d:none md:d:flex fl-dir:column gap:20 w:10p pl:5 pr:5 pc-review">
         <h1 class="d:none">상품 PC 후기</h1>
         <section class="d:flex fl-dir:column gap:5">
           <h1 class="d:none">상품 간략 설명</h1>
@@ -342,7 +342,7 @@
       </section>
 
       <!--상품 Q&A 모바일버전-->
-      <section class="d:flex fl-dir:column gap:7 md:d:none w:10p pl:5 pr:5">
+      <section class="d:none d:flex fl-dir:column gap:7 md:d:none w:10p pl:5 pr:5 m-qna">
         <h1 class="d:none">Q&A</h1>
         <section>
           <h1 class="d:none">상품 Q&A</h1>
@@ -431,7 +431,7 @@
       </section>
 
       <!--상품 Q&A PC버전-->
-      <section class="d:none md:d:flex fl-dir:column gap:20 w:10 pl:5 pr:5">
+      <section class="md:d:none d:none md:d:flex fl-dir:column gap:20 w:10p pl:5 pr:5 pc-qna">
         <h1 class="d:none">Q&A PC</h1>
         <div class="d:flex fw:3 jc:center fs:6">Q&A</div>
         <div class="d:flex ai:center">
@@ -487,6 +487,37 @@
             <div class="bg-color:main-1 d:flex fl-dir:column gap:3 pl:10 pr:10 n-expander-content"></div>
           </div>
         </section>
+      </section>
+      <!--구매정보 안내팝업(모바일)-->
+      <section class=" d:flex fl-dir:column gap:8 ai:center md:d:none m:4">
+        <h1 class="d:none">구매정보안내팝업</h1>
+        <div class="n-item n-item:outline d:flex fl-dir:column ai:center gap:8 w:10p">
+          <div class=" icon icon:caret_down icon-size:4">닫기 아이콘 </div>
+          <div class="w:10p">
+            <div class="bg-color:base-3 p:5 d:flex fl-dir:column gap:3">
+              <div>국산 유기농 감 1kg 내외 (5~6개입)</div>
+              <div class="d:flex fl-dir:row ai:center jc:space-between">
+                <span class="m-numberBox bd bd-color:base-1 of:hidden pos:relative bd-radius:1 bg-color:main-1 bd w:4" style="height: 36px">
+                  <a th:data-btn="minus" class="btnMinus left:1"></a>
+                  <input type="text" class="m-number-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px" maxlength="3" th:value=1 return false; />
+                  <a th:data-btn="plus" class="btnPlus right:1"></a>
+                </span>
+                <span class="w:1/5 txt-al:right">10,000원</span>
+                <input type="hidden" class="m-price" th:value="10000">
+              </div>
+            </div>
+            <div class="d:flex bd bd-color:base-3 h:3 p:3 d:flex fl-dir:row ai:center jc:space-between">
+              <div class="total">
+                <span class="fw:3">총 수량&emsp;<span class="m-total-count color:sub-5" th:text="1">1</span>개</span>
+              </div>
+              <div>
+                <span class="m-total-price color:sub-5 fw:3" th:text="10000">10,000</span>
+                <span class="fw:3">원</span>
+                <input type="hidden" class="m-total-price" name="m-totalPrice" th:value="10000">
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </body>
