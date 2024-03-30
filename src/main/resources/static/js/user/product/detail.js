@@ -138,5 +138,27 @@ window.addEventListener("load", function(){
 
     }
 
+});
+
+
+//찜 눌렀을때
+window.addEventListener("load", function(e){
+
+    e.preventDefault();
+
+    var payBox = this.document.querySelector('.pay-box');
+    var icon = payBox.querySelector('.icon');
+
+    icon.onclick = function(){
+
+        var isClick = icon.classList.contains('icon:heart_fill')
+
+        if(!isClick)
+            icon.classList.replace('icon:heart','icon:heart_fill');
+        else
+            icon.classList.replace('icon:heart_fill','icon:heart');
+    }
 
 });
+
+
