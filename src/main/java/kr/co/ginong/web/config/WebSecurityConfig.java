@@ -16,9 +16,7 @@ public class WebSecurityConfig {
 		.authorizeHttpRequests((requests) -> requests
 		.anyRequest().permitAll()
 		);
-		
 
-		
 		return http.build();
 	}
 }
