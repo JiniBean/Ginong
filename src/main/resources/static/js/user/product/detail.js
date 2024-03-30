@@ -161,4 +161,69 @@ window.addEventListener("load", function(e){
 
 });
 
+// 탭바 클릭 시 해당 정보만 출력
+window.addEventListener("load", function () {
+    var tabbar = document.querySelector("#tabbar");
+    var mInfoSection = document.querySelector(".m-info");
+    var mReviewSection = document.querySelector(".m-review");
+    var pcReviewSection = document.querySelector(".pc-review");
+    var mQnaSection = document.querySelector(".m-qna");
+    var pcQnaSection = document.querySelector(".pc-qna");
 
+    tabbar.onclick = function (e) {
+        var tabLinks = tabbar.querySelectorAll("a");
+
+        if(e.target.tagName != 'A')
+            return
+
+        e.preventDefault();
+
+        tabLinks.forEach(function (tabLink) {
+            tabLink.classList.remove("bd-bottom");
+            tabLink.classList.remove("bd-color:main-6");
+        });
+
+        e.target.classList.add("bd-bottom");
+        e.target.classList.add("bd-color:main-6");
+
+
+        if (e.target.innerText == '상품정보') {
+            console.log('상품정보 출력');
+
+            mInfoSection.classList.remove("d:none");
+
+            mReviewSection.classList.add("d:none");
+            pcReviewSection.classList.add("md:d:none");
+            mQnaSection.classList.add("d:none");
+            pcQnaSection.classList.add("md:d:none");
+
+
+        } else if(e.target.innerText == '후기') {
+            console.log('후기 정보 출력');
+
+            mReviewSection.classList.remove("d:none");
+            pcReviewSection.classList.remove("md:d:none");
+
+            mInfoSection.classList.add("d:none");
+            mQnaSection.classList.add("d:none");
+            pcQnaSection.classList.add("md:d:none");
+
+
+        } else {
+            console.log('QNA 정보 출력');
+
+            mQnaSection.classList.remove("d:none");
+            pcQnaSection.classList.remove("md:d:none");
+
+            mReviewSection.classList.add("d:none");
+            pcReviewSection.classList.add("md:d:none");
+            mInfoSection.classList.add("d:none");
+            // pcInfoSection.classList.add("md:d:none");
+
+
+        }
+
+
+    }
+
+});

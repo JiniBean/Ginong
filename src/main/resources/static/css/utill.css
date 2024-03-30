@@ -238,6 +238,12 @@
     background-color: var(--color-icon-bg) !important;
 }
 
+/*========== border-color ==============================*/
+
+.bd-color\:main-6 {
+    border-color: var(--color-main-6) !important;
+}
+
 
 /*========== padding-top ==============================*/
 
