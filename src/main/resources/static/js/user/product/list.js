@@ -185,7 +185,7 @@ window.addEventListener("load", function () {
                 <div>
                     <div class="d:flex w:10p gap:3">
                         <div class="pos:relative">
-                            <a href="">
+                            <a href="/user/product/detail?id=${m.id}">
                                 <img src="${m.thumbnailPath}/Meongmeong.jpg" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
                             </a>
                             <div class="cart-section">
@@ -196,7 +196,7 @@ window.addEventListener("load", function () {
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:3">
                             <div class="d:flex fl-dir:column jc:center gap:1">
-                                <a href="">
+                                <a href="/user/product/detail?id=${m.id}">
                                     <span>${m.name}</span>
                                     <span>, </span>
                                     <span>${m.quantity}</span>
@@ -227,7 +227,7 @@ window.addEventListener("load", function () {
                 <div>
                     <div class="d:flex fl-dir:column gap:3" style="width: 180px; height: 294px">
                         <div class="pos:relative">
-                            <a href="/user/product/detail(id=${m.id})" class="">
+                            <a href="/user/product/detail?id=${m.id}" class="">
                                 <img src="${m.thumbnailPath}/Meongmeong.jpg" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
                             </a>
                             <div class="cart-section">
@@ -238,7 +238,7 @@ window.addEventListener("load", function () {
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:2">
                             <div class="d:flex fl-dir:column jc:center gap:1">
-                                <a href="/user/product/detail(id=${m.id})" style="height: 34px;">
+                                <a href="/user/product/detail?id=${m.id}" style="height: 34px;">
                                     <span>${m.name}</span>
                                     <span>, </span>
                                     <span>${m.quantity}</span>
@@ -248,7 +248,7 @@ window.addEventListener("load", function () {
                                     <span>${m.weightCategory}</span>
                                     <span>)</span>
                                 </a>
-                                <a href="/user/product/detail(id=${m.id})">
+                                <a href="/user/product/detail?id=${m.id}">
                                     <span class="fw:3">${m.price}</span>
                                     <span class="fw:3">원</span>
                                 </a>
@@ -270,7 +270,7 @@ window.addEventListener("load", function () {
                     <h1 class="d:none">상품 영역</h1>
                     <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
                         <div class="pos:relative">
-                            <a href="/user/product/detail(id=${m.id})" class=""><img src="${m.thumbnailPath}/Meongmeong.jpg" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
+                            <a href="/user/product/detail?id=${m.id}" class=""><img src="${m.thumbnailPath}/Meongmeong.jpg" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
                             <div class="cart-section">
                                 <div>
                                     <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">장바구니 아이콘</a>
@@ -279,7 +279,7 @@ window.addEventListener("load", function () {
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:4">
                             <div class="d:flex fl-dir:column jc:center gap:2">
-                                <a href="/user/product/detail(id=${m.id})" class="h:2" >
+                                <a href="/user/product/detail?id=${m.id}" class="h:2" >
                                     <span>${m.name}</span>
                                     <span>, </span>
                                     <span>${m.quantity}</span>
@@ -289,7 +289,7 @@ window.addEventListener("load", function () {
                                     <span>${m.weightCategory}</span>
                                     <span>)</span>
                                 </a>
-                                <a href="/user/product/detail(id=${m.id})">
+                                <a href="/user/product/detail?id=${m.id}">
                                     <span class="fw:3">${m.price}</span>
                                     <span>원</span>
                                 </a>
