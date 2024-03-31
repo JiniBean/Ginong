@@ -49,7 +49,7 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="Product">
+	<insert id="save" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
     	INSERT INTO PRODUCT(
 			name, price, quantity, weight, thumbnail_name, thumbnail_path, 
 			exp, `desc`, state, category_id, storage_type_id, admin_id, 
@@ -59,6 +59,13 @@
 			#{exp}, #{desc}, #{state}, #{categoryId}, #{storageTypeId}, #{adminId},
 			#{quantityCategoryId}, #{weightCategoryId} )
    </insert>
+
+	<insert id="saveStock" parameterType="Stock">
+		INSERT INTO STOCK(
+		AMOUNT, POSITIVE, MADE_DATE, `DESC`, ADMIN_ID, PRODUCT_ID)
+		VALUES(
+		#{amount}, #{positive}, #{madeDate}, #{desc}, #{adminId}, #{productId})
+	</insert>
 
    <update id="update" parameterType="Product">
 		<set>

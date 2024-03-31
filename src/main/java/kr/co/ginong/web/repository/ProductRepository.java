@@ -21,6 +21,7 @@ public interface ProductRepository {
 
 
     void save(Product product);
+    void saveStock(Stock stock);
     void update(Product product);
     ProductView findById(Long productId);
 
