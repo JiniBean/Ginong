@@ -40,24 +40,28 @@ public class ProductController {
     }
     @PostMapping("reg")
     public String save(
-                        Product product
-//                        @RequestParam("img-file") MultipartFile thumbnailName,
-//                        String category,
-//                        String madeDate,
-//                        String amount
+                        Product product,
+                        @RequestParam("img-file") MultipartFile imgFile,
+                        String categoryId,
+                        String madeDate,
+                        String amount
                         ){
         //product 및 productCategory ... product img 를 받아와야 함 - 구조체 만들기
 
-//        service.save(product);
 
-//        String imgName = thumbnailName.getOriginalFilename();
-        System.out.println("dd");
-//        System.out.println(category);
-//        System.out.println(madeDate);
-//        System.out.println(amount);
-//        System.out.println(imgName);
+        String imgName = imgFile.getOriginalFilename();
+        System.out.println(categoryId);
+        System.out.println(madeDate);
+        System.out.println(amount);
+        System.out.println(imgName);
 
-        return "redirect:admin/product/list";
+        product.setThumbnailPath("/admin");
+        product.setAdminId(1);
+        product.setThumbnailName(imgName);
+        System.out.println(product);
+
+        service.save(product);
+        return "redirect:list";
     }
 
     @GetMapping("update")

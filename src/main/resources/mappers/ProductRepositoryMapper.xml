@@ -55,7 +55,7 @@
 			exp, `desc`, state, category_id, storage_type_id, admin_id, 
 			quantity_category_id, weight_category_id) 
 		VALUES(
-			#{name}, #{price}, #{quantity}, #{weight}, #{thumbnailName}, #{thumbnail_path},
+			#{name}, #{price}, #{quantity}, #{weight}, #{thumbnailName}, #{thumbnailPath},
 			#{exp}, #{desc}, #{state}, #{categoryId}, #{storageTypeId}, #{adminId},
 			#{quantityCategoryId}, #{weightCategoryId} )
    </insert>

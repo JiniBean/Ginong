@@ -23,6 +23,8 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public void save(Product product) {
+        System.out.println("==============================");
+
         repository.save(product);
     }
 
