@@ -1,14 +1,14 @@
 /*모바일 버전 구매정보 수량증감*/
 window.addEventListener("load", function(){
 
-    /!*orderInfo section*!/
+    /*orderInfo section*/
     var orderInfo = this.document.querySelector("#order-info");
 
-    /!*증감버튼영역*!/
+    /*증감버튼영역*/
     var numberBox = orderInfo.querySelector(".numberBox");
     var quantityInput = numberBox.querySelector(".quantity-input");
 
-    /!*구매총합영역*!/
+    /*구매총합영역*/
     var total = this.document.querySelector(".total");
 
     //총 수량
