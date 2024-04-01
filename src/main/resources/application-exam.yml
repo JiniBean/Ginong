@@ -14,7 +14,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: mappers/*Mapper.xml
-  type-aliases-package: kr.co.ginong.web.entity
+  type-aliases-package: kr.co.ginong.web.entity.*
 
 logging:
   level:

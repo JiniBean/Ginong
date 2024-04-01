@@ -3,7 +3,7 @@ package kr.co.ginong.web.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import kr.co.ginong.web.entity.ProductQna;
+import kr.co.ginong.web.entity.product.ProductQna;
 
 
 @Mapper

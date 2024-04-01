@@ -1,12 +1,10 @@
 package kr.co.ginong.web.service.admin;
 
-import ch.qos.logback.core.model.INamedModel;
-import kr.co.ginong.web.entity.Product;
-import kr.co.ginong.web.entity.ProductView;
-import kr.co.ginong.web.entity.Stock;
+import kr.co.ginong.web.entity.product.Product;
+import kr.co.ginong.web.entity.product.ProductView;
+import kr.co.ginong.web.entity.product.Stock;
 import kr.co.ginong.web.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

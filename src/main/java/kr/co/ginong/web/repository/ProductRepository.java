@@ -2,11 +2,11 @@ package kr.co.ginong.web.repository;
 
 import java.util.List;
 
-import kr.co.ginong.web.entity.Stock;
+import kr.co.ginong.web.entity.product.Stock;
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.co.ginong.web.entity.Product;
-import kr.co.ginong.web.entity.ProductView;
+import kr.co.ginong.web.entity.product.Product;
+import kr.co.ginong.web.entity.product.ProductView;
 
 @Mapper
 public interface ProductRepository {

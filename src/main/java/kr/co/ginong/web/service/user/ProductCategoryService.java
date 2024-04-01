@@ -1,7 +1,7 @@
 package kr.co.ginong.web.service.user;
 
 
-import kr.co.ginong.web.entity.ProductCategory;
+import kr.co.ginong.web.entity.product.ProductCategory;
 
 import java.util.List;
 

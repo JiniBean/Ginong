@@ -265,6 +265,7 @@ window.addEventListener("load", function () {
                                     <span>)</span>
                                 </a>
                                 <a href="/user/product/detail?id=${m.id}">
+                                
                                     <span class="fw:3">${m.price}</span>
                                     <span class="fw:3">원</span>
                                 </a>

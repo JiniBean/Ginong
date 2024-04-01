@@ -1,7 +1,7 @@
 package kr.co.ginong.web.service.admin;
 
-import kr.co.ginong.web.entity.Product;
-import kr.co.ginong.web.entity.ProductView;
+import kr.co.ginong.web.entity.product.Product;
+import kr.co.ginong.web.entity.product.ProductView;
 
 import java.util.Date;
 import java.util.List;

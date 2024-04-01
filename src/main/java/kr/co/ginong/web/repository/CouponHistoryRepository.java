@@ -3,8 +3,8 @@ package kr.co.ginong.web.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import kr.co.ginong.web.entity.CouponHistory;
-import kr.co.ginong.web.entity.Location;
+import kr.co.ginong.web.entity.cupon.CouponHistory;
+import kr.co.ginong.web.entity.order.Location;
 
 @Mapper
 public interface CouponHistoryRepository {

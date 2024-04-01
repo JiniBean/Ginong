@@ -1,6 +1,6 @@
 package kr.co.ginong.web.service.user;
 
-import kr.co.ginong.web.entity.ProductCategory;
+import kr.co.ginong.web.entity.product.ProductCategory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,8 +1,7 @@
 package kr.co.ginong.web.controller.admin;
 
-import kr.co.ginong.web.entity.Product;
-import kr.co.ginong.web.entity.ProductView;
-import kr.co.ginong.web.entity.Stock;
+import kr.co.ginong.web.entity.product.Product;
+import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.admin.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller("adminProductController")
 @RequestMapping("admin/product")

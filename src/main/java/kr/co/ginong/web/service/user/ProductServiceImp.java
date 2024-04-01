@@ -1,7 +1,7 @@
 package kr.co.ginong.web.service.user;
 
 
-import kr.co.ginong.web.entity.ProductView;
+import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
