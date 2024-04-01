@@ -18,7 +18,7 @@
 	<select id="findById" resultType="Order">
 		select
 			*
-		from ORDER
+		from `ORDER`
 		where id = #{id}
 	</select>
 

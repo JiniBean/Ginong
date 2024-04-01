@@ -2,7 +2,7 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="user/inc/layout-back">
+      layout:decorate="admin/inc/layout-back">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,7 @@
     </section>
     <section class="d:flex fl-dir:column gap:4 w:10p">
         <h1 class="d:none">상품카드 목록</h1>
-        <div class="d:flex ai:center fl-dir:row gap:3" th:each=" list : ${list}" >
+        <div class="d:flex ai:center fl-dir:row gap:3" th:each="list:${list}" >
             <div>
                 <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
             </div>

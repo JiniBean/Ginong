@@ -28,13 +28,13 @@
         <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
             <h1 class="d:none">주문 상품 목록</h1>
             <section class="w:10p d:flex fl-dir:column gap:4 md:gap:8 " th:each=" list : ${list}"
-                     th:each=" m : ${prdList}">
+                     >
                 <h1 class="d:none">상품 영역</h1>
                 <!--상품 카드 한개-->
-                <div class="d:flex w:10p gap:3">
+                <div class="d:flex w:10p gap:3" th:each=" m : ${prdList}">
                     <div>
                         <a href="">
-                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
+                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:1"/>
                         </a>
                     </div>
                     <div class="d:flex fl-dir:column gap:3">
@@ -48,53 +48,12 @@
                             <div th:text="${list.quantity + '개'}">2개</div>
                         </div>
                     </div>
+
                 </div>
-
-                <!-- ========= 여기서부터 더미데이터 지워도됨 ========= -->
-<!--                <div class="d:flex w:10p gap:3">-->
-<!--                    <div>-->
-<!--                        <a href="">-->
-<!--                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="d:flex fl-dir:column gap:3">-->
-<!--                        <div >-->
-<!--                            <a href="">-->
-<!--                                <span>텃밭에서 키우고 자란 아주 매우 딜리셔스한 흙 당근, 2개입 </span>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="d:flex jc:space-between w:10p">-->
-<!--                            <div><span>2,500</span><span>원</span></div>-->
-<!--                            <div>2개</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="d:flex w:10p gap:3">-->
-<!--                    <div>-->
-<!--                        <a href="">-->
-<!--                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    <div class="d:flex fl-dir:column gap:3">-->
-<!--                        <div >-->
-<!--                            <a href="">-->
-<!--                                <span>텃밭에서 키우고 자란 아주 매우 딜리셔스한 흙 당근, 2개입 </span>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="d:flex jc:space-between w:10p">-->
-<!--                            <div><span>2,500</span><span>원</span></div>-->
-<!--                            <div>2개</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
-<!--            <div class="w:10p d:flex jc:end gap:3">-->
-<!--                <span class="fw:3">총 상품 금액</span>-->
-<!--                <span class="color:main-6 fw:3">15,000</span>-->
-<!--                <span class="fw:3">원</span>-->
-<!--            </div>-->
-            <!-- ======= 여기까지 지우기 ===========  -->
+                <div class="w:10p d:flex jc:end gap:3">
+                    <span class="fw:3">총 상품 금액</span>
+                    <span class="color:main-6 fw:3" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">15,000</span>
+                </div>
         </section>
 
         <form method="post" action="pay" class="d:flex fl-dir:column gap:10 md:gap:20">
@@ -125,10 +84,11 @@
                 <div class="d:flex jc:end gap:2 md:3 w:10p">
                     <div class="fw:3">보유 적립금</div>
 <!--                    <div class="fw:3 color:main-6"><span th:text="${pointList.cost}">0</span><span>P</span></div>-->
+                    <div class="fw:3 color:main-6"><span>0</span><span>P</span></div>
                 </div>
                 <div class="d:flex gap:10">
-                    <div class="d:flex fl:fill">
-                        <input type="text" class="n-textbox n-textbox-type:underline" placeholder="Underline Textbox">
+                    <div class="d:flex fl:fill as:end">
+                        <input type="text" class="n-textbox n-textbox-type:underline">
                         <span class="color:main-6 fw:3 as:end mb:1">P</span>
                     </div>
                     <div>
@@ -168,7 +128,7 @@
                             <input type="radio" name="refund" id="refund-point" checked class="n-toggle n-toggle-type:dot ">
                             적립금으로 환불
                         </label>
-                        <span class="color:base-6 fs:1 md:fs:2 ml:6 ">미출고시 환불 금액의 5% 추가 적립됩니다.</span>
+                        <span class="color:base-6 fs:1 md:fs:2 ml:8 ">미출고시 환불 금액의 5% 추가 적립됩니다.</span>
                     </div>
                     <div>
                         <label>
@@ -185,7 +145,7 @@
                 <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p" >
                     <div class="d:flex jc:space-between">
                         <div>총 상품 금액</div>
-                        <div><span>15,000</span> <span>원</span></div>
+                        <div><span th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">15,000</span></div>
                     </div>
                     <div class="d:flex jc:space-between">
                         <div>쿠폰 적용 금액</div>
@@ -211,7 +171,7 @@
                 <h1 class="d:none">주문 동의 및 버튼</h1>
                 <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">
                     <label>
-                        <input type="checkbox" class="n-toggle n-toggle-type:check-box 	bd-radius:full" />
+                        <input type="checkbox" class="n-toggle n-toggle-type:check-box 	bd-radius:full" required />
                         주문 내용을 확인하였으며 약관에 동의합니다.
                     </label>
                 </div>

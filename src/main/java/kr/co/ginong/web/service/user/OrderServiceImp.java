@@ -15,7 +15,7 @@ public class OrderServiceImp implements OrderService {
     private OrderRepository repository;
 
     @Override
-    public List<Order> get(long id) {
+    public List<Order> get(Long id) {
 
         List<Order> list = repository.findById(id);
 
