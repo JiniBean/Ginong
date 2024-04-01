@@ -22,19 +22,6 @@ window.addEventListener("load", function(){
     var totalPrice = total.querySelector(".total-price");
     var totalPriceInput = total.querySelector(".total-price-input");
 
-    //popup close
-    var close = orderInfo.getElementsByClassName("close")[0];
-
-    //popup open
-    var navi = this.document.querySelector(".navi");
-
-    navi.onclick = function(e){
-        if(e.target.tagName!='BUTTON')
-            return;
-
-        orderInfo.classList.remove("d:none");
-    }
-
     /*증감버튼 계산*/
     numberBox.onclick = function (e) {
 
@@ -72,11 +59,72 @@ window.addEventListener("load", function(){
 
     }
 
-    close.onclick = function(){
-        orderInfo.classList.add("d:none");
+});
+
+/* 모바일 버전 하단 navi */
+window.addEventListener("load", function(){
+
+    var orderInfo = this.document.querySelector("#order-info");
+
+    //popup close
+    var close = orderInfo.getElementsByClassName("close")[0];
+
+    //popup open
+    var navi = this.document.querySelector(".navi");
+
+    navi.onclick = function(e){
+        if(e.target.tagName!='BUTTON')
+            return;
+
+        if(!orderInfo.classList.contains("on")){
+            orderInfo.classList.remove("d:none");
+            orderInfo.classList.add("on");
+        }else{
+            var state = e.target.dataset.btn;
+
+            switch (state) {
+                case 'cart' :
+                    break;
+                case 'order' :
+                    var url = new URL ("/user/order/info", location.origin);
+
+                    var productId = navi.querySelector(".product-id").value;
+                    var numberBox = orderInfo.querySelector(".numberBox");
+                    var quantityInput = numberBox.querySelector(".quantity-input").value;
+                    var quantity = parseInt(quantityInput);
+
+                    url = url + "?productId=" + productId
+                              + "&quantity=" + quantity;
+
+                    console.log(url);
+
+                    location.href = url.toString();
+
+                    // fetch('/user/order/info',{
+                    //     method:'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(params),
+                    //     redirect:'manual'
+                    // });
+
+                    break;
+            }
+        }
+
     }
 
+    //popup close
+    close.onclick = function(){
+        orderInfo.classList.add("d:none");
+        orderInfo.classList.remove("on");
+    }
+
+
+
 });
+
 
 /* pc버전 구매정보 수량증감*/
 window.addEventListener("load", function(){

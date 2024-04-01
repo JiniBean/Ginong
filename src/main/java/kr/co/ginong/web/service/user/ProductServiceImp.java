@@ -1,6 +1,7 @@
 package kr.co.ginong.web.service.user;
 
 
+import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.repository.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,4 +120,5 @@ public class ProductServiceImp implements ProductService {
 
         return productView;
     }
+
 }

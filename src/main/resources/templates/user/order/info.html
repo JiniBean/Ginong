@@ -18,28 +18,28 @@
     <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
         <h1 class="d:none">상품 영역</h1>
         <div class="d:flex w:10p gap:3">
-<!--            <div>-->
-<!--                <a href="">-->
-<!--                    <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지"-->
-<!--                         class="bd-radius:4"/>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--            <div class="d:flex fl-dir:column gap:3">-->
-<!--                <div>-->
-<!--                    <a href="">-->
-<!--                        <span th:text="${list.name}">텃밭에서 키우고 자란 아주 매우 딜리셔스한 흙 당근<span th:text="${list.quantity}">2</span><span>단위</span></span>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="d:flex jc:space-between w:10p">-->
-<!--                    <div th:text="${#numbers.formatInteger(list.price,3,'COMMA') + '원'}">2500원</div>-->
-<!--                    <div th:text="${list.quantity + '개'}">2개</div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div>
+                <a href="">
+                    <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지"
+                         class="bd-radius:4"/>
+                </a>
+            </div>
+            <div class="d:flex fl-dir:column gap:3">
+                <div>
+                    <a href="">
+                        <span th:text="${productView.name}">텃밭에서 키우고 자란 아주 매우 딜리셔스한 흙 당근<span th:text="${productView.quantity}">2</span><span th:text="${productView.quantityCategory}">단위</span></span>
+                    </a>
+                </div>
+                <div class="d:flex jc:space-between w:10p">
+                    <div th:text="${#numbers.formatInteger(productView.price,3,'COMMA') + '원'}">2500원</div>
+                    <div th:text="${totalQuantity + '개'}">2개</div>
+                </div>
+            </div>
         </div>
 
     <div class="w:10p d:flex jc:end gap:3">
         <span class="fw:3">총 상품 금액</span>
-        <span class="color:main-6 fw:3">15,000</span>
+        <span class="color:main-6 fw:3" th:text="${#numbers.formatInteger(productView.price * totalQuantity,3,'COMMA') + '원'}">15,000</span>
         <span class="fw:3">원</span>
     </div>
     </section>
