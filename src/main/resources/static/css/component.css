@@ -90,6 +90,13 @@
     --toggle-outline-background-color-checked: var(--color-main-6);
     --toggle-outline-checked-background-color: var(--color-main-6);
     --toggle-outline-checked-border-color: transparent;
+
+    /* toggle-type:slide */
+    --toggle-slide-background-color: #cccccc;
+    /* --toggle-slide-checked-background-color: var(--color-main-6); */
+    --toggle-slide-background-color-checked: var(--color-main-6);
+    --toggle-slide-circle-color: #f0f0f0;
+    --toggle-slide-circle-color-checked: var(--color-main-1);
 }
 
 .n-toggle-type\:outline-box:before{
