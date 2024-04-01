@@ -9,17 +9,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class payment {
-    private long	id;
-    private String	zipCode;
-    private String	addr1;
-    private String	addr2;
-    private String	receiverName;
-    private String	receiverPhone;
-    private boolean	state;
-    private String	label;
-    private String	note;
-    private String	gatePwd;
-    private long	memberId;
+public class Location {
+    private long   id;
+    private String   zipCode;
+    private String   addr1;
+    private String   addr2;
+    private String   receiverName;
+    private String   receiverPhone;
+    private boolean   state;
+    private String   label;
+    private String   note;
+    private String   gatePwd;
+    private long   memberId;
 
 }
