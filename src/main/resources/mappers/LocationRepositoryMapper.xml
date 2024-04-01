@@ -18,7 +18,8 @@
 	<select id="findById" resultType="Location">
 		select
 			*
-		from Location
+		from LOCATION
 		where id = #{id}
 	</select>
+
 </mapper>
