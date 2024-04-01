@@ -21,7 +21,9 @@
     height: 36px;
 }
 
-
+.cart-section > div:active {
+    background-color: var(--color-main-6);
+}
 
 @media (min-width: 768px) {
     .cart-section{
@@ -44,10 +46,6 @@
 
     .cart-section > div:hover .icon\:shopping_cart_simple::before {
         background-color: var(--color-base-1);
-    }
-
-    .cart-section > div:active {
-        background-color: var(--color-main-6);
     }
 
     .icon\:shopping_cart_simple:hover::before,

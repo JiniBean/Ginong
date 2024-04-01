@@ -66,7 +66,7 @@ window.addEventListener("load", function () {
 
     var colBtn = sortSection.querySelector(".icon\\:squares_four"); //모바일 버전 세로 정렬 버튼
     var rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
-    var colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
+    var colSection = wprdList.querySelector(".menu-card-col"); //세로형 카드 섹션
     var rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
     var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
 
@@ -82,6 +82,8 @@ window.addEventListener("load", function () {
 
     var content = prdList.getElementsByClassName("content");
 
+    //장바구니 아이콘 관련 selector
+    var cartSection =  document.querySelector("main");
 
     // 이전에 선택한 버튼 상태를 쿠키에서 불러옴
     var cookie = new Cookie();
@@ -154,6 +156,20 @@ window.addEventListener("load", function () {
         });
     }
 
+    cartSection.onclick = function (e){
+        e.preventDefault();
+
+        // if(!e.target.classList.contains("icon:shopping_cart_simple"))
+        //     return;
+
+        if(!e.target.closest(".icon\\:shopping_cart_simple"))
+            return;
+
+        console.log("박경인 나왔냐???????????????");
+
+        /*장바구니 아이콘에 div영역 눌러도 안되요 ㅅㄱ*/
+
+    }
 
     // 가격,추천순 정렬 작업 중 ...
     function request(url, callback, method) {

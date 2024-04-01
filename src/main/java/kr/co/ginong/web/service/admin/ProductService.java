@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface ProductService {
-    List<ProductView> getList();
+    List<ProductView> getList(int page);
 
     void save(Product product, Date madeDate, String amount);
 

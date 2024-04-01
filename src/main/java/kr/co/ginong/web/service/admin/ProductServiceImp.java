@@ -1,5 +1,6 @@
 package kr.co.ginong.web.service.admin;
 
+import ch.qos.logback.core.model.INamedModel;
 import kr.co.ginong.web.entity.Product;
 import kr.co.ginong.web.entity.ProductView;
 import kr.co.ginong.web.entity.Stock;
@@ -17,15 +18,21 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     ProductRepository repository;
 
-    @Override
-    public List<ProductView> getList() {
+    int size = 20;
 
-        return null;
+    @Override
+    public List<ProductView> getList(int page) {
+
+        int offset = (page-1) * size;
+
+        List<ProductView> list = repository.findAll(null,null, offset, size, null);
+
+        return list;
     }
 
     @Override
     public void save(Product product
-                    , Date madeDate,
+            , Date madeDate,
                      String amount) {
         System.out.println("==============================");
 

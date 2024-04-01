@@ -32,7 +32,7 @@ public class ProductController {
 
         List<ProductView>list = new ArrayList<>();
 
-        list = service.getList();
+        list = service.getList(1);
 
         model.addAttribute("list", list);
         return "admin/product/list";

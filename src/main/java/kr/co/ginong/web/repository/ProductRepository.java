@@ -25,6 +25,9 @@ public interface ProductRepository {
     void update(Product product);
     ProductView findById(Long productId);
 
+    List<ProductView> findAll(int offset, int size);
+
+
     //void delete(long id);
 
 
