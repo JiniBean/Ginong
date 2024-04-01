@@ -1,4 +1,4 @@
-package kr.co.ginong.web.entity.cupon;
+package kr.co.ginong.web.entity.coupon;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

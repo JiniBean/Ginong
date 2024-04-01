@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.ginong.web.repository.ProductQnaRepository">
+<mapper namespace="kr.co.ginong.web.repository.product.ProductQnaRepository">
 	<!-- 모든 상품별 문의. 해당 문의는 회원별 혹은 상품별로 검색할 수도 있어야 함-->
     <select id="findAll" resultType="ProductQnaView">
 		select

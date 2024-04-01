@@ -1,4 +1,4 @@
-package kr.co.ginong.web.repository;
+package kr.co.ginong.web.repository.product;
 
 import java.util.List;
 

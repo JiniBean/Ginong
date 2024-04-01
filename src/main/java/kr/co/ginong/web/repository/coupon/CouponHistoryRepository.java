@@ -1,16 +1,16 @@
-package kr.co.ginong.web.repository;
+package kr.co.ginong.web.repository.coupon;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import kr.co.ginong.web.entity.cupon.CouponHistory;
 import kr.co.ginong.web.entity.order.Location;
 
-
 @Mapper
-public interface LocationRepository {
-    List<Location> findAll();
+public interface CouponHistoryRepository {
+    List<CouponHistory> findAll();
 
-    Location findById(Long id);
+    CouponHistory findById(Long id);
     
     void save(Location location);
     void update(Location location);

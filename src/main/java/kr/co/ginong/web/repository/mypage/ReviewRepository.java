@@ -1,4 +1,4 @@
-package kr.co.ginong.web.repository;
+package kr.co.ginong.web.repository.mypage;
 
 import java.util.List;
 

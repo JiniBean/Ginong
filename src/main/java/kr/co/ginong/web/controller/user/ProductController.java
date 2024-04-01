@@ -64,6 +64,8 @@ public class ProductController {
         ProductView productView = service.get(productId);
         model.addAttribute("productView", productView);
 
+
+
         return "user/product/detail";
     }
 }

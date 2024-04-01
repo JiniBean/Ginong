@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Location {
+public class payment {
     private long	id;
     private String	zipCode;
     private String	addr1;
