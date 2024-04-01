@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.ginong.web.repository.member.MemberRepository">
     <select id="findByUserName" resultType="Member">
         select * from MEMBER
-        where user_name =#{name}
+        where USER_NAME = #{name}
     </select>
 
     <select id="findById" resultType="Location">

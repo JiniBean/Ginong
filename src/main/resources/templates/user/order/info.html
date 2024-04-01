@@ -39,7 +39,7 @@
 
     <div class="w:10p d:flex jc:end gap:3">
         <span class="fw:3">총 상품 금액</span>
-        <span class="color:main-6 fw:3" th:text="${#numbers.formatInteger(productView.price * totalQuantity,3,'COMMA') + '원'}">15,000</span>
+        <span class="color:main-6 fw:3">15,000</span>
         <span class="fw:3">원</span>
     </div>
     </section>
@@ -92,19 +92,17 @@
 
         <section class="d:flex fl-dir:column gap:4 w:10p">
             <h1 class="fs:3 fw:3 md:fs:5">배송 요청 사항</h1>
-            <div class="n-dropdown">
-                <button id="dropdown-btn-category" type="button" class="n-btn n-btn:outline jc:space-between w:10p">
-                    <span class="fs:2 fw:3">직접 받을게요</span>
-                    <span class="icon icon:RT icon-size:1 icon-color:main-6"></span>
-                </button>
-                <ul id="dropdown-list-category">
-                    <li>직접 받을게요</li>
-                    <li>문 앞에 놓아주세요</li>
-                    <li>경비실에 맡겨주세요</li>
-                    <li>무인 택배함에 넣어주세요</li>
-                    <li>배송 전 연락주세요</li>
+            <div class="custom-dropdown">
+                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionDesc">직접 받을게요</div>
+                <ul class="options">
+                    <li class="optionDesc" data-value="직접 받을게요">직접 받을게요</li>
+                    <li class="optionDesc" data-value="문 앞에 놓아주세요">문 앞에 놓아주세요</li>
+                    <li class="optionDesc" data-value="경비실에 맡겨주세요">경비실에 맡겨주세요</li>
+                    <li class="optionDesc" data-value="무인 택배함에 넣어주세요">무인 택배함에 넣어주세요</li>
+                    <li class="optionDesc" data-value="배송 전 연락주세요">배송 전 연락주세요</li>
                 </ul>
             </div>
+            <input type="hidden" id="selectedDesc" name="desc" value="1">
         </section>
 
         <section class="d:flex fl-dir:column gap:4 md:gap:4 w:10p">
