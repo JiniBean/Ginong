@@ -17,7 +17,6 @@ public class Payment {
     private String 	type;
     private int	    totalAmt;
     private long	memberId;
-    private long	productId;
     private long	categoryId;
     private long    deliveryFeeCategoryId;
     private long	orderId;
