@@ -12,10 +12,18 @@ public interface CouponHistoryRepository {
 
     List<CouponHistoryView> findAll(Long memberId);
 
+    // 사용 가능 쿠폰 목록 출력
+    List<CouponHistoryView> findAllAvail(Long memberId);
+
+    // 사용 불가능 쿠폰 목록 출력
+    List<CouponHistoryView> findAllUnavail(Long memberId);
+
     CouponHistoryView findById(Long id);
-    
+
     void save(CouponHistory couponHistory);
+
     void update(CouponHistory couponHistory);
+
     void delete(long id);
 
     int count(Date usedDate);

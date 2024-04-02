@@ -1,12 +1,12 @@
 package kr.co.ginong.web.controller.user;
 
+import kr.co.ginong.web.entity.coupon.Coupon;
+import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.entity.order.Order;
 import kr.co.ginong.web.entity.product.ProductView;
-import kr.co.ginong.web.service.user.MemberService;
-import kr.co.ginong.web.service.user.OrderService;
-import kr.co.ginong.web.service.user.ProductService;
+import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +29,13 @@ public class OrderController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private PointService pointService;
+
+    @Autowired
+    private CouponService couponService;
+
 
     @GetMapping("info")
     public String info(Model model
@@ -66,11 +73,14 @@ public class OrderController {
 
     @GetMapping("pay")
     public String pay(
-            @RequestParam(name = "id", required = false) Long id
+              @RequestParam(name = "id", required = false) Long orderId
+            , @RequestParam(name = "memberId", required = false) Long memberId
             , Model model
     ) {
+        
+        // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
         Long id_ = 1L;
-        id = id_;
+        orderId = id_;
         List<Order> list = service.get(1L);
         List<ProductView> prdList = new ArrayList<>();
 
@@ -85,13 +95,27 @@ public class OrderController {
             int total = price * quantity;
             totalPrice += total;
         }
-
-
         System.out.println("list.toString() = " + list.toString());
 
+        // 사용가능한 쿠폰 조회
+        long memberId_ = 2;
+        memberId = memberId_;
+
+        List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
+
+
+        // 잔여 포인트 조회
+        int point = pointService.getAvailPont(memberId);
+
+        // 모델
         model.addAttribute("list", list);
         model.addAttribute("prdList", prdList);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("point", point);
+        model.addAttribute("couponList", couponList);
+
+        System.out.println("counponList = " + couponList.toString());
+        System.out.println("counponSize = " + couponList.size());
 
         return "user/order/pay";
     }

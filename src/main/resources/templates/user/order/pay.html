@@ -61,7 +61,7 @@
                 <h1 class="fs:3 md:fs:4 fw:3">쿠폰 사용</h1>
                 <div class="d:flex jc:space-between w:10p">
                     <div>사용 가능 쿠폰</div>
-                    <div class="color:main-6" ><span>0</span> <span>장</span></div>
+                    <div class="color:main-6" ><span th:text="${couponList.size}">0</span><span>장</span></div>
                 </div>
                 <div class="n-dropdown">
                     <button id="dropdown-btn-category" type="button"
@@ -83,8 +83,7 @@
                 <h1 class="fs:3 md:fs:4 fw:3">적립금 사용</h1>
                 <div class="d:flex jc:end gap:2 md:3 w:10p">
                     <div class="fw:3">보유 적립금</div>
-<!--                    <div class="fw:3 color:main-6"><span th:text="${pointList.cost}">0</span><span>P</span></div>-->
-                    <div class="fw:3 color:main-6"><span>0</span><span>P</span></div>
+                    <div class="fw:3 color:main-6"><span th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}">0</span></div>
                 </div>
                 <div class="d:flex gap:10">
                     <div class="d:flex fl:fill as:end">

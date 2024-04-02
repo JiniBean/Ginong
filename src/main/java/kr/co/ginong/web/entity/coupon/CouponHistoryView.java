@@ -12,24 +12,23 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponHistoryView {
-    private long	id;
+    private long    id;
     private Date    issuedDate;
     private Date    usedDate;
     private long    memberId;
     private long    couponId;
-    private String	categoryName;
-    private String	couponName;
-    private long	discountAmount;
-    private long	discountUnit;
-    private long	maxPaymentAmt;
-    private long	minPaymentAmt;
-    private Date	startDate;
-    private Date	endDate;
-    private int	    releaseAmount;
-    private String	desc;
-    private int 	type;
-    private Date	regDate;
-
+    private String  categoryName;
+    private String  couponName;
+    private long    discountAmount;
+    private String    discountUnit;
+    private long    maxPaymentAmt;
+    private long    minPaymentAmt;
+    private Date    startDate;
+    private Date    endDate;
+    private int     releaseAmount;
+    private String  desc;
+    private boolean state;
+    private Date    regDate;
 
 
 }

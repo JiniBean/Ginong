@@ -8,4 +8,10 @@ public interface CouponService {
 
     List<CouponHistoryView> getList(Long memberId);
 
+    // 사용 가능한 쿠폰 출력
+    List<CouponHistoryView> getAvailList(Long memberId);
+    
+    // 사용 불가능한(이미 사용한) 쿠폰 출력
+    List<CouponHistoryView> getUnavailList(Long memberId);
+
 }
