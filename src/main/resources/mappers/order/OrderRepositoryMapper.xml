@@ -22,4 +22,17 @@
 		where id = #{id}
 	</select>
 
+	<insert id="save" parameterType="Order">
+		insert into `ORDER`(`DATE`, `TYPE`, PRICE, QUANTITY, DETAIL_ID, MEMBER_ID, PRODUCT_ID, LOCATION_ID)
+		VALUES(
+		current_timestamp()
+		,#{type}
+		,#{price}
+		,#{quantity}
+		,#{randomNumber}
+		,#{memberId}
+		,#{productId}
+		,#{locationId})
+	</insert>
+
 </mapper>

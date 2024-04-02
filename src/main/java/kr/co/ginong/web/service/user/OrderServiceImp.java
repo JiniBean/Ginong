@@ -21,4 +21,10 @@ public class OrderServiceImp implements OrderService {
 
         return list;
     }
+
+    @Override
+    public void addOrder(Order order) {
+        repository.save(order);
+
+    }
 }

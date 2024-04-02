@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class Order {
     private long	id;
     private Date	date;
-    private boolean	state;
+    private int	    type;
     private int		price;
     private int		quantity;
-    private long	detailId;
+    private String	detailId;
     private long	memberId;
     private long	productId;
     private long	locationId;
