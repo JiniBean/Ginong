@@ -74,14 +74,12 @@ public class OrderController {
     @GetMapping("pay")
     public String pay(
               @RequestParam(name = "id", required = false) Long orderId
-            , @RequestParam(name = "memberId", required = false) Long memberId
             , Model model
     ) {
         
         // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
-        Long id_ = 1L;
-        orderId = id_;
-        List<Order> list = service.get(1L);
+        List<Order> list = service.get(orderId);
+        Long memberId = list.get(0).getMemberId();
         List<ProductView> prdList = new ArrayList<>();
 
         int totalPrice = 0;
@@ -98,13 +96,10 @@ public class OrderController {
         System.out.println("list.toString() = " + list.toString());
 
         // 사용가능한 쿠폰 조회
-        long memberId_ = 2;
-        memberId = memberId_;
-
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
 
 
-        // 잔여 포인트 조회
+        // 잔여 적립금 조회
         int point = pointService.getAvailPont(memberId);
 
         // 모델
@@ -119,6 +114,8 @@ public class OrderController {
 
         return "user/order/pay";
     }
+
+    
 
 
 }
