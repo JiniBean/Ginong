@@ -29,22 +29,22 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public void save(Product product
-            , Date madeDate,
-                     String amount) {
+    public void save(Product product){
+                        // , Date madeDate
+                        // , String amount) {
         System.out.println("==============================");
 
         repository.save(product);
         /*stock 데이터 넣는 곳*/
-        Stock stock = Stock.builder()
-                .amount(Integer.parseInt(amount))
-                .plma(1)
-                .madeDate(madeDate)
-                .desc(product.getDesc())
-                .adminId(1)
-                .productId(product.getId())
-                .build();
-        repository.saveStock(stock);
+        // Stock stock = Stock.builder()
+        //         .amount(Integer.parseInt(amount))
+        //         .plma(1)
+        //         .madeDate(madeDate)
+        //         .desc(product.getDesc())
+        //         .adminId(1)
+        //         .productId(product.getId())
+        //         .build();
+        // repository.saveStock(stock);
     }
 
     @Override

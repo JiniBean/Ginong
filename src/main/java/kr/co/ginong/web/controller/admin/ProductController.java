@@ -41,12 +41,10 @@ public class ProductController {
         return "admin/product/reg";
     }
     @PostMapping("reg")
-    public String save(
-                        Product product,
-                        @RequestParam("img-file") MultipartFile imgFile,
-                        Date madeDate,
-                        String amount
-                        ){
+    public String save(Product product
+                        , @RequestParam("img-file") MultipartFile imgFile) {
+                        // , Date madeDate
+                        // , String amount){
         //product 및 productCategory ... product img 를 받아와야 함 - 구조체 만들기
         /*product 데이터 넣는 곳*/
         String imgName = imgFile.getOriginalFilename();
@@ -56,7 +54,7 @@ public class ProductController {
         product.setThumbnailPath("/admin");
         System.out.println(product);
 
-        service.save(product, madeDate, amount);
+        service.save(product);//, madeDate, amount);
 
 
         return "redirect:list";

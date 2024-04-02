@@ -9,7 +9,7 @@ import java.util.List;
 public interface ProductService {
     List<ProductView> getList(int page);
 
-    void save(Product product, Date madeDate, String amount);
+    void save(Product product);//, Date madeDate, String amount);
 
     void update(Product product);
 

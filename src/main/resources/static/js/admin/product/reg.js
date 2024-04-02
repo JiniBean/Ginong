@@ -122,20 +122,75 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // =============================================================================
 // vanillajs - datepicker
-const button = document.querySelector('.calendar-icon');
-button.addEventListener('click', function()
-{
-    const input = document.querySelector('input[name="madeDate"]');
-    const datepicker = new Datepicker(input, {});
-    datepicker.show();
+// const button = document.querySelector('.calendar-icon');
+// button.addEventListener('click', function()
+// {
+//     const input = document.querySelector('input[name="madeDate"]');
+//     const datepicker = new Datepicker(input, {});
+//     datepicker.show();
 
-    input.addEventListener('change', function() {
+//     input.addEventListener('change', function() {
 
-    });
-});
+//     });
+// });
 
 // ===============================================================
 // 사진 넣기 기능
+window.addEventListener("load", function () {
+    var regForm = this.document.querySelector("#reg-form");
+    var imgInput = regForm.querySelector(".img-input");
+    var previewPanel = regForm.querySelector(".preview-panel");
+    //var previewImage = previewPanel.getElementsByTagName("img")[0];
+
+    imgInput.oninput = function(e) {
+       var files = imgInput.files;
+
+       for (file of files) {
+            if (file.type.indexOf("image/") != 0) {// file type 제약
+                alert("이미지 파일만 업로드 할 수 있습니다.");
+                return ;
+            }
+
+            if (file.size > 3000*1024) {// file size 제약
+                alert("3MB보다 크기가 작은 파일만 업로드 할 수 있습니다.");
+                return ;
+            }
+
+            // 입력상자에 있는 파일을 읽어들이는 것
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            
+                var img = document.createElement("img");
+                img.src = e.target.result;
+
+                console.log(e.target.result);
+                previewPanel.append(img);          // element가 가진 기능
+
+            }
+            reader.readAsDataURL(file);
+
+            console.log("file : ", file.name);
+        }
+
+        console.log("Hello!");
+        //console.log(previewImages);
+    };
+
+    function removeImage(index) {
+        // // 이미지 엘리먼트를 미리보기 패널에서 제거
+        // previewPanel.removeChild(images[index]);
+
+        // // 배열에서 이미지 엘리먼트 제거
+        // images.splice(index, 1);
+
+    }
+
+        
+    // previewImages.onclick = function(e) {
+    //     if (!e.target.tagName("img"))
+    //         console.log("헤헤");
+    // }
+});
 
 
 
