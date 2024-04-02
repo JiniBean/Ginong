@@ -119,7 +119,10 @@ public class OrderController {
 
         // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
         List<Order> list = service.get(orderId);
-        Long memberId = list.get(0).getMemberId();
+        Order order = list.get(0);
+        Long memberId = order.getMemberId();
+
+
         List<ProductView> prdList = new ArrayList<>();
 
         int totalPrice = 0;
@@ -133,14 +136,15 @@ public class OrderController {
             int total = price * quantity;
             totalPrice += total;
         }
-        System.out.println("list.toString() = " + list.toString());
 
         // 사용가능한 쿠폰 조회
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
 
 
+
         // 잔여 적립금 조회
         int point = pointService.getAvailPont(memberId);
+        System.out.println(point);
 
         // 모델
         model.addAttribute("list", list);
