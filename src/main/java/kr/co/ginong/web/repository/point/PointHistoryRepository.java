@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import kr.co.ginong.web.entity.point.PointHistory;
+import kr.co.ginong.web.entity.point.PointHistoryView;
 
 @Mapper
 public interface PointHistoryRepository {
-    List<PointHistory> findAll();
+    List<PointHistoryView> findAll();
 
-    /* id로 후기 찾기 */
-    PointHistory findById(Long id);
+    PointHistoryView findById(Long id);
     
     void save(PointHistory pointHistory);
     void update(PointHistory pointHistory);

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Stock {
     private long	id;
     private int 	amount;
-    private boolean	plma;
+    private int	    plma;
     private Date	regDate;
     private Date	madeDate;
     private Date	ioDate;

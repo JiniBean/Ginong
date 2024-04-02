@@ -38,7 +38,7 @@ public class ProductServiceImp implements ProductService {
         /*stock 데이터 넣는 곳*/
         Stock stock = Stock.builder()
                 .amount(Integer.parseInt(amount))
-                .positive(true)
+                .plma(1)
                 .madeDate(madeDate)
                 .desc(product.getDesc())
                 .adminId(1)
