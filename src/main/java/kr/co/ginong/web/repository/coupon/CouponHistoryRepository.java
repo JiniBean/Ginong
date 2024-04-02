@@ -1,20 +1,21 @@
 package kr.co.ginong.web.repository.coupon;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import kr.co.ginong.web.entity.coupon.CouponHistory;
-import kr.co.ginong.web.entity.order.Location;
+import kr.co.ginong.web.entity.coupon.CouponHistoryView;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface CouponHistoryRepository {
-    List<CouponHistory> findAll();
+    List<CouponHistoryView> findAll();
 
-    CouponHistory findById(Long id);
+    CouponHistoryView findById(Long id);
     
-    void save(Location location);
-    void update(Location location);
+    void save(CouponHistory couponHistory);
+    void update(CouponHistory couponHistory);
     void delete(long id);
 
-    int count(Long categoryId, String query);
+    int count(Date usedDate);
 }

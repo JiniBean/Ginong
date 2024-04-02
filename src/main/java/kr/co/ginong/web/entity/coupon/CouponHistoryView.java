@@ -1,30 +1,35 @@
 package kr.co.ginong.web.entity.coupon;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Coupon {
+public class CouponHistoryView {
     private long	id;
-    private long	couponCategoryId;
-    private String	name;
+    private Date    issuedDate;
+    private Date    usedDate;
+    private long    memberId;
+    private long    couponId;
+    private String	categoryName;
+    private String	couponName;
     private long	discountAmount;
     private long	discountUnit;
-    private long	minPaymentAmt;
     private long	maxPaymentAmt;
+    private long	minPaymentAmt;
     private Date	startDate;
     private Date	endDate;
     private int	    releaseAmount;
     private String	desc;
     private int 	type;
     private Date	regDate;
+
 
 
 }
