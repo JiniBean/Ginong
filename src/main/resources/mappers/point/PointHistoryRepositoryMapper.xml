@@ -12,5 +12,17 @@
 				member_id = #{memberId}
 			</if>
 		</where>
-	</select>	
+	</select>
+
+	<select id="calc" resultType="int" parameterType="int">
+		SELECT
+			sum(PLMA*AMOUNT) as 'avail'
+		from POINT_HISTORY_VIEW
+		<where>
+			<if test="memberId != null">
+				member_id = #{memberId}
+			</if>
+		</where>
+
+	</select>
 </mapper>

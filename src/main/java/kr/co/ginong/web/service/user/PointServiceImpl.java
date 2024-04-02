@@ -21,5 +21,12 @@ public class PointServiceImpl implements PointService{
         return list;
     }
 
+    @Override
+    public int getAvailPont(Long memberId) {
+
+        int availPoint = repository.calc(memberId);
+        return availPoint;
+    }
+
 
 }

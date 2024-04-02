@@ -10,6 +10,7 @@ import kr.co.ginong.web.entity.point.PointHistoryView;
 public interface PointHistoryRepository {
 
     List<PointHistoryView> findAll(Long memberId);
+    int calc(Long memberId);
 
 //    PointHistoryView findById(Long id);
     
@@ -17,6 +18,4 @@ public interface PointHistoryRepository {
     void update(PointHistory pointHistory);
     void delete(long id);
 
-    int count(Long categoryId, String query);
-    
 }
