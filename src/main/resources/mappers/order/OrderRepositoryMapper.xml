@@ -29,7 +29,7 @@
 		,#{type}
 		,#{price}
 		,#{quantity}
-		,111
+		,#{detailId}
 		,#{memberId}
 		,#{productId}
 		,#{locationId})

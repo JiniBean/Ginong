@@ -26,6 +26,7 @@ public class OrderServiceImp implements OrderService {
     public long addOrder(Order order) {
         repository.save(order);
 
+        //Auto increment id값 받기
         return order.getId();
 
     }

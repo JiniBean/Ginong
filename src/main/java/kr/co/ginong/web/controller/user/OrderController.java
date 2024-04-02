@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("user/order")
@@ -51,9 +54,6 @@ public class OrderController {
 
         //상품정보 가져오기
         ProductView productView =  productService.get(productId);
-
-        System.out.println(productView.toString());
-
         //총상품값 계산해서 넣기+++
 
         model.addAttribute("productView", productView);
@@ -78,20 +78,35 @@ public class OrderController {
             ,Long locationId
             ,Long productViewId
             ,Integer price
-            , Model model) {
+            ) {
+        //난수 제작 :날짜+4자리난수+4자리난수
+        //오늘 날짜 제작
+        LocalDate currentDate = LocalDate.now();
+
+        // 날짜를 문자열로 변환하기 (yyyyMMdd 형식)
+        String dateString = currentDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        //난수 두세트 제작
+        Random random = new Random();
+        int randomNum1 = random.nextInt(10000);
+        int randomNum2 = random.nextInt(10000);
+        String randomNumber1 = String.format("%04d", randomNum1);
+        String randomNumber2 = String.format("%04d", randomNum2);
+
+        String detailId = dateString+"-"+randomNumber1+"-"+randomNumber2;
+
 
         //상품정보id, location id order 테이블에 넣기
         Order order = Order.builder()
                 .type(1)
                 .price(price)
                 .quantity(quantity)
+                .detailId(detailId)
                 .memberId(memberId)
                 .productId(productViewId)
                 .locationId(locationId)
                 .build();
 
-        long id = service.addOrder(order);
-        System.out.println("id : " + id);
+        long id = service.addOrder(order); //auto increment id 값
 
         return "redirect:pay?id="+id;
     }
