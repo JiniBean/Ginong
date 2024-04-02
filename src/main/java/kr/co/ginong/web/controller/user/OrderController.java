@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -70,13 +71,37 @@ public class OrderController {
 
         return "user/order/info";
     }
+    @PostMapping("info")
+    public String info(
+            Integer quantity
+            ,Long memberId
+            ,Long locationId
+            ,Long productViewId
+            ,Integer price
+            , Model model) {
 
-    @GetMapping("pay")
+        //상품정보id, location id order 테이블에 넣기
+        Order order = Order.builder()
+                .type(1)
+                .price(price)
+                .quantity(quantity)
+                .memberId(memberId)
+                .productId(productViewId)
+                .locationId(locationId)
+                .build();
+
+        long id = service.addOrder(order);
+        System.out.println("id : " + id);
+
+        return "redirect:pay?id="+id;
+    }
+
+        @GetMapping("pay")
     public String pay(
               @RequestParam(name = "id", required = false) Long orderId
             , Model model
     ) {
-        
+
         // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
         List<Order> list = service.get(orderId);
         Long memberId = list.get(0).getMemberId();

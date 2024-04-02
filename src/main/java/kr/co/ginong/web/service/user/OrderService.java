@@ -9,5 +9,5 @@ public interface OrderService {
     List<Order> get(Long id);
 
 
-    void addOrder(Order order);
+    long addOrder(Order order);
 }

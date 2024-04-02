@@ -22,14 +22,14 @@
 		where id = #{id}
 	</select>
 
-	<insert id="save" parameterType="Order">
+	<insert id="save" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
 		insert into `ORDER`(`DATE`, `TYPE`, PRICE, QUANTITY, DETAIL_ID, MEMBER_ID, PRODUCT_ID, LOCATION_ID)
 		VALUES(
 		current_timestamp()
 		,#{type}
 		,#{price}
 		,#{quantity}
-		,#{randomNumber}
+		,111
 		,#{memberId}
 		,#{productId}
 		,#{locationId})

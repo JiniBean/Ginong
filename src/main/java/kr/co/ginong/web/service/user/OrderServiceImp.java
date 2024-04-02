@@ -23,8 +23,10 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public void addOrder(Order order) {
+    public long addOrder(Order order) {
         repository.save(order);
+
+        return order.getId();
 
     }
 }
