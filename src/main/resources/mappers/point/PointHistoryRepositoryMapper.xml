@@ -16,7 +16,7 @@
 
 	<select id="calc" resultType="int" parameterType="int">
 		SELECT
-			sum(PLMA*AMOUNT) as 'avail'
+			COALESCE(sum(PLMA*AMOUNT), 0) as 'avail'
 		from POINT_HISTORY_VIEW
 		<where>
 			<if test="memberId != null">
