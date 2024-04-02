@@ -8,22 +8,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PointServiceImpl {
+public class PointServiceImpl implements PointService{
 
     @Autowired
     PointHistoryRepository repository;
 
 
-    List<PointHistoryView> getList(Long memberId) {
+    public List<PointHistoryView> getList(Long memberId) {
 
-        List<PointHistoryView> list = repository.findAll();
+        List<PointHistoryView> list = repository.findAll(memberId);
 
         return list;
-    }
-
-    PointHistoryView get(Long memberId) {
-        PointHistoryView pointHistoryView = repository.findById(memberId);
-        return null;
     }
 
 

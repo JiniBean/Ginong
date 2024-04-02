@@ -6,7 +6,7 @@
     <select id="findAll" resultType="CouponHistory">
 		select
 			*
-		from coupon_history
+		from COUPON_HISTORY_VIEW
 		<where>
 			<if test="memberId != null">
 				member_id = #{memberId}
