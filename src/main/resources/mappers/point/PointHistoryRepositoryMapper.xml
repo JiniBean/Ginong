@@ -6,7 +6,7 @@
     <select id="findAll" resultType="PointHistory">
 		select
 			*
-		from point_history
+		from POINT_HISTORY_VIEW
 		<where>
 			<if test="memberId != null">
 				member_id = #{memberId}

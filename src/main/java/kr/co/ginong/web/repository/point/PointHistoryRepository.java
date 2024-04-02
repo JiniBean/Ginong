@@ -8,9 +8,10 @@ import kr.co.ginong.web.entity.point.PointHistoryView;
 
 @Mapper
 public interface PointHistoryRepository {
-    List<PointHistoryView> findAll();
 
-    PointHistoryView findById(Long id);
+    List<PointHistoryView> findAll(Long memberId);
+
+//    PointHistoryView findById(Long id);
     
     void save(PointHistory pointHistory);
     void update(PointHistory pointHistory);

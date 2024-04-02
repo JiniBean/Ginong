@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface CouponHistoryRepository {
-    List<CouponHistoryView> findAll();
+
+    List<CouponHistoryView> findAll(Long memberId);
 
     CouponHistoryView findById(Long id);
     
@@ -18,4 +19,5 @@ public interface CouponHistoryRepository {
     void delete(long id);
 
     int count(Date usedDate);
+
 }
