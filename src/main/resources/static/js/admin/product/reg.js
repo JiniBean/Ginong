@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
 window.addEventListener("load", function () {
     var regForm = this.document.querySelector("#reg-form");
     var imgInput = regForm.querySelector(".img-input");
-    var previewPanel = regForm.querySelector(".preview-panel");
+    var preview = regForm.querySelector(".preview");
     //var previewImage = previewPanel.getElementsByTagName("img")[0];
 
     imgInput.oninput = function(e) {
@@ -175,6 +175,31 @@ window.addEventListener("load", function () {
         console.log("Hello!");
         //console.log(previewImages);
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function removeImage(index) {
         // // 이미지 엘리먼트를 미리보기 패널에서 제거
