@@ -144,34 +144,36 @@
                         </label>
                     </div>
                 </div>
-
             </section>
 
-            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
-                <h1 class="fs:3 md:fs:4 fw:3">결제 정보</h1>
-                <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">
-                    <div class="d:flex jc:space-between">
-                        <div>총 상품 금액</div>
-                        <div><span th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">15,000</span></div>
-                    </div>
-                    <div class="d:flex jc:space-between">
-                        <div>쿠폰 적용 금액</div>
-                        <div><span>15,000</span> <span>원</span></div>
-                    </div>
-                    <div class="d:flex jc:space-between">
-                        <div>적립금 사용</div>
-                        <div><span>15,000</span> <span style="margin-left: 2px; margin-right:2px;">P</span></div>
-                    </div>
-                    <div class="d:flex jc:space-between">
-                        <div>배송비</div>
-                        <div><span th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}">15,000</span> <span>원</span></div>
+            <section id="payment-summary" class="d:flex fl-dir:column gap:10 md:gap:20">
+                <div class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+                    <h1 class="fs:3 md:fs:4 fw:3">결제 정보</h1>
+                    <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">
+                        <div class="d:flex jc:space-between">
+                            <div>총 상품 금액</div>
+                            <div><span th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + ' 원'}">15,000</span></div>
+                        </div>
+                        <div class="d:flex jc:space-between">
+                            <div>쿠폰 적용 금액</div>
+                            <div><span class="coupon">0</span> <span>원</span></div>
+                        </div>
+                        <div class="d:flex jc:space-between">
+                            <div>적립금 사용</div>
+                            <div><span class="point">0</span> <span style="margin-left: 2px; margin-right:2px;">P</span></div>
+                        </div>
+                        <div class="d:flex jc:space-between">
+                            <div>배송비</div>
+                            <div><span class="dlvry" th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}"
+                                       th:data-cost="${totalPrice > 30000 ? 0 : 5000}">15,000</span> <span>원</span></div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="d:flex jc:space-between gap:6 md:gap:12 w:10p">
-                <h1 class="fs:3 md:fs:4 fw:3">총 결제 예정 금액</h1>
-                <div><span class="fs:3 md:fs:4 fw:3 color:main-6">15,000</span><span class="fs:3 md:fs:4 fw:3">원</span>
+                <div class="d:flex jc:space-between gap:6 md:gap:12 w:10p">
+                    <h1 class="fs:3 md:fs:4 fw:3">총 결제 예정 금액</h1>
+                    <div><span class="total fs:3 md:fs:4 fw:3 color:main-6">15,000</span><span class="fs:3 md:fs:4 fw:3"> 원</span>
+                    </div>
                 </div>
             </section>
 
@@ -190,7 +192,7 @@
             </section>
 
         </form>
-</main>
+    </main>
 
 </body>
 </html>
