@@ -37,3 +37,12 @@
     mask-image: url("../icon/smile.svg");
 }
 
+.icon\:x::before,
+.icon\:x::after {
+    -webkit-mask-image: url(../icon/x.svg);
+    mask-image: url(../icon/x.svg);
+    background-color: var(--color-sub-2);
+
+    width: 12px;
+    height: 12px;
+}
