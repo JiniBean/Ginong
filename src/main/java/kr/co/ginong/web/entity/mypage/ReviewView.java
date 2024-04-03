@@ -13,12 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewView {
     private long	id;
+    private long    productId;
     private Date	date;
     private boolean	tagBest;
     private boolean	tagFresh;
     private boolean	tagThumbs;
     private String 	content;
 
+    private Long  memberId;
     private String  userName;
     private String  productName;
 }

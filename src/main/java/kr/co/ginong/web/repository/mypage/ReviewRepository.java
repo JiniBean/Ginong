@@ -2,15 +2,14 @@ package kr.co.ginong.web.repository.mypage;
 
 import java.util.List;
 
+import kr.co.ginong.web.entity.mypage.ReviewView;
 import org.apache.ibatis.annotations.Mapper;
 import kr.co.ginong.web.entity.mypage.Review;
 
 @Mapper
 public interface ReviewRepository {
-    
-    List<Review> findAll(Long categoryId
-                        , int offset
-                        , int size);
+
+    List<ReviewView> findAll(Long productId);
 
     Review findById(Long id);
     
