@@ -19,6 +19,17 @@
 		WHERE PRODUCT_ID = #{productId}
 	</select>
 
+    <select id="findByReview" resultType="ReviewView">
+		select
+			*
+		from REVIEW_VIEW
+		<where>
+			<if test="productId != null">
+				product_id = #{productId}
+			</if>
+		</where>
+	</select>
+
 	
 	<select id="findById" resultType="Review">
 		select

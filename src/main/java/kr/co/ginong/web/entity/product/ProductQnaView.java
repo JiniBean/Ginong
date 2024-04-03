@@ -18,6 +18,7 @@ public class ProductQnaView {
     private boolean	state;
     private boolean answerState;
 
+    private String  productId;
     private String  userName;
     private String  productName;
     private String  qnaCategory;

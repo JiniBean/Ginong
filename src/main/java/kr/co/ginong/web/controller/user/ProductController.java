@@ -2,12 +2,12 @@ package kr.co.ginong.web.controller.user;
 
 import kr.co.ginong.web.entity.mypage.ReviewView;
 import kr.co.ginong.web.entity.product.ProductCategory;
-import kr.co.ginong.web.entity.product.ProductQna;
-import kr.co.ginong.web.entity.product.ProductQnaView;
+//import kr.co.ginong.web.entity.product.ProductQna;
+//import kr.co.ginong.web.entity.product.ProductQnaView;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.user.ProductCategoryService;
 import kr.co.ginong.web.service.user.ProductService;
-import kr.co.ginong.web.service.user.QnaService;
+//import kr.co.ginong.web.service.user.QnaService;
 import kr.co.ginong.web.service.user.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +34,8 @@ public class ProductController {
     @Autowired
     private ReviewService reviewService;
 
-    @Autowired
-    private QnaService qnaService;
+//    @Autowired
+//    private QnaService qnaService;
 
     @GetMapping("list")
     public String list(
@@ -80,7 +80,7 @@ public class ProductController {
 
         List<ReviewView> reviewView = reviewService.getProductReviews(productId);
 
-        List<ProductQnaView> qnaView= qnaService.getProductQna(productId);
+//        List<ProductQnaView> qnaView= qnaService.getProductQna(productId);
 
 
 
@@ -95,8 +95,6 @@ public class ProductController {
         model.addAttribute("reviewView", reviewView);
 
 //        model.addAttribute("reviewView", reviewView);
-
-
 
         return "user/product/detail";
     }

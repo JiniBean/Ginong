@@ -10,6 +10,7 @@ import kr.co.ginong.web.entity.mypage.Review;
 public interface ReviewRepository {
 
     List<ReviewView> findAll(Long productId);
+    List<ReviewView> findByReview(Long productId);
 
     Review findById(Long id);
     
