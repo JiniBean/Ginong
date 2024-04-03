@@ -20,7 +20,7 @@ public class CouponHistoryView {
     private String  categoryName;
     private String  couponName;
     private long    discountAmount;
-    private String    discountUnit;
+    private String  discountUnit;
     private long    maxPaymentAmt;
     private long    minPaymentAmt;
     private Date    startDate;

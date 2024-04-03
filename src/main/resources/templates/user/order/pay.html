@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="/css/toggle.css">
     <script src="/js/user/order/pay.js"></script>
 </head>
+<script>
+    window.addEventListener("load", function () {
+        const dropdownButton = document.getElementById("dropdown-btn");
+        const dropdownList = document.getElementById("dropdown-list");
+
+        dropdownButton.addEventListener("click", function () {
+            dropdownList.classList.toggle("active");
+        })
+    });
+</script>
 <body>
 
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -53,7 +63,7 @@
                     <div class="color:main-6"><span th:text="${couponList.size}">0</span><span>장</span></div>
                 </div>
                 <div class="n-dropdown">
-                    <button id="dropdown-btn-category" type="button"
+                    <button id="dropdown-btn" type="button"
                             class="n-btn n-btn:outline w:10p jc:space-between">
                         <span class="fl:fill">
                             <span>사용할 수 있는 쿠폰 </span>
@@ -61,8 +71,12 @@
                         </span>
                         <span class="icon icon:RT icon-size:1 icon-color:main-6">아이콘</span>
                     </button>
-                    <ul id="dropdown-list-category" th:each="c : ${couponList}">
-                        <li th:text="${c.couponName}" th:data-id="${c.id}">회원 가입 감사 쿠폰</li>
+                    <ul id="dropdown-list" class="active w:10p" th:each="c : ${couponList}">
+                        <li class="d:flex jc:space-between p:1" th:data-id="${c.id}">
+                            <span th:text="${c.couponName}">회원 가입 감사 쿠폰</span>
+                            <span th:text="${c.discountAmount + c.discountUnit}">50원</span>
+                        </li>
+
                     </ul>
                 </div>
             </section>

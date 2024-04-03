@@ -66,7 +66,7 @@ window.addEventListener("load", function () {
 
     var colBtn = sortSection.querySelector(".icon\\:squares_four"); //모바일 버전 세로 정렬 버튼
     var rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
-    var colSection = wprdList.querySelector(".menu-card-col"); //세로형 카드 섹션
+    var colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
     var rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
     var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
 
