@@ -12,7 +12,8 @@ li {
     border: 1px solid var(--color-main-5);
     border-radius: 5px;
     cursor: pointer;
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
     height : 40px;
     display: flex;
     align-items: center;
@@ -29,7 +30,8 @@ li {
     border-top: none;
     border-radius: 5px;
     display: none;
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
     align-items: center;
     justify-content: center;
     z-index: 1;
