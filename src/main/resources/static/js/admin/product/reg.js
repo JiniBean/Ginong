@@ -1,3 +1,23 @@
+// 생성자 및 add 함수 추가
+
+function InputFileList(input){
+    this.input = input;
+}
+
+InputFileList.prototype = {
+    add:function (file){
+        var dt = new DataTransfer();
+        var files = this.input.files;
+
+        for(var existingFile of files)
+            dt.items.add(existingFile);
+
+        //추가로 담는 파일
+        dt.items.add(file);
+        this.input.files = dt.files;
+    }
+};
+
 
 // 카테고리 버튼 css
 document.addEventListener("DOMContentLoaded", function() {
@@ -141,6 +161,77 @@ window.addEventListener("load", function () {
     var imgInput = regForm.querySelector(".img-input");
     var preview = regForm.querySelector(".preview");
     //var previewImage = previewPanel.getElementsByTagName("img")[0];
+    var upload = regForm.querySelector(".upload");
+
+    // 드래그
+    preview.ondragenter = function (e){
+        preview.classList.add("bd");
+        preview.classList.add("bd-color:main-6");
+    };
+
+    preview.ondragleave = function (e){
+        preview.classList.remove("bd");
+        preview.classList.remove("bd-color:main-6");
+        preview.classList.remove("invalid");
+    };
+
+    preview.ondragover = function (e){
+        e.stopPropagation();
+        e.preventDefault();
+
+        var valid = e.dataTransfer &&
+            e.dataTransfer.types &&
+            e.dataTransfer.types.indexOf("Files") >= 0;
+
+        if (!valid)
+            preview.classList.add("invalid");
+        else
+            preview.classList.remove("invalid");
+    };
+
+    preview.ondrop = function (e){
+        e.stopPropagation();
+        e.preventDefault();
+        preview.classList.remove("bd");
+        preview.classList.remove("bd-color:main-6");
+
+        var files = e.dataTransfer.files;
+        var file = files[0];
+
+        new InputFileList(imgInput).add(file);
+
+        if (file.type.indexOf("image/")!==0){
+            alert("이미지만 업로드 할 수 있습니다.")
+            return;
+        } // 타입 제약
+
+        if (file.size > 100 * 1024){
+            alert("크기는 100KB 이하만 얿로드 할 수 있습니다.")
+            return;
+        }// 크기 제약
+
+        var reader = new FileReader();
+        reader.onload = function (e){
+            var img = document.createElement("img");
+            img.src = e.target.result;
+            // previewPanner = appendChild();
+            preview.append(img);
+
+            setTimeout(() => {
+                img.classList.add("slide-in");
+            },10);
+        };
+        reader.readAsDataURL(file);
+
+        console.log(e.dataTransfer.types);
+
+    };
+
+
+
+
+
+
 
     imgInput.oninput = function(e) {
        var files = imgInput.files;
@@ -164,7 +255,7 @@ window.addEventListener("load", function () {
                 img.src = e.target.result;
 
                 console.log(e.target.result);
-                previewPanel.append(img);          // element가 가진 기능
+                preview.append(img);          // element가 가진 기능
 
             }
             reader.readAsDataURL(file);
