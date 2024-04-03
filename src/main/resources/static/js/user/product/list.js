@@ -157,7 +157,7 @@ window.addEventListener("load", function () {
     }
 
     cartSection.onclick = function (e){
-        e.preventDefault();
+        // e.preventDefault();
 
         // if(!e.target.classList.contains("icon:shopping_cart_simple"))
         //     return;

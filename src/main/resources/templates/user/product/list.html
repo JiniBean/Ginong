@@ -120,8 +120,10 @@
             <h1 class="d:none">상품 영역</h1>
             <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
                 <div class="pos:relative">
-                    <a href="#" th:href="@{/user/product/detail(id=${m.id})}" class=""><img
-                            th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
+                    <div>
+                        <a href="#" th:href="@{/user/product/detail(id=${m.id})}"><img
+                                th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/></a>
+                    </div>
                     <div class="cart-section">
                         <div>
                             <a href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">

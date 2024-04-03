@@ -51,7 +51,10 @@
             </div>
             <div class="w:10p d:flex jc:end gap:3">
                 <span class="fw:3">총 상품 금액</span>
-                <span class="color:main-6 fw:3" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">15,000</span>
+                <span id="total-price" class="color:main-6 fw:3"
+                      th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}"
+                      th:data-total="${totalPrice}">
+                    15,000</span>
             </div>
         </section>
 
@@ -64,20 +67,21 @@
                 </div>
                 <div class="n-dropdown">
                     <button id="dropdown-btn" type="button"
-                            class="n-btn n-btn:outline w:10p jc:space-between">
-                        <span class="fl:fill">
-                            <span>사용할 수 있는 쿠폰 </span>
-                            <span th:text="${couponList.size}">0</span><span>장</span>
+                            class="n-btn n-btn:outline w:10p jc:space-between deco icon:RT deco-size:1 icon-color:main-6 deco-pos:right">
+                        <span class="fl:fill" th:text="${'사용할 수 있는 쿠폰 ' + couponList.size + '장'}">
+                              사용할 수 있는 쿠폰 0장
                         </span>
-                        <span class="icon icon:RT icon-size:1 icon-color:main-6">아이콘</span>
                     </button>
-                    <ul id="dropdown-list" class="active w:10p" th:each="c : ${couponList}">
-                        <li class="d:flex jc:space-between p:1" th:data-id="${c.id}">
+                    <ul id="dropdown-list" class="w:10p">
+                        <li class="d:flex jc:space-between p:1" th:each="c : ${couponList}" th:data-id="${c.id}"
+                            th:data-amut="${c.discountAmount}" th:data-unit="${c.discountUnit}">
                             <span th:text="${c.couponName}">회원 가입 감사 쿠폰</span>
                             <span th:text="${c.discountAmount + c.discountUnit}">50원</span>
                         </li>
-
                     </ul>
+                    <div class="d:none">
+                        <input class="coupon-input" type="hidden" name="coupon" >
+                    </div>
                 </div>
             </section>
 
