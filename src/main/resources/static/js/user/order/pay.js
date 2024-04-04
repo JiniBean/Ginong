@@ -69,13 +69,14 @@ window.addEventListener("load", function () {
             //인풋 영역에 금액 뿌려주기
             let remain = point-inputValue;
             remainPoint.textContent = formatNumber(remain)+' P';
-            pointInput.value = inputValue;
+            pointInput.value =  inputValue;
 
             //결제정보 영역에 적립금 뿌려주기
             pointDisc = inputValue;
             pointAmt.textContent = formatNumber(pointDisc);
             total(couponDisc,pointDisc);
         }
+
     }
 
     usePointBtn.onclick = function (e) {
@@ -99,24 +100,27 @@ window.addEventListener("load", function () {
     // 적립금 1000원 이상, 잔여 적립금 이상 못 쓰게 Validation Check
     function validate(inputValue, point){
 
+        //1,000원 이상, 보유 적립금 이하
+        if(1000 <= inputValue && inputValue <= point){
+            minCheck.classList.add("d:none");
+            maxCheck.classList.add("d:none");
+            return true;
+        }
 
+        //1,000원 이하
         if (inputValue < 1000){
             minCheck.classList.remove("d:none");
             maxCheck.classList.add("d:none");
             return false;
         }
 
+        //보유 적립금 이상
         if (inputValue > point){
             minCheck.classList.add("d:none");
             maxCheck.classList.remove("d:none");
             return false;
         }
-
-        if(1000 <= inputValue && inputValue <= point){
-            minCheck.classList.add("d:none");
-            maxCheck.classList.add("d:none");
-            return true;
-        }
+        return false;
     }
 
     //총 결제금액 꽂아주기

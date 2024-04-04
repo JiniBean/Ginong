@@ -108,3 +108,7 @@
         font-size: var(--font-size-3);
     }
 }
+
+.n-textbox {
+    --textbox-border-color-focus: var(--color-main-6);
+}
