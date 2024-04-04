@@ -7,19 +7,8 @@
     <meta charset="UTF-8">
     <title>Product-List</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
-    <link rel="stylesheet" href="/css/toggle.css">
     <script src="/js/user/order/pay.js"></script>
 </head>
-<script>
-    window.addEventListener("load", function () {
-        const dropdownButton = document.getElementById("dropdown-btn");
-        const dropdownList = document.getElementById("dropdown-list");
-
-        dropdownButton.addEventListener("click", function () {
-            dropdownList.classList.toggle("active");
-        })
-    });
-</script>
 <body>
 
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -80,29 +69,43 @@
                         </li>
                     </ul>
                     <div class="d:none">
-                        <input class="coupon-input" type="hidden" name="coupon" >
+                        <input class="coupon-input" type="hidden" name="coupon">
                     </div>
                 </div>
             </section>
 
-            <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
+            <section id="point-section" class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3">적립금 사용</h1>
-                <div class="d:flex jc:end gap:2 md:3 w:10p">
+                <div class="d:flex jc:end md:3 w:10p">
                     <div class="fw:3">보유 적립금</div>
                     <div class="fw:3 color:main-6">
-                        <span th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}">0</span></div>
+                        <span class="remain-point d:block txt-al:end"
+                              th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}"
+                              th:data-point="${point}"
+                              style="width: 80px"
+
+                        >0
+                        </span>
+                    </div>
                 </div>
                 <div class="d:flex gap:10">
                     <div class="d:flex fl:fill as:end">
-                        <input type="text" class="n-textbox n-textbox-type:underline">
+                        <input type="number"
+                               class="point-input test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end"
+                        >
                         <span class="color:main-6 fw:3 as:end mb:1">P</span>
                     </div>
                     <div>
-                        <button type="button" class="n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3 w:3">전액
-                            사용
+                        <button type="button" class="use-point-btn n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3" style="width: 153px">
+                            전액사용
                         </button>
                     </div>
                 </div>
+                <div class="d:flex fl-dir:column">
+                    <div class="min-check d:none color:sub-1">적립금은 1,000원 이상 부터 사용 가능 합니다.</div>
+                    <div class="max-check d:none color:sub-1">보유 적립금 이상으로 사용하실 수 없습니다.</div>
+                </div>
+
             </section>
 
             <section class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
@@ -152,7 +155,8 @@
                     <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">
                         <div class="d:flex jc:space-between">
                             <div>총 상품 금액</div>
-                            <div><span th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + ' 원'}">15,000</span></div>
+                            <div><span th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + ' 원'}">15,000</span>
+                            </div>
                         </div>
                         <div class="d:flex jc:space-between">
                             <div>쿠폰 적용 금액</div>
@@ -160,19 +164,22 @@
                         </div>
                         <div class="d:flex jc:space-between">
                             <div>적립금 사용</div>
-                            <div><span class="point">0</span> <span style="margin-left: 2px; margin-right:2px;">P</span></div>
+                            <div><span class="point">0</span> <span style="margin-left: 2px; margin-right:2px;">P</span>
+                            </div>
                         </div>
                         <div class="d:flex jc:space-between">
                             <div>배송비</div>
                             <div><span class="dlvry" th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}"
-                                       th:data-cost="${totalPrice > 30000 ? 0 : 5000}">15,000</span> <span>원</span></div>
+                                       th:data-cost="${totalPrice > 30000 ? 0 : 5000}">15,000</span> <span>원</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="d:flex jc:space-between gap:6 md:gap:12 w:10p">
                     <h1 class="fs:3 md:fs:4 fw:3">총 결제 예정 금액</h1>
-                    <div><span class="total fs:3 md:fs:4 fw:3 color:main-6">15,000</span><span class="fs:3 md:fs:4 fw:3"> 원</span>
+                    <div>
+                        <span class="total fs:3 md:fs:4 fw:3 color:main-6">15,000</span><span class="fs:3 md:fs:4 fw:3"> 원</span>
                     </div>
                 </div>
             </section>
@@ -192,7 +199,8 @@
             </section>
 
         </form>
-    </main>
+    </section>
+</main>
 
 </body>
 </html>
