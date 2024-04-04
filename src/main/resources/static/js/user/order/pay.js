@@ -23,14 +23,14 @@ window.addEventListener("load", function () {
     couponBtn.onclick = function (e) {
         //쿠폰 리스트 보였다 안보였다
         var active = couponList.classList.contains("active");
-        if(active)
+        if (active)
             couponList.classList.remove("active");
         else
             couponList.classList.add("active");
     }
 
     //드롭다운 리스트에서 옵션 하나 선택 했을 때
-    couponList.onclick = function (e){
+    couponList.onclick = function (e) {
 
         //선택한 쿠폰 보여주기
         couponBtn.textContent = e.target.textContent;
@@ -39,8 +39,8 @@ window.addEventListener("load", function () {
 
         //쿠폰의 데이터로 할인 가격 계산하기
         var amut = e.target.dataset.amut;
-        if(e.target.dataset.unit==='%')
-            couponDisc = totalSpan.dataset.total*(amut/100);
+        if (e.target.dataset.unit === '%')
+            couponDisc = totalSpan.dataset.total * (amut / 100);
         else
             couponDisc = amut;
 
@@ -52,7 +52,7 @@ window.addEventListener("load", function () {
 
 
     //총 결제금액 꽂아주기
-    function total(couponDisc, pointDisc){
+    function total(couponDisc, pointDisc) {
         couponDisc = couponDisc || 0;
         pointDisc = pointDisc || 0;
         var dlvry = dlvryAmt.dataset.cost;
@@ -60,6 +60,61 @@ window.addEventListener("load", function () {
 
         totalAmt.textContent = formatNumber(cost);
     }
+
+});
+
+window.addEventListener("load", function () {
+    const pointSection = document.querySelector("#point-section");
+    const pointInput = pointSection.querySelector(".point-input");
+    const remainPoint = pointSection.querySelector(".remain-point");
+
+    const usePointBtn = pointSection.querySelector(".use-point-btn");
+
+    const minCheck = pointSection.querySelector(".min-check");
+    const maxCheck = pointSection.querySelector(".max-check");
+
+    let point = remainPoint.dataset.point;
+
+    pointInput.oninput = function (e) {
+
+        // 사용자 잔여 포인트
+
+        // 사용자가 입력한 포인트
+        var inputValue = parseInt(e.target.value);
+        console.log("point = ", point);
+        console.log("userInputVal = ", inputValue)
+
+
+        // 포인트 1000원 이상, 잔여 포인트 이상 못 쓰게 Validation Check
+        if (inputValue < 1000){
+            minCheck.classList.remove("d:none");
+            maxCheck.classList.add("d:none");
+        }
+
+        if (inputValue > point){
+            minCheck.classList.add("d:none");
+            maxCheck.classList.remove("d:none");
+        }
+
+        if(1000 < inputValue && inputValue <= point){
+            minCheck.classList.add("d:none");
+            maxCheck.classList.add("d:none");
+        }
+
+    }
+
+    usePointBtn.onclick = function (e) {
+        if(point < 1000){
+            minCheck.classList.remove("d:none");
+            maxCheck.classList.add("d:none");
+            return;
+        }
+
+        remainPoint.textContent = "0 P";
+        pointInput.value = point;
+
+
+    };
 
 
 });

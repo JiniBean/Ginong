@@ -15,4 +15,5 @@
         where MEMBER_ID = #{id}
         and STATE = 1
     </select>
+
 </mapper>

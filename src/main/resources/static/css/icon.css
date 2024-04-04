@@ -46,3 +46,10 @@
     width: 12px;
     height: 12px;
 }
+
+
+.icon\:checkCircle::before,
+.icon\:checkCircle::after {
+    -webkit-mask-image: url("../icon/checkCircle.svg");
+    mask-image: url("../icon/checkCircle.svg");
+}
