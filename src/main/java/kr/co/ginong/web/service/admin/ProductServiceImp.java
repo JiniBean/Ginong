@@ -59,5 +59,9 @@ public class ProductServiceImp implements ProductService {
         return productView;
     }
 
+    public void delete(Long productId) {
+        repository.delete(productId);
+    }
+
 }
 
