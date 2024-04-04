@@ -22,7 +22,7 @@ public class ProductView {
     private boolean state;
     private int     likeCount;
 
-    private String  category;
+    private String  categoryId;
     private String  storageType;
     private String  admin;
     private String  quantityCategory;
