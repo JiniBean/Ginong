@@ -21,7 +21,7 @@
         <h1 class="d:none">상품 정보</h1>
         <form method="post" enctype="multipart/form-data" class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div class="custom-dropdown">
-                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionCategory" th:if>카테고리 선택</div>
+                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionCategory" th:if="${categoryId}" >카테고리 선택</div>
                 <ul class="options" th:value=${categoryId}>
                     <li class="option" data-value="1" th:class="${productView.categoryId == '1' ? 'selected' : ''}">과채</li>
                     <li class="option" data-value="2" th:class="${productView.categoryId == '2' ? 'selected' : ''}">앙념</li>
