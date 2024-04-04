@@ -10,5 +10,5 @@ public interface MemberService {
 
     Location getLocation(long id);
 
-    void addLocationHistory(LocationHistory locationHistory);
+
 }

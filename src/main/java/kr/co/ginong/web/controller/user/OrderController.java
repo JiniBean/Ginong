@@ -38,6 +38,9 @@ public class OrderController {
     @Autowired
     private CouponService couponService;
 
+    @Autowired
+    private LocationService locationService;
+
 
     @GetMapping("info")
     public String info(Model model
@@ -117,9 +120,7 @@ public class OrderController {
         locationHistory.setLocationId(locationId);
 
 
-        System.out.println(locationHistory);
-
-        memberService.addLocationHistory(locationHistory);
+        locationService.addHistory(locationHistory);
 
 
 

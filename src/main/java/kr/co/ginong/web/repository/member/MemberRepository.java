@@ -12,5 +12,4 @@ public interface MemberRepository {
 
     Location findById(long id);
 
-    void saveByLocation(LocationHistory locationHistory);
 }

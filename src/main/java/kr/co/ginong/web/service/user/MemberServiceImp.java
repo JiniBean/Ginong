@@ -26,9 +26,5 @@ public class MemberServiceImp implements MemberService{
         return location;
     }
 
-    @Override
-    public void addLocationHistory(LocationHistory locationHistory) {
-        repository.saveByLocation(locationHistory);
 
-    }
 }
