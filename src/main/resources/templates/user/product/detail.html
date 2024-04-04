@@ -132,6 +132,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <!--구매정보 안내(pc버전)-->
                 <div id="l-order-info" class="d:flex fl-dir:column gap:5 pt:10 pb:10 bd-top">
                     <div class="d:flex fl-dir:row ai:center jc:space-between">
@@ -139,7 +141,7 @@
                       style="height: 36px">
                   <a th:data-btn="minus" class="btn-minus left:1"></a>
                   <input type="text" class="l-quantity-input w:100p h:100p fw:3 txt-al:center" style="line-height: 36px"
-                         maxlength="3" value="1" return false;/>
+                         maxlength="3" value="1"/>
                   <a th:data-btn="plus" class="btn-plus right:1"></a>
                 </span>
                     </div>
@@ -156,12 +158,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="d:flex gap:13 w:10p col-gap:4">
+                <div class="l-pay-box d:flex gap:13 w:10p col-gap:4">
                     <div class="fl-grow:1">
-                        <button th:data-btn="cart" type="button" class="n-btn n-btn-type:outline w:10p">장바구니 담기</button>
+                        <button th:data-btn="cart" type="button" class="l-cart n-btn n-btn-type:outline w:10p">장바구니 담기</button>
                     </div>
                     <div class="fl-grow:1">
-                        <button id="parchase" th:data-btn="order" type="button" class="n-btn n-btn-type:filled w:10p">바로 구매하기</button>
+                        <button th:data-btn="order" type="button" class=" l-order n-btn n-btn-type:filled w:10p">바로 구매하기</button>
                         <input type="hidden" class="l-product-id" th:value="${productView.id}">
                     </div>
                 </div>

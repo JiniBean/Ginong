@@ -85,8 +85,8 @@
                         <span th:text="${location.addr2}">3층</span>
                     </div>
                     <div class="d:flex gap:1">
-                        <span th:text="${memberList.name}">신석호</span>
-                        <span th:text="${memberList.phone}">010-1234-5678</span>
+                        <span th:text="${location.receiverName}">신석호</span>
+                        <span th:text="${location.receiverPhone}">010-1234-5678</span>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                     <li class="optionDesc" data-value="배송 전 연락주세요">배송 전 연락주세요</li>
                 </ul>
             </div>
-            <input type="hidden" id="selectedDesc" name="desc" value="1">
+            <input type="hidden" id="selectedDesc" value="직접 받을게요" name="note">
         </section>
 
         <section class="d:flex fl-dir:column gap:4 md:gap:4 w:10p">
@@ -119,7 +119,6 @@
                         class="n-toggle n-toggle:dot"
                 />
                 <input
-                        name="현관"
                         type="text"
                         placeholder=""
                         class="n-textbox n-textbox:underline"
@@ -142,9 +141,15 @@
         <button class="n-btn n-btn-size:2 fl-grow:1 fw:3">주문하기</button>
         <input type = "hidden" th:value="${totalQuantity}" name="quantity">
         <input type = "hidden" th:value="${memberList.id}" name="memberId">
-        <input type = "hidden" th:value="${location.id}" name="locationId">
         <input type = "hidden" th:value="${productView.id}" name="productViewId">
         <input type = "hidden" th:value="${productView.price}" name="price">
+        <input type = "hidden" th:value="${location.id}" name="locationId">
+        <input type = "hidden" th:value="${location.zipCode}" name="zipCode">
+        <input type = "hidden" th:value="${location.addr1}" name="addr1">
+        <input type = "hidden" th:value="${location.addr2}" name="addr2">
+        <input type = "hidden" th:value="${location.receiverName}" name="receiverName">
+        <input type = "hidden" th:value="${location.receiverPhone}" name="receiverPhone">
+        <input type = "hidden" th:value="${location.gatePwd}" name="gatePwd">
 
     </div>
     </form>

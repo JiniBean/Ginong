@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeliveryCategory {
+public class LocationHistoryCategory {
     private long    id;
     private String  name;
 }
