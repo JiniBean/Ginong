@@ -8,15 +8,14 @@
 		select
 			*
 		from REVIEW_VIEW
-<!--		<where>-->
-<!--			<if test="memberId != null">-->
-<!--				AND member_id = #{memberId}-->
-<!--			</if>-->
-<!--			<if test="productId != null">-->
-<!--				AND product_id = #{productId}-->
-<!--			</if>-->
-<!--		</where>-->
-		WHERE PRODUCT_ID = #{productId}
+		<where>
+			<if test="memberId != null">
+				AND member_id = #{memberId}
+			</if>
+			<if test="productId != null">
+				AND product_id = #{productId}
+			</if>
+		</where>
 	</select>
 
     <select id="findByReview" resultType="ReviewView">

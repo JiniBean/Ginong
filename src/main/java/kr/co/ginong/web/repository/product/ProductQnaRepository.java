@@ -2,13 +2,15 @@ package kr.co.ginong.web.repository.product;
 
 import java.util.List;
 
+import kr.co.ginong.web.entity.product.ProductQnaView;
 import org.apache.ibatis.annotations.Mapper;
 import kr.co.ginong.web.entity.product.ProductQna;
 
 
 @Mapper
 public interface ProductQnaRepository {
-    List<ProductQna> findAll();
+    List<ProductQnaView> findAll(Long productId);
+    List<ProductQnaView> findAll2(Long productId);
 
     ProductQna findById(Long id);
     

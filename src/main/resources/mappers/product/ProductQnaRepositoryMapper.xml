@@ -10,8 +10,19 @@
 		from PRODUCT_QNA_VIEW
 		<where>
 			<if test="memberId != null">
-				member_id = #{memberId}
+				AND member_id = #{memberId}
 			</if>
+			<if test="productId != null">
+				AND product_id = #{productId}
+			</if>
+		</where>
+	</select>
+
+	<select id="findAll2" resultType="ProductQnaView">
+		select
+		*
+		from PRODUCT_QNA_VIEW
+		<where>
 			<if test="productId != null">
 				product_id = #{productId}
 			</if>

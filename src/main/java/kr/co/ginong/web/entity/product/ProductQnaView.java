@@ -16,7 +16,7 @@ public class ProductQnaView {
     private Date	regDate;
     private String 	content;
     private boolean	state;
-    private boolean answerState;
+    private String answerState;
 
     private String  productId;
     private String  userName;
