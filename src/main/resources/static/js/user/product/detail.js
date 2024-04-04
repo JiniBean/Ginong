@@ -126,6 +126,64 @@ window.addEventListener("load", function(){
 });
 
 
+// 살려줘요
+// window.addEventListener("load", function() {
+//     var orderInfo = this.document.querySelector("#l-order-info");
+//     var purchase = document.querySelector("#purchase");
+//
+//     purchase.onclick = function (e){
+//         if(e.target.tagName != 'BUTTON')
+//             return;
+//
+//
+//             case 'cart':
+//                 console.log("카트에 상품을 추가합니다.");
+//                 break;
+//
+//             case 'order':
+//                 var url = new URL("/user/order/info",location.origin);
+//
+//                 var productId =  여기 뭐주면 좋을까요.querySelector(".l-product-id").value;
+//                 var numberBox = orderInfo.querySelector(".l-numberBox");
+//                 var quantityInput = numberBox.querySelector(".l-quantity-input").value;
+//                 var quantity = parseInt(quantityInput);
+//
+//                 url.searchParams.append("productId", productId);
+//                 url.searchParams.append("quantity", quantity);
+//
+//
+//                 console.log(url.href);
+//
+//                 break;
+//         }
+//
+//     }
+//
+// });
+
+// 구매하기 및 장바구니 PC 버전
+window.addEventListener("load", function() {
+    var payBox = document.querySelector(".l-pay-box");
+    var orderBtn = payBox.querySelector(".l-order");
+    var cartBtn = payBox.querySelector(".l-cart");
+    var productId = payBox.querySelector(".l-product-id").value;
+
+    var quantityInput =this.document.getElementsByClassName("l-quantity-input")[0];
+
+    orderBtn.onclick = function (){
+
+        var quantity = parseInt(quantityInput.value);
+
+        var url = new URL ("/user/order/info", location.origin);
+
+        url = url + "?productId=" + productId + "&quantity=" + quantity;
+
+        location.href = url.toString();
+    };
+
+});
+
+
 /* pc버전 구매정보 수량증감*/
 window.addEventListener("load", function(){
 
@@ -187,6 +245,74 @@ window.addEventListener("load", function(){
     }
 
 });
+
+// ===================================================================================================
+
+/* pc 버전 하단 navi */
+window.addEventListener("load", function(){
+
+    var orderInfo = this.document.querySelector("#order-info");
+
+    //popup close
+    var close = orderInfo.getElementsByClassName("close")[0];
+
+    //popup open
+    var navi = this.document.querySelector(".navi");
+
+    navi.onclick = function(e){
+        if(e.target.tagName!='BUTTON')
+            return;
+
+        if(!orderInfo.classList.contains("on")){
+            orderInfo.classList.remove("d:none");
+            orderInfo.classList.add("on");
+        }else{
+            var state = e.target.dataset.btn;
+
+            switch (state) {
+                case 'cart' :
+                    break;
+                case 'order' :
+                    var url = new URL ("/user/order/info", location.origin);
+
+                    var productId = navi.querySelector(".product-id").value;
+                    var numberBox = orderInfo.querySelector(".numberBox");
+                    var quantityInput = numberBox.querySelector(".quantity-input").value;
+                    var quantity = parseInt(quantityInput);
+
+                    url = url + "?productId=" + productId
+                        + "&quantity=" + quantity;
+
+                    console.log(url);
+
+                    location.href = url.toString();
+
+                    // fetch('/user/order/info',{
+                    //     method:'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(params),
+                    //     redirect:'manual'
+                    // });
+
+                    break;
+            }
+        }
+
+    }
+
+    //popup close
+    close.onclick = function(){
+        orderInfo.classList.add("d:none");
+        orderInfo.classList.remove("on");
+    }
+
+
+
+});
+
+
 
 
 //찜 눌렀을때

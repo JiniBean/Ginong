@@ -74,7 +74,6 @@ public class ProductController {
     public String detail(@RequestParam(value = "id") Long productId
                          ,Model model) {
 
-        productId = 11L;
 
         ProductView productView = service.get(productId);
 
