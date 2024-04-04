@@ -227,7 +227,7 @@ window.addEventListener("load", function () {
 
     };
 
-    
+
     imgInput.oninput = function(e) {
        var files = imgInput.files;
 
@@ -263,44 +263,6 @@ window.addEventListener("load", function () {
     };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function removeImage(index) {
-        // // 이미지 엘리먼트를 미리보기 패널에서 제거
-        // previewPanel.removeChild(images[index]);
-
-        // // 배열에서 이미지 엘리먼트 제거
-        // images.splice(index, 1);
-
-    }
-
-        
-    // previewImages.onclick = function(e) {
-    //     if (!e.target.tagName("img"))
-    //         console.log("헤헤");
-    // }
 });
 
 
