@@ -127,7 +127,7 @@ public class OrderController {
         return "redirect:pay?id="+orderId;
     }
 
-        @GetMapping("pay")
+    @GetMapping("pay")
     public String pay(
               @RequestParam(name = "id", required = false) Long orderId
             , Model model
@@ -173,6 +173,12 @@ public class OrderController {
         System.out.println("counponSize = " + couponList.size());
 
         return "user/order/pay";
+    }
+
+    @GetMapping("complete")
+    public String complete(){
+
+        return "user/order/complete";
     }
 
     
