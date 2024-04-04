@@ -47,7 +47,7 @@
             </div>
         </section>
 
-        <form method="post" action="pay" class="d:flex fl-dir:column gap:10 md:gap:20">
+        <form method="post" class="d:flex fl-dir:column gap:10 md:gap:20">
             <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3">쿠폰 사용</h1>
                 <div class="d:flex jc:space-between w:10p">
@@ -83,27 +83,28 @@
                               th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}"
                               th:data-point="${point}"
                               style="width: 80px"
-
                         >0
                         </span>
                     </div>
                 </div>
-                <div class="d:flex gap:10">
-                    <div class="d:flex fl:fill as:end">
-                        <input type="number"
-                               class="point-input test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end"
-                        >
-                        <span class="color:main-6 fw:3 as:end mb:1">P</span>
+                <div class="d:flex fl-dir:column gap:2">
+                    <div class="d:flex gap:10">
+                        <div class="d:flex fl:fill as:end">
+                            <input type="number"
+                                   class="point-input test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end"
+                            >
+                            <span class="color:main-6 fw:3 as:end mb:1">P</span>
+                        </div>
+                        <div>
+                            <button type="button" class="use-point-btn n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3" style="width: 153px">
+                                전액사용
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <button type="button" class="use-point-btn n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3" style="width: 153px">
-                            전액사용
-                        </button>
+                    <div class="d:flex fl-dir:column ml:1">
+                        <div class="min-check d:none color:sub-1">적립금은 1,000원 이상 부터 사용 가능 합니다.</div>
+                        <div class="max-check d:none color:sub-1">보유 적립금 이상으로 사용하실 수 없습니다.</div>
                     </div>
-                </div>
-                <div class="d:flex fl-dir:column">
-                    <div class="min-check d:none color:sub-1">적립금은 1,000원 이상 부터 사용 가능 합니다.</div>
-                    <div class="max-check d:none color:sub-1">보유 적립금 이상으로 사용하실 수 없습니다.</div>
                 </div>
 
             </section>
@@ -179,7 +180,8 @@
                 <div class="d:flex jc:space-between gap:6 md:gap:12 w:10p">
                     <h1 class="fs:3 md:fs:4 fw:3">총 결제 예정 금액</h1>
                     <div>
-                        <span class="total fs:3 md:fs:4 fw:3 color:main-6">15,000</span><span class="fs:3 md:fs:4 fw:3"> 원</span>
+                        <span class="total fs:3 md:fs:4 fw:3 color:main-6" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')}">15,000</span><span
+                            class="fs:3 md:fs:4 fw:3"> 원</span>
                     </div>
                 </div>
             </section>
