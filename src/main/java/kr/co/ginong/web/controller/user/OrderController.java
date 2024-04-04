@@ -44,45 +44,45 @@ public class OrderController {
 
     @GetMapping("info")
     public String info(Model model
-                        ,@RequestParam(name="productId") Long productId
-                        ,@RequestParam(name="quantity") Long quantity
-    ){
+            , @RequestParam(name = "productId") Long productId
+            , @RequestParam(name = "quantity") Long quantity
+    ) {
 
         //(바로 구매하기) 상품정보리스트 가져오기
         System.out.println("=====================");
-        System.out.println("productId="+productId);
-        System.out.println("quantity="+quantity);
+        System.out.println("productId=" + productId);
+        System.out.println("quantity=" + quantity);
 
         //상품정보 가져오기
-        ProductView productView =  productService.get(productId);
+        ProductView productView = productService.get(productId);
         //총상품값 계산해서 넣기+++
 
         model.addAttribute("productView", productView);
         model.addAttribute("totalQuantity", quantity);
 
         //================================================================
-        String name ="dmswls";
+        String name = "dmswls";
 
-        Member member =  memberService.getMemberInfo(name);
+        Member member = memberService.getMemberInfo(name);
         model.addAttribute("memberList", member);
 
         //배송지정보 가져오기
         Location location = memberService.getLocation(member.getId());
-        model.addAttribute("location",location);
-
+        model.addAttribute("location", location);
 
 
         return "user/order/info";
     }
+
     @PostMapping("info")
     public String info(
             LocationHistory locationHistory
-            ,Integer quantity
-            ,Long memberId
-            ,Long locationId
-            ,Long productViewId
-            ,Integer price
-            ) {
+            , Integer quantity
+            , Long memberId
+            , Long locationId
+            , Long productViewId
+            , Integer price
+    ) {
 
         //난수 제작 :날짜+4자리난수+4자리난수
         //오늘 날짜 제작
@@ -97,7 +97,7 @@ public class OrderController {
         String randomNumber1 = String.format("%04d", randomNum1);
         String randomNumber2 = String.format("%04d", randomNum2);
 
-        String detailId = dateString+"-"+randomNumber1+"-"+randomNumber2;
+        String detailId = dateString + "-" + randomNumber1 + "-" + randomNumber2;
 
 
         //상품정보id, location id order 테이블에 넣기
@@ -123,14 +123,13 @@ public class OrderController {
         locationService.addHistory(locationHistory);
 
 
-
         //pay로 order_id 를 이용하여 주소보내기
-        return "redirect:pay?id="+orderId;
+        return "redirect:pay?id=" + orderId;
     }
 
     @GetMapping("pay")
     public String pay(
-              @RequestParam(name = "id", required = false) Long orderId
+            @RequestParam(name = "id", required = false) Long orderId
             , Model model
     ) {
 
@@ -143,7 +142,7 @@ public class OrderController {
         List<ProductView> prdList = new ArrayList<>();
 
         int totalPrice = 0;
-        for(Order o : list){
+        for (Order o : list) {
             long prdId = o.getProductId();
             ProductView prd = productService.get(prdId);
             prdList.add(prd);
@@ -156,7 +155,6 @@ public class OrderController {
 
         // 사용가능한 쿠폰 조회
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
-
 
 
         // 잔여 적립금 조회
@@ -176,13 +174,25 @@ public class OrderController {
         return "user/order/pay";
     }
 
+    @PostMapping("pay")
+    public String pay(){
+
+        return "redirect:complete";
+    }
+
+
     @GetMapping("complete")
-    public String complete(){
+    public String complete() {
 
         return "user/order/complete";
     }
 
-    
+//    @PostMapping("complete")
+//    public String complete() {
+//
+//        return "user/order/complete";
+//    }
+
 
 
 }
