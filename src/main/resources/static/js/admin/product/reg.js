@@ -227,12 +227,7 @@ window.addEventListener("load", function () {
 
     };
 
-
-
-
-
-
-
+    
     imgInput.oninput = function(e) {
        var files = imgInput.files;
 
