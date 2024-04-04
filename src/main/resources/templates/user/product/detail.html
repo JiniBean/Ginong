@@ -226,66 +226,17 @@
                         </div>
                     </div>
                 </div>
-
-                <!--                <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1">-->
-                <!--                    <div class="d:flex fl-dir:row gap:3 ai:center">-->
-                <!--                        <span class="deco icon:leaf deco-size:4 icon-color:base-7">신선해요</span>-->
-                <!--                        <span class="d:none">BEST</span>-->
-                <!--                    </div>-->
-                <!--                    <div class="pos:relative d:flex fl-dir:row gap:3 ai:center">-->
-                <!--                        <span>seokhofan</span>-->
-                <!--                        <span class="bar"></span>-->
-                <!--                        <span>2024.03.22</span>-->
-                <!--                    </div>-->
-                <!--                    <div>-->
-                <!--                        <p>갓석호 추천으로 믿고 먹어봤는데 역시 맛있네요!</p>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1">-->
-                <!--                    <div class="d:flex fl-dir:row gap:3 ai:center">-->
-                <!--                        <span class="deco icon:clap deco-size:4 icon-color:base-7">추천해요</span>-->
-                <!--                        <span class="d:none">BEST</span>-->
-                <!--                    </div>-->
-                <!--                    <div class="pos:relative d:flex fl-dir:row gap:3 ai:center">-->
-                <!--                        <span>lo-seokho-ve</span>-->
-                <!--                        <span class="bar"></span>-->
-                <!--                        <span>2024.03.22</span>-->
-                <!--                    </div>-->
-                <!--                    <div>-->
-                <!--                        <p>석호 오빠 사랑해요!!!!!!!!꺅!!!</p>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <div class="bd-top bd-color:base-5 d:flex fl-dir:column gap:1">-->
-                <!--                    <div class="d:flex fl-dir:row gap:3 ai:center">-->
-                <!--                        <span class="deco icon:thumbsup deco-size:4 icon-color:base-7">최고에요</span>-->
-                <!--                        <span class="d:none">BEST</span>-->
-                <!--                    </div>-->
-                <!--                    <div class="pos:relative d:flex fl-dir:row gap:3 ai:center">-->
-                <!--                        <span>#1seokhofan</span>-->
-                <!--                        <span class="bar"></span>-->
-                <!--                        <span>2024.03.22</span>-->
-                <!--                    </div>-->
-                <!--                    <div>-->
-                <!--                        <p>젠장 또 갓석호야...난 숭배해야만 해....</p>-->
-                <!--                    </div>-->
             </div>
         </section>
+        <div class="d:flex ai:center jc:center" th:if="${reviewView == null or reviewView.isEmpty()}">
+            후기가 없습니다.
+        </div>
     </section>
 
     <!--        ============================================상품 후기 PC버전========================================-->
     <section class="d:none md:d:none md:d:flex fl-dir:column gap:20 w:10p pl:5 pr:5 pc-review">
         <h1 class="d:none">상품 PC 후기</h1>
-        <section class="d:flex fl-dir:column gap:5">
-            <h1 class="d:none">상품 간략 설명</h1>
-            <div class="d:flex jc:center ai:center">
-                <a href=""><img th:src="@{/img/Meongmeong.jpg}" style="background-size: contain" height="500px"
-                                width="500px"/></a>
-            </div>
-            <div class="d:flex fl-dir:column jc:center ai:center">
-                <span class="fw:3 fs:5">감</span>
-                <span class="fs:5">껍질에 드실 수 있는 달콤한 신선한 감</span>
-            </div>
-        </section>
+       
         <section class="d:flex fl-dir:column gap:5">
             <h1 class="d:none">사진 후기</h1>
             <div class="d:flex fl-dir:row jc:space-between">
@@ -304,7 +255,7 @@
                 </div>
             </div>
         </section>
-        <section class="d:flex fl-dir:column">
+        <section class="d:flex fl-dir:column gap:5">
             <h1 class="fs:3 fw:3">후기</h1>
             <div class="d:flex fl-dir:row jc:space-around bg-color:base-2 bd-bottom bd-color:base-3 bd-bottom-w:1 h:4 ai:center">
                 <span class="w:1p">기농태그</span>
@@ -324,37 +275,12 @@
                     </div>
                     <span class="w:3p" th:text="${r.content}">와!!! 정말 맛있어요!!! 이 갓석호가 보증합니다!!</span>
                     <span class="w:1p" th:text="${r.userName}">godseokho</span>
-                    <span class="w:1p" th:text="${r.date}">2024.03.21</span>
+                    <span class="w:1p" th:text="${#dates.format(r.date, 'yyyy.MM.dd')}">2024.03.21</span>
                 </div>
+            </div>
 
-
-<!--                <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center jc:center">-->
-<!--                    <div class="w:1p d:flex ai:center jc:center">-->
-<!--                        <span class="deco icon:leaf deco-size:4 icon-color:base-7">신선해요</span>-->
-<!--                        <span class="d:none">BEST</span>-->
-<!--                    </div>-->
-<!--                    <span class="w:3p">갓석호 추천으로 믿고 먹어봤는데 역시 맛있네요</span>-->
-<!--                    <span class="w:1p">seokhofan</span>-->
-<!--                    <span class="w:1p">2024.03.22</span>-->
-<!--                </div>-->
-<!--                <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center jc:center">-->
-<!--                    <div class="w:1p d:flex ai:center jc:center">-->
-<!--                        <span class="deco icon:clap deco-size:4 icon-color:base-7">추천해요</span>-->
-<!--                        <span class="d:none">BEST</span>-->
-<!--                    </div>-->
-<!--                    <span class="w:3p">석호 오빠 사랑해요!!!!!!!!꺅!!!</span>-->
-<!--                    <span class="w:1p">lo-seokho-ve</span>-->
-<!--                    <span class="w:1p">2024.03.22</span>-->
-<!--                </div>-->
-<!--                <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center jc:center">-->
-<!--                    <div class="w:1p d:flex ai:center jc:center">-->
-<!--                        <span class="deco icon:thumbsup deco-size:4 icon-color:base-7">최고에요</span>-->
-<!--                        <span class="d:none">BEST</span>-->
-<!--                    </div>-->
-<!--                    <span class="w:3p">젠장 또 갓석호야...난 숭배해야만 해...</span>-->
-<!--                    <span class="w:1p">#1seokhofan</span>-->
-<!--                    <span class="w:1p">2024.03.22</span>-->
-<!--                </div>-->
+            <div class="d:flex ai:center jc:center" th:if="${reviewView == null or reviewView.isEmpty()}">
+                후기가 없습니다.
             </div>
 
         </section>
@@ -374,21 +300,23 @@
 
             <div class="d:flex fl-dir:column gap:3">
                 <div class="bd-top bd-color:base-3 pt:3 pb:3">
-                    <div class="d:flex fl-dir:column gap:1">
+                    <div class="d:flex fl-dir:column gap:1" th:each="q:${qnaView}">
                         <div class="d:flex fl-dir:row jc:space-between">
-                            <span class="fw:3">답변완료</span>
+                            <span class="fw:3"
+                                  th:text="${q.answerState}">답변완료</span>
                             <div class="d:flex fl-dir:row gap:1 pos:relative">
-                                <span>***gyungin</span>
+                                <span th:text="${q.userName}">***gyungin</span>
                                 <span class="bar"></span>
-                                <span>2024-01-01</span>
+                                <span class="w:1p" th:text="${#dates.format(q.regDate, 'yyyy.MM.dd')}">2024.03.21</span>
                             </div>
                         </div>
                         <div class="fw:3">
-                            <span>[상품]</span>
-                            <span>햄버거에 넣어도 맛있을까요??</span>
+                            <span th:text="${q.qnaCategory}">[상품]</span>
+                            <span th:text="${q.content}">햄버거에 넣어도 맛있을까요??</span>
                         </div>
-                        <div class="bg-color:main-1 d:flex fl-dir:column gap:1 p:1">
-                            <span class="fw:3">기농이네 답변</span>
+                        <div class="bg-color:main-1 d:flex fl-dir:column gap:1 p:1"
+                             th:text="${q.answer}">
+                            <span class="fw:3" >기농이네 답변</span>
                             <div class="">
                                 안녕하세요.<br/>기농이네입니다.<br/>문의 주셔서
                                 감사합니다.<br/>
@@ -397,55 +325,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="bd-top bd-color:base-3 pt:3 pb:3">
-                    <div class="d:flex fl-dir:column gap:1">
-                        <div class="d:flex fl-dir:row jc:space-between">
-                            <span class="fw:3">답변완료</span>
-                            <div class="d:flex fl-dir:row gap:1 pos:relative">
-                                <span>***gyungin</span>
-                                <span class="bar"></span>
-                                <span>2024-01-01</span>
-                            </div>
-                        </div>
-                        <div class="fw:3">
-                            <span>[상품]</span>
-                            <span>햄버거에 넣어도 맛있을까요??</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bd-top bd-color:base-3 pt:3 pb:3">
-                    <div class="d:flex fl-dir:column gap:1">
-                        <div class="d:flex fl-dir:row jc:space-between">
-                            <span class="fw:3">답변완료</span>
-                            <div class="d:flex fl-dir:row gap:1 pos:relative">
-                                <span>***gyungin</span>
-                                <span class="bar"></span>
-                                <span>2024-01-01</span>
-                            </div>
-                        </div>
-                        <div class="fw:3">
-                            <span>[상품]</span>
-                            <span>햄버거에 넣어도 맛있을까요??</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bd-top bd-color:base-3 pt:3 pb:3">
-                    <div class="d:flex fl-dir:column gap:1">
-                        <div class="d:flex fl-dir:row jc:space-between">
-                            <span class="fw:3">답변완료</span>
-                            <div class="d:flex fl-dir:row gap:1 pos:relative">
-                                <span>***gyungin</span>
-                                <span class="bar"></span>
-                                <span>2024-01-01</span>
-                            </div>
-                        </div>
-                        <div class="fw:3">
-                            <span>[상품]</span>
-                            <span>햄버거에 넣어도 맛있을까요??</span>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+            <div class="d:flex ai:center jc:center" th:if="${qnaView == null or qnaView.isEmpty()}">
+                Q&A가 없습니다.
+            </div>
+
         </section>
     </section>
 
@@ -465,44 +350,31 @@
                 <span class="w:1p">답변 상태</span>
                 <span class="w:1p">등록일</span>
             </div>
-            <div class="n-expander ai:center">
+            <div class="n-expander ai:center" th:each="q:${qnaView}">
                 <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center jc:center n-expander-title">
-                    <span class="w:1p">상품</span>
-                    <span class="w:3p">햄버거에 넣어도 맛있나요.</span>
-                    <span class="w:1p">***gyungin</span>
-                    <span class="w:1p">[답변완료]</span>
-                    <span class="w:1p">2024-01-01</span>
+                    <span class="w:1p"
+                          th:text="${q.qnaCategory}">상품</span>
+                    <span class="w:3p"
+                          th:text="${q.content}">햄버거에 넣어도 맛있나요.</span>
+                    <span class="w:1p"
+                          th:text="${q.userName}">***gyungin</span>
+                    <span class="w:1p"
+                          th:text="${q.answerState}">[답변완료]</span>
+                    <span class="w:1p"
+                          th:text="${#dates.format(q.regDate, 'yyyy.MM.dd')}">2024.03.21</span>
                     <input type="checkbox" class="n-expander-trigger"/>
                 </div>
                 <div class="bg-color:main-1 d:flex fl-dir:column gap:3 p:10 n-expander-content">
                     <span class="fw:3">기농이네 답변</span>
-                    <div class="">
+                    <div class=""
+                         th:text="${q.answer}">
                         안녕하세요.<br/>기농이네입니다.<br/>문의 주셔서 감사합니다.<br/>
                         주문하시면 후회하지 않으실 겁니다.
                     </div>
                 </div>
             </div>
-            <div class="n-expander">
-                <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center n-expander-title">
-                    <span class="w:1p">배송</span>
-                    <span class="w:3p">배송 언제 오나요?</span>
-                    <span class="w:1p">***gyungin</span>
-                    <span class="w:1p">[답변대기중]</span>
-                    <span class="w:1p">2024-01-02</span>
-                    <input type="checkbox" class="n-expander-trigger"/>
-                </div>
-                <div class="bg-color:main-1 d:flex fl-dir:column gap:3 pl:10 pr:10 n-expander-content"></div>
-            </div>
-            <div class="n-expander">
-                <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center n-expander-title">
-                    <span class="w:1p">상품</span>
-                    <span class="w:3p">한 개만 안 파나요?</span>
-                    <span class="w:1p">***gyungin</span>
-                    <span class="w:1p">[답변대기중]</span>
-                    <span class="w:1p">2024-01-03</span>
-                    <input type="checkbox" class="n-expander-trigger"/>
-                </div>
-                <div class="bg-color:main-1 d:flex fl-dir:column gap:3 pl:10 pr:10 n-expander-content"></div>
+            <div class="d:flex ai:center jc:center" th:if="${qnaView == null or qnaView.isEmpty()}">
+                Q&A가 없습니다.
             </div>
         </section>
     </section>
