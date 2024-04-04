@@ -4,16 +4,14 @@ import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.Location;
+import kr.co.ginong.web.entity.order.LocationHistory;
 import kr.co.ginong.web.entity.order.Order;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -69,16 +67,20 @@ public class OrderController {
         Location location = memberService.getLocation(member.getId());
         model.addAttribute("location",location);
 
+
+
         return "user/order/info";
     }
     @PostMapping("info")
     public String info(
-            Integer quantity
+            LocationHistory locationHistory
+            ,Integer quantity
             ,Long memberId
             ,Long locationId
             ,Long productViewId
             ,Integer price
             ) {
+
         //난수 제작 :날짜+4자리난수+4자리난수
         //오늘 날짜 제작
         LocalDate currentDate = LocalDate.now();
@@ -106,9 +108,23 @@ public class OrderController {
                 .locationId(locationId)
                 .build();
 
-        long id = service.addOrder(order); //auto increment id 값
+        long orderId = service.addOrder(order); //auto increment order id 값
 
-        return "redirect:pay?id="+id;
+        //LOCATION_HISTORY 테이블에 넣기
+        locationHistory.setCategoryId(1);
+        locationHistory.setMemberId(memberId);
+        locationHistory.setOrderId(orderId);
+        locationHistory.setLocationId(locationId);
+
+
+        System.out.println(locationHistory);
+
+        memberService.addLocationHistory(locationHistory);
+
+
+
+        //pay로 order_id 를 이용하여 주소보내기
+        return "redirect:pay?id="+orderId;
     }
 
         @GetMapping("pay")
