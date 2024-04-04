@@ -34,8 +34,8 @@ window.addEventListener("load", function () {
 
         //선택한 쿠폰 보여주기
         couponBtn.textContent = e.target.textContent;
-        couponList.classList.remove("active");
         couponInput.value = e.target.dataset.id
+        couponList.classList.remove("active");
 
         //쿠폰의 데이터로 할인 가격 계산하기
         var amut = e.target.dataset.amut;
