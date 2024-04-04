@@ -20,17 +20,19 @@
     <section class= "w:10p">
         <h1 class="d:none">상품 정보</h1>
         <form method="post" enctype="multipart/form-data" class="n-form:outline-none d:flex fl-dir:column gap:8">
+            <input type="hidden" name="adminId" value="1"/>
+            <input type="hidden" name="id" th:value="${productView.id}"/>
+
             <div class="custom-dropdown">
-                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionCategory" th:if="${categoryId}" >카테고리 선택</div>
-                <ul class="options" th:value=${categoryId}>
-                    <li class="option" data-value="1" th:class="${productView.categoryId == '1' ? 'selected' : ''}">과채</li>
-                    <li class="option" data-value="2" th:class="${productView.categoryId == '2' ? 'selected' : ''}">앙념</li>
-                    <li class="option" data-value="3" th:class="${productView.categoryId == '3' ? 'selected' : ''}">가공식품</li>
-                    <!-- <li class="option" data-value="1">과채</li>
+                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionCategory" >카테고리 선택</div>
+                <ul class="options" th:value="${productView.categoryId}">
+<!--                    <li class="option" data-value="1" th:class="${productView.categoryId == '1' ? 'selected' : ''}">과채</li>-->
+<!--                    <li class="option" data-value="2" th:class="${productView.categoryId == '2' ? 'selected' : ''}">앙념</li>-->
+<!--                    <li class="option" data-value="3" th:class="${productView.categoryId == '3' ? 'selected' : ''}">가공식품</li>-->
+                    <li class="option" data-value="1">과채</li>
                     <li class="option" data-value="2">양념</li>
-                    <li class="option" data-value="3">가공식품</li> -->
+                    <li class="option" data-value="3">가공식품</li>
                 </ul>
-                <div th:text="${productView.categoryId}">klklk</div>
                 
             </div>
 
@@ -115,7 +117,8 @@
             </fieldset>
             <div>
                 <ul class="image-preview"></ul>
-                <input type="file" class="real-upload" accept="image/*" required multiple>
+<!--                <input type="file" class="real-upload" accept="image/*" name="images" required multiple>-->
+                <input type="file" class="real-upload" accept="image/*" name="images" multiple>
                 <div class="upload n-btn w:100p"><span class="text color:main-1">사진 첨부하기</span></div>
             </div>
             <div class = "display:flex flex-direction:row gap:4">
@@ -123,8 +126,8 @@
                 <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
             </div>
             <div class = "display:flex flex-direction:row w:10p gap:8">
-                <button type="button" class="n-btn n-btn-color:accent n-btn-size:2 min-w:3 w:100p">삭제</button>
-                <button type="button" class="n-btn n-btn-size:2 min-w:3 w:10p">수정</button>
+                <button type="submit" formaction="/admin/product/delete" class="n-btn n-btn-color:accent n-btn-size:2 min-w:3 w:100p">삭제</button>
+                <button type="submit" class="n-btn n-btn-size:2 min-w:3 w:10p">수정</button>
             </div>
         </form>
     </section>
