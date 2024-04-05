@@ -47,7 +47,7 @@ window.addEventListener("load", function () {
         couponList.classList.remove("active");
 
         //쿠폰의 데이터로 할인 가격 계산하기
-        var amut = e.target.dataset.amut;
+        let amut = e.target.dataset.amut;
         if (e.target.dataset.unit === '%')
             couponDisc = totalSpan.dataset.total * (amut / 100);
         else
@@ -127,8 +127,8 @@ window.addEventListener("load", function () {
     function total(couponDisc, pointDisc) {
         couponDisc = couponDisc || 0;
         pointDisc = pointDisc || 0;
-        var dlvry = dlvryAmt.dataset.cost;
-        var cost = totalSpan.dataset.total - couponDisc - pointDisc - dlvry;
+        let dlvry = dlvryAmt.dataset.cost;
+        let cost = totalSpan.dataset.total - couponDisc - pointDisc - dlvry;
 
         totalAmt.textContent = formatNumber(cost);
     }
