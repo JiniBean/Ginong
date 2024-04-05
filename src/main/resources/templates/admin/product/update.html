@@ -24,7 +24,7 @@
             <input type="hidden" name="id" th:value="${productView.id}"/>
 
             <div class="custom-dropdown">
-                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionCategory" >카테고리 선택</div>
+                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionCategory" th:text="${productView.categoryName}" >카테고리 선택</div>
                 <ul class="options" th:value="${productView.categoryId}">
 <!--                    <li class="option" data-value="1" th:class="${productView.categoryId == '1' ? 'selected' : ''}">과채</li>-->
 <!--                    <li class="option" data-value="2" th:class="${productView.categoryId == '2' ? 'selected' : ''}">앙념</li>-->
@@ -33,9 +33,7 @@
                     <li class="option" data-value="2">양념</li>
                     <li class="option" data-value="3">가공식품</li>
                 </ul>
-                
             </div>
-
             <input type="hidden" id="selectedCategory" name="categoryId" value="1">
             <fieldset class ="d:flex fl-dir:column gap:8">
                 <legend class="d:none">상품 설명 텍스트</legend>
