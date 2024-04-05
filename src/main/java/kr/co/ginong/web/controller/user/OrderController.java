@@ -92,7 +92,7 @@ public class OrderController {
         String randomNumber1 = String.format("%04d", randomNum1);
         String randomNumber2 = String.format("%04d", randomNum2);
 
-        String detailId = dateString + "-" + randomNumber1 + "-" + randomNumber2;
+        String detailId = dateString + randomNumber1 + randomNumber2;
 
 
         //상품정보id, location id order 테이블에 넣기
@@ -100,7 +100,7 @@ public class OrderController {
                 .type(1)
                 .price(price)
                 .quantity(quantity)
-                .detailId(detailId)
+                .detailId(Long.parseLong(detailId))
                 .memberId(memberId)
                 .productId(productViewId)
                 .locationId(locationId)
@@ -116,8 +116,8 @@ public class OrderController {
 
         locationService.addHistory(locationHistory);
 
-        //pay로 order_id 를 이용하여 주소보내기
-        return "redirect:pay?id=" + orderId;
+        //난수로 만든 detail_id로 pay로 주소보내기
+        return "redirect:pay?id=" + detailId;
     }
 
     @GetMapping("pay")

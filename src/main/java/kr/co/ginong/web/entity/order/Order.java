@@ -17,7 +17,7 @@ public class Order {
     private int	    type;
     private int		price;
     private int		quantity;
-    private String	detailId;
+    private long	detailId;
     private long	memberId;
     private long	productId;
     private long	locationId;
