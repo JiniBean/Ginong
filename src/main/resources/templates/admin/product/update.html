@@ -52,7 +52,7 @@
                     <div class = "d:flex fl-dir:row gap:4">
                         <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="2kg" th:value="${productView.weight}"/></div>
                         <div class="custom-dropdown">
-                            <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionWeight">중량 유형 선택</div>
+                            <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionWeight" th:text="${productView.weightCategory}">중량 유형 선택</div>
                             <ul class="options">
                                 <li class="optionWeight" data-value="1">g</li>
                                 <li class="optionWeight" data-value="2">kg</li>
@@ -68,7 +68,7 @@
                     <div class = "d:flex fl-dir:row gap:4">
                         <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="2통" th:value="${productView.quantity}"/></div>
                         <div class="custom-dropdown">
-                            <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionQuantity">개수 유형 선택</div>
+                            <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionQuantity" th:text="${productView.quantityCategory}">개수 유형 선택</div>
                             <ul class="options">
                                 <li class="optionQuantity" data-value="1">통</li>
                                 <li class="optionQuantity" data-value="2">개</li>
@@ -99,7 +99,7 @@
                 <div class="d:flex fl-dir:column gap:2">
                     <div>상품보관유형</div>
                     <div class="custom-dropdown">
-                        <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionStorage">보관 유형 선택</div>
+                        <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionStorage" th:text="${productView.storageType}">보관 유형 선택</div>
                         <ul class="options">
                             <li class="optionStorage" data-value="1">실온보관</li>
                             <li class="optionStorage" data-value="2">냉장보관</li>
