@@ -21,6 +21,7 @@ public class ProductView {
     private String  desc;
     private boolean state;
     private int     likeCount;
+    private String  categoryName;
 
     private String  categoryId;
     private String  storageType;
