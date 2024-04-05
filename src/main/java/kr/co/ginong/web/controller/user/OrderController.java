@@ -48,11 +48,6 @@ public class OrderController {
             , @RequestParam(name = "quantity") Long quantity
     ) {
 
-        //(바로 구매하기) 상품정보리스트 가져오기
-        System.out.println("=====================");
-        System.out.println("productId=" + productId);
-        System.out.println("quantity=" + quantity);
-
         //상품정보 가져오기
         ProductView productView = productService.get(productId);
         //총상품값 계산해서 넣기+++
@@ -61,7 +56,7 @@ public class OrderController {
         model.addAttribute("totalQuantity", quantity);
 
         //================================================================
-        String name = "dmswls";
+        String name = "dmswls"; //로그인 구현 전이라 박아놓은 MEMBER_NAME
 
         Member member = memberService.getMemberInfo(name);
         model.addAttribute("memberList", member);
@@ -119,9 +114,7 @@ public class OrderController {
         locationHistory.setOrderId(orderId);
         locationHistory.setLocationId(locationId);
 
-
         locationService.addHistory(locationHistory);
-
 
         //pay로 order_id 를 이용하여 주소보내기
         return "redirect:pay?id=" + orderId;

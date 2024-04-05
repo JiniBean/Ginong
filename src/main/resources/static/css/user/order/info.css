@@ -1,6 +1,16 @@
 li {
     list-style: none;
 }
+.small-button {
+    display: flex;
+    height: 26px;
+    padding: 4px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 90px;
+    align-items: center;
+    justify-content: center;
+}
 .custom-dropdown {
     position: relative;
     display: inline-block;

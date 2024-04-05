@@ -39,7 +39,7 @@ public class ProductServiceImp implements ProductService {
         // Stock stock = Stock.builder()
         //         .amount(Integer.parseInt(amount))
         //         .plma(1)
-        //         .madeDate(madeDate)
+        //         .madeDate(madeDa+te)
         //         .desc(product.getDesc())
         //         .adminId(1)
         //         .productId(product.getId())
