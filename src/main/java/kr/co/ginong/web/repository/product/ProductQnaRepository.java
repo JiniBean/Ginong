@@ -10,7 +10,7 @@ import kr.co.ginong.web.entity.product.ProductQna;
 @Mapper
 public interface ProductQnaRepository {
     List<ProductQnaView> findAll(Long productId);
-    List<ProductQnaView> findAll2(Long productId);
+    List<ProductQnaView> findByProductId(Long productId);
 
     ProductQna findById(Long id);
     

@@ -18,7 +18,7 @@
 		</where>
 	</select>
 
-	<select id="findAll2" resultType="ProductQnaView">
+	<select id="findByProductId" resultType="ProductQnaView">
 		select
 		*
 		from PRODUCT_QNA_VIEW
@@ -29,7 +29,6 @@
 		</where>
 	</select>
 
-	
 	<select id="findById" resultType="ProductQna">
 		select
 			*

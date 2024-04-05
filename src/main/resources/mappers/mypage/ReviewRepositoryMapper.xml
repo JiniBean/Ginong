@@ -18,7 +18,7 @@
 		</where>
 	</select>
 
-    <select id="findByReview" resultType="ReviewView">
+    <select id="findByProductId" resultType="ReviewView">
 		select
 			*
 		from REVIEW_VIEW

@@ -18,7 +18,7 @@ public class QnaServiceImp implements QnaService {
     @Override
     public List<ProductQnaView> getProductQna(Long productId) {
 
-        List<ProductQnaView> list = qnaRepository.findAll2(productId);
+        List<ProductQnaView> list = qnaRepository.findByProductId(productId);
 
         return list;
     }
