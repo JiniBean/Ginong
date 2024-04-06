@@ -16,6 +16,7 @@ public class Payment {
     private Date	date;
     private String 	type;
     private int	    totalAmt;
+    private boolean refundType;
     private long	memberId;
     private long	categoryId;
     private long    deliveryFeeCategoryId;

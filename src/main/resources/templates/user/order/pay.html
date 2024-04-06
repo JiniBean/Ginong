@@ -79,20 +79,15 @@
                 <div class="d:flex jc:end md:3 w:10p">
                     <div class="fw:3">보유 적립금</div>
                     <div class="fw:3 color:main-6">
-                        <span class="remain-point d:block txt-al:end"
-                              th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}"
-                              th:data-point="${point}"
-                              style="width: 80px"
-                        >0
+                        <span class="remain-point d:block txt-al:end" style="width: 80px"
+                              th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}" th:data-point="${point}">0
                         </span>
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <div class="d:flex gap:10">
                         <div class="d:flex fl:fill as:end">
-                            <input type="number"
-                                   class="point-input test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end"
-                            >
+                            <input type="number" name="point" value="" class="point-input test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end">
                             <span class="color:main-6 fw:3 as:end mb:1">P</span>
                         </div>
                         <div>
@@ -106,7 +101,6 @@
                         <div class="max-check d:none color:sub-1">보유 적립금 이상으로 사용하실 수 없습니다.</div>
                     </div>
                 </div>
-
             </section>
 
             <section class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
@@ -114,19 +108,19 @@
                 <div class="d:flex w:6 md:w:7 gap:4 jc:center gap:4 md:gap:7 fl-flow:wrap">
                     <label class="n-toggle n-toggle-type:outline-box ai:center jc:center ac:center w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
                         카카오페이
-                        <input type="radio" name="pay" id="1" value="k" class="d:none">
+                        <input type="radio" name="categoryId" value="1" class="d:none">
                     </label>
                     <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3 ">
                         네이버페이
-                        <input type="radio" name="pay" id="2" value="n" class="d:none">
+                        <input type="radio" name="categoryId"  value="2" class="d:none">
                     </label>
                     <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
                         토스페이
-                        <input type="radio" name="pay" id="3" value="t" class="d:none">
+                        <input type="radio" name="categoryId" value="3" class="d:none">
                     </label>
                     <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
                         페이코
-                        <input type="radio" name="pay" id="4" value="p" class="d:none">
+                        <input type="radio" name="categoryId" value="4" class="d:none">
                     </label>
                 </div>
             </section>
@@ -136,14 +130,14 @@
                 <div class="d:flex fl-dir:column gap:4 ml:4">
                     <div>
                         <label>
-                            <input type="radio" name="refund" id="refund-point" checked class="n-toggle n-toggle-type:dot ">
+                            <input type="radio" name="refundType" id="1" value="refund-point" checked class="n-toggle n-toggle-type:dot ">
                             적립금으로 환불
                         </label>
                         <span class="color:base-6 fs:1 md:fs:2 ml:8 ">미출고시 환불 금액의 5% 추가 적립됩니다.</span>
                     </div>
                     <div>
                         <label>
-                            <input type="radio" name="refund" id="refund-payment" class="n-toggle n-toggle-type:dot">
+                            <input type="radio" name="refund" id="2" value="refund-payment" class="n-toggle n-toggle-type:dot">
                             결제수단으로 환불
                         </label>
                     </div>
@@ -173,6 +167,7 @@
                             <div><span class="dlvry" th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}"
                                        th:data-cost="${totalPrice > 30000 ? 0 : 5000}">15,000</span> <span>원</span>
                             </div>
+                            <input type="hidden" name="deliveryFeeCategoryId" th:value="${totalPrice > 30000 ? 2 : 1}">
                         </div>
                     </div>
                 </div>
