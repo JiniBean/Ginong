@@ -22,8 +22,6 @@ window.addEventListener("load", function () {
     let dlvryAmt = paySummary.querySelector(".dlvry")                       //배송비 영역
     let totalAmt = paySummary.querySelector(".total");                      //총 결제 금액 영역
 
-
-
     let couponDisc; //쿠폰 할인 금액
     let pointDisc;  //포인트 할인 금액
 
@@ -124,13 +122,16 @@ window.addEventListener("load", function () {
     }
 
     //총 결제금액 꽂아주기
-    function total(couponDisc, pointDisc) {
-        couponDisc = couponDisc || 0;
-        pointDisc = pointDisc || 0;
+    function total(couponDisc= 0, pointDisc= 0) {
+
         let dlvry = dlvryAmt.dataset.cost;
         let cost = totalSpan.dataset.total - couponDisc - pointDisc - dlvry;
 
         totalAmt.textContent = formatNumber(cost);
+        let totalInput = paySummary.querySelector(".total-input");
+        totalInput.value = cost;
+
     }
+
 
 });

@@ -103,7 +103,7 @@
                 </div>
             </section>
 
-            <section class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
+            <section id="test" class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3 w:10p">결제 수단</h1>
                 <div class="d:flex w:6 md:w:7 gap:4 jc:center gap:4 md:gap:7 fl-flow:wrap">
                     <label class="n-toggle n-toggle-type:outline-box ai:center jc:center ac:center w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
@@ -130,14 +130,14 @@
                 <div class="d:flex fl-dir:column gap:4 ml:4">
                     <div>
                         <label>
-                            <input type="radio" name="refundType" id="1" value="refund-point" checked class="n-toggle n-toggle-type:dot ">
+                            <input type="radio" name="refundType" id="1" value="false" checked class="n-toggle n-toggle-type:dot ">
                             적립금으로 환불
                         </label>
                         <span class="color:base-6 fs:1 md:fs:2 ml:8 ">미출고시 환불 금액의 5% 추가 적립됩니다.</span>
                     </div>
                     <div>
                         <label>
-                            <input type="radio" name="refund" id="2" value="refund-payment" class="n-toggle n-toggle-type:dot">
+                            <input type="radio" name="refundType" id="2" value="true" class="n-toggle n-toggle-type:dot">
                             결제수단으로 환불
                         </label>
                     </div>
@@ -177,6 +177,7 @@
                     <div>
                         <span class="total fs:3 md:fs:4 fw:3 color:main-6" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')}">15,000</span><span
                             class="fs:3 md:fs:4 fw:3"> 원</span>
+                        <input type="hidden" name="totalAmt" class="total-input">
                     </div>
                 </div>
             </section>

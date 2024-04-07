@@ -6,6 +6,7 @@ import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.entity.order.LocationHistory;
 import kr.co.ginong.web.entity.order.Order;
+import kr.co.ginong.web.entity.order.Payment;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,12 +118,12 @@ public class OrderController {
         locationService.addHistory(locationHistory);
 
         //난수로 만든 detail_id로 pay로 주소보내기
-        return "redirect:pay?id=" + detailId;
+        return "redirect:pay?orderId=" + detailId;
     }
 
     @GetMapping("pay")
     public String pay(
-            @RequestParam(name = "id", required = false) Long orderId
+            @RequestParam(name = "orderId", required = false) Long orderId
             , Model model
     ) {
 
@@ -130,7 +131,6 @@ public class OrderController {
         List<Order> list = service.get(orderId);
         Order order = list.get(0);
         Long memberId = order.getMemberId();
-
 
         List<ProductView> prdList = new ArrayList<>();
 
@@ -149,10 +149,8 @@ public class OrderController {
         // 사용가능한 쿠폰 조회
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
 
-
         // 잔여 적립금 조회
         int point = pointService.getAvailPont(memberId);
-        System.out.println(point);
 
         // 모델
         model.addAttribute("list", list);
@@ -161,14 +159,26 @@ public class OrderController {
         model.addAttribute("point", point);
         model.addAttribute("couponList", couponList);
 
-        System.out.println("counponList = " + couponList.toString());
-        System.out.println("counponSize = " + couponList.size());
-
         return "user/order/pay";
     }
 
     @PostMapping("pay")
-    public String pay(){
+    public String pay(
+            Payment payment,
+            Long couponId,
+            Integer point
+    ){
+
+        //memberID setting (추후 세션으로 바뀔지도)
+        Long orderId = payment.getOrderId();
+        Order order = service.get(orderId).get(0);
+        Long memberId = order.getMemberId();
+        payment.setMemberId(memberId);
+
+        //couponHistory update
+
+        //pointHistory update
+
 
         return "redirect:complete";
     }
@@ -179,12 +189,6 @@ public class OrderController {
 
         return "user/order/complete";
     }
-
-//    @PostMapping("complete")
-//    public String complete() {
-//
-//        return "user/order/complete";
-//    }
 
 
 

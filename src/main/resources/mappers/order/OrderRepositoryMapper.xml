@@ -19,7 +19,7 @@
 		select
 			*
 		from `ORDER`
-		where id = #{id}
+		where DETAIL_ID = #{id}
 	</select>
 
 	<insert id="save" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
