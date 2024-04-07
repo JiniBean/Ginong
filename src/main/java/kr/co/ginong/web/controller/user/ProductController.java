@@ -71,6 +71,7 @@ public class ProductController {
     public String detail(@RequestParam(value = "id") Long productId
                          ,Model model) {
 
+        System.out.println("productId" + productId);
 
         ProductView productView = service.get(productId);
         List<ReviewView> reviewView = reviewService.getProductReviews(productId);

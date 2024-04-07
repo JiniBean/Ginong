@@ -2,25 +2,25 @@
 window.addEventListener("load", function(){
 
     /*orderInfo section*/
-    var orderInfo = this.document.querySelector("#order-info");
+    let orderInfo = this.document.querySelector("#order-info");
 
     /*증감버튼영역*/
-    var numberBox = orderInfo.querySelector(".numberBox");
-    var quantityInput = numberBox.querySelector(".quantity-input");
+    let numberBox = orderInfo.querySelector(".numberBox");
+    let quantityInput = numberBox.querySelector(".quantity-input");
 
     /*구매총합영역*/
-    var total = this.document.querySelector(".total");
+    let total = this.document.querySelector(".total");
 
     //총 수량
-    var totalQuantity = total.querySelector(".total-quantity");
+    let totalQuantity = total.querySelector(".total-quantity");
 
     //상품 가격
-    var productPriceValue= this.document.querySelector(".product-price").value;
-    var productPrice = parseInt(productPriceValue);
+    let productPriceValue= this.document.querySelector(".product-price").value;
+    let productPrice = parseInt(productPriceValue);
 
     //총 금액
-    var totalPrice = total.querySelector(".total-price");
-    var totalPriceInput = total.querySelector(".total-price-input");
+    let totalPrice = total.querySelector(".total-price");
+    let totalPriceInput = total.querySelector(".total-price-input");
 
     /*증감버튼 계산*/
     numberBox.onclick = function (e) {
@@ -31,20 +31,20 @@ window.addEventListener("load", function(){
             return;
 
         //수량 -> int
-        var quantity = parseInt(quantityInput.value);
+        let quantity = parseInt(quantityInput.value);
 
         //클릭한 버튼 구별
-        var state = e.target.dataset.btn;
+        let state = e.target.dataset.btn;
 
         switch (state) {
             case 'minus' :
-                if(quantity==1)
-                    return;
+                if(quantity<=1)
+                     return;
                 quantityInput.value = quantity-1;
                 break;
             case 'plus' :
-                if(quantity==10) //최대 재고수량까지(나중에 재고값 가져오기)
-                    return;
+                if(quantity>=10) //최대 재고수량까지(나중에 재고값 가져오기)
+                     return;
                 quantityInput.value = quantity+1;
                 break;
         }
@@ -53,64 +53,61 @@ window.addEventListener("load", function(){
         totalQuantity.innerText = quantityInput.value;
 
         // 총금액(수량*상품가격)
-        var totalSum = quantityInput.value * productPrice;
+
+        let totalSum = quantityInput.value * productPrice;
         totalPrice.innerText=totalSum.toLocaleString('ko-KR')+"원";
         totalPriceInput.value=totalSum;
 
     }
+
+    quantityInput.oninput = function (e){
+        console.log("ddd");
+    };
+
 
 });
 
 /* 모바일 버전 하단 navi */
 window.addEventListener("load", function(){
 
-    var orderInfo = this.document.querySelector("#order-info");
+    //popup open
+    let navi = this.document.querySelector(".navi");
 
     //popup close
-    var close = orderInfo.getElementsByClassName("close")[0];
+    let close = orderInfo.getElementsByClassName("close")[0];
 
-    //popup open
-    var navi = this.document.querySelector(".navi");
+    let orderInfo = this.document.querySelector("#order-info");
+    let productId = navi.querySelector(".product-id").value;
+    let numberBox = orderInfo.querySelector(".numberBox");
+    let quantityInput = numberBox.querySelector(".quantity-input");
 
     navi.onclick = function(e){
         if(e.target.tagName!='BUTTON')
             return;
 
-        if(!orderInfo.classList.contains("on")){
+        if(!orderInfo.classList.contains("on")) {
             orderInfo.classList.remove("d:none");
             orderInfo.classList.add("on");
-        }else{
-            var state = e.target.dataset.btn;
+            return;
+        }
 
-            switch (state) {
-                case 'cart' :
-                    break;
-                case 'order' :
-                    var url = new URL ("/user/order/info", location.origin);
+        let state = e.target.dataset.btn;
 
-                    var productId = navi.querySelector(".product-id").value;
-                    var numberBox = orderInfo.querySelector(".numberBox");
-                    var quantityInput = numberBox.querySelector(".quantity-input").value;
-                    var quantity = parseInt(quantityInput);
+        switch (state) {
+            case 'cart' :
+                //구현해야함
+                break;
+            case 'order' :
+                let url = new URL ("/user/order/info", location.origin);
 
-                    url = url + "?productId=" + productId
-                              + "&quantity=" + quantity;
+                let quantity = parseInt(quantityInput.value);
 
-                    console.log(url);
+                url = url + "?productId=" + productId
+                          + "&quantity=" + quantity;
 
-                    location.href = url.toString();
+                location.href = url.toString();
 
-                    // fetch('/user/order/info',{
-                    //     method:'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(params),
-                    //     redirect:'manual'
-                    // });
-
-                    break;
-            }
+                break;
         }
 
     }
@@ -121,60 +118,23 @@ window.addEventListener("load", function(){
         orderInfo.classList.remove("on");
     }
 
-
-
 });
 
 
-// 살려줘요
-// window.addEventListener("load", function() {
-//     var orderInfo = this.document.querySelector("#l-order-info");
-//     var purchase = document.querySelector("#purchase");
-//
-//     purchase.onclick = function (e){
-//         if(e.target.tagName != 'BUTTON')
-//             return;
-//
-//
-//             case 'cart':
-//                 console.log("카트에 상품을 추가합니다.");
-//                 break;
-//
-//             case 'order':
-//                 var url = new URL("/user/order/info",location.origin);
-//
-//                 var productId =  여기 뭐주면 좋을까요.querySelector(".l-product-id").value;
-//                 var numberBox = orderInfo.querySelector(".l-numberBox");
-//                 var quantityInput = numberBox.querySelector(".l-quantity-input").value;
-//                 var quantity = parseInt(quantityInput);
-//
-//                 url.searchParams.append("productId", productId);
-//                 url.searchParams.append("quantity", quantity);
-//
-//
-//                 console.log(url.href);
-//
-//                 break;
-//         }
-//
-//     }
-//
-// });
-
 // 구매하기 및 장바구니 PC 버전
 window.addEventListener("load", function() {
-    var payBox = document.querySelector(".l-pay-box");
-    var orderBtn = payBox.querySelector(".l-order");
-    var cartBtn = payBox.querySelector(".l-cart");
-    var productId = payBox.querySelector(".l-product-id").value;
+    let payBox = document.querySelector(".l-pay-box");
+    let orderBtn = payBox.querySelector(".l-order");
+    let cartBtn = payBox.querySelector(".l-cart");
+    let productId = payBox.querySelector(".l-product-id").value;
 
-    var quantityInput =this.document.getElementsByClassName("l-quantity-input")[0];
+    let quantityInput =this.document.getElementsByClassName("l-quantity-input")[0];
 
     orderBtn.onclick = function (){
 
-        var quantity = parseInt(quantityInput.value);
+        let quantity = parseInt(quantityInput.value);
 
-        var url = new URL ("/user/order/info", location.origin);
+        let url = new URL ("/user/order/info", location.origin);
 
         url = url + "?productId=" + productId + "&quantity=" + quantity;
 
@@ -188,25 +148,25 @@ window.addEventListener("load", function() {
 window.addEventListener("load", function(){
 
     /* l-order-info section */
-    var orderInfo = this.document.querySelector("#l-order-info");
+    let orderInfo = this.document.querySelector("#l-order-info");
 
     /*증감버튼영역*/
-    var numberBox = orderInfo.querySelector(".l-numberBox");
-    var quantityInput = numberBox.querySelector(".l-quantity-input");
+    let numberBox = orderInfo.querySelector(".l-numberBox");
+    let quantityInput = numberBox.querySelector(".l-quantity-input");
 
     /*구매총합영역*/
-    var total = orderInfo.querySelector(".l-total");
+    let total = orderInfo.querySelector(".l-total");
 
     //총 수량
-    var totalQuantity = total.querySelector(".l-total-quantity");
+    let totalQuantity = total.querySelector(".l-total-quantity");
 
     //상품 가격
-    var productPriceValue= this.document.querySelector(".l-price").value;
-    var productPrice = parseInt(productPriceValue);
+    let productPriceValue= this.document.querySelector(".l-price").value;
+    let productPrice = parseInt(productPriceValue);
 
     //총 금액
-    var totalPrice = total.querySelector(".l-total-price");
-    var totalPriceInput = total.querySelector(".l-total-price-input");
+    let totalPrice = total.querySelector(".l-total-price");
+    let totalPriceInput = total.querySelector(".l-total-price-input");
 
     numberBox.onclick = function (e) {
 
@@ -216,19 +176,19 @@ window.addEventListener("load", function(){
             return;
 
         //수량 -> int
-        var quantity = parseInt(quantityInput.value);
+        let quantity = parseInt(quantityInput.value);
 
         //클릭한 버튼 구별
-        var state = e.target.dataset.btn;
+        let state = e.target.dataset.btn;
 
         switch (state) {
             case 'minus' :
-                if(quantity==1)
+                if(quantity<=1)
                     return;
                 quantityInput.value = quantity-1;
                 break;
             case 'plus' :
-                if(quantity==10) //최대 재고수량까지(나중에 재고값 가져오기)
+                if(quantity>=10) //최대 재고수량까지(나중에 재고값 가져오기)
                     return;
                 quantityInput.value = quantity+1;
                 break;
@@ -238,7 +198,7 @@ window.addEventListener("load", function(){
         totalQuantity.innerText = quantityInput.value;
 
         // 총금액(수량*상품가격)
-        var totalSum = quantityInput.value * productPrice;
+        let totalSum = quantityInput.value * productPrice;
         totalPrice.innerText=totalSum.toLocaleString('ko-KR')+"원";
         totalPriceInput.value=totalSum;
 
@@ -251,13 +211,13 @@ window.addEventListener("load", function(){
 /* pc 버전 하단 navi */
 window.addEventListener("load", function(){
 
-    var orderInfo = this.document.querySelector("#order-info");
+    let orderInfo = this.document.querySelector("#order-info");
 
     //popup close
-    var close = orderInfo.getElementsByClassName("close")[0];
+    let close = orderInfo.getElementsByClassName("close")[0];
 
     //popup open
-    var navi = this.document.querySelector(".navi");
+    let navi = this.document.querySelector(".navi");
 
     navi.onclick = function(e){
         if(e.target.tagName!='BUTTON')
@@ -267,18 +227,18 @@ window.addEventListener("load", function(){
             orderInfo.classList.remove("d:none");
             orderInfo.classList.add("on");
         }else{
-            var state = e.target.dataset.btn;
+            let state = e.target.dataset.btn;
 
             switch (state) {
                 case 'cart' :
                     break;
                 case 'order' :
-                    var url = new URL ("/user/order/info", location.origin);
+                    let url = new URL ("/user/order/info", location.origin);
 
-                    var productId = navi.querySelector(".product-id").value;
-                    var numberBox = orderInfo.querySelector(".numberBox");
-                    var quantityInput = numberBox.querySelector(".quantity-input").value;
-                    var quantity = parseInt(quantityInput);
+                    let productId = navi.querySelector(".product-id").value;
+                    let numberBox = orderInfo.querySelector(".numberBox");
+                    let quantityInput = numberBox.querySelector(".quantity-input").value;
+                    let quantity = parseInt(quantityInput);
 
                     url = url + "?productId=" + productId
                         + "&quantity=" + quantity;
@@ -286,15 +246,6 @@ window.addEventListener("load", function(){
                     console.log(url);
 
                     location.href = url.toString();
-
-                    // fetch('/user/order/info',{
-                    //     method:'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(params),
-                    //     redirect:'manual'
-                    // });
 
                     break;
             }
@@ -320,12 +271,12 @@ window.addEventListener("load", function(e){
 
     e.preventDefault();
 
-    var payBox = this.document.querySelector('.pay-box');
-    var icon = payBox.querySelector('.icon');
+    let payBox = this.document.querySelector('.pay-box');
+    let icon = payBox.querySelector('.icon');
 
     icon.onclick = function(){
 
-        var isClick = icon.classList.contains('icon:heart_fill')
+        let isClick = icon.classList.contains('icon:heart_fill')
 
         if(!isClick)
             icon.classList.replace('icon:heart','icon:heart_fill');
