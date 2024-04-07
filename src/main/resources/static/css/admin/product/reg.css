@@ -1,15 +1,3 @@
-li {
-    list-style: none;
-}
-
-img {
-    width: 90px;
-    height: 90px;
-}
-
-.real-upload {
-    display: none;
-}
 
 .upload {
     position: relative;
@@ -52,7 +40,7 @@ img {
     display: inline-block;
 }
 /*처음 클릭하는 곳 스타일링*/
-.selected-option {
+.selected-option{
     background-color: #ffffff;
     padding: 8px 16px;
     border: 1px solid var(--color-main-5);
@@ -89,28 +77,37 @@ img {
 .option:hover {
     background-color: var(--color-base-2); /*버튼 마우스오버 시 색상 지정*/
 }
-.optionWeight {
-    padding: 8px 16px;
-    cursor: pointer;
+.option-category-list {
+    display: none;
 }
 
-.optionWeight:hover {
-    background-color: var(--color-base-2); /*버튼 마우스오버 시 색상 지정*/
+/* 표시될 상태 */
+.option-category-list.active {
+    display: block;
 }
-.optionQuantity {
-    padding: 8px 16px;
-    cursor: pointer;
-}
-
-.optionQuantity:hover {
-    background-color: var(--color-base-2); /*버튼 마우스오버 시 색상 지정*/
+.option-weight-list {
+    display: none;
 }
 
-.optionStorage {
-    padding: 8px 16px;
-    cursor: pointer;
+/* 표시될 상태 */
+.option-weight-list.active {
+    display: block;
 }
 
-.optionStorage:hover {
-    background-color: var(--color-base-2); /*버튼 마우스오버 시 색상 지정*/
+.option-quantity-list {
+    display: none;
+}
+
+/* 표시될 상태 */
+.option-quantity-list.active {
+    display: block;
+}
+
+.option-storage-list {
+    display: none;
+}
+
+/* 표시될 상태 */
+.option-storage-list.active {
+    display: block;
 }
