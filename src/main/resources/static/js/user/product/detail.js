@@ -125,6 +125,7 @@ window.addEventListener("load", function(){
 window.addEventListener("load", function() {
     let payBox = document.querySelector(".l-pay-box");
     let orderBtn = payBox.querySelector(".l-order");
+    /*cartBtn 추후 구현 예정*/
     let cartBtn = payBox.querySelector(".l-cart");
     let productId = payBox.querySelector(".l-product-id").value;
 
