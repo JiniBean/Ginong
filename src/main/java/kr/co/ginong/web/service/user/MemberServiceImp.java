@@ -15,16 +15,17 @@ public class MemberServiceImp implements MemberService{
 
 
     @Override
-    public Member getMemberInfo(String name) {
-        Member member = repository.findByUserName(name);
+    public Member get(String name) {
+        Member member = repository.find(name);
         return member;
     }
 
     @Override
-    public Location getLocation(long id) {
-        Location location = repository.findById(id);
-        return location;
+    public Member get(Long id) {
+        Member member = repository.find(id);
+        return member;
     }
+
 
 
 }

@@ -14,36 +14,40 @@
 
     <main layout:fragment="main" class="d:flex fl-dir:column gap:10 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 pt:10 md:pt:0">
         <h1 class="d:none md:d:flex ai:center jc:center h:4 w:10p fs:5 fw:3">주문하기</h1>
+
         <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
-            <h1 class="d:none">상품 영역</h1>
-            <div class="d:flex w:10p gap:3">
-                <div>
-                    <a href="">
-                        <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지"
-                             class="bd-radius:1"/>
-                    </a>
-                </div>
-                <div class="d:flex fl-dir:column gap:3">
+            <h1 class="d:none">주문 상품 목록</h1>
+            <section class="w:10p d:flex fl-dir:column gap:4 md:gap:8 " th:each=" list : ${list}">
+                <h1 class="d:none">상품 영역</h1>
+                <!--상품 카드 한개-->
+                <div class="d:flex w:10p gap:3" th:each=" p : ${prdList}">
                     <div>
                         <a href="">
-                            <span th:text="${productView.name}">텃밭에서 키우고 자란 아주 매우 딜리셔스한 흙 당근<span th:text="${productView.quantity}">2</span><span th:text="${productView.quantityCategory}">단위</span></span>
+                            <img th:src="@{/img/Meongmeong.jpg}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:1"/>
                         </a>
                     </div>
-                    <div class="pos:relative gap:3 d:flex ai:center fl-dir:row">
-                        <span th:text="${#numbers.formatInteger(productView.price,3,'COMMA') + '원'}">2500원</span>
-                        <span class="bar"></span>
-                        <span th:text="${totalQuantity + '개'}" >2개</span>
-
+                    <div class="d:flex fl-dir:column gap:3">
+                        <div>
+                            <a href="">
+                                <span th:text="${p.name + ', ' + p.quantity + p.quantityCategory + '(' + p.weight + p.weightCategory + ')'}">텃밭 흙 당근,2개입</span>
+                            </a>
+                        </div>
+                        <div class="d:flex jc:space-between w:10p">
+                            <div th:text="${#numbers.formatInteger(p.price,3,'COMMA') + '원'}">2500원</div>
+                            <div th:text="${list.quantity + '개'}">2개</div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-        <div class="w:10p d:flex jc:end gap:3">
-            <span class="fw:3">총 상품 금액</span>
-            <span class="color:main-6 fw:3" th:text="${#numbers.formatInteger(productView.price*totalQuantity,3,'COMMA')}">15,000</span>
-            <span class="fw:3">원</span>
-        </div>
-        </section>
+                </div>
+                <div class="w:10p d:flex jc:end gap:3">
+                    <span class="fw:3">총 상품 금액</span>
+                    <span id="total-price" class="color:main-6 fw:3"
+                          th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}"
+                          th:data-total="${totalPrice}">
+                    15,000</span>
+                </div>
+            </section>
+
         <form method="post" class="d:flex fl-dir:column gap:10 md:gap:20">
             <section class="d:flex fl-dir:column gap:2 md:gap:10 w:10p">
                 <div class="d:flex fl-dir:column gap:2 md:gap:3">
@@ -53,12 +57,12 @@
 
                 <label class="fs:2 md:fs:3">
                     보내시는 분
-                    <input type="text" placeholder="이름" th:value="${memberList.name}"
+                    <input type="text" placeholder="이름" th:value="${member.name}"
                            class="n-textbox  n-textbox-type:underline n-textbox-label:top"/>
                 </label>
                 <label class="fs:2 md:fs:3">
                     연락처
-                    <input type="text" placeholder="010-1234-6578" th:value="${memberList.phone}"
+                    <input type="text" placeholder="010-1234-6578" th:value="${member.phone}"
                            class="n-textbox  n-textbox-type:underline n-textbox-label:top"/>
                 </label>
             </section>
@@ -113,10 +117,8 @@
             <div class="d:flex gap:8 md:gap:10 w:10p">
                 <button class="n-btn n-btn:outline n-btn-size:2 fl-grow:1 fw:3">취소</button>
                 <button class="n-btn n-btn-size:2 fl-grow:1 fw:3">주문하기</button>
-                <input type = "hidden" th:value="${totalQuantity}" name="quantity">
-                <input type = "hidden" th:value="${memberList.id}" name="memberId">
-                <input type = "hidden" th:value="${productView.id}" name="productViewId">
-                <input type = "hidden" th:value="${productView.price}" name="price">
+                <input type = "hidden" th:value="${p.id}" name="productViewId">
+                <input type = "hidden" th:value="${p.price}" name="price">
                 <input type = "hidden" th:value="${location.id}" name="locationId">
                 <input type = "hidden" th:value="${location.zipCode}" name="zipCode">
                 <input type = "hidden" th:value="${location.addr1}" name="addr1">

@@ -2,7 +2,7 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="admin/inc/layout-back">
+      layout:decorate="admin/inc/layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +33,14 @@
                     <button class="n-btn fw:3">숨김</button>
                 </div>
             </div>
+        <div class="d:flex">
+            <h1 class="d:none">상품추가</h1>
+            <a class="fl-grow:1 d:flex" th:href="@{/admin/product/reg}">
+                <button class="fl-grow:1 n-btn n-btn:outline border-color:base-4 w:10p ml:7 h:4">
+                    <span class="icon icon:plus"></span>
+                </button>
+            </a>
+        </div>
     </section>
     <section class="d:flex fl-dir:column gap:4 w:10p">
         <h1 class="d:none">상품카드 목록</h1>
@@ -60,14 +68,7 @@
             </div>
         </div>
        
-        <div class="d:flex">
-            <h1 class="d:none">상품추가</h1>
-            <a class="fl-grow:1 d:flex" th:href="@{/admin/product/reg}">
-                <button class="fl-grow:1 n-btn n-btn:outline border-color:base-4 w:10p ml:7 h:4">
-                    <span class="icon icon:plus"></span>
-                </button>
-            </a>
-        </div>
+
 
         
     </section>

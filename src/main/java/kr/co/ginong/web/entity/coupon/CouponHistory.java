@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CouponHistory {
     private long id;
+    private int usedAmt;
     private Date issuedDate;
     private Date usedDate;
     private long couponId;

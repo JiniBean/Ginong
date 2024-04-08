@@ -3,17 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.member.MemberRepository">
-    <select id="findByUserName" resultType="Member">
+
+    <select id="find" resultType="Member">
         select * from MEMBER
-        where USER_NAME = #{name}
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                USER_NAME = #{name}
+            </if>
+        </where>
     </select>
 
-    <select id="findById" resultType="Location">
-        select
-        *
-        from LOCATION
-        where MEMBER_ID = #{id}
-        and STATE = 1
-    </select>
 
 </mapper>

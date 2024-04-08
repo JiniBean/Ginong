@@ -17,6 +17,7 @@ public class CouponHistoryView {
     private Date    usedDate;
     private long    memberId;
     private long    couponId;
+    private int     usedAmt;
     private String  categoryName;
     private String  couponName;
     private long    discountAmount;

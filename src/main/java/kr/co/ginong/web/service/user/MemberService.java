@@ -6,9 +6,9 @@ import kr.co.ginong.web.entity.order.LocationHistory;
 
 public interface MemberService {
 
-    Member getMemberInfo(String name);
+    Member get(String name);
+    Member get(Long id);
 
-    Location getLocation(long id);
 
 
 }
