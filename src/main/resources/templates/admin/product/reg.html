@@ -14,13 +14,15 @@
 
 </head>
 <body>
-<main layout:fragment="main" class= "d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pl:4 pr:4 md:pl:0 md:pr:0" >
-    <section class= "w:10p" id="reg-form">
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pl:4 pr:4 md:pl:0 md:pr:0">
+    <section class="w:10p" id="reg-form">
         <h1 class="d:none">상품 정보</h1>
         <form method="post" enctype="multipart/form-data" class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div id="category">
                 <div class="custom-dropdown">
-                    <div class="selected-option selected-option-category deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">카테고리 선택</div>
+                    <div class="selected-option selected-option-category icon-size:1 deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                        카테고리 선택
+                    </div>
                     <ul class="options option-category-list">
                         <li class="option option-category" data-value="1">과채</li>
                         <li class="option option-category" data-value="2">앙념</li>
@@ -29,7 +31,7 @@
                 </div>
                 <input type="hidden" class="selected-category" name="categoryId" value="1">
             </div>
-            <fieldset class ="d:flex fl-dir:column gap:8">
+            <fieldset class="d:flex fl-dir:column gap:8">
                 <legend class="d:none">상품 설명 텍스트</legend>
 
 
@@ -43,11 +45,15 @@
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <div>중량</div>
-                    <div class = "d:flex fl-dir:row gap:4">
-                        <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="33333"/></div>
+                    <div class="d:flex fl-dir:row gap:4">
+                        <div class="w:10p">
+                            <input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="33333"/>
+                        </div>
                         <div id="weight">
                             <div class="custom-dropdown">
-                                <div class="selected-option selected-option-weight deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">중량 선택</div>
+                                <div class="selected-option icon-size:1 selected-option-weight deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                                    중량 선택
+                                </div>
                                 <ul class="options option-weight-list">
                                     <li class="option option-weight" data-value="1">g</li>
                                     <li class="option option-weight" data-value="2">kg</li>
@@ -61,11 +67,15 @@
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <div>개수</div>
-                    <div class = "d:flex fl-dir:row gap:4">
-                        <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="quantity" value="44444"/></div>
+                    <div class="d:flex fl-dir:row gap:4">
+                        <div class="w:10p">
+                            <input type="text" class="n-textbox n-textbox-type:underline" name="quantity" value="44444"/>
+                        </div>
                         <div id="quantity">
                             <div class="custom-dropdown">
-                                <div class="selected-option selected-option-quantity deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">개수 단위 선택</div>
+                                <div class="selected-option icon-size:1 selected-option-quantity deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                                    개수 단위 선택
+                                </div>
                                 <ul class="options option-quantity-list">
                                     <li class="option option-quantity" data-value="1">통</li>
                                     <li class="option option-quantity" data-value="2">개</li>
@@ -88,7 +98,9 @@
                     <div>상품보관유형</div>
                     <div id="storage">
                         <div class="custom-dropdown">
-                            <div class="selected-option selected-option-storage deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">개수 단위 선택</div>
+                            <div class="selected-option icon-size:1 selected-option-storage deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                                개수 단위 선택
+                            </div>
                             <ul class="options option-storage-list">
                                 <li class="option option-storage" data-value="1">실온보관</li>
                                 <li class="option option-storage" data-value="2">냉장보관</li>
@@ -117,11 +129,11 @@
                 </div>
             </div>
 
-            <div class = "display:flex flex-direction:row gap:4">
+            <div class="display:flex flex-direction:row gap:4">
                 <span class="d:flex ai:center">상태</span>
                 <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
             </div>
-            <div class = "display:flex flex-direction:row w:10p gap:8">
+            <div class="display:flex flex-direction:row w:10p gap:8">
                 <button type="button" class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">임시저장</button>
                 <button type="submit" class="n-btn n-btn-size:2 min-w:3 w:10p">저장</button>
             </div>

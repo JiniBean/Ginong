@@ -1,15 +1,15 @@
 // 생성자 및 add 함수 추가
 
-function InputFileList(input){
+function InputFileList(input) {
     this.input = input;
 }
 
 InputFileList.prototype = {
-    add:function (file){
+    add: function (file) {
         var dt = new DataTransfer();
         var files = this.input.files;
 
-        for(var existingFile of files)
+        for (var existingFile of files)
             dt.items.add(existingFile);
 
         //추가로 담는 파일
@@ -163,18 +163,18 @@ window.addEventListener("load", function () {
     var upload = regForm.querySelector(".upload");
 
     // 드래그
-    preview.ondragenter = function (e){
+    preview.ondragenter = function (e) {
         preview.classList.add("bd");
         preview.classList.add("bd-color:main-6");
     };
 
-    preview.ondragleave = function (e){
+    preview.ondragleave = function (e) {
         preview.classList.remove("bd");
         preview.classList.remove("bd-color:main-6");
         preview.classList.remove("invalid");
     };
 
-    preview.ondragover = function (e){
+    preview.ondragover = function (e) {
         e.stopPropagation();
         e.preventDefault();
 
@@ -188,7 +188,7 @@ window.addEventListener("load", function () {
             preview.classList.remove("invalid");
     };
 
-    preview.ondrop = function (e){
+    preview.ondrop = function (e) {
         e.stopPropagation();
         e.preventDefault();
         preview.classList.remove("bd");
@@ -199,18 +199,18 @@ window.addEventListener("load", function () {
 
         new InputFileList(imgInput).add(file);
 
-        if (file.type.indexOf("image/")!==0){
+        if (file.type.indexOf("image/") !== 0) {
             alert("이미지만 업로드 할 수 있습니다.")
             return;
         } // 타입 제약
 
-        if (file.size > 100 * 1024){
+        if (file.size > 100 * 1024) {
             alert("크기는 100KB 이하만 얿로드 할 수 있습니다.")
             return;
         }// 크기 제약
 
         var reader = new FileReader();
-        reader.onload = function (e){
+        reader.onload = function (e) {
             var img = document.createElement("img");
             img.src = e.target.result;
             // previewPanner = appendChild();
@@ -218,7 +218,7 @@ window.addEventListener("load", function () {
 
             setTimeout(() => {
                 img.classList.add("slide-in");
-            },10);
+            }, 10);
         };
         reader.readAsDataURL(file);
 
@@ -227,24 +227,24 @@ window.addEventListener("load", function () {
     };
 
 
-    imgInput.oninput = function(e) {
-       var files = imgInput.files;
+    imgInput.oninput = function (e) {
+        var files = imgInput.files;
 
-       for (file of files) {
+        for (file of files) {
             if (file.type.indexOf("image/") != 0) {// file type 제약
                 alert("이미지 파일만 업로드 할 수 있습니다.");
-                return ;
+                return;
             }
 
-            if (file.size > 3000*1024) {// file size 제약
+            if (file.size > 3000 * 1024) {// file size 제약
                 alert("3MB보다 크기가 작은 파일만 업로드 할 수 있습니다.");
-                return ;
+                return;
             }
 
             // 입력상자에 있는 파일을 읽어들이는 것
             var reader = new FileReader();
-            reader.onload = function(e) {
-            
+            reader.onload = function (e) {
+
                 var img = document.createElement("img");
                 img.src = e.target.result;
 
@@ -265,13 +265,131 @@ window.addEventListener("load", function () {
 });
 
 
+// 임시저장 쿠키
+class Cookie {
+    constructor() {
+        this.map = {};
+        console.log("document.cookie = " + document.cookie);
+        console.log("document.cookie.split(\";\") = " + document.cookie.split(";"));
+
+        // 쿠키가 존재하는 경우에만 파싱하여 map에 저장
+        if (document.cookie) {
+            const cookieDecoded = decodeURIComponent(document.cookie);
+            const cookieTokens = cookieDecoded.split(";");
+
+            for (const c of cookieTokens) {
+                const tmp = c.split("=");
+                const key = tmp[0].trim();
+                const value = JSON.parse(tmp[1]);
+
+                this.map[key] = value;
+            }
+        }
+
+        // product 속성이 없으면 빈 배열로 초기화
+        if (!this.map["product"]) {
+            this.map["product"] = [];
+        }
+
+    }
+
+    get(name) {
+        return this.map[name];
+    }
+
+    save() {
+        const list = this.map["product"];
+        const size = list.length;
+        const lastIndex = size - 1;
+
+        let str = "[";
+        for (const m of list) {
+            str += JSON.stringify(m);
+            if (m !== list[lastIndex])
+                str += ",";
+        }
+        str += "]";
+
+        const encoded = encodeURIComponent(str);
+        document.cookie = `product=${encoded}; path=/;`;
+    }
+
+    remove(name) {
+        delete this.map[name];
+    }
+
+    addItem(name, item) {
+        const list = this.map[name];
+        list.push(item);
+    }
+}
 
 
+window.addEventListener("load", function () {
+
+    const formSection = document.querySelector("#reg-form");
+
+    const name = formSection.querySelector('[name="name"]');
+    const price = formSection.querySelector('[name="price"]');
+
+    const weight = formSection.querySelector('[name="weight"]');
+    const weightCategory = formSection.querySelector('.options .optionWeight.selected');
+    // const selectedWeight = weightCategory.getAttribute('data-value');
+    const selectedWeight = weightCategory ? weightCategory.getAttribute('data-value') : null;
+
+    const quantity = formSection.querySelector('[name="quantity"]');
+    const quantityCategory = formSection.querySelector('.options .optionQuantity.selected');
+    // const selectedQuantity = quantityCategory.getAttribute('data-value');
+    const selectedQuantity = quantityCategory ? quantityCategory.getAttribute('data-value') : null;
+
+    const exp = formSection.querySelector('[name="exp"]');
+
+    const storage = formSection.querySelector('.options .optionStorage.selected');
+    // const selectedStorage = storage.getAttribute('data-value');
+    const selectedStorage = storage ? storage.getAttribute('data-value') : null;
+
+    const desc = formSection.querySelector('[name="desc"]');
+
+    const state = formSection.querySelector('[name="state"]');
+    const stateChecked = state.checked;
+
+    const tempSave = formSection.querySelector('.temp-save');
+
+    tempSave.onclick = function (e) {
+        if (!e.target.classList.contains("temp-save"))
+            return;
+
+        console.log("tmp-save clicked!")
+
+        let item = {
+            name: name.value,
+            price: price.value,
+            weight: weight.value,
+            selectedWeight: selectedWeight,
+            quantity: quantity.value,
+            selectedQuantity: selectedQuantity,
+            exp: exp.value,
+            selectedStorage: selectedStorage,
+            desc: desc.value,
+            stateChecked: stateChecked
+        };
+
+        console.log("item = ", item.name);
+        for (let i in item)
+            console.log("i = ", item[i])
+
+        let cookie = new Cookie();
+        console.log(cookie.get("product"));
+        cookie.addItem("product", item);
+        if (!cookie.get["product"] == null)
+            cookie.remove("product");
+        cookie.save();
 
 
+    };
 
 
-
+});
 
 
 /*
