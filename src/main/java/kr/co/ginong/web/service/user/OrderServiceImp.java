@@ -36,11 +36,16 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public long addOrder(Order order) {
-        repository.save(order);
+    public boolean add(Order order) {
+       boolean save = repository.save(order);
 
-        //Auto increment id값 받기
-        return order.getId();
+        return save;
 
+    }
+
+    @Override
+    public boolean addItems(List<OrderItem> items) {
+        boolean save = itemRepository.save(items);
+        return save;
     }
 }

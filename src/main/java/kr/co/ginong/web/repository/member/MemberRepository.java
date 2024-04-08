@@ -8,8 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberRepository {
 
-    Member find(String name);
-    Member find(Long id);
+    Member find(Long id,String name);
 
 
 

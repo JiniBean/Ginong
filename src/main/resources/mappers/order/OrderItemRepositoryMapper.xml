@@ -19,7 +19,9 @@
 	</select>
 
 	<insert id="save" parameterType="OrderItem">
-
+		INSERT INTO ORDER_ITEM
+			(PRICE, QUANTITY, PRODUCT_ID, ORDER_ID)
+		VALUES (#{price}, #{quantity}, #{productId}, #{orderId})
 	</insert>
 
 </mapper>

@@ -12,7 +12,7 @@ public interface OrderRepository {
 
     List<Order> findById(Long id);
     
-    void save(Order order);
+    boolean save(Order order);
     void update(Order order);
     void delete(long id);
 

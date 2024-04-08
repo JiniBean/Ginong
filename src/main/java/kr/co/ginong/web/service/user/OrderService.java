@@ -12,5 +12,7 @@ public interface OrderService {
     List<OrderItem> getItems(Long id);
 
 
-    long addOrder(Order order);
+    boolean add(Order order);
+    boolean addItems(List<OrderItem> items);
+
 }

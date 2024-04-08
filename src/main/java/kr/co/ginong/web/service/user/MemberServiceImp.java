@@ -16,13 +16,13 @@ public class MemberServiceImp implements MemberService{
 
     @Override
     public Member get(String name) {
-        Member member = repository.find(name);
+        Member member = repository.find(null,name);
         return member;
     }
 
     @Override
     public Member get(Long id) {
-        Member member = repository.find(id);
+        Member member = repository.find(id,null);
         return member;
     }
 

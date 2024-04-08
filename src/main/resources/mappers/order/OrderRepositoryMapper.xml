@@ -23,9 +23,10 @@
 	</select>
 
 	<insert id="save" parameterType="Order">
-		insert into `ORDER`(`DATE`, `TYPE`, MEMBER_ID, LOCATION_ID)
+		insert into `ORDER`(ID,`DATE`, `TYPE`, MEMBER_ID, LOCATION_ID)
 		VALUES(
-		current_timestamp()
+		#{id}
+		,current_timestamp()
 		,#{type}
 		,#{memberId}
 		,#{locationId})
