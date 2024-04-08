@@ -1,136 +1,135 @@
-// 카테고리 버튼 css
-document.addEventListener("DOMContentLoaded", function() {
-    var selectedOption = document.getElementById('selectedOptionCategory');
-    var options = document.querySelectorAll('.option');
-    var selectedCategoryInput = document.getElementById('selectedCategory');
+// 카테고리 버튼
+window.addEventListener("load", function () {
+    const category = this.document.querySelector('#category');
+    const selectedOptionCategory = category.querySelector('.selected-option-category');
+    const optionsCategory = category.querySelectorAll('.option-category');
+    const selectedCategory = category.querySelector('.selected-category');
+    const optionCategoryList = category.querySelector('.option-category-list');
 
-    selectedOption.addEventListener('click', function() {
-        var optionList = this.nextElementSibling;
-        optionList.style.display = (optionList.style.display === 'block') ? 'none' : 'block';
+    //드롭다운 최초 클릭 시 이벤트 처리
+    selectedOptionCategory.addEventListener('click', function (e) {
+        e.stopPropagation(); //이벤트 버블링 방지
+        optionCategoryList.classList.toggle('active'); // 카테고리 옵션 목록의 표시/숨김을 토글
     });
 
-    options.forEach(function(option) {
-        option.addEventListener('click', function() {
-            var selectedValueCategory = this.getAttribute('data-value');
-            selectedOption.textContent = this.textContent;
-            selectedCategoryInput.value = selectedValueCategory; // hidden input에 선택된 값을 설정
-            this.parentNode.style.display = 'none';
+    // 드롭다운 클릭하여 아래로 펼쳐졌을 때 카테고리 옵션 항목 클릭 시 이벤트 처리
+    optionsCategory.forEach(function (option) {
+        option.addEventListener('click', function (e) {
+            e.stopPropagation(); // 이벤트 버블링 방지
+            const selectedValueCategory = this.getAttribute('data-value'); // 선택된 카테고리 값
+            selectedOptionCategory.textContent = this.textContent; // 선택된 카테고리 표시 업데이트
+            selectedCategory.value = selectedValueCategory; // 선택된 카테고리 값 업데이트 (hidden 되어있음)
+            optionCategoryList.classList.remove('active'); // 원하는 값 클릭 후 펼쳐진 목록 사라짐
         });
     });
 
-    // 드롭다운 닫기
-    document.addEventListener('click', function(event) {
-        if (!selectedOption.contains(event.target)) {
-            options.forEach(function(option) {
-                option.parentNode.style.display = 'none';
-            });
+    // 문서의 다른 부분을 클릭했을 때 드롭다운 메뉴가 열려있는 경우 드롭다운 메뉴를 닫음
+    window.addEventListener('click', function (e) {
+        if (!selectedOptionCategory.contains(e.target)) { // 클릭한 요소가 선택된 카테고리 영역이 아니라면
+            optionCategoryList.classList.remove('active'); // 카테고리 옵션 목록을 숨김
         }
-    });
+    })
 });
-// weightCategory 선택 버튼
-document.addEventListener("DOMContentLoaded", function() {
-    var selectedOptionWeight = document.getElementById('selectedOptionWeight');
-    var optionsWeight = document.querySelectorAll('.optionWeight');
-    var selectedWeightInput = document.getElementById('selectedWeight');
 
-    selectedOptionWeight.addEventListener('click', function() {
-        var optionWeightList = this.nextElementSibling;
-        optionWeightList.style.display = (optionWeightList.style.display === 'block') ? 'none' : 'block';
+// weightCategory 선택 버튼
+window.addEventListener("load", function () {
+    const weight = this.document.querySelector('#weight');
+    const selectedOptionWeight = weight.querySelector('.selected-option-weight');
+    const optionsWeight = weight.querySelectorAll('.option-weight');
+    const selectedWeight = weight.querySelector('.selected-weight');
+    const optionWeightList = weight.querySelector('.option-weight-list');
+
+    //드롭다운 최초 클릭 시 이벤트 처리
+    selectedOptionWeight.addEventListener('click', function (e) {
+        e.stopPropagation(); //이벤트 버블링 방지
+        optionWeightList.classList.toggle('active'); // 카테고리 옵션 목록의 표시/숨김을 토글
     });
 
-    optionsWeight.forEach(function(option) {
-        option.addEventListener('click', function() {
-            var selectedValueWeight = this.getAttribute('data-value');
-            selectedOptionWeight.textContent = this.textContent;
-            selectedWeightInput.value = selectedValueWeight; // hidden input에 선택된 값을 설정
-            this.parentNode.style.display = 'none';
+    // 드롭다운 클릭하여 아래로 펼쳐졌을 때 카테고리 옵션 항목 클릭 시 이벤트 처리
+    optionsWeight.forEach(function (option) {
+        option.addEventListener('click', function (e) {
+            e.stopPropagation(); // 이벤트 버블링 방지
+            const selectedValueWeight = this.getAttribute('data-value'); // 선택된 카테고리 값
+            selectedOptionWeight.textContent = this.textContent; // 선택된 카테고리 표시 업데이트
+            selectedWeight.value = selectedValueWeight; // 선택된 카테고리 값 업데이트 (hidden 되어있음)
+            optionWeightList.classList.remove('active'); // 원하는 값 클릭 후 펼쳐진 목록 사라짐
         });
     });
 
-    // 드롭다운 닫기
-    document.addEventListener('click', function(event) {
-        if (!selectedOptionWeight.contains(event.target)) {
-            optionsWeight.forEach(function(option) {
-                option.parentNode.style.display = 'none';
-            });
+    // 문서의 다른 부분을 클릭했을 때 드롭다운 메뉴가 열려있는 경우 드롭다운 메뉴를 닫음
+    window.addEventListener('click', function (e) {
+        if (!selectedOptionWeight.contains(e.target)) { // 클릭한 요소가 선택된 카테고리 영역이 아니라면
+            optionWeightList.classList.remove('active'); // 카테고리 옵션 목록을 숨김
         }
-    });
+    })
 });
 
 //quantityCategory 선택 버튼
+window.addEventListener("load", function () {
+    const quantity = this.document.querySelector('#quantity');
+    const selectedOptionQuantity = quantity.querySelector('.selected-option-quantity');
+    const optionsQuantity = quantity.querySelectorAll('.option-quantity');
+    const selectedQuantity = quantity.querySelector('.selected-quantity');
+    const optionQuantityList = quantity.querySelector('.option-quantity-list');
 
-document.addEventListener("DOMContentLoaded", function() {
-    var selectedOptionQuantity = document.getElementById('selectedOptionQuantity');
-    var optionsQuantity = document.querySelectorAll('.optionQuantity');
-    var selectedQuantityInput = document.getElementById('selectedQuantity');
-
-    selectedOptionQuantity.addEventListener('click', function() {
-        var optionQuantityList = this.nextElementSibling;
-        optionQuantityList.style.display = (optionQuantityList.style.display === 'block') ? 'none' : 'block';
+    //드롭다운 최초 클릭 시 이벤트 처리
+    selectedOptionQuantity.addEventListener('click', function (e) {
+        e.stopPropagation(); //이벤트 버블링 방지
+        optionQuantityList.classList.toggle('active'); // 카테고리 옵션 목록의 표시/숨김을 토글
     });
 
-    optionsQuantity.forEach(function(option) {
-        option.addEventListener('click', function() {
-            var selectedValueQuantity = this.getAttribute('data-value');
-            selectedOptionQuantity.textContent = this.textContent;
-            selectedQuantityInput.value = selectedValueQuantity; // hidden input에 선택된 값을 설정
-            this.parentNode.style.display = 'none';
+    // 드롭다운 클릭하여 아래로 펼쳐졌을 때 카테고리 옵션 항목 클릭 시 이벤트 처리
+    optionsQuantity.forEach(function (option) {
+        option.addEventListener('click', function (e) {
+            e.stopPropagation(); // 이벤트 버블링 방지
+            const selectedValueQuantity = this.getAttribute('data-value'); // 선택된 카테고리 값
+            selectedOptionQuantity.textContent = this.textContent; // 선택된 카테고리 표시 업데이트
+            selectedQuantity.value = selectedValueQuantity; // 선택된 카테고리 값 업데이트 (hidden 되어있음)
+            optionQuantityList.classList.remove('active'); // 원하는 값 클릭 후 펼쳐진 목록 사라짐
         });
     });
 
-    // 드롭다운 닫기
-    document.addEventListener('click', function(event) {
-        if (!selectedOptionQuantity.contains(event.target)) {
-            optionsQuantity.forEach(function(option) {
-                option.parentNode.style.display = 'none';
-            });
+    // 문서의 다른 부분을 클릭했을 때 드롭다운 메뉴가 열려있는 경우 드롭다운 메뉴를 닫음
+    window.addEventListener('click', function (e) {
+        if (!selectedOptionQuantity.contains(e.target)) { // 클릭한 요소가 선택된 카테고리 영역이 아니라면
+            optionQuantityList.classList.remove('active'); // 카테고리 옵션 목록을 숨김
         }
-    });
+    })
 });
 
 //상품 보관유형 선택 버튼
+window.addEventListener("load", function () {
+    const storage = this.document.querySelector('#storage');
+    const selectedOptionStorage = storage.querySelector('.selected-option-storage');
+    const optionsStorage = storage.querySelectorAll('.option-storage');
+    const selectedStorage = storage.querySelector('.selected-storage');
+    const optionStorageList = storage.querySelector('.option-storage-list');
 
-document.addEventListener("DOMContentLoaded", function() {
-    var selectedOptionStorage = document.getElementById('selectedOptionStorage');
-    var optionsStorage = document.querySelectorAll('.optionStorage');
-    var selectedStorageInput = document.getElementById('selectedStorage');
-
-    selectedOptionStorage.addEventListener('click', function() {
-        var optionStorageList = this.nextElementSibling;
-        optionStorageList.style.display = (optionStorageList.style.display === 'block') ? 'none' : 'block';
+    //드롭다운 최초 클릭 시 이벤트 처리
+    selectedOptionStorage.addEventListener('click', function (e) {
+        e.stopPropagation(); //이벤트 버블링 방지
+        optionStorageList.classList.toggle('active'); // 카테고리 옵션 목록의 표시/숨김을 토글
     });
 
-    optionsStorage.forEach(function(option) {
-        option.addEventListener('click', function() {
-            var selectedValueStorage = this.getAttribute('data-value');
-            selectedOptionStorage.textContent = this.textContent;
-            selectedStorageInput.value = selectedValueStorage; // hidden input에 선택된 값을 설정
-            this.parentNode.style.display = 'none';
+    // 드롭다운 클릭하여 아래로 펼쳐졌을 때 카테고리 옵션 항목 클릭 시 이벤트 처리
+    optionsStorage.forEach(function (option) {
+        option.addEventListener('click', function (e) {
+            e.stopPropagation(); // 이벤트 버블링 방지
+            const selectedValueStorage = this.getAttribute('data-value'); // 선택된 카테고리 값
+            selectedOptionStorage.textContent = this.textContent; // 선택된 카테고리 표시 업데이트
+            selectedStorage.value = selectedValueStorage; // 선택된 카테고리 값 업데이트 (hidden 되어있음)
+            optionStorageList.classList.remove('active'); // 원하는 값 클릭 후 펼쳐진 목록 사라짐
         });
     });
 
-    // 드롭다운 닫기
-    document.addEventListener('click', function(event) {
-        if (!selectedOptionStorage.contains(event.target)) {
-            optionsStorage.forEach(function(option) {
-                option.parentNode.style.display = 'none';
-            });
+    // 문서의 다른 부분을 클릭했을 때 드롭다운 메뉴가 열려있는 경우 드롭다운 메뉴를 닫음
+    window.addEventListener('click', function (e) {
+        if (!selectedOptionStorage.contains(e.target)) { // 클릭한 요소가 선택된 카테고리 영역이 아니라면
+            optionStorageList.classList.remove('active'); // 카테고리 옵션 목록을 숨김
         }
-    });
+    })
 });
 
-// const button = document.querySelector('.calendar-icon');
-// button.addEventListener('click', function()
-// {
-//     const input = document.querySelector('input[name="foo2"]');
-//     const datepicker = new Datepicker(input, {});
-//     datepicker.show();
-// });
-
-// const elem = document.getElementById('foo');
-// const rangepicker = new DateRangePicker(elem, {
-//     // ...options
-// });
 
 function getImageFiles(e) {
     const uploadFiles = [];
