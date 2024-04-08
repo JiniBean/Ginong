@@ -25,6 +25,10 @@
     background-color: var(--color-main-6);
 }
 
+.n-pager li.active>*, .n-pager .n-page.active {
+    background-color: var(--color-main-6);
+}
+    
 @media (min-width: 768px) {
     .cart-section{
         height: 60px;
@@ -57,10 +61,6 @@
     .icon-color\:base-1:before {
         background-color: var(--color-base-9);
     }
-
-
-
-
 
 
 }

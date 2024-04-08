@@ -2,12 +2,10 @@ package kr.co.ginong.web.service.admin;
 
 import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
-import kr.co.ginong.web.entity.product.Stock;
 import kr.co.ginong.web.repository.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service("adminProductServiceImp")
@@ -20,36 +18,14 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<ProductView> getList(int page) {
+        return getList(page, null);
+    }
 
+    public List<ProductView> getList(int page, String query) {
         int offset = (page-1) * size;
-
-        List<ProductView> list = repository.findAll(null,null, offset, size, null);
+        List<ProductView> list = repository.findAll(null, query, offset, size, null);
 
         return list;
-    }
-
-    @Override
-    public void save(Product product){
-                        // , Date madeDate
-                        // , String amount) {
-        System.out.println("==============================");
-
-        repository.save(product);
-        /*stock 데이터 넣는 곳*/
-        // Stock stock = Stock.builder()
-        //         .amount(Integer.parseInt(amount))
-        //         .plma(1)
-        //         .madeDate(madeDa+te)
-        //         .desc(product.getDesc())
-        //         .adminId(1)
-        //         .productId(product.getId())
-        //         .build();
-        // repository.saveStock(stock);
-    }
-
-    @Override
-    public void update(Product product) {
-        repository.update(product);
     }
 
     @Override
@@ -57,11 +33,32 @@ public class ProductServiceImp implements ProductService {
         ProductView productView = repository.findById(productId);
 
         return productView;
+    }    
+
+    @Override
+    public int count() {
+        int count = repository.count(null, null);
+        return count;
     }
 
+    public int count(String query) {
+        int count = repository.count(null, query);
+        return count;
+    }
+
+    
     public void delete(Long productId) {
         repository.delete(productId);
     }
 
+    
+    public void save(Product product){
+        repository.save(product);
+    }
+
+    @Override
+    public void update(Product product) {
+        repository.update(product);
+    }
 }
 

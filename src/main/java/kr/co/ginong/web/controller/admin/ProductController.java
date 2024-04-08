@@ -21,14 +21,23 @@ public class ProductController {
     private ProductService service;
 
 
-
     @GetMapping("list")
-    public String list(Model model){
+    public String list(@RequestParam(name = "q", required = false) String query
+                        , @RequestParam(name = "p", required = false, defaultValue = "1") Integer page
+                        , Model model){
 
         List<ProductView>list = new ArrayList<>();
+        int count = 0;
 
-        list = service.getList(1);
+        if (query != null) {
+            list = service.getList(page, query);
+            count = service.count(query);
+        } else {
+            list = service.getList(page);
+            count = service.count();
+        }
 
+        model.addAttribute("count", count);
         model.addAttribute("list", list);
         return "admin/product/list";
     }
@@ -37,6 +46,7 @@ public class ProductController {
     public String save(){
         return "admin/product/reg";
     }
+    
     @PostMapping("reg")
     public String save(Product product
                         , @RequestParam("img-file") MultipartFile imgFile) {

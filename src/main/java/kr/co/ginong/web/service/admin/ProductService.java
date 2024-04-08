@@ -7,9 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 public interface ProductService {
+    List<ProductView> getList(int page, String query);
     List<ProductView> getList(int page);
 
-    void save(Product product);//, Date madeDate, String amount);
+    int count(String query);
+    int count();
+
+    void save(Product product);
 
     void update(Product product);
 
