@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -68,7 +68,30 @@
                 </button>
             </a>
         </div>
+
+        
     </section>
+    <section class="d:flex w:10p mb:5 jc:center">
+        <h1 class="d:none">페이저</h1>
+        <ul class="n-pager d:flex " th:with="page=${param.p} eq null ? 1 : ${{param.p}}
+                                                        , temp=(${page}-1)/5
+                                                        , startnum=${T(java.lang.Math).floor(temp)}*5+1
+                                                        , temp1=${count div 6}
+                                                        , lastnum=${count} mod 6 eq 0 ? ${temp1} : ${temp1}+1">
+          <li>
+            <span th:if="${page} lt 6">이전</span>
+            <a th:if="${{page}} ge 6" th:href="@{./list(p=${startnum-1})}" href="list?p=1">이전</a>
+          </li>
+          <li th:each="n:${#numbers.sequence(startnum,startnum+4)}" th:class="${{param.p}} eq ${n}? 'active' : ''">
+            <span th:if="${n} gt ${lastnum}" th:text="${n}"></span>
+            <a th:if="${n} le ${lastnum}" th:href="@{./list(p=${n})}" th:text="${n}" href="list?p=1">1</a>
+          </li>
+          <li>
+            <span th:if="${lastnum} lt ${startnum+5}">다음</span>
+            <a th:if="${lastnum} ge ${startnum+5}" th:href="@{./list(p=${startnum+5})}" href="list?p=6">다음</a>
+          </li>
+        </ul>
+    </section>  
 </main>
 </body>
 </html>
