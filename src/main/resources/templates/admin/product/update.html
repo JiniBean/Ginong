@@ -22,7 +22,7 @@
             <input type="hidden" name="id" th:value="${productView.id}"/>
             <div id="category">
                 <div class="custom-dropdown">
-                    <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" th:text="${productView.categoryName}" >카테고리 선택</div>
+                    <div class="selected-option selected-option-category deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" th:text="${productView.categoryName}" >카테고리 선택</div>
                     <ul class="options option-category-list" th:value="${productView.categoryId}">
                         <li class="option option-category" data-value="1">과채</li>
                         <li class="option option-category" data-value="2">양념</li>
@@ -50,7 +50,7 @@
                         <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="2kg" th:value="${productView.weight}"/></div>
                         <div id="weight">
                             <div class="custom-dropdown">
-                                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionWeight" th:text="${productView.weightCategory}">중량 유형 선택</div>
+                                <div class="selected-option selected-option-weight deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionWeight" th:text="${productView.weightCategory}">중량 유형 선택</div>
                                 <ul class="options option-weight-list">
                                     <li class="option option-weight" data-value="1">g</li>
                                     <li class="option option-weight" data-value="2">kg</li>
@@ -68,7 +68,7 @@
                         <div class="w:10p"><input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="2통" th:value="${productView.quantity}"/></div>
                         <div id="quantity">
                             <div class="custom-dropdown">
-                                <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionQuantity" th:text="${productView.quantityCategory}">개수 유형 선택</div>
+                                <div class="selected-option selected-option-quantity deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionQuantity" th:text="${productView.quantityCategory}">개수 유형 선택</div>
                                 <ul class="options option-quantity-list">
                                     <li class="option option-quantity" data-value="1">통</li>
                                     <li class="option option-quantity" data-value="2">개</li>
@@ -88,9 +88,9 @@
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <div>상품보관유형</div>
-                    <div id="storage"></div>
+                    <div id="storage">
                         <div class="custom-dropdown">
-                            <div class="selected-option deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionStorage" th:text="${productView.storageType}">보관 유형 선택</div>
+                            <div class="selected-option selected-option-storage deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" id="selectedOptionStorage" th:text="${productView.storageType}">보관 유형 선택</div>
                             <ul class="options option-storage-list">
                                 <li class="option option-storage" data-value="1">실온보관</li>
                                 <li class="option option-storage" data-value="2">냉장보관</li>
