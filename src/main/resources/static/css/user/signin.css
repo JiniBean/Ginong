@@ -7,3 +7,23 @@
     background-position: center;
     text-indent: -999px;
 }
+.social-logo{
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+}
+.kakao{
+    background-image: url("/img/logo-kakao.svg");
+
+}
+.naver{
+    background-image: url("/img/logo-naver.svg");
+}
+.google{
+    background-image: url("/img/logo-google.svg");
+}
+.apple{
+    background-image: url("/img/logo-apple.svg");
+}
