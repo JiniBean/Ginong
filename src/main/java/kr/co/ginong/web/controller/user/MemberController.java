@@ -16,6 +16,7 @@ public class MemberController {
     @GetMapping("signin")
     public String signin() {return "user/signin";}
 
-
+    @GetMapping("signup/step1")
+    public String signup() {return "user/signup/step1";}
 
 }
