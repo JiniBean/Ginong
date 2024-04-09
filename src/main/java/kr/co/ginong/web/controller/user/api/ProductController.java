@@ -24,6 +24,7 @@ public class ProductController {
             , @RequestParam(name = "q", required = false) String query
             , @RequestParam(name = "p", required = false, defaultValue = "1") Integer page
             , @RequestParam(name = "s", required = false) Integer sortType
+            , @RequestParam(name = "r", required = false) Integer rows
     ) {
 
         List<ProductView> list = new ArrayList<>();

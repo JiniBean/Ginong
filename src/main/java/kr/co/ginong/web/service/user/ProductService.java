@@ -12,7 +12,6 @@ public interface ProductService {
     List<ProductView> getList(Integer page, String query);
     List<ProductView> getList(Integer page, Long categoryId);
     List<ProductView> getList(Integer page, String query, Integer sortType);
-    List<ProductView> getList(Integer page, String query, Long categoryId);
     List<ProductView> getList(Integer page, Long categoryId, String query);
     List<ProductView> getList(Integer page, Long categoryId, Integer sortType);
     List<ProductView> getList(Integer page, String query, Long categoryId, Integer sortType);
