@@ -22,8 +22,15 @@
 		where id = #{id}
 	</select>
 
+	<select id="findByMemberId" resultType="Location">
+		select
+		*
+		from LOCATION
+		where MEMBER_ID = #{id}
+		and STATE = 1
+	</select>
 
-	<insert id = "saveByLocation" parameterType="LocationHistory" >
+	<insert id = "saveHistory" parameterType="LocationHistory" >
 		insert into
 		LOCATION_HISTORY(ZIP_CODE,ADDR1,ADDR2,RECEIVER_NAME,RECEIVER_PHONE,LABEL,NOTE,GATE_PWD,CATEGORY_ID,MEMBER_ID,ORDER_ID,LOCATION_ID)
 		values(#{zipCode},#{addr1},#{addr2},#{receiverName},#{receiverPhone},#{label},#{note},#{gatePwd},#{categoryId},#{memberId},#{orderId},#{locationId})

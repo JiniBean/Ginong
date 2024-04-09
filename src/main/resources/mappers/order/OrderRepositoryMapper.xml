@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.order.OrderRepository">
-    <select id="findAll" resultType="Order">
+	<select id="findAll" resultType="Order">
 		select
-			*
-		from Location
+		*
+		from `ORDER`
 		<where>
 			<if test="memberId != null">
 				member_id = #{memberId}
@@ -14,24 +14,21 @@
 		</where>
 	</select>
 
-	
+
 	<select id="findById" resultType="Order">
 		select
-			*
+		*
 		from `ORDER`
-		where DETAIL_ID = #{id}
+		where id = #{id}
 	</select>
 
-	<insert id="save" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into `ORDER`(`DATE`, `TYPE`, PRICE, QUANTITY, DETAIL_ID, MEMBER_ID, PRODUCT_ID, LOCATION_ID)
+	<insert id="save" parameterType="Order">
+		insert into `ORDER`(ID,`DATE`, `TYPE`, MEMBER_ID, LOCATION_ID)
 		VALUES(
-		current_timestamp()
+		#{id}
+		,current_timestamp()
 		,#{type}
-		,#{price}
-		,#{quantity}
-		,#{detailId}
 		,#{memberId}
-		,#{productId}
 		,#{locationId})
 	</insert>
 

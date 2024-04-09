@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ginong.web.repository.order.OrderItemRepository">
+    <select id="findAll" resultType="OrderItem">
+		SELECT
+			*
+		FROM  ORDER_ITEM
+		WHERE ORDER_ID = #{orderId}
+	</select>
+
+	
+	<select id="findById" resultType="Order">
+		select
+			*
+		from `ORDER`
+		where id = #{id}
+	</select>
+
+	<insert id="save" parameterType="OrderItem">
+		INSERT INTO ORDER_ITEM
+			(PRICE, QUANTITY, PRODUCT_ID, ORDER_ID)
+		VALUES (#{price}, #{quantity}, #{productId}, #{orderId})
+	</insert>
+
+</mapper>

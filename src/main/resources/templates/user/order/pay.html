@@ -12,7 +12,7 @@
 <body>
 
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
-    <h1 class="d:none md:d:flex ai:center jc:center h:4 w:10p fs:5 fw:3">주문하기</h1>
+    <h1 class="d:none md:d:flex ai:center jc:center h:4 w:10p fs:5 fw:3">결제하기</h1>
 
     <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
         <h1 class="d:none">주문 상품 목록</h1>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="n-dropdown">
                     <button id="dropdown-btn" type="button"
-                            class="n-btn n-btn:outline w:10p ai:center jc:space-between icon icon:RT icon-size:1 icon-color:main-6 deco-pos:right">
+                            class="n-btn n-btn:outline w:10p ai:center jc:space-between deco deco-size:1 icon:RT icon-size:1 icon-color:main-6 deco-pos:right">
                         <span class="fl:fill" th:text="${'사용할 수 있는 쿠폰 ' + couponList.size + '장'}">
                               사용할 수 있는 쿠폰 0장
                         </span>

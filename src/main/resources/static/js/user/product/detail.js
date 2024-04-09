@@ -102,8 +102,7 @@ window.addEventListener("load", function(){
 
                 let quantity = parseInt(quantityInput.value);
 
-                url = url + "?productId=" + productId
-                          + "&quantity=" + quantity;
+                url = url + "?p=" + productId + "&q=" + quantity;
 
                 location.href = url.toString();
 
@@ -137,7 +136,7 @@ window.addEventListener("load", function() {
 
         let url = new URL ("/user/order/info", location.origin);
 
-        url = url + "?productId=" + productId + "&quantity=" + quantity;
+        url = url + "?p=" + productId + "&q=" + quantity;
 
         location.href = url.toString();
     };
@@ -241,8 +240,7 @@ window.addEventListener("load", function(){
                     let quantityInput = numberBox.querySelector(".quantity-input").value;
                     let quantity = parseInt(quantityInput);
 
-                    url = url + "?productId=" + productId
-                        + "&quantity=" + quantity;
+                    url = url + "?p=" + productId + "&q=" + quantity;
 
                     console.log(url);
 

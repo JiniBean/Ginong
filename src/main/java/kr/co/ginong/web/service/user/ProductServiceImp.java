@@ -15,7 +15,7 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     ProductRepository repository;
 
-    int size = 12;
+    final int size = 12;
     @Override
     public List<ProductView> getList(Integer page) {
         int offset = (page-1) * size;

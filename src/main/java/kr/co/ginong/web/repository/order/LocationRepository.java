@@ -12,9 +12,10 @@ public interface LocationRepository {
     List<Location> findAll();
 
     Location findById(Long id);
-    
+
+    Location findByMemberId(long memberId);
     void save(Location location);
-    void saveByLocation(LocationHistory locationHistory);
+    void saveHistory(LocationHistory locationHistory);
     void update(Location location);
     void delete(long id);
 
