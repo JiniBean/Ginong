@@ -69,6 +69,8 @@ window.addEventListener("load", function () {
     var colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
     var rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
     var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
+    
+    var alignNumberBox = sortSection.querySelector(".align-number");
 
     // URLSearchParams를 사용하여 현재 URL의 파라미터 가져오기
     var params = new URLSearchParams(window.location.search);
@@ -76,6 +78,8 @@ window.addEventListener("load", function () {
     // 특정 파라미터 값 가져오기
     var c = params.get('c');
 
+    // 현재 페이지의 도메인, 포트를 가져오기. (application.yaml에서 port변경하는 경우를 위함)
+    let baseUrl = window.location.origin;
 
     var priceBtn = sortSection.querySelector(".price"); //가격순
     var recommendBtn = sortSection.querySelector(".recommend"); //추천순
@@ -134,7 +138,7 @@ window.addEventListener("load", function () {
         recommendBtn.classList.remove("color:main-6");
 
         var sortType = 1;
-        var url = `http://localhost:8080/user/api/product?p=1&s=${sortType}&c=${c}`;
+        var url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
 
         request(url, function (list) {
             bind(list);
@@ -148,12 +152,27 @@ window.addEventListener("load", function () {
         priceBtn.classList.remove("color:main-6");
         recommendBtn.classList.add("color:main-6");
         var sortType = 2;
-        var url = `http://localhost:8080/user/api/product?p=1&s=${sortType}&c=${c}`;
+        var url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
 
         request(url, function (list) {
             bind(list);
             console.log("추천순 정렬 리로드");
         });
+    }
+
+    alignNumberBox.onclick = function(e) {
+        e.preventDefault();
+
+        let baseUrl = window.location.origin;
+        url = `${baseUrl}/user/api/product?p=1&c=${c}`;
+
+        console.log(baseUrl);
+        console.log(url);
+
+        let alignNumber = alignNumberBox.value;
+
+        if (!url.includes("c"))
+            url = `${baseUrl}/user/api/product?p=1&c=${c}&rows=${alignNumber}`;
     }
 
     cartSection.onclick = function (e){
