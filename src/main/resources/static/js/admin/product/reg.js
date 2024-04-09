@@ -269,28 +269,27 @@ window.addEventListener("load", function () {
 class Cookie {
     constructor() {
         this.map = {};
-        console.log("document.cookie = " + document.cookie);
-        console.log("document.cookie.split(\";\") = " + document.cookie.split(";"));
 
-        // 쿠키가 존재하는 경우에만 파싱하여 map에 저장
         if (document.cookie) {
-            const cookieDecoded = decodeURIComponent(document.cookie);
-            const cookieTokens = cookieDecoded.split(";");
-
-            for (const c of cookieTokens) {
-                const tmp = c.split("=");
-                const key = tmp[0].trim();
-                const value = JSON.parse(tmp[1]);
-
-                this.map[key] = value;
-            }
-        }
-
-        // product 속성이 없으면 빈 배열로 초기화
-        if (!this.map["product"]) {
+            // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+            this.readCookie();
+        } else {
+            // 쿠키가 존재하지 않으면 Product : 빈 배열로 초기화
             this.map["product"] = [];
         }
+    }
 
+    readCookie() {
+        const cookieDecoded = decodeURIComponent(document.cookie);
+        const cookieTokens = cookieDecoded.split(";");
+
+        for (const c of cookieTokens) {
+            const tmp = c.split("=");
+            const key = tmp[0].trim();
+            const value = JSON.parse(tmp[1]);
+
+            this.map[key] = value;
+        }
     }
 
     get(name) {
@@ -298,12 +297,12 @@ class Cookie {
     }
 
     save() {
-        const list = this.map["product"];
-        const size = list.length;
-        const lastIndex = size - 1;
+        let list = this.map["product"];
+        let size = list.length;
+        let lastIndex = size - 1;
 
         let str = "[";
-        for (const m of list) {
+        for (let m of list) {
             str += JSON.stringify(m);
             if (m !== list[lastIndex])
                 str += ",";
@@ -314,17 +313,32 @@ class Cookie {
         document.cookie = `product=${encoded}; path=/;`;
     }
 
-    remove(name) {
-        delete this.map[name];
+    addItem(name, item) {
+        // 기존의 값을 가져와서 새로운 값을 추가, falsy 이용 쿠키 값 없으면 배열 초기화.
+        const existingItems = this.map[name] || [];
+        existingItems.push(item);
+        this.map[name] = existingItems;
     }
 
-    addItem(name, item) {
-        const list = this.map[name];
-        list.push(item);
+    remove(name) {
+        const cookieDecoded = decodeURIComponent(document.cookie);
+        const cookieTokens = cookieDecoded.split(";");
+
+        // 'product' 쿠키가 존재하는 경우 삭제
+        for (const cookie of cookieTokens) {
+            const [key] = cookie.split("=").map(item => item.trim());
+            if (key === name) {
+                document.cookie = `${key}=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+                console.log(`쿠키 '${name}'가 성공적으로 삭제되었습니다.`);
+                delete this.map[name]; // map에서도 해당 쿠키를 삭제
+                break;
+            }
+        }
     }
+
 }
 
-
+// 임시저장 기능 구현
 window.addEventListener("load", function () {
 
     const formSection = document.querySelector("#reg-form");
@@ -334,18 +348,15 @@ window.addEventListener("load", function () {
 
     const weight = formSection.querySelector('[name="weight"]');
     const weightCategory = formSection.querySelector('.options .optionWeight.selected');
-    // const selectedWeight = weightCategory.getAttribute('data-value');
     const selectedWeight = weightCategory ? weightCategory.getAttribute('data-value') : null;
 
     const quantity = formSection.querySelector('[name="quantity"]');
     const quantityCategory = formSection.querySelector('.options .optionQuantity.selected');
-    // const selectedQuantity = quantityCategory.getAttribute('data-value');
     const selectedQuantity = quantityCategory ? quantityCategory.getAttribute('data-value') : null;
 
     const exp = formSection.querySelector('[name="exp"]');
 
     const storage = formSection.querySelector('.options .optionStorage.selected');
-    // const selectedStorage = storage.getAttribute('data-value');
     const selectedStorage = storage ? storage.getAttribute('data-value') : null;
 
     const desc = formSection.querySelector('[name="desc"]');
@@ -355,6 +366,56 @@ window.addEventListener("load", function () {
 
     const tempSave = formSection.querySelector('.temp-save');
 
+
+    // 쿠키 정보 가져와서 값 넣기
+    let cookie = new Cookie();
+    let cookieData = cookie.get("product");
+    if (cookieData) {
+        name.value = cookieData.name;
+        price.value = cookieData.price;
+        weight.value = cookieData.weight;
+        if (selectedWeight) {
+            const weightOptions = document.querySelectorAll('.option-weight-list .option-weight');
+            weightOptions.forEach(option => {
+                if (option.getAttribute('data-value') === selectedWeight) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+        quantity.value = cookieData.quantity;
+        // 개수 선택
+        if (selectedQuantity) {
+            const quantityOptions = document.querySelectorAll('.option-quantity-list .option-quantity');
+            quantityOptions.forEach(option => {
+                if (option.getAttribute('data-value') === selectedQuantity) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+        exp.value = cookieData.exp;
+
+        // 보관유형 선택
+        if (selectedStorage) {
+            const storageOptions = document.querySelectorAll('.option-storage-list .option-storage');
+            storageOptions.forEach(option => {
+                if (option.getAttribute('data-value') === selectedStorage) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        desc.value = cookieData.desc;
+
+        // 상태 체크
+        if (stateChecked) {
+            const stateCheckbox = document.querySelector('[name="state"]');
+            stateCheckbox.checked = stateChecked;
+        }
+
+    }
+
+
+    // 임시저장 버튼 클릭 시
     tempSave.onclick = function (e) {
         if (!e.target.classList.contains("temp-save"))
             return;
@@ -379,13 +440,10 @@ window.addEventListener("load", function () {
             console.log("i = ", item[i])
 
         let cookie = new Cookie();
-        console.log(cookie.get("product"));
+
+        cookie.remove("product");
         cookie.addItem("product", item);
-        if (!cookie.get["product"] == null)
-            cookie.remove("product");
         cookie.save();
-
-
     };
 
 
