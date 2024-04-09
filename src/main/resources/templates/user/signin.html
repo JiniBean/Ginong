@@ -16,32 +16,60 @@
     <section>
         <h1 class="d:none">로그인 기능</h1>
         <div>
-            <form>
+            <form class= "d:flex fl-dir:column gap:8">
                 <div>
                     <input type="text" class="n-textbox n-textbox-type:underline" name="name"/>
                 </div>
                 <div>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="name"/>
+                    <input type="text" class="n-textbox n-textbox-type:underline" name="pwd"/>
                 </div>
-                <div>
+                <div class= "d:flex fl-dir:row gap:1 ai:center">
                     <input type="checkbox" class="n-toggle n-toggle-type:check-box" />
+                    <span>아이디 저장</span>
                 </div>
                 <div>
-                    <button>로그인</button>
+                    <button type="submit" class="n-btn n-btn-size:2 fw:3 fs:3 md:fs:6 min-w:3 w:10p">로그인</button>
                 </div>
             </form>
         </div>
     </section>
-    <section>
-        <h1>개인정보 찾기</h1>
-        <div>아이디 찾기</div>
-        <div>비밀번호 찾기</div>
+    <section class="d:flex fl-dir:row gap:8 ai:center jc:center">
+        <h1 class="d:none">개인정보 찾기</h1>
+        <div><a href=""> 아이디 찾기</a></div>
+        <div><a href=""> 비밀번호 찾기</a></div>
     </section>
-    <section>
-        <h1>소셜 로그인</h1>
+    <section class= "d:flex fl-dir:row gap:10 jc:center ai:center">
+        <h1 class="d:none">소셜 로그인</h1>
+        <div>
+            <a href="" class= "d:flex fl-dir:column gap:2 jc:center ai:center">
+                <div class="kakao social-logo"></div>
+                <span>카카오</span>
+            </a>
+        </div>
+        <div>
+            <a href="" class= "d:flex fl-dir:column gap:2 jc:center ai:center">
+                <div class="naver social-logo"></div>
+                <span>네이버</span>
+            </a>
+        </div>
+        <div>
+            <a href="" class= "d:flex fl-dir:column gap:2 jc:center ai:center">
+                <div class="google social-logo"></div>
+                <span>구글</span>
+            </a>
+        </div>
+        <div>
+            <a href="" class= "d:flex fl-dir:column gap:2 jc:center ai:center">
+                <div class="apple social-logo"></div>
+                <span>애플</span>
+            </a>
+        </div>
     </section>
-    <section>
-        <h1>회원가입 페이지로</h1>
+    <section class= "d:flex fl-dir:column jc:center ai:center">
+        <h1 class="d:none">회원가입 페이지로 링크</h1>
+        <div class="d:flex fl-dir:row gap:2 ai:center jc:center">
+            <span>지금 함께하세요 !</span><span><a href="" class="fw:3"> 회원가입 ></a></span>
+        </div>
     </section>
 </main>
 

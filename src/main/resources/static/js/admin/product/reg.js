@@ -34,7 +34,7 @@ window.addEventListener("load", function () {
     });
 
     // 드롭다운 클릭하여 아래로 펼쳐졌을 때 카테고리 옵션 항목 클릭 시 이벤트 처리
-    optionsCategory.forEach(function (option) {
+    for (const option of optionsCategory) {
         option.addEventListener('click', function (e) {
             e.stopPropagation(); // 이벤트 버블링 방지
             const selectedValueCategory = this.getAttribute('data-value'); // 선택된 카테고리 값
@@ -42,7 +42,7 @@ window.addEventListener("load", function () {
             selectedCategory.value = selectedValueCategory; // 선택된 카테고리 값 업데이트 (hidden 되어있음)
             optionCategoryList.classList.remove('active'); // 원하는 값 클릭 후 펼쳐진 목록 사라짐
         });
-    });
+    }
 
     // 문서의 다른 부분을 클릭했을 때 드롭다운 메뉴가 열려있는 경우 드롭다운 메뉴를 닫음
     window.addEventListener('click', function (e) {

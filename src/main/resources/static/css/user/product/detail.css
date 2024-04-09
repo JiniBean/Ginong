@@ -22,3 +22,7 @@
 ,.numberBox .btn-plus::before{
     content: "\253C";
 }
+
+.n-expander .n-expander-content {
+    transition: visibility .1s;
+}
