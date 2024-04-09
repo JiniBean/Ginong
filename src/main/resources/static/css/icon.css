@@ -53,3 +53,9 @@
     -webkit-mask-image: url("../icon/checkCircle.svg");
     mask-image: url("../icon/checkCircle.svg");
 }
+
+.icon\:carrot::before,
+.icon\:carrot::after {
+    -webkit-mask-image: url("../icon/carrot.svg");
+    mask-image: url("../icon/carrot.svg");
+}
