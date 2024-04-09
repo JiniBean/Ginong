@@ -22,5 +22,16 @@ public class MemberController {
     @GetMapping("signup/index")
     public String index() {return "user/signup/index";}
 
+//    @GetMapping("signup1")
+//    public String signup() {return "user/signup/find-id";}
+//
+//    @GetMapping("signup2")
+//    public String signup2() {return "user/signup/confirm-id";}
+//
+//    @GetMapping("signup3")
+//    public String signup3() {return "user/signup/find-pwd";}
+//
+//    @GetMapping("signup4")
+//    public String signup4() {return "user/signup/change-pwd";}
 
 }
