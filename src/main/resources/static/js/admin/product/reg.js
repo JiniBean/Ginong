@@ -267,19 +267,23 @@ window.addEventListener("load", function () {
 
 // 임시저장 쿠키
 class Cookie {
+
     constructor() {
         this.map = {};
+        this.initCookie();
+    }
 
+    initCookie() {
         if (document.cookie) {
             // 쿠키가 존재하는 경우, 파싱하여 map에 저장
-            this.readCookie();
+            this.parseCookie();
         } else {
             // 쿠키가 존재하지 않으면 Product : 빈 배열로 초기화
             this.map["product"] = [];
         }
     }
 
-    readCookie() {
+    parseCookie() {
         const cookieDecoded = decodeURIComponent(document.cookie);
         const cookieTokens = cookieDecoded.split(";");
 
@@ -297,145 +301,167 @@ class Cookie {
     }
 
     save() {
-        let list = this.map["product"];
-        let size = list.length;
-        let lastIndex = size - 1;
-
-        let str = "[";
-        for (let m of list) {
-            str += JSON.stringify(m);
-            if (m !== list[lastIndex])
-                str += ",";
-        }
-        str += "]";
-
-        const encoded = encodeURIComponent(str);
-        document.cookie = `product=${encoded}; path=/;`;
+        const productList = this.map["product"];
+        const encodedProducts = encodeURIComponent(JSON.stringify(productList));
+        document.cookie = `product=${encodedProducts}; path=/;`;
     }
 
     addItem(name, item) {
-        // 기존의 값을 가져와서 새로운 값을 추가, falsy 이용 쿠키 값 없으면 배열 초기화.
+        //this.map[product]가 undefined 인 경우, 빈 배열로 초기화
         const existingItems = this.map[name] || [];
         existingItems.push(item);
         this.map[name] = existingItems;
     }
 
     remove(name) {
-        const cookieDecoded = decodeURIComponent(document.cookie);
-        const cookieTokens = cookieDecoded.split(";");
-
-        // 'product' 쿠키가 존재하는 경우 삭제
-        for (const cookie of cookieTokens) {
-            const [key] = cookie.split("=").map(item => item.trim());
-            if (key === name) {
-                document.cookie = `${key}=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-                console.log(`쿠키 '${name}'가 성공적으로 삭제되었습니다.`);
-                delete this.map[name]; // map에서도 해당 쿠키를 삭제
-                break;
-            }
-        }
+        document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+        delete this.map[name];
     }
+
 
 }
 
 // 임시저장 기능 구현
+
 window.addEventListener("load", function () {
 
     const formSection = document.querySelector("#reg-form");
+
+    const category = formSection.querySelector('#category .selected-option-category');
+    const selectedCategory = formSection.querySelector('.selected-category');
 
     const name = formSection.querySelector('[name="name"]');
     const price = formSection.querySelector('[name="price"]');
 
     const weight = formSection.querySelector('[name="weight"]');
-    const weightCategory = formSection.querySelector('.options .optionWeight.selected');
-    const selectedWeight = weightCategory ? weightCategory.getAttribute('data-value') : null;
+    const weightCategory = formSection.querySelector('#weight .selected-option');
+    const selectedWeight = formSection.querySelector('.selected-weight');
 
     const quantity = formSection.querySelector('[name="quantity"]');
-    const quantityCategory = formSection.querySelector('.options .optionQuantity.selected');
-    const selectedQuantity = quantityCategory ? quantityCategory.getAttribute('data-value') : null;
+    const quantityCategory = formSection.querySelector('#quantity .selected-option');
+    const selectedQuantity = formSection.querySelector('.selected-quantity');
 
     const exp = formSection.querySelector('[name="exp"]');
 
-    const storage = formSection.querySelector('.options .optionStorage.selected');
-    const selectedStorage = storage ? storage.getAttribute('data-value') : null;
+    const storage = formSection.querySelector('#storage .selected-option');
+    const selectedStorage = formSection.querySelector('.selected-storage');
 
     const desc = formSection.querySelector('[name="desc"]');
 
     const state = formSection.querySelector('[name="state"]');
-    const stateChecked = state.checked;
+    let stateChecked = state.checked;
 
     const tempSave = formSection.querySelector('.temp-save');
 
 
     // 쿠키 정보 가져와서 값 넣기
     let cookie = new Cookie();
+    let hasCookie = document.cookie;
     let cookieData = cookie.get("product");
-    if (cookieData) {
-        name.value = cookieData.name;
-        price.value = cookieData.price;
-        weight.value = cookieData.weight;
-        if (selectedWeight) {
-            const weightOptions = document.querySelectorAll('.option-weight-list .option-weight');
-            weightOptions.forEach(option => {
-                if (option.getAttribute('data-value') === selectedWeight) {
-                    option.classList.add('selected');
-                }
-            });
-        }
-        quantity.value = cookieData.quantity;
-        // 개수 선택
-        if (selectedQuantity) {
-            const quantityOptions = document.querySelectorAll('.option-quantity-list .option-quantity');
-            quantityOptions.forEach(option => {
-                if (option.getAttribute('data-value') === selectedQuantity) {
-                    option.classList.add('selected');
-                }
-            });
-        }
-        exp.value = cookieData.exp;
+    if (hasCookie) {
 
-        // 보관유형 선택
-        if (selectedStorage) {
-            const storageOptions = document.querySelectorAll('.option-storage-list .option-storage');
-            storageOptions.forEach(option => {
-                if (option.getAttribute('data-value') === selectedStorage) {
-                    option.classList.add('selected');
-                }
-            });
+        // 상품 카테고리
+        selectedCategory.value = cookieData[0].selectedCategory;
+        switch (parseInt(cookieData[0].selectedCategory)) {
+            case 1:
+                category.textContent = "과채";
+                break;
+            case 2:
+                category.textContent = "양념";
+                break;
+            case 3:
+                category.textContent = "가공식품";
+                break;
+            default:
+                break;
         }
 
-        desc.value = cookieData.desc;
+        name.value = cookieData[0].name;
+        price.value = cookieData[0].price;
+
+        // 중량
+        weight.value = cookieData[0].weight;
+        selectedWeight.value = cookieData[0].selectedWeight;
+        switch (parseInt(cookieData[0].selectedWeight)) {
+            case 1:
+                weightCategory.textContent = "g";
+                break;
+            case 2:
+                weightCategory.textContent = "kg";
+                break;
+            case 3:
+                weightCategory.textContent = "g 내외";
+                break;
+            case 4:
+                weightCategory.textContent = "kg 내외";
+                break;
+            default:
+                break;
+        }
+
+        // 개수
+        quantity.value = cookieData[0].quantity;
+        selectedQuantity.value = cookieData[0].selectedQuantity;
+        switch (parseInt(cookieData[0].selectedQuantity)) {
+            case 1:
+                quantityCategory.textContent = "통";
+                break;
+            case 2:
+                quantityCategory.textContent = "개";
+                break;
+            case 3:
+                quantityCategory.textContent = "봉";
+                break;
+            case 4:
+                quantityCategory.textContent = "팩";
+                break;
+            default:
+                break;
+        }
+        exp.value = cookieData[0].exp;
+
+        //상품보관유형
+        switch (parseInt(cookieData[0].selectedStorage)) {
+            case 1:
+                storage.textContent = "실온보관";
+                break;
+            case 2:
+                storage.textContent = "냉장보관";
+                break;
+            case 3:
+                storage.textContent = "냉동보관";
+                break;
+            default:
+                break;
+        }
+
+        desc.value = cookieData[0].desc;
 
         // 상태 체크
-        if (stateChecked) {
-            const stateCheckbox = document.querySelector('[name="state"]');
-            stateCheckbox.checked = stateChecked;
-        }
+        state.checked = cookieData[0].stateChecked;
 
     }
 
 
     // 임시저장 버튼 클릭 시
     tempSave.onclick = function (e) {
-        if (!e.target.classList.contains("temp-save"))
-            return;
+        if (!e.target.classList.contains("temp-save")) return;
 
         console.log("tmp-save clicked!")
 
         let item = {
-            name: name.value,
-            price: price.value,
-            weight: weight.value,
-            selectedWeight: selectedWeight,
-            quantity: quantity.value,
-            selectedQuantity: selectedQuantity,
-            exp: exp.value,
-            selectedStorage: selectedStorage,
-            desc: desc.value,
-            stateChecked: stateChecked
+            selectedCategory: selectedCategory.value,
+            name            : name.value,
+            price           : price.value,
+            weight          : weight.value,
+            selectedWeight  : selectedWeight.value,
+            quantity        : quantity.value,
+            selectedQuantity: selectedQuantity.value,
+            exp             : exp.value,
+            selectedStorage : selectedStorage.value,
+            desc            : desc.value,
+            stateChecked    : stateChecked
         };
-
-        console.log("item = ", item.name);
         for (let i in item)
             console.log("i = ", item[i])
 
@@ -445,6 +471,13 @@ window.addEventListener("load", function () {
         cookie.addItem("product", item);
         cookie.save();
     };
+
+
+    // 상태 체크박스 변화 감지
+    state.addEventListener('change', function () {
+        stateChecked = state.checked;
+        console.log("stateChecked = ", stateChecked)
+    });
 
 
 });
