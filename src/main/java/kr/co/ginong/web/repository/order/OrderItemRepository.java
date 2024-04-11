@@ -9,5 +9,5 @@ import java.util.List;
 public interface OrderItemRepository {
     List<OrderItem> findAll(Long orderId);
 
-    boolean save(List<OrderItem> items);
+    boolean save(OrderItem item);
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ginong.web.repository.order.PaymentRepository">
+
+	<insert id="save" parameterType="Payment">
+		INSERT INTO PAYMENT (TOTAL_AMT, REFUND_TYPE, MEMBER_ID, CATEGORY_ID, DELIVERY_FEE_CATEGORY_ID, ORDER_ID)
+		VALUES (
+			#{totalAmt}
+			,#{refundType}
+			,#{memberId}
+			,#{categoryId}
+			,#{deliveryFeeCategoryId}
+			,#{orderId}
+		)
+	</insert>
+
+</mapper>

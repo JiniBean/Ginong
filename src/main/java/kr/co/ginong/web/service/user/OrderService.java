@@ -13,6 +13,6 @@ public interface OrderService {
 
 
     boolean add(Order order);
-    boolean addItems(List<OrderItem> items);
+    boolean addItem(OrderItem item);
 
 }

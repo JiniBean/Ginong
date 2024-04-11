@@ -40,6 +40,8 @@ public class OrderController {
     @Autowired
     private LocationService locationService;
 
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("info")
     public String info(Model model
@@ -91,7 +93,6 @@ public class OrderController {
         session.setAttribute("orderItems", items);
         session.setAttribute("memberId", mId);
 
-
         return "user/order/info";
     }
 
@@ -120,7 +121,7 @@ public class OrderController {
         String str = dateString + randomNumber1 + randomNumber2;
         Long id = Long.parseLong(str);
 
-//        상품정보id, location id order 테이블에 넣기
+        //상품정보 id, location id order 테이블에 넣기
         Order order = Order.builder()
                 .id(id)
                 .type(1)
@@ -129,12 +130,15 @@ public class OrderController {
                 .build();
 
 
+        //주문 테이블과 주문 아이템 테이블에 저장하기
         boolean vaild = service.add(order);
-        if (vaild){
-            for (OrderItem i : items)
-                i.setOrderId(id);
 
-            service.addItems(items);
+        // 주문테이블 저장 성공 했을 때 주문 아이템 넣음
+        if (vaild){
+            for (OrderItem i : items){
+                i.setOrderId(id);
+                service.addItem(i);
+            }
         }
 
         //LOCATION_HISTORY 테이블에 넣기
@@ -144,21 +148,21 @@ public class OrderController {
 
         locationService.addHistory(locationHistory);
 
-        //난수로 만든 detail_id로 pay로 주소보내기
-        return "redirect:pay?o=" + id;
+        //세션에 주문 아이템 정보 업데이트
+        session.setAttribute("orderItems", items);
+
+        return "redirect:pay";
     }
 
     @GetMapping("pay")
     public String pay(
-            @RequestParam(name = "o", required = false) Long orderId
+            HttpSession session
             , Model model
     ) {
 
         // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
-        List<OrderItem> items = service.getItems(orderId);
-        List<Order> list = service.get(orderId);
-
-        Long memberId = list.get(0).getMemberId();
+        List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
+        Long memberId = (Long) session.getAttribute("memberId");
 
         List<ProductView> prdList = new ArrayList<>();
 
@@ -181,27 +185,32 @@ public class OrderController {
         int point = pointService.getAvailPont(memberId);
 
         // 모델
-        model.addAttribute("list", list);
+        model.addAttribute("items", items);
         model.addAttribute("prdList", prdList);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("point", point);
         model.addAttribute("couponList", couponList);
-
         return "user/order/pay";
     }
 
     @PostMapping("pay")
     public String pay(
-            Payment payment,
-            Long couponId,
-            Integer point
+            Payment payment
+            ,Long couponId
+            ,Integer point
+            ,HttpSession session
     ){
 
         //memberID setting (추후 세션으로 바뀔지도)
-        Long orderId = payment.getOrderId();
-        Order order = service.get(orderId).get(0);
-        Long memberId = order.getMemberId();
+        List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
+        Long orderId = items.get(0).getOrderId();
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        //결제정보 결제 테이블에 저장하기
+        payment.setOrderId(orderId);
         payment.setMemberId(memberId);
+
+        paymentService.add(payment);
 
         //couponHistory update
 

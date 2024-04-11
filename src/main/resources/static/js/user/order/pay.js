@@ -45,9 +45,9 @@ window.addEventListener("load", function () {
         couponList.classList.remove("active");
 
         //쿠폰의 데이터로 할인 가격 계산하기
-        let amut = e.target.dataset.amut;
+        let amut = parseInt(e.target.dataset.amut);
         if (e.target.dataset.unit === '%')
-            couponDisc = totalSpan.dataset.total * (amut / 100);
+            couponDisc = parseInt(totalSpan.dataset.total) * (amut / 100);
         else
             couponDisc = amut;
 
@@ -79,7 +79,7 @@ window.addEventListener("load", function () {
 
     usePointBtn.onclick = function (e) {
 
-        let point = remainPoint.dataset.point;
+        let point = parseInt(remainPoint.dataset.point);
         let inputValue = point;
 
         let check = validate(inputValue, point);
@@ -124,9 +124,8 @@ window.addEventListener("load", function () {
     //총 결제금액 꽂아주기
     function total(couponDisc= 0, pointDisc= 0) {
 
-        let dlvry = dlvryAmt.dataset.cost;
-        let cost = totalSpan.dataset.total - couponDisc - pointDisc - dlvry;
-
+        let dlvry = parseInt(dlvryAmt.dataset.cost);
+        let cost = parseInt(totalSpan.dataset.total) - (couponDisc + pointDisc) + dlvry;
         totalAmt.textContent = formatNumber(cost);
         let totalInput = paySummary.querySelector(".total-input");
         totalInput.value = cost;
