@@ -70,16 +70,16 @@ window.addEventListener("load", function () {
     var rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
     var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
     
-    var alignNumberBox = sortSection.querySelector(".align-number");
+    let alignNumberBox = sortSection.querySelector(".align-number");        // 데이터 표시 갯수 체크
 
     // URLSearchParams를 사용하여 현재 URL의 파라미터 가져오기
     var params = new URLSearchParams(window.location.search);
+    // 현재 페이지의 도메인, 포트를 가져오기. (application.yaml에서 port변경하는 경우를 위함)
+    let baseUrl = window.location.origin;
 
     // 특정 파라미터 값 가져오기
     var c = params.get('c');
 
-    // 현재 페이지의 도메인, 포트를 가져오기. (application.yaml에서 port변경하는 경우를 위함)
-    let baseUrl = window.location.origin;
 
     var priceBtn = sortSection.querySelector(".price"); //가격순
     var recommendBtn = sortSection.querySelector(".recommend"); //추천순
@@ -160,20 +160,22 @@ window.addEventListener("load", function () {
         });
     }
 
-    alignNumberBox.onclick = function(e) {
+    /* 상품 display 갯수 선택, default 20*/
+    alignNumberBox.onchange = function(e) {
+        e.stopPropagation();
         e.preventDefault();
-
-        let baseUrl = window.location.origin;
-        url = `${baseUrl}/user/api/product?p=1&c=${c}`;
-
-        console.log(baseUrl);
-        console.log(url);
 
         let alignNumber = alignNumberBox.value;
 
-        if (!url.includes("c"))
-            url = `${baseUrl}/user/api/product?p=1&c=${c}&rows=${alignNumber}`;
-    }
+        url = `${baseUrl}/user/api/product?p=1&c=${c}&r=${alignNumber}`;
+        console.log(url, alignNumber);
+
+        // request(url, function (list) {
+        //     bind(list);
+        //     console.log(`${alignNumber}개씩 출력`);
+        // });
+    }  
+    
 
     cartSection.onclick = function (e){
         // e.preventDefault();
