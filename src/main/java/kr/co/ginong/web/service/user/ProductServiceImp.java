@@ -19,60 +19,60 @@ public class ProductServiceImp implements ProductService {
     @Override
     public List<ProductView> getList(Integer page) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(null, null, offset, size, null);
-
-        return list;
+        // List<ProductView> list = repository.findAll(null, null, offset, size, null);
+        // return list;
+        return getList(page, null, null, null);
     }
 
     @Override
     public List<ProductView> getList(Integer page, Integer sortType) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(null, null, offset, size, sortType);
-
-        return list;
+        // List<ProductView> list = repository.findAll(null, null, offset, size, sortType);
+        // return list;
+        return getList(page, null, null, sortType);
     }
 
     @Override
     public List<ProductView> getList(Integer page, String query) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(null, query, offset, size, null);
-
-        return list;
+        // List<ProductView> list = repository.findAll(null, query, offset, size, null);
+        // return list;
+        return getList(page, query, null, null);
     }
 
     @Override
     public List<ProductView> getList(Integer page, Long categoryId) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(categoryId, null, offset, size, null);
-
-        return list;
+        // List<ProductView> list = repository.findAll(categoryId, null, offset, size, null);
+        // return list;
+        return getList(page, null, categoryId, null);
+    }
+    
+    @Override
+    public List<ProductView> getList(Integer page, Long categoryId, String query) {
+        int offset = (page-1) * size;
+        // List<ProductView> list = repository.findAll(categoryId, query, offset, size, null);
+        // return list;
+        return getList(page, query, categoryId, null);
     }
 
     @Override
     public List<ProductView> getList(Integer page, String query, Integer sortType) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(null, query, offset, size, sortType);
-
-        return list;
+        // List<ProductView> list = repository.findAll(null, query, offset, size, sortType);
+        // return list;
+        return getList(page, query, null, sortType);
     }
-
-    @Override
-    public List<ProductView> getList(Integer page, Long categoryId, String query) {
-        int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(categoryId, query, offset, size, null);
-
-        return list;
-    }
-
+    
     @Override
     public List<ProductView> getList(Integer page, Long categoryId, Integer sortType) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(categoryId, null, offset, size, sortType);
+        // List<ProductView> list = repository.findAll(categoryId, null, offset, size, sortType);
+        // return list;
 
-        return list;
+        return getList(page, null, categoryId, sortType);
     }
 
-    @Override
     public List<ProductView> getList(Integer page, String query, Long categoryId, Integer sortType) {
         int offset = (page-1) * size;
         List<ProductView> list = repository.findAll(categoryId, query, offset, size, sortType);
