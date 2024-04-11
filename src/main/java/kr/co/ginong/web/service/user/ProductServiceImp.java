@@ -1,6 +1,7 @@
 package kr.co.ginong.web.service.user;
 
 
+import kr.co.ginong.web.dto.Pager;
 import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.repository.product.ProductRepository;
@@ -79,6 +80,17 @@ public class ProductServiceImp implements ProductService {
 
         return list;
     }
+
+    // pager : size, page를 담은 dto 객체
+    @Override
+    public List<ProductView> getList(Long categoryId, String query, Integer sortType, Pager pager) {
+        int offset = pager.getOffset();
+        int size = pager.getSize();
+
+        System.out.println(size);
+        return repository.findAll(categoryId, query, offset, size, sortType);
+    }
+
 
     @Override
     public int count() {

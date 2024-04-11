@@ -63,6 +63,7 @@ window.addEventListener("load", function () {
 
     var sortSection = document.getElementById("sort");
     var prdList = document.getElementById("prd-list");
+    let pagerSection = document.getElementById("pager");
 
     var colBtn = sortSection.querySelector(".icon\\:squares_four"); //모바일 버전 세로 정렬 버튼
     var rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
@@ -71,6 +72,8 @@ window.addEventListener("load", function () {
     var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
     
     let alignNumberBox = sortSection.querySelector(".align-number");        // 데이터 표시 갯수 체크
+
+    let pagerButtons = pagerSection.querySelectorAll("li a");
 
     // URLSearchParams를 사용하여 현재 URL의 파라미터 가져오기
     var params = new URLSearchParams(window.location.search);
@@ -170,11 +173,24 @@ window.addEventListener("load", function () {
         url = `${baseUrl}/user/api/product?p=1&c=${c}&r=${alignNumber}`;
         console.log(url, alignNumber);
 
-        // request(url, function (list) {
-        //     bind(list);
-        //     console.log(`${alignNumber}개씩 출력`);
-        // });
-    }  
+        request(url, function (list) {
+            bind(list);
+            updatePagerLink(alignNumber);
+            console.log(`${alignNumber}개씩 출력`);
+        });
+    }
+
+    function updatePagerLink(size) {
+        // console.log(pagerButtons);
+        for(let a of pagerButtons) {
+            // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+            let parts = a.href.split('?'); // ['/list', 'p=1&r=1']
+            let params = new URLSearchParams(parts[1] || '');
+            params.set('r', size);
+            a.href = `${parts[0]}?${params.toString()}`;
+            // console.log(a.href, a);
+        }
+    }
     
 
     cartSection.onclick = function (e){

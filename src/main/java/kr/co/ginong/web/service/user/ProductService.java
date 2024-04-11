@@ -1,5 +1,6 @@
 package kr.co.ginong.web.service.user;
 
+import kr.co.ginong.web.dto.Pager;
 import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 
@@ -15,6 +16,7 @@ public interface ProductService {
     List<ProductView> getList(Integer page, Long categoryId, String query);
     List<ProductView> getList(Integer page, Long categoryId, Integer sortType);
     List<ProductView> getList(Integer page, String query, Long categoryId, Integer sortType);
+    List<ProductView> getList(Long categoryId, String query, Integer sortType, Pager pager);
 
     int count();
     int count(Long categoryId);
