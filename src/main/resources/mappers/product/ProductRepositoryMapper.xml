@@ -13,7 +13,7 @@
 				category_id = #{categoryId}
 			</if>
 			<if test="query != null">
-				name like '%${query}%'
+				AND name like '%${query}%'
 			</if>
 		</where>
 		<choose>
@@ -44,7 +44,7 @@
 				category_id = #{categoryId}
 			</if>
 			<if test="query != null">
-				name like '%${query}%'
+				AND name like '%${query}%'
 			</if>
 		</where>
 	</select>
