@@ -1,7 +1,6 @@
 package kr.co.ginong.web.controller.user;
 
 import jakarta.servlet.http.HttpSession;
-import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.*;
@@ -10,13 +9,14 @@ import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("user/order")
@@ -45,16 +45,22 @@ public class OrderController {
 
     @GetMapping("info")
     public String info(Model model
-            , @RequestParam(name = "p") Long prdId
-            , @RequestParam(name = "q") Integer qty
+            , @RequestParam(name = "p", required = false) Long prdId
+            , @RequestParam(name = "q", required = false) Integer qty
             , HttpSession session
     ) {
 
-        //상품정보 가져오기
-        List<OrderItem> items = new ArrayList<>();
-        OrderItem item = OrderItem.builder().productId(prdId).quantity(qty).build();
-        items.add(item);
 
+        List<OrderItem> items = new ArrayList<>();
+
+        //상품정보 가져오기
+        //파라미터 없다면 세션에서 꺼내오기
+        if(prdId != null && qty != null){
+            OrderItem item = OrderItem.builder().productId(prdId).quantity(qty).build();
+            items.add(item);
+        }
+        else
+            items = (List<OrderItem>) session.getAttribute("orderItems");
 
         //총상품값 계산해서 넣기
         List<ProductView> prdList = new ArrayList<>();
@@ -73,6 +79,23 @@ public class OrderController {
             totalPrice += total;
         }
 
+
+        //주문 정보 + 상품 정보 List<Map>으로 만들기
+        List<Map<String, Object>> list = new ArrayList<>();
+
+        for (OrderItem i : items)
+            for (ProductView p : prdList)
+                if (i.getProductId() == p.getId()) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", p.getId());
+                    map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
+                    map.put("img", p.getThumbnailPath()+p.getThumbnailName());
+                    map.put("price", i.getPrice());
+                    map.put("quantity", i.getQuantity()+ "개");
+                    list.add(map);
+                }
+
+
         //================================================================
         String name = "dmswls"; //로그인 구현 전이라 박아놓은 MEMBER_NAME
 
@@ -86,11 +109,12 @@ public class OrderController {
         //모델 및 세션
         model.addAttribute("location", location);
         model.addAttribute("member", member);
-        model.addAttribute("list", items);
-        model.addAttribute("prdList", prdList);
+        model.addAttribute("items", list);
         model.addAttribute("totalPrice", totalPrice);
 
+        session.setAttribute("totalPrice", totalPrice);
         session.setAttribute("orderItems", items);
+        session.setAttribute("orderItemsList", list);
         session.setAttribute("memberId", mId);
 
         return "user/order/info";
@@ -130,15 +154,15 @@ public class OrderController {
                 .build();
 
 
-        //주문 테이블과 주문 아이템 테이블에 저장하기
+        //주문 테이블 저장하기
         boolean vaild = service.add(order);
 
-        // 주문테이블 저장 성공 했을 때 주문 아이템 넣음
+        // 주문테이블 저장 성공 했을 때 주문 아이템들 저장하기
         if (vaild){
             for (OrderItem i : items){
                 i.setOrderId(id);
-                service.addItem(i);
             }
+            service.addItems(items);
         }
 
         //LOCATION_HISTORY 테이블에 넣기
@@ -150,6 +174,7 @@ public class OrderController {
 
         //세션에 주문 아이템 정보 업데이트
         session.setAttribute("orderItems", items);
+        session.setAttribute("orderId", id);
 
         return "redirect:pay";
     }
@@ -161,22 +186,11 @@ public class OrderController {
     ) {
 
         // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
-        List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
+        List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
+        int totalPrice = (int) session.getAttribute("totalPrice");
         Long memberId = (Long) session.getAttribute("memberId");
 
-        List<ProductView> prdList = new ArrayList<>();
 
-        int totalPrice = 0;
-        for (OrderItem i : items) {
-            long prdId = i.getProductId();
-            ProductView prd = productService.get(prdId);
-            prdList.add(prd);
-
-            int price = i.getPrice();
-            int quantity = i.getQuantity();
-            int total = price * quantity;
-            totalPrice += total;
-        }
 
         // 사용가능한 쿠폰 조회
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
@@ -186,7 +200,6 @@ public class OrderController {
 
         // 모델
         model.addAttribute("items", items);
-        model.addAttribute("prdList", prdList);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("point", point);
         model.addAttribute("couponList", couponList);
@@ -201,9 +214,8 @@ public class OrderController {
             ,HttpSession session
     ){
 
-        //memberID setting (추후 세션으로 바뀔지도)
-        List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
-        Long orderId = items.get(0).getOrderId();
+        //session에서 주문 번호와 사용자 번호 가져오기
+        Long orderId = (Long) session.getAttribute("orderId");
         Long memberId = (Long) session.getAttribute("memberId");
 
         //결제정보 결제 테이블에 저장하기
@@ -216,13 +228,40 @@ public class OrderController {
 
         //pointHistory update
 
+        //결제금액 넘기기
+        int totalAmt = payment.getTotalAmt();
+        session.setAttribute("totalAmt", totalAmt);
 
         return "redirect:complete";
     }
 
 
     @GetMapping("complete")
-    public String complete() {
+    public String complete(HttpSession session, Model model) {
+
+        //주문 정보 가져오기
+        List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
+        Map<String, Object> item = items.get(0); //첫번째
+        int size = items.size()-1; //외 N건
+
+        int totalAmt = (int) session.getAttribute("totalAmt");//총 결제금액
+
+
+        // 사용자 이름 가져오기
+        Long memberId = (Long) session.getAttribute("memberId");
+        Member member = memberService.get(memberId);
+        String name = member.getName();
+
+        model.addAttribute("item", item);
+        model.addAttribute("size", size);
+        model.addAttribute("totalAmt", totalAmt);
+        model.addAttribute("name", name);
+
+        //세션에 있는 주문 정보 지우기
+        session.removeAttribute("orderId");
+        session.removeAttribute("totalPrice");
+        session.removeAttribute("orderItems");
+        session.removeAttribute("orderItemsList");
 
         return "user/order/complete";
     }

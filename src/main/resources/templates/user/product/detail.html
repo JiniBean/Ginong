@@ -49,12 +49,12 @@
                 </div>
             </div>
             <div class="d:flex ai:center h:3 bd-top bd-bottom bd-color:base-3">
-                <div class="fl-grow:1 d:flex jc:center deco icon:smile deco-color:sub-4 deco-size:2"
+                <div class="fl-grow:1 d:flex jc:center deco icon:smile deco-color:sub-4 deco-size:2 icon-size:2"
                      th:text="${productView.likeCount}">추천수
                 </div>
                 <div class="h:6p bd-left bd-color:base-3 " style="width: 1px"></div>
                 <div class="fl-grow:1 d:flex ai:center jc:center"><a href=""
-                                                                     class="deco icon:share_network deco-size:2">공유하기</a>
+                                                                     class="deco icon:share_network deco-size:2 icon-size:2">공유하기</a>
                 </div>
             </div>
             <div class="d:flex fl-dir:column gap:3 mr:4 ml:4">
@@ -215,7 +215,7 @@
             <h1>후기</h1>
             <div class="d:flex fl-dir:column gap:2 bd-top bd-color:base-5">
                 <div class="d:flex fl-dir:row mt:2 gap:3 ai:center">
-              <span class="deco icon:leaf deco-size:4 icon-color:sub-5 d:flex ai:center jc:center"
+              <span class="deco icon:leaf deco-size:4 icon-size:4 icon-color:sub-5 d:flex ai:center jc:center"
                     th:text="${r.tagClap ? '최고에요' : (r.tagFresh ? '신선해요' : (r.tagThumbs ? '추천해요' : ''))}">신선해요</span>
                 </div>
                 <div class="d:flex fl-dir:column gap:1">
@@ -268,7 +268,7 @@
 
                 <div class="d:flex jc:space-around bd-bottom bd-color:base-3 h:4 ai:center jc:center">
                     <div class="w:1p d:flex ai:center jc:center">
-                        <span class="deco icon:leaf deco-size:4 icon-color:sub-5"
+                        <span class="deco icon:leaf deco-size:4 icon-size:4 icon-color:sub-5"
                               th:text="${r.tagClap ? '최고에요' : (r.tagFresh ? '신선해요' : (r.tagThumbs ? '추천해요' : ''))}">신선해요</span>
                         <span class="n-btn n-btn-size:1 ml:4 d:none"
                               style="background-color: var(--color-sub-5)">BEST</span>

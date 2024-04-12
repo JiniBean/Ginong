@@ -13,18 +13,23 @@
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0">
     <div class="d:flex fl-dir:column gap:2 md:gap:3 ai:center p:4">
         <div class="icon icon:checkCircle icon-color:main-6">아이콘</div>
-        <div><span>기농이</span><span>님의 주문이 완료되었습니다!</span></div>
+        <div><span th:text="${name}">기농이</span><span>님의 주문이 완료되었습니다!</span></div>
     </div>
 
     <section class="d:flex fl-dir:column gap:6 md:gap:8 p:4 bd bd-radius:2">
         <h1 class="d:none">주문 상품 정보 요약</h1>
         <div class="d:flex gap:15">
-            <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}"  src="" alt="상품 썸네일" width="88px" height="88px">
-            <span>텃밭 흙 당근, 2개입 외 3건</span>
+            <div>
+                <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}"  src="" alt="상품 썸네일" width="88px" height="88px">
+            </div>
+            <div>
+                <span th:text="${item.name}">텃밭 흙 당근, 2개입</span>
+                <span th:if="${size > 0 ? ' 외 '+ size + '건' :'' }">외 3건</span>
+            </div>
         </div>
         <div class="d:flex jc:space-between">
             <span class="fw:3">최종 결제 금액</span>
-            <span class="fw:3">30,000원</span>
+            <span class="fw:3" th:text="${#numbers.formatInteger(totalAmt,3,'COMMA') + '원' }">30,000원</span>
         </div>
     </section>
 

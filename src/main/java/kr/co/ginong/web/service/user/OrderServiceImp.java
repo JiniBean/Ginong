@@ -43,9 +43,10 @@ public class OrderServiceImp implements OrderService {
 
     }
 
+
     @Override
-    public boolean addItem(OrderItem item) {
-        boolean save = itemRepository.save(item);
+    public boolean addItems(List<OrderItem> items) {
+        boolean save = itemRepository.save(items);
         return save;
     }
 }

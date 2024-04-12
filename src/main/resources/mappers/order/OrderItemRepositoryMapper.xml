@@ -3,13 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.order.OrderItemRepository">
-    <select id="findAll" resultType="OrderItem">
+
+	<select id="findAll" resultType="OrderItem">
 		SELECT
-			*
+		*
 		FROM  ORDER_ITEM
 		WHERE ORDER_ID = #{orderId}
 	</select>
-
 	
 	<select id="findById" resultType="Order">
 		select
@@ -18,10 +18,13 @@
 		where id = #{id}
 	</select>
 
-	<insert id="save" parameterType="OrderItem">
+	<insert id="save" >
 		INSERT INTO ORDER_ITEM
-			(PRICE, QUANTITY, PRODUCT_ID, ORDER_ID)
-		VALUES (#{price}, #{quantity}, #{productId}, #{orderId})
+		(PRICE, QUANTITY, PRODUCT_ID, ORDER_ID)
+		VALUES
+		<foreach collection="items" item="item" separator=",">
+		 	(#{item.price}, #{item.quantity}, #{item.productId}, #{item.orderId})
+		</foreach>
 	</insert>
 
 </mapper>

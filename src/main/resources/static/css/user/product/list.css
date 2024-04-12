@@ -48,6 +48,11 @@
         background-color: var(--color-icon-bg);
     }
 
+    .cart-section > div:active {
+        background-color: var(--color-main-6);
+    }
+
+
     .cart-section > div:hover .icon\:shopping_cart_simple::before {
         background-color: var(--color-base-1);
     }
