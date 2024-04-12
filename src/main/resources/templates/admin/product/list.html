@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
+    <script src="/js/admin/product/list.js"></script>
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -21,57 +22,52 @@
             </fieldset>
         </form>
     </section>
-    <section class="w:10p">
+    <form class="d:flex fl-dir:column gap:8 md:gap:13" method="post">
+        <section class="w:10p">
             <h1 class="d:none">상품선택목록</h1>
             <div class="d:flex jc:space-between ai:center w:10p">
-                <div>
-                    <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
-                    <span class="fw:3">전체선택</span>
-                </div>
+                <label class="fw:3">
+                    <input type="checkbox" class="all n-toggle n-toggle-type:check n-toggle-size:1">
+                    전체 선택
+                </label>
                 <div>
                     <button class="n-btn n-btn:outline fw:3 color:main-6">품절</button>
                     <button class="n-btn fw:3">숨김</button>
                 </div>
             </div>
-        <div class="d:flex">
-            <h1 class="d:none">상품추가</h1>
-            <a class="fl-grow:1 d:flex" th:href="@{/admin/product/reg}">
-                <button class="fl-grow:1 n-btn n-btn:outline border-color:base-4 w:10p ml:7 h:4">
-                    <span class="icon icon:plus"></span>
-                </button>
+        </section>
+        <div class="fl-grow:1 n-btn n-btn:outline border-color:base-4 ml:7 h:4">
+            <a class="icon icon-size:4 icon:plus " href="/admin/product/reg}">
+                상품 추가
             </a>
         </div>
-    </section>
-    <section class="d:flex fl-dir:column gap:4 w:10p">
-        <h1 class="d:none">상품카드 목록</h1>
-        <div class="d:flex ai:center fl-dir:row gap:3" th:each="list:${list}" >
-            <div>
-                <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1">
-            </div>
-            <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
-                <a href="#" th:href="@{/admin/product/update(id=${list.id})}" class="d:flex w:10p gap:2">
+        <section class="d:flex fl-dir:column gap:4 w:10p" >
+            <h1 class="d:none">상품카드 목록</h1>
+            <div class="d:flex ai:center fl-dir:row gap:3" th:each="p:${list}" >
                 <div>
-                    <img src="/img/carrot.png" alt="상품썸네일">
+                    <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1" name="state" th:value="${p.id}" th:data="${p.id}">
                 </div>
-                <div class="d:flex fl-dir:column gap:2 w:10p">
-                    <div th:text="${list.name}">흙당근 2개입</div>
-                    <div th:text="${#numbers.formatInteger(list.price,3,'COMMA') + '원'}">2500</div>
-                    <div class="d:flex fl-dir:row gap:3 pos:relative">
-                        <span>재고</span>
-<!--                        <span th:text="${list.amount}">200</span>-->
-                        <span class="bar"></span>
-                        <span>상태</span>
-                        <span th:text="${list.state}">활성화</span>
-                    </div>
+                <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
+                    <a href="#" th:href="@{/admin/product/update(id=${p.id})}" class="d:flex w:10p gap:2">
+                        <div>
+                            <img src="/img/carrot.png" alt="상품썸네일">
+                        </div>
+                        <div class="d:flex fl-dir:column gap:2 w:10p">
+                            <div th:text="${p.name}">흙당근 2개입</div>
+                            <div th:text="${#numbers.formatInteger(p.price,3,'COMMA') + '원'}">2500</div>
+                            <div class="d:flex fl-dir:row gap:3 pos:relative">
+                                <span>재고</span>
+                                <!--                        <span th:text="${list.amount}">200</span>-->
+                                <span class="bar"></span>
+                                <span th:text="${p.state?'판매중':'숨김'}">활성화</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                </a>
             </div>
-        </div>
-       
+        </section>
+    </form>
 
-
-        
-    </section>
     <section class="d:flex w:10p mb:5 jc:center">
         <h1 class="d:none">페이저</h1>
         <ul class="n-pager d:flex " th:with="page=${param.p} eq null ? 1 : ${{param.p}}

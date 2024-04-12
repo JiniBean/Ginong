@@ -92,6 +92,17 @@
 		</where>
    </update>
 
+
+	<update id="updateState">
+		UPDATE PRODUCT SET STATE = FALSE
+		<where>
+			<foreach item="item" collection="ids"
+					 open="ID in (" separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</update>
+
    <delete id="delete" parameterType="Product">
 		delete from PRODUCT
 		<where>

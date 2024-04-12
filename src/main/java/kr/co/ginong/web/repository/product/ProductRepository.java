@@ -23,6 +23,8 @@ public interface ProductRepository {
     void save(Product product);
     void saveStock(Stock stock);
     void update(Product product);
+
+    void updateState(List<Long> ids);
     ProductView findById(Long productId);
 
     List<ProductView> findAll(int offset, int size);

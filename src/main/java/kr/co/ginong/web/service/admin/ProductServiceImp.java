@@ -60,5 +60,10 @@ public class ProductServiceImp implements ProductService {
     public void update(Product product) {
         repository.update(product);
     }
+
+    @Override
+    public void hidden(List<Long> ids) {
+        repository.updateState(ids);
+    }
 }
 

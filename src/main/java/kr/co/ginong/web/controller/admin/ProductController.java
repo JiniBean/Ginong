@@ -42,6 +42,14 @@ public class ProductController {
         return "admin/product/list";
     }
 
+    @PostMapping("list")
+    public String list(@RequestParam("state") List<Long> ids){
+
+        service.hidden(ids);
+
+        return "redirect:/admin/product/list";
+    }
+
     @GetMapping("reg")
     public String save(){
         return "admin/product/reg";

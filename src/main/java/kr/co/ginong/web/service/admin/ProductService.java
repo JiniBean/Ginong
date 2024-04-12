@@ -17,6 +17,7 @@ public interface ProductService {
 
     void update(Product product);
 
+    void hidden(List<Long> ids);
     ProductView get(Long productId);
 
     void delete(Long productId);
