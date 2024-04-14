@@ -43,13 +43,13 @@ public class OrderController {
     @Autowired
     private PaymentService paymentService;
 
+
     @GetMapping("info")
     public String info(Model model
             , @RequestParam(name = "p", required = false) Long prdId
             , @RequestParam(name = "q", required = false) Integer qty
             , HttpSession session
     ) {
-
 
         List<OrderItem> items = new ArrayList<>();
 
@@ -62,38 +62,32 @@ public class OrderController {
         else
             items = (List<OrderItem>) session.getAttribute("orderItems");
 
-        //총상품값 계산해서 넣기
-        List<ProductView> prdList = new ArrayList<>();
 
+        // 화면에 뿌려줄 주문 정보와 상품 정보 조합하기
+        List<Map<String, Object>> list = new ArrayList<>();
         int totalPrice = 0;
+
         for (OrderItem i : items) {
             long pId = i.getProductId();
-            ProductView prd = productService.get(pId);
-            prdList.add(prd);
+            ProductView p = productService.get(pId);
 
-            int price = prd.getPrice();
-            i.setPrice(price);
-
+            //총상품값 계산해서 넣기
+            int price = p.getPrice();
             int quantity = i.getQuantity();
             int total = price * quantity;
             totalPrice += total;
+
+            i.setPrice(price);
+
+            //주문 정보 + 상품 정보 List<Map>으로 만들기
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", pId);
+            map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
+            map.put("img", p.getThumbnailPath()+p.getThumbnailName());
+            map.put("price", price);
+            map.put("quantity", quantity+ "개");
+            list.add(map);
         }
-
-
-        //주문 정보 + 상품 정보 List<Map>으로 만들기
-        List<Map<String, Object>> list = new ArrayList<>();
-
-        for (OrderItem i : items)
-            for (ProductView p : prdList)
-                if (i.getProductId() == p.getId()) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", p.getId());
-                    map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
-                    map.put("img", p.getThumbnailPath()+p.getThumbnailName());
-                    map.put("price", i.getPrice());
-                    map.put("quantity", i.getQuantity()+ "개");
-                    list.add(map);
-                }
 
 
         //================================================================
@@ -126,6 +120,7 @@ public class OrderController {
             , HttpSession session
     ) {
 
+        //세션에서 주문 목록 가져오기
         List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
         Long memberId = (Long) session.getAttribute("memberId");
 
@@ -145,7 +140,7 @@ public class OrderController {
         String str = dateString + randomNumber1 + randomNumber2;
         Long id = Long.parseLong(str);
 
-        //상품정보 id, location id order 테이블에 넣기
+        //주문 번호, location id order 테이블에 넣기
         Order order = Order.builder()
                 .id(id)
                 .type(1)
@@ -157,7 +152,7 @@ public class OrderController {
         //주문 테이블 저장하기
         boolean vaild = service.add(order);
 
-        // 주문테이블 저장 성공 했을 때 주문 아이템들 저장하기
+        // 주문 테이블 저장 성공 했을 때 주문 목록 저장하기
         if (vaild){
             for (OrderItem i : items){
                 i.setOrderId(id);
@@ -185,14 +180,12 @@ public class OrderController {
             , Model model
     ) {
 
-        // 상품 목록 출력 관련 코드 - 상품 목록 및 총 상품 금액 계산
+        //세션에서 회원번호 및 화면에 뿌려줄 주문 정보 가져오기
         List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
         int totalPrice = (int) session.getAttribute("totalPrice");
         Long memberId = (Long) session.getAttribute("memberId");
 
-
-
-        // 사용가능한 쿠폰 조회
+        // DB에서 사용가능한 쿠폰 리스트 가져오기
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
 
         // 잔여 적립금 조회
@@ -214,21 +207,20 @@ public class OrderController {
             ,HttpSession session
     ){
 
-        //session에서 주문 번호와 사용자 번호 가져오기
+        //session에서 주문 번호와 회원 번호 가져오기
         Long orderId = (Long) session.getAttribute("orderId");
         Long memberId = (Long) session.getAttribute("memberId");
 
         //결제정보 결제 테이블에 저장하기
         payment.setOrderId(orderId);
         payment.setMemberId(memberId);
-
         paymentService.add(payment);
 
         //couponHistory update
 
         //pointHistory update
 
-        //결제금액 넘기기
+        //결제금액 세션으로 넘기기
         int totalAmt = payment.getTotalAmt();
         session.setAttribute("totalAmt", totalAmt);
 
@@ -241,7 +233,7 @@ public class OrderController {
 
         //주문 정보 가져오기
         List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
-        Map<String, Object> item = items.get(0); //첫번째
+        Map<String, Object> item = items.get(0); //주문 목록 중 첫번째 상품
         int size = items.size()-1; //외 N건
 
         int totalAmt = (int) session.getAttribute("totalAmt");//총 결제금액
@@ -252,14 +244,16 @@ public class OrderController {
         Member member = memberService.get(memberId);
         String name = member.getName();
 
+        // 모델
         model.addAttribute("item", item);
         model.addAttribute("size", size);
         model.addAttribute("totalAmt", totalAmt);
         model.addAttribute("name", name);
 
-        //세션에 있는 주문 정보 지우기
+        //세션에 있는 주문 관련 정보들 지우기
         session.removeAttribute("orderId");
         session.removeAttribute("totalPrice");
+        session.removeAttribute("totalAmt");
         session.removeAttribute("orderItems");
         session.removeAttribute("orderItemsList");
 

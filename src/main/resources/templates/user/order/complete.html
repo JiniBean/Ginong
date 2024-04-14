@@ -24,7 +24,7 @@
             </div>
             <div>
                 <span th:text="${item.name}">텃밭 흙 당근, 2개입</span>
-                <span th:if="${size > 0 ? ' 외 '+ size + '건' :'' }">외 3건</span>
+                <span th:if="${size > 0}" th:text="' 외 '+ ${size} + '건'">외 3건</span>
             </div>
         </div>
         <div class="d:flex jc:space-between">
