@@ -322,156 +322,58 @@ class Cookie {
 }
 
 // 임시저장 기능 구현
-
 window.addEventListener("load", function () {
 
     const formSection = document.querySelector("#reg-form");
-
-    const category = formSection.querySelector('#category .selected-option-category');
-    const selectedCategory = formSection.querySelector('.selected-category');
-
+    const categoryId = formSection.querySelector('.selected-category');
     const name = formSection.querySelector('[name="name"]');
     const price = formSection.querySelector('[name="price"]');
-
     const weight = formSection.querySelector('[name="weight"]');
-    const weightCategory = formSection.querySelector('#weight .selected-option');
-    const selectedWeight = formSection.querySelector('.selected-weight');
-
+    const weightCategoryId = formSection.querySelector('.selected-weight');
     const quantity = formSection.querySelector('[name="quantity"]');
-    const quantityCategory = formSection.querySelector('#quantity .selected-option');
-    const selectedQuantity = formSection.querySelector('.selected-quantity');
-
+    const quantityCategoryId = formSection.querySelector('.selected-quantity');
     const exp = formSection.querySelector('[name="exp"]');
-
-    const storage = formSection.querySelector('#storage .selected-option');
-    const selectedStorage = formSection.querySelector('.selected-storage');
-
+    const storageTypeId = formSection.querySelector('.selected-storage');
     const desc = formSection.querySelector('[name="desc"]');
-
     const state = formSection.querySelector('[name="state"]');
     let stateChecked = state.checked;
-
     const tempSave = formSection.querySelector('.temp-save');
-
-
-    // 쿠키 정보 가져와서 값 넣기
-    let cookie = new Cookie();
-    let hasCookie = document.cookie;
-    let cookieData = cookie.get("product");
-    if (hasCookie) {
-
-        // 상품 카테고리
-        selectedCategory.value = cookieData[0].selectedCategory;
-        switch (parseInt(cookieData[0].selectedCategory)) {
-            case 1:
-                category.textContent = "과채";
-                break;
-            case 2:
-                category.textContent = "양념";
-                break;
-            case 3:
-                category.textContent = "가공식품";
-                break;
-            default:
-                break;
-        }
-
-        name.value = cookieData[0].name;
-        price.value = cookieData[0].price;
-
-        // 중량
-        weight.value = cookieData[0].weight;
-        selectedWeight.value = cookieData[0].selectedWeight;
-        switch (parseInt(cookieData[0].selectedWeight)) {
-            case 1:
-                weightCategory.textContent = "g";
-                break;
-            case 2:
-                weightCategory.textContent = "kg";
-                break;
-            case 3:
-                weightCategory.textContent = "g 내외";
-                break;
-            case 4:
-                weightCategory.textContent = "kg 내외";
-                break;
-            default:
-                break;
-        }
-
-        // 개수
-        quantity.value = cookieData[0].quantity;
-        selectedQuantity.value = cookieData[0].selectedQuantity;
-        switch (parseInt(cookieData[0].selectedQuantity)) {
-            case 1:
-                quantityCategory.textContent = "통";
-                break;
-            case 2:
-                quantityCategory.textContent = "개";
-                break;
-            case 3:
-                quantityCategory.textContent = "봉";
-                break;
-            case 4:
-                quantityCategory.textContent = "팩";
-                break;
-            default:
-                break;
-        }
-        exp.value = cookieData[0].exp;
-
-        //상품보관유형
-        switch (parseInt(cookieData[0].selectedStorage)) {
-            case 1:
-                storage.textContent = "실온보관";
-                break;
-            case 2:
-                storage.textContent = "냉장보관";
-                break;
-            case 3:
-                storage.textContent = "냉동보관";
-                break;
-            default:
-                break;
-        }
-
-        desc.value = cookieData[0].desc;
-
-        // 상태 체크
-        state.checked = cookieData[0].stateChecked;
-
-    }
-
 
     // 임시저장 버튼 클릭 시
     tempSave.onclick = function (e) {
+
+        // 임시저장 버튼이 아닌 경우 return
         if (!e.target.classList.contains("temp-save")) return;
 
         console.log("tmp-save clicked!")
 
         let item = {
-            selectedCategory: selectedCategory.value,
-            name            : name.value,
-            price           : price.value,
-            weight          : weight.value,
-            selectedWeight  : selectedWeight.value,
-            quantity        : quantity.value,
-            selectedQuantity: selectedQuantity.value,
-            exp             : exp.value,
-            selectedStorage : selectedStorage.value,
-            desc            : desc.value,
-            stateChecked    : stateChecked
+            categoryId          : categoryId.value,
+            name                : name.value,
+            price               : price.value,
+            weight              : weight.value,
+            weightCategoryId    : weightCategoryId.value,
+            quantity            : quantity.value,
+            quantityCategoryId  : quantityCategoryId.value,
+            exp                 : exp.value,
+            storageTypeId       : storageTypeId.value,
+            desc                : desc.value,
+            state               : stateChecked
         };
+
         for (let i in item)
             console.log("i = ", item[i])
 
         let cookie = new Cookie();
 
+        // 사용자가 입력한 항목 쿠키로 저장(기존 쿠키 삭제)
         cookie.remove("product");
         cookie.addItem("product", item);
         cookie.save();
-    };
 
+        // 상품 목록 페이지로 redirect
+        window.location.href = "/admin/product/list";
+    };
 
     // 상태 체크박스 변화 감지
     state.addEventListener('change', function () {

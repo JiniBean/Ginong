@@ -20,7 +20,8 @@
         <form method="post" enctype="multipart/form-data" class="n-form:outline-none d:flex fl-dir:column gap:8">
             <div id="category">
                 <div class="custom-dropdown">
-                    <div class="selected-option selected-option-category icon-size:1 deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                    <div class="selected-option selected-option-category icon-size:1 deco deco-pos:right icon:RT deco-size:1 deco-color:main-6"
+                         th:text="${prd.categoryId == 1 ? '과채' : (prd.categoryId == 2 ? '앙념' : (prd.categoryId == 3 ? '가공식품' : '카테고리 선택'))}">
                         카테고리 선택
                     </div>
                     <ul class="options option-category-list">
@@ -29,7 +30,7 @@
                         <li class="option option-category" data-value="3">가공식품</li>
                     </ul>
                 </div>
-                <input type="hidden" class="selected-category" name="categoryId" value="1">
+                <input type="hidden" class="selected-category" name="categoryId" value="1" th:value="${prd.categoryId}">
             </div>
             <fieldset class="d:flex fl-dir:column gap:8">
                 <legend class="d:none">상품 설명 텍스트</legend>
@@ -37,21 +38,21 @@
 
                 <div class="d:flex fl-dir:column gap:2">
                     <span>상품명</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="name" value="테스트"/>
+                    <input th:value="${prd.name}" type="text" class="n-textbox n-textbox-type:underline" name="name" value="테스트"/>
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <span>가격</span>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="price" value="22222"/>
+                    <input th:value="${prd.price == 0 ? '' : prd.price}" type="text" class="n-textbox n-textbox-type:underline" name="price" value="22222"/>
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <div>중량</div>
                     <div class="d:flex fl-dir:row gap:4">
                         <div class="w:10p">
-                            <input type="text" class="n-textbox n-textbox-type:underline" name="weight" value="33333"/>
+                            <input th:value="${prd.weight == 0 ? '' : prd.weight }" type="text" class="n-textbox n-textbox-type:underline" name="weight" value="33333"/>
                         </div>
                         <div id="weight">
                             <div class="custom-dropdown">
-                                <div class="selected-option icon-size:1 selected-option-weight deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                                <div class="selected-option icon-size:1 selected-option-weight deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" th:text="${prd.weightCategoryId == 1 ? 'g' : (prd.weightCategoryId == 2 ? 'kg' : (prd.weightCategoryId == 3 ? 'g 내외' : (prd.weightCategoryId == 4 ? 'kg 내외' : '중량 선택')))}">
                                     중량 선택
                                 </div>
                                 <ul class="options option-weight-list">
@@ -61,7 +62,7 @@
                                     <li class="option option-weight" data-value="4">kg 내외</li>
                                 </ul>
                             </div>
-                            <input type="hidden" class="selected-weight" name="weightCategoryId" value="1">
+                            <input th:value="${prd.weightCategoryId}" type="hidden" class="selected-weight" name="weightCategoryId" value="1">
                         </div>
                     </div>
                 </div>
@@ -69,11 +70,13 @@
                     <div>개수</div>
                     <div class="d:flex fl-dir:row gap:4">
                         <div class="w:10p">
-                            <input type="text" class="n-textbox n-textbox-type:underline" name="quantity" value="44444"/>
+                            <input th:value="${prd.quantity == 0 ? '' : prd.quantity}" type="text" class="n-textbox n-textbox-type:underline" name="quantity" value="44444"/>
                         </div>
                         <div id="quantity">
                             <div class="custom-dropdown">
-                                <div class="selected-option icon-size:1 selected-option-quantity deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
+                                <div class="selected-option icon-size:1 selected-option-quantity deco deco-pos:right icon:RT deco-size:1 deco-color:main-6"
+                                     th:text="${prd.quantityCategoryId == 1 ? '통' : (prd.quantityCategoryId == 2 ? '개' : (prd.quantityCategoryId == 3 ? '봉' : (prd.quantityCategoryId == 4 ? '팩' : '개수 단위 선택')))}"
+                                >
                                     개수 단위 선택
                                 </div>
                                 <ul class="options option-quantity-list">
@@ -83,7 +86,7 @@
                                     <li class="option option-quantity" data-value="4">팩</li>
                                 </ul>
                             </div>
-                            <input type="hidden" class="selected-quantity" name="quantityCategoryId" value="1">
+                            <input th:value="${prd.quantityCategoryId}" type="hidden" class="selected-quantity" name="quantityCategoryId" value="1">
                         </div>
 
                     </div>
@@ -91,15 +94,17 @@
                 <div class="d:flex fl-dir:column gap:2">
                     <span>유통기한</span>
                     <div class="input-wrapper">
-                        <input type="text" class="n-textbox n-textbox-type:underline" name="exp" value="테스트"/>
+                        <input th:value="${prd.exp}" type="text" class="n-textbox n-textbox-type:underline" name="exp" value="테스트"/>
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <div>상품보관유형</div>
                     <div id="storage">
                         <div class="custom-dropdown">
-                            <div class="selected-option icon-size:1 selected-option-storage deco deco-pos:right icon:RT deco-size:1 deco-color:main-6">
-                                개수 단위 선택
+
+                            <div class="selected-option icon-size:1 selected-option-storage deco deco-pos:right icon:RT deco-size:1 deco-color:main-6"
+                                 th:text="${prd.storageTypeId == 1 ? '실온보관' : (prd.storageTypeId == 2 ? '냉장보관' : (prd.storageTypeId == 3 ? '냉동보관' : '보관 유형 선택'))}">
+                                보관 유형 선택
                             </div>
                             <ul class="options option-storage-list">
                                 <li class="option option-storage" data-value="1">실온보관</li>
@@ -107,12 +112,12 @@
                                 <li class="option option-storage" data-value="3">냉동보관</li>
                             </ul>
                         </div>
-                        <input type="hidden" class="selected-storage" name="storageTypeId" value="1">
+                        <input th:value="${prd.storageTypeId}" type="hidden" class="selected-storage" name="storageTypeId" value="1">
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column gap:2">
                     <span>상품설명</span>
-                    <textarea type="text" class="n-textbox" name="desc" value="테스트"></textarea>
+                    <textarea th:text="${prd.desc}" type="text" class="n-textbox" name="desc" value="테스트"></textarea>
                 </div>
             </fieldset>
             <div class="d:flex fl-dir:column gap:4">
@@ -131,7 +136,7 @@
 
             <div class="display:flex flex-direction:row gap:4">
                 <span class="d:flex ai:center">상태</span>
-                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
+                <input th:checked="${prd.state}" type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
             </div>
             <div class="display:flex flex-direction:row w:10p gap:8">
                 <button type="button" class="temp-save n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">임시저장</button>
