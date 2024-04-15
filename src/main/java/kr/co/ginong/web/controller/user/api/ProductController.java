@@ -1,6 +1,7 @@
 package kr.co.ginong.web.controller.user.api;
 
 import kr.co.ginong.web.dto.Pager;
+import kr.co.ginong.web.dto.ProductFilter;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.user.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,13 @@ public class ProductController {
     @Autowired
     ProductService service;
 
-    @GetMapping(params = "r")
-    public List<?> listWithPager(@RequestParam(name = "c", required = false) Long categoryId
-                                , @RequestParam(name = "q", required = false) String query
-                                , @RequestParam(name = "s", required = false) Integer sortType
-                                , Pager pager) {
+    @GetMapping
+    public List<ProductView> listWithPager(ProductFilter productFilter, Pager pager) {
 
-        return service.getList(categoryId, query, sortType, pager);
+        return service.getList(productFilter, pager);
     }
 
-    @GetMapping
+    //@GetMapping
     public List<ProductView> list(
             @RequestParam(name = "c", required = false) Long categoryId
             , @RequestParam(name = "q", required = false) String query

@@ -2,6 +2,7 @@ package kr.co.ginong.web.service.user;
 
 
 import kr.co.ginong.web.dto.Pager;
+import kr.co.ginong.web.dto.ProductFilter;
 import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.repository.product.ProductRepository;
@@ -17,6 +18,7 @@ public class ProductServiceImp implements ProductService {
     ProductRepository repository;
 
     final int size = 12;
+
     @Override
     public List<ProductView> getList(Integer page) {
         int offset = (page-1) * size;
@@ -82,10 +84,14 @@ public class ProductServiceImp implements ProductService {
     }
 
     // pager : size, page를 담은 dto 객체
+    // productFilter : categoryId, query, sortType을 담은 dto 객체
     @Override
-    public List<ProductView> getList(Long categoryId, String query, Integer sortType, Pager pager) {
+    public List<ProductView> getList(ProductFilter productFilter, Pager pager) {
+        long categoryId = productFilter.getCategoryId();
+        String query = productFilter.getQuery();
         int offset = pager.getOffset();
         int size = pager.getSize();
+        int sortType = productFilter.getSortType();
 
         System.out.println(size);
         return repository.findAll(categoryId, query, offset, size, sortType);
