@@ -1,5 +1,6 @@
 package kr.co.ginong.web.controller.admin;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,32 +52,24 @@ public class ProductController {
 
     @GetMapping("reg")
     public String save(@CookieValue(name = "product", required = false) String productCookie, Model model) {
-        // 쿠키에서 가져온 값을 Product 객체로 변환
-        Product product = convertCookieToProduct(productCookie);
-        // Model에 Product 객체 추가
-        model.addAttribute("prd", product);
-        return "admin/product/reg";
-    }
 
-    // 쿠키에서 가져온 값을 Product 객체로 변환하는 메서드
-    private Product convertCookieToProduct(String productCookie) {
-        // 쿠키에 저장된 값이 없는 경우 기본값으로 Product 객체 생성
-        if (productCookie == null || productCookie.isEmpty()) {
-            return new Product();
-        }
-
-        // 쿠키에서 가져온 JSON 문자열을 Product 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
+        // JSON 데이터를 처리하는 ObjectMapper 객체 생성(jackson data-bind lib)
+
+        Product product;
         try {
-            // 쿠키에서 가져온 JSON 문자열을 Product 배열로 변환
             Product[] products = objectMapper.readValue(productCookie, Product[].class);
-            // 배열의 첫 번째 원소를 반환 (임시저장 기능이므로 항상 하나의 상품만 저장될 것으로 가정)
-            return products[0];
-        } catch (IOException e) {
-            e.printStackTrace();
-            // JSON 파싱에 실패한 경우 기본값으로 Product 객체 생성
-            return new Product();
+            // ObjectMapper를 사용하여 productCookie에 저장된 JSON 문자열을 Product 배열로 변환
+            product = products[0];
+            // 변환된 배열의 첫 번째 요소를 Product 객체로 설정
+        } catch (JsonProcessingException e) {
+            product = new Product();
+            // 예외 발생 시, 빈 product 반환
         }
+
+        model.addAttribute("prd", product);
+
+        return "admin/product/reg";
     }
 
     @PostMapping("reg")
