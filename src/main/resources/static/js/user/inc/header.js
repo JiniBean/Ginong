@@ -4,7 +4,6 @@ window.addEventListener("road", function () {
     
     cartCircle.onclick = function () {
 
-        console.log("됨");
     }
 
 });

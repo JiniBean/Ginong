@@ -25,7 +25,6 @@ public class ProductController {
 
         return service.getList(productFilter, pager);
     }
-
     //@GetMapping
     public List<ProductView> list(
             @RequestParam(name = "c", required = false) Long categoryId

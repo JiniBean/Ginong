@@ -81,6 +81,7 @@ public class ProductController {
         model.addAttribute("reviewView", reviewView);
         model.addAttribute("qnaView", qnaView);
 
+
         return "user/product/detail";
     }
 }

@@ -2,13 +2,13 @@ function Cookie() {
     this.map = {};
 
     if (document.cookie) {
-        var cookieDecoded = decodeURIComponent(document.cookie);
-        var tokens = cookieDecoded.split(";");
+        let cookieDecoded = decodeURIComponent(document.cookie);
+        let tokens = cookieDecoded.split(";");
 
-        for (c of tokens) {
-            var tmp = c.split("=");
-            var key = tmp[0];
-            var value = tmp[1];
+        for (let c of tokens) {
+            let tmp = c.split("=");
+            let key = tmp[0];
+            let value = tmp[1];
 
             this.map[key] = value;
         }
@@ -23,11 +23,11 @@ Cookie.prototype = {
 
     save: function () {
         // document.cookie = "menus=hh; path=/;";
-        var list = this.map["menus"];
-        var size = list.length;
-        var lastIdx = size - 1;
+        let list = this.map["menus"];
+        let size = list.length;
+        let lastIdx = size - 1;
 
-        var str = "[";
+        let str = "[";
 
         for (m of list) {
             str += JSON.stringify(m);
@@ -35,7 +35,7 @@ Cookie.prototype = {
         }
 
         str = "]";
-        var encoded = encodeURIComponent(str);
+        let encoded = encodeURIComponent(str);
         document.cookie = `menus=${encoded}; path=/;`;
 
     },
@@ -49,7 +49,7 @@ Cookie.prototype = {
     },
 
     addItem: function (name, item) {
-        var list = this.map[name];
+        let list = this.map[name];
         list.push(item);
     },
 
@@ -58,50 +58,84 @@ Cookie.prototype = {
     }
 
 }
+// ========== 장바구니 담기 =========================================================
+import CartRepository from "../../module/CartRepository.js";
+document.addEventListener('click', async function (e) {
+
+    const cartBox = e.target.closest(".cart-box");
+
+    if (cartBox) {
+        const prdId = cartBox.dataset.id;
+        e.preventDefault();
+
+        let cartRepository = new CartRepository();
+        let item = await cartRepository.findItem(prdId);
+        let vaild = false;
+        if(item == null)
+            vaild = await cartRepository.add(prdId);
+        else
+            vaild = await cartRepository.addCount(prdId);
+
+        if(vaild){
+            item  = await cartRepository.findItem(prdId);
+            let qty = item.quantity;
+            console.log(item);
+            cartBox.textContent = qty;
+            cartBox.classList.add('bg-color:main-6');
+            cartBox.classList.add('color:base-1');
+
+        }
+
+
+
+
+    }
+
+
+});
+
+
+// ========== 정렬 =========================================================
 
 window.addEventListener("load", function () {
 
-    var sortSection = document.getElementById("sort");
-    var prdList = document.getElementById("prd-list");
-    let pagerSection = document.getElementById("pager");
+    const sortSection = document.getElementById("sort");
+    const prdList = document.getElementById("prd-list");
+    const pagerSection = document.getElementById("pager");
 
-    var colBtn = sortSection.querySelector(".icon\\:squares_four"); //모바일 버전 세로 정렬 버튼
-    var rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
-    var colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
-    var rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
-    var pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
-    
-    let alignNumberBox = sortSection.querySelector(".align-number");        // 데이터 표시 갯수 체크
+    const colBtn = sortSection.querySelector(".icon\\:squares_four"); //모바일 버전 세로 정렬 버튼
+    const rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
+    const colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
+    const rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
+    const pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
+
+    const alignNumberBox = sortSection.querySelector(".align-number");        // 데이터 표시 갯수 체크
 
     let pagerButtons = pagerSection.querySelectorAll("li a");
 
     // URLSearchParams를 사용하여 현재 URL의 파라미터 가져오기
-    var params = new URLSearchParams(window.location.search);
+    let params = new URLSearchParams(window.location.search);
     // 현재 페이지의 도메인, 포트를 가져오기. (application.yaml에서 port변경하는 경우를 위함)
     let baseUrl = window.location.origin;
 
     // 특정 파라미터 값 가져오기
-    var c = params.get('c');
+    let c = params.get('c');
 
 
-    var priceBtn = sortSection.querySelector(".price"); //가격순
-    var recommendBtn = sortSection.querySelector(".recommend"); //추천순
+    const priceBtn = sortSection.querySelector(".price"); //가격순
+    const recommendBtn = sortSection.querySelector(".recommend"); //추천순
 
-    var content = prdList.getElementsByClassName("content");
-
-    //장바구니 아이콘 관련 selector
-    var cartSection =  document.querySelector("main");
+    const content = prdList.getElementsByClassName("content");
+    
 
     // 이전에 선택한 버튼 상태를 쿠키에서 불러옴
-    var cookie = new Cookie();
-    var previousBtn = cookie.get("previousBtn");
+    let cookie = new Cookie();
+    let previousBtn = cookie.get("previousBtn");
 
-    if (previousBtn === "colBtn") {
-        console.log("콜롬 버튼 저장됨");
+    if (previousBtn === "colBtn")
         col();
-    } else if (previousBtn === "rowBtn") {
+    else if (previousBtn === "rowBtn")
         row();
-    }
 
     // 세로형 상품 카드로 바꾸기
     colBtn.onclick = function (e) {
@@ -140,12 +174,11 @@ window.addEventListener("load", function () {
         priceBtn.classList.add("color:main-6");
         recommendBtn.classList.remove("color:main-6");
 
-        var sortType = 1;
-        var url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
+        let sortType = 1;
+        let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
 
         request(url, function (list) {
             bind(list);
-            console.log("가격순 정렬 리로드");
         });
     }
 
@@ -154,8 +187,8 @@ window.addEventListener("load", function () {
 
         priceBtn.classList.remove("color:main-6");
         recommendBtn.classList.add("color:main-6");
-        var sortType = 2;
-        var url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
+        let sortType = 2;
+        let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
 
         request(url, function (list) {
             bind(list);
@@ -170,7 +203,7 @@ window.addEventListener("load", function () {
 
         let alignNumber = alignNumberBox.value;
 
-        url = `${baseUrl}/user/api/product?p=1&c=${c}&r=${alignNumber}`;
+        let url = `${baseUrl}/user/api/product?p=1&c=${c}&r=${alignNumber}`;
         console.log(url, alignNumber);
 
         request(url, function (list) {
@@ -193,31 +226,17 @@ window.addEventListener("load", function () {
     }
     
 
-    cartSection.onclick = function (e){
-        // e.preventDefault();
-
-        // if(!e.target.classList.contains("icon:shopping_cart_simple"))
-        //     return;
-
-        if(!e.target.closest(".icon\\:shopping_cart_simple"))
-            return;
-
-        console.log("박경인 나왔냐???????????????");
-
-        /*장바구니 아이콘에 div영역 눌러도 안되요 ㅅㄱ*/
-
-    }
 
     // 가격,추천순 정렬 작업 중 ...
     function request(url, callback, method) {
 
         method = method || "GET";
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
         xhr.onload = function () {
-            var list = JSON.parse(this.responseText);
+            let list = JSON.parse(this.responseText);
             callback(list);
         };
 
@@ -231,9 +250,9 @@ window.addEventListener("load", function () {
         pcSection.innerHTML = "";
         
         // 가로형 카드 렌더링
-        for (var m of list) {
+        for (let m of list) {
 
-            var rowSectiondHTML = `
+            let rowSectiondHTML = `
 <!--                <div class="menu-card-row">-->
                 <div>
                     <div class="d:flex w:10p gap:3">
@@ -273,9 +292,9 @@ window.addEventListener("load", function () {
         }
         
         // 세로형 카드 렌더링
-        for (var m of list) {
+        for (let m of list) {
 
-            var colSectionHTML = `
+            let colSectionHTML = `
 <!--                <div class="menu-card-col">-->
                 <div>
                     <div class="d:flex fl-dir:column gap:3" style="width: 180px; height: 294px">
@@ -316,9 +335,9 @@ window.addEventListener("load", function () {
         }
         
         // PC버전 카드 렌더링
-        for (var m of list) {
+        for (let m of list) {
 
-            var pcSectiondHTML = `
+            let pcSectiondHTML = `
 <!--                <div class="menu-card-row">-->
                 <section class="font-size:3" style="width:280px; height:404px">
                     <h1 class="d:none">상품 영역</h1>
