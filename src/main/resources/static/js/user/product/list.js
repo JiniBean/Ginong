@@ -96,12 +96,10 @@ document.addEventListener('click', async function (e) {
 
 
 // ========== 정렬 =========================================================
-
 window.addEventListener("load", function () {
 
     const sortSection = document.getElementById("sort");
     const prdList = document.getElementById("prd-list");
-    const pagerSection = document.getElementById("pager");
 
     const colBtn = sortSection.querySelector(".icon\\:squares_four"); //모바일 버전 세로 정렬 버튼
     const rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
@@ -111,6 +109,7 @@ window.addEventListener("load", function () {
 
     const alignNumberBox = sortSection.querySelector(".align-number");        // 데이터 표시 갯수 체크
 
+    let pagerSection = document.querySelector(".pager");       // Pager 섹션
     let pagerButtons = pagerSection.querySelectorAll("li a");
 
     // URLSearchParams를 사용하여 현재 URL의 파라미터 가져오기
@@ -119,14 +118,14 @@ window.addEventListener("load", function () {
     let baseUrl = window.location.origin;
 
     // 특정 파라미터 값 가져오기
-    let c = params.get('c');
+    let c = params.get('c') || 1;
+    let p = params.get('p') || 1;
 
 
     const priceBtn = sortSection.querySelector(".price"); //가격순
     const recommendBtn = sortSection.querySelector(".recommend"); //추천순
 
     const content = prdList.getElementsByClassName("content");
-    
 
     // 이전에 선택한 버튼 상태를 쿠키에서 불러옴
     let cookie = new Cookie();
@@ -189,21 +188,18 @@ window.addEventListener("load", function () {
         recommendBtn.classList.add("color:main-6");
         let sortType = 2;
         let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
+        //let url = `${baseUrl}/user/api/product?p=${p}&s=${sortType}&c=${c}&r=${alignNumberBox.value}`;
 
         request(url, function (list) {
             bind(list);
-            console.log("추천순 정렬 리로드");
         });
     }
 
     /* 상품 display 갯수 선택, default 20*/
-    alignNumberBox.onchange = function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-
+    function loadData() {
         let alignNumber = alignNumberBox.value;
 
-        let url = `${baseUrl}/user/api/product?p=1&c=${c}&r=${alignNumber}`;
+        let url = `${baseUrl}/user/api/product?p=${p}&c=${c}&r=${alignNumber}`;
         console.log(url, alignNumber);
 
         request(url, function (list) {
@@ -213,6 +209,15 @@ window.addEventListener("load", function () {
         });
     }
 
+    alignNumberBox.onchange = function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        loadData();
+    }
+
+    loadData();
+
     function updatePagerLink(size) {
         // console.log(pagerButtons);
         for(let a of pagerButtons) {
@@ -221,10 +226,9 @@ window.addEventListener("load", function () {
             let params = new URLSearchParams(parts[1] || '');
             params.set('r', size);
             a.href = `${parts[0]}?${params.toString()}`;
-            // console.log(a.href, a);
+            console.log(a.href, a);
         }
     }
-    
 
 
     // 가격,추천순 정렬 작업 중 ...
@@ -244,10 +248,13 @@ window.addEventListener("load", function () {
         xhr.send();
     }
 
-    function bind(list) {
+    function bind(data) {
+        let list = data.list;
+
         rowSection.innerHTML = "";
         colSection.innerHTML = "";
         pcSection.innerHTML = "";
+        pagerSection.innerHTML = "";
         
         // 가로형 카드 렌더링
         for (let m of list) {
@@ -375,9 +382,55 @@ window.addEventListener("load", function () {
             pcSection.insertAdjacentHTML("beforeend", pcSectiondHTML);
         }
 
+        let page = params.get('p') || 1;
+        let count = data.count;
+        let size = alignNumberBox.value;
+
+        let startnum = Math.floor((page - 1) / 5) * 5 + 1;
+        let lastnum = startnum + 4;
+        let next = lastnum + 1;
+        let prev = Math.max(startnum - 1, 1);
+        let maxPage = Math.ceil(count/size);
+
+        lastnum = Math.min(maxPage, lastnum);
+        next = Math.min(maxPage, next);
+        // let count = 30;//cookie.map.length;
+        // let temp = Math.floor((page - 1) / 5);
+        // let startnum = temp * 5 + 1;
+        // let temp1 = Math.floor(count / 6);
+        // let lastnum = count % 6 === 0 ? temp1 : temp1 + 1;
+
+        let sequence = [];
+        for (let i = startnum; i <= lastnum; i++)
+            sequence.push(i);
+
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
+        let linkParam = `&c=${c}&r=${size}`;
+        let prevLink = `./list?p=${prev}${linkParam}`;
+        let nextLink = `./list?p=${next}${linkParam}`;
+
+        let pagerSectionHTML =
+            `<section id="pager" class="d:flex w:10p mb:5 jc:center">
+                <h1 class="d:none">페이저</h1>
+    
+                <ul class="n-pager d:flex">
+                    <li><a href="${prevLink}">이전</a></li>`;
+
+        for(let n of sequence) {
+            let cssClass = page == n ? 'active' : '';
+            pagerSectionHTML +=
+                `<li class="${cssClass}">
+                    <a href="./list?p=${n}${linkParam}">${n}</a>
+                </li>`;
+        }
+
+        pagerSectionHTML +=
+                    `<li><a href="${nextLink}">다음</a></li>
+                </ul>
+            </section>`;
+
+        pcSection.insertAdjacentHTML("beforeend", pagerSectionHTML);
 
     }
-
-
 });
 
