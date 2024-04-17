@@ -23,7 +23,7 @@ public class ProductView {
     private int     likeCount;
     private String  categoryName;
 
-    private Long  categoryId;
+    private Long    categoryId;
     private String  storageType;
     private String  admin;
     private String  quantityCategory;
