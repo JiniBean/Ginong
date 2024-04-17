@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductView {
-    private long    id;
+    private Long    id;
     private String  name;
     private int     price;
     private int     quantity;
@@ -23,7 +23,7 @@ public class ProductView {
     private int     likeCount;
     private String  categoryName;
 
-    private String  categoryId;
+    private Long  categoryId;
     private String  storageType;
     private String  admin;
     private String  quantityCategory;
