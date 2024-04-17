@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,17 +55,16 @@ public class ProductController {
     public String save(@CookieValue(name = "product", required = false) String productCookie, Model model) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        // JSON 데이터를 처리하는 ObjectMapper 객체 생성(jackson data-bind lib)
+        Product product = new Product();
 
-        Product product;
         try {
             Product[] products = objectMapper.readValue(productCookie, Product[].class);
-            // ObjectMapper를 사용하여 productCookie에 저장된 JSON 문자열을 Product 배열로 변환
             product = products[0];
-            // 변환된 배열의 첫 번째 요소를 Product 객체로 설정
-        } catch (JsonProcessingException e) {
-            product = new Product();
-            // 예외 발생 시, 빈 product 반환
+        } catch (IllegalArgumentException | JsonProcessingException e) {
+            // IllegalArgumentException과 JsonProcessingException 모두 이곳에서 처리
+            // IllegalArgumentException => 전달되는 arguments가 null일 경우
+            // JsonProcessingException => JSON Parsing하는 과정에서 에러 발생할 경우
+            e.printStackTrace();
         }
 
         model.addAttribute("prd", product);
