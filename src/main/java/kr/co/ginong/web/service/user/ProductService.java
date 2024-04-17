@@ -8,8 +8,6 @@ import kr.co.ginong.web.entity.product.ProductView;
 import java.util.List;
 
 public interface ProductService {
-
-    @Deprecated
     List<ProductView> getList(Integer page);
     List<ProductView> getList(Integer page, Integer sortType);
     List<ProductView> getList(Integer page, String query);
@@ -24,6 +22,7 @@ public interface ProductService {
     int count(Long categoryId);
     int count(String query);
     int count(Long categoryId, String query);
+    int count(ProductFilter productFilter);
 
     ProductView get(Long productId);
 

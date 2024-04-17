@@ -1,5 +1,6 @@
 package kr.co.ginong.web.controller.user.api;
 
+import kr.co.ginong.web.dto.Page;
 import kr.co.ginong.web.dto.Pager;
 import kr.co.ginong.web.dto.ProductFilter;
 import kr.co.ginong.web.entity.product.ProductView;
@@ -21,10 +22,13 @@ public class ProductController {
     ProductService service;
 
     @GetMapping
-    public List<ProductView> listWithPager(ProductFilter productFilter, Pager pager) {
+    public Page listWithPager(ProductFilter productFilter, Pager pager) {
 
-        return service.getList(productFilter, pager);
+        int count = service.count(productFilter);
+        return new Page(count, service.getList(productFilter, pager));
+        //return service.getList(productFilter, pager);
     }
+
     //@GetMapping
     public List<ProductView> list(
             @RequestParam(name = "c", required = false) Long categoryId

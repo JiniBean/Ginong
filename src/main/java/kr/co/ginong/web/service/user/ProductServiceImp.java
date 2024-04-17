@@ -113,8 +113,15 @@ public class ProductServiceImp implements ProductService {
         return count(null, query);
     }
 
+    @Override
+    public int count(ProductFilter productFilter) {
+        long categoryId = productFilter.getCategoryId();
+        String query = productFilter.getQuery();
+
+        return repository.count(categoryId, query);
+    }
     public int count(Long categoryId, String query) {
-        int count = repository.count(categoryId,query);
+        int count = repository.count(categoryId, query);
 
         return count;
     }
