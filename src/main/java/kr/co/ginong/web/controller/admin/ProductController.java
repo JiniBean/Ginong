@@ -38,7 +38,6 @@ public class ProductController {
             count = service.getCount();
         }
 
-        System.out.println(count);
         model.addAttribute("count", count);
         model.addAttribute("list", list);
         return "admin/product/list";

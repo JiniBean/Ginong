@@ -14,10 +14,10 @@
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
     <section class="d:flex jc:center w:10p">
         <h1 class="d:none">검색폼</h1>
-        <form class="pos:relative w:10p md:w:8 h:2">
+        <form class="pos:relative w:10p md:w:8 h:2" method="get">
             <fieldset>
                 <legend class="d:none">상품검색</legend>
-                <input type="text" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요">
+                <input type="text" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요" name="q">
                 <button class="pos:absolute m-right:1 icon icon:magnifying_glass icon-size:3 icon-color:base-5" style="top:2px; right:4px;"></button>
             </fieldset>
         </form>
