@@ -36,12 +36,12 @@ public class ProductServiceImp implements ProductService {
     }    
 
     @Override
-    public int count() {
+    public int getCount() {
         int count = repository.count(null, null);
         return count;
     }
 
-    public int count(String query) {
+    public int getCount(String query) {
         int count = repository.count(null, query);
         return count;
     }

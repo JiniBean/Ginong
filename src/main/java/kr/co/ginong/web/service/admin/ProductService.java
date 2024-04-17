@@ -10,8 +10,8 @@ public interface ProductService {
     List<ProductView> getList(int page, String query);
     List<ProductView> getList(int page);
 
-    int count(String query);
-    int count();
+    int getCount(String query);
+    int getCount();
 
     void save(Product product);
 

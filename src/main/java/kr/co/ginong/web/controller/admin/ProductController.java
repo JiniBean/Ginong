@@ -32,12 +32,13 @@ public class ProductController {
 
         if (query != null) {
             list = service.getList(page, query);
-            count = service.count(query);
+            count = service.getCount(query);
         } else {
             list = service.getList(page);
-            count = service.count();
+            count = service.getCount();
         }
 
+        System.out.println(count);
         model.addAttribute("count", count);
         model.addAttribute("list", list);
         return "admin/product/list";
