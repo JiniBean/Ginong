@@ -22,6 +22,9 @@ public class MemberController {
     @GetMapping("signup/step2")
     public String step2() {return "user/signup/step2";}
 
+    @GetMapping("signup/step3")
+    public String step3() {return "user/signup/step3";}
+
     @GetMapping("signup/index")
     public String index() {return "user/signup/index";}
 
