@@ -74,9 +74,10 @@ window.addEventListener("load", function(){
     let navi = this.document.querySelector(".navi");
 
     //popup close
-    let close = orderInfo.getElementsByClassName("close")[0];
 
     let orderInfo = this.document.querySelector("#order-info");
+    let close = orderInfo.getElementsByClassName("close")[0];
+
     let productId = navi.querySelector(".product-id").value;
     let numberBox = orderInfo.querySelector(".numberBox");
     let quantityInput = numberBox.querySelector(".quantity-input");

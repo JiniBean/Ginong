@@ -56,35 +56,46 @@ Cookie.prototype = {
     set: function (name, value) {
         document.cookie = name + "=" + value + "; path=/";
     }
-
 }
+
 // ========== 장바구니 담기 =========================================================
 import CartRepository from "../../module/CartRepository.js";
+import Header from "../inc/header.js";
 document.addEventListener('click', async function (e) {
 
-    const cartBox = e.target.closest(".cart-box");
-    e.preventDefault();
+
+    const cartBox = e.target.closest(".cart-box"); // 장바구니 아이콘 영역
 
     if (cartBox) {
-        console.log("눌림");
-        const prdId = cartBox.dataset.id;
+
+        // a 태그 막기
         e.preventDefault();
 
+        const prdId = cartBox.dataset.id;
         let cartRepository = new CartRepository();
+
+        // 해당 상품 아이디로 장바구니 목록에 있는지 체크
         let item = await cartRepository.findItem(prdId);
         let valid = false;
+
+        // 없다면 추가, 있다면 수량 증가
         if(item == null)
             valid = await cartRepository.add(prdId);
         else
             valid = await cartRepository.addQty(prdId);
 
-
+        // DB 저장 잘 됐다면 헤더와 카드의 장바구니 바꾸기
         if(valid){
             item = await cartRepository.findItem(prdId);
             let qty = item.quantity;
+
             cartBox.textContent = qty;
             cartBox.classList.add('bg-color:main-6');
             cartBox.classList.add('color:base-1');
+
+            let header = new Header();
+            await header.renewCart();
+
         }
 
     }
@@ -239,7 +250,7 @@ window.addEventListener("load", function () {
 
         xhr.onload = function () {
             let list = JSON.parse(this.responseText);
-            // callback(list);
+            callback(list);
         };
 
         xhr.open(method, url);

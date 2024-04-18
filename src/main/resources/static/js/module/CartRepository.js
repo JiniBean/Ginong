@@ -2,9 +2,6 @@ let baseUrl = window.location.origin;
 export default class CartRepository{
 
     findPromise(url,method="GET"){
-        console.log("fetch url : ", url);
-        console.log("fetch method : ", method);
-
         return fetch(url,{method:method});
     }
 
