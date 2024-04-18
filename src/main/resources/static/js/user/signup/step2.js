@@ -1,21 +1,101 @@
-//step2
 //============================================  모바일  ============================================
-// 아이디 유효성검사
+
+//============================================  sec1  ============================================
+
+//이전다음 버튼
 window.addEventListener("load", function(e){
 
-    // step3
-    let step3 = document.querySelector("#step3");
+    // sec1의 버튼
+    let sec1 = document.querySelector("#sec1");
+    let sec2 = document.querySelector("#sec2");
+
+    //sec1 이전 다음 버튼들
+    let sec1btns = sec1.querySelector(".btns");
+    let sec1prevBtn = sec1btns.querySelector(".prev");
+    let sec1nextBtn = sec1btns.querySelector(".next");
+
+    //sec2 이전 다음 버튼들
+    let sec2btns = sec2.querySelector(".btns");
+    let sec2prevBtn = sec2btns.querySelector(".prev");
+    let signupBtn = sec2btns.querySelector(".signup");
+
+    //모바일 버전 상단 현단계 알려주는 영역
+    let stepDivs = document.querySelector("#stepDivs");
+
+    let step2Div = stepDivs.getElementsByClassName("n-item")[1];
+    let step3Div = stepDivs.getElementsByClassName("n-item")[2];
+
+    //원안의 숫자
+    let step2Span =step2Div.childNodes[0];
+    let step3Span =step3Div.childNodes[0];
+
+
+    sec1prevBtn.onclick = function (e){
+        let url = new URL ("/user/signup/step1", location.origin);
+        location.href = url.toString();
+    }
+
+    sec1nextBtn.onclick = function (e){
+
+        e.preventDefault();
+
+        step2Div.classList.remove("bg-color:main-6");
+        step3Div.classList.add("bg-color:main-6");
+
+        step2Span.classList.remove("color:base-1");
+        step3Span.classList.add("color:base-1");
+
+        sec1.classList.add("d:none");
+        sec2.classList.remove("d:none");
+
+    }
+
+    sec2prevBtn.onclick = function (e) {
+        e.preventDefault();
+
+        step2Div.classList.add("bg-color:main-6");
+        step3Div.classList .remove("bg-color:main-6");
+
+        step2Span.classList.add("color:base-1")
+        step3Span.classList.remove("color:base-1");
+
+        sec1.classList.remove("d:none");
+        sec2.classList.add("d:none");
+    }
+
+    signupBtn.onclick = function (e) {
+        alert("너무졸리다..........");
+    }
+
+
+});
+
+
+//============================================  sec2  ============================================
+
+
+// 아이디 유효성
+window.addEventListener("load", function(e){
+
+    // sec2
+    let sec2 = document.querySelector("#sec2");
 
     // 아이디
-    let userName = step3.querySelector(".user-name");
-
-    //한글 입력시 주의사항
-    let idInfo = document.querySelector(".id-info");
+    let userName = sec2.querySelector(".user-name");
 
     //1. 아이디 입력 시
     let timeoutId;
 
     userName.oninput = function (e){
+
+        // 입력된 값 가져오기
+        let userInputData = e.data;
+
+        // 한글이 입력되었다면 입력을 취소하고 함수를 빠져나감
+        if(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(userInputData)){
+            userName.value = userName.value.slice(0, -1);
+            return;
+        }
 
         if(timeoutId!==undefined){
             clearTimeout(timeoutId);
@@ -77,10 +157,10 @@ window.addEventListener("load", function(e){
 
 // 비밀번호 유효성 검사
 window.addEventListener("load", function(e){
-    // step3
-    let step3 = document.querySelector("#step3");
+    // sec2
+    let sec2 = document.querySelector("#sec2");
     // 비밀번호 input
-    let pwdInput = step3.querySelector(".password");
+    let pwdInput = sec2.querySelector(".password");
 
     //사용불가
     let disableDiv= document.getElementsByClassName("check-pwd")[0];
@@ -137,12 +217,12 @@ window.addEventListener("load", function(e){
 
 //비밀번호 일치 확인
 window.addEventListener("load", function(e){
-    // step3
-    let step3 = document.querySelector("#step3");
+    // sec2
+    let sec2 = document.querySelector("#sec2");
     // 비밀번호 input
-    let pwdInput = step3.querySelector(".password");
+    let pwdInput = sec2.querySelector(".password");
     // 비밀번호 확인
-    let verifyPwdInput = step3.querySelector(".verify-password");
+    let verifyPwdInput = sec2.querySelector(".verify-password");
 
     let timeoutId;
 

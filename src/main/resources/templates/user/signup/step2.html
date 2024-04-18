@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Product-List</title>
     <link rel="stylesheet" href="/css/user/signup/step.css">
-    <script src="/js/user/signup/step2.js" defer></script>
+    <script src="/js/user/signup/step2.js"></script>
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pl:4 pr:4 md:pl:0 md:pr:0">
@@ -20,7 +20,7 @@
     <!--모바일 영역-->
     <section class="s-signup md:d:none">
         <h1 class="d:none">모바일 영역 step</h1>
-        <section>
+        <section id="stepDivs">
             <h1 class="d:none">step 영역</h1>
             <div class="d:flex jc:center gap:4">
                 <div class="n-item n-item-type:outline-box fs:4 txt-al:center bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center" style="width: 21px; height: 21px;"><span>1</span></div>
@@ -29,18 +29,18 @@
             </div>
         </section>
 
-        <!--step2-->
-        <section id="step2" class="d:flex fl-dir:column gap:10 d:none mb:8">
+        <!--sec1-->
+        <section id="sec1" class="d:flex fl-dir:column gap:10 mb:8">
             <section class="col-gap:2">
                 <h1 class="d:none">인풋박스</h1>
                 <div>이름</div>
-                <input type="text" class="n-textbox n-textbox-type:underline"/>
+                <input type="text" class="n-textbox n-textbox-type:underline" required/>
             </section>
             <section>
                 <h1 class="d:none">전화번호 입력</h1>
                 <div>전화번호</div>
                 <div class="d:flex col-gap:2">
-                    <input type="text" class="n-textbox n-textbox-type:underline"/>
+                    <input type="text" class="n-textbox n-textbox-type:underline" required/>
                     <!-- <button class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증번호 발송</button>-->
                 </div>
             </section>
@@ -48,7 +48,7 @@
                 <h1 class="d:none">이메일 입력</h1>
                 <div>이메일</div>
                 <div class="d:flex col-gap:2">
-                    <input type="text" class="n-textbox n-textbox-type:underline"/>
+                    <input type="email" class="n-textbox n-textbox-type:underline" required/>
                     <button class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증번호 발송</button>
                 </div>
             </section>
@@ -56,7 +56,7 @@
                 <h1 class="d:none">이메일 확인</h1>
                 <div>이메일 확인</div>
                 <div class="d:flex col-gap:2">
-                    <input type="text" class="n-textbox n-textbox-type:underline"/>
+                    <input type="text" class="n-textbox n-textbox-type:underline" required/>
                     <button class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증번호 확인</button>
                 </div>
             </section>
@@ -67,16 +67,16 @@
                     <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
                 </div>
             </section>
-            <section class="d:flex gap:8">
+            <section class="btns d:flex gap:8">
                 <h1 class="d:none">버튼</h1>
-                <button type="button" class="n-btn n-btn:outline w:10p">이전</button>
-                <button type="button" class="n-btn w:10p">다음</button>
+                <button type="button" class="prev n-btn n-btn:outline w:10p">이전</button>
+                <button type="button" class="next n-btn w:10p">다음</button>
             </section>
         </section>
 
-        <!--step3-->
-        <section id="step3">
-            <form name="s-step3" class="d:flex fl-dir:column gap:10 mb:8">
+        <!--sec2-->
+        <section id="sec2" class="d:none">
+            <form class="d:flex fl-dir:column gap:10 mb:8">
                 <section class="col-gap:2 pos:relative">
                     <h1 class="d:none">인풋박스</h1>
                     <div>
@@ -99,11 +99,11 @@
                 <section class="col-gap:2 pos:relative">
                     <h1 class="d:none">비밀번호 확인</h1>
                     <div>
-                        <div>비밀번호 확인</div>
+                        <div>비밀번호 재확인</div>
                         <input type="password" class="verify-password n-textbox n-textbox-type:underline" required/>
                     </div>
-                    <div class="check-password d:none color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 비밀번호 일치 ]</div>
-                    <div class="check-password d:none color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 비밀번호 불일치 ]</div>
+                    <div class="check-password d:none color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 일치 ]</div>
+                    <div class="check-password d:none color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 불일치 ]</div>
                 </section>
                 <section class="d:flex gap:3 flex-direction:column" >
                     <h1>유입경로 선택</h1>
@@ -134,112 +134,15 @@
                         </li>
                     </ul>
                 </section>
-                <section class="d:flex gap:8">
+                <section class="btns d:flex gap:8">
                     <h1 class="d:none">버튼</h1>
-                    <button type="button" class="n-btn n-btn:outline w:10p">이전</button>
-                    <button type="button" class="n-btn w:10p">회원가입</button>
+                    <button type="button" class="prev n-btn n-btn:outline w:10p">이전</button>
+                    <button type="button" class="signup n-btn w:10p">회원가입</button>
                 </section>
             </form>
         </section>
-
     </section>
 
-    <!--pc 영역-->
-    <section class="l-signup d:flex fl-dir:column gap:10 mb:8 d:none md:d:flex md:gap:8">
-        <h1 class="d:none">pc 영역</h1>
-            <section class="col-gap:2">
-                <h1 class="d:none">인풋박스</h1>
-                <div>이름</div>
-                <input type="text" class="n-textbox n-textbox-type:underline" required/>
-            </section>
-            <section>
-                <h1 class="d:none">전화번호 입력</h1>
-                <div>전화번호</div>
-                <div class="d:flex col-gap:2">
-                    <input type="text" class="n-textbox n-textbox-type:underline" required/>
-                </div>
-            </section>
-            <section>
-                <h1 class="d:none">이메일 입력</h1>
-                <div>이메일</div>
-                <div class="d:flex col-gap:2">
-                    <input type="text" class="n-textbox n-textbox-type:underline" required/>
-                    <button class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증번호 발송</button>
-                </div>
-            </section>
-            <section class="col-gap:2 pos:relative">
-                <h1 class="d:none">이메일 확인</h1>
-                <div>이메일 확인</div>
-                <div class="d:flex col-gap:2">
-                    <input type="text" class="n-textbox n-textbox-type:underline" required/>
-                    <button class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증번호 확인</button>
-                </div>
-            </section>
-            <section>
-                <h1 class="d:none">이메일 수신여부 토글</h1>
-                <div class="display:flex flex-direction:row gap:4">
-                    <span class="d:flex ai:center">이메일 수신 여부</span>
-                    <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state" required/>
-                </div>
-            </section>
-            <section class="col-gap:2 pos:relative">
-                <h1 class="d:none">인풋박스</h1>
-                <div>
-                    <div>아이디</div>
-                    <input type="text" class="n-textbox n-textbox-type:underline" required/>
-                </div>
-                <div class="color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 사용가능 ]</div>
-            </section>
-            <section class="col-gap:2 pos:relative">
-                <h1 class="d:none">비밀번호</h1>
-                <div>
-                    <div>비밀번호</div>
-                    <input type="password" class="n-textbox n-textbox-type:underline" required/>
-                </div>
-                <div class="color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 사용가능 ]</div>
-            </section>
-            <section class="col-gap:2 pos:relative">
-                <h1 class="d:none">비밀번호 확인</h1>
-                <div>
-                    <div>비밀번호 확인</div>
-                    <input type="password" class="n-textbox n-textbox-type:underline" required/>
-                </div>
-                <div class="color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 비밀번호 일치 ]</div>
-            </section>
-            <section class="d:flex gap:3 flex-direction:column" >
-                <h1>유입경로 선택</h1>
-                <ul class="w:full d:flex jc:center gap:2">
-                    <li>
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            블로그
-                            <input  type="radio" class="d:none" name="" checked />
-                        </label>
-                    </li>
-                    <li>
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            인터넷
-                            <input  type="radio" class="d:none" name="" />
-                        </label>
-                    </li>
-                    <li>
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            SNS
-                            <input  type="radio" class="d:none" name="" />
-                        </label>
-                    </li>
-                    <li>
-                        <label class="n-toggle n-toggle-type:outline-box">
-                            지인추천
-                            <input  type="radio" class="d:none" name="" />
-                        </label>
-                    </li>
-                </ul>
-            </section>
-            <section class="d:flex gap:8">
-                <h1 class="d:none">버튼</h1>
-                <button type="button" class="n-btn w:10p">회원가입</button>
-            </section>
-    </section>
 </main>
 </body>
 </html>

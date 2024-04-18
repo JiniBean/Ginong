@@ -12,9 +12,7 @@
             let loginBtn = document.querySelector(".n-btn");
 
             loginBtn.onclick = function (){
-                console.log("ddd");
                 let url = new URL("/user/signin", location.origin);
-
                 location.href= url.toString();
             }
         });
