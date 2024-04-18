@@ -12,7 +12,7 @@ public class MailService {
     @Resource
     private JavaMailSender javaMailSender; // JavaMailSender를 주입받는다.
 
-    static String senderEmail = "tlstpstpdl11@naver.com"; // 발신자 이메일 주소
+    static String senderEmail = ""; // 발신자 이메일 주소
     static int number; // 생성된 인증 번호를 저장하는 변수
 
     // 인증 번호 생성 메서드
