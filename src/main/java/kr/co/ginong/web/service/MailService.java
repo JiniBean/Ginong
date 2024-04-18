@@ -3,6 +3,7 @@ package kr.co.ginong.web.service;
 import jakarta.annotation.Resource;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,8 @@ public class MailService {
     @Resource
     private JavaMailSender javaMailSender; // JavaMailSender를 주입받는다.
 
-    static String senderEmail = ""; // 발신자 이메일 주소
+    @Value("${spring.mail.username}")
+    private String senderEmail; // 발신자 이메일 주소
     static int number; // 생성된 인증 번호를 저장하는 변수
 
     // 인증 번호 생성 메서드
