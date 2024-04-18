@@ -34,21 +34,26 @@ public class CartController {
         return cart;
     }
 
+    @GetMapping("/c")
+    public Integer count(){
 
-    @PostMapping("/{prdId}")
-    public boolean add(@PathVariable Long prdId
-            ,@RequestParam(name = "q", required = false) Boolean addCount){
+        // 로그인 완성 후 수정 예정
+        Long memberId = 2L;
+        return service.getCount(memberId);
+    }
 
-        System.out.println("왔어");
+
+    @GetMapping("/a/{prdId}")
+    public Boolean add(@PathVariable Long prdId
+            , @RequestParam(name = "q", required = false) Boolean addCount){
+
         // 로그인 완성 후 수정 예정
         Long memberId = 2L;
 
         if(addCount != null) {
-            System.out.println("숫자만 추가해");
             return service.edit(memberId, prdId);
         }
         int qty = 1;
-        System.out.println("건너왔어 다 추가해");
         Cart cart = Cart.builder().productId(prdId).memberId(memberId).quantity(qty).build();
         return service.save(cart);
 

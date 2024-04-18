@@ -24,29 +24,38 @@ export default class CartRepository{
         }
     }
 
+    async count(){
+        let url = `${baseUrl}/user/api/cart/c`;
+
+        let response = await this.findPromise(url);
+
+        // 응답의 상태 코드 확인
+        if (response.status === 200) {
+            //response가 비었는지 확인
+            if (response.headers.get('content-length') === '0') {
+                return null;
+            }
+            let count = await response.json();
+            return count;
+        }
+    }
+
+
     async add(prdId){
-        let url = `${baseUrl}/user/api/cart/${prdId}`;
-        let method = 'POST';
-        let response = await this.findPromise(url, method);
-        let vaild = await response.json();
-
-        if (vaild) {
-            return vaild;
-        }
+        let url = `${baseUrl}/user/api/cart/a/${prdId}`;
+        let response = await this.findPromise(url);
+        let valid = await response.json();
+        return valid;
     }
 
-    async addCount(prdId){
-        let url = `${baseUrl}/user/api/cart/${prdId}?q=1`;
-        let method = 'POST';
-        let response = await this.findPromise(url, method);
-        let vaild = await response.json();
-
-        console.log("valid : ", vaild);
-
-        if (vaild) {
-            return vaild;
-        }
+    async addQty(prdId){
+        let url = `${baseUrl}/user/api/cart/a/${prdId}?q=1`;
+        let response = await this.findPromise(url);
+        let valid = await response.json();
+        return valid;
     }
+
+
 
 
 }

@@ -51,8 +51,12 @@
                         <div class="pos:relative">
                             <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="110px" width="110px" alt="상품 이미지" class="bd-radius:4"/>
                             <div class="cart-section">
-                                <div class="cart-box" th:data-id="${m.id}">
-                                    <span href="" class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니 아이콘</span>
+                                <div class="cart-box" th:data-id="${m.id}"
+                                     th:classappend="${m.cartQty}!= null ?'bg-color:main-6' ">
+                                    <span th:if="${m.cartQty == null}"
+                                          class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘
+                                    </span>
+                                    <span th:if="${m.cartQty != null}" th:text="${m.cartQty}" class="color:base-1"></span>
                                 </div>
                             </div>
 
@@ -78,9 +82,12 @@
                         <div class="pos:relative">
                             <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="180px" width="180px" alt="상품 이미지" class="bd-radius:2"/>
                             <div class="cart-section">
-                                <div class="cart-box">
-                                    <span href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4" th:data-id="${m.id}">
-                                        장바구니아이콘</span>
+                                <div class="cart-box" th:data-id="${m.id}"
+                                     th:classappend="${m.cartQty}!= null ?'bg-color:main-6' ">
+                                    <span th:if="${m.cartQty == null}"
+                                          class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘
+                                    </span>
+                                    <span th:if="${m.cartQty != null}" th:text="${m.cartQty}" class="color:base-1"></span>
                                 </div>
                             </div>
                         </div>
@@ -108,10 +115,12 @@
                             <img th:src="${m.thumbnailPath + '/Meongmeong.jpg'}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/>
                         </div>
                         <div class="cart-section">
-                            <div class="cart-box" th:data-id="${m.id}">
-                                <span href="" class="icon-shopping_cart icon icon:shopping_cart_simple icon-color:base-1 icon-size:4 color:base-1">
-                                    장바구니 아이콘
-                                </span>
+                            <div class="cart-box" th:data-id="${m.id}"
+                                 th:classappend="${m.cartQty}!= null ?'bg-color:main-6' ">
+                                    <span th:if="${m.cartQty == null}"
+                                          class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">장바구니아이콘
+                                    </span>
+                                <span th:if="${m.cartQty != null}" th:text="${m.cartQty}" class="color:base-1"></span>
                             </div>
                         </div>
                     </div>

@@ -14,4 +14,6 @@ public interface CartRepository {
 
     Boolean update(Long memberId, Long prdId);
     Boolean update(Long memberId, Long prdId, Integer qty);
+
+    Integer count(Long memberId);
 }

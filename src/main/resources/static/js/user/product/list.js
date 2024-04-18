@@ -63,31 +63,29 @@ import CartRepository from "../../module/CartRepository.js";
 document.addEventListener('click', async function (e) {
 
     const cartBox = e.target.closest(".cart-box");
+    e.preventDefault();
 
     if (cartBox) {
+        console.log("눌림");
         const prdId = cartBox.dataset.id;
         e.preventDefault();
 
         let cartRepository = new CartRepository();
         let item = await cartRepository.findItem(prdId);
-        let vaild = false;
+        let valid = false;
         if(item == null)
-            vaild = await cartRepository.add(prdId);
+            valid = await cartRepository.add(prdId);
         else
-            vaild = await cartRepository.addCount(prdId);
+            valid = await cartRepository.addQty(prdId);
 
-        if(vaild){
-            item  = await cartRepository.findItem(prdId);
+
+        if(valid){
+            item = await cartRepository.findItem(prdId);
             let qty = item.quantity;
-            console.log(item);
             cartBox.textContent = qty;
             cartBox.classList.add('bg-color:main-6');
             cartBox.classList.add('color:base-1');
-
         }
-
-
-
 
     }
 
@@ -241,7 +239,7 @@ window.addEventListener("load", function () {
 
         xhr.onload = function () {
             let list = JSON.parse(this.responseText);
-            callback(list);
+            // callback(list);
         };
 
         xhr.open(method, url);

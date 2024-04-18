@@ -28,5 +28,6 @@ public class ProductView {
     private String  admin;
     private String  quantityCategory;
     private String  weightCategory;
+//    private Integer cartQty;
 
 }

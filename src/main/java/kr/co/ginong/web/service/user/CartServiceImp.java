@@ -24,14 +24,14 @@ public class CartServiceImp implements CartService{
     }
 
     @Override
+    public Integer getCount(Long memberId){return repository.count(memberId);}
+    @Override
     public Boolean save(Cart cart) {
         return repository.save(cart);
     }
 
     @Override
     public Boolean edit(Long memberId, Long prdId) {
-        System.out.println("서비스야");
-
         return repository.update(memberId,prdId, null);
     }
 

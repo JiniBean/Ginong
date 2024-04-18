@@ -14,7 +14,14 @@
         AND PRODUCT_ID = #{prdId};
     </select>
 
-    <insert id="save" parameterType="Cart">
+    <select id="count" resultType="Integer" parameterType="Long">
+        SELECT
+            count(*)
+        from CART
+        WHERE MEMBER_ID = ${memberId}
+    </select>
+
+    <insert id="save" parameterType="Cart" >
         INSERT INTO CART (QUANTITY, PRODUCT_ID, MEMBER_ID)
         values (#{quantity}, #{productId}, #{memberId})
     </insert>

@@ -10,6 +10,8 @@ public interface CartService {
 
     Cart get(Long memberId, Long prdId);
 
+    Integer getCount(Long memberId);
+
     Boolean save(Cart cart);
 
     Boolean edit(Long memberId, Long prdId);
