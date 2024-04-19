@@ -260,6 +260,9 @@ public class OrderController {
         return "user/order/complete";
     }
 
-
+    @GetMapping("detail")
+    public String detail() {
+        return "user/order/detail";
+    }
 
 }
