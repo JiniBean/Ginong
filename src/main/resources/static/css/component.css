@@ -39,6 +39,13 @@
     --btn-border-accent-default: 1px solid var(--color-accent-1);
     --btn-border-accent-hover: 1px solid var(--color-accent-1);
     --btn-color-accent: var(--color-base-1);
+
+    /* btn-color:base */
+    --btn-background-color-base-default: var(--color-base-1);
+    --btn-background-color-base-hover: var(--color-base-7);
+    --btn-border-base-default: 1px solid var(--color-base-4);
+    --btn-border-base-hover: 1px solid var(--color-base-4);
+    --btn-color-base: var(--color-base-4);
 }
 
 .n-btn-type\:outline:hover{
@@ -71,6 +78,7 @@
 /* toggle.css */
 .n-toggle {
     /* toggle-type:check */
+    --toggle-check-border-color: var(--color-base-7);
     --toggle-check-background-color-checked: var(--color-main-6);
     --toggle-check-checked-background-color: var(--color-main-6);
 
