@@ -26,6 +26,15 @@ public class MemberServiceImp implements MemberService{
         return member;
     }
 
+    @Override
+    public boolean addMember(Member member) {
+        int affectedRows = repository.insertMember(member);
+
+        if(affectedRows>0)
+            return true;
+
+        return false;
+    }
 
 
 }

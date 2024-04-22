@@ -19,6 +19,7 @@ public class MailController {
     @ResponseBody
     @PostMapping("/mailSend")
     public ResponseEntity<HashMap<String, Object>> mailsend(@RequestParam String mail){
+
         HashMap<String, Object> map = new HashMap<>();
 
         try{

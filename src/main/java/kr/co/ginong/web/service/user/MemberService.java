@@ -8,7 +8,5 @@ public interface MemberService {
 
     Member get(String name);
     Member get(Long id);
-
-
-
+    boolean addMember(Member member);
 }

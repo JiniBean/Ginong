@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         let verificationResult = document.querySelector('.verification-result');
                         verificationResult.textContent = '인증이 확인되었습니다.';
                         verificationResult.style.color = 'green';
+                        sessionStorage.setItem("verification-email","Y");
                     } else {
                         // 인증번호가 일치하지 않을 때
                         let verificationResult = document.querySelector('.verification-result');

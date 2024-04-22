@@ -22,4 +22,5 @@ public class Member {
     private Date    deleteDate;
     private boolean state;
     private boolean agree;
+
 }

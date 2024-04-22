@@ -10,6 +10,5 @@ public interface MemberRepository {
 
     Member find(Long id,String name);
 
-
-
+    int insertMember(Member member);
 }

@@ -3,10 +3,8 @@ package kr.co.ginong.web.controller.user.api;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,4 +30,38 @@ public class MemberController {
 
         return map;
     }
+
+    @PostMapping("add")
+    public ResponseEntity<Boolean> add(@RequestBody Map<String, String> params){
+
+        System.out.println("stepinfo="+params);
+
+        String name = params.get("name");
+        String userName = params.get("userName");
+        String pwd = params.get("pwd");
+        String email = params.get("email");
+        String phone = params.get("phone");
+        boolean agree = Boolean.parseBoolean(params.get("agree"));
+
+        Member member = Member.builder()
+                            .name(name)
+                            .userName(userName)
+                            .pwd(pwd)
+                            .email(email)
+                            .phone(phone)
+                            .agree(agree)
+                            .build();
+
+        System.out.println(member.toString());
+
+        boolean result = service.addMember(member);
+
+        if(result)
+            return ResponseEntity.ok(true);
+
+        return ResponseEntity.badRequest().body(false);
+    }
+
+
+
 }

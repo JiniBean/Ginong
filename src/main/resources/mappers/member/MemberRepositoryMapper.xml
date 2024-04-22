@@ -16,5 +16,11 @@
         </where>
     </select>
 
+    <insert id="insertMember">
+        INSERT INTO MEMBER
+        ( NAME, USER_NAME, EMAIL, PWD, PHONE, JOIN_DATE, AGREE)
+        VALUES(#{name},#{userName}, #{email}, #{pwd}, #{phone}, current_timestamp(),#{agree})
+    </insert>
+
 
 </mapper>
