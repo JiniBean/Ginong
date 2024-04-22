@@ -66,40 +66,40 @@ document.addEventListener('click', async function (e) {
 
     const cartBox = e.target.closest(".cart-box"); // 장바구니 아이콘 영역
 
-    if (cartBox) {
+    if (!cartBox)
+        return;
 
-        // a 태그 막기
-        e.preventDefault();
+    // a 태그 막기
+    e.preventDefault();
 
-        const prdId = cartBox.dataset.id;
-        let cartRepository = new CartRepository();
+    const prdId = cartBox.dataset.id;
+    let cartRepository = new CartRepository();
 
-        // 해당 상품 아이디로 장바구니 목록에 있는지 체크
-        let item = await cartRepository.findItem(prdId);
-        let valid = false;
+    // 해당 상품 아이디로 장바구니 목록에 있는지 체크
+    let valid = false;
+    let item = await cartRepository.findItem(prdId);
+    console.log(item);
 
-        // 없다면 추가, 있다면 수량 증가
-        if(item == null)
-            valid = await cartRepository.add(prdId);
-        else
-            valid = await cartRepository.addQty(prdId);
+    // 없다면 추가, 있다면 수량 증가
+    if(item == null)
+        valid = await cartRepository.add(prdId);
+    else
+        valid = await cartRepository.addQty(prdId);
+    console.log(valid);
 
-        // DB 저장 잘 됐다면 헤더와 카드의 장바구니 바꾸기
-        if(valid){
-            item = await cartRepository.findItem(prdId);
-            let qty = item.quantity;
+    // DB 저장 잘 됐다면 헤더와 카드의 장바구니 바꾸기
+    if(valid){
+        item = await cartRepository.findItem(prdId);
+        let qty = item.quantity;
 
-            cartBox.textContent = qty;
-            cartBox.classList.add('bg-color:main-6');
-            cartBox.classList.add('color:base-1');
+        cartBox.textContent = qty;
+        cartBox.classList.add('bg-color:main-6');
+        cartBox.classList.add('color:base-1');
 
-            let header = new Header();
-            await header.renewCart();
+        let header = new Header();
+        await header.renewCart();
 
         }
-
-    }
-
 
 });
 
@@ -176,33 +176,33 @@ window.addEventListener("load", function () {
     }
 
 
-    priceBtn.onclick = function (e) {
-        e.preventDefault();
-
-        priceBtn.classList.add("color:main-6");
-        recommendBtn.classList.remove("color:main-6");
-
-        let sortType = 1;
-        let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
-
-        request(url, function (list) {
-            bind(list);
-        });
-    }
-
-    recommendBtn.onclick = function (e) {
-        e.preventDefault();
-
-        priceBtn.classList.remove("color:main-6");
-        recommendBtn.classList.add("color:main-6");
-        let sortType = 2;
-        let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
-        //let url = `${baseUrl}/user/api/product?p=${p}&s=${sortType}&c=${c}&r=${alignNumberBox.value}`;
-
-        request(url, function (list) {
-            bind(list);
-        });
-    }
+    // priceBtn.onclick = function (e) {
+    //     e.preventDefault();
+    //
+    //     priceBtn.classList.add("color:main-6");
+    //     recommendBtn.classList.remove("color:main-6");
+    //
+    //     let sortType = 1;
+    //     let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
+    //
+    //     request(url, function (list) {
+    //         bind(list);
+    //     });
+    // }
+    //
+    // recommendBtn.onclick = function (e) {
+    //     e.preventDefault();
+    //
+    //     priceBtn.classList.remove("color:main-6");
+    //     recommendBtn.classList.add("color:main-6");
+    //     let sortType = 2;
+    //     let url = `${baseUrl}/user/api/product?p=1&s=${sortType}&c=${c}`;
+    //     //let url = `${baseUrl}/user/api/product?p=${p}&s=${sortType}&c=${c}&r=${alignNumberBox.value}`;
+    //
+    //     request(url, function (list) {
+    //         bind(list);
+    //     });
+    // }
 
     /* 상품 display 갯수 선택, default 20*/
     function loadData() {
@@ -219,8 +219,8 @@ window.addEventListener("load", function () {
     }
 
     alignNumberBox.onchange = function(e) {
-        e.stopPropagation();
-        e.preventDefault();
+        // e.stopPropagation();
+        // e.preventDefault();
 
         loadData();
     }
@@ -250,7 +250,7 @@ window.addEventListener("load", function () {
 
         xhr.onload = function () {
             let list = JSON.parse(this.responseText);
-            callback(list);
+            // callback(list);
         };
 
         xhr.open(method, url);

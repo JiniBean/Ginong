@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("user/product")
+@RequestMapping("product")
 public class ProductController {
 
     @Autowired
@@ -42,7 +42,8 @@ public class ProductController {
     public String list(
             @RequestParam(name = "c", required = false) Long categoryId
             , @RequestParam(name = "q", required = false) String query
-            , @RequestParam(name = "p", required = false, defaultValue = "1") Integer page
+            , @RequestParam(name = "p", defaultValue = "1") Integer page
+            , @RequestParam(name = "s", required = false) Integer sortType
             , @CookieValue(name = "cartList", required = false) List<Cart> carts
             , Model model) {
 
@@ -51,20 +52,8 @@ public class ProductController {
 
         int count = 0;
 
-        if (categoryId != null && query != null) {
-            prds = service.getList(page, categoryId, query);
-            count = service.count(categoryId, query);
-        } else if (categoryId != null) {
-            prds = service.getList(page, categoryId);
-            count = service.count(categoryId);
-        } else if (query != null) {
-            prds = service.getList(page, query);
-            count = service.count(query);
-        } else {
-            prds = service.getList(page);
-            count = service.count();
-        }
-
+        prds = service.getList(page, categoryId, query, sortType);
+        count = service.count(categoryId, query);
 
         // 장바구니에 담겨있는 상품 체크
         List<Cart> cartList = new ArrayList<>();

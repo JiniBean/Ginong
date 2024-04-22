@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
-@RequestMapping("user/order")
+@RequestMapping("order")
 public class OrderController {
 
     @Autowired

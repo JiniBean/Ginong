@@ -1,8 +1,10 @@
 let baseUrl = window.location.origin;
 export default class CartRepository{
 
-    findPromise(url,method="GET"){
+    findPromise(url,method="GET", data){
         return fetch(url,{method:method});
+        // return fetch(url,{method:method, body:JSON.stringify(data)});
+
     }
 
     async findItem(prdId){
@@ -40,16 +42,20 @@ export default class CartRepository{
 
     async add(prdId){
         let url = `${baseUrl}/user/api/cart/a/${prdId}`;
+        // let method = 'POST';
+        // let data = {"prdId" : prdId};
+        // let response = await this.findPromise(url,method, data);
         let response = await this.findPromise(url);
-        let valid = await response.json();
-        return valid;
+        return await response.json();
     }
 
     async addQty(prdId){
         let url = `${baseUrl}/user/api/cart/a/${prdId}?q=1`;
+        // let method = 'POST';
+        // let data = {"prdId" : prdId};
+        // let response = await this.findPromise(url,method, data);
         let response = await this.findPromise(url);
-        let valid = await response.json();
-        return valid;
+        return await response.json();
     }
 
 

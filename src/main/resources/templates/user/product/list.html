@@ -32,9 +32,9 @@
             </div>
 
             <div class="pos:relative d:flex gap:3">
-                <a href="" class="price">가격순</a>
+                <a href="list?s=1"  th:classappend="${{param.s}}==1 ? 'color:main-6': ''" class="price">가격순</a>
                 <span class="bar"></span>
-                <a href="" class="recommend">추천순</a>
+                <a href="list?s=2" th:classappend="${{param.s}}==2 ? 'color:main-6': ''" class="recommend">추천순</a>
             </div>
         </section>
 
