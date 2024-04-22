@@ -189,7 +189,7 @@ public class OrderController {
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
 
         // 잔여 적립금 조회
-        int point = pointService.getAvailPont(memberId);
+        int point = pointService.getAvailPoint(memberId);
 
         // 모델
         model.addAttribute("items", items);

@@ -9,7 +9,7 @@ public interface PointService {
 
     List<PointHistoryView> getList(Long memberId);
 
-    int getAvailPont(Long memberId);
+    int getAvailPoint(Long memberId);
 
 
 
