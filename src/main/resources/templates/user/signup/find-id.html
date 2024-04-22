@@ -62,10 +62,10 @@
                 placeholder="Underline Textbox"/>
     </section>
 
-    <section>
+    <section id="email-send">
         <h1 class="d:none">이메일 인풋박스</h1>
         <div>이메일</div>
-        <form id="mail-form" action="/mailSend" method="post">
+        <form class="mail-form" action="/mailSend" method="post">
             <div class="d:flex col-gap:2">
                 <input
                         type="text"
@@ -73,14 +73,14 @@
                         placeholder="Underline Textbox"
                         name = "mail"
                 />
-                <button id="send-mail-btn" class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증 번호 발송</button>
+                <button class="n-btn n-btn:outline color:base-9 send-mail-btn" style="top:-3px;">인증 번호 발송</button>
             </div>
         </form>
     </section>
 
     <section id="email-confirm">
         <h1 class="d:none">이메일 인증번호 인풋박스</h1>
-        <form id="verify-form" class="">
+        <form class="verify-form">
             <div>인증번호</div>
             <div class="d:flex col-gap:2">
                 <input
@@ -88,7 +88,7 @@
                         class="n-textbox n-textbox-type:underline verification-code"
                         name="verification-code"
                         placeholder="Underline Textbox"/>
-                <button id="verify_btn" class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증 확인</button>
+                <button class="n-btn n-btn:outline color:base-9 verify_btn disabled" style="top:-3px;">인증 확인</button>
             </div>
         </form>
         <div class="verification-result"></div>
