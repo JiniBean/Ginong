@@ -32,36 +32,57 @@ public class MemberController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<Boolean> add(@RequestBody Map<String, String> params){
+    public ResponseEntity<Boolean> add(@RequestBody Map<String, String> params) {
 
-        System.out.println("stepinfo="+params);
+        Long memberId = null;
 
-        String name = params.get("name");
-        String userName = params.get("userName");
-        String pwd = params.get("pwd");
-        String email = params.get("email");
-        String phone = params.get("phone");
-        boolean agree = Boolean.parseBoolean(params.get("agree"));
+        //회원등록
+        {
+            String name = params.get("name");
+            String userName = params.get("userName");
+            String pwd = params.get("pwd");
+            String email = params.get("email");
+            String phone = params.get("phone");
+            boolean agree = Boolean.parseBoolean(params.get("agree"));
 
-        Member member = Member.builder()
-                            .name(name)
-                            .userName(userName)
-                            .pwd(pwd)
-                            .email(email)
-                            .phone(phone)
-                            .agree(agree)
-                            .build();
+            Member member = Member.builder()
+                    .name(name)
+                    .userName(userName)
+                    .pwd(pwd)
+                    .email(email)
+                    .phone(phone)
+                    .agree(agree)
+                    .build();
 
-        System.out.println(member.toString());
+            memberId = service.addMember(member);
 
-        boolean result = service.addMember(member);
+            if (memberId == null)
+                return ResponseEntity.badRequest().body(false);
 
-        if(result)
-            return ResponseEntity.ok(true);
+        }
 
-        return ResponseEntity.badRequest().body(false);
+        //가입경로 등록
+        {
+            String joinRoute = params.get("joinRoute");
+
+            boolean isValid =false;
+
+            //가입경로 선택했다면 등록
+            if(!joinRoute.equals("default")){
+
+                //실패시 false
+                isValid = service.addRoute(memberId,joinRoute);
+
+                if(!isValid)
+                    return ResponseEntity.badRequest().body(false);
+
+            }
+
+        }
+
+        return ResponseEntity.ok(true);
+
     }
-
 
 
 }

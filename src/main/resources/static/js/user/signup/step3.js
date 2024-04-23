@@ -4,22 +4,42 @@
 //세션에 임시저장한 값 가져오기
 window.addEventListener("load", function(e){
 
-    // sec1
-    // let sec2 = document.querySelector("#sec1");
-    //
-    // //세션에서 값 꺼내기
-    // const step2DataString = sessionStorage.getItem('step2Data');
-    // const userData = JSON.parse(step2DataString);
-    //
-    // let joinRoute = sec2.querySelector(".join-route");
+    // sec2
+    let sec2 = document.querySelector("#sec2");
 
-    //let userName = sec1.querySelector(".userName");
+    //세션에서 값 꺼내기
+    const step3DataString = sessionStorage.getItem('step3Data');
+    const userData = JSON.parse(step3DataString);
 
-    // if(userData){
-    //     name.value=`${userData.name}`;
-    //     agree.checked = `${userData.agree}`==='true' ? true : false;
-    // }
+    let userName = sec2.querySelector(".user-name");
+    let pwd = sec2.querySelector(".password");
 
+    //유입경로
+    let route = document.getElementsByName("route");
+
+    let joinRoute;
+
+    if(userData){
+        joinRoute = `${userData.joinRoute}`;
+
+        switch (joinRoute){
+            case 'blog' :
+                route[0].checked=true;
+                break;
+            case 'internet' :
+                route[1].checked=true;
+                break;
+            case 'sns' :
+                route[2].checked=true;
+                break;
+            case 'person' :
+                route[3].checked=true;
+                break;
+        }
+
+        userName.value=`${userData.userName}`;
+        pwd.value=`${userData.pwd}`;
+    }
 
 });
 
@@ -254,8 +274,7 @@ window.addEventListener("load", function(e){
                url = url + "?name=" +name;
 
                //세션 저장소값 지우고 페이지 넘기기
-               sessionStorage.removeItem("step2Data");
-               sessionStorage.removeItem("step3Data");
+               sessionStorage.clear();
 
                location.href=url.toString();
 
@@ -277,7 +296,7 @@ window.addEventListener("load", function(e){
         let pwd = sec2.querySelector(".password").value;
         let route = document.getElementsByName("route");
 
-        let joinRoute = "";
+        let joinRoute = "default";
 
         //유입경로 선택
         for(const radio of route)

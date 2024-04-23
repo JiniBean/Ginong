@@ -10,5 +10,7 @@ public interface MemberRepository {
 
     Member find(Long id,String name);
 
-    int insertMember(Member member);
+    Long insertMember(Member member);
+
+    int insertRoute(Long memberId, String name);
 }

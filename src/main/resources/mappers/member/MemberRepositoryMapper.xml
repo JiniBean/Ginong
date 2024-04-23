@@ -16,11 +16,15 @@
         </where>
     </select>
 
-    <insert id="insertMember">
+    <insert id="insertMember" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO MEMBER
         ( NAME, USER_NAME, EMAIL, PWD, PHONE, JOIN_DATE, AGREE)
         VALUES(#{name},#{userName}, #{email}, #{pwd}, #{phone}, current_timestamp(),#{agree})
     </insert>
 
+    <insert id="insertRoute">
+        INSERT INTO JOIN_ROUTE (MEMBER_ID,NAME)
+        VALUES (#{memberId},#{name});
+    </insert>
 
 </mapper>

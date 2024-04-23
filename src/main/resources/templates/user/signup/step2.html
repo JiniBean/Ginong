@@ -35,14 +35,14 @@
                 <section class="col-gap:2">
                     <h1 class="d:none">인풋박스</h1>
                     <div>이름</div>
-                    <input type="text" class="name n-textbox n-textbox-type:underline" autofocus required/>
+                    <input type="text" class="name n-textbox n-textbox-type:underline" autofocus required autocomplete="false"/>
                     <div class="verify-name d:none">이름을 입력해주세요</div>
                 </section>
                 <section>
                     <h1 class="d:none">전화번호 입력</h1>
                     <div>전화번호</div>
                     <div class="d:flex col-gap:2">
-                        <input type="text" class="phone n-textbox n-textbox-type:underline" placeholder="01012345678" required/>
+                        <input type="text" class="phone n-textbox n-textbox-type:underline" placeholder="01012345678" required autocomplete="false"/>
                     </div>
                     <div class="verify-phone d:none">전화번호를 입력해주세요</div>
                 </section>
@@ -58,7 +58,7 @@
                     <h1 class="d:none">이메일 인증번호 확인</h1>
                     <div>인증번호</div>
                     <div class="d:flex col-gap:2">
-                        <input type="text" class="verify-num n-textbox n-textbox-type:underline verification-code" required/>
+                        <input type="text" class="verify-num n-textbox n-textbox-type:underline verification-code" required autocomplete="false"/>
                         <button id="verify_btn" class="n-btn n-btn:outline color:base-9" style="top:-3px;">인증번호 확인</button>
                     </div>
                     <div class="verification-result"></div>
