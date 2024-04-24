@@ -265,4 +265,11 @@ public class OrderController {
         return "user/order/detail";
     }
 
+
+    @GetMapping("list")
+    public String list() {
+        return "user/order/list";
+    }
+
+
 }
