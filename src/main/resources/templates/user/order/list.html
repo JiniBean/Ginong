@@ -6,6 +6,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Product-List</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="/js/menu/list-vue.js" defer></script>
   <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
@@ -15,20 +17,20 @@
         <nav>
             <h1 class="d:none">탭</h1>
             <ul id='tabbar' class="n-tabbar n-tab-grow w:10p">
-                <li class="active"><a href="#" class="h:4">주문 내역</a></li>
-                <li><a href="#" class="h:4">주문 취소 내역</a></li>
+                <li class="active"><a href="#" class="h:3 md:h:4">주문 내역</a></li>
+                <li><a href="#" class="h:3 md:h:4">주문 취소 내역</a></li>
             </ul>
         </nav>
         
         <!-- 주문 취소 내역 카드 -->
-        <section class="d:flex fl-dir:column gap:2 pt:5 pb:5">
+        <section class="d:flex fl-dir:column gap:2 pt:5 pb:5" v-for="ol in list">
             <span class="d:flex flex-grow:1 jc:right color:sub-5 fw:3">취소 완료</span>
             <div class="d:flex fl-dir:column bd bd-radius:2 bd-color:base-4 pt:2 pb:2 pr:5 pl:5 gap:3">
                 <div class="d:flex fl-dir:row gap:3">
                     <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}"  src="" alt="상품 썸네일" width="120px" height="120px">
                     <div class="d:flex fl-dir:column jc:center gap:3">
                         <div>
-                            <span class="fs:2 md:fs:3 color:base-4">2024.01.17</span>
+                            <span class="fs:2 md:fs:3 color:base-4" v-text="ol.date">2024.01.17</span>
                             <span class="fs:2 md:fs:3 color:base-4">환불</span>
                         </div>
                         <span class="fs:2 md:fs:3">텃밭 흙 당근, 2개입</span>
