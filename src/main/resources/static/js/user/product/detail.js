@@ -99,7 +99,7 @@ window.addEventListener("load", function(){
                 //구현해야함
                 break;
             case 'order' :
-                let url = new URL ("/user/order/info", location.origin);
+                let url = new URL ("/order/info", location.origin);
 
                 let quantity = parseInt(quantityInput.value);
 
@@ -135,7 +135,7 @@ window.addEventListener("load", function() {
 
         let quantity = parseInt(quantityInput.value);
 
-        let url = new URL ("/user/order/info", location.origin);
+        let url = new URL ("/order/info", location.origin);
 
         url = url + "?p=" + productId + "&q=" + quantity;
 
@@ -234,7 +234,7 @@ window.addEventListener("load", function(){
                 case 'cart' :
                     break;
                 case 'order' :
-                    let url = new URL ("/user/order/info", location.origin);
+                    let url = new URL ("/order/info", location.origin);
 
                     let productId = navi.querySelector(".product-id").value;
                     let numberBox = orderInfo.querySelector(".numberBox");
