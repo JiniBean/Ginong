@@ -269,7 +269,7 @@ public class OrderController {
     @GetMapping("list")
     public String list(Long memberId, Model model) {
 
-        List<Order> list = service.get(memberId);
+        List<OrderView> list = service.getList(memberId);
         model.addAttribute(list);
 
         return "user/order/list";
