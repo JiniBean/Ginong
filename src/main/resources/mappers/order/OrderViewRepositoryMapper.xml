@@ -14,18 +14,6 @@
 		</where>
 	</select>
 
-    <select id="findAll" resultType="OrderView">
-		select
-		*
-		from ORDER_VIEW
-		<where>
-			<if test="orderId != null">
-				order_id = #{orderId}
-			</if>
-		</where>
-	</select>
-
-
 	<select id="findByOrderId" resultType="OrderView">
 		select
 		*
