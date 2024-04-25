@@ -6,6 +6,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Product-List</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="/js/user/order/detail.js" defer></script>
   <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
@@ -32,7 +34,15 @@
         </div>
         <div>
           <span class="fs:2 md:fs:4 fw:3 color:base-9">주문번호</span>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9">12240021</span>
+          <span class="fs:2 md:fs:4 fw:3 color:base-9">{{ order.orderId }}</span>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" @change="checkAll"> 전체선택
+          </label>
+          <label v-for="item in order.orderItems" :key="item.id">
+            <input type="checkbox" v-model="item.checked" @change="console.log(order.orderItems)"> {{ item.productName }}
+          </label>
         </div>
       </div>
       <div class="d:flex jc:space-between gap:4 p:5">
@@ -97,7 +107,7 @@
           <span class="fs:2 md:fs:3">텃밭 흙 당근, 2개입</span>
           <span class="fs:2 md:fs:3 fw:3">2,500원</span>
           <span class="fs:2 md:fs:3">2개</span>
-          <div class="d:flex d:none fl-dir:column gap:2">
+          <div class="d:none md:d:flex fl-dir:column gap:2">
             <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
             <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base">배송완료</div>
           </div>
