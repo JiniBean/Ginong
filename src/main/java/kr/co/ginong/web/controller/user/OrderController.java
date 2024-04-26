@@ -260,6 +260,11 @@ public class OrderController {
         return "user/order/complete";
     }
 
+    @GetMapping("list")
+    public String list() {
+        return "user/order/list";
+    }
+
     @GetMapping("detail")
     public String detail() {
         return "user/order/detail";

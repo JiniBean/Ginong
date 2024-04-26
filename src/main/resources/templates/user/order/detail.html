@@ -18,8 +18,8 @@
     <h1 class="d:none">주문 상세 요약</h1>
     <div class="d:flex jc:center gap:6">
       <span class="fw:3 fs:5">주문 상세 - </span>
-      <span class="fw:3 fs:5">텃밭 흙당근 2개입</span>
-      <span class="fw:3 fs:5">외 3건</span>
+      <span class="fw:3 fs:5">{{order.orderItems[0].productName}}</span>
+      <span class="fw:3 fs:5">외 {{(order.orderItems.length)-1}} 건</span>
     </div>
   </section>
 
@@ -29,28 +29,22 @@
     <div class="d:flex fl-dir:column gap:10 p:5">
       <div class="d:flex jc:space-between">
         <div>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9">2024.01.27</span>
+          <span class="fs:2 md:fs:4 fw:3 color:base-9 pr:1" v-text="order.orderDate"></span>
+          <!-- <span class="fs:2 md:fs:4 fw:3 color:base-9">{{ order.orderDate }}</span> -->
           <span class="fs:2 md:fs:4 fw:3 color:base-9">주문</span>
         </div>
         <div>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9">주문번호</span>
+          <span class="fs:2 md:fs:4 fw:3 color:base-9 pr:1">주문번호</span>
           <span class="fs:2 md:fs:4 fw:3 color:base-9">{{ order.orderId }}</span>
         </div>
-        <div>
-          <label>
-            <input type="checkbox" @change="checkAll"> 전체선택
-          </label>
-          <label v-for="item in order.orderItems" :key="item.id">
-            <input type="checkbox" v-model="item.checked" @change="console.log(order.orderItems)"> {{ item.productName }}
-          </label>
-        </div>
+       
       </div>
       <div class="d:flex jc:space-between gap:4 p:5">
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
+        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="state in order.orderState" :key="state.id">
           <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:main-6" style="width: 36px; height: 36px;"></div>
-          <span class="fs:1 md:fs:3 color:main-6">주문완료</span>
+          <span class="fs:1 md:fs:3 color:main-6">{{ state.name }}</span>
         </div>
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
+        <!-- <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
           <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
           <span class="fs:1 md:fs:3 color:base-9">배송준비중</span>
         </div>
@@ -61,33 +55,33 @@
         <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
           <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
           <span class="fs:1 md:fs:3 color:base-9">배송완료</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
 
-<!--  주문한 상품 내역-->
+<!-- 주문한 상품 내역-->
   <section class="d:flex fl-dir:column gap:4 pl:5 pr:5 ">
     <h1 class="d:none">주문 상품 내역</h1>
     <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p ">
       <label>
-        <input type="checkbox" class="n-toggle n-toggle-type:check-box" />
+        <input type="checkbox" class="n-toggle n-toggle-type:check-box" @change="checkAll" />
         전체선택
       </label>
     </div>
-    <div class="d:flex gap:2 md:gap4 w:10p pr:10">
+    <div class="d:flex gap:2 md:gap4 w:10p pr:10" v-for="item in order.orderItems" :key="item.id">
       <label>
-        <input type="checkbox" class="n-toggle n-toggle-type:check-box" />
+        <input type="checkbox" class="n-toggle n-toggle-type:check-box" v-model="item.checked" />
       </label>
-<!--      mobile버전-->
+<!-- mobile버전-->
       <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
-        <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}"  src="" alt="상품 썸네일" width="120px" height="120px">
+        <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
         <div class="d:flex fl-dir:column jc:space-between ai:start md:ai:center md:fl-dir:row gap:2 w:10p">
-          <span class="fs:2 md:fs:3">텃밭 흙 당근, 2개입</span>
+          <span class="fs:2 md:fs:3"> {{ item.productName }} </span>
           <div class="d:flex fl-dir:row pos:relative md:jc:space-between md:ai:center md:pos:none gap:3">
-            <span class="fs:2 md:fs:3 fw:3">2,500원</span>
+            <span class="fs:2 md:fs:3 fw:3">{{ item.productPrice }}원</span>
             <span class="md:d:none bar"></span>
-            <span class="fs:2 md:fs:3">2개</span>
+            <span class="fs:2 md:fs:3">{{ item.quantity }}개</span>
           </div>
           <div class="d:flex d:none fl-dir:column gap:2">
             <div class="n-btn n-btn-type:outline n-btn-size:1">교환</div>
@@ -97,6 +91,7 @@
       </div>
     </div>
 <!--    pc버전-->
+<!--
     <div class="d:flex gap:2 md:gap4 w:10p pr:10">
       <label>
         <input type="checkbox" class="n-toggle n-toggle-type:check-box" />
@@ -115,7 +110,7 @@
       </div>
     </div>
   </section>
-
+-->
 <!--  버튼들-->
   <section class="d:flex fl-dir:column gap:10">
     <h1 class="d:none">버튼</h1>
@@ -136,7 +131,7 @@
     <h1 class="d:none">결제정보</h1>
     <div class="n-expander bd-top bd-color:base-4 bd-width:3 pl:5 pr:5">
       <div class="n-expander-title bd-bottom bd-color:base-4 bd-width:1 fs:5 md:fs:6 fw:3">
-        <input type="checkbox" class="n-expander-trigger"/>
+        <input type="checkbox" class="n-expander-trigger" checked/>
         결제 정보
       </div>
       <div class="n-expander-content px:2 gap:4">
@@ -164,6 +159,10 @@
           <span class="fs:3 md:fs:4 fw:3">총 결제금액</span>
           <span class="fs:3 md:fs:4 fw:3">26,900원</span>
         </div>
+        <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
+          <span class="fs:3 md:fs:4 fw:3">환불 방법</span>
+          <span class="fs:3 md:fs:4 fw:3">적립금 환불</span>
+        </div>
       </div>
     </div>
   </section>
@@ -173,25 +172,21 @@
     <h1 class="d:none">배송지 정보</h1>
     <div class="n-expander bd-top bd-color:base-4 bd-width:3 pl:5 pr:5">
       <div class="n-expander-title bd-bottom bd-color:base-4 bd-width:1 fs:5 md:fs:6 fw:3">
-        <input type="checkbox" class="n-expander-trigger"/>
+        <input type="checkbox" class="n-expander-trigger" checked/>
         배송지 정보
       </div>
       <div class="n-expander-content px:2 gap:4">
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">수령인</span>
-          <span class="fs:3 md:fs:4 fw:3">기농이</span>
+          <span class="fs:3 md:fs:4 fw:3" v-text="order.location[0].receiverName"></span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">연락처</span>
-          <span class="fs:3 md:fs:4 fw:3">010-1234-5678</span>
+          <span class="fs:3 md:fs:4 fw:3">{{order.location[0].receiverPhone}}</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
-          <span class="fs:3 md:fs:4 fw:3">서울 특별시 마포구 백범로 3</span>
-          <span class="fs:3 md:fs:4 fw:3">KT플라자 하이미디어 아카데미 3층</span>
-        </div>
-        <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
-          <span class="fs:3 md:fs:4 fw:3">환불 방법</span>
-          <span class="fs:3 md:fs:4 fw:3">적립금 환불</span>
+          <span class="fs:3 md:fs:4 fw:3">주소</span>
+          <span class="fs:3 md:fs:4 fw:3">{{order.location[0].addr1}}</span>
         </div>
       </div>
     </div>
@@ -202,7 +197,7 @@
     <h1 class="d:none">주문자 정보</h1>
     <div class="n-expander bd-top bd-color:base-4 bd-width:3 pl:5 pr:5">
       <div class="n-expander-title bd-bottom bd-color:base-4 bd-width:1 fs:5 md:fs:6 fw:3">
-        <input type="checkbox" class="n-expander-trigger"/>
+        <input type="checkbox" class="n-expander-trigger" checked/>
         주문자 정보
       </div>
       <div class="n-expander-content px:2 gap:4">
