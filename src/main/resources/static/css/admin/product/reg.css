@@ -1,17 +1,17 @@
 
 .upload {
-    position: relative;
-    display: inline-flex;
+    /*position: relative;*/
+    /*display: inline-flex;*/
 }
 
 .upload::before {
-    content: url(/icon/camera.svg);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    /*content: url(/icon/camera.svg);*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
 
 
-    margin-right: 110px; /* 이미지와 텍스트 간격 조정 */
+    /*margin-right: 110px; !* 이미지와 텍스트 간격 조정 *!*/
 }
 
 
