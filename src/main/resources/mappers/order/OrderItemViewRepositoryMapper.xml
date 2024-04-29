@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.ginong.web.repository.order.OrderViewRepository">
-	<select id="findAll" resultType="OrderView">
+<mapper namespace="kr.co.ginong.web.repository.order.OrderItemViewRepository">
+	<select id="findAll" resultType="OrderItemView">
 		select
 		*
-		from ORDER_VIEW
+		from ORDER_ITEM_VIEW
 		<where>
 			<if test="memberId != null">
 				member_id = #{memberId}
@@ -14,10 +14,10 @@
 		</where>
 	</select>
 
-	<select id="findByOrderId" resultType="OrderView">
+	<select id="findByOrderId" resultType="OrderItemView">
 		select
 		*
-		from ORDER_VIEW
+		from ORDER_ITEM_VIEW
 		where order_id = #{orderId}
 	</select>
 

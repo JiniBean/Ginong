@@ -3,10 +3,10 @@ package kr.co.ginong.web.service.user;
 
 import kr.co.ginong.web.entity.order.Order;
 import kr.co.ginong.web.entity.order.OrderItem;
-import kr.co.ginong.web.entity.order.OrderView;
+import kr.co.ginong.web.entity.order.OrderItemView;
 import kr.co.ginong.web.repository.order.OrderItemRepository;
 import kr.co.ginong.web.repository.order.OrderRepository;
-import kr.co.ginong.web.repository.order.OrderViewRepository;
+import kr.co.ginong.web.repository.order.OrderItemViewRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class OrderServiceImp implements OrderService {
     private OrderItemRepository itemRepository;
 
     @Autowired
-    private OrderViewRepository viewRepository;
+    private OrderItemViewRepository viewRepository;
 
     @Override
     public List<Order> get(Long id) {
@@ -42,8 +42,8 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public List<OrderView> getList(Long memberId) {
-        List<OrderView> list = viewRepository.findAll(memberId);
+    public List<OrderItemView> getList(Long orderId) {
+        List<OrderItemView> list = viewRepository.findByOrderId(orderId);
         return list;
     }
 
