@@ -40,9 +40,12 @@
        
       </div>
       <div class="d:flex jc:space-between gap:4 p:5">
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="state in order.orderState" :key="state.id">
-          <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:main-6" style="width: 36px; height: 36px;"></div>
-          <span class="fs:1 md:fs:3 color:main-6">{{ state.name }}</span>
+        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3 status" v-for="state in order.orderState" :key="state.id">
+          <div v-if="state.id === order.orderStatus" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center
+            bg-color:main-6" style="width: 36px; height: 36px;"></div>
+          <div v-else class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
+          <span v-if="state.id === order.orderStatus" class="fs:1 md:fs:3 color:main-6">{{ state.name }}</span>
+          <span v-else class="fs:1 md:fs:3 color:base-4">{{ state.name }}</span>
         </div>
         <!-- <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
           <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
@@ -137,19 +140,19 @@
       <div class="n-expander-content px:2 gap:4">
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">상품금액</span>
-          <span class="fs:3 md:fs:4 fw:3">25,900원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ order.payment.totalAmt }}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">배송비</span>
-          <span class="fs:3 md:fs:4 fw:3">3,000원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{order.payment.deliveryFee}}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">적립금</span>
-          <span class="fs:3 md:fs:4 fw:3">1,000P</span>
+          <span class="fs:3 md:fs:4 fw:3">{{order.payment.point}}P</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">쿠폰</span>
-          <span class="fs:3 md:fs:4 fw:3">1,000원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{order.payment.coupon}}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">결제수단</span>
@@ -178,15 +181,20 @@
       <div class="n-expander-content px:2 gap:4">
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">수령인</span>
-          <span class="fs:3 md:fs:4 fw:3" v-text="order.location[0].receiverName"></span>
+          <span class="fs:3 md:fs:4 fw:3" v-text="order.location.receiverName"></span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">연락처</span>
-          <span class="fs:3 md:fs:4 fw:3">{{order.location[0].receiverPhone}}</span>
+          <span class="fs:3 md:fs:4 fw:3">{{order.location.receiverPhone}}</span>
         </div>
-        <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
-          <span class="fs:3 md:fs:4 fw:3">주소</span>
-          <span class="fs:3 md:fs:4 fw:3">{{order.location[0].addr1}}</span>
+        <div class="d:flex fl-dir:column" >
+          <div class="d:flex fl-dir:row jc:space-between p:2">
+            <span class="fs:3 md:fs:4 fw:3">주소</span>
+            <span class="fs:3 md:fs:4 fw:3">{{order.location.addr1}}</span>
+          </div>
+          <div class="d:flex fl-grow:1">
+            <span class="fs:3 md:fs:4 fw:3 ">{{order.location.addr2}}</span>
+          </div>
         </div>
       </div>
     </div>
