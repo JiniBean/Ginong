@@ -59,3 +59,9 @@
     -webkit-mask-image: url("../icon/carrot.svg");
     mask-image: url("../icon/carrot.svg");
 }
+
+.icon\:camera::before,
+.icon\:camera::after {
+    -webkit-mask-image: url("../icon/camera.svg");
+    mask-image: url("../icon/camera.svg");
+}

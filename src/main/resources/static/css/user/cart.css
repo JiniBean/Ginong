@@ -1,0 +1,26 @@
+[class^="btn"]::before{
+    display: block;
+    font-size: 11px;
+}
+.btn-minus::before {
+    content: "\2500";
+
+}
+
+.btn-plus::before {
+    content: "\253C";
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (min-width: 780px) {
+    .info{
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
