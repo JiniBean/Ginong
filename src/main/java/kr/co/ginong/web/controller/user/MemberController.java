@@ -43,7 +43,9 @@ public class MemberController {
 
 
     @GetMapping("signup1")
-    public String signup() {return "user/signup/find-id";}
+    public String signup() {
+
+        return "user/signup/find-id";}
 
     @GetMapping("signup2")
     public String signup2() {return "user/signup/confirm-id";}

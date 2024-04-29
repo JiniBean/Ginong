@@ -2,13 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailConfirm = document.querySelector('#email-confirm');
     const verifyBtn = emailConfirm.querySelector('.verify_btn');
 
+    const bottomButton = document.querySelector('#bottom-button');
+    const nextButton = bottomButton.querySelector('.next-button');
+
     const emailSend = document.querySelector('#email-send');
     const sendMailBtn = emailSend.querySelector('.send-mail-btn');
 
     let timer; // 타이머 변수
     let countdownInterval; //카운트 다운 변수
 
-
+    // =============================인증 기능 구현=============================
     // 인증 확인 버튼 클릭 이벤트 리스너 추가
     verifyBtn.addEventListener('click', function(e) {
         e.preventDefault(); // 기본 동작 중단
@@ -31,12 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         let verificationResult = emailConfirm.querySelector('.verification-result');
                         verificationResult.textContent = '인증이 확인되었습니다.';
                         verificationResult.style.color = 'green';
-                        sessionStorage.setItem("verification-email","Y");
+                        // sessionStorage.setItem("verification-email","Y");
+                        // 다음 버튼 활성화
+                        nextButton.classList.remove("disabled");
                     } else {
                         // 인증번호가 일치하지 않을 때
                         let verificationResult = emailConfirm.querySelector('.verification-result');
                         verificationResult.textContent = '인증번호를 다시 한번 확인해주세요.';
                         verificationResult.style.color = 'red';
+                        //다음 버튼 비활성화
+                        nextButton.classList.add("disabled");
                     }
                 } else {
                     alert('서버 오류가 발생했습니다.');
@@ -46,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send();
     });
 
+    // =============================이메일 발송 구현=============================
     // 이메일 발송 버튼 클릭 이벤트 리스너 추가
     sendMailBtn.addEventListener('click', function(e) {
         e.preventDefault(); // 기본 동작 중단

@@ -22,6 +22,7 @@ public class MailController {
 
         HashMap<String, Object> map = new HashMap<>();
 
+
         try{
             // MailService를 사용하여 입력된 이메일(mail)을 전송하고,
             // 성공 시 발급된 번호를 number에 저장
