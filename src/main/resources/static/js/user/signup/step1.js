@@ -109,15 +109,31 @@ window.addEventListener("load", function(e){
 
         e.preventDefault();
 
-        let iconList= chkRequired.querySelectorAll(".icon");
+        //필수동의 영역
+        {
+            let iconList= chkRequired.querySelectorAll(".icon");
 
-        let set = new Set();
-        set.add(iconList[0].classList.contains("checked"));
-        set.add(iconList[1].classList.contains("checked"));
+            let set = new Set();
+            set.add(iconList[0].classList.contains("checked"));
+            set.add(iconList[1].classList.contains("checked"));
 
-        if(set.has(false)){
-            alert("필수약관에 전부 동의해주세요");
-            return;
+            if(set.has(false)){
+                alert("필수약관에 전부 동의해주세요");
+                return;
+            }
+        }
+
+        //선택동의 영역
+        {
+            let chkOption = document.querySelector(".check-option");
+            let icon= chkOption.querySelector(".icon");
+
+            let isChecked = icon.classList.contains("checked");
+
+            if(isChecked){
+                sessionStorage.setItem("agree",JSON.stringify(isChecked));
+            }
+
         }
 
         let url = new URL("/user/signup/step2", location.origin);
@@ -126,4 +142,5 @@ window.addEventListener("load", function(e){
     }
 
 });
+
 

@@ -17,18 +17,19 @@ public class MemberController {
     MemberService service;
 
     @GetMapping("checkUserName")
-    public Map<String,String> checkUserName(
+    public ResponseEntity<Boolean> checkUserName(
             @RequestParam(name = "userName", required = false) String userName
     ){
 
-        Map<String,String> map = new HashMap<>();
-
         Member member = service.get(userName);
 
-        if(member!=null)
-            map.put("name", member.getUserName());
+        System.out.println("등록된 아이디 있느냐 "+member.getUserName());
 
-        return map;
+        if(member.getUserName()!=null)
+            return ResponseEntity.ok(true); //아이디 있다
+
+        return ResponseEntity.badRequest().body(false); //아이디 없다
+
     }
 
     @PostMapping("add")

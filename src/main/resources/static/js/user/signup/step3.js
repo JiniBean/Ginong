@@ -5,7 +5,7 @@
 window.addEventListener("load", function(e){
 
     // sec2
-    let sec2 = document.querySelector("#sec2");
+    const sec2 = document.querySelector("#sec2");
 
     //세션에서 값 꺼내기
     const step3DataString = sessionStorage.getItem('step3Data');
@@ -51,70 +51,103 @@ window.addEventListener("load", function(e){
 
     // 아이디
     let userName = sec2.querySelector(".user-name");
+    let verifyName = sec2.querySelector(".verify-kor");
 
     //1. 아이디 입력 시
     let timeoutId;
 
     userName.oninput = function (e){
 
+        //유효성검사 내용들 clear
+        verifyName.classList.add("d:none");
+
+        console.log(e.data);
+
         // 입력된 값 가져오기
         let userInputData = e.data;
-
-        // 한글이 입력되었다면 입력을 취소하고 함수를 빠져나감
-        if(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(userInputData)){
-            userName.value = userName.value.slice(0, -1);
-            alert("한글은 입력할 수 없습니다.");
-            return;
-        }
 
         if(timeoutId!==undefined){
             clearTimeout(timeoutId);
         }
 
+        // 한글이 입력되었다면 입력을 취소하고 함수를 빠져나감
+        if(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(userInputData)){
+            verifyName.classList.remove("d:none");
+            userName.value = "";
+            clearTimeout(timeoutId);
+        }
+
         timeoutId = setTimeout(()=>{
 
-            console.log("0.5초후 실행");
-
+            //사용자가 입력한 값
             let userNameValue = userName.value;
-
-            console.log("사용자가 입력한 값 : ", userNameValue);
-
+            console.log("==========",userNameValue);
             checkUserName(userNameValue);
 
         },500);
 
     }
 
-
     //DB에서 아이디 있는지 확인
    async function checkUserName(userNameValue){
 
+        //아이디 사용가능
        let  usableDiv= document.getElementsByClassName("check-id")[0];
+       //아이디 사용중
        let  disableDiv= document.getElementsByClassName("check-id")[1];
 
         if(userNameValue!=="") {
 
             //db에 값체크 해야함
+            // let url=`/user/api/member/checkUserName`;
+            //
+            // url = `${url}?userName=${userNameValue}`;
+            //
+            // let resonse = await fetch(url);
+            //
+            // let map = await resonse.json();
+            // let name = await map.name;
+            //
+            // //사용가능
+            // if(name===undefined){
+            //     usableDiv.classList.remove("d:none");
+            //     disableDiv.classList.add("d:none");
+            //     sessionStorage.setItem('nameYn','N');
+            // }
+            //
+            // //사용중
+            // if(name!==undefined){
+            //     disableDiv.classList.remove("d:none");
+            //     usableDiv.classList.add("d:none");
+            //     sessionStorage.setItem('nameYn','Y');
+            // }
+
             let url=`/user/api/member/checkUserName`;
+                url = `${url}?userName=${userNameValue}`;
 
-            url = `${url}?userName=${userNameValue}`;
+            let method = "get";
 
-            let resonse = await fetch(url);
+            let xhr = new XMLHttpRequest();
 
-            let map = await resonse.json();
-            let name = await map.name;
+            //xhr.withCredentials=true;
 
-            //사용가능
-            if(name===undefined){
-                usableDiv.classList.remove("d:none");
-                disableDiv.classList.add("d:none");
-            }
+            xhr.onload = function (){
 
-            //사용중
-            if(name!==undefined){
-                disableDiv.classList.remove("d:none");
-                usableDiv.classList.add("d:none");
-            }
+                if(xhr.status===200){ //아이디 있으니 사용불가
+                    disableDiv.classList.remove("d:none");
+                    usableDiv.classList.add("d:none");
+                    sessionStorage.setItem('nameYn','Y');
+                }else { //DB에 아이디 없으니 사용가능
+                    usableDiv.classList.remove("d:none");
+                    disableDiv.classList.add("d:none");
+                    sessionStorage.setItem('nameYn','N');
+                }
+
+            };
+
+             xhr.open(method, url);
+             xhr.setRequestHeader('Content-Type', 'text/plain');
+             xhr.send();
 
         }else {
             usableDiv.classList.add("d:none");
@@ -211,6 +244,24 @@ window.addEventListener("load", function(e){
 
     }
 
+    pwdInput.oninput = function (e) {
+
+        if(timeoutId!==undefined){
+            clearTimeout(timeoutId);
+        }
+
+        timeoutId = setTimeout(()=>{
+            let  pwdValue = pwdInput.value;
+            let  verifyPwdValue = verifyPwdInput.value;
+
+            if(verifyPwdValue!=="")
+                checkVerify(pwdValue,verifyPwdValue);
+
+        },500);
+
+    }
+
+    //비밀번호 값 확인
     function checkVerify(pwdValue,verifyPwdValue){
         let match = document.getElementsByClassName("check-password")[0];
         let mismatch = document.getElementsByClassName("check-password")[1];
@@ -218,11 +269,14 @@ window.addEventListener("load", function(e){
         if(pwdValue!==verifyPwdValue){
             match.classList.add("d:none");
             mismatch.classList.remove("d:none");
+            sessionStorage.setItem('pwdYn','N');
             return false;
         }
 
         match.classList.remove("d:none");
         mismatch.classList.add("d:none");
+        sessionStorage.setItem('pwdYn','Y');
+
 
     }
 
@@ -239,6 +293,14 @@ window.addEventListener("load", function(e){
     let prevBtn = btnBox.querySelector(".prev");
     let signupBtn = btnBox.querySelector(".signup");
 
+    //유효성검사 값들
+    let userName = sec2.querySelector(".user-name");
+    let verifyId = sec2.querySelector(".verify-id");
+    let pwd = sec2.querySelector(".password");
+    let verifyPwd = sec2.querySelector(".verify-pwd");
+   // let pwdMatch = sec2.querySelector(".verify-password");
+
+    //이전 버튼 눌렀을 때
     prevBtn.onclick = function (e){
         e.preventDefault();
 
@@ -248,15 +310,81 @@ window.addEventListener("load", function(e){
 
     }
 
+    //회원가입 버튼 눌렀을 때
     signupBtn.onclick = function (e){
+
+        //유효성 검사
+        {
+
+            //초기화
+            verifyId.classList.add("d:none");
+            verifyPwd.classList.add("d:none");
+
+            //검사
+            //아이디
+            {
+                let userName = document.querySelector(".user-name");
+
+                if(!userName.value){
+                    verifyId.classList.remove("d:none");
+                    return;
+                }
+
+                //아이디 사용가능만 가능하도록
+                let nameYn = sessionStorage.getItem('nameYn');
+
+                if(nameYn==='Y'){
+                    alert("아이디가 사용중입니다.");
+                    return;
+                }
+
+
+            }
+
+
+            //비밀번호
+            {
+                if(!pwd.value){
+                    verifyPwd.classList.remove("d:none");
+                    return;
+                }
+
+                let regExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,}$/;
+                let isValid = regExp.test(pwd.value);
+
+                if(!isValid){
+                    pwd.setAttribute('autofocus',true);
+                    return;
+                }
+
+                //재확인
+                let pwdYn = sessionStorage.getItem('pwdYn');
+
+                if(pwdYn==='N'){
+                    let verifyPwd = sec2.querySelector(".verify-password");
+                    verifyPwd.setAttribute("autofocus",true);
+                    alert("비밀번호 재확인을 다시 입력해주세요");
+                    return;
+
+                }
+
+            }
+
+        }
 
         const step3data = save();
 
         const step2DataString = sessionStorage.getItem('step2Data');
         const step2Data = JSON.parse(step2DataString);
 
-        let data = {...step3data, ...step2Data};
+        const agreeString = sessionStorage.getItem('agree');
+        const agree = JSON.parse(agreeString);
 
+        let data = {...step3data, ...step2Data, agree};
+
+        console.log("회원등록",data);
+
+        //db에 회원정보 저장
         let url = "/user/api/member/add";
         let method ="post";
 

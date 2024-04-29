@@ -7,7 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Product-List</title>
-    <link rel="stylesheet" href="/css/user/signup/step.css">
     <script src="/js/user/signup/step3.js"></script>
 </head>
 <body>
@@ -30,13 +29,15 @@
 
         <!--sec2-->
         <section id="sec2">
-            <form class="d:flex fl-dir:column gap:10 mb:8">
+            <form class="d:flex fl-dir:column gap:10 md:gap:17 mb:8">
                 <section class="col-gap:2 pos:relative">
                     <h1 class="d:none">인풋박스</h1>
                     <div>
-                        <div>아이디</div>
+                        <div><span>아이디</span><span class="emphasis color:accent-3">*</span></div>
                         <input type="text" class="user-name n-textbox n-textbox-type:underline" autofocus required autocomplete="false"/>
                     </div>
+                    <div class="verify-id d:none color:accent-3">아이디를 입력해주세요</div>
+                    <div class="verify-kor d:none color:accent-3">한글은 입력할 수 없습니다.</div>
                     <div class="id-info d:none color:accent-3 mt:2">영문, 숫자만을 조합해서 입력하셔야 합니다.</div>
                    <div class="check-id d:none color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 사용가능 ]</div>
                     <div class="check-id d:none color:accent-3 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 사용중 ]</div>
@@ -44,8 +45,9 @@
                 <section class="col-gap:2 pos:relative">
                     <h1 class="d:none">비밀번호</h1>
                     <div>
-                        <div>비밀번호</div>
+                        <div><span>비밀번호</span><span class="emphasis color:accent-3">*</span></div>
                         <input type="password" class="password n-textbox n-textbox-type:underline" required/>
+                        <div class="verify-pwd d:none color:accent-3 mt:2">비밀번호를 입력해주세요</div>
                         <div class="check-pwd d:none color:accent-3 mt:2">영문, 숫자를 조합하여 최소 7자리 이상 입력하셔야 합니다.</div>
                     </div>
                     <div class="check-pwd d:none color:main-6 pos:absolute right:0 txt-al:right zi:5 bg-color:base-1" style="top:25px;">[ 사용가능 ]</div>
@@ -63,25 +65,25 @@
                     <h1>유입경로 선택</h1>
                     <ul class="join-route w:full d:flex jc:space-between gap:2">
                         <li>
-                            <label class="n-toggle n-toggle-type:outline-box w:2">
+                            <label class="n-toggle n-toggle-type:outline-box md:w:4 w:2 md:h:2">
                                 블로그
                                 <input  type="radio" class="d:none" name="route" th:value="blog">
                             </label>
                         </li>
                         <li>
-                            <label class="n-toggle n-toggle-type:outline-box w:2">
+                            <label class="n-toggle n-toggle-type:outline-box md:w:4 w:2 md:h:2">
                                 인터넷
                                 <input  type="radio" class="d:none" name="route" th:value="internet" >
                             </label>
                         </li>
                         <li>
-                            <label class="n-toggle n-toggle-type:outline-box w:2">
+                            <label class="n-toggle n-toggle-type:outline-box md:w:4 w:2 md:h:2">
                                 SNS
                                 <input  type="radio" class="d:none" name="route" th:value="sns">
                             </label>
                         </li>
                         <li>
-                            <label class="n-toggle n-toggle-type:outline-box w:2">
+                            <label class="n-toggle n-toggle-type:outline-box md:w:4 w:2 md:h:2">
                                 지인추천
                                 <input type="radio" class="d:none" name="route" th:value="person">
                             </label>
