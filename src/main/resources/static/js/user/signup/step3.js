@@ -98,38 +98,12 @@ window.addEventListener("load", function(e){
 
         if(userNameValue!=="") {
 
-            //db에 값체크 해야함
-            // let url=`/user/api/member/checkUserName`;
-            //
-            // url = `${url}?userName=${userNameValue}`;
-            //
-            // let resonse = await fetch(url);
-            //
-            // let map = await resonse.json();
-            // let name = await map.name;
-            //
-            // //사용가능
-            // if(name===undefined){
-            //     usableDiv.classList.remove("d:none");
-            //     disableDiv.classList.add("d:none");
-            //     sessionStorage.setItem('nameYn','N');
-            // }
-            //
-            // //사용중
-            // if(name!==undefined){
-            //     disableDiv.classList.remove("d:none");
-            //     usableDiv.classList.add("d:none");
-            //     sessionStorage.setItem('nameYn','Y');
-            // }
-
             let url=`/user/api/member/checkUserName`;
                 url = `${url}?userName=${userNameValue}`;
 
             let method = "get";
 
             let xhr = new XMLHttpRequest();
-
-            //xhr.withCredentials=true;
 
             xhr.onload = function (){
 
