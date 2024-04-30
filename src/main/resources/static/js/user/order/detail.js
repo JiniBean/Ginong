@@ -27,14 +27,18 @@ createApp({
     data() {
         return {
             order: {},
-            list: []
+            itemList: [],
+            address: [],
+            member: [],
+
         }
     },
     methods:{
         // 전체선택
         checkAll(e) {
             let checked = e.target.checked
-            this.order.orderItems.forEach(item => item.checked = checked)
+            // this.order.orderItems.forEach(item => item.checked = checked)
+            checkbox.forEach(item => item.checked = checked)
         }
     },
     async created(){
@@ -43,12 +47,17 @@ createApp({
         // this.order = { ...dummyResponse }
 
         let response = await fetch("/user/api/order/detail");
-        list = await response.json();
-        this.list = list;
+        let itemList = await response.json();
+        this.itemList = itemList;
 
-        console.log("오고있니?", list);
-        console.log(list[0].productName);
-        console.log(list[1].productName);
+
+        response = await fetch("/user/api/order/detail/location");
+        let address = await response.json();
+        this.address = address;
+
+        response = await fetch("/user/api/order/detail/member");
+        let member = await response.json();
+        this.member = member;
     },
 }).mount('main');
 

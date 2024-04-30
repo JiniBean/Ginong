@@ -16,6 +16,15 @@
         </where>
     </select>
 
+    <select id="findByOrderId" resultType="Member">
+        select
+		*
+		from `ORDER` O LEFT JOIN MEMBER M
+		ON O.MEMBER_ID = M.ID
+		where O.ID = #{orderId}
+    </select>
+
+
     <insert id="insertMember" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO MEMBER
         ( NAME, USER_NAME, EMAIL, PWD, PHONE, JOIN_DATE, AGREE)

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberRepository {
 
     Member find(Long id,String name);
+    Member findByOrderId(Long orderId);
 
     Long insertMember(Member member);
 

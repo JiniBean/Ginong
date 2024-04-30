@@ -8,6 +8,8 @@ public interface MemberService {
 
     Member get(String name);
     Member get(Long id);
+    Member getByOrderId(Long id);
+    
     Long addMember(Member member);
     boolean addRoute(Long memberId, String joinRoute);
 

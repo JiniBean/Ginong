@@ -24,4 +24,10 @@ public class LocationServiceImp implements LocationService{
         return location;
     }
 
+    @Override
+    public LocationHistory getByOrderID(Long orderId) {
+        LocationHistory locationHistory = repository.findByOrderId(orderId);
+        return locationHistory;
+    }
+
 }

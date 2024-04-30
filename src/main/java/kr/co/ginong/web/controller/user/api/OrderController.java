@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.order.LocationHistory;
 import kr.co.ginong.web.entity.order.OrderItemView;
+import kr.co.ginong.web.service.user.LocationService;
 import kr.co.ginong.web.service.user.MemberService;
 import kr.co.ginong.web.service.user.OrderService;
 
@@ -22,15 +25,38 @@ public class OrderController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private LocationService locationService;
+    
+
     @GetMapping("detail")
-    public List<OrderItemView> list() {
+    public List<OrderItemView> getItems() {
+       
         Long orderId = null;
-        List<OrderItemView> itemList = new ArrayList<>();
-        
         orderId = Long.parseLong("2024042490646637");
+
+        List<OrderItemView> itemList = new ArrayList<>();
         itemList = service.getList(orderId);
 
         return itemList;
-    }    
+    }
+    
+    @GetMapping("detail/location")
+    public LocationHistory getLocation() {
+        Long orderId = null;
+        orderId = Long.parseLong("2024042490646637");
+
+        LocationHistory location = locationService.getByOrderID(orderId);
+        return location;
+    }
+
+    @GetMapping("detail/member")
+    public Member getMember() {
+        Long orderId = null;
+        orderId = Long.parseLong("2024042490646637");
+
+        Member member = memberService.getByOrderId(orderId);
+        return member;
+    }
 
 }

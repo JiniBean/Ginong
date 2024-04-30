@@ -27,6 +27,13 @@ public class MemberServiceImp implements MemberService{
     }
 
     @Override
+    public Member getByOrderId(Long orderId) {
+        
+        return repository.findByOrderId(orderId);
+    }
+
+
+    @Override
     public Long addMember(Member member) {
 
         repository.insertMember(member);
