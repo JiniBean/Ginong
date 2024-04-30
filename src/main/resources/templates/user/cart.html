@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>cart-List</title>
     <link rel="stylesheet" href="/css/user/cart.css">
+<!--    <script src="/js/user/cart.js" defer></script>-->
 </head>
 
 <body>
@@ -14,7 +15,11 @@
     <div class="bg-color:base-1 pr:4 pl:4 md:pr:0 md:pl:0 ">
         <h1 class="d:none md:d:flex jc:center ai:center fs:4 fw:3 h:4 bg-color:base-1">장바구니</h1>
         <div class="d:flex m:4 jc:space-between">
-            <div class="deco icon:map_pin_fill deco-size:4 icon-size:4 icon-color:main-6">서울특별시 마포구 신수동 81-45</div>
+            <div class="d:flex gap:1 deco icon:map_pin_fill deco-size:4 icon-size:4 icon-color:main-6">
+                <span th:text="${location.addr1}">서울특별시 마포구 신수동 81-45</span>
+                <span th:text="${location.addr2}">706호</span>
+            </div>
+            <div><input type="hidden" name="location" th:value="${location.id}"></div>
             <div><a href="" class="n-btn n-btn-type:outline">변경</a></div>
         </div>
     </div>
@@ -24,12 +29,15 @@
         <form id="order" action="" class="d:flex fl-dir:column gap:4">
             <!-- 전체 삭제 및 삭제 버튼 영역 -->
             <div class="d:flex jc:space-between ml:4 mr:4">
-                <div>
+                <div class="d:flex gap:1">
                     <label>
                         <input type="checkbox" class="all n-toggle n-toggle-type:check n-toggle-size:1">
                         전체선택
-                        <span>(2/2)</span>
                     </label>
+                    <span>
+                        <span>(1</span>
+                        <span th:text="'/ '+ ${count} + ')'">/2)</span>
+                    </span>
                 </div>
                 <div class="pos:relative d:flex gap:3">
                     <span class="">선택삭제</span>
@@ -42,9 +50,9 @@
             <!-- 상품 영역 -->
             <div class="d:flex fl-dir:column m:4 bd bd-color:base-2 bd-radius:2 bg-color:base-1">
                 <!-- 상품 한개 영역 -->
-                <div class="d:flex gap:5 p:4 bd-bottom bd-color:base-2" th:each=" i : ${items}">
+                <div class="d:flex gap:5 p:4 bd-bottom bd-color:base-2" th:each=" i : ${list}">
                     <div><input type="checkbox" class="all n-toggle n-toggle-type:check n-toggle-size:1"
-                                name="productId" th:value="${p.id}"></div>
+                                name="productId" th:value="${i.id}"></div>
                     <div><img src="/img/Meongmeong.jpg" height="90px" class="bd-radius:1"></div>
                     <div class="info flex-grow:1">
                         <div th:text="${i.name}">텃밭 흙 당근 3개(500g 내외)</div>
@@ -52,6 +60,8 @@
                         <div class="d:flex jc:space-between ai:center w:2 h:1 bd bd-radius:1 p:1">
                             <span class="btn-minus"></span>
                             <input class="txt-al:center" type="text" name="" th:value="${i.quantity}" style="width:20px; height:20px;">
+<!--                                   v-model="quantity"-->
+
                             <span class="btn-plus"></span>
                         </div>
                     </div>
