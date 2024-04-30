@@ -38,24 +38,25 @@ public class MemberController {
         return "user/signup/step4";
     }
 
+
     @GetMapping("signup/index")
     public String index() {return "user/signup/index";}
 
-
-
-    @GetMapping("signup1")
+    @GetMapping("signup/find-id")
     public String signup() {
-        return "find-pwd";}
-    @GetMapping("signup2")
-    public String signup2() {return "user/signup/confirm-id";}
+        return "user/signup/find-id";}
 
-    @GetMapping("signup3")
-    public String signup3() {return "find-pwd1";}
+    @GetMapping("signup/find-pwd")
+    public String findPwd() {
+        return "user/signup/find-pwd";}
 
-    @GetMapping("signup4")
-    public String signup4() {return "user/signup/change-pwd";}
+    @GetMapping("signup/confirm-id")
+    public String confirmId() {return "user/signup/confirm-id";}
 
-    @GetMapping("signup5")
-    public String signup5() {return "user/signup/confirm-pwd";}
+    @GetMapping("signup/change-pwd")
+    public String changePwd() {return "user/signup/change-pwd";}
+
+    @GetMapping("signup5/confirm-pwd")
+    public String confirmPwd5() {return "user/signup/confirm-pwd";}
 
 }
