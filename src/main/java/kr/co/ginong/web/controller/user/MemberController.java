@@ -42,16 +42,15 @@ public class MemberController {
     public String index() {return "user/signup/index";}
 
 
+
     @GetMapping("signup1")
     public String signup() {
-
-        return "user/signup/find-id";}
-
+        return "find-pwd";}
     @GetMapping("signup2")
     public String signup2() {return "user/signup/confirm-id";}
 
     @GetMapping("signup3")
-    public String signup3() {return "user/signup/find-pwd";}
+    public String signup3() {return "find-pwd1";}
 
     @GetMapping("signup4")
     public String signup4() {return "user/signup/change-pwd";}
