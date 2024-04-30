@@ -1,9 +1,12 @@
 package kr.co.ginong.web.controller;
 
+import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.service.MailService;
+import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -13,27 +16,36 @@ public class MailController {
 
     @Autowired
     MailService service;
+
+    @Autowired
+    MemberService memberService;
     private int number; // 이메일 확인을 위한 번호
+
 
     // 이메일을 보내는 메서드
     @ResponseBody
     @PostMapping("/mailSend")
-    public ResponseEntity<HashMap<String, Object>> mailsend(@RequestParam String mail){
+    public ResponseEntity<HashMap<String, Object>> mailSend(Member member
+                                                            , Model model){
+        String email = member.getEmail();
+        String userName = member.getUserName();
 
         HashMap<String, Object> map = new HashMap<>();
+        System.out.println(email);
+        System.out.println(userName);
 
+        int valid = memberService.search(email,userName);
 
-        try{
+        if (valid==1) {
+
             // MailService를 사용하여 입력된 이메일(mail)을 전송하고,
             // 성공 시 발급된 번호를 number에 저장
-            number = service.sendMail(mail);
+            number = service.sendMail(email);
             // 성공적으로 이메일을 보냈다는 메시지와 함께 성공 응답 전송
             map.put("success", Boolean.TRUE);
-            map.put("message", "이메일을 성공적으로 보냈습니다.");
-        } catch (Exception e){
-            // 실패 시 에러 메시지와 함께 실패 응답 전송
+        }
+        else {
             map.put("success", Boolean.FALSE);
-            map.put("error", e.getMessage());
         }
 
         return ResponseEntity.ok(map);

@@ -10,4 +10,7 @@ public interface MemberService {
     Member get(Long id);
     Long addMember(Member member);
     boolean addRoute(Long memberId, String joinRoute);
+
+    int search(String email, String userName);
+
 }

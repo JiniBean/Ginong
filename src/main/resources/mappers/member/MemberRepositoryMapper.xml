@@ -27,4 +27,12 @@
         VALUES (#{memberId},#{name});
     </insert>
 
+    <select id="searchByNameAndMail" resultType="int">
+        SELECT COUNT(ID) valid
+        FROM `MEMBER`
+        WHERE USER_NAME = #{userName}
+        AND EMAIL = #{email};
+
+    </select>
+
 </mapper>

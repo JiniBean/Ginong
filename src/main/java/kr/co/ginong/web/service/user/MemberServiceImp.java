@@ -63,5 +63,12 @@ public class MemberServiceImp implements MemberService{
 
     }
 
+    @Override
+    public int search(String email, String userName) {
+        int valid = repository.searchByNameAndMail(email, userName);
+
+        return valid;
+    }
+
 
 }

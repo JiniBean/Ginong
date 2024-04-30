@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
         //메일 보내기 버튼 눌렀을 때 재발송으로 텍스트 바꿈
         sendMailBtn.textContent = '재발송';
         // 이메일 주소 가져오기
-        let email = emailSend.querySelector('input[name="mail"]').value;
+        let email = emailSend.querySelector('input[name="email"]').value;
+        let userName = emailSend.querySelector('input[name="userName"]').value;
         //이메일 주소 유효성 검증
         if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/.test(email)) {
             alert("유효한 이메일 형식이 아닙니다.");
@@ -119,14 +120,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                 displayTime();
                             }
                         } else {
-                            alert('이메일 전송에 실패했습니다.');
+                            alert('가입된 정보가 없습니다. 이름 혹은 이메일을 확인해주세요.');
                         }
                     } else {
-                        alert('서버 오류가 발생했습니다.');
+                        alert('이메일 전송에 실패했습니다.');
                     }
                 }
             };
-        xhr.send('mail=' + encodeURIComponent(email));
+            xhr.send('email=' + encodeURIComponent(email) + '&userName=' + encodeURIComponent(userName));
         }
     });
 });

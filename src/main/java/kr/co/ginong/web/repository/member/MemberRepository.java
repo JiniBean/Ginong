@@ -13,4 +13,7 @@ public interface MemberRepository {
     Long insertMember(Member member);
 
     int insertRoute(Long memberId, String name);
+
+
+    int searchByNameAndMail(String email, String userName);
 }
