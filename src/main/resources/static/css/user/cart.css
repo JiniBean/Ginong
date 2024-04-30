@@ -7,10 +7,18 @@
 
 }
 
+.btn-minus::before:hover{
+    color: var(--color-main-6);
+}
+
 .btn-plus::before {
     content: "\253C";
 }
 
+[class^="btn"]::before:hover,
+[class^="btn"]::before:active{
+    color: var(--color-main-6);
+}
 .info {
     display: flex;
     flex-direction: column;
@@ -19,8 +27,15 @@
 
 @media (min-width: 780px) {
     .info{
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
+        display: grid;
+        justify-content: center;
+
+        gap: 16px;
+        grid-template-columns: 2fr 0.6fr 1fr;
     }
+
+    .info > * {
+        margin-top: 24px;
+    }
+
 }
