@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="user/inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+</head>
+<body>
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
+
+    <section class="md:d:none d:flex fl-dir:column gap:4" style="height: 194px">
+        <h1 class="d:none ">추천 상품 목록 - 모바일</h1>
+        <nav class="w:10p">
+            <h1 class="d:none">추천 상품 선택 목록</h1>
+            <ul class="w:10p d:flex pl:10 pr:10 fs:3 fw:3 txt-al:center">
+                <li class="w:10p"><a href="" style="width: 98px; height: 30px">베스트</a></li>
+                <li class="w:10p"><a href="" style="width: 98px; height: 30px">특가</a></li>
+                <li class="w:10p"><a href="" style="width: 98px; height: 30px">추천</a></li>
+            </ul>
+        </nav>
+        <section>
+            <h1 class="d:none">추천 상품 정보</h1>
+            <div class="bg-color:base-5 w:10p pos:relative" style="height: 144px">
+                <img class="w:10p h:10p"
+                     th:src="@{/img/Meongmeong.jpg}" src="/img/carrot.png"/>
+                <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
+                     style="height: 40px; background-color: rgba(51, 51, 51, 0.7);">
+                    <span class="color:base-1 fs:3">텃밭 흙당근,</span>
+                    <span>&emsp;</span>
+                    <span class="color:base-1 fs:3">2개입 2500원</span>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="d:none md:d:flex gap:4" style="height: 290px">
+        <h1 class="d:none">추천 상품 목록 - PC</h1>
+        <section class="d:flex jc:space-between w:10p ">
+            <section class="d:flex fl-dir:column ai:center  gap:10">
+                <h1 class="fs:5 fw:3">베스트</h1>
+                <a href="">
+                    <div class="d:flex fl-dir:column pos:relative">
+                        <img th:src="@{/img/Meongmeong.jpg}" src="/img/carrot.png" style="width: 360px; height: 180px"/>
+                        <div class="w:10p pos:relative bottom:0 bg-color:base-8 d:flex jc:center ai:center" style="height: 40px">
+                            <span class="color:base-1 fs:3 opacity:10">텃밭 흙당근,</span>
+                            <span>&emsp;</span>
+                            <span class="color:base-1 fs:3">2개입 2500원</span>
+                        </div>
+                    </div>
+                </a>
+            </section>
+            <section class="d:flex fl-dir:column ai:center  gap:10">
+                <h1 class="fs:5 fw:3">특가</h1>
+                <a href="">
+                    <div class="d:flex fl-dir:column pos:relative">
+                        <img th:src="@{/img/Meongmeong.jpg}" src="/img/carrot.png" style="width: 360px; height: 180px"/>
+                        <div class="w:10p pos:relative bottom:0 bg-color:base-8 d:flex jc:center ai:center" style="height: 40px">
+                            <span class="color:base-1 fs:3 opacity:10">텃밭 흙당근,</span>
+                            <span>&emsp;</span>
+                            <span class="color:base-1 fs:3">2개입 2500원</span>
+                        </div>
+                    </div>
+                </a>
+            </section>
+            <section class="d:flex fl-dir:column ai:center  gap:10">
+                <h1 class="fs:5 fw:3">추천</h1>
+                <a href="">
+                    <div class="d:flex fl-dir:column pos:relative">
+                        <img th:src="@{/img/Meongmeong.jpg}" src="/img/carrot.png" style="width: 360px; height: 180px"/>
+                        <div class="w:10p pos:relative bottom:0 bg-color:base-8 d:flex jc:center ai:center" style="height: 40px">
+                            <span class="color:base-1 fs:3 opacity:10">텃밭 흙당근,</span>
+                            <span>&emsp;</span>
+                            <span class="color:base-1 fs:3">2개입 2500원</span>
+                        </div>
+                    </div>
+                </a>
+            </section>
+        </section>
+    </section>
+
+    <!--  ###################################################################################################  -->
+
+    <section class="d:flex fl-dir:column gap:4">
+        <h1 class="d:none">시즌 아웃 </h1>
+        <div class="d:flex p:5 gap:3 fs:3 bd-bottom">
+            <span class="color:sub-6">놓치지 마세요!</span>
+            <span>시즌 아웃 임박</span>
+        </div>
+        <section>
+            <h1 class="d:none">상품카드 - pc</h1>
+            <div class="font-size:3" style="width:280px; height:404px">
+                <a href="#">
+                    <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
+                        <div class="pos:relative">
+                            <div>
+                                <img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/>
+                            </div>
+                            <div class="cart-section">
+                                <div class="cart-box">
+                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
+                                        장바구니아이콘
+                                    </span>
+                                    <span class="color:base-1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d:flex fl-dir:column jc:center gap:4">
+                            <div class="d:flex fl-dir:column jc:center gap:2">
+                                <div>텃밭 흙 당근, 2개입</div>
+                                <div class="fw:3">2,500원</div>
+                            </div>
+                            <div class="deco icon:smile deco-color:sub-4 icon-size:4 deco-size:4">1234</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </section>
+
+
+    <!--  ###################################################################################################  -->
+
+
+    <section class="d:flex fl-dir:column gap:4">
+        <h1 class="d:none">커밍순</h1>
+        <div class="d:flex p:5 gap:3 fs:3 bd-bottom">
+            <span class="color:main-6">갓 수확한 그대로~</span>
+            <span>커밍 순</span>
+        </div>
+        <section>
+            <h1 class="d:none">상품카드 - pc</h1>
+            <div class="font-size:3" style="width:280px; height:404px">
+                <a href="#">
+                    <div class="d:flex fl-dir:column w:10p h:10p jc:space-between">
+                        <div class="pos:relative">
+                            <div>
+                                <img th:src="@{/img/Meongmeong.jpg}" src="" height="280px" width="280px" alt="상품 이미지" class="bd-radius:2"/>
+                            </div>
+                            <div class="cart-section">
+                                <div class="cart-box">
+                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
+                                        장바구니아이콘
+                                    </span>
+                                    <span class="color:base-1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d:flex fl-dir:column jc:center gap:4">
+                            <div class="d:flex fl-dir:column jc:center gap:2">
+                                <div>텃밭 흙 당근, 2개입</div>
+                                <div class="fw:3">2,500원</div>
+                            </div>
+                            <div class="deco icon:smile deco-color:sub-4 icon-size:4 deco-size:4">1234</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </section>
+
+    <!--  ###################################################################################################  -->
+
+    <section class="w:10p h:10p">
+        <h1 class="d:none">블로그 정보</h1>
+        <div class="h:10p d:flex fl-dir:column pos:relative">
+            <img class="w:10p" th:src="@{/img/Meongmeong.jpg}" src="" alt="" style="height: 500px">
+            <div class="w:10p pos:absolute bottom:0"
+                    style="height: 114px; background-color: rgba(51, 51, 51, 0.7);">
+                <a href="" class="w:10p h:10p">
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+</body>
+</html>

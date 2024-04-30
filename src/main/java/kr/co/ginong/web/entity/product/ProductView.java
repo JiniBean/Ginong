@@ -25,7 +25,7 @@ public class ProductView {
 
     private Long    categoryId;
     private String  storageType;
-    private String  admin;
+//    private String  admin;
     private String  quantityCategory;
     private String  weightCategory;
 //    private Integer cartQty;
