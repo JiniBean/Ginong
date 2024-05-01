@@ -4,7 +4,7 @@ createApp({
 
     data(){
         return{
-            quantity
+            quantity:0
         }
     }
 

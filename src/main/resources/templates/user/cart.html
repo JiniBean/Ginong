@@ -76,7 +76,7 @@
                             <div class="d:flex jc:space-between"><span>배송비</span><span th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}">5,000원</span></div>
                         </div>
                         <div class="d:flex jc:end gap:1 ">
-                            <span class="fw:3">총 주문 금액</span><span class="fw:3">37,000원</span></div>
+                            <span class="fw:3">총 주문 금액</span><span class="fw:3" v-model="totalPrice">37,000원</span></div>
                     </div>
                     <div class="d:flex fl-dir:column gap:2 ai:center">
                         <span class="txt-al:center fw:3 color:base-7 md:fs:4">제주 및 도서산간 지역 추가 배송비 안내</span>
