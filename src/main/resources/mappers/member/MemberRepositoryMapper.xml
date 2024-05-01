@@ -40,8 +40,14 @@
         SELECT COUNT(ID) valid
         FROM `MEMBER`
         WHERE USER_NAME = #{userName}
-        AND EMAIL = #{email};
+        AND EMAIL = #{email}
 
     </select>
+
+    <update id="updateByUserName" parameterType="String">
+        UPDATE `MEMBER`
+        SET PWD = #{pwd}
+        WHERE USER_NAME = #{userName}
+    </update>
 
 </mapper>

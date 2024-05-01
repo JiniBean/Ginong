@@ -9,9 +9,7 @@ import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -103,7 +101,23 @@ public class MemberController {
     public String confirmId() {return "user/signup/confirm-id";}
 
     @GetMapping("signup/change-pwd")
-    public String changePwd() {return "user/signup/change-pwd";}
+    public String changePwd() {return "user/signup/change-pwd";
+    }
+    @PostMapping("signup/change-pwd")
+    public String changePwd(@CookieValue(value = "userName", defaultValue = "") String userName
+                            ,@CookieValue(value = "email", defaultValue = "") String email
+                            ,@RequestParam(value = "password") String pwd
+                            ,@RequestParam(value = "verify-password") String verifyPwd
+                            ){
+        System.out.println("사용자 이름: " + userName);
+        System.out.println("이메일: " + email);
+        System.out.println("비밀번호: " + pwd);
+        System.out.println("비밀번호확인: " + verifyPwd);
+        if(pwd.equals(verifyPwd)) {
+            service.changePwd(pwd,userName);
+        }
+        return "redirect:/user/signin";
+    }
 
     @GetMapping("signup5/confirm-pwd")
     public String confirmPwd5() {return "user/signup/confirm-pwd";}

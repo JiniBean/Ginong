@@ -1,8 +1,6 @@
 package kr.co.ginong.web.service.user;
 
 import kr.co.ginong.web.entity.member.Member;
-import kr.co.ginong.web.entity.order.Location;
-import kr.co.ginong.web.entity.order.LocationHistory;
 import kr.co.ginong.web.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +73,11 @@ public class MemberServiceImp implements MemberService{
         int valid = repository.searchByNameAndMail(email, userName);
 
         return valid;
+    }
+
+    @Override
+    public void changePwd(String pwd, String userName) {
+        repository.updateByUserName(pwd, userName);
     }
 
 
