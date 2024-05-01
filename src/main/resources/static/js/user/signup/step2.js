@@ -12,8 +12,10 @@ window.addEventListener("load", function(e){
     let phone = sec1.querySelector(".phone");
   //  let agree = sec1.querySelector(".agree");
 
+    //쿠키에서 꺼내서 담아줌
+
     //세션에서 담아줌
-    {
+    /*{
         const step2DataString = sessionStorage.getItem('step2Data');
         const userData = JSON.parse(step2DataString);
 
@@ -25,7 +27,7 @@ window.addEventListener("load", function(e){
            // agree.checked = `${userData.agree}`==='true' ? true : false;
         }
 
-    }
+    }*/
 
     //전화번호 입력 시 11자리만 입력되도록
     {
@@ -94,15 +96,15 @@ window.addEventListener("load", function(e){
         }
 
         //이메일 유효성 검사
-        let verificationEmail = sessionStorage.getItem('verification-email');
-        let verifyEmail = JSON.parse(verificationEmail);
-
-        if(!verifyEmail){
-            let verificationResult = document.querySelector('.verification-result');
-            verificationResult.textContent='인증을 완료해주세요';
-            verificationResult.style.color = 'red';
-            return;
-        }
+        // let verificationEmail = sessionStorage.getItem('verification-email');
+        // let verifyEmail = JSON.parse(verificationEmail);
+        //
+        // if(!verifyEmail){
+        //     let verificationResult = document.querySelector('.verification-result');
+        //     verificationResult.textContent='인증을 완료해주세요';
+        //     verificationResult.style.color = 'red';
+        //     return;
+        // }
 
         save();
 
@@ -116,13 +118,67 @@ window.addEventListener("load", function(e){
         let name = sec1.querySelector(".name").value;
         let email = sec1.querySelector(".email").value;
         let phone = sec1.querySelector(".phone").value;
-        let verifyNum = sec1.querySelector(".verify-num").value;
+        //let verifyNum = sec1.querySelector(".verify-num").value;
         //let agree = sec1.querySelector(".agree").checked.toString();
 
-        const data = { name, email,verifyNum, phone }
-
+        let data = {name: name, email : email, phone : phone};
         //세션에 데이터 임시저장
-        sessionStorage.setItem("step2Data",JSON.stringify(data));
+        // sessionStorage.setItem("step2Data",JSON.stringify(data));
+
+        //쿠키에 데이터 저장
+        let cookie = new Cookie();
+        cookie.addItem("userInfo", data);
+        cookie.save();
+
     }
 
 });
+
+Cookie.prototype = {
+    get : function(name){
+        return this.map[name];  // 쿠키객체마다 공유해야하기 때문에 this 작성이 필수
+    },
+    save : function() {
+
+        let list = this.map["userInfo"];
+        let size = list.length;
+        let lastIndex = size-1;
+
+        str ="[";
+
+        for(let m of this.map["userInfo"]){
+            str+=JSON.stringify(m);
+            if(m!==list[lastIndex])
+                str+=",";
+        }
+
+        str +="]";
+
+        let encoded = encodeURIComponent(str);
+        document.cookie = `userInfo=${encoded}; path=/user/signup`;
+
+    },addItem : function(name, item) {
+        console.log(this.map[name]);
+        let list = this.map[name];
+        list.push(item);
+    }
+}
+
+function Cookie(){
+
+    this.map = {};
+
+    let cookieDecoded = decodeURIComponent(document.cookie);
+    let cookieTokens = cookieDecoded.split(";");
+
+    console.log(cookieTokens);
+
+    for(const c of cookieTokens){
+        const temp = c.split("=");
+        const key = temp[0];
+        const value = JSON.parse(temp[1]);
+
+        this.map[key] = value;
+    }
+
+}

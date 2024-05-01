@@ -109,6 +109,8 @@ window.addEventListener("load", function(e){
 
         e.preventDefault();
 
+
+
         //필수동의 영역
         {
             let iconList= chkRequired.querySelectorAll(".icon");
@@ -123,6 +125,8 @@ window.addEventListener("load", function(e){
             }
         }
 
+
+
         //선택동의 영역
         {
             let chkOption = document.querySelector(".check-option");
@@ -130,14 +134,25 @@ window.addEventListener("load", function(e){
 
             let isChecked = icon.classList.contains("checked");
 
-            if(isChecked){
-                sessionStorage.setItem("agree",JSON.stringify(isChecked));
-            }
+            let agree = "N";
+
+            if(isChecked)
+                agree="Y";
+
+            const userInfoData = {agree : agree};
+            const userInfo = JSON.stringify(userInfoData);
+
+            let str ="[" + userInfo +"]";
+
+            const encodedUserInfo = encodeURIComponent(str);
+
+            document.cookie = `userInfo=${encodedUserInfo}; path=/user/signup`;
 
         }
 
-        let url = new URL("/user/signup/step2", location.origin);
-        location.href = url.toString();
+        //get 방식
+        let url = new URL("/user/signup/step2",location.origin);
+        location.href=url.toString();
 
     }
 

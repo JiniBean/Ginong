@@ -327,7 +327,7 @@ window.addEventListener("load", function(e){
                 let isValid = regExp.test(pwd.value);
 
                 if(!isValid){
-                    pwd.setAttribute('autofocus',true);
+                    //pwd.setAttribute('autofocus',true);
                     return;
                 }
 
@@ -336,7 +336,7 @@ window.addEventListener("load", function(e){
 
                 if(pwdYn==='N'){
                     let verifyPwd = sec2.querySelector(".verify-password");
-                    verifyPwd.setAttribute("autofocus",true);
+                    //verifyPwd.setAttribute("autofocus",true);
                     alert("비밀번호 재확인을 다시 입력해주세요");
                     return;
 
@@ -356,7 +356,7 @@ window.addEventListener("load", function(e){
 
         let data = {...step3data, ...step2Data, agree};
 
-        console.log("회원등록",data);
+        //console.log("회원등록",data);
 
         //db에 회원정보 저장
         let url = "/user/api/member/add";
