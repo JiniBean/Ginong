@@ -1,4 +1,5 @@
 const { createApp } = Vue
+
 // const dummyResponse = {
 //     orderId: 2024042490646637,
 //     orderDate: '2024.04.25',
@@ -30,7 +31,8 @@ createApp({
             itemList: [],
             address: [],
             member: [],
-
+            info: [],
+            state: [],
         }
     },
     methods:{
@@ -46,10 +48,9 @@ createApp({
         // this.order = dummyResponse
         // this.order = { ...dummyResponse }
 
-        let response = await fetch("/user/api/order/detail");
+        let response = await fetch("/user/api/order/detail/items");
         let itemList = await response.json();
         this.itemList = itemList;
-
 
         response = await fetch("/user/api/order/detail/location");
         let address = await response.json();
@@ -58,6 +59,14 @@ createApp({
         response = await fetch("/user/api/order/detail/member");
         let member = await response.json();
         this.member = member;
+
+        response = await fetch("/user/api/order/detail/orderInfo");
+        let info = await response.json();
+        this.info = info;
+
+        response = await fetch("/user/api/order/detail/status");
+        let state = await response.json();
+        this.state = state;
     },
 }).mount('main');
 

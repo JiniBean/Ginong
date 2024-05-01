@@ -1,17 +1,19 @@
 package kr.co.ginong.web.service.user;
 
 
-import kr.co.ginong.web.entity.order.Order;
-import kr.co.ginong.web.entity.order.OrderItem;
-import kr.co.ginong.web.entity.order.OrderItemView;
-import kr.co.ginong.web.repository.order.OrderItemRepository;
-import kr.co.ginong.web.repository.order.OrderRepository;
-import kr.co.ginong.web.repository.order.OrderItemViewRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import kr.co.ginong.web.entity.order.Order;
+import kr.co.ginong.web.entity.order.OrderItem;
+import kr.co.ginong.web.entity.order.OrderItemView;
+import kr.co.ginong.web.entity.order.OrderView;
+import kr.co.ginong.web.repository.order.OrderItemRepository;
+import kr.co.ginong.web.repository.order.OrderItemViewRepository;
+import kr.co.ginong.web.repository.order.OrderRepository;
+import kr.co.ginong.web.repository.order.OrderViewRepository;
 
 @Service
 public class OrderServiceImp implements OrderService {
@@ -20,10 +22,13 @@ public class OrderServiceImp implements OrderService {
     private OrderRepository repository;
 
     @Autowired
+    private OrderViewRepository viewRepository;
+
+    @Autowired
     private OrderItemRepository itemRepository;
 
     @Autowired
-    private OrderItemViewRepository viewRepository;
+    private OrderItemViewRepository itemViewRepository;
 
     @Override
     public List<Order> get(Long id) {
@@ -31,6 +36,11 @@ public class OrderServiceImp implements OrderService {
         List<Order> list = repository.findById(id);
 
         return list;
+    }
+
+    @Override
+    public OrderView getOrderInfo(Long orderId) {
+        return viewRepository.findByOrderId(orderId);
     }
 
     @Override
@@ -43,7 +53,7 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public List<OrderItemView> getList(Long orderId) {
-        List<OrderItemView> list = viewRepository.findByOrderId(orderId);
+        List<OrderItemView> list = itemViewRepository.findByOrderId(orderId);
         return list;
     }
 
@@ -61,4 +71,6 @@ public class OrderServiceImp implements OrderService {
         boolean save = itemRepository.save(items);
         return save;
     }
+
+    
 }
