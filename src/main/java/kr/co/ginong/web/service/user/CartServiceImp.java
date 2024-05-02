@@ -39,4 +39,9 @@ public class CartServiceImp implements CartService{
     public Boolean edit(Long memberId, Long prdId, Integer qty) {
         return repository.update(memberId,prdId, qty);
     }
+
+    @Override
+    public Boolean delete(Long prdId, List<Long> list) {
+        return repository.delete(prdId, list);
+    }
 }

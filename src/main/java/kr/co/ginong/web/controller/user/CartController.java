@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,12 +81,19 @@ public class CartController {
             list.add(map);
         }
 
-
-
         model.addAttribute("list", list);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("location", location);
         model.addAttribute("count", items.size());
         return "user/cart";
+    }
+
+    @PostMapping
+    public String list(List<Cart> list){
+
+        System.out.println("왔다");
+        System.out.println("=================================");
+        System.out.println(list.toString());
+        return "redirect:/cart";
     }
 }

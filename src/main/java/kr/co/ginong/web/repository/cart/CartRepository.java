@@ -11,9 +11,8 @@ public interface CartRepository {
     List<Cart> findAll(Long memberId);
     Cart find(Long memberId,Long prdId);
     Boolean save(Cart cart);
-
-    Boolean update(Long memberId, Long prdId);
     Boolean update(Long memberId, Long prdId, Integer qty);
-
     Integer count(Long memberId);
+
+    Boolean delete(Long prdId, List<Long> list);
 }

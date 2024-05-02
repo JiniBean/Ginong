@@ -40,4 +40,16 @@
         AND PRODUCT_ID = #{prdId};
     </update>
 
+    <delete id="delete">
+        DELETE FROM CART WHERE PRODUCT_ID
+        <if test="prdId != null">
+            = #{prdId}
+        </if>
+        <if test="list != null">
+            <foreach collection="c" item="list" separator=",">
+               in (#{c})
+            </foreach>
+        </if>
+    </delete>
+
 </mapper>

@@ -2,8 +2,7 @@ let baseUrl = window.location.origin;
 export default class CartRepository{
 
     findPromise(url,method="GET", data){
-        return fetch(url,{method:method});
-        // return fetch(url,{method:method, body:JSON.stringify(data)});
+        return fetch(url,{method:method, body:data});
 
     }
 
@@ -56,6 +55,12 @@ export default class CartRepository{
         // let response = await this.findPromise(url,method, data);
         let response = await this.findPromise(url);
         return await response.json();
+    }
+
+    async delete(list){
+        let url = `${baseUrl}/user/api/cart`;
+        let method = 'DELETE';
+
     }
 
 

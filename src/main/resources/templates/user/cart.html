@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <title>cart-List</title>
     <link rel="stylesheet" href="/css/user/cart.css">
-<!--    <script src="/js/user/cart.js" defer></script>-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module" src="/js/user/cart.js" defer></script>
 </head>
 
 <body>
@@ -26,42 +27,28 @@
 
     <section>
         <h1 class="d:none">상품 리스트</h1>
-        <form id="order" action="" class="d:flex fl-dir:column gap:4">
+        <form id="order" method="post" class="d:flex fl-dir:column gap:4">
             <!-- 전체 삭제 및 삭제 버튼 영역 -->
-            <div class="d:flex jc:space-between ml:4 mr:4">
-                <div class="d:flex gap:1">
-                    <label>
-                        <input type="checkbox" class="all n-toggle n-toggle-type:check n-toggle-size:1">
-                        전체선택
-                    </label>
-                    <span>
-                        <span>(1</span>
-                        <span th:text="'/ '+ ${count} + ')'">/2)</span>
-                    </span>
-                </div>
-                <div class="pos:relative d:flex gap:3">
-                    <span class="">선택삭제</span>
-                    <span class="bar"></span>
-                    <span class="all">전체삭제</span>
-                </div>
+            <div class="d:flex jc:end pos:relative gap:3 ml:4 mr:4">
+                <span @click="deleteHandler">선택삭제</span>
+                <span class="bar"></span>
+                <span>전체삭제</span>
             </div>
-
 
             <!-- 상품 영역 -->
             <div class="d:flex fl-dir:column m:4 bd bd-color:base-2 bd-radius:2 bg-color:base-1">
                 <!-- 상품 한개 영역 -->
                 <div class="d:flex gap:5 p:4 bd-bottom bd-color:base-2" th:each=" i : ${list}">
-                    <div><input type="checkbox" class="all n-toggle n-toggle-type:check n-toggle-size:1"
-                                name="productId" th:value="${i.id}"></div>
+                    <div><input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:1"
+                                name="productId" th:value="${i.id}" th:data-id="${i.id}"></div>
                     <div><img src="/img/Meongmeong.jpg" height="90px" class="bd-radius:1"></div>
                     <div class="info flex-grow:1">
                         <div th:text="${i.name}">텃밭 흙 당근 3개(500g 내외)</div>
-                        <div>2,500원</div>
+                        <div th:text="${#numbers.formatInteger(i.price,3,'COMMA') + '원'}">2,500원</div>
                         <div class="d:flex jc:space-between ai:center w:2 h:1 bd bd-radius:1 p:1">
                             <span class="btn-minus"></span>
-                            <input class="txt-al:center" type="text" name="" th:value="${i.quantity}" style="width:20px; height:20px;">
-<!--                                   v-model="quantity"-->
-
+                            <span class="txt-al:center h:10p" th:text="${i.quantity}"  style="width:20px; height:20px;">2</span>
+                            <input type="hidden" name="quantity"  value="3" th:value="${i.quantity}">
                             <span class="btn-plus"></span>
                         </div>
                     </div>
@@ -76,7 +63,7 @@
                             <div class="d:flex jc:space-between"><span>배송비</span><span th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}">5,000원</span></div>
                         </div>
                         <div class="d:flex jc:end gap:1 ">
-                            <span class="fw:3">총 주문 금액</span><span class="fw:3" v-model="totalPrice">37,000원</span></div>
+                            <span class="fw:3">총 주문 금액</span><span class="fw:3" >37,000원</span></div>
                     </div>
                     <div class="d:flex fl-dir:column gap:2 ai:center">
                         <span class="txt-al:center fw:3 color:base-7 md:fs:4">제주 및 도서산간 지역 추가 배송비 안내</span>

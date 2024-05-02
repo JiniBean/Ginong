@@ -74,7 +74,7 @@
             </section>
 
             <!--  아이템 목록(바둑판) / 확인  -->
-            <section class="menu-card-col d:flex flex-wrap:wrap ai:center gap:5 md:d:none d:none">
+            <section class="menu-card-col d:flex flex-wrap:wrap ai:center gap:2 md:d:none d:none">
                 <h1 class="d:none">상품카드 - col</h1>
                 <div th:each="m:${list}">
                     <a href="#" th:href="@{/product/detail(id=${m.id})}" class="">

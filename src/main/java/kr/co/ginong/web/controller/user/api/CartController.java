@@ -59,5 +59,10 @@ public class CartController {
 
     }
 
+    @DeleteMapping
+    public Boolean delte(List<Long> list){
+        return service.delete(null,list);
+    }
+
 
 }
