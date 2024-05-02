@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 인증 확인 버튼 클릭 이벤트 리스너 추가
     verifyBtn.addEventListener('click', function(e) {
         e.preventDefault(); // 기본 동작 중단
+        if (verifyBtn.classList.contains('disabled')) {
+            return;
+        }
         // 이전 타이머 제거
         clearTimeout(timer);
         clearInterval(countdownInterval);
@@ -35,9 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         // 인증이 확인되었을 때
                         let verificationResult = emailConfirm.querySelector('.verification-result');
                         verificationResult.textContent = '인증이 확인되었습니다.';
+                        verificationResult.style.color = 'green';
                         userNameInput.setAttribute('readonly','readonly');
                         emailInput.setAttribute('readonly','readonly');
-                        verificationResult.style.color = 'green';
                         // 다음 버튼 활성화
                         nextButton.classList.remove("disabled");
                     } else {
@@ -59,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // =============================이메일 발송 구현=============================
     // 이메일 발송 버튼 클릭 이벤트 리스너 추가
     sendMailBtn.addEventListener('click', function(e) {
+
         e.preventDefault(); // 기본 동작 중단
 
         //메일 보내기 버튼 눌렀을 때 재발송으로 텍스트 바꿈
@@ -133,6 +137,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     //쿠키에 비밀번호 변경 페이지로 넘길 데이터 담기
     nextButton.addEventListener("click",()=>{
+
+        if (nextButton.classList.contains('disabled')) {
+            return;
+        }
         let email = emailSend.querySelector('input[name="email"]').value;
         let userName = emailSend.querySelector('input[name="userName"]').value;
         const currentPath = window.location.pathname; // 현재 페이지의 경로를 가져오기

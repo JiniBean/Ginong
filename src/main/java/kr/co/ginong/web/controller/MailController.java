@@ -31,8 +31,6 @@ public class MailController {
         String userName = member.getUserName();
 
         HashMap<String, Object> map = new HashMap<>();
-        System.out.println(email);
-        System.out.println(userName);
 
         int valid = memberService.search(email,userName);
 

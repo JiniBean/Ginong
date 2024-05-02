@@ -1,23 +1,13 @@
 package kr.co.ginong.web.controller.user;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.ui.Model;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 
 @RequestMapping("user")
 @Controller
@@ -109,10 +99,7 @@ public class MemberController {
                             ,@RequestParam(value = "password") String pwd
                             ,@RequestParam(value = "verify-password") String verifyPwd
                             ){
-        System.out.println("사용자 이름: " + userName);
-        System.out.println("이메일: " + email);
-        System.out.println("비밀번호: " + pwd);
-        System.out.println("비밀번호확인: " + verifyPwd);
+
         if(pwd.equals(verifyPwd)) {
             service.changePwd(pwd,userName);
         }
