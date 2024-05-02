@@ -1,12 +1,13 @@
 package kr.co.ginong.web.controller.user.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.LocationHistory;
@@ -35,66 +36,68 @@ public class OrderController {
     @Autowired
     private OrderCategoryService categoryService;
     
-    @GetMapping("list")
-    public List<Order> getList() {
-        Long memberId = null;
-        memberId = Long.parseLong("40");
+    @GetMapping("{memberId}")
+    public List<Order> getList(@PathVariable Long memberId) {
 
-        List<Order> list = new ArrayList<>();
-        list = service.getListByMemberId(memberId);
+        List<Order> list = service.getListByMemberId(memberId);
 
         System.out.println(list);
         return list;
     }
 
-    @GetMapping("detail/items")
-    public List<OrderItemView> getItems() {
-       
-        Long orderId = null;
-        orderId = Long.parseLong("2024042490646637");
+    @GetMapping("{orderId}/items")
+    public List<OrderItemView> getItems(@PathVariable Long orderId) {
 
-        List<OrderItemView> itemList = new ArrayList<>();
-        itemList = service.getList(orderId);
-
+        List<OrderItemView> itemList = service.getList(orderId);
         int totalPrice = 0;
 
-        
+        // List<OrderItemView> itemList = ...;
+        // Map<Long, List<OrderItemView>> result = itemList.stream().collect(Collectors.groupingBy(OrderItemView::getOrderId));
+//        Map<Long, List<OrderItemView>> result = new HashMap<>();
+//        for (OrderItemView item : itemList) {
+////            List<OrderItemView> orderItems = result.get(item.getOrderId());
+////            if (orderItems == null) {
+////                orderItems = new ArrayList<>();
+////                result.put(item.getOrderId(), orderItems);
+////            }
+//            List<OrderItemView> orderItems = result.computeIfAbsent(item.getOrderId(), id -> new ArrayList<>());
+//            orderItems.add(item);
+//        }
         return itemList;
     }
     
-    @GetMapping("detail/location")
-    public LocationHistory getLocation() {
-        Long orderId = null;
-        orderId = Long.parseLong("2024042490646637");
+    @GetMapping("{orderId}/location")
+    public LocationHistory getLocation(@PathVariable Long orderId) {
 
         LocationHistory location = locationService.getByOrderID(orderId);
         return location;
     }
 
-    @GetMapping("detail/member")
-    public Member getMember() {
-        Long orderId = null;
-        orderId = Long.parseLong("2024042490646637");
+    @GetMapping("{orderId}/member")
+    public Member getMember(@PathVariable Long orderId) {
 
         Member member = memberService.getByOrderId(orderId);
         return member;
     }
 
-    @GetMapping("detail/orderInfo")
-    public OrderView getOrderInfo() {
-        Long orderId = null;
-        orderId = Long.parseLong("2024042490646637");
+    @GetMapping("{orderId}/orderInfo")
+    public OrderView getOrderInfo(@PathVariable Long orderId) {
 
         OrderView orderInfo = service.getOrderInfo(orderId);    
         return orderInfo;
     }
 
-    @GetMapping("detail/status")
+    @GetMapping("status")
     public List<OrderCategory> getStatus() {
-        List<OrderCategory> categoryList =  categoryService.getList();
+        List<OrderCategory> categoryList = categoryService.getList();
         categoryList = categoryList.subList(0, 4);
         
         return categoryList;
-    } 
+    }
+
+    @PutMapping("{orderId}")
+    public void updateOrderType(@PathVariable Long orderId, @RequestBody int orderType) {
+        System.out.println(orderId+", "+orderType);
+    }
 
 }

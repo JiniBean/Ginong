@@ -16,9 +16,9 @@
         <!--  페이지 제목-->
         <nav>
             <h1 class="d:none">탭</h1>
-            <ul id='tabbar' class="n-tabbar n-tab-grow w:10p" @click="clickTab">
-                <li class="active"><a href="#" class="h:3 md:h:4" >주문 내역</a></li>
-                <li><a href="#" class="h:3 md:h:4">주문 취소 내역</a></li>
+            <ul id='tabbar' class="n-tabbar n-tab-grow w:10p">
+                <li :class="tabIndex == 0 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(0)">주문 내역</a></li>
+                <li :class="tabIndex == 1 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(1)">주문 취소 내역</a></li>
             </ul>
         </nav>
         
@@ -33,17 +33,20 @@
                             <span class="fs:2 md:fs:3 color:base-4">{{l.date}}</span>
                             <span class="fs:2 md:fs:3 color:base-4">환불</span>
                         </div>
-                        <span class="fs:2 md:fs:3">{{itemList[0].productName}} 외 {{(itemList.length)-1}}건</span>
+                        <span class="fs:2 md:fs:3">{{itemList && itemList[0] && itemList[0].productName}} 외 {{(itemList && itemList.length)-1}}건</span>
                         <div class="d:flex fl-dlr:row gap:2 " >
                             <span>34,000원</span>
-                            <span class="deco icon:caret_right icon-size:1 deco-position:right ai:center color:base-7">상세보기</span>
+                            <span class="deco icon:caret_right icon-size:1 deco-position:right ai:center color:base-7"
+                                  @click="goDetail(l)">
+                                상세보기
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div v-if="l.type < 5"class="d:flex fl-dir:row jc:space-between w:10p gap:2">
                     <div class="n-btn n-btn-type:filled n-btn-size:2 w:3p">1:1 문의</div>
                     <div class="n-btn n-btn-type:filled n-btn-size:2 w:3p">배송조회</div>
-                    <div class="n-btn n-btn-type:filled n-btn-size:2 w:3p">구매확정</div>
+                    <div class="n-btn n-btn-type:filled n-btn-size:2 w:3p" @click="confirmOrder(l)">구매확정</div>
                 </div>
                 <div v-else class="d:flex fl-dir:row jc:space-between w:10p gap:2">
                     <div class="n-btn n-btn-type:filled n-btn-size:2 w:4p">1:1 문의</div>

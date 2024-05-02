@@ -47,24 +47,28 @@ createApp({
     
         // this.order = dummyResponse
         // this.order = { ...dummyResponse }
+        let params = new URLSearchParams(location.search);
+        console.log(params.get('orderId'));
+        let orderId = params.get('orderId');
 
-        let response = await fetch("/user/api/order/detail/items");
+        // let response = await fetch("/user/api/order/detail/items");
+        let response = await fetch(`/user/api/order/${orderId}/items`);
         let itemList = await response.json();
         this.itemList = itemList;
 
-        response = await fetch("/user/api/order/detail/location");
+        response = await fetch(`/user/api/order/${orderId}/location`);
         let address = await response.json();
         this.address = address;
 
-        response = await fetch("/user/api/order/detail/member");
+        response = await fetch(`/user/api/order/${orderId}/member`);
         let member = await response.json();
         this.member = member;
 
-        response = await fetch("/user/api/order/detail/orderInfo");
+        response = await fetch(`/user/api/order/${orderId}/orderInfo`);
         let info = await response.json();
         this.info = info;
 
-        response = await fetch("/user/api/order/detail/status");
+        response = await fetch("/user/api/order/status");
         let state = await response.json();
         this.state = state;
     },
