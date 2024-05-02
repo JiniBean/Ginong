@@ -10,24 +10,12 @@ window.addEventListener("load", function(e){
     let email = sec1.querySelector(".email");
     let verifyNum = sec1.querySelector(".verify-num");
     let phone = sec1.querySelector(".phone");
-  //  let agree = sec1.querySelector(".agree");
 
     //쿠키에서 꺼내서 담아줌
+    const cookie = new Cookie();
+    const map = cookie.get("userInfo");
+    console.log("cookie에서 꺼낸" , map);
 
-    //세션에서 담아줌
-    /*{
-        const step2DataString = sessionStorage.getItem('step2Data');
-        const userData = JSON.parse(step2DataString);
-
-        if(userData){
-            name.value=`${userData.name}`;
-            email.value = `${userData.email}`;
-            verifyNum.value=`${userData.verifyNum}`;
-            phone.value = `${userData.phone}`;
-           // agree.checked = `${userData.agree}`==='true' ? true : false;
-        }
-
-    }*/
 
     //전화번호 입력 시 11자리만 입력되도록
     {
@@ -64,7 +52,22 @@ window.addEventListener("load", function(e){
     prevBtn.onclick = function (e){
 
         e.preventDefault();
-        save();
+
+        //쿠키에 입력했던 내용 저장
+        {
+            let sec1 = document.querySelector("#sec1");
+
+            let name = sec1.querySelector(".name").value;
+            let email = sec1.querySelector(".email").value;
+            let phone = sec1.querySelector(".phone").value;
+
+            const data = {name, email, phone};
+
+            const cookie = new Cookie();
+            cookie.addItem("userInfo",data);
+            cookie.save();
+
+        }
 
         location.href="/user/signup/step1";
 
@@ -74,6 +77,9 @@ window.addEventListener("load", function(e){
     nextBtn.onclick = function (e){
 
         e.preventDefault();
+
+        if (nextBtn.classList.contains('disabled'))
+            return;
 
         //초기화
         verifyName.classList.add("d:none");
@@ -95,17 +101,6 @@ window.addEventListener("load", function(e){
             return;
         }
 
-        //이메일 유효성 검사
-        // let verificationEmail = sessionStorage.getItem('verification-email');
-        // let verifyEmail = JSON.parse(verificationEmail);
-        //
-        // if(!verifyEmail){
-        //     let verificationResult = document.querySelector('.verification-result');
-        //     verificationResult.textContent='인증을 완료해주세요';
-        //     verificationResult.style.color = 'red';
-        //     return;
-        // }
-
         save();
 
         location.href="/user/signup/step3";
@@ -122,11 +117,13 @@ window.addEventListener("load", function(e){
         //let agree = sec1.querySelector(".agree").checked.toString();
 
         let data = {name: name, email : email, phone : phone};
-        //세션에 데이터 임시저장
-        // sessionStorage.setItem("step2Data",JSON.stringify(data));
+
+        //세션에 이름 저장
+        sessionStorage.setItem("name",name);
 
         //쿠키에 데이터 저장
         let cookie = new Cookie();
+        cookie.get("userInfo");
         cookie.addItem("userInfo", data);
         cookie.save();
 

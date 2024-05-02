@@ -61,8 +61,6 @@ window.addEventListener("load", function(e){
         //유효성검사 내용들 clear
         verifyName.classList.add("d:none");
 
-        console.log(e.data);
-
         // 입력된 값 가져오기
         let userInputData = e.data;
 
@@ -218,7 +216,7 @@ window.addEventListener("load", function(e){
 
     }
 
-    pwdInput.oninput = function (e) {
+    pwdInput.onchange = function (e) {
 
         if(timeoutId!==undefined){
             clearTimeout(timeoutId);
@@ -326,17 +324,15 @@ window.addEventListener("load", function(e){
                 let regExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,}$/;
                 let isValid = regExp.test(pwd.value);
 
-                if(!isValid){
-                    //pwd.setAttribute('autofocus',true);
+                if(!isValid)
                     return;
-                }
+
 
                 //재확인
                 let pwdYn = sessionStorage.getItem('pwdYn');
 
                 if(pwdYn==='N'){
                     let verifyPwd = sec2.querySelector(".verify-password");
-                    //verifyPwd.setAttribute("autofocus",true);
                     alert("비밀번호 재확인을 다시 입력해주세요");
                     return;
 
@@ -346,17 +342,38 @@ window.addEventListener("load", function(e){
 
         }
 
-        const step3data = save();
+        save();
 
-        const step2DataString = sessionStorage.getItem('step2Data');
-        const step2Data = JSON.parse(step2DataString);
+        const cookieString = document.cookie;
 
-        const agreeString = sessionStorage.getItem('agree');
-        const agree = JSON.parse(agreeString);
+        const cookies={};
+        const cookiePairs = cookieString.split('; ');
 
-        let data = {...step3data, ...step2Data, agree};
+        for (const cookiePair of cookiePairs) {
+            const [key, value] = cookiePair.split('=');
+            cookies[key] = value;
+        }
 
-        //console.log("회원등록",data);
+        const cookieName = 'userInfo';
+        const encodedValue  = cookies[cookieName];
+
+        let decodedValue;
+        let userInfoData;
+
+        if (encodedValue) {
+            decodedValue = decodeURIComponent(encodedValue);
+
+
+            // JSON 객체로 변환
+            try {
+                userInfoData = JSON.parse(decodedValue);
+                console.log("JSON 객체 출력  ",userInfoData); // JSON 객체 출력
+            } catch (error) {
+                console.error('쿠키 값 파싱 오류:', error);
+            }
+        } else {
+            console.error('쿠키에 userInfo 값이 없습니다.');
+        }
 
         //db에 회원정보 저장
         let url = "/user/api/member/add";
@@ -371,7 +388,7 @@ window.addEventListener("load", function(e){
 
                let url = new URL("/user/signup/step4",location.origin);
 
-               let name = data.name;
+               const name = sessionStorage.getItem("name");
 
                url = url + "?name=" +name;
 
@@ -385,9 +402,16 @@ window.addEventListener("load", function(e){
            }
         };
 
+        // 쿠키 값을 JSON 데이터로 변환
+        const cookieData = JSON.stringify({
+            userInfo: userInfoData
+        });
+
         xhr.open(method,url);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(data));
+        xhr.send(cookieData);
+
+
     }
 
     function save(){
@@ -409,11 +433,62 @@ window.addEventListener("load", function(e){
 
         let data = { userName, pwd, joinRoute }
 
-        //세션에 데이터 임시저장
-        sessionStorage.setItem("step3Data",JSON.stringify(data));
+        //쿠키에 데이터 저장
+        let cookie = new Cookie();
+        cookie.get("userInfo");
+        cookie.addItem("userInfo", data);
+        cookie.save();
 
-        return data;
     }
 
 
 });
+
+Cookie.prototype = {
+    get : function(name){
+        return this.map[name];  // 쿠키객체마다 공유해야하기 때문에 this 작성이 필수
+    },
+    save : function() {
+
+        let list = this.map["userInfo"];
+        let size = list.length;
+        let lastIndex = size-1;
+
+        str ="[";
+
+        for(let m of this.map["userInfo"]){
+            str+=JSON.stringify(m);
+            if(m!==list[lastIndex])
+                str+=",";
+        }
+
+        str +="]";
+
+        let encoded = encodeURIComponent(str);
+        document.cookie = `userInfo=${encoded}; path=/user/signup`;
+
+    },addItem : function(name, item) {
+        console.log(this.map[name]);
+        let list = this.map[name];
+        list.push(item);
+    }
+}
+
+function Cookie(){
+
+    this.map = {};
+
+    let cookieDecoded = decodeURIComponent(document.cookie);
+    let cookieTokens = cookieDecoded.split(";");
+
+    console.log(cookieTokens);
+
+    for(const c of cookieTokens){
+        const temp = c.split("=");
+        const key = temp[0];
+        const value = JSON.parse(temp[1]);
+
+        this.map[key] = value;
+    }
+
+}

@@ -49,6 +49,22 @@ public class MailController {
         return ResponseEntity.ok(map);
     }
 
+    @ResponseBody
+    @PostMapping("/emailSend")
+    public ResponseEntity<HashMap<String, Object>> emailSend(Member member
+            , Model model){
+        String email = member.getEmail();
+
+        HashMap<String, Object> map = new HashMap<>();
+        // MailService를 사용하여 입력된 이메일(mail)을 전송하고,
+        // 성공 시 발급된 번호를 number에 저장
+        number = service.sendMail(email);
+        // 성공적으로 이메일을 보냈다는 메시지와 함께 성공 응답 전송
+        map.put("success", Boolean.TRUE);
+
+        return ResponseEntity.ok(map);
+    }
+
     // 메일 확인을 위한 메서드
     @GetMapping("/mailCheck")
     public ResponseEntity<HashMap<String, Object>> mailCheck(@RequestParam int userNumber){

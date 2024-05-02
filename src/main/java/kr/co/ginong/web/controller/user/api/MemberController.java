@@ -1,12 +1,22 @@
 package kr.co.ginong.web.controller.user.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import kr.co.ginong.web.dto.Signup;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController("apiMemberController")
@@ -19,13 +29,11 @@ public class MemberController {
     @GetMapping("checkUserName")
     public ResponseEntity<Boolean> checkUserName(
             @RequestParam(name = "userName", required = false) String userName
-    ){
+    ) {
 
         Member member = service.get(userName);
 
-        System.out.println("등록된 아이디 있느냐 "+member.getUserName());
-
-        if(member.getUserName()!=null)
+        if (member!= null)
             return ResponseEntity.ok(true); //아이디 있다
 
         return ResponseEntity.badRequest().body(false); //아이디 없다
@@ -33,18 +41,48 @@ public class MemberController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<Boolean> add(@RequestBody Map<String, String> params) {
+    public ResponseEntity<Boolean> add(
+            @RequestBody String params
+    ) {
+
+        System.out.println(params);
+
+        if(params.isBlank())
+            return ResponseEntity.badRequest().body(false);
+
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(params, JsonObject.class);
+
+        // "userInfo" 키에 해당하는 값을 추출하여 JsonArray 객체로 변환
+        JsonArray userInfoArray = jsonObject.getAsJsonArray("userInfo");
+
+        System.out.println(userInfoArray);
+
+        //step1
+        jsonObject = (JsonObject) userInfoArray.get(0);
+        String agreeStr = String.valueOf(jsonObject.get("agree")).replace("\"", "");
+
+        boolean agree=false;
+
+        if(agreeStr.equals("Y"))
+            agree=true;
+
+        //step2
+        jsonObject = (JsonObject) userInfoArray.get(1);
+        String name = String.valueOf(jsonObject.get("name")).replace("\"", "");
+        String email = String.valueOf(jsonObject.get("email")).replace("\"", "");
+        String phone = String.valueOf(jsonObject.get("phone")).replace("\"", "");
+
+        //step3
+        jsonObject = (JsonObject) userInfoArray.get(2);
+        String userName = String.valueOf(jsonObject.get("userName")).replace("\"", "");
+        String pwd = String.valueOf(jsonObject.get("pwd")).replace("\"", "");
+        String joinRoute = String.valueOf(jsonObject.get("joinRoute")).replace("\"", "");
 
         Long memberId = null;
 
         //회원등록
         {
-            String name = params.get("name");
-            String userName = params.get("userName");
-            String pwd = params.get("pwd");
-            String email = params.get("email");
-            String phone = params.get("phone");
-            boolean agree = Boolean.parseBoolean(params.get("agree"));
 
             Member member = Member.builder()
                     .name(name)
@@ -60,11 +98,12 @@ public class MemberController {
             if (memberId == null)
                 return ResponseEntity.badRequest().body(false);
 
+
+
         }
 
         //가입경로 등록
         {
-            String joinRoute = params.get("joinRoute");
 
             boolean isValid =false;
 
@@ -82,8 +121,6 @@ public class MemberController {
         }
 
         return ResponseEntity.ok(true);
-
     }
-
 
 }

@@ -156,6 +156,54 @@ window.addEventListener("load", function(e){
 
     }
 
+    Cookie.prototype = {
+        get : function(name){
+            return this.map[name];  // 쿠키객체마다 공유해야하기 때문에 this 작성이 필수
+        },
+        save : function() {
+
+            let list = this.map["userInfo"];
+            let size = list.length;
+            let lastIndex = size-1;
+
+            str ="[";
+
+            for(let m of this.map["userInfo"]){
+                str+=JSON.stringify(m);
+                if(m!==list[lastIndex])
+                    str+=",";
+            }
+
+            str +="]";
+
+            let encoded = encodeURIComponent(str);
+            document.cookie = `userInfo=${encoded}; path=/user/signup`;
+
+        },addItem : function(name, item) {
+            console.log(this.map[name]);
+            let list = this.map[name];
+            list.push(item);
+        }
+    }
+
+    function Cookie(){
+
+        this.map = {};
+
+        let cookieDecoded = decodeURIComponent(document.cookie);
+        let cookieTokens = cookieDecoded.split(";");
+
+        console.log(cookieTokens);
+
+        for(const c of cookieTokens){
+            const temp = c.split("=");
+            const key = temp[0];
+            const value = JSON.parse(temp[1]);
+
+            this.map[key] = value;
+        }
+    }
+
 });
 
 
