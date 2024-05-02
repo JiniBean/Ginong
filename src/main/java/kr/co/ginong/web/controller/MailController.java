@@ -25,24 +25,30 @@ public class MailController {
     // 이메일을 보내는 메서드
     @ResponseBody
     @PostMapping("/mailSend")
-    public ResponseEntity<HashMap<String, Object>> mailSend(Member member
-                                                            , Model model){
+    public ResponseEntity<HashMap<String, Object>> mailSend(Member member, Model model) {
         String email = member.getEmail();
         String userName = member.getUserName();
+        String name = member.getName();
 
         HashMap<String, Object> map = new HashMap<>();
 
-        int valid = memberService.search(email,userName);
+        int valid = memberService.search(email, userName);
 
-        if (valid==1) {
+        Member validId = memberService.searchId(email, name);
 
+        if (valid == 1 || validId != null) {
             // MailService를 사용하여 입력된 이메일(mail)을 전송하고,
             // 성공 시 발급된 번호를 number에 저장
             number = service.sendMail(email);
+
             // 성공적으로 이메일을 보냈다는 메시지와 함께 성공 응답 전송
             map.put("success", Boolean.TRUE);
-        }
-        else {
+
+            // 이름과 가입일을 HashMap에 추가
+            map.put("userName", validId.getUserName());
+            map.put("joinDate", validId.getJoinDate());
+
+        } else {
             map.put("success", Boolean.FALSE);
         }
 

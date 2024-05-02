@@ -17,4 +17,6 @@ public interface MemberRepository {
     int searchByNameAndMail(String email, String userName);
 
     void updateByUserName(String pwd, String userName);
+
+    Member searchByRealNameAndMail(String email, String name);
 }

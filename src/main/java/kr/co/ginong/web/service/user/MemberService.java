@@ -15,4 +15,5 @@ public interface MemberService {
 
     void changePwd(String pwd, String userName);
 
+    Member searchId(String email, String name);
 }

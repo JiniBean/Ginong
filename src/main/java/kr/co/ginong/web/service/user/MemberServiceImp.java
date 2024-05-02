@@ -76,9 +76,19 @@ public class MemberServiceImp implements MemberService{
     }
 
     @Override
+    public Member searchId(String email, String name) {
+        Member validId = repository.searchByRealNameAndMail(email, name);
+
+        return validId;
+    }
+
+
+    @Override
     public void changePwd(String pwd, String userName) {
         repository.updateByUserName(pwd, userName);
     }
+
+
 
 
 }

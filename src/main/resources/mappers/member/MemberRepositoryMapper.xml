@@ -44,6 +44,13 @@
 
     </select>
 
+    <select id="searchByRealNameAndMail" resultType="Member" parameterType="map">
+        SELECT NAME, EMAIL, USER_NAME, JOIN_DATE
+        FROM MEMBER
+        WHERE NAME = #{name}
+        AND EMAIL = #{email}
+    </select>
+
     <update id="updateByUserName" parameterType="String">
         UPDATE `MEMBER`
         SET PWD = #{pwd}
