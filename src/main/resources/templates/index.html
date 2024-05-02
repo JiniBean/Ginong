@@ -8,23 +8,21 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
-    <link rel="stylesheet" href="/css/user/product/list.css">
     <link rel="stylesheet" href="/css/index.css">
     <script type="module" src="/js/user/product/list.js" defer></script>
     <script type="module" src="/js/index.js" defer></script>
-
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
 
-    <section class="md:d:none d:flex fl-dir:column gap:4" style="height: 194px">
+    <section class="recommand-section md:d:none d:flex fl-dir:column gap:4" style="height: 194px">
         <h1 class="d:none ">추천 상품 목록 - 모바일</h1>
         <nav class="w:10p">
             <h1 class="d:none">추천 상품 선택 목록</h1>
             <ul class="w:10p d:flex pl:10 pr:10 fs:3 fw:3 txt-al:center">
-                <li class="w:10p"><a href="" style="width: 98px; height: 30px">베스트</a></li>
-                <li class="w:10p"><a href="" style="width: 98px; height: 30px">특가</a></li>
-                <li class="w:10p"><a href="" style="width: 98px; height: 30px">추천</a></li>
+                <li @click.prevent="selectItem('best')" :class="{ selected: best }"><a href="" style="width: 98px; height: 30px">베스트</a></li>
+                <li @click.prevent="selectItem('sale')" :class="{ selected: sale }"><a href="" style="width: 98px; height: 30px">특가</a></li>
+                <li @click.prevent="selectItem('pick')" :class="{ selected: pick }"><a href="" style="width: 98px; height: 30px">추천</a></li>
             </ul>
         </nav>
         <section>
@@ -58,7 +56,7 @@
                     </div>
                 </a>
             </section>
-            <section class="d:flex fl-dir:column ai:center  gap:10">
+            <section class="d:flex fl-dir:column ai:center gap:10">
                 <h1 class="fs:5 fw:3">특가</h1>
                 <a href="">
                     <div class="d:flex fl-dir:column pos:relative">
@@ -95,7 +93,7 @@
             <span class="color:sub-6">놓치지 마세요!</span>
             <span>시즌 아웃 임박</span>
         </div>
-        <section class="d:flex fl-wrap:wrap jc:space-between fl:wrap:wrap">
+        <section class="d:flex fl-wrap:wrap jc:space-between fl:wrap:wrap row-gap:20">
             <h1 class="d:none">상품카드</h1>
             <div class="font-size:3">
                 <a href="#">
@@ -296,7 +294,7 @@
             <span class="color:main-6">갓 수확한 그대로~</span>
             <span>커밍 순</span>
         </div>
-        <section class="d:flex fl-wrap:wrap jc:space-between fl:wrap:wrap">
+        <section class="d:flex fl-wrap:wrap jc:space-between fl:wrap:wrap row-gap:20">
             <h1 class="d:none">상품카드</h1>
             <div class="font-size:3">
                 <a href="#">
