@@ -10,10 +10,12 @@ import kr.co.ginong.web.entity.order.OrderView;
 public interface OrderService {
 
     List<Order> get(Long id);
+    List<Order> getListByMemberId(Long orderId);
+    
     OrderView getOrderInfo(Long orderId);
 
     List<OrderItem> getItems(Long id);
-    List<OrderItemView> getList(Long memberId);
+    List<OrderItemView> getList(Long orderId);
 
 
     boolean add(Order order);

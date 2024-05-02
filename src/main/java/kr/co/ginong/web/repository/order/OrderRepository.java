@@ -11,6 +11,7 @@ public interface OrderRepository {
     List<Order> findAll();
 
     List<Order> findById(Long id);
+    List<Order> findByMemberId(Long memberId);
     
     boolean save(Order order);
     void update(Order order);

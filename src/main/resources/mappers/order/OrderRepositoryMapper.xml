@@ -22,6 +22,15 @@
 		where id = #{id}
 	</select>
 
+
+	<select id="findByMemberId" resultType="Order">
+		select
+		*
+		from `ORDER`
+		where member_id = #{memberId}
+	</select>
+
+
 	<insert id="save" parameterType="Order">
 		insert into `ORDER`(ID,`DATE`, `TYPE`, MEMBER_ID, LOCATION_ID)
 		VALUES(

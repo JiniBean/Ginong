@@ -29,43 +29,24 @@
     <div class="d:flex fl-dir:column gap:10 p:5">
       <div class="d:flex jc:space-between">
         <div>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9 pr:1">{{ info.orderDate }}</span>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9">주문</span>
+          <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ info.orderDate }}</span>
+          <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
         </div>
         <div>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9 pr:1">주문번호</span>
-          <span class="fs:2 md:fs:4 fw:3 color:base-9">{{ info.orderId }}</span>
+          <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
+          <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ info.orderId }}</span>
         </div>
        
       </div>
       <div class="d:flex jc:space-between gap:4 p:5">
-        <!-- <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3 status" v-for="status in state" :key="status.id"  > -->
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3 status" v-for="status in state.slice(0, 4)" :key="status.name"  >
-          <div>{{status.id}}</div>
-          <div>{{status.name}}</div>
-          <div>{{info.orderStatus}}</div>
-          <div v-if="status.name = info.orderStatus" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center
+        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
+          <div v-if="status.name === info.orderStatus" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center
             bg-color:main-6" style="width: 36px; height: 36px;"></div>
           <div v-else class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-           <span v-if="status.name = info.orderStatus" class="fs:1 md:fs:3 color:main-6">{{ status.name }}</span>
-          <span v-else class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span> 
+
+          <span v-if="status.name === info.orderStatus" class="fs:1 md:fs:3 color:main-6">{{ status.name }}</span>
+          <span v-else class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
         </div>
-        <!-- <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3 status" v-for="status in state" :key="status.id" v-if="status.id <= 4" >
-          <span>{{status.id}}</span>
-          <span>{{status.name}}</span>
-        </div> -->
-        <!-- <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-          <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-          <span class="fs:1 md:fs:3 color:base-9">배송준비중</span>
-        </div>
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-          <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-          <span class="fs:1 md:fs:3 color:base-9">배송중</span>
-        </div>
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-          <div class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-          <span class="fs:1 md:fs:3 color:base-9">배송완료</span>
-        </div> -->
       </div>
     </div>
   </section>
@@ -79,7 +60,7 @@
         전체선택
       </label>
     </div>
-    <div class="d:flex gap:2 md:gap4 w:10p pr:10" v-for="item in itemList" :key="item.id">
+    <div class="d:flex gap:2 md:gap4 w:10p" v-for="item in itemList" :key="item.id">
       <label>
         <input type="checkbox" class="n-toggle n-toggle-type:check-box" v-model="item.checked" />
       </label>
@@ -87,16 +68,23 @@
       <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
         <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
         <div class="d:flex fl-dir:column jc:space-between ai:start md:ai:center md:fl-dir:row gap:2 w:10p">
-          <span class="fs:2 md:fs:3"> {{ item.productName }} ({{item.weight}}{{item.weightCategory}})</span>
-          <div class="d:flex fl-dir:row pos:relative md:jc:space-between md:ai:center md:pos:none gap:3">
-            <span class="fs:2 md:fs:3 fw:3">{{ Number(item.price).toLocaleString() }}원</span>
-            <span class="md:d:none bar"></span>
-            <span class="fs:2 md:fs:3">{{ item.quantity }}개</span>
+          <span class="fs:2 md:w:5p md:fs:3"> {{ item.productName }} ({{item.weight}}{{item.weightCategory}})</span>
+          <div>
+            <div class="d:flex fl-dir:row pos:relative md:jc:space-between md:ai:center md:pos:none gap:3">
+              <span class="fs:2 md:fs:3 fw:3">{{ Number(item.price).toLocaleString() }}원</span>
+              <span class="md:d:none bar"></span>
+              <span class="fs:2 md:fs:3">{{ item.quantity }}개</span>
+            </div>
           </div>
-          <div class="d:flex d:none fl-dir:column gap:2">
+          <div v-if="info.orderStatusId === 4" class="d:flex fl-dir:row md:fl-dir:column gap:2">
             <div class="n-btn n-btn-type:outline n-btn-size:1">교환</div>
             <div class="n-btn n-btn-type:outline n-btn-size:1">환불</div>
           </div>
+          <div v-else-if="info.orderStatusId === 5" class="d:flex fl-dir:row md:fl-dir:column gap:2">
+            <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
+            <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base">배송완료</div>
+          </div>
+         <div v-else></div>
         </div>
       </div>
     </div>
@@ -132,7 +120,8 @@
       <div class="n-btn n-btn-size:2 w:10 md:w:10"><a href="">선택상품 다시 담기</a></div>
     </div>
     <div class="d:flex fl-grow:1">
-      <div class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10"><a href="">전체 상품 다시 담기</a></div>
+      <div v-if="info.orderStatusId === 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10" ><a href="">주문 취소</a></div>
+      <div v-else></div>
     </div>
   </section>
 
@@ -230,7 +219,7 @@
   </section>
   <section>
     <div class="d:flex fl-grow:1">
-      <div class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10"><a href="">주문내역 삭제</a></div>
+      <div v-if="info.orderStatusId != 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10"><a href="">주문내역 삭제</a></div>
     </div>
   </section>
 </main>

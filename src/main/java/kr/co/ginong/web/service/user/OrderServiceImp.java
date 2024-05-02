@@ -39,6 +39,11 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
+    public List<Order> getListByMemberId(Long memberId) {
+        return repository.findByMemberId(memberId);
+    }
+
+    @Override
     public OrderView getOrderInfo(Long orderId) {
         return viewRepository.findByOrderId(orderId);
     }
@@ -71,6 +76,8 @@ public class OrderServiceImp implements OrderService {
         boolean save = itemRepository.save(items);
         return save;
     }
+
+    
 
     
 }
