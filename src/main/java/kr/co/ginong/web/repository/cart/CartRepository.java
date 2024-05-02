@@ -14,5 +14,5 @@ public interface CartRepository {
     Boolean update(Long memberId, Long prdId, Integer qty);
     Integer count(Long memberId);
 
-    Boolean delete(Long prdId, List<Long> list);
+    Boolean delete(Long memberId, Long prdId, List<Long> list);
 }

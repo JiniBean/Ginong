@@ -98,7 +98,13 @@ public class OrderController {
 
 
         //배송지정보 가져오기
-        Location location = locationService.getByMemberID(mId);
+        Long lId = (Long) session.getAttribute("locationId");
+
+        Location location = new Location();
+        if (lId == null)
+            location = locationService.getByMemberID(mId);
+        else
+            location = locationService.getByID(lId);
 
         //모델 및 세션
         model.addAttribute("location", location);

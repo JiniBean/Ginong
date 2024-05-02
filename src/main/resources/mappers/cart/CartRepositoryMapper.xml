@@ -50,6 +50,7 @@
                in (#{c})
             </foreach>
         </if>
+        AND MEMBER_ID = #{memberId}
     </delete>
 
 </mapper>

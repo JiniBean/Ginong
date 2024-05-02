@@ -17,5 +17,5 @@ public interface CartService {
     Boolean edit(Long memberId, Long prdId);
     Boolean edit(Long memberId, Long prdId, Integer qty);
 
-    Boolean delete(Long prdId, List<Long> list);
+    Boolean delete(Long memberId,Long prdId, List<Long> list);
 }

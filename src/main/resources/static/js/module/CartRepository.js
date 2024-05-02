@@ -57,9 +57,12 @@ export default class CartRepository{
         return await response.json();
     }
 
-    async delete(list){
+    async delete(form){
         let url = `${baseUrl}/user/api/cart`;
         let method = 'DELETE';
+
+        let response = await this.findPromise(url,method,form);
+        return await response.json();
 
     }
 

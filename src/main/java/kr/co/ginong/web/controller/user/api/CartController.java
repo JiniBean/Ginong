@@ -17,7 +17,7 @@ public class CartController {
     @GetMapping
     public List<Cart> list(){
 
-        // 로그인 완성 후 수정 예정
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
 
        List<Cart> list = service.getList(memberId);
@@ -26,7 +26,7 @@ public class CartController {
 
     @GetMapping("/{prdId}")
     public Cart list(@PathVariable Long prdId){
-        // 로그인 완성 후 수정 예정
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
 
         Cart cart = service.get(memberId, prdId);
@@ -37,7 +37,7 @@ public class CartController {
     @GetMapping("/c")
     public Integer count(){
 
-        // 로그인 완성 후 수정 예정
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
         return service.getCount(memberId);
     }
@@ -47,7 +47,7 @@ public class CartController {
     public Boolean add(@PathVariable Long prdId
             , @RequestParam(name = "q", required = false) Boolean addCount){
 
-        // 로그인 완성 후 수정 예정
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
 
         if(addCount != null) {
@@ -61,7 +61,10 @@ public class CartController {
 
     @DeleteMapping
     public Boolean delte(List<Long> list){
-        return service.delete(null,list);
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
+        Long memberId = 2L;
+
+        return service.delete(memberId,null,list);
     }
 
 

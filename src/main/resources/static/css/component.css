@@ -78,7 +78,7 @@
 /* toggle.css */
 .n-toggle {
     /* toggle-type:check */
-    --toggle-check-border-color: var(--color-base-7);
+    --toggle-check-border-color: var(--color-base-4);
     --toggle-check-background-color-checked: var(--color-main-6);
     --toggle-check-checked-background-color: var(--color-main-6);
 

@@ -89,11 +89,48 @@ public class CartController {
     }
 
     @PostMapping
-    public String list(List<Cart> list){
+    public String list(@RequestParam("location") Long locationId,
+                       @RequestParam(value = "chkId", required = false) List<Long> chkIds,
+                       @RequestParam("prdId") List<Long> prdIds,
+                       @RequestParam("quantity") List<Integer> qtys,
+                       @RequestParam("all") Boolean isAll,
+                       HttpSession session){
 
-        System.out.println("왔다");
-        System.out.println("=================================");
-        System.out.println(list.toString());
-        return "redirect:/cart";
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
+//        Long memberId = null;
+        Long memberId = 2L;
+
+        // 회원 정보가 없다면 로그인 페이지로
+        if(memberId==null)
+            return "redirect:/user/signin";
+
+        List<OrderItem> list = new ArrayList<>();
+
+        // 전체 상품 주문하기 일 경우
+        if(isAll){
+            for (int i=0; i<qtys.size(); i++){
+               OrderItem item = new OrderItem();
+               item.setProductId( prdIds.get(i) );
+               item.setQuantity( qtys.get(i) );
+               list.add(item);
+            }
+        }
+        // 선택 상품 주문하기 일 경우
+        else{
+            for (Long p : chkIds){
+                OrderItem item = new OrderItem();
+                item.setProductId(p);
+
+                int idx = prdIds.indexOf(p);
+                item.setQuantity(qtys.get(idx));
+                list.add(item);
+            }
+        }
+
+        session.setAttribute("orderItems", list);
+        session.setAttribute("locationId", locationId);
+
+
+        return "redirect:/order/info";
     }
 }
