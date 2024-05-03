@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController("apiMemberController")
-@RequestMapping("user/api/member")
+@RequestMapping("api/member")
 public class MemberController {
 
     @Autowired

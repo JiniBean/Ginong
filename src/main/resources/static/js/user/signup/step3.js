@@ -96,7 +96,7 @@ window.addEventListener("load", function(e){
 
         if(userNameValue!=="") {
 
-            let url=`/user/api/member/checkUserName`;
+            let url=`/api/member/checkUserName`;
                 url = `${url}?userName=${userNameValue}`;
 
             let method = "get";
@@ -278,7 +278,7 @@ window.addEventListener("load", function(e){
 
         save();
 
-        location.href="/user/signup/step2";
+        location.href="/signup/step2";
 
     }
 
@@ -376,7 +376,7 @@ window.addEventListener("load", function(e){
         }
 
         //db에 회원정보 저장
-        let url = "/user/api/member/add";
+        let url = "/api/member/add";
         let method ="post";
 
         let xhr = new XMLHttpRequest();
@@ -386,7 +386,7 @@ window.addEventListener("load", function(e){
         xhr.onload = function(){
            if(xhr.status===200){
 
-               let url = new URL("/user/signup/step4",location.origin);
+               let url = new URL("/signup/step4",location.origin);
 
                const name = sessionStorage.getItem("name");
 
@@ -465,7 +465,7 @@ Cookie.prototype = {
         str +="]";
 
         let encoded = encodeURIComponent(str);
-        document.cookie = `userInfo=${encoded}; path=/user/signup`;
+        document.cookie = `userInfo=${encoded}; path=/signup`;
 
     },addItem : function(name, item) {
         console.log(this.map[name]);

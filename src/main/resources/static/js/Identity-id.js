@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     //쿠키에 비밀번호 변경 페이지로 넘길 데이터 담기
-    //쿠키에 비밀번호 변경 페이지로 넘길 데이터 담기
     nextButton.addEventListener("click", () => {
         let email = emailSend.querySelector('input[name="email"]').value;
         let name = emailSend.querySelector('input[name="name"]').value;
@@ -149,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.cookie = "email=" + encodeURIComponent(email) + "; path=" + newPath;
 
         // 해당 사용자의 userName과 joinDate를 서버에서 가져와서 쿠키에 저장
-        // 여기서는 서버에서 가져오는 부분이 없으므로 가상의 값을 사용하겠습니다.
         // document.cookie = "userName=" + encodeURIComponent(userName) + "; path=" + newPath;
         // document.cookie = "joinDate=" + encodeURIComponent(joinDate) + "; path=" + newPath;
 

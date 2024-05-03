@@ -36,7 +36,7 @@ public class OrderController {
     @Autowired
     private OrderCategoryService categoryService;
     
-    @GetMapping("{memberId}")
+    @GetMapping("{memberId}/list")
     public List<Order> getList(@PathVariable Long memberId) {
 
         List<Order> list = service.getListByMemberId(memberId);
@@ -44,6 +44,16 @@ public class OrderController {
         System.out.println(list);
         return list;
     }
+
+    @GetMapping("{memberId}/canceledList")
+    public List<Order> getCanceledList(@PathVariable Long memberId) {
+
+        List<Order> list = service.getCanceledListByMemberId(memberId);
+
+        System.out.println(list);
+        return list;
+    }
+
 
     @GetMapping("{orderId}/items")
     public List<OrderItemView> getItems(@PathVariable Long orderId) {
@@ -98,6 +108,8 @@ public class OrderController {
     @PutMapping("{orderId}")
     public void updateOrderType(@PathVariable Long orderId, @RequestBody int orderType) {
         System.out.println(orderId+", "+orderType);
+        
+        service.updateOrderType(orderId, orderType);
     }
 
 }

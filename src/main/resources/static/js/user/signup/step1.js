@@ -146,13 +146,14 @@ window.addEventListener("load", function(e){
 
             const encodedUserInfo = encodeURIComponent(str);
 
-            document.cookie = `userInfo=${encodedUserInfo}; path=/user/signup`;
+            document.cookie = `userInfo=${encodedUserInfo}; path=/signup`;
 
         }
 
         //get 방식
-        let url = new URL("/user/signup/step2",location.origin);
-        location.href=url.toString();
+        // let url = new URL("/signup/step2",location.origin);
+        // location.href=url.toString();
+        location.href="/signup/step2";
 
     }
 
@@ -177,7 +178,7 @@ window.addEventListener("load", function(e){
             str +="]";
 
             let encoded = encodeURIComponent(str);
-            document.cookie = `userInfo=${encoded}; path=/user/signup`;
+            document.cookie = `userInfo=${encoded}; path=/signup`;
 
         },addItem : function(name, item) {
             console.log(this.map[name]);

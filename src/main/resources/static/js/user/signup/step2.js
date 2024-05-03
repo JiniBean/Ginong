@@ -69,7 +69,7 @@ window.addEventListener("load", function(e){
 
         }
 
-        location.href="/user/signup/step1";
+        location.href="/signup/step1";
 
     }
 
@@ -103,7 +103,7 @@ window.addEventListener("load", function(e){
 
         save();
 
-        location.href="/user/signup/step3";
+        location.href="/signup/step3";
     }
 
     function save(){
@@ -152,7 +152,7 @@ Cookie.prototype = {
         str +="]";
 
         let encoded = encodeURIComponent(str);
-        document.cookie = `userInfo=${encoded}; path=/user/signup`;
+        document.cookie = `userInfo=${encoded}; path=/signup`;
 
     },addItem : function(name, item) {
         console.log(this.map[name]);
