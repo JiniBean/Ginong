@@ -11,6 +11,7 @@ public interface OrderService {
 
     List<Order> get(Long id);
     List<Order> getListByMemberId(Long orderId);
+    List<Order> getCanceledListByMemberId(Long orderId);
     
     OrderView getOrderInfo(Long orderId);
 
@@ -20,6 +21,8 @@ public interface OrderService {
 
     boolean add(Order order);
     boolean addItems(List<OrderItem> items);
+    
+    void updateOrderType(Long orderId, int orderType);
 
 
 

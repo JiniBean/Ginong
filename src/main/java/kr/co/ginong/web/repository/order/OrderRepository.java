@@ -12,9 +12,10 @@ public interface OrderRepository {
 
     List<Order> findById(Long id);
     List<Order> findByMemberId(Long memberId);
+    List<Order> findCancellationByMemberId(Long memberId);
     
     boolean save(Order order);
-    void update(Order order);
+    void update(Long orderId, int orderType);
     void delete(long id);
 
 }

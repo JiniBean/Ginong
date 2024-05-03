@@ -37,11 +37,7 @@ public class OrderServiceImp implements OrderService {
 
         return list;
     }
-
-    @Override
-    public List<Order> getListByMemberId(Long memberId) {
-        return repository.findByMemberId(memberId);
-    }
+    
 
     @Override
     public OrderView getOrderInfo(Long orderId) {
@@ -62,6 +58,19 @@ public class OrderServiceImp implements OrderService {
         return list;
     }
 
+
+    @Override
+    public List<Order> getCanceledListByMemberId(Long memberId) {
+        return repository.findCancellationByMemberId(memberId);
+    }
+
+
+    @Override
+    public List<Order> getListByMemberId(Long memberId) {
+        return repository.findByMemberId(memberId);
+    }
+
+
     @Override
     public boolean add(Order order) {
        boolean save = repository.save(order);
@@ -75,6 +84,11 @@ public class OrderServiceImp implements OrderService {
     public boolean addItems(List<OrderItem> items) {
         boolean save = itemRepository.save(items);
         return save;
+    }
+
+    @Override
+    public void updateOrderType(Long orderId, int orderType) {
+        repository.update(orderId, orderType);
     }
 
     
