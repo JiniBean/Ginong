@@ -44,9 +44,12 @@ public class MailController {
             // 성공적으로 이메일을 보냈다는 메시지와 함께 성공 응답 전송
             map.put("success", Boolean.TRUE);
 
-            // 이름과 가입일을 HashMap에 추가
-            map.put("userName", validId.getUserName());
-            map.put("joinDate", validId.getJoinDate());
+            if (validId != null) {
+
+                map.put("userName", validId.getUserName());
+                map.put("joinDate", validId.getJoinDate());
+                model.addAttribute("validId", validId); // validId를 모델에 추가
+            }
 
         } else {
             map.put("success", Boolean.FALSE);
