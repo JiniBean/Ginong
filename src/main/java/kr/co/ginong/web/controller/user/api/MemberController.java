@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController("apiMemberController")
-@RequestMapping("user/api/member")
+@RequestMapping("api/member")
 public class MemberController {
 
     @Autowired

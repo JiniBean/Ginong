@@ -63,7 +63,7 @@ public class MemberController {
                 return "redirect:signup/step2";
         }
 
-        return "signup/step3";
+        return "user/signup/step3";
     }
 
     @GetMapping("signup/step4")
@@ -103,7 +103,7 @@ public class MemberController {
         if(pwd.equals(verifyPwd)) {
             service.changePwd(pwd,userName);
         }
-        return "redirect:/user/signin";
+        return "redirect:/signin";
     }
 
     @GetMapping("signup5/confirm-pwd")
