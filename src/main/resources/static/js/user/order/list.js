@@ -25,7 +25,7 @@ createApp({
             }
             else if (this.tabIndex == 1) {
                 // 취소요청중 취소완료 상태
-                this.loadList();
+                this.loadCancelList();
             }
 
         },
@@ -52,7 +52,24 @@ createApp({
         // todo: 주문내역 카드 api 다시 만들기
         async loadList() {
             let memberId = 40;
-            let response = await fetch(`/user/api/order/${memberId}`);
+            let response = await fetch(`/user/api/order/${memberId}/list`);
+            let list = await response.json();
+            this.list = list;
+
+            let orderId = list && list[0] && list[0].id;
+            response = await fetch(`/user/api/order/${orderId}/items`)
+            this.itemList = await response.json();
+
+            // const ids = this.list.map(order => order.id);
+            // console.log(ids);
+            // response = await fetch(`/user/api/order/items?ids=${ids}`);
+            // let itemsMap = await response.json();
+            // itemsMap['10293012930193'] = [...]
+            // this.itemList = itemList;
+        },
+        async loadCancelList() {
+            let memberId = 40;
+            let response = await fetch(`/user/api/order/${memberId}/canceledList`);
             let list = await response.json();
             this.list = list;
 

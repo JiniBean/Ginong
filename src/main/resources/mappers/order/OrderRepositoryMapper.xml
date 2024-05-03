@@ -28,6 +28,15 @@
 		*
 		from `ORDER`
 		where member_id = #{memberId}
+		and type in (1,2,3,4,5)
+	</select>
+
+	<select id="findCancellationByMemberId" resultType="Order">
+		select
+		*
+		from `ORDER`
+		where member_id = #{memberId}
+		and type in (6,7)
 	</select>
 
 
@@ -40,5 +49,10 @@
 		,#{memberId}
 		,#{locationId})
 	</insert>
+
+	<update id="update" parameterType="Order">
+		update `ORDER` set
+		type = #{orderType} where id = #{orderId}
+	</update>
 
 </mapper>
