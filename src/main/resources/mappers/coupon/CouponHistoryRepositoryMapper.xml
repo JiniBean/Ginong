@@ -21,7 +21,7 @@
 		from COUPON_HISTORY_VIEW
 		where 1=1
 		and member_id = #{memberId}
-		and state = 1
+		and USED_DATE IS NULL
 	</select>
 
 	<select id="findAllUnavail" resultType="CouponHistoryView">
@@ -30,7 +30,13 @@
 		from COUPON_HISTORY_VIEW
 		where 1=1
 		and member_id = #{memberId}
-		and state = 0
+		and USED_DATE IS NOT NULL
 	</select>
+
+	<update id="update" parameterType="CouponHistory">
+		update COUPON_HISTORY
+		set USED_AMT = #{usedAmt}, USED_DATE = current_timestamp(), ORDER_ID = #{orderId}
+		where MEMBER_id = #{memberId} and id = #{id} and COUPON_ID = #{couponId};
+	</update>
 
 </mapper>

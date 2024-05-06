@@ -6,10 +6,12 @@ window.addEventListener("load", function () {
     let couponSection = document.querySelector(".n-dropdown");              //드롭다운 전체 영역
     let couponBtn = couponSection.querySelector("#dropdown-btn");           //드롭다운 버튼
     let couponList = couponSection.querySelector("#dropdown-list");         //드롭다운 리스트
-    let couponInput = couponSection.querySelector(".coupon-input");         //드롭다운 선택 값 input(hidden)
+    let couponInput1 = couponSection.querySelector(".coupon-input-id");         //드롭다운 선택 값 input(hidden)
+    let couponInput2 = couponSection.querySelector(".coupon-input-cid");         //드롭다운 선택 값 input(hidden)
+    let couponInput3 = couponSection.querySelector(".coupon-input-amt");         //드롭다운 선택 값 input(hidden)
 
     const pointSection = document.querySelector("#point-section");          //적립금 영역
-    const pointInput = pointSection.querySelector(".point-input");          //적립금 입력 칸
+    const pointInput = pointSection.querySelector("input[name='point']");          //적립금 입력 칸
     const remainPoint = pointSection.querySelector(".remain-point");        //사용자 보유 적립금
     const usePointBtn = pointSection.querySelector(".use-point-btn");       //전액 사용 버튼
     const minCheck = pointSection.querySelector(".min-check");              //최소 금액 유효성 검사 문구
@@ -41,7 +43,6 @@ window.addEventListener("load", function () {
 
         //선택한 쿠폰 보여주기
         couponBtn.textContent = e.target.textContent;
-        couponInput.value = e.target.dataset.id
         couponList.classList.remove("active");
 
         //쿠폰의 데이터로 할인 가격 계산하기
@@ -55,19 +56,24 @@ window.addEventListener("load", function () {
         couponAmt.textContent = formatNumber(couponDisc);
         total(couponDisc, pointDisc);
 
+        //사용한 쿠폰 정보 input에 뿌려주기
+        couponInput1.value = e.target.dataset.id;
+        couponInput2.value = e.target.dataset.cid;
+        couponInput3.value = couponDisc;
     }
 
     pointInput.oninput = function (e) {
 
-        // 사용자가 입력한 포인트
+        // 사용자가 입력한 포인트와 잔여 포인트 비교
         let inputValue = parseInt(e.target.value);
         let point = parseInt(remainPoint.dataset.point);
         let check = validate(inputValue, point);
         if(check){
             //인풋 영역에 금액 뿌려주기
-            let remain = point-inputValue;
+            let remain = point - inputValue;
             remainPoint.textContent = formatNumber(remain)+' P';
-            pointInput.value =  inputValue;
+            pointInput.textContent = String(inputValue);
+            pointInput.value = inputValue;
 
             //결제정보 영역에 적립금 뿌려주기
             pointDisc = inputValue;

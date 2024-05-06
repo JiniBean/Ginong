@@ -78,14 +78,12 @@ document.addEventListener('click', async function (e) {
     // 해당 상품 아이디로 장바구니 목록에 있는지 체크
     let valid = false;
     let item = await cartRepository.findItem(prdId);
-    console.log(item);
 
     // 없다면 추가, 있다면 수량 증가
     if(item == null)
         valid = await cartRepository.add(prdId);
     else
-        valid = await cartRepository.addQty(prdId);
-    console.log(valid);
+        valid = await cartRepository.updateQty(prdId);
 
     // DB 저장 잘 됐다면 헤더와 카드의 장바구니 바꾸기
     if(valid){

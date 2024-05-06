@@ -1,11 +1,20 @@
 package kr.co.ginong.web.controller.user.api;
 
+import jakarta.servlet.http.HttpSession;
 import kr.co.ginong.web.entity.cart.Cart;
+import kr.co.ginong.web.entity.order.Location;
+import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.user.CartService;
+import kr.co.ginong.web.service.user.LocationService;
+import kr.co.ginong.web.service.user.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController("apiCartController")
 @RequestMapping("user/api/cart")
@@ -13,6 +22,12 @@ public class CartController {
 
     @Autowired
     CartService service;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private LocationService locationService;
 
     @GetMapping
     public List<Cart> list(){
@@ -43,26 +58,38 @@ public class CartController {
     }
 
 
-    @GetMapping("/a/{prdId}")
-    public Boolean add(@PathVariable Long prdId
-            , @RequestParam(name = "q", required = false) Boolean addCount){
+    @PostMapping
+    public Boolean add(@RequestBody Long prdId){
 
         // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
-
-        if(addCount != null) {
-            return service.edit(memberId, prdId);
-        }
         int qty = 1;
         Cart cart = Cart.builder().productId(prdId).memberId(memberId).quantity(qty).build();
         return service.save(cart);
 
     }
 
-    @DeleteMapping
-    public Boolean delte(List<Long> list){
+    @PostMapping("/u")
+    public Boolean update(@RequestBody Cart cart){
         // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
+
+        System.out.println(cart.toString());
+        Long prdId = cart.getProductId();
+        Integer qty = cart.getQuantity();
+
+
+        if(qty == null || qty == 0)
+            return service.edit(memberId, prdId);
+
+        return service.edit(memberId, prdId, qty);
+    }
+
+    @DeleteMapping
+    public Boolean delete(@RequestBody List<Long> list) {
+        // 임시로 박아놓음, 로그인 완성 후 수정 예정
+        Long memberId = 2L;
+
 
         return service.delete(memberId,null,list);
     }

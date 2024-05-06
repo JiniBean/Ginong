@@ -1,5 +1,6 @@
 package kr.co.ginong.web.repository.coupon;
 
+import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponHistory;
 import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,9 +21,10 @@ public interface CouponHistoryRepository {
 
     CouponHistoryView findById(Long id);
 
-    void save(CouponHistory couponHistory);
+    void save(CouponHistory history);
 
-    void update(CouponHistory couponHistory);
+
+    boolean update(CouponHistory history);
 
     void delete(long id);
 

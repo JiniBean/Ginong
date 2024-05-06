@@ -65,3 +65,8 @@
     -webkit-mask-image: url("../icon/camera.svg");
     mask-image: url("../icon/camera.svg");
 }
+.icon\:minus::before,
+.icon\:minus::after{
+    -webkit-mask-image: url("../icon/minus.svg");
+    mask-image: url("../icon/minus.svg");
+}

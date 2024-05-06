@@ -23,6 +23,18 @@
 				member_id = #{memberId}
 			</if>
 		</where>
-
 	</select>
+	
+	<insert id="save" parameterType="PointHistory">
+		INSERT INTO POINT_HISTORY (
+			PLMA, AMOUNT, MEMBER_ID
+			<if test="pointId != null &amp;&amp; pointId > 0">,POINT_ID</if>
+			<if test="orderId != null &amp;&amp; orderId > 0">,ORDER_ID</if>
+		)
+		values (
+			#{plma} , #{amount}, #{memberId}
+			<if test="pointId != null &amp;&amp; pointId > 0">,#{pointId}</if>
+			<if test="orderId != null &amp;&amp; orderId > 0">,#{orderId}</if>
+		)
+	</insert>
 </mapper>

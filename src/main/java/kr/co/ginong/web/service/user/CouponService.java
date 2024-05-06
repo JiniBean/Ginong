@@ -1,5 +1,6 @@
 package kr.co.ginong.web.service.user;
 
+import kr.co.ginong.web.entity.coupon.CouponHistory;
 import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface CouponService {
     
     // 사용 불가능한(이미 사용한) 쿠폰 출력
     List<CouponHistoryView> getUnavailList(Long memberId);
+
+    boolean updateHistory(CouponHistory history);
 
 }

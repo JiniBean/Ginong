@@ -12,8 +12,8 @@ public interface PaymentRepository {
 
     Payment findById(Long id);
     
-    void save(Payment payment);
-    void update(Payment payment);
-    void delete(long id);
+    boolean save(Payment payment);
+    boolean update(Payment payment);
+    boolean delete(long id);
 
 }
