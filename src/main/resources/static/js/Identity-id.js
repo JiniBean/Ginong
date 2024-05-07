@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let timer; // 타이머 변수
     let countdownInterval; //카운트 다운 변수
 
+    let userName;
+    let joinDate;
+
+
     // =============================인증 기능 구현=============================
     // 인증 확인 버튼 클릭 이벤트 리스너 추가
     verifyBtn.addEventListener('click', function (e) {
@@ -54,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('서버 오류가 발생했습니다.');
                 }
             }
-
         };
         xhr.send();
     });
@@ -83,6 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         let response = JSON.parse(xhr.responseText);
+
+                        userName = response.userName;
+                        joinDate = response.joinDate;
+
                         if (response.success) {
                             {
                                 //버튼의 비활성 요소 제거
@@ -136,20 +143,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
     });
-    //쿠키에 비밀번호 변경 페이지로 넘길 데이터 담기
+    //쿠키에 confirm-id 페이지로 넘길 데이터 담기
     nextButton.addEventListener("click", () => {
         let email = emailSend.querySelector('input[name="email"]').value;
         let name = emailSend.querySelector('input[name="name"]').value;
         const currentPath = window.location.pathname; // 현재 페이지의 경로를 가져오기
-        const newPath = currentPath.replace("find-id", "confirm-id"); // "/find-pwd"를 "/change-pwd"로 교체
+        const newPath = currentPath.replace("find-id", "confirm-id"); // "/find-pwd"를 "/confirm-id"로 교체
 
         // 쿠키에 name과 email 저장
         document.cookie = "name=" + encodeURIComponent(name) + "; path=" + newPath;
         document.cookie = "email=" + encodeURIComponent(email) + "; path=" + newPath;
 
         // 해당 사용자의 userName과 joinDate를 서버에서 가져와서 쿠키에 저장
-        // document.cookie = "userName=" + encodeURIComponent(userName) + "; path=" + newPath;
-        // document.cookie = "joinDate=" + encodeURIComponent(joinDate) + "; path=" + newPath;
+        document.cookie = "userName=" + encodeURIComponent(userName) + "; path=" + newPath;
+        document.cookie = "joinDate=" + encodeURIComponent(joinDate) + "; path=" + newPath;
 
         window.location.href = newPath;  // newPath로 cookie에 담은 정보를 보냄과 동시에 해당 페이지로 이동
     });

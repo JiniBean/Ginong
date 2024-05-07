@@ -25,7 +25,9 @@ public class MailController {
     // 이메일을 보내는 메서드
     @ResponseBody
     @PostMapping("/mailSend")
-    public ResponseEntity<HashMap<String, Object>> mailSend(Member member, Model model) {
+    public ResponseEntity<HashMap<String, Object>> mailSend(Member member,
+                                                            Model model
+                                                           ) {
         String email = member.getEmail();
         String userName = member.getUserName();
         String name = member.getName();
@@ -46,9 +48,11 @@ public class MailController {
 
             if (validId != null) {
 
+                map.put("name", validId.getName());
+                map.put("email", validId.getEmail());
                 map.put("userName", validId.getUserName());
                 map.put("joinDate", validId.getJoinDate());
-                model.addAttribute("validId", validId); // validId를 모델에 추가
+
             }
 
         } else {
