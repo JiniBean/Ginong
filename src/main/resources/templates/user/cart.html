@@ -41,7 +41,8 @@
                 <div class="d:flex gap:5 p:4 bd-bottom bd-color:base-2" th:each=" i : ${list}" >
                     <div>
                         <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:2"
-                                name="chkId" th:value="${i.id}" th:data-id="${i.id}">
+                               name="chkId" th:value="${i.id}" th:data-id="${i.id}">
+                        <input type="hidden" name="prdId" th:value="${i.id}">
                     </div>
                     <div><img src="/img/Meongmeong.jpg" height="90px" class="bd-radius:1"></div>
                     <div class="info flex-grow:1">
@@ -53,6 +54,7 @@
                             <span @click="qtyHandler" class=" icon icon:plus cursor:pointer" style="width: 16px; height: 16px"></span>
                             <input type="hidden" name="prdId" th:value="${i.id}">
                             <input type="hidden" name="quantity"  value="3" th:value="${i.quantity}">
+                            <span class="btn-plus"></span>
                         </div>
                     </div>
                 </div>

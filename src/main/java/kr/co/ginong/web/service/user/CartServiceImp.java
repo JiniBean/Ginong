@@ -41,7 +41,12 @@ public class CartServiceImp implements CartService{
     }
 
     @Override
-    public Boolean delete( Long memberId, Long prdId, List<Long> list) {
-        return repository.delete(memberId, prdId, list);
+    public Boolean delete(Long memberId, Long prdId) {
+        return repository.delete(memberId, prdId, null);
+    }
+
+    @Override
+    public Boolean delete( Long memberId, List<Long> list) {
+        return repository.delete(memberId, null, list);
     }
 }

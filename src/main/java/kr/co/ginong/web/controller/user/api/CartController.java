@@ -91,7 +91,7 @@ public class CartController {
         Long memberId = 2L;
 
 
-        return service.delete(memberId,null,list);
+        return service.delete(memberId,list);
     }
 
 

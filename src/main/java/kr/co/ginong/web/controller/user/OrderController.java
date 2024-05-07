@@ -45,6 +45,9 @@ public class OrderController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private CartService cartService;
+
 
     @GetMapping("info")
     public String info(Model model
@@ -160,12 +163,16 @@ public class OrderController {
         //주문 테이블 저장하기
         boolean vaild = service.add(order);
 
-        // 주문 테이블 저장 성공 했을 때 주문 목록 저장하기
+        // 주문 테이블 저장 성공 했을 때 주문 목록 저장 및 장바구니에서 삭제
+
+        List<Long> cartList = new ArrayList<>();
         if (vaild){
             for (OrderItem i : items){
                 i.setOrderId(id);
+                cartList.add(i.getProductId());
             }
             service.addItems(items);
+            cartService.delete(memberId, cartList);
         }
 
         //LOCATION_HISTORY 테이블에 넣기
