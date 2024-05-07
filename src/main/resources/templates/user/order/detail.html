@@ -82,32 +82,12 @@
           </div>
           <div v-else-if="info.orderStatusId === 5" class="d:flex fl-dir:row md:fl-dir:column gap:2">
             <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
-            <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base">배송완료</div>
+            <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base disabled" >배송완료</div>
           </div>
          <div v-else></div>
         </div>
       </div>
     </div>
-<!--    pc버전-->
-<!--
-    <div class="d:flex gap:2 md:gap4 w:10p pr:10">
-      <label>
-        <input type="checkbox" class="n-toggle n-toggle-type:check-box" />
-      </label>
-      <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
-        <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}"  src="" alt="상품 썸네일" width="120px" height="120px">
-        <div class="d:flex jc:space-between ai:center w:10p">
-          <span class="fs:2 md:fs:3">텃밭 흙 당근, 2개입</span>
-          <span class="fs:2 md:fs:3 fw:3">2,500원</span>
-          <span class="fs:2 md:fs:3">2개</span>
-          <div class="d:none md:d:flex fl-dir:column gap:2">
-            <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
-            <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base">배송완료</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  -->
   </section>
 <!--  버튼들-->
   <section class="d:flex fl-dir:column gap:10">

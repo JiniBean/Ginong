@@ -6,17 +6,14 @@ createApp({
             list: [],
             itemList: [],
             //info: [],
-            //state: [],
+            state: [],
             tabIndex: 0,
         }
     },
     methods:{
         // 탭바꾸기
         clickTab(selectedIndex) {
-
             this.tabIndex = selectedIndex;
-            console.log("여긴 어디?", selectedIndex);
-            console.log("Tab index!", this.tabIndex);
 
             // tabIndex가 바뀌면 api를 새로 호출해야함
             if (this.tabIndex == 0) {
@@ -36,7 +33,6 @@ createApp({
             location.href = `/order/detail?orderId=${orderId}`;
         },
 
-        // todo: 구매확정하기
         async confirmOrder(order) {
             console.log(order);
             let orderId = order.id;
@@ -49,12 +45,18 @@ createApp({
                 // .then(response => response.json());
             this.loadList();
         },
-        // todo: 주문내역 카드 api 다시 만들기
+
         async loadList() {
             let memberId = 40;
             let response = await fetch(`/user/api/order/${memberId}/list`);
             let list = await response.json();
             this.list = list;
+
+            for (item of list) {
+                const dateIdx = item.date.search("T");
+                const subDate = item.date.substring(0, dateIdx);
+                item.date = subDate;
+            }
 
             let orderId = list && list[0] && list[0].id;
             response = await fetch(`/user/api/order/${orderId}/items`)
@@ -73,6 +75,12 @@ createApp({
             let list = await response.json();
             this.list = list;
 
+            for (item of list) {
+                const dateIdx = item.date.search("T");
+                const subDate = item.date.substring(0, dateIdx);
+                item.date = subDate;
+            }
+
             let orderId = list && list[0] && list[0].id;
             response = await fetch(`/user/api/order/${orderId}/items`)
             this.itemList = await response.json();
@@ -87,10 +95,6 @@ createApp({
     },
     created(){
         this.loadList();
-
-        // response = await fetch("/user/api/order/detail/orderInfo");
-        // let info = await response.json();
-        // this.info = info;
 
         // response = await fetch("/user/api/order/detail/status");
         // let state = await response.json();
