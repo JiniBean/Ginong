@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
-    private long    id;
+    private Long    id;
     private String  name;
     private int     price;
     private int     weight;
@@ -21,9 +21,9 @@ public class Product {
     private boolean state;
     private int     quantity;
 
-    private long    categoryId;
-    private long    storageTypeId;
-    private long    memberId;
-    private long    quantityCategoryId;
-    private long    weightCategoryId;
+    private Long    categoryId;
+    private Long    storageTypeId;
+    private Long    memberId;
+    private Long    quantityCategoryId;
+    private Long    weightCategoryId;
 }

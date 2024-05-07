@@ -62,9 +62,9 @@
 
 	<insert id="saveStock" parameterType="Stock">
 		INSERT INTO STOCK(
-		AMOUNT, POSITIVE, MADE_DATE, `DESC`, ADMIN_ID, PRODUCT_ID)
+		AMOUNT, POSITIVE, MADE_DATE, `DESC`, MEMBER_ID, PRODUCT_ID)
 		VALUES(
-		#{amount}, #{positive}, #{madeDate}, #{desc}, #{adminId}, #{productId})
+		#{amount}, #{positive}, #{madeDate}, #{desc}, #{memberId}, #{productId})
 	</insert>
 
    <update id="update" parameterType="Product">
@@ -81,7 +81,7 @@
 			<if test="quantity != null"> quantity = #{quantity}, </if>
 			<if test="categoryId != null"> category_id = #{categoryId}, </if>
 			<if test="storageTypeId != null"> storage_type_id = #{storageTypeId}, </if>
-			<if test="adminId != null"> admin_id = #{adminId}, </if>
+			<if test="memberId != null"> member_id = #{memberId}, </if>
 			<if test="quantityCategoryId != null"> quantity_category_id = #{quantityCategoryId}, </if>
 			<if test="weightCategoryId != null"> weight_category_id = #{weightCategoryId}, </if>
 		</set>

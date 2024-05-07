@@ -81,7 +81,7 @@ public class ProductController {
         /*product 데이터 넣는 곳*/
         String imgName = imgFile.getOriginalFilename();
 
-        product.setMemberId(1);
+        product.setMemberId(1L);
         product.setThumbnailName(imgName);
         product.setThumbnailPath("/img");
         System.out.println(product);
@@ -105,6 +105,9 @@ public class ProductController {
     @PostMapping("update")
 //    @PutMapping("{productId}")
     public String update(Product product) {
+        System.out.println("############################################"+product);
+        System.out.println("product"+product);
+        System.out.println("############################################"+product);
         service.update(product);
         return "redirect:/admin/product/list";
     }
