@@ -62,12 +62,13 @@ createApp({
             response = await fetch(`/user/api/order/${orderId}/items`)
             this.itemList = await response.json();
 
+            // 페이지에 있는 order id들을 전부 가져옴
             // const ids = this.list.map(order => order.id);
             // console.log(ids);
             // response = await fetch(`/user/api/order/items?ids=${ids}`);
             // let itemsMap = await response.json();
-            // itemsMap['10293012930193'] = [...]
             // this.itemList = itemList;
+            // console.log(itemList);
         },
         async loadCancelList() {
             let memberId = 40;
@@ -85,11 +86,11 @@ createApp({
             response = await fetch(`/user/api/order/${orderId}/items`)
             this.itemList = await response.json();
 
+            //TODO: 하나의 주문아이디에 딸린 여러개의 아이템을 어떻게 각각 받아오는가?
             // const ids = this.list.map(order => order.id);
             // console.log(ids);
             // response = await fetch(`/user/api/order/items?ids=${ids}`);
             // let itemsMap = await response.json();
-            // itemsMap['10293012930193'] = [...]
             // this.itemList = itemList;
         }
     },

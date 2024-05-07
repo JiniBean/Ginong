@@ -38,23 +38,20 @@ public class OrderController {
     
     @GetMapping("{memberId}/list")
     public List<Order> getList(@PathVariable Long memberId) {
-
         List<Order> list = service.getListByMemberId(memberId);
 
-        System.out.println(list);
         return list;
     }
 
     @GetMapping("{memberId}/canceledList")
     public List<Order> getCanceledList(@PathVariable Long memberId) {
-
         List<Order> list = service.getCanceledListByMemberId(memberId);
 
-        System.out.println(list);
         return list;
     }
 
 
+    //TODO: 주문ID별 주문목록 받아오기
     @GetMapping("{orderId}/items")
     public List<OrderItemView> getItems(@PathVariable Long orderId) {
 
@@ -63,16 +60,17 @@ public class OrderController {
 
         // List<OrderItemView> itemList = ...;
         // Map<Long, List<OrderItemView>> result = itemList.stream().collect(Collectors.groupingBy(OrderItemView::getOrderId));
-//        Map<Long, List<OrderItemView>> result = new HashMap<>();
-//        for (OrderItemView item : itemList) {
-////            List<OrderItemView> orderItems = result.get(item.getOrderId());
-////            if (orderItems == null) {
-////                orderItems = new ArrayList<>();
-////                result.put(item.getOrderId(), orderItems);
-////            }
-//            List<OrderItemView> orderItems = result.computeIfAbsent(item.getOrderId(), id -> new ArrayList<>());
-//            orderItems.add(item);
-//        }
+        Map<Long, List<OrderItemView>> result = new HashMap<>();
+        for (OrderItemView item : itemList) {
+            List<OrderItemView> orderItems = result.get(item.getOrderId());
+            if (orderItems == null) {
+                orderItems = new ArrayList<>();
+                result.put(item.getOrderId(), orderItems);
+            }
+        // List<OrderItemView> orderItems = result.computeIfAbsent(item.getOrderId(), id -> new ArrayList<>());
+        // orderItems.add(item);
+        }
+        System.out.println(itemList);
         return itemList;
     }
     
