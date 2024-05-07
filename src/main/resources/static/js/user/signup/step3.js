@@ -386,16 +386,13 @@ window.addEventListener("load", function(e){
         xhr.onload = function(){
            if(xhr.status===200){
 
-               let url = new URL("/signup/step4",location.origin);
+               //let url = new URL("/signup/step4",location.origin);
 
                const name = sessionStorage.getItem("name");
 
-               url = url + "?name=" +name;
+               //url = url + "?name=" +name;
 
-               //세션 저장소값 지우고 페이지 넘기기
-               sessionStorage.clear();
-
-               location.href=url.toString();
+               location.href=`/signup/step4?name=${name}`;
 
            }else {
               alert("회원가입에 실패했습니다.");
@@ -406,6 +403,8 @@ window.addEventListener("load", function(e){
         const cookieData = JSON.stringify({
             userInfo: userInfoData
         });
+
+        console.log(cookieData);
 
         xhr.open(method,url);
         xhr.setRequestHeader('Content-Type', 'application/json');
