@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
     <header class="header w:10p d:flex max-w:10 jc:center h:5 md:h:6 bg-color:base-1 top:1 pos:sticky zi:1">
       <div class="d:flex jc:space-between h:5 md:h:6 bd-bottom bd-color:base-2 fl-grow:1 mr:4 ml:4 md:mr:0 md:ml:0">
           <h1 class="d:none ai:center md:d:flex" ><a href="/index" >
@@ -16,9 +17,17 @@
             <nav class="d:none md:d:flex ai:center">
               <h1 class="d:none">top</h1>
               <ul class="d:flex gap:3">
-                <li><a href="/signin" class="color:main-6 fw:3">로그인</a></li>
-                <li class="d:none"><a href="" class="color:main-6 fw:3">로그아웃</a></li>
-                <li><a href="/signup/step1" class="color:main-6 fw:3">회원가입</a></li>
+                  <li sec:authorize = "isAnonymous()">
+                      <a href="/signin" class="color:main-6 fw:3">로그인</a>
+                  </li>
+                  <li sec:authorize = "isAuthenticated()">
+                      <span class="color:main-6 fw:3" th:text="${#authentication.name}"> 유저아이디</span>
+                      <span class="fw:3"> 님! 기농이네 방문을 환영합니다.</span>
+                      <a href="/logout" class="color:main-6 fw:3">로그아웃</a>
+                  </li>
+                  <li sec:authorize = "isAnonymous()">
+                      <a href="/signup/step1" class="color:main-6 fw:3">회원가입</a>
+                  </li>
               </ul>
             </nav>
 
