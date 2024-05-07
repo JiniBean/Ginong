@@ -29,6 +29,7 @@
 		from `ORDER`
 		where member_id = #{memberId}
 		and type in (1,2,3,4,5)
+		order by date desc
 	</select>
 
 	<select id="findCancellationByMemberId" resultType="Order">
@@ -37,6 +38,7 @@
 		from `ORDER`
 		where member_id = #{memberId}
 		and type in (6,7)
+		order by date desc
 	</select>
 
 
