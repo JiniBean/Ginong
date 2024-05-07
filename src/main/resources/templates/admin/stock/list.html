@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin/inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll("table tr");
+            rows.forEach(row => {
+                row.addEventListener("click", function() {
+                    alert("선택된 상품: " + this.cells[0].textContent.trim() + ", 재고: " + this.cells[1].textContent.trim());
+                });
+            });
+        });
+    </script>
+    <style>
+        tr:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
+    <table class="n-table n-table-hover n-table-border:bottom">
+        <thead style="background-color: #F5F5F5">
+        <tr>
+            <th scope="col">상품명</th>
+            <th scope="col">재고</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">텃밭 흙당근</th>
+            <td>300</td>
+        </tr>
+        <tr>
+            <th scope="row">달디단 밤양갱</th>
+            <td>178</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

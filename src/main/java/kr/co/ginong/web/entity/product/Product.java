@@ -23,7 +23,7 @@ public class Product {
 
     private long    categoryId;
     private long    storageTypeId;
-    private long    adminId;
+    private long    memberId;
     private long    quantityCategoryId;
     private long    weightCategoryId;
 }

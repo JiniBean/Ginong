@@ -81,9 +81,9 @@ public class ProductController {
         /*product 데이터 넣는 곳*/
         String imgName = imgFile.getOriginalFilename();
 
-        product.setAdminId(1);
+        product.setMemberId(1);
         product.setThumbnailName(imgName);
-        product.setThumbnailPath("/admin");
+        product.setThumbnailPath("/img");
         System.out.println(product);
 
         service.save(product);//, madeDate, amount);

@@ -12,5 +12,6 @@ createApp({
         selectProduct(product) {
             this.selectedProduct = product;
         },
+
     },
 }).mount('main')

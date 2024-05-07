@@ -52,11 +52,11 @@
 	<insert id="save" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
     	INSERT INTO PRODUCT(
 			name, price, quantity, weight, thumbnail_name, thumbnail_path, 
-			exp, `desc`, state, category_id, storage_type_id, admin_id, 
+			exp, `desc`, state, category_id, storage_type_id, member_id,
 			quantity_category_id, weight_category_id) 
 		VALUES(
 			#{name}, #{price}, #{quantity}, #{weight}, #{thumbnailName}, #{thumbnailPath},
-			#{exp}, #{desc}, #{state}, #{categoryId}, #{storageTypeId}, #{adminId},
+			#{exp}, #{desc}, #{state}, #{categoryId}, #{storageTypeId}, #{memberId},
 			#{quantityCategoryId}, #{weightCategoryId} )
    </insert>
 
