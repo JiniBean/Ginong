@@ -11,7 +11,7 @@ public class PaymentServiceImp implements PaymentService{
     @Autowired
     private PaymentRepository repository;
     @Override
-    public void add(Payment payment) {
-        repository.save(payment);
+    public boolean add(Payment payment) {
+        return repository.save(payment);
     }
 }

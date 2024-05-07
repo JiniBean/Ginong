@@ -20,12 +20,25 @@
         <nav class="w:10p">
             <h1 class="d:none">추천 상품 선택 목록</h1>
             <ul class="w:10p d:flex pl:10 pr:10 fs:3 fw:3 txt-al:center">
-                <li @click.prevent="selectItem('best')" :class="{ selected: best }"><a href="" style="width: 98px; height: 30px">베스트</a></li>
-                <li @click.prevent="selectItem('sale')" :class="{ selected: sale }"><a href="" style="width: 98px; height: 30px">특가</a></li>
-                <li @click.prevent="selectItem('pick')" :class="{ selected: pick }"><a href="" style="width: 98px; height: 30px">추천</a></li>
+                <li @click.prevent="selectProduct('best')" :class="{ 'selected': selectedProduct === 'best' }"><a href="" style="width: 98px; height: 30px">베스트</a></li>
+                <li @click.prevent="selectProduct('sale')" :class="{ 'selected': selectedProduct === 'sale' }"><a href="" style="width: 98px; height: 30px">특가</a></li>
+                <li @click.prevent="selectProduct('pick')" :class="{ 'selected': selectedProduct === 'pick' }"><a href="" style="width: 98px; height: 30px">추천</a></li>
             </ul>
         </nav>
-        <section>
+        <section v-if="selectedProduct === 'best'">
+            <h1 class="d:none">추천 상품 정보</h1>
+            <div class="bg-color:base-5 w:10p pos:relative bd-radius:2" style="height: 144px">
+                <img class="w:10p h:10p"
+                     th:src="@{/img/gaam.jpg}" src="/img/carrot.png"/>
+                <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
+                     style="height: 40px; background-color: rgba(51, 51, 51, 0.7);">
+                    <span class="color:base-1 fs:3">텃밭 흙당근,</span>
+                    <span>&emsp;</span>
+                    <span class="color:base-1 fs:3">2개입 2500원</span>
+                </div>
+            </div>
+        </section>
+        <section v-if="selectedProduct === 'sale'">
             <h1 class="d:none">추천 상품 정보</h1>
             <div class="bg-color:base-5 w:10p pos:relative bd-radius:2" style="height: 144px">
                 <img class="w:10p h:10p"
@@ -38,6 +51,20 @@
                 </div>
             </div>
         </section>
+        <section v-if="selectedProduct === 'pick'">
+            <h1 class="d:none">추천 상품 정보</h1>
+            <div class="bg-color:base-5 w:10p pos:relative bd-radius:2" style="height: 144px">
+                <img class="w:10p h:10p"
+                     th:src="@{/img/dang-gun.png}" src="/img/carrot.png"/>
+                <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
+                     style="height: 40px; background-color: rgba(51, 51, 51, 0.7);">
+                    <span class="color:base-1 fs:3">텃밭 흙당근,</span>
+                    <span>&emsp;</span>
+                    <span class="color:base-1 fs:3">2개입 2500원</span>
+                </div>
+            </div>
+        </section>
+
     </section>
 
     <section class="d:none md:d:flex gap:4" style="height: 290px">

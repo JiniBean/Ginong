@@ -1,29 +1,24 @@
-[class^="btn"]::before{
-    display: block;
-    font-size: 11px;
-}
-.btn-minus::before {
-    content: "\2500";
-
-}
-
-.btn-minus::before:hover{
-    color: var(--color-main-6);
-}
-
-.btn-plus::before {
-    content: "\253C";
-}
-
-[class^="btn"]::before:hover,
-[class^="btn"]::before:active{
-    color: var(--color-main-6);
-}
 .info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+.cursor\:pointer:hover,
+.cursor\:pointer:active{
+    color: var(--color-sub-5);
+}
+
+.icon\:minus:hover::before,
+.icon\:minus:active::before{
+    background-color: var(--color-sub-2);
+}
+
+.icon\:plus:hover::before,
+.icon\:plus:active::before{
+    background-color: var(--color-sub-5);
+}
+
 
 @media (min-width: 780px) {
     .info{

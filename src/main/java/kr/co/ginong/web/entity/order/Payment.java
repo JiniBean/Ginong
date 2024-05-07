@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
-    private long	id;
+    private Long	id;
     private Date	date;
     private String 	type;
     private int	    totalAmt;

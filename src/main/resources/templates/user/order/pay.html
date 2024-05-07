@@ -62,13 +62,15 @@
                     </button>
                     <ul id="dropdown-list" class="w:10p">
                         <li class="d:flex jc:space-between p:1" th:each="c : ${couponList}" th:data-id="${c.id}"
-                            th:data-amut="${c.discountAmount}" th:data-unit="${c.discountUnit}">
+                            th:data-amut="${c.discountAmount}" th:data-unit="${c.discountUnit}" th:data-cid="${c.couponId}">
                             <span th:text="${c.couponName}">회원 가입 감사 쿠폰</span>
                             <span th:text="${c.discountAmount + c.discountUnit}">50원</span>
                         </li>
                     </ul>
                     <div class="d:none">
-                        <input class="coupon-input" type="hidden" name="coupon">
+                        <input class="coupon-input-id" type="hidden" name="id">
+                        <input class="coupon-input-cid" type="hidden" name="cid">
+                        <input class="coupon-input-amt" type="hidden" name="usedAmt">
                     </div>
                 </div>
             </section>
@@ -86,7 +88,7 @@
                 <div class="d:flex fl-dir:column gap:2">
                     <div class="d:flex gap:10">
                         <div class="d:flex fl:fill as:end">
-                            <input type="number" name="point" value="" class="point-input test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end">
+                            <input type="text" name="point" value="0" class="test n-textbox n-textbox-type:underline txt-al:end d:flex jc:end">
                             <span class="color:main-6 fw:3 as:end mb:1">P</span>
                         </div>
                         <div>
@@ -154,7 +156,9 @@
                         </div>
                         <div class="d:flex jc:space-between">
                             <div>쿠폰 적용 금액</div>
-                            <div><span class="coupon">0</span> <span>원</span></div>
+                            <div>
+                                <span class="coupon">0</span> <span>원</span>
+                            </div>
                         </div>
                         <div class="d:flex jc:space-between">
                             <div>적립금 사용</div>

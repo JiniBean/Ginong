@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PointHistory {
     private long	id;
-    private boolean plma;
+    private int     plma;
     private int 	amount;
     private Date	date;
     private long	pointId;

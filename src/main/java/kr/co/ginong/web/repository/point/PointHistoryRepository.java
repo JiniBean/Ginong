@@ -14,7 +14,7 @@ public interface PointHistoryRepository {
 
 //    PointHistoryView findById(Long id);
     
-    void save(PointHistory pointHistory);
+    boolean save(PointHistory pointHistory);
     void update(PointHistory pointHistory);
     void delete(long id);
 

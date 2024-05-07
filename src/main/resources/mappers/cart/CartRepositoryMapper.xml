@@ -41,16 +41,18 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM CART WHERE PRODUCT_ID
+        DELETE FROM CART
+        WHERE MEMBER_ID = #{memberId}
         <if test="prdId != null">
-            = #{prdId}
+            AND PRODUCT_ID = #{prdId}
         </if>
         <if test="list != null">
-            <foreach collection="c" item="list" separator=",">
-               in (#{c})
+            AND PRODUCT_ID IN (
+            <foreach collection="list" item="id" separator=",">
+                #{id}
             </foreach>
+            )
         </if>
-        AND MEMBER_ID = #{memberId}
     </delete>
 
 </mapper>
