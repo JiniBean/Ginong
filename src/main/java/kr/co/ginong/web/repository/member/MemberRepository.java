@@ -20,4 +20,6 @@ public interface MemberRepository {
 
     void updateByUserName(String pwd, String userName);
 
+    Member findByUsername(String username);
+
 }

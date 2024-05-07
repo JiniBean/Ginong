@@ -57,4 +57,11 @@
         WHERE USER_NAME = #{userName}
     </update>
 
+    <select id = "findByUsername" resultType="Member">
+        select
+        *
+        from `MEMBER`
+        where USER_NAME=#{username}
+    </select>
+
 </mapper>
