@@ -50,6 +50,23 @@
 		where date(SEASON_START_DATE) - date(sysdate()) between 1 and 14
 		limit 4
 	</select>
+	<!-- todo findAllBestProduct / 베스트 상품 쿼리 만들기 / 판매일, 누적 판매량 필요 / 월 단위로 어떻게 끊을지 생각해보기 -->
+
+	<select id="findAllSaleProduct" resultType="ProductView">
+		select
+		*
+		from PRODUCT_VIEW
+		order by DISCOUNT_RATE desc
+	</select>
+
+	<select id="findAllPickProduct" resultType="ProductView">
+		select
+		*
+		from PRODUCT_VIEW
+		order by LIKE_COUNT desc
+	</select>
+
+
 	<!--  #####################################################################	-->
 
 	<select id="count" resultType="Integer">
