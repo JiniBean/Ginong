@@ -87,9 +87,11 @@ document.addEventListener('click', async function (e) {
 
     // DB 저장 잘 됐다면 헤더와 카드의 장바구니 바꾸기
     if(valid){
+        //해당 상품 수량 DB에서 다시 갖고오기
         item = await cartRepository.findItem(prdId);
         let qty = item.quantity;
 
+        //
         cartBox.textContent = qty;
         cartBox.classList.add('bg-color:main-6');
         cartBox.classList.add('color:base-1');
