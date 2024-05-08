@@ -7,11 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<!--    <style>-->
-<!--        tr:hover{-->
-<!--            cursor: pointer;-->
-<!--        }-->
-<!--    </style>-->
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -30,7 +25,7 @@
         <a href="list?s=2" th:classappend="${{param.s}}==2 ? 'color:main-6': ''" class="">최신순</a>
     </div>
 
-    <table class="n-table n-table-hover n-table-border:bottom" th:each="s:${list}">
+    <table class="n-table n-table-hover n-table-border:bottom txt-al:center" >
         <thead class="bg-color:base-3">
         <tr>
             <th scope="col" class="w:auto">상품명</th>
@@ -40,11 +35,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="s:${list}">
             <th scope="row" class="w:auto" th:text="${s.name}">텃밭 흙당근</th>
-            <td style="width: 100px">300</td>
-            <td class="d:none md:d:table-cell" style="width: 100px">3~4개</td>
-            <td class="d:none md:d:table-cell w:3">400g 내외</td>
+            <td style="width: 100px" th:text="${s.currentAmount}">300</td>
+            <td class="d:none md:d:table-cell" style="width: 100px" th:text="${s.quantity + s.quantityCategoryName}">3~4개</td>
+            <td class="d:none md:d:table-cell w:3" th:text="${s.weight + s.weightCategoryName}">400g 내외</td>
         </tr>
         </tbody>
     </table>
