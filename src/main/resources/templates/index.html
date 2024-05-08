@@ -20,9 +20,12 @@
         <nav class="w:10p">
             <h1 class="d:none">추천 상품 선택 목록</h1>
             <ul class="w:10p d:flex pl:10 pr:10 fs:3 fw:3 txt-al:center">
-                <li @click.prevent="selectProduct('best')" :class="{ 'selected': selectedProduct === 'best' }"><a href="" style="width: 98px; height: 30px">베스트</a></li>
-                <li @click.prevent="selectProduct('sale')" :class="{ 'selected': selectedProduct === 'sale' }"><a href="" style="width: 98px; height: 30px">특가</a></li>
-                <li @click.prevent="selectProduct('pick')" :class="{ 'selected': selectedProduct === 'pick' }"><a href="" style="width: 98px; height: 30px">추천</a></li>
+                <li @click.prevent="selectProduct('best')" :class="{ 'selected': selectedProduct === 'best' }">
+                    <a href="" style="width: 98px; height: 30px">베스트</a></li>
+                <li @click.prevent="selectProduct('sale')" :class="{ 'selected': selectedProduct === 'sale' }">
+                    <a href="" style="width: 98px; height: 30px">특가</a></li>
+                <li @click.prevent="selectProduct('pick')" :class="{ 'selected': selectedProduct === 'pick' }">
+                    <a href="" style="width: 98px; height: 30px">추천</a></li>
             </ul>
         </nav>
         <section v-if="selectedProduct === 'best'">
@@ -128,14 +131,6 @@
                             <div>
                                 <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:1"/>
                             </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:2">
                             <div th:text="${s.name}">텃밭 흙 당근, 2개입</div>
@@ -146,9 +141,6 @@
             </div>
         </section>
     </section>
-
-
-    <!--  ###################################################################################################  -->
 
     <section class="d:flex fl-dir:column gap:4">
         <h1 class="d:none">커밍순</h1>
@@ -164,11 +156,9 @@
                         <div class="item-card pos:relative">
                             <div class="comming-soon-container">
                                 <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:1"/>
-                                <div class="overlay">
-                                    <p>Comming Soon</p>
-                                </div>
                             </div>
-
+                            <div class="overlay">
+                                <p>Comming Soon</p>
                             </div>
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:2">
@@ -180,7 +170,6 @@
             </div>
         </section>
     </section>
-
     <!--  ###################################################################################################  -->
     <section class="blog-section w:10p h:10p">
         <h1 class="d:none">블로그 정보</h1>
