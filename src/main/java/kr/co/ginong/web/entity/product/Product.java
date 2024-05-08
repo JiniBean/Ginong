@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -13,13 +15,13 @@ public class Product {
     private Long    id;
     private String  name;
     private int     price;
+    private int     quantity;
     private int     weight;
     private String  thumbnailName;
     private String  thumbnailPath;
     private String  exp;
     private String  desc;
     private boolean state;
-    private int     quantity;
 
     private Long    categoryId;
     private Long    storageTypeId;

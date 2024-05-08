@@ -11,11 +11,30 @@ import kr.co.ginong.web.entity.product.ProductView;
 @Mapper
 public interface ProductRepository {
 
+    ProductView findById(Long productId);
+
+    List<ProductView> findAll(int offset, int size);
     List<ProductView> findAll(Long categoryId
-                        , String query
-                        , int offset
-                        , int size
-                        , Integer sortType);
+                            , String query
+                            , int offset
+                            , int size
+                            , Integer sortType);
+
+    List<ProductView> findAllSeasonOut();
+    List<ProductView> findAllSeasonOut(   int offset, int size);
+    List<ProductView> findAllSeasonOut(   Long categoryId
+                                        , String query
+                                        , int offset
+                                        , int size
+                                        , Integer sortType);
+
+    List<ProductView> findAllCommingSoon();
+    List<ProductView> findAllCommingSoon( int offset, int size);
+    List<ProductView> findAllCommingSoon( Long categoryId
+                                        , String query
+                                        , int offset
+                                        , int size
+                                        , Integer sortType);
 
     int count(Long categoryId, String query);
 
@@ -25,9 +44,7 @@ public interface ProductRepository {
     void update(Product product);
 
     void updateState(List<Long> ids);
-    ProductView findById(Long productId);
 
-    List<ProductView> findAll(int offset, int size);
     void delete(long id);
 
 

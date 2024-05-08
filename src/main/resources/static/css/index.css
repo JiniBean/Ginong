@@ -17,6 +17,20 @@
     gap: var(--gap-1);
 }
 
+/* 호버 상태일 때 이미지를 살짝 키우는 스타일 */
+.item-card {
+    overflow: hidden; /* 이미 설정되어 있으므로 이 설정을 유지하면 좋습니다. */
+    border-radius: 5px; /* 컨테이너에도 둥근 모서리를 적용 */
+}
+img {
+    transition: transform 0.3s ease-in-out; /* 변환에 대한 부드러운 전환 효과 적용 */
+}
+
+img:hover {
+    transform: scale(1.1); /* 원래 크기보다 10% 더 크게 */
+    border-radius: 5px;
+}
+
 /* 베스트, 특가, 추천 상품 영역 */
 .recommand-section ul > li {
     padding: 5px;

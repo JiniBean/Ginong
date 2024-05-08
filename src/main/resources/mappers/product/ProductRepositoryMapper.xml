@@ -3,10 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.product.ProductRepository">
-	
+
+	<select id="findById" resultType="ProductView">
+		select
+		 *
+		from PRODUCT_VIEW
+		where id = #{id}
+	</select>
+
 	<select id="findAll" resultType="ProductView">
 		select
-			*
+		 *
 		from PRODUCT_VIEW
 		<where>
 			<if test="categoryId != null">
@@ -27,13 +34,24 @@
 		limit #{offset}, #{size}
 	</select>
 
-	<select id="findById" resultType="ProductView">
+	<!--  #####################################################################	-->
+	<select id="findAllSeasonOut" resultType="ProductView">
 		select
-			*
+		 *
 		from PRODUCT_VIEW
-		where id = #{id}
+		where date(SEASON_END_DATE) - date(sysdate()) &lt;= 14
+		limit 4
 	</select>
-	
+
+	<select id="findAllCommingSoon" resultType="ProductView">
+		select
+		 *
+		from PRODUCT_VIEW
+		where date(SEASON_START_DATE) - date(sysdate()) between 1 and 14
+		limit 4
+	</select>
+	<!--  #####################################################################	-->
+
 	<select id="count" resultType="Integer">
 		select
 			count(id)

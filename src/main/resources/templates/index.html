@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/css/index.css">
     <script type="module" src="/js/user/product/list.js" defer></script>
     <script type="module" src="/js/index.js" defer></script>
+    <style>
+
+    </style>
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -27,7 +30,7 @@
         </nav>
         <section v-if="selectedProduct === 'best'">
             <h1 class="d:none">추천 상품 정보</h1>
-            <div class="bg-color:base-5 w:10p pos:relative bd-radius:2" style="height: 144px">
+            <div class="bg-color:base-5 w:10p pos:relative bd-radius:1" style="height: 144px">
                 <img class="w:10p h:10p"
                      th:src="@{/img/gaam.jpg}" src="/img/carrot.png"/>
                 <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
@@ -40,7 +43,7 @@
         </section>
         <section v-if="selectedProduct === 'sale'">
             <h1 class="d:none">추천 상품 정보</h1>
-            <div class="bg-color:base-5 w:10p pos:relative bd-radius:2" style="height: 144px">
+            <div class="bg-color:base-5 w:10p pos:relative bd-radius:1" style="height: 144px">
                 <img class="w:10p h:10p"
                      th:src="@{/img/baechoo.png}" src="/img/carrot.png"/>
                 <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
@@ -53,7 +56,7 @@
         </section>
         <section v-if="selectedProduct === 'pick'">
             <h1 class="d:none">추천 상품 정보</h1>
-            <div class="bg-color:base-5 w:10p pos:relative bd-radius:2" style="height: 144px">
+            <div class="bg-color:base-5 w:10p pos:relative bd-radius:1" style="height: 144px">
                 <img class="w:10p h:10p"
                      th:src="@{/img/dang-gun.png}" src="/img/carrot.png"/>
                 <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
@@ -64,7 +67,6 @@
                 </div>
             </div>
         </section>
-
     </section>
 
     <section class="d:none md:d:flex gap:4" style="height: 290px">
@@ -73,7 +75,7 @@
             <section class="d:flex fl-dir:column ai:center  gap:10">
                 <h1 class="fs:5 fw:3">베스트</h1>
                 <a href="">
-                    <div class="d:flex fl-dir:column pos:relative">
+                    <div class="item-card d:flex fl-dir:column pos:relative">
                         <img th:src="@{/img/baechoo.png}" src="/img/carrot.png" style="width: 360px; height: 180px"/>
                         <div class="w:10p pos:relative bottom:0 bg-color:base-8 d:flex jc:center ai:center" style="height: 40px">
                             <span class="color:base-1 fs:3 opacity:10">텃밭 흙당근,</span>
@@ -86,7 +88,7 @@
             <section class="d:flex fl-dir:column ai:center gap:10">
                 <h1 class="fs:5 fw:3">특가</h1>
                 <a href="">
-                    <div class="d:flex fl-dir:column pos:relative">
+                    <div class="item-card d:flex fl-dir:column pos:relative">
                         <img th:src="@{/img/baechoo.png}" src="/img/carrot.png" style="width: 360px; height: 180px"/>
                         <div class="w:10p pos:relative bottom:0 bg-color:base-8 d:flex jc:center ai:center" style="height: 40px">
                             <span class="color:base-1 fs:3 opacity:10">텃밭 흙당근,</span>
@@ -99,7 +101,7 @@
             <section class="d:flex fl-dir:column ai:center  gap:10">
                 <h1 class="fs:5 fw:3">추천</h1>
                 <a href="">
-                    <div class="d:flex fl-dir:column pos:relative">
+                    <div class="item-card d:flex fl-dir:column pos:relative">
                         <img th:src="@{/img/baechoo.png}" src="/img/carrot.png" style="width: 360px; height: 180px"/>
                         <div class="w:10p pos:relative bottom:0 bg-color:base-8 d:flex jc:center ai:center" style="height: 40px">
                             <span class="color:base-1 fs:3 opacity:10">텃밭 흙당근,</span>
@@ -122,12 +124,15 @@
         </div>
         <section class="d:flex fl-wrap:wrap jc:space-between fl:wrap:wrap row-gap:20">
             <h1 class="d:none">상품카드</h1>
-            <div class="font-size:3">
+            <div th:each="s:${seasonOutList}" class="font-size:3">
+                <h1>###################</h1>
+                <h2 th:text="${s.}"></h2>
+                <h1>###################</h1>
                 <a href="#">
                     <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
+                        <div class="item-card pos:relative">
                             <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
+                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:1"/>
                             </div>
                             <div class="cart-section">
                                 <div class="cart-box">
@@ -139,176 +144,12 @@
                             </div>
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
+                            <div th:text="${s.name}">텃밭 흙 당근, 2개입</div>
+                            <div th:text="${#numbers.formatInteger(s.price,3,'COMMA') + '원'}" class="fw:3">2,500원</div>
                         </div>
                     </div>
                 </a>
             </div>
-            <!--  여기서 부터 삭제###################################################################################################  -->
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!--  여기까지 삭제###################################################################################################  -->
         </section>
     </section>
 
@@ -323,195 +164,21 @@
         </div>
         <section class="d:flex fl-wrap:wrap jc:space-between fl:wrap:wrap row-gap:20">
             <h1 class="d:none">상품카드</h1>
-            <div class="font-size:3">
+            <div th:each="c:${commingSoonList}" class="font-size:3" >
                 <a href="#">
                     <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
+                        <div class="item-card pos:relative">
                             <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
+                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:1"/>
                             </div>
                         </div>
                         <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
+                            <div th:text="${c.name}">텃밭 흙 당근, 2개입</div>
+                            <div th:text="${#numbers.formatInteger(c.price,3,'COMMA') + '원'}" class="fw:3">2,500원</div>
                         </div>
                     </div>
                 </a>
             </div>
-
-            <!--  여기서 부터 삭제###################################################################################################  -->
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="font-size:3">
-                <a href="#">
-                    <div class="product-card d:flex fl-dir:column w:10p h:10p">
-                        <div class="pos:relative">
-                            <div>
-                                <img th:src="@{/img/baechoo.png}" src="" height="100%" width="100%" alt="상품 이미지" class="bd-radius:2"/>
-                            </div>
-                            <div class="cart-section">
-                                <div class="cart-box">
-                                    <span class="icon icon:shopping_cart_simple icon-color:base-1 icon-size:4">
-                                        장바구니아이콘
-                                    </span>
-                                    <span class="color:base-1"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d:flex fl-dir:column jc:center gap:2">
-                            <div>텃밭 흙 당근, 2개입</div>
-                            <div class="fw:3">2,500원</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!--  여기까지 삭제###################################################################################################  -->
-
         </section>
     </section>
 
