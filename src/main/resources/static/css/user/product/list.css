@@ -6,7 +6,7 @@
     height: 40px;
 
     position: absolute;
-    bottom: 4px;
+    bottom: 0px;
 
 }
 .cart-section > div {
@@ -19,6 +19,20 @@
     background-color: var(--color-icon-bg);
     width: 36px;
     height: 36px;
+}
+
+.product-card > div:first-child {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.product-card > div:first-child > div:first-child > img {
+    transition: transform 0.3s ease-in-out; /* 변환에 대한 부드러운 전환 효과 적용 */
+}
+
+.product-card > div:first-child > div:first-child > img:hover {
+    transform: scale(1.1); /* 원래 크기보다 10% 더 크게 */
+    border-radius: 5px;
 }
 
 .cart-section > div:active {

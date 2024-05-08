@@ -18,17 +18,63 @@
 }
 
 /* 호버 상태일 때 이미지를 살짝 키우는 스타일 */
-.item-card {
-    overflow: hidden; /* 이미 설정되어 있으므로 이 설정을 유지하면 좋습니다. */
-    border-radius: 5px; /* 컨테이너에도 둥근 모서리를 적용 */
+.item-card{
+    overflow: hidden;
+    border-radius: 5px;
 }
-img {
+
+.item-card > img {
     transition: transform 0.3s ease-in-out; /* 변환에 대한 부드러운 전환 효과 적용 */
 }
 
-img:hover {
+.item-card > img:hover {
     transform: scale(1.1); /* 원래 크기보다 10% 더 크게 */
     border-radius: 5px;
+}
+.product-card > div:first-child {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.product-card > div:first-child > div:first-child > img {
+    transition: transform 0.3s ease-in-out; /* 변환에 대한 부드러운 전환 효과 적용 */
+}
+
+.product-card > div:first-child > div:first-child > img:hover {
+    transform: scale(1.1); /* 원래 크기보다 10% 더 크게 */
+    border-radius: 5px;
+}
+
+/* 커밍순 스타일 */
+.coming-soon-container {
+    position: relative;
+    width: 100%; /* 조정 가능 */
+    height: 500px; /* 조정 가능 */
+}
+
+.coming-soon-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 컨테이너를 완전히 채우도록 설정 */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색 투명 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* 텍스트 색상 */
+    font-size: 2em; /* 텍스트 크기 */
+}
+
+.overlay p {
+    margin: 0; /* 기본 여백 제거 */
+    color: #cccccc;
 }
 
 /* 베스트, 특가, 추천 상품 영역 */

@@ -24,8 +24,8 @@ public class ProductView {
     private boolean state;
     private int     likeCount;
     private String  categoryName;
-    private Date    seasonStartDate;
-    private Date    seasonEndDate;
+    private String  seasonStartDate;
+    private String  seasonEndDate;
 
     private Long    categoryId;
     private String  storageType;

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,6 @@ public class IndexController {
     String index(Model model){
         List<ProductView> seasonOutList = service.getSeasonOutList();
         List<ProductView> commingSoonList = service.getCommingSoonList();
-
-        model.addAttribute("seasonOutList", seasonOutList);
-        model.addAttribute("commingSoonList", commingSoonList);
 
         // 데이터 확인 용
         // System.out.println("#####################################################################");
