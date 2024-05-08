@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Stock {
-    private long	id;
+    private Long	id;
     private int 	amount;
     private int	    plma;
     private Date	regDate;
     private Date	madeDate;
     private Date	ioDate;
     private String 	desc;
-    private long	adminId;
-    private long	productId;
+    private Long	memberId;
+    private Long	productId;
 
 }

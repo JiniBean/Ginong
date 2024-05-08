@@ -17,6 +17,7 @@ public class ProductView {
     private int     price;
     private int     quantity;
     private int     weight;
+    private int     currentAmount;
     private String  thumbnailName;
     private String  thumbnailPath;
     private String  exp;

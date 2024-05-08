@@ -2,11 +2,12 @@ let baseUrl = window.location.origin;
 export default class CartRepository{
 
     findPromise(url,method="GET", data = null){
-        console.log(' 왓따' ,data)
+
         let header = {
             "Content-Type": "application/json",
         }
 
+        // 메소드가 GET이 아니라면 option 넣음
         let option = method === 'GET' ? null : {method:method, headers:header, body:data}
 
         return fetch(url, option);
@@ -40,6 +41,7 @@ export default class CartRepository{
             if (response.headers.get('content-length') === '0') {
                 return null;
             }
+            // 잘왔다면 장바구니 수량 보내기
             let count = await response.json();
             return count;
         }
@@ -49,7 +51,7 @@ export default class CartRepository{
     async add(prdId){
         let url = `${baseUrl}/user/api/cart`;
         let method = 'POST';
-        let response = await this.findPromise(url,method, prdId);
+        let response = await this.findPromise(url,method, prdId); // Controller에서 Long 타입으로 받기 때문에 stringify() 하면 안됨
         return await response.json();
     }
 
@@ -65,8 +67,7 @@ export default class CartRepository{
     async delete(data){
         let url = `${baseUrl}/user/api/cart`;
         let method = 'DELETE';
-
-        let response = await this.findPromise(url,method,data);
+        let response = await this.findPromise(url,method,JSON.stringify(data));
         return await response.json();
 
     }

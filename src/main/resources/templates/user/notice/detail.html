@@ -1,34 +1,63 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="user/inc/layout-back">
+      layout:decorate="user/inc/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/user/notice/detail.css">
+    <title>Product-List</title>
+    <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
-<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0">
-    <section class="d:flex fl-dir:column gap:2 fl-grow:1">
-        <h1 class="d:none">공지 디테일</h1>
-        <div class="">결제 시스템 변경 안내</div>
-        <div class="d:flex fl-dir:row gap:2">
-            <span>작성일</span>
-            <span>2024-01-01</span>
-        </div>
-        <div class="fl-grow:1 bd bd-color:main-6 p:5">
-            가나다라마바사아자차카타파하
-        </div>
-    </section>
-    <section class="d:flex gap:2 ai:center">
-        <div class="w:5p">
-            <p>기농이는 언제나 고객님의 가정과 건강에 도움이 되기를 바라고 있습니다.</p>
-        </div>
-        <div class="logo w:5p">기농이네 감자사진</div>
-    </section>
 
-</main>
+    <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0">
+        <section class="pt:3 pb:3">
+            <h1 class="d:none">공지사항</h1>
+            <div class="d:none md:d:flex fl-dir:column fw:3 fs:3 ai:center md:fs:4">공지사항</div>
+       
+            <div class="d:flex fl-dir:column p:2 md:p:4">
+                <div class="d:flex fl-dir:row p:2 md:p:4">
+                    <span class="fs:2 md:fs:3">연휴 기간 배송 지연 안내</span>
+                    <span></span>
+                </div>
+                <div class="d:flex fl-dir:row pos:relative gap:3 bd-top bd-color:base-4 p:2 md:p:4">
+                    <span>작성일</span>
+                    <span class="bar"></span>
+                    <span>2024-01-27</span>
+                </div>
+            </div>
+            <div class="bd bd-color:main-6 white-space:pre-line m:2 md:m:4 p:5 fs:2 md:fs:3">
+                <!-- <pre> -->
+                안녕하세요. 기농이네입니다.
+
+                기농이네 결제 시스템이 기존 계좌이체에서
+                카카오페이,네이버페이,토스,페이코 간편결제로
+                변경되었습니다.
+
+                이용에 참고하시길 바랍니다.
+
+                감사합니다.
+                <!-- </pre>   -->
+            </div>
+        </section>
+        <section>
+            <h1 class="기농이 안내문 & 기농이 로고"></h1>
+            <div class="d:flex fl-dir:row">
+                <div class="white-space:pre-line fs:2 md:fs:3 p:5 fl-grow:1" >
+                    기농이는 언제나 고객님의
+                    가정과 건강에 도움이 되기를 
+                    바라고 있습니다.
+                </div>
+                <div>
+                    <img src="" th:src="@{/img/potato-ginong-hat.png}" width="155px" height="100px">
+                </div>
+            </div>
+        </section>
+        <section class="d:flex jc:center">
+            <h1 class="d:none">버튼</h1>
+            <div class="n-btn n-btn-size:1 w:3 md:w:4"><a href="/user/notice/list">목록</a></div>
+        </section>
+    </main>
+
 </body>
 </html>

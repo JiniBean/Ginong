@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,18 +18,10 @@ public class IndexController {
     private ProductService service;
 
     @GetMapping
-    String index(Model model){
+    //todo 베스트 / 특가 / 추천 기능 구현 필요
+    String index(Model model) {
         List<ProductView> seasonOutList = service.getSeasonOutList();
         List<ProductView> commingSoonList = service.getCommingSoonList();
-
-        // 데이터 확인 용
-        // System.out.println("#####################################################################");
-        // System.out.println("seasonOutList = " + seasonOutList);
-        // System.out.println("seasonOutList.size() = " + seasonOutList.size());
-        // System.out.println("#####################################################################");
-        // System.out.println("seasonOutList = " + commingSoonList);
-        // System.out.println("commingSoonList.size() = " + commingSoonList.size());
-        // System.out.println("#####################################################################");
 
         model.addAttribute("seasonOutList", seasonOutList);
         model.addAttribute("commingSoonList", commingSoonList);
