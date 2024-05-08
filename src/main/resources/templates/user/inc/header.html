@@ -19,7 +19,7 @@
                 </li>
                   <li sec:authorize = "isAuthenticated()">
                       <span class="color:main-6 fw:3" th:text="${#authentication.name}"> 유저아이디</span>
-                      <span class="fw:3"> 님! 기농이네 방문을 환영합니다.</span>
+                      <span class="fw:3"> 님  </span>
                       <a href="/logout" class="color:main-6 fw:3">로그아웃</a>
                   </li>
                 <li sec:authorize = "isAnonymous()">

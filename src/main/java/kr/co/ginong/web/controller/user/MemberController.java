@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -144,8 +146,12 @@ public class MemberController {
             , @RequestParam(value = "verify-password") String verifyPwd
     ) {
 
+
+
         if (pwd.equals(verifyPwd)) {
-            service.changePwd(pwd, userName);
+            PasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+            String encodePwd = pwdEncoder.encode(pwd);
+            service.changePwd(encodePwd, userName);
         }
         return "redirect:/signin";
     }

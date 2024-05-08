@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -65,9 +67,14 @@ public class MemberController {
         String phone = String.valueOf(jsonObject.get("phone")).replace("\"", "");
 
         //step3
+        //BCryptPasswordEncoder를 생성
+        PasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+
         jsonObject = (JsonObject) userInfoArray.get(2);
         String userName = String.valueOf(jsonObject.get("userName")).replace("\"", "");
         String pwd = String.valueOf(jsonObject.get("pwd")).replace("\"", "");
+        //입력받은 pwd를 encoder를 이용하여 bcrypt 형식으로 encode 후 encodePwd 에 저장
+        String encodePwd = pwdEncoder.encode(pwd);
         String joinRoute = String.valueOf(jsonObject.get("joinRoute")).replace("\"", "");
 
         Long memberId = null;
@@ -78,7 +85,7 @@ public class MemberController {
             Member member = Member.builder()
                     .name(name)
                     .userName(userName)
-                    .pwd(pwd)
+                    .pwd(encodePwd)
                     .email(email)
                     .phone(phone)
                     .agree(agree)

@@ -47,35 +47,4 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 }
-//	public UserDetailsService jdbcUserDetailsService() {
-//
-////      -> 결과 집합의 모양
-////         ┌────────────┬───────────┬─────────┐
-////         │  username  │  password │ enabled │
-////         ├────────────┼───────────┼─────────┤
-////         │   newlec   │    111    │    1    │
-//
-//		String userSql = "select USER_NAME as username, pwd AS password, 1 AS enabled from `MEMBER` where USER_NAME=?";
-//
-////			┌────────────┬───────────┬
-//////        │  username  │ authority │
-//////         ├────────────┼───────────┼
-//////         │   newlec   │    111    │
-//		String authorSql = """
-//				SELECT
-//					a.USER_NAME as username
-//					, b.role_name  AS authority
-//				FROM `MEMBER` a
-//				RIGHT JOIN MEMBER_ROLE b
-//				ON a.ID = b.MEMBER_ID
-//				WHERE a.USER_NAME = ?;
-//				""";
-//
-//		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);        //dataSource(데이터베이스 접속 정보)를 가진 JdbcUserDetailsManager 객체 생성
-//		manager.setUsersByUsernameQuery(userSql);                                    //유저 정보 쿼리 JdbcUserDetailsManager 에 넣기
-//		manager.setAuthoritiesByUsernameQuery(authorSql);                            //인증 정보 쿼리 JdbcUserDetailsManager 에 넣기
-//
-//
-//		return manager;
-//	}
 
