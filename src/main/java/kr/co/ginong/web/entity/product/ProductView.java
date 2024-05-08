@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -23,6 +21,7 @@ public class ProductView {
     private String  exp;
     private String  desc;
     private boolean state;
+    private int     discountRate;
     private int     likeCount;
     private String  categoryName;
     private String  seasonStartDate;
@@ -32,6 +31,5 @@ public class ProductView {
     private String  storageType;
     private String  quantityCategory;
     private String  weightCategory;
-//    private Integer cartQty;
 
 }
