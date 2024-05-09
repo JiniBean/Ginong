@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ginong.web.repository.member.AdminMemberRepository">
+
+    <select id="findAll" resultType="Member">
+        select
+        NAME,
+        USER_NAME,
+        BIRTH_DATE,
+        CASE
+        WHEN STATE = false THEN '비활성화'
+        WHEN STATE = true THEN '활성화'
+        END AS STATE_DESCRIPTION,
+        SUBSTRING(PHONE, LENGTH(PHONE) - 3) AS PHONE
+        from MEMBER
+        <where>
+            <if test="query != null">
+                and NAME like '%${query}%'
+            </if>
+            <if test="query != null">
+                and USER_NAME like '%${query}%'
+            </if>
+            <if test="query != null">
+                and PHONE like '%${query}%'
+            </if>
+            <if test="query != null">
+                and BIRTH_DATE like '%${query}%'
+            </if>
+            <if test="query != null">
+                and STATE like '%${query}%'
+            </if>
+        </where>
+        limit #{offset}, #{size}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select
+        	count(id)
+        from MEMBER
+        <where>
+            <if test="query != null">
+                name like '%${query}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" resultType="MemberView">
+        select *
+        from MEMBER_VIEW
+        WHERE ID = #{id}
+    </select>
+
+</mapper>

@@ -21,33 +21,36 @@
         <div class="n-tab">이메일 인증</div>
     </section>
 
-    <section class="col-gap:2">
-        <h1 class="d:none">인풋박스</h1>
-        <div>이름</div>
-        <input
-                type="text"
-                class="n-textbox n-textbox-type:underline"
-                placeholder="Underline Textbox"/>
-    </section>
+    <form class="" action="" method="post">
+        <section class="col-gap:2">
+            <h1 class="d:none">인풋박스</h1>
+            <div>이름</div>
+            <input
+                    type="text"
+                    class="n-textbox n-textbox-type:underline"
+                    placeholder="Underline Textbox"/>
+        </section>
 
-    <section>
-        <h1 class="d:none">인증번호 섹션</h1>
-        <div>전화번호</div>
-        <div class="d:flex col-gap:2">
-            <input type="text" class="n-textbox n-textbox-type:underline"/>
-            <button class="n-btn n-btn:outline color:base-9 disabled" style="top:-3px;">인증번호 발송</button>
-        </div>
-    </section>
+        <section>
+            <h1 class="d:none">인증번호 섹션</h1>
+            <div>전화번호</div>
+            <div class="d:flex col-gap:2">
+                <input type="text" class="n-textbox n-textbox-type:underline"/>
+                <button class="n-btn n-btn:outline color:base-9 disabled" style="top:-3px;">인증번호 발송</button>
+            </div>
+        </section>
 
-    <section>
-        <h1 class="d:none">인증번호 섹션</h1>
-        <div>인증번호</div>
-        <div class="d:flex col-gap:2">
-            <input type="text" class="n-textbox n-textbox-type:underline"/>
-            <button class="n-btn n-btn:outline color:base-9 disabled" style="top:-3px;">인증번호 확인</button>
-        </div>
-    </section>
+        <section>
+            <h1 class="d:none">인증번호 섹션</h1>
+            <div>인증번호</div>
+            <div class="d:flex col-gap:2">
+                <input type="text" class="n-textbox n-textbox-type:underline"/>
+                <button class="n-btn n-btn:outline color:base-9 disabled" style="top:-3px;">인증번호 확인</button>
+            </div>
+        </section>
+    </form>
 -->
+
 
     <!--아이디 찿기 - 이메일인증-->
     <section class="n-tabbar n-tab-grow">
@@ -57,7 +60,8 @@
     </section>
 
     <form class="mail-form" action="/mailSend" method="post">
-        <section  id="email-send" class=" d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p  pr:4 pl:4 md:pr:0 md:pl:0">
+        <section id="email-send"
+                 class=" d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p  pr:4 pl:4 md:pr:0 md:pl:0">
             <div class="col-gap:2">
                 <h1 class="d:none">인풋박스</h1>
                 <div>이름</div>
@@ -80,7 +84,9 @@
                             placeholder="이메일 주소를 입력해주세요."
                             name="email"
                     /> <!-- 추후 로그인 정보에서 이메일 정보 받아와야 함.-->
-                    <button type="submit" class="n-btn n-btn:outline color:base-9 send-mail-btn" style="top:-3px;">인증 번호 발송</button>
+                    <button type="submit" class="n-btn n-btn:outline color:base-9 send-mail-btn" style="top:-3px;">인증 번호
+                        발송
+                    </button>
                 </div>
 
             </div>
@@ -100,8 +106,8 @@
                         placeholder="인증번호를 입력해주세요."/>
                 <button class="n-btn n-btn:outline color:base-9 verify_btn disabled" style="top:-3px;">인증 확인</button>
             </div>
-            <div class = "d:flex jc:end mr:6">
-                <span class = "countdown"></span>
+            <div class="d:flex jc:end mr:6">
+                <span class="countdown"></span>
             </div>
         </form>
         <div class="verification-result"></div>
