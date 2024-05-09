@@ -27,3 +27,11 @@
 .apple{
     background-image: url("/img/logo-apple.svg");
 }
+
+.error-message{
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-size: var(--font-size-2);
+    @media (min-width: 780px) {
+        font-size : var(--font-size-2);
+    }
+}

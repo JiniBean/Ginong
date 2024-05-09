@@ -70,3 +70,13 @@
     -webkit-mask-image: url("../icon/minus.svg");
     mask-image: url("../icon/minus.svg");
 }
+
+.icon\:eye::before{
+    -webkit-mask-image: url("../icon/eye.svg");
+    mask-image: url("../icon/eye.svg");
+}
+
+.icon\:eyeSlash::before{
+    -webkit-mask-image: url("../icon/eyeSlash.svg");
+    mask-image: url("../icon/eyeSlash.svg");
+}

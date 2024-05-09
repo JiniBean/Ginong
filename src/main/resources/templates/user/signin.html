@@ -7,29 +7,45 @@
     <meta charset="UTF-8">
     <title>Signin</title>
     <link rel="stylesheet" href="/css/user/signin.css">
+    <script src="/js/user/signin.js"></script>
 </head>
 <body>
-<main layout:fragment="main" class= "d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pl:4 pr:4 md:pl:0 md:pr:0" >
+<main layout:fragment="main" class= "d:flex fl-dir:column gap:12 md:gap:16 max-w:9 w:10p pl:4 pr:4 md:pl:0 md:pr:0" >
     <section class="mt:10">
         <h1 class="logo">로고</h1>
     </section>
     <section>
         <h1 class="d:none">로그인 기능</h1>
         <div>
-            <form method="post" class= "d:flex fl-dir:column gap:8">
-                <div>
-                    <input type="text" class="n-textbox n-textbox-type:underline" placeholder="아이디를 입력하세요." name="username"/>
-                </div>
-                <div>
-                    <input type="password" class="n-textbox n-textbox-type:underline" placeholder="비밀번호를 입력하세요." name="password"/>
-                </div>
-                <div class= "d:flex fl-dir:row gap:1 ai:center">
-                    <input type="checkbox" class="n-toggle n-toggle-type:check-box" />
-                    <span>아이디 저장</span>
-                </div>
-                <div>
-                    <button type="submit" class="n-btn n-btn-size:2 fw:3 fs:3 md:fs:6 min-w:3 w:10p">로그인</button>
-                </div>
+            <form method="post" class= "d:flex fl-dir:column gap:12">
+                <section id = "username">
+                    <h1 class="d:none">아이디 입력란</h1>
+                    <div>
+                        <input type="text" class="input-username n-textbox n-textbox-type:underline" placeholder="아이디를 입력하세요." name="username"/>
+                    </div>
+                </section>
+                <section class="pos:relative" id="password">
+                    <h1 class="d:none">비밀번호 입력란</h1>
+                    <div>
+                        <input type="password" class="password-input n-textbox n-textbox-type:underline" placeholder="비밀번호를 입력하세요." name="password"/>
+                    </div>
+                    <div class="icon icon:eye icon-size:4 icon-eye icon-color:base-5 pos:absolute  txt-al:right zi:5" style="top:2px; right:10px;"></div>
+                    <div class="d:none icon icon:eyeSlash icon-size:4 icon-eye-slash icon-color:base-5 pos:absolute  txt-al:right zi:5" style="top:2px; right:10px;"></div>
+                    <div class="error-message mt:2 ml:2 color:accent-1"></div>
+                </section>
+                <section>
+                    <h1 class="d:none">아이디 저장 체크박스</h1>
+                    <div class= "d:flex fl-dir:row gap:1 ai:center">
+                        <input type="checkbox" name = "rememberUsername" class="n-toggle n-toggle-type:check-box" />
+                        <span>아이디 저장</span>
+                    </div>
+                </section>
+                <section id="button">
+                    <h1 class="d:none">로그인 버튼</h1>
+                    <div>
+                        <button type="submit" class="submit-button n-btn n-btn-size:2 fw:3 fs:3 md:fs:6 min-w:3 w:10p">로그인</button>
+                    </div>
+                </section>
             </form>
         </div>
     </section>
