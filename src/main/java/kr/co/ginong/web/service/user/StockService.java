@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface StockService {
 
-    StockView get(Long productId);
-    List<StockView> getList();
+    List<StockView> get(Long productId);
+    List<StockView> getList(Boolean amount, Boolean current);
 
 }

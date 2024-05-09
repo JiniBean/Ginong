@@ -18,7 +18,9 @@ public class StockController {
     StockService service;
     @GetMapping("list")
     public String list(Model model){
-        List<StockView> list = service.getList();
+        Boolean amount = false;
+        Boolean current = false;
+        List<StockView> list = service.getList(amount, current);
 
         model.addAttribute( "list",list);
         return "admin/stock/list";

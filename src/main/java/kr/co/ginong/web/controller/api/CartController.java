@@ -1,4 +1,4 @@
-package kr.co.ginong.web.controller.user.api;
+package kr.co.ginong.web.controller.api;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.ginong.web.entity.cart.Cart;
@@ -74,7 +74,6 @@ public class CartController {
         // 임시로 박아놓음, 로그인 완성 후 수정 예정
         Long memberId = 2L;
 
-        System.out.println(cart.toString());
         Long prdId = cart.getProductId();
         Integer qty = cart.getQuantity();
 

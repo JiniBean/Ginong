@@ -1,5 +1,5 @@
 let baseUrl = window.location.origin;
-export default class CartRepository{
+export default class StockRepository{
 
     findPromise(url,method="GET", data = null){
 
@@ -14,8 +14,19 @@ export default class CartRepository{
 
     }
 
+    async findAll(amount, current){
+        let url = `${baseUrl}/api/stock?a=${amount}&c=${current}`;
+
+        let response = await this.findPromise(url);
+        console.log(response);
+        let list =  await response.json();
+        for ( let s in list)
+            console.log(s.name);
+        return list;
+    }
+
     async findItem(prdId){
-        let url = `${baseUrl}/api/cart/${prdId}`;
+        let url = `${baseUrl}/api/stock/${prdId}`;
 
         let response = await this.findPromise(url);
 
@@ -31,7 +42,7 @@ export default class CartRepository{
     }
 
     async count(){
-        let url = `${baseUrl}/api/cart/c`;
+        let url = `${baseUrl}/api/stock/c`;
 
         let response = await this.findPromise(url);
 
@@ -49,23 +60,16 @@ export default class CartRepository{
 
 
     async add(prdId){
-        let url = `${baseUrl}/api/cart`;
+        let url = `${baseUrl}/api/stock`;
         let method = 'POST';
         let response = await this.findPromise(url,method, prdId); // Controller에서 Long 타입으로 받기 때문에 stringify() 하면 안됨
         return await response.json();
     }
 
-    async updateQty(productId, quantity= null){
-        let url = `${baseUrl}/api/cart/u`;
-        let method = 'POST';
-        let data = {productId, quantity};
-        let response = await this.findPromise(url,method, JSON.stringify(data));
 
-        return await response.json();
-    }
 
     async delete(data){
-        let url = `${baseUrl}/api/cart`;
+        let url = `${baseUrl}/api/stock`;
         let method = 'DELETE';
         let response = await this.findPromise(url,method,JSON.stringify(data));
         return await response.json();

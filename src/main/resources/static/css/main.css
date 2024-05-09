@@ -26,3 +26,8 @@ div:has(.preview.invalid)>:first-child::after{
 
 }
 
+/*테이블 내용 마우스 커서 변경*/
+table > tbody th:hover,
+table > tbody td:hover {
+    cursor: pointer;
+}
