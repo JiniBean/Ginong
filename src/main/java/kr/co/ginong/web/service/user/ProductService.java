@@ -10,9 +10,13 @@ import java.util.List;
 public interface ProductService {
     ProductView get(Long productId);
 
-    List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType);
+    List<ProductView> getBestProductList();
 
-    int count(Long categoryId, String query);
+    List<ProductView> getSaleProductList();
+
+    List<ProductView> getPickProductList();
+
+    List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType);
 
     List<ProductView> getSeasonOutList();
 
@@ -22,5 +26,6 @@ public interface ProductService {
 
     List<ProductView> getCommingSoonList(Integer page, Long categoryId, String query, Integer sortType);
 
+    int count(Long categoryId, String query);
 
 }

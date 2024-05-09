@@ -22,6 +22,7 @@ public class Product {
     private String  exp;
     private String  desc;
     private boolean state;
+    private int     discountRate;
 
     private Long    categoryId;
     private Long    storageTypeId;

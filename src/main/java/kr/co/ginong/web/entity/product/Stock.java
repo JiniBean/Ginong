@@ -21,5 +21,7 @@ public class Stock {
     private String 	desc;
     private Long	memberId;
     private Long	productId;
+    private Long	categoryId;
+
 
 }

@@ -14,38 +14,40 @@ public interface ProductRepository {
     ProductView findById(Long productId);
 
     List<ProductView> findAll(int offset, int size);
-    List<ProductView> findAll(Long categoryId
-                            , String query
-                            , int offset
-                            , int size
-                            , Integer sortType);
+
+    List<ProductView> findAll(Long categoryId, String query, int offset, int size, Integer sortType);
 
     List<ProductView> findAllSeasonOut();
-    List<ProductView> findAllSeasonOut(   int offset, int size);
-    List<ProductView> findAllSeasonOut(   Long categoryId
-                                        , String query
-                                        , int offset
-                                        , int size
-                                        , Integer sortType);
+
+    List<ProductView> findAllSeasonOut(int offset, int size);
+
+    List<ProductView> findAllSeasonOut(Long categoryId, String query, int offset, int size, Integer sortType);
 
     List<ProductView> findAllCommingSoon();
-    List<ProductView> findAllCommingSoon( int offset, int size);
-    List<ProductView> findAllCommingSoon( Long categoryId
-                                        , String query
-                                        , int offset
-                                        , int size
-                                        , Integer sortType);
+
+    List<ProductView> findAllCommingSoon(int offset, int size);
+
+    List<ProductView> findAllCommingSoon(Long categoryId, String query, int offset, int size, Integer sortType);
+
+    List<ProductView> findAllBestProduct();
+
+    List<ProductView> findAllSaleProduct();
+
+    List<ProductView> findAllPickProduct();
 
     int count(Long categoryId, String query);
 
 
     void save(Product product);
+
     void saveStock(Stock stock);
+
     void update(Product product);
 
     void updateState(List<Long> ids);
 
     void delete(long id);
+
 
 
 }
