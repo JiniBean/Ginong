@@ -19,10 +19,11 @@ public class StockController {
     StockService service;
 
     @GetMapping
-    public List<StockView> list(@RequestParam(name = "a") Boolean amount,
-                                @RequestParam(name = "c") Boolean current){
+    public List<StockView> list(@RequestParam(name = "a",required = false) Boolean amount,
+                                @RequestParam(name = "c" ,required = false) Boolean current){
 
         List<StockView> list = service.getList(amount,current);
+
        return list;
     }
 

@@ -22,7 +22,7 @@
     </section>
 
     <div class="pos:relative d:flex gap:3">
-        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up':amount, 'icon:arrow_down':!amount}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1 color:main-6 icon-color:main-6">재고순</a>
+        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up':!amount, 'icon:arrow_down':amount}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1 color:main-6 icon-color:main-6">재고순</a>
         <span class="bar"></span>
         <a @click.prevent="currentHandler" href="" :class="{'color:main-6' : current }">최신순</a>
     </div>
@@ -37,14 +37,23 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="s:${list}" v-for="s in list">
-            <th scope="row" class="w:auto" th:text="${s.name}" :text="s.name">텃밭 흙당근</th>
-            <td style="width: 100px" class="txt-al:center" th:text="${s.currentAmount}" :text="s.currentAmount">300</td>
-            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px" th:text="${s.quantity + s.quantityCategoryName}" :text="s.quantity + s.quantityCategoryName" >3~4개</td>
-            <td class="d:none md:d:table-cell txt-al:center w:3" th:text="${s.weight + s.weightCategoryName}" :text="s.weight + s.weightCategoryName">400g 내외</td>
+        <tr v-for="s in list">
+            <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
+            <td style="width: 100px" class="txt-al:center" v-text="s.currentAmount">300</td>
+            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px"  v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
+            <td class="d:none md:d:table-cell txt-al:center w:3"  v-text="s.weight + s.weightCategoryName">400g 내외</td>
         </tr>
         </tbody>
     </table>
 </main>
 </body>
 </html>
+
+
+
+<!--        <tr th:each="s:${list}" v-for="s in list">-->
+<!--            <th scope="row" class="w:auto" th:text="${s.name}" :text="s.name">텃밭 흙당근</th>-->
+<!--            <td style="width: 100px" class="txt-al:center" th:text="${s.currentAmount}" :text="s.currentAmount">300</td>-->
+<!--            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px" th:text="${s.quantity + s.quantityCategoryName}" :text="s.quantity + s.quantityCategoryName" >3~4개</td>-->
+<!--            <td class="d:none md:d:table-cell txt-al:center w:3" th:text="${s.weight + s.weightCategoryName}" :text="s.weight + s.weightCategoryName">400g 내외</td>-->
+<!--        </tr>-->
