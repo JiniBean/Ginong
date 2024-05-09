@@ -42,10 +42,9 @@ createApp({
 
         const dateIdx = info.orderDate.search("T");
         const subDate = info.orderDate.substring(0, dateIdx);
-        console.log(subDate);
         this.info.orderDate = subDate;
 
-        response = await fetch("/user/api/order/status");
+        response = await fetch("/user/api/order/delivery-status");
         let state = await response.json();
         this.state = state;
     },

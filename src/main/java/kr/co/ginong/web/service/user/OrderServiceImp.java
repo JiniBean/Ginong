@@ -58,6 +58,11 @@ public class OrderServiceImp implements OrderService {
         return list;
     }
 
+    public List<OrderItemView> getListOfOrderId(List<Long> orderIds) {
+        List<OrderItemView> list = itemViewRepository.findByOrderIds(orderIds);
+        return list;
+    }
+
 
     @Override
     public List<Order> getCanceledListByMemberId(Long memberId) {

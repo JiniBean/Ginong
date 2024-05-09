@@ -1,12 +1,13 @@
 const { createApp } = Vue
 
+
 createApp({
     data() {
         return {
             list: [],
-            itemList: [],
+            itemsMap: {},
             //info: [],
-            state: [],
+            state: {},
             tabIndex: 0,
         }
     },
@@ -33,6 +34,7 @@ createApp({
             location.href = `/order/detail?orderId=${orderId}`;
         },
 
+        // 구매확정하기
         async confirmOrder(order) {
             console.log(order);
             let orderId = order.id;
@@ -58,18 +60,21 @@ createApp({
                 item.date = subDate;
             }
 
-            let orderId = list && list[0] && list[0].id;
-            response = await fetch(`/user/api/order/${orderId}/items`)
-            this.itemList = await response.json();
+            const ids = this.list.map(order => order.id);
+            response = await fetch(`/user/api/order/items?ids=${ids}`);
+            let itemsMap = await response.json();
+            this.itemsMap = itemsMap;
 
-            // 페이지에 있는 order id들을 전부 가져옴
-            // const ids = this.list.map(order => order.id);
-            // console.log(ids);
-            // response = await fetch(`/user/api/order/items?ids=${ids}`);
-            // let itemsMap = await response.json();
-            // this.itemList = itemList;
-            // console.log(itemList);
+            // let valuesArray = Object.values(itemsMap);
+            //
+            // this.calcTotalPrice(valuesArray)
+            //     .then(total => {
+            //         const totalPriceElement = document.querySelector('.total-price');
+            //         totalPriceElement.textContent = `${total}`;
+            //     })
+
         },
+
         async loadCancelList() {
             let memberId = 40;
             let response = await fetch(`/user/api/order/${memberId}/canceledList`);
@@ -82,24 +87,44 @@ createApp({
                 item.date = subDate;
             }
 
-            let orderId = list && list[0] && list[0].id;
-            response = await fetch(`/user/api/order/${orderId}/items`)
-            this.itemList = await response.json();
+            const ids = this.list.map(order => order.id);
+            response = await fetch(`/user/api/order/items?ids=${ids}`);
+            let itemsMap = await response.json();
+            this.itemsMap = itemsMap;
 
-            //TODO: 하나의 주문아이디에 딸린 여러개의 아이템을 어떻게 각각 받아오는가?
-            // const ids = this.list.map(order => order.id);
-            // console.log(ids);
-            // response = await fetch(`/user/api/order/items?ids=${ids}`);
-            // let itemsMap = await response.json();
-            // this.itemList = itemList;
+        },
+
+        calcTotalPrice(list) {
+            if (!list)
+                return 0;
+
+            let totalPrice = 0;
+
+            for (item of list)
+                totalPrice += item.price;
+
+            if (totalPrice < 30000)
+                totalPrice += 5000;
+
+            return Number(totalPrice).toLocaleString();
         }
     },
-    created(){
+    async created(){
         this.loadList();
 
-        // response = await fetch("/user/api/order/detail/status");
-        // let state = await response.json();
-        // this.state = state;
+        response = await fetch("/user/api/order/status");
+        let state = await response.json();
+
+        // list를 object(map)으로 변경한다. {id, name}
+        // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+        let obj = {};
+
+        state.forEach((o, i) => {
+            console.log(i, '++++', o);
+            obj[o.id] = o.name;
+        });
+
+        this.state = obj;
     },
 }).mount('main');
 
