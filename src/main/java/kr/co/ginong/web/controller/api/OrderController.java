@@ -20,6 +20,8 @@ import kr.co.ginong.web.service.user.MemberService;
 import kr.co.ginong.web.service.user.OrderCategoryService;
 import kr.co.ginong.web.service.user.OrderService;
 
+import static java.util.stream.Collectors.groupingBy;
+
 @RestController("apiOrderController")
 @RequestMapping("user/api/order")
 public class OrderController {
@@ -51,7 +53,41 @@ public class OrderController {
     }
 
 
-    //TODO: 주문ID별 주문목록 받아오기
+    @GetMapping("items")
+    public Map<Long, List<OrderItemView>> getItemsOfOrderId(@RequestParam List<Long> ids) {
+
+        List<OrderItemView> itemList = service.getListOfOrderId(ids);
+
+        Map<Long, List<OrderItemView>> result = new HashMap<>();
+        for(OrderItemView item : itemList) {
+            List<OrderItemView> orderItems = result.get(item.getOrderId());
+            if (orderItems == null) {
+                orderItems = new ArrayList<>();
+                result.put(item.getOrderId(), orderItems);
+            }
+            orderItems.add(item);
+        }
+/*
+        List<OrderItemView> itemList = ...;
+        Map<Long, List<OrderItemView>> result = itemList.stream().collect(Collectors.groupingBy(OrderItemView::getOrderId));
+
+        Map<Long, List<OrderItemView>> result = new HashMap<>();
+        for (OrderItemView item : itemList) {
+            List<OrderItemView> orderItems = result.get(item.getOrderId());
+            if (orderItems == null) {
+                orderItems = new ArrayList<>();
+                result.put(item.getOrderId(), orderItems);
+            }
+        // List<OrderItemView> orderItems = result.computeIfAbsent(item.getOrderId(), id -> new ArrayList<>());
+        // orderItems.add(item);
+        }
+
+ */
+        System.out.println(itemList);
+        return result;
+    }
+
+
     @GetMapping("{orderId}/items")
     public List<OrderItemView> getItems(@PathVariable Long orderId) {
 
@@ -67,13 +103,13 @@ public class OrderController {
                 orderItems = new ArrayList<>();
                 result.put(item.getOrderId(), orderItems);
             }
-        // List<OrderItemView> orderItems = result.computeIfAbsent(item.getOrderId(), id -> new ArrayList<>());
-        // orderItems.add(item);
+            // List<OrderItemView> orderItems = result.computeIfAbsent(item.getOrderId(), id -> new ArrayList<>());
+            // orderItems.add(item);
         }
         System.out.println(itemList);
         return itemList;
     }
-    
+
     @GetMapping("{orderId}/location")
     public LocationHistory getLocation(@PathVariable Long orderId) {
 
@@ -97,6 +133,12 @@ public class OrderController {
 
     @GetMapping("status")
     public List<OrderCategory> getStatus() {
+        List<OrderCategory> categoryList = categoryService.getList();
+
+        return categoryList;
+    }
+    @GetMapping("delivery-status")
+    public List<OrderCategory> getDeliveryStatus() {
         List<OrderCategory> categoryList = categoryService.getList();
         categoryList = categoryList.subList(0, 4);
         
