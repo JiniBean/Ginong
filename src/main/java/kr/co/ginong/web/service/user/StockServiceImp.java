@@ -15,12 +15,12 @@ public class StockServiceImp implements StockService{
     StockRepository repository;
 
     @Override
-    public StockView get(Long productId) {
+    public List<StockView> get(Long productId) {
         return repository.findById(productId);
     }
 
     @Override
-    public List<StockView> getList() {
-        return repository.findAll();
+    public List<StockView> getList(Boolean amount, Boolean current) {
+        return repository.findAll(amount, current);
     }
 }

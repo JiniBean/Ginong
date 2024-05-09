@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface StockRepository {
 
-    StockView findById(Long productId);
-    List<StockView> findAll();
+    List<StockView> findById(Long productId);
+    List<StockView> findAll(Boolean amount, Boolean current);
 
 }

@@ -1,4 +1,4 @@
-package kr.co.ginong.web.controller.user.api;
+package kr.co.ginong.web.controller.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;

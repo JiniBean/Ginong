@@ -11,10 +11,12 @@
 	</select>
 
 	<select id="findAll" resultType="StockView">
-		select
-		 *
-		from STOCK_VIEW
+		SELECT MAX(STOCK_ID) STOCK_ID, a.PRODUCT_ID ,a.NAME ,a.CURRENT_AMOUNT , a.QUANTITY, a.QUANTITY_CATEGORY_NAME ,a.WEIGHT , a.WEIGHT_CATEGORY_NAME ,a.PLMA , a.SYMBOL , a.AMOUNT , a.IO_DATE , a.MADE_DATE ,MAX(REG_DATE) AS reg_date, a.`DESC` , a.STOCK_CATEGORY_ID , a.STOCK_CATEGORY_NAME
+		FROM STOCK_VIEW a
 		group by PRODUCT_ID
+		order by current_amount
+		<if test="amount">desc</if>
+		<if test="current">, reg_date desc</if>
 	</select>
 
 
