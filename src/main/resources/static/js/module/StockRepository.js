@@ -14,14 +14,19 @@ export default class StockRepository{
 
     }
 
-    async findAll(amount, current){
-        let url = `${baseUrl}/api/stock?a=${amount}&c=${current}`;
+    async findAll(query,amount, current){
+        let url = `${baseUrl}/api/stock?`;
+
+        if(query)
+            url += `q=${query}&`
+
+        if(amount !=null)
+            url += `a=${amount}`
+        else
+            url += `c=${current}`
 
         let response = await this.findPromise(url);
-        console.log(response);
         let list =  await response.json();
-        for ( let s in list)
-            console.log(s.name);
         return list;
     }
 

@@ -16,13 +16,13 @@
     <section class="d:flex jc:center w:10p">
         <h1 class="d:none">검색폼</h1>
         <form class="pos:relative w:10p md:w:8 h:2">
-            <input type="text" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요">
-            <button class="pos:absolute m-right:1 icon icon:magnifying_glass icon-size:3 icon-color:base-5" style="top:2px; right:4px;">검색 버튼</button>
+            <input type="text" @keyup.enter="getList" v-model="query" class="n-textbox border-color:main-6 bd-radius:4 pr:1 pl:4" placeholder="검색어를 입력해 주세요">
+            <button @click.prevent="getList" class="pos:absolute m-right:1 icon cursor:pointer icon:magnifying_glass icon-size:4 icon-color:base-5" style="top:2px; right:4px;">검색 버튼</button>
         </form>
     </section>
 
     <div class="pos:relative d:flex gap:3">
-        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up':!amount, 'icon:arrow_down':amount}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1 color:main-6 icon-color:main-6">재고순</a>
+        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up' :!amount, 'icon:arrow_down':amount , 'color:main-6 icon-color:main-6':amount!=null}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1">재고순</a>
         <span class="bar"></span>
         <a @click.prevent="currentHandler" href="" :class="{'color:main-6' : current }">최신순</a>
     </div>
@@ -37,23 +37,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="s in list">
+        <tr v-for="s in list" @click="move(s.productId)">
             <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
-            <td style="width: 100px" class="txt-al:center" v-text="s.currentAmount">300</td>
-            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px"  v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
-            <td class="d:none md:d:table-cell txt-al:center w:3"  v-text="s.weight + s.weightCategoryName">400g 내외</td>
+            <td class="txt-al:center" style="width: 100px" v-text="s.currentAmount">300</td>
+            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px" v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
+            <td class="d:none md:d:table-cell txt-al:center w:3" v-text="s.weight + s.weightCategoryName">400g 내외</td>
         </tr>
         </tbody>
     </table>
 </main>
 </body>
 </html>
-
-
-
-<!--        <tr th:each="s:${list}" v-for="s in list">-->
-<!--            <th scope="row" class="w:auto" th:text="${s.name}" :text="s.name">텃밭 흙당근</th>-->
-<!--            <td style="width: 100px" class="txt-al:center" th:text="${s.currentAmount}" :text="s.currentAmount">300</td>-->
-<!--            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px" th:text="${s.quantity + s.quantityCategoryName}" :text="s.quantity + s.quantityCategoryName" >3~4개</td>-->
-<!--            <td class="d:none md:d:table-cell txt-al:center w:3" th:text="${s.weight + s.weightCategoryName}" :text="s.weight + s.weightCategoryName">400g 내외</td>-->
-<!--        </tr>-->

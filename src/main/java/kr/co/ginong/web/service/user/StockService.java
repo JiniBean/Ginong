@@ -8,6 +8,6 @@ import java.util.List;
 public interface StockService {
 
     List<StockView> get(Long productId);
-    List<StockView> getList(Boolean amount, Boolean current);
+    List<StockView> getList(String query,Boolean amount, Boolean current);
 
 }
