@@ -45,21 +45,21 @@ public class WebSecurityConfig{
 		.formLogin((form)->form
 				.loginPage("/signin")
 				.permitAll()
-				.successHandler(webSigninSuccessHandler())
-				.failureHandler(new WebSigninFailureHandler())
+				.successHandler(webSigninSuccessHandler())					//로그인 성공 시 처리 로직
+				.failureHandler(new WebSigninFailureHandler())				//로그인 실패 시 처리 로직
 				)
 		.logout((logout)->logout
 				.logoutUrl("/logout")
-				.logoutSuccessUrl("/product/list")
+				.logoutSuccessUrl("/index")									//로그아웃 성공시 보낼 url
 				.permitAll());
 
 		return http.build();
 	}
 	@Bean
 	public WebSigninSuccessHandler webSigninSuccessHandler(){
-		WebSigninSuccessHandler handler = new WebSigninSuccessHandler();
+		WebSigninSuccessHandler handler = new WebSigninSuccessHandler();		//로그인 성공 시 수행할 WebSigninSuccessHandler 객체 생성
 
-		handler.setAlwaysUseDefaultTargetUrl(true);
+		handler.setAlwaysUseDefaultTargetUrl(true);								//WebSigninSuccessHandler의 determineTargetUrl 메소드에 설정한 주소로 항상 리다이렉트
 		return handler;
 	}
 }

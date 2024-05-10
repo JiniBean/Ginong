@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 @Component
-public class WebSigninFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class WebSigninFailureHandler extends SimpleUrlAuthenticationFailureHandler {                                //로그인 실패 헨들러
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
             throws IOException, ServletException {
@@ -36,7 +36,7 @@ public class WebSigninFailureHandler extends SimpleUrlAuthenticationFailureHandl
 
         errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); /* 한글 인코딩 깨진 문제 방지 */
         setDefaultFailureUrl("/signin?error=true&exception="+errorMessage);
-        super.onAuthenticationFailure(request, response, exception);
+        super.onAuthenticationFailure(request, response, exception);            //onAuthenticationFailure 메소드의 나머지 기능을 수행
     }
 
 
