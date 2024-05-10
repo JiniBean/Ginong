@@ -9,6 +9,6 @@ import java.util.List;
 public interface StockRepository {
 
     List<StockView> findById(Long productId);
-    List<StockView> findAll(Boolean amount, Boolean current);
+    List<StockView> findAll(String query,Boolean amount, Boolean current);
 
 }

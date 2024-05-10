@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController("apiCartController")
-@RequestMapping("user/api/cart")
+@RequestMapping("api/cart")
 public class CartController {
 
     @Autowired

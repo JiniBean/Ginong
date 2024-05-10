@@ -209,12 +209,10 @@ window.addEventListener("load", function () {
         let alignNumber = alignNumberBox.value;
 
         let url = `${baseUrl}/user/api/product?p=${p}&c=${c}&r=${alignNumber}`;
-        console.log(url, alignNumber);
 
         request(url, function (list) {
             bind(list);
             updatePagerLink(alignNumber);
-            console.log(`${alignNumber}개씩 출력`);
         });
     }
 
@@ -235,7 +233,6 @@ window.addEventListener("load", function () {
             let params = new URLSearchParams(parts[1] || '');
             params.set('r', size);
             a.href = `${parts[0]}?${params.toString()}`;
-            console.log(a.href, a);
         }
     }
 

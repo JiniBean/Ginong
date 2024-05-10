@@ -10,4 +10,5 @@ import kr.co.ginong.web.entity.order.OrderItemView;
 public interface OrderItemViewRepository {
     List<OrderItemView> findByOrderId(Long memberId);
 
+    List<OrderItemView> findByOrderIds(List<Long> orderIds);
 }

@@ -6,35 +6,28 @@ createApp({
         return{
             current:false,
             amount:false,
-            list:[]
+            list:[],
+            query: ""
         }
     },
     methods:{
         currentHandler(){
-            this.current = this.current ? false:true;
+            this.current = !this.current;
             this.amount = null;
             this.getList();
 
         },
         amountHandler(){
-            this.amount = this.amount ? false:true;
+            this.amount = !this.amount;
             this.current = false;
             this.getList();
         },
+        move(id){
+          console.log(id);
+        },
         async getList(){
-            // let repository = new Repository;
-            // let list = await repository.findAll(this.amount, this.current);
-
-            let url = `${baseUrl}/api/stock?`;
-            if(this.amount)
-                url += `a=${this.amount}`
-            else
-                url += `c=${this.current}`
-
-            console.log(url);
-            let response = await fetch(url, null);
-            let list =  await response.json();
-            this.list = list;
+            let repository = new Repository;
+            this.list = await repository.findAll(this.query, this.amount, this.current);
         }
     },
     mounted(){

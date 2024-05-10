@@ -17,12 +17,8 @@ public class StockController {
     @Autowired
     StockService service;
     @GetMapping("list")
-    public String list(Model model){
-        Boolean amount = false;
-        Boolean current = false;
-        List<StockView> list = service.getList(amount, current);
+    public String list(){
 
-        model.addAttribute( "list",list);
         return "admin/stock/list";
     }
 

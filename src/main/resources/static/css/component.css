@@ -124,3 +124,7 @@
 .n-textbox {
     --textbox-border-color-focus: var(--color-main-6);
 }
+
+.icon\:magnifying_glass:hover::before{
+    background-color:var(--color-main-6) ;
+}

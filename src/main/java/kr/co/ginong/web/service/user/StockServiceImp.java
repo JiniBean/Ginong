@@ -20,7 +20,7 @@ public class StockServiceImp implements StockService{
     }
 
     @Override
-    public List<StockView> getList(Boolean amount, Boolean current) {
-        return repository.findAll(amount, current);
+    public List<StockView> getList(String query,Boolean amount, Boolean current) {
+        return repository.findAll(query,amount, current);
     }
 }
