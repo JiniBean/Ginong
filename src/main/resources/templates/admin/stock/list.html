@@ -31,17 +31,17 @@
         <thead class="bg-color:base-3 txt-al:center">
         <tr>
             <th scope="col" class="w:auto txt-al:center">상품명</th>
-            <th scope="col" class="txt-al:center" style="width: 100px">재고</th>
-            <th scope="col" class="d:none md:d:table-cell txt-al:center" style="width: 100px">단위</th>
-            <th scope="col" class="d:none md:d:table-cell w:3 txt-al:center">중량</th>
+            <th scope="col" class="txt-al:center w:3">재고</th>
+            <th scope="col" class="d:none md:d:table-cell txt-al:center w:3">단위</th>
+            <th scope="col" class="d:none md:d:table-cell txt-al:center w:4">중량</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="s in list" @click="move(s.productId)">
             <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
-            <td class="txt-al:center" style="width: 100px" v-text="s.currentAmount">300</td>
-            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px" v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
-            <td class="d:none md:d:table-cell txt-al:center w:3" v-text="s.weight + s.weightCategoryName">400g 내외</td>
+            <td class="txt-al:center w:3" v-text="s.currentAmount">300</td>
+            <td class="d:none md:d:table-cell txt-al:center w:3" v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
+            <td class="d:none md:d:table-cell txt-al:center w:4" v-text="s.weight + s.weightCategoryName">400g 내외</td>
         </tr>
         </tbody>
     </table>

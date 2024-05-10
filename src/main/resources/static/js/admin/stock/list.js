@@ -23,7 +23,8 @@ createApp({
             this.getList();
         },
         move(id){
-          console.log(id);
+            //클릭한 상품의 상품 id를 인자로 받음
+            location.href = `detail?p=${id}`;
         },
         async getList(){
             let repository = new Repository;

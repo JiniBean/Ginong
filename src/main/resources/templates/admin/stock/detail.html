@@ -11,38 +11,37 @@
     <script type="module" src="/js/admin/stock/list.js" defer></script>
 </head>
 <body>
-<main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:10 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
 
-    <section class="d:flex jc:center w:10p">
-        <h1 class="d:none">검색폼</h1>
-        <form class="pos:relative w:10p md:w:8 h:2">
-            <input type="text" @keyup.enter="getList" v-model="query" class="n-textbox border-color:main-6 bd-radius:4 pr:1 pl:4" placeholder="검색어를 입력해 주세요">
-            <button @click.prevent="getList" class="pos:absolute m-right:1 icon cursor:pointer icon:magnifying_glass icon-size:4 icon-color:base-5" style="top:2px; right:4px;">검색 버튼</button>
-        </form>
-    </section>
-
-    <div class="pos:relative d:flex gap:3">
-        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up' :!amount, 'icon:arrow_down':amount , 'color:main-6 icon-color:main-6':amount!=null}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1">재고순</a>
-        <span class="bar"></span>
-        <a @click.prevent="currentHandler" href="" :class="{'color:main-6' : current }">최신순</a>
+    <h1 th:text="${list[0].name +' '+list[0].quantity + list[0].quantityCategoryName+'('+list[0].weight+list[0].weightCategoryName+')' }" class="txt-al:center fs:3 md:fs:4 fw:3">텃밭 흙 당근</h1>
+    <div class="d:flex jc:space-between ai:center">
+        <div class="fw:3">현재 재고 : <span th:text="${list[0].currentAmount}">100봉</span> </div>
+        <div class="n-btn"><a href="reg">등록</a></div>
     </div>
 
     <table class="n-table n-table-hover n-table-border:bottom txt-al:center" >
         <thead class="bg-color:base-3 txt-al:center">
         <tr>
-            <th scope="col" class="w:auto txt-al:center">상품명</th>
-            <th scope="col" class="txt-al:center" style="width: 100px">재고</th>
-            <th scope="col" class="d:none md:d:table-cell txt-al:center" style="width: 100px">단위</th>
-            <th scope="col" class="d:none md:d:table-cell w:3 txt-al:center">중량</th>
+            <th scope="col" class="txt-al:center md:w:4" style="width: 100px">입고</th>
+            <th scope="col" class="txt-al:center md:w:4" style="width: 100px">출고</th>
+            <th scope="col" class="d:none md:d:table-cell txt-al:center w:4">사유</th>
+            <th scope="col" class="txt-al:center" style="width: 160px">입출고일</th>
+            <th scope="col" class="d:none md:d:table-cell txt-al:center" style="width: 160px">수확일</th>
+            <th scope="col" class="d:none md:d:table-cell w:auto txt-al:center">비고</th>
+            <th scope="col" class="d:none md:d:table-cell txt-al:center" style="width: 160px">등록일</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="s in list">
-            <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
-            <td style="width: 100px" class="txt-al:center" v-text="s.currentAmount">300</td>
-            <td class="d:none md:d:table-cell txt-al:center" style="width: 100px"  v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
-            <td class="d:none md:d:table-cell txt-al:center w:3"  v-text="s.weight + s.weightCategoryName">400g 내외</td>
+        <tr th:each="s : ${list}">
+            <th th:text="${s.plma==1? s.amount:''}" scope="row" class="txt-al:center md:w:4" style="width: 100px">300</th>
+            <td th:text="${s.plma==-1? s.amount:''}" class="txt-al:center md:w:4" style="width: 100px"></td>
+            <td th:text="${s.stockCategoryName}" class="d:none md:d:table-cell txt-al:center w:4">입고</td>
+            <td th:text="${#dates.format(s.ioDate, 'yy-MM-dd')}" class="txt-al:center" style="width: 160px">24-05-04</td>
+            <td th:text="${#dates.format(s.madeDate, 'yy-MM-dd')}" class="d:none md:d:table-cell txt-al:center" style="width: 160px">24-05-04</td>
+            <td th:text="${s.desc}" class="d:none md:d:table-cell w:auto">비고</td>
+            <td th:text="${#dates.format(s.regDate, 'yy-MM-dd')}" class="d:none md:d:table-cell txt-al:center" style="width: 160px">24-05-04</td>
         </tr>
+
         </tbody>
     </table>
 </main>

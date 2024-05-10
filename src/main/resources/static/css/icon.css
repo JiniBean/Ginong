@@ -80,3 +80,8 @@
     -webkit-mask-image: url("../icon/eyeSlash.svg");
     mask-image: url("../icon/eyeSlash.svg");
 }
+.icon\:calendar::before,
+.icon\:calendar::after{
+    -webkit-mask-image: url("../icon/calendar.svg");
+    mask-image: url("../icon/calendar.svg");
+}

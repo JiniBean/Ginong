@@ -119,12 +119,15 @@
     label:has(.n-toggle) {
         font-size: var(--font-size-3);
     }
+    label:has(+.n-textbox) {
+        font-size: var(--font-size-3);
+    }
 }
 
 .n-textbox {
-    --textbox-border-color-focus: var(--color-main-6);
+--textbox-border-color-focus: var(--color-main-6);
 }
 
 .icon\:magnifying_glass:hover::before{
-    background-color:var(--color-main-6) ;
+background-color:var(--color-main-6) ;
 }
