@@ -50,6 +50,7 @@ public class MemberController {
     public String detail(@RequestParam(name = "id", required = false) Long memberId, Model model){
 
         MemberView member = service.get(memberId);
+
         model.addAttribute("member", member);
 
         return "admin/member/detail";

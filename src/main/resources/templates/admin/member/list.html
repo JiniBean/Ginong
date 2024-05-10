@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/admin/member/list.js"></script>
     <title>Document</title>
 </head>
-
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
 
@@ -17,28 +17,13 @@
         <form class="pos:relative w:10p md:w:8 h:2" method="get">
             <fieldset>
                 <legend class="d:none">제목검색</legend>
-                <input type="text" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요" name="q">
+                <input type="text" @keyup.enter="getList" class="n-textbox border-color:main-6 bd-radius:4" placeholder="검색어를 입력해 주세요" name="q">
                 <button class="pos:absolute m-right:1 icon icon:magnifying_glass icon-size:3 icon-color:base-5" style="top:2px; right:4px;"></button>
             </fieldset>
         </form>
     </section>
 
-<!--
-    <section class="d:flex fl-dir:column gap:8 md:gap:13 w:10p">
-        <h1 class="d:none">상품선택목록</h1>
-        <div class="d:flex jc:space-between ai:center w:10p">
-            <div class="pos:relative d:flex gap:3">
-                <a href="">등록순</a>
-                <span class="bar"></span>
-                <a href="">최신순</a>
-            </div>
-            <div>
-                <button class="n-btn fw:3">등록</button>
-            </div>
-        </div>
-    </section>
--->
-    <table class="n-table n-table-hover n-table-border:bottom txt-al:center" >
+    <table class="n-table n-table-hover n-table-border:bottom txt-al:center" id="memberTable">
         <thead class="bg-color:base-3">
         <tr>
             <th scope="col" class="w:auto txt-al:center">이름</th>
@@ -49,19 +34,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="m:${members}">
+        <tr class="table-row" th:each="m: ${members}" th:data-id="${m.id}">
+<!--        <tr class="table-row" th:each="m: ${members}" th:attr="data-id=${m.id}">-->
             <th scope="row" class="w:auto txt-al:center" th:text="${m.name}">박경인</th>
-            <td style="width: 100px" class="w:auto txt-al:center" th:text="${m.userName}">ilovejapan</td>
+            <td style="width: 100px" class="w:auto txt-al:center" th:text="${m.userName}">kingofnewlecure</td>
             <td style="width: 100px" class="w:auto txt-al:center" th:text="${#dates.format(m.birthDate, 'yy-MM-dd')}">98-08-15</td>
             <td style="width: 100px" class="w:auto txt-al:center" th:text="${m.phone}">0815</td>
             <td class="d:none md:d:table-cell w:3 txt-al:center" th:text="${m.state == 0 ? '비활성화' : '활성화'}"></td>
-
         </tr>
         </tbody>
     </table>
 
-
-
 </main>
+
+<script src="/js/admin/member/list.js"></script>
+
 </body>
 </html>
