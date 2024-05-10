@@ -1,5 +1,8 @@
 package kr.co.ginong.web.config.security;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.ginong.web.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -55,7 +58,7 @@ public class WebSecurityConfig{
 	@Bean
 	public WebSigninSuccessHandler webSigninSuccessHandler(){
 		WebSigninSuccessHandler handler = new WebSigninSuccessHandler();
-		handler.setDefaultTargetUrl("/product/list");
+
 		handler.setAlwaysUseDefaultTargetUrl(true);
 		return handler;
 	}

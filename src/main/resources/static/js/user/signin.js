@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded",(e)=>{
     const errorMessage = password.querySelector('.error-message');
 
     if (error) {
-        errorMessage.textContent = "아이디 혹은 비밀번호가 옳바르지 않습니다.";
+        errorMessage.textContent = "아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
     }
 
     //==========아이디 저장 시 username 을 username inputbox에 출력===========
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded",(e)=>{
     }
 });
 
-// ======================cookie 함수======================
+// ======================아이디 저장 cookie 함수======================
 function getCookie(name){                                       //쿠키이름을 매개변수로 넘겨받음
     let value ="; " + document.cookie;
     let parts = value.split("; " + name + "=");
