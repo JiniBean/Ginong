@@ -64,4 +64,10 @@
         where USER_NAME=#{username}
     </select>
 
+    <insert id="insertAuthorityByUserId" parameterType="MemberRole">
+        INSERT INTO MEMBER_ROLE
+        (MEMBER_ID, ROLE_NAME)
+        VALUES(#{memberId}, #{roleName})
+    </insert>
+
 </mapper>

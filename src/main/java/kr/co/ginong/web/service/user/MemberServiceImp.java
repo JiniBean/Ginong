@@ -1,6 +1,7 @@
 package kr.co.ginong.web.service.user;
 
 import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.member.MemberRole;
 import kr.co.ginong.web.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,11 @@ public class MemberServiceImp implements MemberService{
         Member validId = repository.searchByRealNameAndMail(email, name);
 
         return validId;
+    }
+
+    @Override
+    public void grantAuthority(MemberRole memberRole) {
+        repository.insertAuthorityByUserId(memberRole);
     }
 
 

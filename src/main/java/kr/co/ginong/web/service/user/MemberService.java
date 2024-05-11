@@ -1,6 +1,7 @@
 package kr.co.ginong.web.service.user;
 
 import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.member.MemberRole;
 
 public interface MemberService {
 
@@ -17,4 +18,5 @@ public interface MemberService {
 
     Member searchId(String email, String name);
 
+    void grantAuthority(MemberRole memberRole);
 }

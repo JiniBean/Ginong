@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.member.MemberRole;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -111,9 +112,15 @@ public class MemberController {
 
             memberId = service.addMember(member);
 
+
             if (memberId == null)
                 return ResponseEntity.badRequest().body(false);
 
+            MemberRole memberRole = MemberRole.builder()
+                    .memberId(memberId)
+                    .roleName("ROLE_MEMBER")
+                    .build();
+            service.grantAuthority(memberRole);
 
 
         }
