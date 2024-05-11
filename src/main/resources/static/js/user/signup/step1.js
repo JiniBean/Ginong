@@ -1,4 +1,66 @@
-//step1
+//쿠키
+class Cookie{
+
+    constructor() {
+        this.map={};
+        this.initCookie();
+    }
+
+    initCookie() {
+        // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+        if (document.cookie) {
+            // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+            this.parseCookie();
+        }
+        else {
+            // 쿠키가 존재하지 않으면 Product : 빈 배열로 초기화
+            this.map["userInfo"] = [];
+        }
+
+    }
+
+    parseCookie(){
+        const cookieDecoded = decodeURIComponent(document.cookie);
+        const cookieTokens = cookieDecoded.split(";");
+
+        for (const c of cookieTokens) {
+            const tmp = c.split("=");
+            const key = tmp[0].trim();
+            const value = JSON.parse(tmp[1]);
+
+            this.map[key] = value;
+        }
+    }
+
+    get(name) {
+        return this.map[name];
+    }
+
+    save() {
+        const productList = this.map["userInfo"];
+        const encodedProducts = encodeURIComponent(JSON.stringify(productList));
+        document.cookie = `userInfo=${encodedProducts}; path=/signup;`;
+    }
+
+    remove(name) {
+        document.cookie = `${name}=; path=/signup;`;
+        delete this.map[name];
+    }
+
+    addItem(name, item) {
+        //this.map[product]가 undefined 인 경우, 빈 배열로 초기화
+        const existingItems = this.map[name] || [];
+        existingItems.push(item);
+        this.map[name] = existingItems;
+    }
+
+    size(){
+        let size = Object.keys(this.map).length;
+        return size;
+    }
+
+}
+
 
 // 전체약관동의 checked
 window.addEventListener("load", function(e){
@@ -7,8 +69,46 @@ window.addEventListener("load", function(e){
     let checkDivs = this.document.querySelectorAll(".check");
     //전체선택 check 영역 div
     let checkDiv = this.document.querySelector(".check");
+
     //전체선택 span
     let checkAll = checkDiv.querySelector(".check-all");
+
+    //필수선택영역
+    let chkRequired = this.document.querySelector(".check-required");
+    let iconList= chkRequired.querySelectorAll(".icon");
+
+    //선택영역
+    let chkOption = this.document.querySelector(".check-option");
+    let chk = chkOption.querySelector(".icon");
+
+
+    //step2에서 이전 버튼을 누른 경우 - 쿠키에 담은 step1값 꺼내 줌
+    // 만약 쿠키의 값이 있다면 이 함수 실행
+    let cookie = new Cookie();
+
+    if(document.cookie){
+
+        const agree = cookie.get("userInfo")[0].agree;
+
+        // 선택 + 전체약관동의 체크해줌
+        if(agree=="Y") {
+            chk.classList.replace("icon:checkCircle","icon:check_circle_fill");
+            chk.classList.replace("icon-color:base-6","icon-color:main-6");
+            chk.classList.add("checked");
+
+            checkAll.classList.replace("icon:checkCircle","icon:check_circle_fill");
+            checkAll.classList.replace("icon-color:base-6","icon-color:main-6");
+            checkAll.classList.add("checked");
+        }
+
+        //이전에서 왔다면 필수체크
+        for(let i=0; i<2; i++){
+            iconList[i].classList.replace("icon:checkCircle","icon:check_circle_fill");
+            iconList[i].classList.replace("icon-color:base-6","icon-color:main-6");
+            iconList[i].classList.add("checked");
+        }
+
+    }
 
     //checkDiv > icon을 클릭했을때
     checkAll.onclick = function (){
@@ -36,6 +136,7 @@ window.addEventListener("load", function(e){
     }
 
 });
+
 
 //체크 클릭 했을 때 활성화/비활성화
 window.addEventListener("load", function(e){
@@ -109,8 +210,6 @@ window.addEventListener("load", function(e){
 
         e.preventDefault();
 
-
-
         //필수동의 영역
         {
             let iconList= chkRequired.querySelectorAll(".icon");
@@ -125,84 +224,90 @@ window.addEventListener("load", function(e){
             }
         }
 
+        let chkOption = document.querySelector(".check-option");
+        let icon= chkOption.querySelector(".icon");
 
+        let isChecked = icon.classList.contains("checked");
 
-        //선택동의 영역
+        let agree = "N";
+
+        if(isChecked)
+            agree="Y";
+
+        let cookie = new Cookie();
+
         {
-            let chkOption = document.querySelector(".check-option");
-            let icon= chkOption.querySelector(".icon");
 
-            let isChecked = icon.classList.contains("checked");
+            let name=undefined;
+            let email=undefined;
+            let phone=undefined;
+            let birthDate=undefined;
 
-            let agree = "N";
+            console.log("===쿠키있음=======");
 
-            if(isChecked)
-                agree="Y";
+            const cookieString = document.cookie;
 
-            const userInfoData = {agree : agree};
-            const userInfo = JSON.stringify(userInfoData);
+            const cookies={};
+            const cookiePairs = cookieString.split('; ');
 
-            let str ="[" + userInfo +"]";
-
-            const encodedUserInfo = encodeURIComponent(str);
-
-            document.cookie = `userInfo=${encodedUserInfo}; path=/signup`;
-
-        }
-
-        //get 방식
-        // let url = new URL("/signup/step2",location.origin);
-        // location.href=url.toString();
-        location.href="/signup/step2";
-
-    }
-
-    Cookie.prototype = {
-        get : function(name){
-            return this.map[name];  // 쿠키객체마다 공유해야하기 때문에 this 작성이 필수
-        },
-        save : function() {
-
-            let list = this.map["userInfo"];
-            let size = list.length;
-            let lastIndex = size-1;
-
-            str ="[";
-
-            for(let m of this.map["userInfo"]){
-                str+=JSON.stringify(m);
-                if(m!==list[lastIndex])
-                    str+=",";
+            for (const cookiePair of cookiePairs) {
+                const [key, value] = cookiePair.split('=');
+                cookies[key] = value;
             }
 
-            str +="]";
+            const cookieName = 'userInfo';
+            const encodedValue  = cookies[cookieName];
 
-            let encoded = encodeURIComponent(str);
-            document.cookie = `userInfo=${encoded}; path=/signup`;
+            let decodedValue;
+            let userInfoData;
+            let step1Data = {agree : agree};
 
-        },addItem : function(name, item) {
-            console.log(this.map[name]);
-            let list = this.map[name];
-            list.push(item);
+            if (encodedValue!==undefined) {
+                //선택동의 영역 - 쿠키에 저장된 내용이 있는 경우
+                decodedValue = decodeURIComponent(encodedValue);
+
+                // JSON 객체로 변환
+                try {
+                    userInfoData = JSON.parse(decodedValue);
+                    console.log("JSON 객체 출력  ",userInfoData); // JSON 객체 출력
+
+                    name = userInfoData[1].name;
+                    email = userInfoData[1].email;
+                    phone = userInfoData[1].phone;
+                    birthDate =userInfoData[1].birthDate;
+
+                    const step2Data = {name,phone,birthDate,email};
+
+                    //쿠키지우기
+                    cookie.remove("userInfo");
+
+                    //쿠키에 새로 데이터 넣기
+                    cookie.addItem("userInfo",step1Data);
+                    cookie.addItem("userInfo",step2Data);
+
+                    //쿠키 저장하기
+                    cookie.save();
+
+                    location.href="/signup/step2";
+
+                } catch (error) {
+                    console.error('쿠키 값 파싱 오류:', error);
+                }
+            } else {
+                //쿠키값 없다면
+                const step1DataString = JSON.stringify(step1Data);
+
+                let str ="[" + step1DataString +"]";
+
+                const encodedUserInfo = encodeURIComponent(str);
+
+                document.cookie = `userInfo=${encodedUserInfo}; path=/signup`;
+
+                location.href="/signup/step2";
+            }
+
         }
-    }
 
-    function Cookie(){
-
-        this.map = {};
-
-        let cookieDecoded = decodeURIComponent(document.cookie);
-        let cookieTokens = cookieDecoded.split(";");
-
-        console.log(cookieTokens);
-
-        for(const c of cookieTokens){
-            const temp = c.split("=");
-            const key = temp[0];
-            const value = JSON.parse(temp[1]);
-
-            this.map[key] = value;
-        }
     }
 
 });

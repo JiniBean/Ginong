@@ -37,7 +37,7 @@ public class MemberController {
     ) {
 
         if (userInfo == null)
-            return "redirect:signup/step1";
+            return "redirect:step1";
 
         //step1의 agree값 있어야만 step2 페이지 열림
         {
@@ -45,7 +45,7 @@ public class MemberController {
             boolean hasAgree = userInfoStr.contains("agree");
 
             if (!hasAgree)
-                return "redirect:signup/step1";
+                return "redirect:step1";
         }
 
         return "user/signup/step2";
@@ -59,7 +59,7 @@ public class MemberController {
 
         //userInfo가 아예 없다면 step1로
         if (userInfo == null)
-            return "redirect:signup/step1";
+            return "redirect:step1";
 
         //step2의 name값 있어야만 step3 페이지 열림
         {
@@ -67,7 +67,7 @@ public class MemberController {
             boolean hasName = userInfoStr.contains("name");
 
             if (!hasName)
-                return "redirect:signup/step2";
+                return "redirect:step2";
         }
 
         return "user/signup/step3";

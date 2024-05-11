@@ -1,26 +1,24 @@
 //============================================  모바일  ============================================
 
 //============================================  sec2  ============================================
-//세션에 임시저장한 값 가져오기
+//쿠키에서 값 꺼내서 넣기
 window.addEventListener("load", function(e){
 
-    // sec2
     const sec2 = document.querySelector("#sec2");
-
-    //세션에서 값 꺼내기
-    const step3DataString = sessionStorage.getItem('step3Data');
-    const userData = JSON.parse(step3DataString);
-
     let userName = sec2.querySelector(".user-name");
     let pwd = sec2.querySelector(".password");
 
     //유입경로
     let route = document.getElementsByName("route");
 
-    let joinRoute;
+    let cookie = new Cookie();
+    let userInfoData = cookie.get("userInfo");
 
-    if(userData){
-        joinRoute = `${userData.joinRoute}`;
+    if(userInfoData[2]!==undefined){
+        userName.value = userInfoData[2].userName;
+        pwd.value = userInfoData[2].pwd;
+
+        let joinRoute = userInfoData[2].joinRoute;
 
         switch (joinRoute){
             case 'blog' :
@@ -37,8 +35,7 @@ window.addEventListener("load", function(e){
                 break;
         }
 
-        userName.value=`${userData.userName}`;
-        pwd.value=`${userData.pwd}`;
+
     }
 
 });
@@ -270,7 +267,6 @@ window.addEventListener("load", function(e){
     let verifyId = sec2.querySelector(".verify-id");
     let pwd = sec2.querySelector(".password");
     let verifyPwd = sec2.querySelector(".verify-pwd");
-   // let pwdMatch = sec2.querySelector(".verify-password");
 
     //이전 버튼 눌렀을 때
     prevBtn.onclick = function (e){
@@ -344,36 +340,9 @@ window.addEventListener("load", function(e){
 
         save();
 
-        const cookieString = document.cookie;
+        let cookie = new Cookie();
+        let userInfoData = cookie.get("userInfo");
 
-        const cookies={};
-        const cookiePairs = cookieString.split('; ');
-
-        for (const cookiePair of cookiePairs) {
-            const [key, value] = cookiePair.split('=');
-            cookies[key] = value;
-        }
-
-        const cookieName = 'userInfo';
-        const encodedValue  = cookies[cookieName];
-
-        let decodedValue;
-        let userInfoData;
-
-        if (encodedValue) {
-            decodedValue = decodeURIComponent(encodedValue);
-
-
-            // JSON 객체로 변환
-            try {
-                userInfoData = JSON.parse(decodedValue);
-                console.log("JSON 객체 출력  ",userInfoData); // JSON 객체 출력
-            } catch (error) {
-                console.error('쿠키 값 파싱 오류:', error);
-            }
-        } else {
-            console.error('쿠키에 userInfo 값이 없습니다.');
-        }
 
         //db에 회원정보 저장
         let url = "/api/member/add";
@@ -385,12 +354,12 @@ window.addEventListener("load", function(e){
 
         xhr.onload = function(){
            if(xhr.status===200){
-
-               //let url = new URL("/signup/step4",location.origin);
-
                const name = sessionStorage.getItem("name");
 
-               //url = url + "?name=" +name;
+               //쿠키 삭제하기
+               cookie.remove("userInfo");
+
+
 
                location.href=`/signup/step4?name=${name}`;
 
@@ -430,64 +399,101 @@ window.addEventListener("load", function(e){
                 break;
             }
 
-        let data = { userName, pwd, joinRoute }
+        let step3Data = { userName, pwd, joinRoute }
 
         //쿠키에 데이터 저장
         let cookie = new Cookie();
-        cookie.get("userInfo");
-        cookie.addItem("userInfo", data);
-        cookie.save();
+        let userInfoData = cookie.get("userInfo");
+
+        if(userInfoData[2]!=null) {
+            //step1의 data
+            let agree = userInfoData[0].agree;
+            let step1Data = {agree};
+
+            let name = userInfoData[1].name;
+            let phone = userInfoData[1].phone;
+            let birthDate = userInfoData[1].birthDate;
+            let email = userInfoData[1].email;
+
+            let step2Data ={name,phone,birthDate,email};
+
+            cookie.remove("userInfo");
+
+            cookie.addItem("userInfo",step1Data);
+            cookie.addItem("userInfo",step2Data);
+
+            cookie.addItem("userInfo",step3Data);
+            cookie.save();
+
+            //return;
+
+        }else{
+            cookie.addItem("userInfo",step3Data);
+            cookie.save();
+        }
 
     }
 
 
 });
+class Cookie{
 
-Cookie.prototype = {
-    get : function(name){
-        return this.map[name];  // 쿠키객체마다 공유해야하기 때문에 this 작성이 필수
-    },
-    save : function() {
+    constructor() {
+        this.map={};
+        this.initCookie();
+    }
 
-        let list = this.map["userInfo"];
-        let size = list.length;
-        let lastIndex = size-1;
-
-        str ="[";
-
-        for(let m of this.map["userInfo"]){
-            str+=JSON.stringify(m);
-            if(m!==list[lastIndex])
-                str+=",";
+    initCookie() {
+        // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+        if (document.cookie) {
+            // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+            this.parseCookie();
+        }
+        else {
+            // 쿠키가 존재하지 않으면 Product : 빈 배열로 초기화
+            this.map["userInfo"] = [];
         }
 
-        str +="]";
-
-        let encoded = encodeURIComponent(str);
-        document.cookie = `userInfo=${encoded}; path=/signup`;
-
-    },addItem : function(name, item) {
-        console.log(this.map[name]);
-        let list = this.map[name];
-        list.push(item);
     }
-}
 
-function Cookie(){
+    parseCookie(){
+        const cookieDecoded = decodeURIComponent(document.cookie);
+        const cookieTokens = cookieDecoded.split(";");
 
-    this.map = {};
+        for (const c of cookieTokens) {
+            const tmp = c.split("=");
+            const key = tmp[0].trim();
+            const value = JSON.parse(tmp[1]);
 
-    let cookieDecoded = decodeURIComponent(document.cookie);
-    let cookieTokens = cookieDecoded.split(";");
+            this.map[key] = value;
+        }
+    }
 
-    console.log(cookieTokens);
+    get(name) {
+        return this.map[name];
+    }
 
-    for(const c of cookieTokens){
-        const temp = c.split("=");
-        const key = temp[0];
-        const value = JSON.parse(temp[1]);
+    save() {
+        const productList = this.map["userInfo"];
+        const encodedProducts = encodeURIComponent(JSON.stringify(productList));
+        document.cookie = `userInfo=${encodedProducts}; path=/signup;`;
+    }
 
-        this.map[key] = value;
+    remove(name) {
+        document.cookie = `${name}=; path=/signup;`;
+        delete this.map[name];
+    }
+
+    addItem(name, item) {
+        //this.map[product]가 undefined 인 경우, 빈 배열로 초기화
+        const existingItems = this.map[name] || [];
+        existingItems.push(item);
+        this.map[name] = existingItems;
+    }
+
+    size(){
+        let size = Object.keys(this.map).length;
+        return size;
     }
 
 }

@@ -7,15 +7,19 @@ window.addEventListener("load", function(e){
     let sec1 = document.querySelector("#sec1");
 
     let name = sec1.querySelector(".name");
-    let email = sec1.querySelector(".email");
-    let verifyNum = sec1.querySelector(".verify-num");
     let phone = sec1.querySelector(".phone");
+    let birthDate = sec1.querySelector(".birthDate");
+    let email = sec1.querySelector(".email");
 
-    //쿠키에서 꺼내서 담아줌
-    const cookie = new Cookie();
-    const map = cookie.get("userInfo");
-    console.log("cookie에서 꺼낸" , map);
+    let cookie = new Cookie();
+    let userInfoData = cookie.get("userInfo");
 
+    if(userInfoData[1]!==undefined){
+        name.value = userInfoData[1].name;
+        phone.value = userInfoData[1].phone;
+        birthDate.value =userInfoData[1].birthDate;
+        email.value = userInfoData[1].email;
+    }
 
     //전화번호 입력 시 11자리만 입력되도록
     {
@@ -25,6 +29,30 @@ window.addEventListener("load", function(e){
             // 11자리 이상 입력하면 11자리까지 잘라내기
             this.value = this.value.length <= 11 ? this.value : this.value.slice(0, 11);
         }
+    }
+
+    //만 14살 이하 유효성 검사
+    {
+        let birthDate = sec1.querySelector(".birthDate");
+
+        birthDate.onchange = function (){
+            let birthDateValue = new Date(birthDate.value);
+            let today = new Date();
+            let age = today.getFullYear() - birthDateValue.getFullYear();
+            let verifyAge = sec1.querySelector(".verify-age");
+            let nextBtn = document.querySelector(".next-button");
+
+            if(age < 14){
+                verifyAge.classList.remove("d:none");
+                nextBtn.disabled = true;
+            }else{
+                verifyAge.classList.add("d:none");
+                nextBtn.disabled = false;
+
+            }
+
+        }
+
     }
 
 
@@ -48,6 +76,7 @@ window.addEventListener("load", function(e){
     let phone = sec1.querySelector(".phone");
     let verifyPhone = sec1.querySelector(".verify-phone");
 
+
     //이전 버튼
     prevBtn.onclick = function (e){
 
@@ -55,18 +84,10 @@ window.addEventListener("load", function(e){
 
         //쿠키에 입력했던 내용 저장
         {
-            let sec1 = document.querySelector("#sec1");
-
-            let name = sec1.querySelector(".name").value;
-            let email = sec1.querySelector(".email").value;
-            let phone = sec1.querySelector(".phone").value;
-
-            const data = {name, email, phone};
-
             const cookie = new Cookie();
-            cookie.addItem("userInfo",data);
             cookie.save();
 
+            save();
         }
 
         location.href="/signup/step1";
@@ -101,6 +122,18 @@ window.addEventListener("load", function(e){
             return;
         }
 
+        //이메일 유효성 검사
+        {
+            let verifyAge = sec1.querySelector(".verify-age");
+            let isValid = verifyAge.classList.contains("d:none");
+
+            if(!isValid){
+                nextBtn.disabled = true;
+                return;
+            }
+
+        }
+
         save();
 
         location.href="/signup/step3";
@@ -111,71 +144,124 @@ window.addEventListener("load", function(e){
         let sec1 = document.querySelector("#sec1");
 
         let name = sec1.querySelector(".name").value;
-        let email = sec1.querySelector(".email").value;
         let phone = sec1.querySelector(".phone").value;
-        //let verifyNum = sec1.querySelector(".verify-num").value;
-        //let agree = sec1.querySelector(".agree").checked.toString();
+        let birthDate = sec1.querySelector(".birthDate").value;
+        let email = sec1.querySelector(".email").value;
 
-        let data = {name: name, email : email, phone : phone};
+        //step2의 data
+        let step2Data = {name,phone,birthDate,email};
 
         //세션에 이름 저장
         sessionStorage.setItem("name",name);
 
         //쿠키에 데이터 저장
         let cookie = new Cookie();
-        cookie.get("userInfo");
-        cookie.addItem("userInfo", data);
-        cookie.save();
+        let userInfoData = cookie.get("userInfo");
+
+        if(userInfoData[1]!=null&&userInfoData[2]==null){
+            //step1의 data
+            let agree = userInfoData[0].agree;
+            let step1Data = {agree};
+
+            //쿠키 지우기
+            cookie.remove("userInfo");
+
+            //쿠키에 새로 넣기
+            cookie.addItem("userInfo",step1Data);
+            cookie.addItem("userInfo",step2Data);
+
+            cookie.save();
+
+        }
+        else if(userInfoData[1]!=null&&userInfoData[2]!=null){
+            //step1의 data
+            let agree = userInfoData[0].agree;
+            let step1Data = {agree};
+
+            //step3의 Data
+            let userName = userInfoData[2].userName;
+            let pwd = userInfoData[2].pwd;
+            let joinRoute = userInfoData[2].joinRoute;
+
+            let step3Data = {userName, pwd, joinRoute};
+
+            //쿠키 지우기
+            cookie.remove("userInfo");
+
+            //쿠키에 새로 넣기
+            cookie.addItem("userInfo",step1Data);
+            cookie.addItem("userInfo",step2Data);
+            cookie.addItem("userInfo",step3Data);
+
+            cookie.save();
+        }
+        else{
+            cookie.addItem("userInfo", step2Data);
+            cookie.save();
+        }
 
     }
 
 });
 
-Cookie.prototype = {
-    get : function(name){
-        return this.map[name];  // 쿠키객체마다 공유해야하기 때문에 this 작성이 필수
-    },
-    save : function() {
+class Cookie{
 
-        let list = this.map["userInfo"];
-        let size = list.length;
-        let lastIndex = size-1;
+    constructor() {
+        this.map={};
+        this.initCookie();
+    }
 
-        str ="[";
-
-        for(let m of this.map["userInfo"]){
-            str+=JSON.stringify(m);
-            if(m!==list[lastIndex])
-                str+=",";
+    initCookie() {
+        // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+        if (document.cookie) {
+            // 쿠키가 존재하는 경우, 파싱하여 map에 저장
+            this.parseCookie();
+        }
+        else {
+            // 쿠키가 존재하지 않으면 Product : 빈 배열로 초기화
+            this.map["userInfo"] = [];
         }
 
-        str +="]";
-
-        let encoded = encodeURIComponent(str);
-        document.cookie = `userInfo=${encoded}; path=/signup`;
-
-    },addItem : function(name, item) {
-        console.log(this.map[name]);
-        let list = this.map[name];
-        list.push(item);
     }
-}
 
-function Cookie(){
+    parseCookie() {
+        const cookieDecoded = decodeURIComponent(document.cookie);
+        const cookieTokens = cookieDecoded.split(";");
 
-    this.map = {};
+        for (const c of cookieTokens) {
+            const tmp = c.split("=");
+            const key = tmp[0].trim();
+            const value = JSON.parse(tmp[1]);
 
-    let cookieDecoded = decodeURIComponent(document.cookie);
-    let cookieTokens = cookieDecoded.split(";");
+            this.map[key] = value;
+        }
+    }
 
-    console.log(cookieTokens);
+    get(name) {
+        return this.map[name];
+    }
 
-    for(const c of cookieTokens){
-        const temp = c.split("=");
-        const key = temp[0];
-        const value = JSON.parse(temp[1]);
+    save() {
+        const productList = this.map["userInfo"];
+        const encodedProducts = encodeURIComponent(JSON.stringify(productList));
+        document.cookie = `userInfo=${encodedProducts}; path=/signup;`;
+    }
 
-        this.map[key] = value;
+    remove(name) {
+        document.cookie = `${name}=; path=/signup;`;
+        delete this.map[name];
+    }
+
+    addItem(name, item) {
+        //this.map[product]가 undefined 인 경우, 빈 배열로 초기화
+        const existingItems = this.map[name] || [];
+        existingItems.push(item);
+        this.map[name] = existingItems;
+    }
+
+    size(){
+        let size = Object.keys(this.map).length;
+        return size;
     }
 
 }
