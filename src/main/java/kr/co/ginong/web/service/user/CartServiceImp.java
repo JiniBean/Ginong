@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CartServiceImp implements CartService{
@@ -14,9 +15,10 @@ public class CartServiceImp implements CartService{
     CartRepository repository;
 
     @Override
-    public List<Cart> getList(Long memberId) {
-        return repository.findAll(memberId);
-    }
+    public List<Cart> getList(Long memberId) { return repository.findAll(memberId); }
+
+    @Override
+    public List<Map<String, Object>> getAvailableQtyList(Long memberId) { return repository.findAvailableQty(memberId); }
 
     @Override
     public Cart get(Long memberId, Long prdId) {

@@ -17,8 +17,10 @@
         <h1 class="d:none md:d:flex jc:center ai:center fs:4 fw:3 h:4 bg-color:base-1">장바구니</h1>
         <div class="d:flex m:4 jc:space-between">
             <div class="d:flex gap:1 fs:1 md:fs:3 deco icon:map_pin_fill deco-size:4 icon-size:4 icon-color:main-6">
-                <span th:text="${location.addr1}">서울특별시 마포구 신수동 81-45</span>
-                <span th:text="${location.addr2}">706호</span>
+<!--                <span th:text="${location.addr1}">서울특별시 마포구 신수동 81-45</span>-->
+<!--                <span th:text="${location.addr2}">706호</span>-->
+                <span>{{location.addr1}}</span>
+                <span>{{location.addr2}}</span>
             </div>
             <div><a href="" class="n-btn n-btn-type:outline">변경</a></div>
         </div>
@@ -26,8 +28,9 @@
 
     <section class="d:flex fl-grow:1 fl-dir:column">
         <h1 class="d:none">상품 리스트</h1>
-        <form id="order" method="post" class="d:flex fl-grow:1 fl-dir:column gap:4">
-            <div><input type="hidden" name="location" th:value="${location.id}"></div>
+        <form @submit="submitHandler" id="order" method="post" class="d:flex fl-grow:1 fl-dir:column gap:4">
+<!--            <div><input type="hidden" name="location" th:value="${location.id}"></div>-->
+            <div><input type="hidden" name="location" v-model="location.id"></div>
             <!-- 전체 삭제 및 삭제 버튼 영역 -->
             <div class="delete d:flex jc:end pos:relative gap:3 ml:4 mr:4">
                 <a href="" @click.prevent="deleteHandler(false)" class="cursor:pointer">선택삭제</a>
@@ -38,21 +41,26 @@
             <!-- 상품 영역 -->
             <div class="d:flex fl-dir:column m:4 bd bd-color:base-2 bd-radius:2 bg-color:base-1">
                 <!-- 상품 한개 영역 -->
-                <div class="d:flex gap:5 p:4 bd-bottom bd-color:base-2" th:each=" i : ${list}" >
+                <div v-for="item in cartDataList" :key="item.productId"
+                     class="d:flex gap:5 p:4 bd-bottom bd-color:base-2" >
                     <div>
                         <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:2"
-                               name="chkId" th:value="${i.id}" th:data-id="${i.id}">
+                               name="chkId" :value="item.productId" :data-id="item.productId">
                     </div>
                     <div><img src="/img/Meongmeong.jpg" height="90px" class="bd-radius:1"></div>
                     <div class="info flex-grow:1">
-                        <div th:text="${i.name}">텃밭 흙 당근 3개(500g 내외)</div>
-                        <div th:text="${#numbers.formatInteger(i.price,3,'COMMA') + '원'}">2,500원</div>
+                        <div>{{ item.prettyName }}</div>
+                        <div>{{ Intl.NumberFormat().format(item.productPrice) }}원</div>
                         <div class="d:flex jc:space-between ai:center w:2 h:1 bd bd-radius:1 p:1">
-                            <span @click="qtyHandler" class=" icon icon:minus cursor:pointer" style="width: 16px; height: 16px"></span>
-                            <span class="txt-al:center" th:text="${i.quantity}">2</span>
-                            <span @click="qtyHandler" class=" icon icon:plus cursor:pointer" style="width: 16px; height: 16px"></span>
-                            <input type="hidden" name="prdId" th:value="${i.id}">
-                            <input type="hidden" name="quantity"  value="3" th:value="${i.quantity}">
+                            <span @click="qtyHandler(item, -1)" class=" icon icon:minus cursor:pointer" style="width: 16px; height: 16px"></span>
+                            <span class="txt-al:center">{{ item.cartQuantity }}</span>
+                            <span @click="qtyHandler(item, 1)" class=" icon icon:plus cursor:pointer" style="width: 16px; height: 16px"></span>
+                            <input type="hidden" name="prdId" :value="item.productId">
+                            <input type="hidden" name="quantity" :value="item.cartQuantity">
+                        </div>
+                        <div class="full-width"
+                             :class="item.stockStatus === 'valid' ? 'color:sub-4' : 'color:sub-2'">
+                            주문가능 수량 : {{item.stockQuantity}}
                         </div>
                     </div>
                 </div>
@@ -63,7 +71,8 @@
                         <div class="d:flex fl-dir:column gap:3 md:gap:5">
                             <div class="d:flex jc:space-between">
                                 <span>상품 금액</span>
-                                <span class="prd" th:data-cost="${totalPrice}" th:text="${totalPrice < 1 ? 0 +'원' : #numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">32,000원</span>
+<!--                                <span class="prd" th:data-cost="${totalPrice}" th:text="${totalPrice < 1 ? 0 +'원' : #numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">32,000원</span>-->
+                                <span class="prd">{{Intl.NumberFormat().format(totalPrice)}} 원</span>
                             </div>
                             <div class="d:flex jc:space-between"><span>할인 금액</span><span>0원</span></div>
                             <div class="d:flex jc:space-between">
@@ -72,7 +81,7 @@
                             </div>
                         </div>
                         <div class="d:flex jc:end gap:1 ">
-                            <span class="fw:3">총 주문 금액</span><span class="fw:3">{{ Number(total).toLocaleString() }}원</span></div>
+                            <span class="fw:3">총 주문 금액</span><span class="fw:3">{{Intl.NumberFormat().format(finalPrice)}} 원</span></div>
                     </div>
                     <div class="d:flex fl-dir:column gap:2 ai:center">
                         <span class="txt-al:center fw:3 color:base-7 md:fs:4">제주 및 도서산간 지역 추가 배송비 안내</span>
@@ -82,7 +91,10 @@
                         </span>
                     </div>
                 </div>
-                <div th:if="${count < 1}" class="d:flex ai:center jc:center h:7 fs:4 fw:3 color:base-8" style="height: 280px">
+<!--                <div th:if="${count < 1}" class="d:flex ai:center jc:center h:7 fs:4 fw:3 color:base-8" style="height: 280px">-->
+<!--                    장바구니가 비었어요.-->
+<!--                </div>-->
+                <div v-if="isCartEmpty" class="d:flex ai:center jc:center h:7 fs:4 fw:3 color:base-8" style="height: 280px">
                     장바구니가 비었어요.
                 </div>
             </div>

@@ -14,6 +14,38 @@
         AND PRODUCT_ID = #{prdId};
     </select>
 
+    <select id="findAvailableQty" resultType="Map" parameterType="Long">
+        SELECT P.ID AS PRODUCT_ID                                      <!-- 상품 ID -->
+             , P.NAME AS PRODUCT_NAME                                  <!-- 상품명 -->
+             , concat(P.NAME, ', ', P.QUANTITY, QC.NAME, ' (', P.WEIGHT, WC.NAME, ')') AS PRETTY_PRODUCT_NAME
+             , P.PRICE AS PRODUCT_PRICE                                <!-- 상품 가격 -->
+             , P.DISCOUNT_RATE                                         <!-- 상품 할인율 -->
+             , C.QUANTITY AS CART_QUANTITY                             <!-- 장바구니 수량 -->
+             , S.CUR_AMT AS STOCK_QUANTITY                             <!-- 재고 수량 -->
+             , CASE                                                    <!-- (재고수량-장바구니수량) > 0 이면 구매가능(valid) 반환 -->
+                  WHEN S.CUR_AMT - C.QUANTITY >= 0 THEN 'valid'
+                  ELSE 'invalid'
+               END AS STOCK_STATUS
+             , CONCAT(P.THUMBNAIL_PATH, "/", P.THUMBNAIL_NAME) AS IMG  <!-- 이미지 경로 -->
+        FROM CART C
+        LEFT JOIN
+                (
+                    SELECT PRODUCT_ID
+                         , SUM(PLMA * AMOUNT) AS CUR_AMT
+                    FROM STOCK
+                    GROUP BY PRODUCT_ID
+                ) S
+            ON C.PRODUCT_ID = S.PRODUCT_ID
+        LEFT JOIN PRODUCT P
+            ON C.PRODUCT_ID = P.ID
+        LEFT JOIN QUANTITY_CATEGORY QC
+            ON P.QUANTITY_CATEGORY_ID = QC.ID
+        LEFT JOIN WEIGHT_CATEGORY WC
+            ON P.WEIGHT_CATEGORY_ID = WC.ID
+        WHERE 1=1
+        AND C.MEMBER_ID = #{memberId}
+    </select>
+
     <select id="count" resultType="Integer" parameterType="Long">
         SELECT
             count(*)

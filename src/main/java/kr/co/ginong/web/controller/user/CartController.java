@@ -59,6 +59,7 @@ public class CartController {
 
         // 화면에 뿌려줄 장바구니 정보와 상품 정보 조합하기
         List<Map<String, Object>> list = new ArrayList<>();
+        List<Map<String, Object>> availList = service.getAvailableQtyList(memberId);
         int totalPrice = 0;
 
         for (Cart i : items) {
@@ -74,10 +75,12 @@ public class CartController {
             //장바구니 정보 + 상품 정보 List<Map>으로 만들기
             Map<String, Object> map = new HashMap<>();
             map.put("id", pId);
-            map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
+//            map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
+            map.put("name", p.getPrettyName());
             map.put("img", p.getThumbnailPath() + p.getThumbnailName());
             map.put("price", price);
             map.put("quantity", quantity);
+            map.put("currentAmt", p.getCurrentAmount());
             list.add(map);
         }
 
@@ -98,6 +101,11 @@ public class CartController {
 
         // 임시로 박아놓음, 로그인 완성 후 수정 예정
 //        Long memberId = null;
+
+        System.out.println("locationId:" + locationId);
+        System.out.println("chkIds:" + chkIds);
+        System.out.println("qtys:" + qtys);
+        System.out.println("isAll:" + isAll);
         Long memberId = 2L;
 
         // 회원 정보가 없다면 로그인 페이지로

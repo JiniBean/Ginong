@@ -30,6 +30,45 @@ export default class CartRepository{
         }
     }
 
+    async findAvailableQty(memberId){
+
+        // memberId가 null이면 memberId = 2L => 테스트용
+        if(memberId == null) memberId = 2;
+
+        let url = `${baseUrl}/api/cart/available-qty/${memberId}`;
+
+        let response = await this.findPromise(url);
+
+        // 응답의 상태 코드 확인
+        if (response.status === 200) {
+            //response가 비었는지 확인
+            if (response.headers.get('content-length') === '0') {
+                return null;
+            }
+            let items = await response.json();
+            return items;
+        }
+    }
+
+    async findLocationByMemberId(memberId){
+
+        // memberId가 null이면 memberId = 2L => 테스트용
+        if(memberId == null) memberId = 2;
+
+        let url = `${baseUrl}/api/cart/location/${memberId}`;
+        let response = await this.findPromise(url);
+
+        // 응답의 상태 코드 확인
+        if (response.status === 200) {
+            //response가 비었는지 확인
+            if (response.headers.get('content-length') === '0') {
+                return null;
+            }
+            let items = await response.json();
+            return items;
+        }
+    }
+
     async count(){
         let url = `${baseUrl}/api/cart/c`;
 

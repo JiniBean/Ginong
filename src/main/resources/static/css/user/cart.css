@@ -33,4 +33,9 @@
         margin-top: 24px;
     }
 
+    .info > .full-width {
+        margin-top: 0;
+        grid-column: 1 / 4; /* 첫 번째 컬럼에서 시작하여 세 번째 컬럼까지 차지 */
+    }
+
 }
