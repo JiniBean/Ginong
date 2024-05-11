@@ -11,6 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @RestController("apiMemberController")
 @RequestMapping("api/member")
@@ -38,6 +42,7 @@ public class MemberController {
             @RequestBody String params
     ) {
 
+
         System.out.println(params);
 
         if(params.isBlank())
@@ -64,6 +69,18 @@ public class MemberController {
         jsonObject = (JsonObject) userInfoArray.get(1);
         String name = String.valueOf(jsonObject.get("name")).replace("\"", "");
         String email = String.valueOf(jsonObject.get("email")).replace("\"", "");
+        String dateString = String.valueOf(jsonObject.get("birthDate")).replace("\"", "");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date birthDate=null;
+
+        try {
+            birthDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+
         String phone = String.valueOf(jsonObject.get("phone")).replace("\"", "");
 
         //step3
@@ -89,6 +106,7 @@ public class MemberController {
                     .email(email)
                     .phone(phone)
                     .agree(agree)
+                    .birthDate(birthDate)
                     .build();
 
             memberId = service.addMember(member);
