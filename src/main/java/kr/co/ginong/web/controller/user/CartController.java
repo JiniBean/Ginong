@@ -59,7 +59,6 @@ public class CartController {
 
         // 화면에 뿌려줄 장바구니 정보와 상품 정보 조합하기
         List<Map<String, Object>> list = new ArrayList<>();
-        List<Map<String, Object>> availList = service.getAvailableQtyList(memberId);
         int totalPrice = 0;
 
         for (Cart i : items) {
