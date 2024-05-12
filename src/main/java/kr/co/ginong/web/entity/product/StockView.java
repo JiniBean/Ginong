@@ -15,6 +15,7 @@ public class StockView {
     private Long	stockId;
     private Long	productId;
     private String  name;
+    private String  prettyName;
     private int 	currentAmount;
     private int     quantity;
     private String  quantityCategoryName;

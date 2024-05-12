@@ -1,6 +1,5 @@
 const { createApp } = Vue;
 import Repository from "/js/module/StockRepository.js";
-let baseUrl = window.location.origin;
 createApp({
     data(){
         return{

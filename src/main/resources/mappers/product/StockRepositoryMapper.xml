@@ -7,7 +7,17 @@
 	<select id="findById" resultType="StockView">
 		SELECT *
 		FROM STOCK_VIEW
-		WHERE PRODUCT_ID = #{productId};
+		<where>
+			<if test="id!=null">STOCK_ID = #{id}</if>;
+		</where>
+	</select>
+
+	<select id="findByPrdId" resultType="StockView">
+		SELECT *
+		FROM STOCK_VIEW
+		<where>
+			<if test="productId!=null"> PRODUCT_ID = #{productId}</if>;
+		</where>
 	</select>
 
 	<select id="findAll" resultType="StockView">
@@ -19,6 +29,11 @@
 		<if test="amount">desc</if>
 		<if test="current">order by reg_date desc</if>
 	</select>
+
+	<insert id="save" parameterType="Stock">
+		INSERT INTO STOCK (PLMA, AMOUNT, MADE_DATE, IO_DATE, `DESC`, MEMBER_ID, PRODUCT_ID, CATEGORY_ID)
+		values ( #{plma}, #{amount} , #{madeDate}, #{ioDate}, #{desc}, #{memberId}, #{productId}, #{categoryId}  )
+	</insert>
 
 
 </mapper>

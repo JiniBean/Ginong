@@ -92,7 +92,7 @@ public class CartController {
 
     @PostMapping
     public String list(@RequestParam("location") Long locationId,
-                       @RequestParam(value = "chkId", required = false) List<Long> chkIds,
+                       @RequestParam(name = "chkId", required = false) List<Long> chkIds,
                        @RequestParam("prdId") List<Long> prdIds,
                        @RequestParam("quantity") List<Integer> qtys,
                        @RequestParam("all") Boolean isAll,

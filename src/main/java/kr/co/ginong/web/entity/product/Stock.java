@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Stock {
     private Long	id;
-    private int 	amount;
     private int	    plma;
+    private int 	amount;
     private Date	regDate;
     private Date	madeDate;
     private Date	ioDate;

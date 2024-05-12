@@ -7,8 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script type="module" src="/js/admin/stock/list.js" defer></script>
+    <script type="module" src="/js/admin/stock/detail.js" defer></script>
+</head>
+
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:10 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -16,7 +17,7 @@
     <h1 th:text="${list[0].name +' '+list[0].quantity + list[0].quantityCategoryName+'('+list[0].weight+list[0].weightCategoryName+')' }" class="txt-al:center fs:3 md:fs:4 fw:3">텃밭 흙 당근</h1>
     <div class="d:flex jc:space-between ai:center">
         <div class="fw:3">현재 재고 : <span th:text="${list[0].currentAmount}">100봉</span> </div>
-        <div class="n-btn"><a href="reg">등록</a></div>
+        <div class="n-btn"><a th:href="@{reg(p=${list[0].productId})}">등록</a></div>
     </div>
 
     <table class="n-table n-table-hover n-table-border:bottom txt-al:center" >
@@ -25,23 +26,22 @@
             <th scope="col" class="txt-al:center md:w:4" style="width: 100px">입고</th>
             <th scope="col" class="txt-al:center md:w:4" style="width: 100px">출고</th>
             <th scope="col" class="d:none md:d:table-cell txt-al:center w:4">사유</th>
+            <th scope="col" class="d:none md:d:table-cell w:auto txt-al:center">비고</th>
             <th scope="col" class="txt-al:center" style="width: 160px">입출고일</th>
             <th scope="col" class="d:none md:d:table-cell txt-al:center" style="width: 160px">수확일</th>
-            <th scope="col" class="d:none md:d:table-cell w:auto txt-al:center">비고</th>
             <th scope="col" class="d:none md:d:table-cell txt-al:center" style="width: 160px">등록일</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="s : ${list}">
+        <tr th:each="s : ${list}" th:data-id="${s.stockId}">
             <th th:text="${s.plma==1? s.amount:''}" scope="row" class="txt-al:center md:w:4" style="width: 100px">300</th>
             <td th:text="${s.plma==-1? s.amount:''}" class="txt-al:center md:w:4" style="width: 100px"></td>
             <td th:text="${s.stockCategoryName}" class="d:none md:d:table-cell txt-al:center w:4">입고</td>
+            <td th:text="${s.desc}" class="d:none md:d:table-cell w:auto">비고</td>
             <td th:text="${#dates.format(s.ioDate, 'yy-MM-dd')}" class="txt-al:center" style="width: 160px">24-05-04</td>
             <td th:text="${#dates.format(s.madeDate, 'yy-MM-dd')}" class="d:none md:d:table-cell txt-al:center" style="width: 160px">24-05-04</td>
-            <td th:text="${s.desc}" class="d:none md:d:table-cell w:auto">비고</td>
             <td th:text="${#dates.format(s.regDate, 'yy-MM-dd')}" class="d:none md:d:table-cell txt-al:center" style="width: 160px">24-05-04</td>
         </tr>
-
         </tbody>
     </table>
 </main>
