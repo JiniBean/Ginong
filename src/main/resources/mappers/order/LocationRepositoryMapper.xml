@@ -44,4 +44,14 @@
 		values(#{zipCode},#{addr1},#{addr2},#{receiverName},#{receiverPhone},#{label},#{note},#{gatePwd},#{categoryId},#{memberId},#{orderId},#{locationId})
 	</insert>
 
+
+	<update id="updateLocation" parameterType="memberView">
+		UPDATE LOCATION
+		<set>
+			<if test="addr1 != null"> addr1 = #{addr1}, </if>
+			<if test="addr2 != null"> addr2 = #{addr2}, </if>
+		</set>
+		WHERE memberId = #{id}
+	</update>
+
 </mapper>

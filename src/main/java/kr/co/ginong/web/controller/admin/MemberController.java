@@ -4,6 +4,7 @@ import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberView;
 import kr.co.ginong.web.service.admin.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,15 +65,15 @@ public class MemberController {
     @PostMapping("/detail")
     public String detail(MemberView member){
 
-
-        System.out.println("############################################"+member);
-        System.out.println("############################################"+member);
-        System.out.println("############################################"+member);
-        System.out.println("############################################"+member);
-        System.out.println("############################################"+member);
-        System.out.println("############################################"+member);
-
         service.update(member);
-        return "redirect:/admin/member/detail";
+
+        return "redirect:/admin/member/detail?id="+member.getId();
+    }
+
+
+    @GetMapping("/order_list")
+    public String orderList(){
+
+        return "admin/member/orderList";
     }
 }

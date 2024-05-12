@@ -2,7 +2,11 @@ package kr.co.ginong.web.service.admin;
 
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberView;
+import kr.co.ginong.web.entity.order.Location;
+import kr.co.ginong.web.entity.point.Point;
 import kr.co.ginong.web.repository.member.AdminMemberRepository;
+import kr.co.ginong.web.repository.order.LocationRepository;
+import kr.co.ginong.web.repository.point.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +18,18 @@ public class MemberServiceImp implements MemberService {
     @Autowired
     private AdminMemberRepository repository;
 
+    @Autowired
+    private PointRepository pointRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
+
     int size = 20;
 
     @Override
     public List<Member> getList(int page, String query) {
-        int offset = (page-1) * size;
+        int offset = (page - 1) * size;
         List<Member> list = repository.findAll(query, offset, size);
 
         return list;
@@ -62,7 +73,24 @@ public class MemberServiceImp implements MemberService {
 
     @Override
     public void update(MemberView member) {
-        repository.update(member);
+
+        Member updatedMemberInfo = new Member();
+        updatedMemberInfo.setUserName(member.getUserName());
+        updatedMemberInfo.setEmail(member.getEmail());
+        updatedMemberInfo.setPhone(member.getPhone());
+
+        Point updatedPointInfo = new Point();
+        updatedPointInfo.setCost(member.getCost());
+
+        Location updatedLocationInfo = new Location();
+        updatedLocationInfo.setAddr1(member.getAddr1());
+        updatedLocationInfo.setAddr2(member.getAddr2());
+
+
+        repository.updateMember(updatedMemberInfo);
+        pointRepository.updatePoint(updatedPointInfo);
+        locationRepository.updateLocation(updatedLocationInfo);
+
     }
 
 

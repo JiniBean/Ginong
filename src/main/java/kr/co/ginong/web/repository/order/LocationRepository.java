@@ -19,8 +19,9 @@ public interface LocationRepository {
     
     void save(Location location);
     void saveHistory(LocationHistory locationHistory);
-    void update(Location location);
     void delete(long id);
+    void updateLocation(Location updatedLocationInfo);
 
     int count(Long categoryId, String query);
+
 }

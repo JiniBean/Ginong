@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="admin/inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--    <script src="/js/admin/member/orderList.js"></script>-->
+    <title>Document</title>
+</head>
+<body>
+<main layout:fragment="main"
+      class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
+
+
+    <section class="d:flex fl-dir:column gap:8 md:gap:13 w:10p">
+        <h1 class="d:none">주문 목록</h1>
+        <div class="d:flex jc:space-between fw:2 ai:center w:10p">
+            <div>
+                <span>주문일자/번호</span>
+                <span>202041111</span>/
+                <span>2403011115</span>
+            </div>
+            <div>
+                <span class="fw:3">주문완료</span>
+            </div>
+        </div>
+        <section>
+            <h1 class="d:none">주문 목록 상세</h1>
+            <table class="n-table n-row-height:2 n-table-border n-table-hover">
+                <tbody>
+                <tr>
+                    <th class="d:none" scope="row">1</th>
+                    <td>Tom</td>
+                    <td>male</td>
+                    <td>2020-11-01</td>
+                </tr>
+                <tr>
+                    <th class="d:none" scope="row">2</th>
+                    <td>Olivia</td>
+                    <td>female</td>
+                    <td>2021-03-01</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </section>
+
+
+</main>
+</body>
+</html>

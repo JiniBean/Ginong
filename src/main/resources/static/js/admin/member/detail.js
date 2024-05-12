@@ -41,3 +41,4 @@ window.addEventListener("load", function () {
         document.getElementById("memberForm").submit();
     }
 });
+

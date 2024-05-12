@@ -21,7 +21,7 @@
       <section>
         <h1 class="d:none">이름 입력</h1>
         <div><span>이름</span><span class="emphasis color:accent-3"></span></div>
-        <input type="text" id="name" class="name n-textbox n-textbox-type:underline" autofocus autocomplete="false" th:value="${member.name}" readonly/>
+        <input type="text" id="name" name="name" class="name n-textbox n-textbox-type:underline" autofocus autocomplete="false" th:value="${member.name}" readonly/>
         <div class="verify-name d:none color:accent-3">이름을 입력해주세요</div>
       </section>
 
@@ -30,7 +30,7 @@
         <h1 class="d:none">아이디 입력</h1>
         <div><span>아이디</span><span class="emphasis color:accent-3">*</span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="userName" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.userName}"/>
+          <input type="text" id="userName" name="userName" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.userName}"/>
         </div>
         <div class="verify-phone d:none color:accent-3">아이디를 입력해주세요</div>
       </section>
@@ -40,7 +40,7 @@
         <h1 class="d:none">가입일 입력</h1>
         <div><span>가입일</span><span class="emphasis color:accent-3"></span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="joinDate" class="phone n-textbox n-textbox-type:underline" autocomplete="false"
+          <input type="text" id="joinDate" name="joinDate" class="phone n-textbox n-textbox-type:underline" autocomplete="false"
                  th:value="${#dates.format(member.joinDate, 'yyyy-MM-dd')}" readonly/>
         </div>
         <div class="verify-phone d:none color:accent-3">가입일을 입력해주세요</div>
@@ -51,7 +51,7 @@
         <h1 class="d:none">총 적립금 입력</h1>
         <div><span>총 적립금</span><span class="emphasis color:accent-3">*</span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="cost" class="phone n-textbox n-textbox-type:underline" autocomplete="false"  th:value="${member.cost}"/>
+          <input type="text" id="cost" name="joinDate" class="phone n-textbox n-textbox-type:underline" autocomplete="false"  th:value="${member.cost}"/>
         </div>
         <div class="verify-phone d:none color:accent-3">적립금을 입력해주세요</div>
       </section>
@@ -61,7 +61,7 @@
         <h1 class="d:none">연락처 입력</h1>
         <div><span>연락처</span><span class="emphasis color:accent-3">*</span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="phone" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.phone}"/>
+          <input type="text" id="phone" name="phone" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.phone}"/>
         </div>
         <div class="verify-phone d:none color:accent-3">연락처를 입력해주세요</div>
       </section>
@@ -71,7 +71,7 @@
         <h1 class="d:none">주소 입력</h1>
         <div><span>주소</span><span class="emphasis color:accent-3">*</span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="addr1" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.addr1}"/>
+          <input type="text" id="addr1" name="addr1" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.addr1}"/>
         </div>
         <div class="verify-phone d:none color:accent-3">주소를 입력해주세요</div>
       </section>
@@ -81,7 +81,7 @@
         <h1 class="d:none">상세 주소 입력</h1>
         <div><span>상세 주소</span><span class="emphasis color:accent-3">*</span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="addr2" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.addr2}"/>
+          <input type="text" id="addr2" name="addr2" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.addr2}"/>
         </div>
         <div class="verify-phone d:none color:accent-3">주소를 입력해주세요</div>
       </section>
@@ -91,7 +91,7 @@
         <h1 class="d:none">이메일 입력</h1>
         <div><span>이메일</span><span class="emphasis color:accent-3">*</span></div>
         <div class="d:flex col-gap:2">
-          <input type="text" id="email" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.email}"/>
+          <input type="text" id="email" name="email" class="phone n-textbox n-textbox-type:underline" autocomplete="false" th:value="${member.email}"/>
         </div>
         <div class="verify-phone d:none color:accent-3">이메일을 입력해주세요</div>
       </section>
