@@ -14,4 +14,9 @@ public interface AdminMemberRepository {
     int count( String query);
 
     MemberView findById(Long memberId);
+//    MemberView findById(Long id);
+
+    int getTotalMemberCount();
+
+    void update(MemberView member);
 }

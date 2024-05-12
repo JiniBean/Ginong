@@ -52,5 +52,18 @@ public class MemberServiceImp implements MemberService {
     }
 
 
+    @Override
+    public int getTotalMemberCount() {
+
+        int totalMember = repository.getTotalMemberCount();
+
+        return totalMember;
+    }
+
+    @Override
+    public void update(MemberView member) {
+        repository.update(member);
+    }
+
 
 }

@@ -6,7 +6,6 @@ window.addEventListener("load", function () {
             // 클릭된 행에서 회원 ID를 추출
             let memberId = row.dataset.id;
 
-
             // 회원 디테일 페이지 URL을 생성
             let detailPageUrl = "/admin/member/detail?id=" + memberId;
 

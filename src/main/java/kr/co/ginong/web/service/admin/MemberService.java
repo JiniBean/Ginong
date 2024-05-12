@@ -14,6 +14,7 @@ public interface MemberService {
     int getCount();
 
     MemberView get(Long memberId);
+    int getTotalMemberCount();
 
-
+    void update(MemberView member);
 }

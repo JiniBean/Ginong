@@ -6,6 +6,7 @@
 
     <select id="findAll" resultType="Member">
         select
+        ID,
         NAME,
         USER_NAME,
         BIRTH_DATE,
@@ -51,5 +52,35 @@
         from MEMBER_VIEW
         WHERE ID = #{id}
     </select>
+
+    <select id="getTotalMemberCount" resultType="int">
+        select
+            count(*)
+        from
+        MEMBER;
+    </select>
+
+    <update id="update" parameterType="memberView">
+        UPDATE MEMBER_VIEW
+        <set>
+            <if test="name != null"> name = #{name}, </if>
+            <if test="userName != null"> userName = #{userName}, </if>
+            <if test="cost != null"> cost = #{cost}, </if>
+            <if test="phone != null"> phone = #{phone}, </if>
+            <if test="addr1 != null"> addr1 = #{addr1}, </if>
+            <if test="addr2 != null"> addr2 = #{addr2}, </if>
+            <if test="email != null"> email = #{email}, </if>
+        </set>
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </update>
+
+
+
+
+
 
 </mapper>
