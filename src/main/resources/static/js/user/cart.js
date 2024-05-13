@@ -50,7 +50,6 @@ createApp({
 
             // 데이터 베이스에 수량 업데이트하기
             let repository = new Repository;
-            console.log("item.productId:", item.productId, ", item.cartQuantity:",item.cartQuantity)
             let s = await repository.updateQty(item.productId, item.cartQuantity);
 
             this.cartDataHandler();
@@ -77,16 +76,12 @@ createApp({
 
             const reponseData2 = await repository.findLocationByMemberId();
             this.location = reponseData2;
-            // 테스트용 콘솔 출력
-            console.log(this.location);
         },
 
         async emptyCartHandler() {
             let repository = new Repository;
             const reponseData = await repository.count();
-            console.log("repository.count(): ", reponseData);
             if(reponseData > 0) this.isCartEmpty = false;
-            console.log("this.isCartEmpty: " ,this.isCartEmpty);
 
         },
 
@@ -133,20 +128,7 @@ createApp({
         // DB에 저장되어 있는 장바구니 정보를 가져 오기.
         this.cartDataHandler();
 
-        // 배송비 정보 가져오기
-        const dlvryEl = document.querySelector(".dlvry");
-        // let dlvry = parseInt(dlvryEl.dataset.dlvry);
-
-        // 총 주문 금액 합산을 위해서 data()에 배송비 저장하기
-        // this.dlvryPrice = dlvry;
-        // const emptyCart = document.querySelector(".emptyCart");
-        // this.isCartEmpty = emptyCart.className;
-        // console.log("emptyCart");
-        // console.log("뭐가 안되는겨")
-
         this.emptyCartHandler();
-
-
     }
 
 }).mount('main');

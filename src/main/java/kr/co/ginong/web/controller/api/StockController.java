@@ -31,7 +31,7 @@ public class StockController {
     @GetMapping("/{prdId}")
     public List<StockView> list(@PathVariable Long prdId){
 
-        List<StockView> stock = service.get(prdId);
+        List<StockView> stock = service.getByPrdId(prdId);
 
         return stock;
     }
