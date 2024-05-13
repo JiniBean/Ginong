@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Builder
@@ -16,8 +17,13 @@ public class Stock {
     private int	    plma;
     private int 	amount;
     private Date	regDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date	madeDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date	ioDate;
+
     private String 	desc;
     private Long	memberId;
     private Long	productId;

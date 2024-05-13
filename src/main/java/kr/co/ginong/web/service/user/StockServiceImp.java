@@ -44,4 +44,14 @@ public class StockServiceImp implements StockService{
     public Boolean add(Stock stock) {
         return repository.save(stock);
     }
+
+    @Override
+    public boolean edit(Stock stock) {
+        return repository.update(stock);
+    }
+
+    @Override
+    public Boolean delete(List<Long> ids) {
+        return repository.delete(ids);
+    }
 }

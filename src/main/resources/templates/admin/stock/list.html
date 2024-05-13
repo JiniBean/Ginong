@@ -21,7 +21,7 @@
     </section>
 
     <div class="pos:relative d:flex gap:3">
-        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up' :!amount, 'icon:arrow_down':amount , 'color:main-6 icon-color:main-6':amount!=null}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1">재고순</a>
+        <a @click.prevent="amountHandler" href="" :class="{'icon:arrow_up' :amount, 'icon:arrow_down':!amount , 'color:main-6 icon-color:main-6':amount!=null}"  class="deco deco-pos:right icon:arrow_down icon-size:1 deco-size:1">재고순</a>
         <span class="bar"></span>
         <a @click.prevent="currentHandler" href="" :class="{'color:main-6' : current }">최신순</a>
     </div>

@@ -5,7 +5,10 @@ import kr.co.ginong.web.entity.product.*;
 import kr.co.ginong.web.service.user.ProductService;
 import kr.co.ginong.web.service.user.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller("stockController")
@@ -23,6 +27,9 @@ public class StockController {
 
     @Autowired
     StockService service;
+
+    @Autowired
+    ProductService productService;
 
     @GetMapping("list")
     public String list(){
@@ -34,8 +41,10 @@ public class StockController {
     public String detail(@RequestParam(name = "p") Long prdId
             , Model model){
         List<StockView> list = service.getByPrdId(prdId);
+        ProductView prd = productService.get(prdId);
 
         model.addAttribute("list", list);
+        model.addAttribute("prd", prd);
         return "admin/stock/detail";
     }
 
@@ -52,25 +61,20 @@ public class StockController {
     }
 
     @PostMapping("reg")
-    public String reg(Stock stock,
-                      @RequestParam(name ="io") String io,
-                      @RequestParam(name = "made") String made
-                     ){
+    public String reg(Stock stock
+                    ,@AuthenticationPrincipal WebUserDetails userDetails){
 
-//        @AuthenticationPrincipal WebUserDetails userDetails
-//        Long memebrId = userDetails.getId();
 
-        Long memebrId = 2L;
-        stock.setMemberId(memebrId);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            stock.setIoDate(dateFormat.parse(io));
-            stock.setMadeDate(dateFormat.parse(made));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        Long memberId = 0L;
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null) {
+            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
         }
+        stock.setMemberId(memberId);
 
         boolean valid = service.add(stock);
+
         if (!valid)
             return "redirect:reg?p="+stock.getProductId();
         return "redirect:detail?p="+stock.getProductId();
@@ -80,9 +84,42 @@ public class StockController {
     public String update(@RequestParam(name = "id") Long id , Model model){
 
         StockView stock = service.getById(id);
-        model.addAttribute("view", stock);
 
+        model.addAttribute("view", stock);
         return "admin/stock/update";
+    }
+
+    @PostMapping("update")
+    public String update(Stock stock
+            ,@AuthenticationPrincipal WebUserDetails userDetails){
+
+
+        Long memberId = 0L;
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails == null) {
+            return "/signup";
+        }
+        memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+        stock.setMemberId(memberId);
+
+        boolean valid = service.edit(stock);
+
+        if (!valid)
+            return "redirect:update?id="+stock.getId();
+        return "redirect:detail?p="+stock.getProductId();
+    }
+
+    @PostMapping("delete")
+    public String delete(@RequestParam(name="id") List<Long> ids,
+                         @RequestParam(name="prdId") Long prdId){
+
+        System.out.println(ids.toString());
+        System.out.println(prdId);
+        Boolean valid = service.delete(ids);
+
+        return "redirect:detail?p="+prdId;
+
     }
 
 }

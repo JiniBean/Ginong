@@ -16,7 +16,8 @@
 		SELECT *
 		FROM STOCK_VIEW
 		<where>
-			<if test="productId!=null"> PRODUCT_ID = #{productId}</if>;
+			<if test="productId!=null"> PRODUCT_ID = #{productId}</if>
+			order by io_date desc
 		</where>
 	</select>
 
@@ -35,5 +36,33 @@
 		values ( #{plma}, #{amount} , #{madeDate}, #{ioDate}, #{desc}, #{memberId}, #{productId}, #{categoryId}  )
 	</insert>
 
+	<update id="update" parameterType="Stock">
+		UPDATE STOCK
+		<set>
+			<if test="plma != null &amp;&amp; plma!=0 ">PLMA = #{plma},</if>
+			<if test="amount != null &amp;&amp; plma!=0 ">AMOUNT = #{amount},</if>
+			<if test="madeDate !=null">MADE_DATE = #{madeDate},</if>
+			<if test="ioDate !=null">IO_DATE = #{ioDate},</if>
+			<if test="desc !=null">`DESC` = #{desc},</if>
+			<if test="categoryId != null &amp;&amp; categoryId!=0 "> CATEGORY_ID = #{categoryId},</if>
+			<if test="productId != null &amp;&amp; productId!=0 "> PRODUCT_ID = #{productId}</if>
+		</set>
+		<where>
+			ID = #{id}
+		</where>
+	</update>
+
+	<delete id="delete">
+		DELETE FROM STOCK
+		<where>
+			<if test="list != null">
+				ID IN (
+				<foreach collection="ids" item="id" separator=",">
+					#{id}
+				</foreach>
+				)
+			</if>
+		</where>
+	</delete>
 
 </mapper>

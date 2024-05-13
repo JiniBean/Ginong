@@ -17,4 +17,7 @@ public interface StockService {
 
     Boolean add(Stock stock);
 
+    boolean edit(Stock stock);
+
+    Boolean delete(List<Long> ids);
 }

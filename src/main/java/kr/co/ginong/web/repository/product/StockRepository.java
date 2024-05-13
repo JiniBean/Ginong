@@ -15,4 +15,7 @@ public interface StockRepository {
 
     Boolean save(Stock stock);
 
+    boolean update(Stock stock);
+
+    Boolean delete(List<Long> ids);
 }

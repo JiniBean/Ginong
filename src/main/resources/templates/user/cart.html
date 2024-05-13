@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>cart-List</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="/css/user/cart.css">
     <script type="module" src="/js/user/cart.js" defer></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
@@ -48,9 +48,16 @@
                                name="chkId" :value="item.productId" :data-id="item.productId">
                     </div>
                     <div><img src="/img/Meongmeong.jpg" height="90px" class="bd-radius:1"></div>
-                    <div class="info flex-grow:1">
+                    <div class="info flex-grow:1 ">
                         <div>{{ item.prettyName }}</div>
-                        <div>{{ Intl.NumberFormat().format(item.productPrice) }}원</div>
+<!--                        <div v-if="item.discountRate > 0">-->
+<!--                            <span class="fw:1 color:base-7">{{ Intl.NumberFormat().format(item.productPrice) }}</span>-->
+<!--                            <span>{{item.discountRate}}%</span>-->
+<!--                        </div>-->
+<!--                        <div v-if="item.discountRate < 0 ">{{ Intl.NumberFormat().format(item.productPrice) }}원</div>-->
+                        <div >{{ Intl.NumberFormat().format(item.productPrice) }}원
+
+                        </div>
                         <div class="d:flex jc:space-between ai:center w:2 h:1 bd bd-radius:1 p:1">
                             <span @click="qtyHandler(item, -1)" class=" icon icon:minus cursor:pointer" style="width: 16px; height: 16px"></span>
                             <span class="txt-al:center">{{ item.cartQuantity }}</span>

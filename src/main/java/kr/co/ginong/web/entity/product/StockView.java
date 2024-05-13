@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -24,7 +25,9 @@ public class StockView {
     private int	    plma;
     private String  symbol;
     private int 	amount;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date	ioDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date	madeDate;
     private Date	regDate;
     private String 	desc;

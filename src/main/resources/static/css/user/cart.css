@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .cursor\:pointer:hover,
@@ -27,15 +28,32 @@
 
         gap: 16px;
         grid-template-columns: 2fr 0.6fr 1fr;
+        grid-template-rows: 1fr 0.4fr;
+        grid-template-areas:
+        "name price qty"
+        "stock price qty";
     }
 
     .info > * {
         margin-top: 24px;
     }
 
+    .info>:first-child{
+        grid-area: name;
+    }
+
+    .info>:nth-child(2){
+        grid-area: price;
+        justify-self: center;
+    }
+
+    .info>:nth-child(3){
+        grid-area: qty;
+        justify-self: center;
+    }
     .info > .full-width {
         margin-top: 0;
-        grid-column: 1 / 4; /* 첫 번째 컬럼에서 시작하여 세 번째 컬럼까지 차지 */
+        grid-area: stock;
     }
 
 }
