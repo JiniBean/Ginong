@@ -155,4 +155,10 @@ public class MemberController {
         }
         return "redirect:/signin";
     }
+
+    @GetMapping("mypage/index")
+    public String mypage(){
+        return "user/mypage/index";
+    }
+
 }
