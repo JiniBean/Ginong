@@ -17,7 +17,7 @@ createApp({
         let list = await response.json();
         this.list = list;
 
-        for (item of list) {
+        for (let item of list) {
             const dateIdx = item.regDate.search("T");
             const subDate = item.regDate.substring(0, dateIdx);
             item.regDate = subDate;

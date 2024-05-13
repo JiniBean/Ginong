@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/js/admin/notice/update.js" defer></script>
+    <script src="/js/admin/notice/detail.js" defer></script>
 </head>
 
 <body>
@@ -20,8 +20,8 @@
         <form method="post" class="n-form:outline-none d:flex fl-dir:column gap:8 md:gap:13 h:10p">
             <div class="d:flex fl-dir:column gap:2">
                 <div>제목</div>
-                <div class="n-textbox n-textbox-type:underline"></div>
-                <input type="hidden" name="title" value="dddd">
+                <div class="n-textbox n-textbox-type:underline">{{}}</div>
+                <input type="hidden" name="title" v-model="notice.title">
             </div>
             <div class="d:flex fl-dir:column gap:2">
                 <label>작성일</label>
@@ -31,11 +31,17 @@
             <div class="d:flex fl-dir:column gap:2">
                 <div>공지유형</div>
                 <div id="category" class="n-dropdown category w:5">
-                    <button type="button" class="dropdown-btn n-btn n-btn:outline w:10p ai:center jc:space-between icon icon:RT icon-size:1 icon-color:main-6 deco-pos:right">
-                        <span class="fl:fill">사유</span>
+                    <button type="button" class="dropdown-btn n-btn n-btn:outline w:10p ai:center jc:space-between icon icon:RT icon-size:1 icon-color:main-6 deco-pos:right"
+                            @click.prevent="clickDropdown()">
+                        <span class="fl:fill">{{ getCategoryName() }}</span>
                     </button>
-                    <ul class="dropdown-list w:10p" >
-                        <li class="d:flex jc:center p:1" th:each="c:${categories}" th:data-id="${c.id}" th:text="${c.name}"></li>
+                    <ul :class="
+                            [
+                                showDropdown ? 'active' : '',
+                                'dropdown-list w:10p'
+                            ]" >
+                        <li class="d:flex jc:center p:1" v-for="c of category"
+                            @click.prevent="clickDropdownElement(c)">{{ c.name }}</li>
                     </ul>
                     <div>
                         <input type="hidden" name="categoryId" required title="공지 유형을 선택해주세요">
