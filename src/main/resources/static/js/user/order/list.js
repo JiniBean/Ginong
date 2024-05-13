@@ -48,6 +48,7 @@ createApp({
             this.loadList();
         },
 
+        // 주문내역(배송요청중~구매확정)
         async loadList() {
             let memberId = 40;
             let response = await fetch(`/user/api/order/${memberId}/list`);
@@ -75,6 +76,7 @@ createApp({
 
         },
 
+        // 주문취소내역(취소요청중, 취소완료)
         async loadCancelList() {
             let memberId = 40;
             let response = await fetch(`/user/api/order/${memberId}/canceledList`);
@@ -94,6 +96,7 @@ createApp({
 
         },
 
+        // 주문당 총 금액 구하기
         calcTotalPrice(list) {
             if (!list)
                 return 0;
