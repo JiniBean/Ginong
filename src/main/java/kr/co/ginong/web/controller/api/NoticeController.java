@@ -22,8 +22,8 @@ public class NoticeController {
         return repository.findAll();
     }
 
-    @GetMapping("{id}")
-    public Notice detail(@PathVariable(required = false) Long id) {
-        return repository.findById(id);
+    @GetMapping("{noticeId}")
+    public Notice detail(@PathVariable(required = false) Long noticeId) {
+        return repository.findById(noticeId);
     }
 }

@@ -19,12 +19,12 @@
         </section>
 
         <section>
-            <div class="d:flex fl-dir:column bd-bottom bd-color:base-2 p:2 md:p:4" v-for="list of list">
-                <div class="d:flex fl-dir:row ">
-                    <span class="fs:2 md:fs:3">{{ list.content }}</span>
+            <div class="d:flex fl-dir:column bd-bottom bd-color:base-2 p:2 md:p:4 gap:2" v-for="notice of list">
+                <div class="d:flex fl-dir:row" >
+                    <span class="fs:2 md:fs:3" @click="goDetail(notice)">{{ notice.title }}</span>
                     <span></span>
                 </div>
-                <div class="color:base-7">{{ list.regDate }}</div>
+                <div class="color:base-7">{{ notice.regDate }}</div>
             </div>
         </section>
 

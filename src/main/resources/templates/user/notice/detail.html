@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product-List</title>
+    <script src="/js/user/notice/detail.js" defer></script>
     <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
@@ -17,16 +18,16 @@
        
             <div class="d:flex fl-dir:column p:2 md:p:4">
                 <div class="d:flex fl-dir:row p:2 md:p:4">
-                    <span class="fs:2 md:fs:3">연휴 기간 배송 지연 안내</span>
+                    <span class="fs:2 md:fs:3" v-text="notice.title">연휴 기간 배송 지연 안내</span>
                     <span></span>
                 </div>
                 <div class="d:flex fl-dir:row pos:relative gap:3 bd-top bd-color:base-4 p:2 md:p:4">
                     <span>작성일</span>
                     <span class="bar"></span>
-                    <span>2024-01-27</span>
+                    <span v-text="notice.regDate">2024-01-27</span>
                 </div>
             </div>
-            <div class="bd bd-color:main-6 white-space:pre-line m:2 md:m:4 p:5 fs:2 md:fs:3">
+            <div class="bd bd-color:main-6 white-space:pre-line m:2 md:m:4 p:5 fs:2 md:fs:3" v-text="notice.content">
                 <!-- <pre> -->
                 안녕하세요. 기농이네입니다.
 

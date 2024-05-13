@@ -7,7 +7,8 @@
 	<select id="findAll" resultType="Notice">
 		SELECT
 		*
-		FROM  NOTICE
+		FROM NOTICE
+		ORDER BY ID DESC;
 	</select>
 	
 	<select id="findById" resultType="Notice">
@@ -17,4 +18,34 @@
 		where id = #{id}
 	</select>
 
+	<insert id="save" parameterType="Notice">
+		INSERT INTO NOTICE (TITLE, CONTENT, START_DATE, END_DATE, REG_DATE, CATEGORY_ID)
+		values (#{title}, #{content}, #{startDate}, #{endDate}, #{regDate}, #{categoryId})
+	</insert>
+
+	<update id="update" parameterType="Notice">
+	   UPDATE NOTICE
+		<set>
+			<if test="title != null"> TITLE = #{title}, </if>
+			<if test="content != null"> CONTENT = #{content}, </if>
+			<if test="startDate != null"> START_DATE = #{startDate}, </if>
+			<if test="endDate != null"> END_DATE = #{endDate}, </if>
+			<if test="regDate != null"> REG_DATE = #{regDate}, </if>
+			<if test="categoryId != null"> CATEGORY_ID = #{categoryId}, </if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{noticeId}
+			</if>
+		</where>
+   </update>
+
+	<delete id="delete" parameterType="Notice">
+		delete from NOTICE
+		<where>
+			<if test="id != null">
+				id = #{noticeId}
+			</if>	
+		</where>
+   </delete>
 </mapper>
