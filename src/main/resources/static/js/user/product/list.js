@@ -9,8 +9,7 @@ function Cookie() {
             let tmp = c.split("=");
             let key = tmp[0];
             let value = tmp[1];
-
-            this.map[key] = value;
+            this.map[key] = JSON.parse(value);
         }
     }
 
@@ -54,14 +53,16 @@ Cookie.prototype = {
     },
 
     set: function (name, value) {
-        document.cookie = name + "=" + value + "; path=/";
+        let s = `${name}=${value}; path=/; SameSite=None; Secure`;
+        document.cookie = s;
     }
 }
+
 
 // ========== 장바구니 담기 =========================================================
 import CartRepository from "../../module/CartRepository.js";
 import Header from "../inc/header.js";
-document.addEventListener('click', async function (e) {
+document.addEventListener('click',  function (e) {
 
 
     const cartBox = e.target.closest(".cart-box"); // 장바구니 아이콘 영역
@@ -72,35 +73,88 @@ document.addEventListener('click', async function (e) {
     // a 태그 막기
     e.preventDefault();
 
-    const prdId = cartBox.dataset.id;
-    let cartRepository = new CartRepository();
+    const prdId = parseInt(cartBox.dataset.id);
+    let header = new Header();
 
-    // 해당 상품 아이디로 장바구니 목록에 있는지 체크
-    let valid = false;
-    let item = await cartRepository.findItem(prdId);
+    //로그인 되어있는지 판별
+    let isMember = header.checkUser();
 
-    // 없다면 추가, 있다면 수량 증가
-    if(item == null)
-        valid = await cartRepository.add(prdId);
+    // 로그인 되어있다면 DB로, 아니라면 쿠키로
+    if(isMember)
+        cartByDB();
     else
-        valid = await cartRepository.updateQty(prdId);
+        cartBYCookie();
 
-    // DB 저장 잘 됐다면 헤더와 카드의 장바구니 바꾸기
-    if(valid){
-        //해당 상품 수량 DB에서 다시 갖고오기
-        item = await cartRepository.findItem(prdId);
-        let qty = item.quantity;
+    function cartBYCookie(){
+        let cookie = new Cookie();
+        let cookieList = cookie.get("cartList");
 
-        //
+        let check = false;
+        let qty;
+        if(cookieList){
+            for (let c of cookieList)
+                if(c.prdId===prdId){
+                    let q = c.quantity;
+                    c.quantity = ++q;
+                    qty = q;
+                    check = true;
+                }
+            cookie.set("cartList",JSON.stringify(cookieList));
+        }
+
+        if(!check) {
+            let cart= {
+                prdId : prdId,
+                quantity:1
+            }
+
+            let list = [];
+            list.push(cart);
+            cookie.set("cartList",JSON.stringify(list));
+            qty = cart.quantity;
+
+        }
+
+        // 상품카드의 장바구니 바꾸기
         cartBox.textContent = qty;
         cartBox.classList.add('bg-color:main-6');
         cartBox.classList.add('color:base-1');
 
-        let header = new Header();
-        await header.renewCart();
+        //헤더 바꾸기
+        header.renewCart();
 
+    }
+
+
+    async function cartByDB(header) {
+        let cartRepository = new CartRepository();
+
+        // 해당 상품 아이디로 장바구니 목록에 있는지 체크
+        let valid = false;
+        let item = await cartRepository.findItem(prdId);
+
+        // 없다면 추가, 있다면 수량 증가
+        if (item == null)
+            valid = await cartRepository.add(prdId);
+        else
+            valid = await cartRepository.updateQty(prdId);
+
+        // DB 저장 잘 됐다면 헤더와 상품 카드의 장바구니 바꾸기
+        if (valid) {
+            //해당 상품 수량 DB에서 다시 갖고오기
+            item = await cartRepository.findItem(prdId);
+            let qty = item.quantity;
+
+            // 상품카드의 장바구니 바꾸기
+            cartBox.textContent = qty;
+            cartBox.classList.add('bg-color:main-6');
+            cartBox.classList.add('color:base-1');
+
+            //헤더 바꾸기
+            await header.renewCart();
         }
 
+    }
 });
 
 

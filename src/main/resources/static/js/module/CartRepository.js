@@ -17,7 +17,7 @@ export default class CartRepository{
     async findItem(prdId){
         let url = `${baseUrl}/api/cart/${prdId}`;
 
-        let response = await this.findPromise(url);
+        let response = await this.findPromise(url)
 
         // 응답의 상태 코드 확인
         if (response.status === 200) {
@@ -90,7 +90,7 @@ export default class CartRepository{
     async add(prdId){
         let url = `${baseUrl}/api/cart`;
         let method = 'POST';
-        let response = await this.findPromise(url,method, prdId); // Controller에서 Long 타입으로 받기 때문에 stringify() 하면 안됨
+        let response= await this.findPromise(url,method, prdId)
         return await response.json();
     }
 

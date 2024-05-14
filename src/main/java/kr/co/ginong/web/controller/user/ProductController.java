@@ -1,5 +1,6 @@
 package kr.co.ginong.web.controller.user;
 
+import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.cart.Cart;
 import kr.co.ginong.web.entity.mypage.ReviewView;
 import kr.co.ginong.web.entity.product.ProductCategory;
@@ -7,6 +8,7 @@ import kr.co.ginong.web.entity.product.ProductQnaView;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -45,6 +47,7 @@ public class ProductController {
             , @RequestParam(name = "p", defaultValue = "1") Integer page
             , @RequestParam(name = "s", required = false) Integer sortType
             , @CookieValue(name = "cartList", required = false) List<Cart> carts
+            , @AuthenticationPrincipal WebUserDetails userDetails
             , Model model) {
 
         List<ProductView> prds = new ArrayList<>();
@@ -58,12 +61,13 @@ public class ProductController {
         // 장바구니에 담겨있는 상품 체크
         List<Cart> cartList = new ArrayList<>();
         // 임시로 박아 놓은 회원 번호임 로그인 완성 후 삭제 예정
-        Long memberId = 2L;
+        Long memberId = null;
 
         // 로그인 했다면
-        if(memberId != null)
+        if(userDetails != null){
+            memberId = userDetails.getId();
             cartList = cartService.getList(memberId);
-
+        }
         // 로그인 안했지만 장바구니 목록이 있다면
         else if (carts != null)
             cartList = carts;
@@ -90,10 +94,10 @@ public class ProductController {
             map.put("cartQty", null);
 
             // 장바구니에 담긴게 있다면 넣어주기
-            if(cartList !=null)
-                for (Cart c : cartList)
-                    if (p.getId() == c.getProductId())
-                        map.put("cartQty", c.getQuantity());
+            for (Cart c : cartList)
+                if (p.getId() == c.getProductId())
+                    map.put("cartQty", c.getQuantity());
+
             list.add(map);
         }
 
@@ -108,8 +112,6 @@ public class ProductController {
     public String detail(@RequestParam(value = "id") Long productId
                          ,Model model) {
 
-        System.out.println("productId" + productId);
-
         ProductView productView = service.get(productId);
         List<ReviewView> reviewView = reviewService.getProductReviews(productId);
         List<ProductQnaView> qnaView= qnaService.getProductQna(productId);
@@ -117,7 +119,6 @@ public class ProductController {
         model.addAttribute("productView", productView);
         model.addAttribute("reviewView", reviewView);
         model.addAttribute("qnaView", qnaView);
-
 
         return "user/product/detail";
     }

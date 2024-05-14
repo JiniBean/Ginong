@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
-    private long  id;
+    private Long  id;
     private int   quantity;
-    private long  productId;
-    private long  memberId;
+    private Long  productId;
+    private Long  memberId;
 
 }
