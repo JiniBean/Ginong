@@ -12,6 +12,24 @@ createApp({
             // }
         }
     },
+    computed: {
+        formattedStartDate() {
+            // timestamp를 Date 객체로 변환
+            const date = new Date(this.notice.startDate);
+            // Date 객체를 ISO 날짜 문자열로 변환 (YYYY-MM-DD)
+            return date.toISOString().split('T')[0];
+        },
+        formattedEndDate() {
+            // timestamp를 Date 객체로 변환
+            const date = new Date(this.notice.endDate);
+            return date.toISOString().split('T')[0];
+        },
+        formattedRegDate() {
+            // timestamp를 Date 객체로 변환
+            const date = new Date(this.notice.regDate);
+            return date.toISOString().split('T')[0];
+        }
+    },
     methods: {
         clickDropdown() {
             this.showDropdown = !this.showDropdown;
@@ -28,6 +46,9 @@ createApp({
                     return item.name;
             }
             return '선택';
+        },
+        goList() {
+            location.href = `@/admin/notice/list`;
         },
     },
     async created() {

@@ -11,4 +11,9 @@ public interface NoticeService {
     Notice getById(Long id);
 
     List<NoticeCategory> getCategories();
+
+    void insert(Notice notice);
+    void update(Long noticeId, Notice notice);
+
+    
 }
