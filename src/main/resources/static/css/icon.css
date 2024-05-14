@@ -85,3 +85,13 @@
     -webkit-mask-image: url("../icon/calendar.svg");
     mask-image: url("../icon/calendar.svg");
 }
+
+.icon\:caretDoubleLeft::before{
+    -webkit-mask-image: url("../icon/caretDoubleLeft.svg");
+    mask-image: url("../icon/caretDoubleLeft.svg");
+}
+
+.icon\:caretDoubleRight::before{
+    -webkit-mask-image: url("../icon/caretDoubleRight.svg");
+    mask-image: url("../icon/caretDoubleRight.svg");
+}
