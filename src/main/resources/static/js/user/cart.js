@@ -73,7 +73,7 @@ createApp({
                 stockQuantity: item.STOCK_QUANTITY,
                 stockStatus: item.STOCK_STATUS,
                 discountRate : item.DISCOUNT_RATE,
-                disCountPrice : parseInt(this.productPrice) * parseInt(this.discountRate) /100
+                disCountPrice : item.DISCOUNT_PRICE
             }));
 
             const reponseData2 = await repository.findLocationByMemberId();

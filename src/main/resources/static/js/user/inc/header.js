@@ -1,9 +1,37 @@
 import CartRepository from "../../module/CartRepository.js";
 
+function Cookie() {
+    this.map = {};
+
+    if (document.cookie) {
+        let cookieDecoded = decodeURIComponent(document.cookie);
+        let tokens = cookieDecoded.split(";");
+
+        for (let c of tokens) {
+            let tmp = c.split("=");
+            let key = tmp[0];
+            let value = tmp[1];
+            this.map[key] = JSON.parse(value);
+        }
+    }
+
+}
+
+Cookie.prototype = {
+    get: function (name) {
+        return this.map[name];
+    },
+
+    getCount: function (name){
+        return this.map[name].size();
+    }
+
+}
+
 export default class Header {
-    #header
-    #cartCircle
-    #user
+    #header     //header 전체 영역
+    #cartCircle //장바구니 아이콘의 숫자 들어가는 동그라미 부분
+    #user       //로그인시에만 존재하는 username span 영역
 
     constructor() {
         this.#header = document.querySelector("header");
@@ -21,9 +49,9 @@ export default class Header {
             count = await cartRepository.count();
         }
         else {
-
+            let cookie = new Cookie();
+            count = cookie.getCount("cartList");
         }
-
 
         // 있다면 장바구니에 개수 표시
         if(count > 0){
