@@ -72,7 +72,6 @@ public class CartController {
             //장바구니 정보 + 상품 정보 List<Map>으로 만들기
             Map<String, Object> map = new HashMap<>();
             map.put("id", pId);
-//            map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
             map.put("name", p.getPrettyName());
             map.put("img", p.getThumbnailPath() + p.getThumbnailName());
             map.put("price", price);
@@ -95,19 +94,6 @@ public class CartController {
                        @RequestParam("quantity") List<Integer> qtys,
                        @RequestParam("all") Boolean isAll,
                        HttpSession session){
-
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-//        Long memberId = null;
-
-        System.out.println("locationId:" + locationId);
-        System.out.println("chkIds:" + chkIds);
-        System.out.println("qtys:" + qtys);
-        System.out.println("isAll:" + isAll);
-        Long memberId = 2L;
-
-        // 회원 정보가 없다면 로그인 페이지로
-        if(memberId==null)
-            return "redirect:/user/signin";
 
         List<OrderItem> list = new ArrayList<>();
 
@@ -134,7 +120,6 @@ public class CartController {
 
         session.setAttribute("orderItems", list);
         session.setAttribute("locationId", locationId);
-
 
         return "redirect:/order/info";
     }

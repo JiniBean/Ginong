@@ -65,16 +65,12 @@ public class StockController {
                     ,@AuthenticationPrincipal WebUserDetails userDetails){
 
 
-        Long memberId = 0L;
-
-        // 사용자가 인증되었는지 확인
-        if (userDetails != null) {
-            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
-        }
+        //Stock에 memberID 추가 후 DB INSERT
+        Long memberId = userDetails.getId();
         stock.setMemberId(memberId);
-
         boolean valid = service.add(stock);
 
+        //DB에 잘 저장되었다면 재고 내역 페이지로, 아니라면 다시 등록 페이지로
         if (!valid)
             return "redirect:reg?p="+stock.getProductId();
         return "redirect:detail?p="+stock.getProductId();
@@ -94,17 +90,12 @@ public class StockController {
             ,@AuthenticationPrincipal WebUserDetails userDetails){
 
 
-        Long memberId = 0L;
-
-        // 사용자가 인증되었는지 확인
-        if (userDetails == null) {
-            return "/signup";
-        }
-        memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+        //Stock에 memberID 추가 후 DB update
+        Long memberId = userDetails.getId();
         stock.setMemberId(memberId);
-
         boolean valid = service.edit(stock);
 
+        //DB에 잘 저장되었다면 재고 내역 페이지로, 아니라면 다시 수정 페이지로
         if (!valid)
             return "redirect:update?id="+stock.getId();
         return "redirect:detail?p="+stock.getProductId();
@@ -114,8 +105,6 @@ public class StockController {
     public String delete(@RequestParam(name="id") List<Long> ids,
                          @RequestParam(name="prdId") Long prdId){
 
-        System.out.println(ids.toString());
-        System.out.println(prdId);
         Boolean valid = service.delete(ids);
 
         return "redirect:detail?p="+prdId;

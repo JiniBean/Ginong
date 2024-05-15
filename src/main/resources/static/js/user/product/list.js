@@ -91,18 +91,9 @@ document.addEventListener('click',  function (e) {
 
         let check = false;
         let qty;
-        if(cookieList){
-            for (let c of cookieList)
-                if(c.prdId===prdId){
-                    let q = c.quantity;
-                    c.quantity = ++q;
-                    qty = q;
-                    check = true;
-                }
-            cookie.set("cartList",JSON.stringify(cookieList));
-        }
 
-        if(!check) {
+        //기존 쿠키가 없다면 쿠키에 "cartList" 새로 생성
+        if(!cookieList) {
             let cart= {
                 prdId : prdId,
                 quantity:1
@@ -114,6 +105,31 @@ document.addEventListener('click',  function (e) {
             qty = cart.quantity;
 
         }
+
+        //기존의 쿠키가 있다면 리스트 검사
+        if(cookieList){
+            for (let c of cookieList)
+                // 만약 클릭한 상품이 이미 있다면 수량+1
+                if(c.prdId===prdId){
+                    let q = c.quantity;
+                    c.quantity = ++q;
+                    qty = q;
+                    check = true;
+                }
+            //기존 쿠키가 없다면 기존 리스트에 추가
+            if(!check) {
+                let cart= {
+                    prdId : prdId,
+                    quantity:1
+                }
+                cookieList.push(cart);
+                cookie.set("cartList",JSON.stringify(list));
+                qty = cart.quantity;
+                check = true;
+            }
+            cookie.set("cartList",JSON.stringify(cookieList));
+        }
+
 
         // 상품카드의 장바구니 바꾸기
         cartBox.textContent = qty;

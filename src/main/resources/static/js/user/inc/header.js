@@ -44,11 +44,12 @@ export default class Header {
         let count;
 
         if(this.#user){
-            // DB에 담겨 있는 상품 개수 가져오기
+            // DB에 있는 상품 개수 가져오기
             let cartRepository = new CartRepository();
             count = await cartRepository.count();
         }
         else {
+            // 쿠키에 있는 상품 개수 가져오기
             let cookie = new Cookie();
             count = cookie.getCount("cartList");
         }
