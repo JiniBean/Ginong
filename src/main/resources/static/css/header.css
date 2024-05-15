@@ -1,4 +1,4 @@
-.cart-circle{
+.cart-circle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,15 +17,43 @@
     right: -2px;
 }
 
+/* 검색창 스타일 */
+.search-input {
+    width: 0;
+    padding: 10px;
+    border: 1px solid var(--color-main-6);
+    border-radius: 5px;
+
+    position: absolute;
+    transition: width 0.4s ease, opacity 0.4s ease;
+    outline: none;
+    opacity: 0;
+    right: 3em;
+}
+
+.search-input.show {
+    width: 150px;
+    opacity: 1;
+    visibility: visible;
+
+}
+
 @media (min-width: 780px) {
 
-    .cart-circle{
+    .cart-circle {
         font-size: 12px;
         width: 18px;
         height: 18px;
     }
+
+    .search-input.show {
+        width: 300px;
+        opacity: 1;
+        visibility: visible;
+    }
+
 }
 
-.icon\:shopping_cart_simple::before:hover{
+.icon\:shopping_cart_simple::before:hover {
     background-color: var(--color-base-9);
 }

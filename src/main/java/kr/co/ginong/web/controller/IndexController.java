@@ -32,11 +32,6 @@ public class IndexController {
         ProductView saleProduct = saleProductList.get(0);
         ProductView pickProduct = pickProductList.get(0);
 
-        System.out.println("################################################################");
-        System.out.println("saleProduct" + saleProduct);
-        System.out.println("################################################################");
-        System.out.println("pickProduct" + pickProduct);
-
         model.addAttribute("saleProduct", saleProduct);             // 베스트 상품     (판매량최대상품)
         model.addAttribute("pickProduct", pickProduct);             // 추천 상품       (좋아요최대상품)
         model.addAttribute("seasonOutList", seasonOutList);         // 시즌아웃임박상품 (시즌 종료일이 D-14일인 상품)
@@ -46,4 +41,8 @@ public class IndexController {
     }
 
 
+    @GetMapping("test")
+    String test(Model model) {
+        return "test";
+    }
 }

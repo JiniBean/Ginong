@@ -11,7 +11,7 @@
               </a>
           </h1>
           <div class="d:flex fl-dir:column ac:center jc:center gap:2">
-            <nav class="d:none md:d:flex ai:center">
+            <nav class="d:none md:d:flex ai:center jc:end">
               <h1 class="d:none">top</h1>
               <ul class="d:flex gap:3">
                 <li sec:authorize = "isAnonymous()">
@@ -27,11 +27,17 @@
                 </li>
               </ul>
             </nav>
-  
+
             <nav class="d:flex jc:end">
               <h1 class="d:none">down</h1>
               <ul class="d:flex gap:3 pos:relative">
-                <li><a href="" class="icon icon:magnifying_glass icon-size:5">검색</a></li>
+                <li class="d:flex gap:2 bd-radius:3 pos:relative">
+                    <form action="/product/list" method="get">
+                        <input class="search-input" type="text" name="q">
+                        <button class="d:none" type="submit">검색</button>
+                    </form>
+                    <a href="javascript:void(0);" class="search-icon icon icon:magnifying_glass icon-size:5">검색</a>
+                </li>
                 <li class="d:none md:d:block"><a href="/mypage/index" class=" icon icon:user icon-size:5">마이페이지</a></li>
                 <li>
                     <a href="/cart" class="icon icon:shopping_cart_simple icon-size:5">장바구니</a>

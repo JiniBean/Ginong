@@ -39,4 +39,29 @@ export default class Header {
         return false;
     }
 
+    // 검색창 script, 상품만 검색 가능
+    searchBar() {
+        const searchIcon = this.#header.querySelector('.search-icon');
+        const searchInput = this.#header.querySelector('.search-input');
+        const searchForm = this.#header.querySelector('form');
+
+        searchIcon.addEventListener('click', function(e) {
+            e.preventDefault(); // 기본 이벤트 방지
+            if (searchInput.classList.contains('show') && searchInput.value.trim() !== "") {
+                // 검색창이 화면에 출력되지 않은 상태 + 검색어가 검색어가 한 글자라도 포함되어 있는 경우
+                searchForm.submit(); // 검색창에 내용이 있으면 폼 제출
+            } else {
+                searchInput.classList.toggle('show'); // 검색창에 내용이 없으면 표시 상태 토글
+
+                if (searchInput.classList.contains('show')) {
+                    searchInput.focus(); // 검색창 화면에 표시 시 포커스
+                }
+            }
+        });
+    }
+
+
+
+
+
 }
