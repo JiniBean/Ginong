@@ -4,12 +4,12 @@ createApp({
     data() {
         return {
             notice: {
-                title: '',
-                regDate: '',
-                startDate: '',
-                endDate: '',
-                content: '',
-                categoryId: '',
+                title: '공지3',
+                regDate: '2024-05-17',
+                startDate: '2024-05-21',
+                endDate: '2024-05-31',
+                content: '공지 세번째',
+                categoryId: '3',
             },
             category: [],
             showDropdown: false,
@@ -46,11 +46,11 @@ createApp({
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    data: notice
+                    data:notice
                 }),
             };
 
-            console.log(requestOptions);
+            console.log("요청", requestOptions);
             // await fetch(`/user/api/order/${orderId}`, requestOptions);
             //     // .then(response => response.json());
         },

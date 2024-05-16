@@ -67,8 +67,8 @@
             </div>
             
             <div class="d:flex fl-grow:1 gap:8">
-                <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p" @click="goList()">취소</button>
-                <button class="n-btn n-btn-size:2 min-w:3 w:10p" @click="regNotice()">등록</button>
+                <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p" @click.prevent="goList()">취소</button>
+                <button class="n-btn n-btn-size:2 min-w:3 w:10p" @click.prevent="regNotice()">등록</button>
             </div>
         </form>
     </section>

@@ -48,7 +48,7 @@ createApp({
             return '선택';
         },
         goList() {
-            location.href = `@/admin/notice/list`;
+            location.href = `/admin/notice/list`;
         },
     },
     async created() {
