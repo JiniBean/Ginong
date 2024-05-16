@@ -25,7 +25,7 @@
           </li>
           <li class="h:10p">
 <!--          <li class="h:10p" th:class="${#httpServletRequest.requestURI.contains('/inquiry') ? 'active' : ''}">-->
-            <a href="/inquiry/faq" class="fs:3 h:10p">고객센터</a>
+            <a href="/faq" class="fs:3 h:10p">고객센터</a>
           </li>
         </ul>
 
@@ -45,7 +45,7 @@
             <a href="/product/list?c=3" class="h:10p fw:3" th:class="${{param.c}}==3 ? 'fw:3 h:10p': 'h:10p'" th:data-id=3>가공식품</a>
           </li>
           <li class="h:10p"><a href="/notice/list" class="h:10p">공지사항</a></li>
-          <li class="h:10p"><a href="/inquiry/faq" class="h:10p">고객센터</a></li>
+          <li class="h:10p"><a href="/faq" class="h:10p">고객센터</a></li>
         </ul>
       </nav>
 </html>
