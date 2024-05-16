@@ -21,7 +21,7 @@
                       <a href="/signin" class="color:main-6 fw:3">로그인</a>
                   </li>
                   <li sec:authorize = "isAuthenticated()">
-                      <span class="color:main-6 fw:3" th:text="${#authentication.name}"> 유저아이디</span>
+                      <span class="user color:main-6 fw:3" th:text="${#authentication.name}"> 유저아이디</span>
                       <span class="fw:3"> 님</span>
                       <a href="/logout" class="color:main-6 fw:3">로그아웃</a>
                   </li>

@@ -72,6 +72,8 @@ createApp({
                 cartQuantity: item.CART_QUANTITY,
                 stockQuantity: item.STOCK_QUANTITY,
                 stockStatus: item.STOCK_STATUS,
+                discountRate : item.DISCOUNT_RATE,
+                disCountPrice : item.DISCOUNT_PRICE
             }));
 
             const reponseData2 = await repository.findLocationByMemberId();

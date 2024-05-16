@@ -6,6 +6,9 @@ import kr.co.ginong.web.service.user.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,4 +35,17 @@ public class NoticeController {
     public List<NoticeCategory> categoryList() {
         return service.getCategories();
     }
+
+    @PutMapping("{noticeId}")
+    public void updateNotice(@PathVariable Long noticeId, @RequestBody Notice notice) {
+        System.out.println(noticeId+", "+notice);
+        
+        service.update(noticeId, notice);
+    }
+
+    @PostMapping
+    public void addNotice(Notice notice) {
+        service.insert(notice);
+    }
+
 }

@@ -11,4 +11,8 @@ public interface NoticeRepository {
     List<Notice> findAll();
 
     Notice findById(Long id);
+
+    void save(Notice notice);
+    
+    void update(Long noticeId, Notice notice);
 }

@@ -50,14 +50,14 @@
                     <div><img src="/img/Meongmeong.jpg" height="90px" class="bd-radius:1"></div>
                     <div class="info flex-grow:1 ">
                         <div>{{ item.prettyName }}</div>
-<!--                        <div v-if="item.discountRate > 0">-->
-<!--                            <span class="fw:1 color:base-7">{{ Intl.NumberFormat().format(item.productPrice) }}</span>-->
-<!--                            <span>{{item.discountRate}}%</span>-->
-<!--                        </div>-->
-<!--                        <div v-if="item.discountRate < 0 ">{{ Intl.NumberFormat().format(item.productPrice) }}원</div>-->
-                        <div >{{ Intl.NumberFormat().format(item.productPrice) }}원
-
+                        <div v-if="item.discountRate > 0">
+                            <div>
+                                <span class="color:sub-4 mr:1">{{item.discountRate}}%</span>
+                                <span class="fw:1 fs:1 md:fs:2 color:base-7 font-style:italic">{{ Intl.NumberFormat().format(item.productPrice) }}</span>
+                            </div>
+                            <div>{{Intl.NumberFormat().format(item.disCountPrice)}}</div>
                         </div>
+                        <div v-else>{{ Intl.NumberFormat().format(item.productPrice) }}원</div>
                         <div class="d:flex jc:space-between ai:center w:2 h:1 bd bd-radius:1 p:1">
                             <span @click="qtyHandler(item, -1)" class=" icon icon:minus cursor:pointer" style="width: 16px; height: 16px"></span>
                             <span class="txt-al:center">{{ item.cartQuantity }}</span>
@@ -93,8 +93,8 @@
                     <div class="d:flex fl-dir:column gap:2 ai:center">
                         <span class="txt-al:center fw:3 color:base-7 md:fs:4">제주 및 도서산간 지역 추가 배송비 안내</span>
                         <span class="d:flex fl-dir:column ai:center color:base-7 gap:1 fs:1">
-                                <p>도서산간 지역의 경우 기본 배송비 외</p>
-                                <p>별도의 추가배송비가 부과되오니 양해 부탁드립니다.</p>
+                            <p>도서산간 지역의 경우 기본 배송비 외</p>
+                            <p>별도의 추가배송비가 부과되오니 양해 부탁드립니다.</p>
                         </span>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                 <span class="d:flex fl-dir:column gap:1">
                         <p>배송 불가 상품이 포함되어 있을 경우 주문이 취소될 수 있습니다.</p>
                         <p>상품 특성에 따라 단순 변심일 경우 환불이 불가할 수 있습니다.</p>
-                    </span>
+                </span>
             </div>
         </form>
     </section>

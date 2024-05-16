@@ -1,5 +1,7 @@
 package kr.co.ginong.web.controller.user;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.ginong.web.entity.cart.Cart;
 import kr.co.ginong.web.entity.order.Location;
@@ -11,10 +13,7 @@ import kr.co.ginong.web.service.user.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +35,10 @@ public class CartController {
 
     @GetMapping
     public String list(
-            HttpSession session,
+            @CookieValue(name = "cartList",required = false) List<Cart> cartList,
             Model model){
 
-        // 임시 멤버 정보 로그인 완성 후 수정 예정
-        Long memberId = 2L;
+        Long memberId = null;
 
         List<Cart> items = new ArrayList<>();
         Location location = new Location();
@@ -51,7 +49,7 @@ public class CartController {
             location = locationService.getByMemberID(memberId);
         }
         else {
-            items = (List<Cart>) session.getAttribute("cartList");
+            items = cartList;
             location.setId(0);
             location.setAddr1("");
             location.setAddr2("");
@@ -74,7 +72,6 @@ public class CartController {
             //장바구니 정보 + 상품 정보 List<Map>으로 만들기
             Map<String, Object> map = new HashMap<>();
             map.put("id", pId);
-//            map.put("name", p.getName() + ", " + p.getQuantity() + p.getQuantityCategory() + "(" + p.getWeight() + p.getWeightCategory() + ")");
             map.put("name", p.getPrettyName());
             map.put("img", p.getThumbnailPath() + p.getThumbnailName());
             map.put("price", price);
@@ -97,19 +94,6 @@ public class CartController {
                        @RequestParam("quantity") List<Integer> qtys,
                        @RequestParam("all") Boolean isAll,
                        HttpSession session){
-
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-//        Long memberId = null;
-
-        System.out.println("locationId:" + locationId);
-        System.out.println("chkIds:" + chkIds);
-        System.out.println("qtys:" + qtys);
-        System.out.println("isAll:" + isAll);
-        Long memberId = 2L;
-
-        // 회원 정보가 없다면 로그인 페이지로
-        if(memberId==null)
-            return "redirect:/user/signin";
 
         List<OrderItem> list = new ArrayList<>();
 
@@ -136,7 +120,6 @@ public class CartController {
 
         session.setAttribute("orderItems", list);
         session.setAttribute("locationId", locationId);
-
 
         return "redirect:/order/info";
     }
