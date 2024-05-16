@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="user/inc/layout-back">
+<head>
+    <meta charset="UTF-8">
+    <title>고객센터</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/js/user/faq.js" defer></script>
+    <style>
+        .faq-title {
+            border-bottom: 1px solid var(--color-base-2);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+
+
+    </style>
+</head>
+<body>
+
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0">
+    <!--  페이지 제목-->
+    <nav>
+        <h1 class="d:none">탭</h1>
+        <ul id='tabbar' class="n-tabbar n-tab-grow w:10p">
+            <li :class="tabIndex == 0 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(0)">FAQ</a></li>
+            <li :class="tabIndex == 1 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(1)">1:1 문의</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="d:flex fl-dir:column gap:5 ">
+        <h1 class="d:none">FAQ 목록</h1>
+        <div class="">
+            <div class="d:flex jc:space-between">
+                <div class="faq-title deco icon:carrot icon-color:main-4 deco-size:4 icon-size:4 h:3">일반 택배 배송 언제오나요?</div>
+                <div @click="toggleArrow"
+                     class="arrow deco icon:caret_down_bold deco-size:4 icon-size:4 h:3" ></div>
+<!--                <div :class="['arrow deco icon:caret_down_bold deco-size:4 icon-size:4 h:3', { 'rotate-180': item.open }]"></div>-->
+            </div>
+            <div class="p:4 bg-color:main-1">
+                기농이네 고객센터입니다.
+                일반 택배는 평일에 20시 이전 주문시 당일 발송되며,
+                금요일 20시~일요일 19시 이전에 주문하시면 일요일 포장하여 발송해드리고 있습니다. 감사합니다.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-title deco icon:carrot icon-color:main-4 deco-size:4 icon-size:4 h:3">일반 택배 배송 언제오나요?</div>
+            <div class="p:4 bg-color:main-1">
+                기농이네 고객센터입니다.
+                일반 택배는 평일에 20시 이전 주문시 당일 발송되며,
+                금요일 20시~일요일 19시 이전에 주문하시면 일요일 포장하여 발송해드리고 있습니다. 감사합니다.
+            </div>
+        </div>
+        <div class="">
+            <div class="faq-title deco icon:carrot icon-color:main-4 deco-size:4 icon-size:4 h:3">일반 택배 배송 언제오나요?</div>
+            <div class="p:4 bg-color:main-1">
+                기농이네 고객센터입니다.
+                일반 택배는 평일에 20시 이전 주문시 당일 발송되며,
+                금요일 20시~일요일 19시 이전에 주문하시면 일요일 포장하여 발송해드리고 있습니다. 감사합니다.
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
