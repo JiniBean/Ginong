@@ -5,6 +5,8 @@ createApp({
     data() {
         return {
             tabIndex: 0,
+            //todo 현재는 고정으로 박아놨는데, DB 연동 시 실제 index부여해야 함
+            isRotated: [false, false, false]
         }
     },
     methods:{
@@ -12,9 +14,8 @@ createApp({
         clickTab(selectedIndex) {
             this.tabIndex = selectedIndex;
         },
-        toggleArrow(e) {
-            const arrow = e.currentTarget.querySelector('.arrow');
-            arrow.classList.toggle('rotate-180');
+        toggleArrow(index) {
+            this.isRotated[index] = !this.isRotated[index];
         }
 
     },
