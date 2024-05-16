@@ -16,7 +16,8 @@
     <div class="n-tabbar d:flex h:2 md:h:4 w:10p">
         <div @click="getList(1)" :class="{active :orderType==1}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">주문</div>
         <div @click="getList(2)" :class="{active :orderType==2}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">교환</div>
-        <div @click="getList(3)" :class="{active :orderType==3}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">취소/환불</div>
+        <div @click="getList(3)" :class="{active :orderType==3}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">환불</div>
+        <div @click="getList(4)" :class="{active :orderType==4}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">취소</div>
     </div>
 
     <section class="d:flex jc:center w:10p">
@@ -27,33 +28,28 @@
         </form>
     </section>
 
-    <div @click="getList(1,!sortType)" :class="{'d:none':orderType!=1, 'icon-color:main-6':sortType}" class=" deco icon:check_circle deco-size:4 icon-size:4 icon-color:base-5">출고 전만 보기</div>
-    <div :class="{'d:none':orderType!=2}" class="pos:relative d:flex gap:3 cursor:pointer">
+    <div @click="getList(1,!sortType)" :class="{'d:none':orderType!=1, 'icon-color:main-6':sortType}" class=" deco icon:check_circle deco-size:4 icon-size:4 icon-color:base-5" style="height: 24px">출고 전만 보기</div>
+    <div :class="{'d:none':orderType!=2}" class="pos:relative d:flex gap:3 cursor:pointer" style="height: 24px">
         <span @click="getList(2,1)" :class="{'color:main-6':sortType==1}">승인 전</span>
         <span class="bar"></span>
         <span @click="getList(2,2)" :class="{'color:main-6':sortType==2}">출고 전</span>
     </div>
-    <div @click="getList(1,!sortType)" :class="{'d:none':orderType!=3,'icon-color:main-6':sortType}" class="deco icon:check_circle deco-size:4 icon-size:4 icon-color:base-5">승인 전만 보기</div>
+    <div @click="getList(1,!sortType)" :class="{'d:none':orderType!=3,'icon-color:main-6':sortType}" class="deco icon:check_circle deco-size:4 icon-size:4 icon-color:base-5" style="height: 24px">승인 전만 보기</div>
 
-    <section class="d:flex fl-dir:column gap:7 md:gap:8">
+    <section class="d:flex fl-dir:column gap:7 md:gap:10">
         <h1 class="d:none">주문내역</h1>
         <div class="d:flex fl-dir:column gap:2">
-            <div>배송 상태 : 주문 완료</div>
+            <div v-if="orderType !=4">{{category[orderType]}} 상태 :
+                <span>주문 완료</span>
+            </div>
             <div class="d:flex fl-dir:column gap:2 md:gap:4 p:4 bd bd-color:base-6 bd-radius:2">
                 <div>주문 정보 : 텃밭</div>
                 <div>주문 번호 : </div>
                 <div>주문 일자 : </div>
+                <div v-if="orderType !=1">{{category[orderType]}} 사유 : </div>
             </div>
         </div>
 
-        <div class="d:flex fl-dir:column gap:3">
-            <div>배송 상태 : 주문 완료</div>
-            <div class="d:flex fl-dir:column gap:2 md:gap:4 p:4 bd bd-color:base-6 bd-radius:2">
-                <div>주문 정보 : 텃밭</div>
-                <div>주문 번호 : </div>
-                <div>주문 일자 : </div>
-            </div>
-        </div>
     </section>
 
 </main>
