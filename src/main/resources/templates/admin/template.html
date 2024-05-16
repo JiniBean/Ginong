@@ -1,6 +1,61 @@
-<!--============== 관리자 페이지 메인 =================-->
+<!--============== 관리자 페이지 메인: 기본 =================-->
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 md:pb:4">
 </main>
+
+<!--============== 관리자 페이지 메인 : 탭바 있는 화면 =================-->
+<main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:13 md:pt:1 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
+</main>
+
+
+<!-- ============== 탭바 시작 ================= -->
+
+<!--SSR로 구현할 페이지의 탭바 (타임리프 사용)-->
+<ul class="n-tabbar d:flex jc:space-between ai:center h:2 md:h:4 w:10p">
+    <li th:classappend="${{param.c}}==1 ? 'active' : ''" class="fl-grow:1 h:10p">
+        <a href="" class="h:10p">주문</a>
+    </li>
+    <li th:classappend="${{param.c}}==2 ? 'active' : ''" class="fl-grow:1 h:10p">
+        <a href="" class="h:10p">교환</a>
+    </li>
+    <li th:classappend="${{param.c}}==3 ? 'active' : ''" class="fl-grow:1 h:10p">
+        <a href="" class="h:10p">취소환불</a>
+    </li>
+</ul>
+
+<!--CSR로 구현할 페이지의 탭바 (vue.js 사용)-->
+<div class="n-tabbar d:flex h:2 md:h:4 w:10p">
+    <div @click="getList(1)" :class="{active :type==1}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">주문</div>
+    <div @click="getList(2)" :class="{active :type==1}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">교환</div>
+    <div @click="getList(3)" :class="{active :type==2}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">취소/환불</div>
+</div>
+
+<!--vue 예시-->
+<script>
+    const { createApp } = Vue;
+    import Repository from "/js/module/??Repository.js";
+    createApp({
+        data(){
+            return{
+                type:1,//기본값 = 처음 페이지 들어갈때 기본으로 눌려있어야 하는 탭의 값
+                list:[],
+                query: ""
+            }
+        },
+        methods:{
+            async getList(type){
+                this.type = type;
+                let repository = new Repository;
+                this.list = await repository.findAll(this.query, this.type);
+            }
+        },
+        mounted(){
+            this.getList(1);
+        }
+    }).mount('main');
+</script>
+
+<!-- ============== 탭바 끝 ================= -->
+
 
 <!-- ============== 검색창 시작 ================= -->
 <section class="d:flex jc:center w:10p">
