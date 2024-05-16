@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 @Controller
 public class RecentController {
-    @GetMapping("recent/list")
+    @GetMapping("recent")
     public String list() {
         return "user/recent/list";
     }
