@@ -1,3 +1,49 @@
+/* (최근 본 상품)  local storage에 상품 id값 저장 */
+window.addEventListener("load", function(){
+
+    let productId = document.querySelector(".product-id").value;
+    let title = document.querySelector(".product-title").value;
+    let price = document.querySelector(".product-price").value;
+
+    let detailArray = {productId,title, price};
+
+    save(detailArray);
+
+    function save(detailArray){
+
+        let localStorage = window.localStorage;
+        let localData = localStorage.getItem("recentList");
+        let recentList;
+
+        //recentList가 존재하지않는 경우
+        if(localData===null){
+            recentList = [];
+            recentList.push(detailArray);
+
+            localStorage.setItem("recentList",JSON.stringify(recentList));
+            return;
+        }
+
+        //recentList가 존재하는 경우
+        {
+            // 객체로 바꾸기
+            recentList = JSON.parse(localData);
+
+            //(상품 중복체크) product id가 있는지 체크 - for문돌면서 체크해야함
+            if(detailArray.productId===recentList[0].productId)
+                return;
+
+            //없다면 push
+            recentList.push(detailArray);
+
+            localStorage.setItem("recentList",JSON.stringify(recentList));
+        }
+
+
+    }
+
+});
+
 /*모바일 버전 구매정보 수량증감*/
 window.addEventListener("load", function(){
 

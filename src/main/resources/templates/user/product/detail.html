@@ -13,6 +13,7 @@
 </head>
 <body>
 <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:20 w:10p max-w:10">
+
     <!--    Mobile================================================================================================-->
     <section class="d:flex w:10p fl-dir:column gap:7 md:d:none ">
         <h1 class="d:none">상품 정보</h1>
@@ -45,6 +46,8 @@
                 </div>
                 <div class="mt:2">
                     <span class="fs:3 fw:3 " th:text="${#numbers.formatInteger(productView.price, 3, 'COMMA') +'원'}">상품가격</span>
+                    <!--최근 본 상품 저장시 필요-->
+                    <input type="hidden" class="product-title" th:value="${productView.name + ', ' + productView.quantity + productView.quantityCategory + '(' + productView.weight + productView.weightCategory + ')'}">
                     <input type="hidden" class="product-price" th:value="${productView.price}">
                 </div>
             </div>
