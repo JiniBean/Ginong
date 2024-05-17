@@ -60,8 +60,8 @@ Cookie.prototype = {
 
 
 // ========== 장바구니 담기 =========================================================
-import CartRepository from "../../module/CartRepository.js";
-import Header from "../inc/header.js";
+import CartRepository from "/js/module/CartRepository.js";
+import Header from "/js/module/header.js";
 document.addEventListener('click',  function (e) {
 
 
@@ -74,6 +74,7 @@ document.addEventListener('click',  function (e) {
     e.preventDefault();
 
     const prdId = parseInt(cartBox.dataset.id);
+
     let header = new Header();
 
     //로그인 되어있는지 판별

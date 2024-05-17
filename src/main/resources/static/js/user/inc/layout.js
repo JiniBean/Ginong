@@ -1,4 +1,4 @@
-import Header from "./header.js";
+import Header from "/js/module/header.js";
 
 let header = new Header();
 // header.renewCart();

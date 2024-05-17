@@ -1,4 +1,4 @@
-import CartRepository from "../../module/CartRepository.js";
+import CartRepository from "./CartRepository.js";
 
 function Cookie() {
     this.map = {};
