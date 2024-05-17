@@ -14,6 +14,7 @@ public interface NoticeService {
 
     void insert(Notice notice);
     void update(Long noticeId, Notice notice);
+    void delete(Long noticeId, Notice notice);
 
     
 }

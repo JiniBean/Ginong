@@ -50,8 +50,26 @@ createApp({
         goList() {
             location.href = `/admin/notice/list`;
         },
+
+        async updateNotice() {
+            let requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.notice),
+            };
+
+            // let nnnotice = {"id": 0, "title": null, "regDate": null};
+            // let dddotice = {"data":{"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}}
+            // let fffotice = {"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}
+
+            console.log(requestOptions);
+
+            await fetch(`/api/notices/${this.notice.id}`, requestOptions);
+            // this.goList();
+        },
     },
     async created() {
+
         let params = new URLSearchParams(location.search);
         let noticeId = params.get('noticeId');
 

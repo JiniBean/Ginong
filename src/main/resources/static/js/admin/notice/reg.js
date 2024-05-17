@@ -4,14 +4,16 @@ createApp({
     data() {
         return {
             notice: {
-                title: '공지3',
-                regDate: '2024-05-17',
-                startDate: '2024-05-21',
-                endDate: '2024-05-31',
-                content: '공지 세번째',
-                categoryId: '3',
+                // title: '공지3',
+                // regDate: '2024-05-22',
+                // startDate: '2024-05-25',
+                // endDate: '2024-05-31',
+                // content: '공지입니다',
+                // categoryId: '1',
             },
-            category: [],
+            category: [
+                // { id: 1, name: '이벤트' }
+            ],
             showDropdown: false,
         }
     },
@@ -45,20 +47,33 @@ createApp({
             let requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    data:notice
-                }),
+                body: JSON.stringify(this.notice),
             };
 
-            console.log("요청", requestOptions);
-            // await fetch(`/user/api/order/${orderId}`, requestOptions);
-            //     // .then(response => response.json());
+            // let nnnotice = {"id": 0, "title": null, "regDate": null};
+            // let dddotice = {"data":{"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}}
+            // let fffotice = {"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}
+
+            console.log(this.notice);
+            console.log(requestOptions);
+
+            await fetch(`/api/notices`, requestOptions);
+            this.goList();
         },
     },
     async created() {
-        response = await fetch(`/api/notices/notice-category`);
-        let category = await response.json();
-        this.category = category;
+        try {
+            response = await fetch(`/api/notices/notice-category`);
+        
+            if (!response.ok) {
+                return // https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch#%EC%B7%A8%EB%93%9D_%EC%84%B1%EA%B3%B5_%EC%97%AC%EB%B6%80_%ED%99%95%EC%9D%B8
+            }
+        
+            let category = await response.json();
+            this.category = category;
+        } catch(ex) {
+            console.log(ex)
+        }
     }
 }).mount('main');
 

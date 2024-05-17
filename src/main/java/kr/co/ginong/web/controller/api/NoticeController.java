@@ -4,6 +4,7 @@ import kr.co.ginong.web.entity.notice.Notice;
 import kr.co.ginong.web.entity.notice.NoticeCategory;
 import kr.co.ginong.web.service.user.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,9 +44,15 @@ public class NoticeController {
         service.update(noticeId, notice);
     }
 
-    @PostMapping
-    public void addNotice(Notice notice) {
+    @PostMapping()
+    public void addNotice(@RequestBody Notice notice) {
+        System.out.println(notice);
         service.insert(notice);
+    }
+
+    @DeleteMapping("{noticeId}")
+    public void deleteNotice(@PathVariable Long noticeId, @RequestBody Notice notice) {
+        service.delete(noticeId, notice);
     }
 
 }

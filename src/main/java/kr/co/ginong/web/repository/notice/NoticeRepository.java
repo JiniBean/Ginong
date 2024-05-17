@@ -15,4 +15,6 @@ public interface NoticeRepository {
     void save(Notice notice);
     
     void update(Long noticeId, Notice notice);
+
+    void delete(Long noticeId, Notice notice);
 }
