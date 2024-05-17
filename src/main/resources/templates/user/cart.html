@@ -17,8 +17,6 @@
         <h1 class="d:none md:d:flex jc:center ai:center fs:4 fw:3 h:4 bg-color:base-1">장바구니</h1>
         <div class="d:flex m:4 jc:space-between">
             <div class="d:flex gap:1 fs:1 md:fs:3 deco icon:map_pin_fill deco-size:4 icon-size:4 icon-color:main-6">
-<!--                <span th:text="${location.addr1}">서울특별시 마포구 신수동 81-45</span>-->
-<!--                <span th:text="${location.addr2}">706호</span>-->
                 <span>{{location.addr1}}</span>
                 <span>{{location.addr2}}</span>
             </div>
@@ -29,7 +27,6 @@
     <section class="d:flex fl-grow:1 fl-dir:column">
         <h1 class="d:none">상품 리스트</h1>
         <form @submit="submitHandler" id="order" method="post" class="d:flex fl-grow:1 fl-dir:column gap:4">
-<!--            <div><input type="hidden" name="location" th:value="${location.id}"></div>-->
             <div><input type="hidden" name="location" v-model="location.id"></div>
             <!-- 전체 삭제 및 삭제 버튼 영역 -->
             <div class="delete d:flex jc:end pos:relative gap:3 ml:4 mr:4">
@@ -78,13 +75,12 @@
                         <div class="d:flex fl-dir:column gap:3 md:gap:5">
                             <div class="d:flex jc:space-between">
                                 <span>상품 금액</span>
-<!--                                <span class="prd" th:data-cost="${totalPrice}" th:text="${totalPrice < 1 ? 0 +'원' : #numbers.formatInteger(totalPrice,3,'COMMA') + '원'}">32,000원</span>-->
                                 <span class="prd">{{Intl.NumberFormat().format(totalPrice)}} 원</span>
                             </div>
                             <div class="d:flex jc:space-between"><span>할인 금액</span><span>0원</span></div>
                             <div class="d:flex jc:space-between">
                                 <span>배송비</span>
-                                <span th:data-dlvry="${totalPrice > 30000 || totalPrice < 1 ? 0 : 5000}" th:text="${totalPrice > 30000 || totalPrice < 1 ? 0+'원' : #numbers.formatInteger(5000,3,'COMMA')+'원'}">{{Number(dlvryPrice).toLocaleString() }}</span>
+                                <span>{{Number(dlvryPrice).toLocaleString()}}</span>
                             </div>
                         </div>
                         <div class="d:flex jc:end gap:1 ">

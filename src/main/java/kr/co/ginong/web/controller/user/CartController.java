@@ -35,55 +35,54 @@ public class CartController {
 
     @GetMapping
     public String list(
-            @CookieValue(name = "cartList",required = false) List<Cart> cartList,
             Model model){
-
-        Long memberId = null;
-
-        List<Cart> items = new ArrayList<>();
-        Location location = new Location();
-
-        // 상품 리스트 갖고 오기, 회원 정보가 없다면 세션에서
-        if(memberId != null){
-            items = service.getList(memberId);
-            location = locationService.getByMemberID(memberId);
-        }
-        else {
-            items = cartList;
-            location.setId(0);
-            location.setAddr1("");
-            location.setAddr2("");
-        }
-
-        // 화면에 뿌려줄 장바구니 정보와 상품 정보 조합하기
-        List<Map<String, Object>> list = new ArrayList<>();
-        int totalPrice = 0;
-
-        for (Cart i : items) {
-            long pId = i.getProductId();
-            ProductView p = productService.get(pId);
-
-            //총상품값 계산해서 넣기
-            int price = p.getPrice();
-            int quantity = i.getQuantity();
-            int total = price * quantity;
-            totalPrice += total;
-
-            //장바구니 정보 + 상품 정보 List<Map>으로 만들기
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", pId);
-            map.put("name", p.getPrettyName());
-            map.put("img", p.getThumbnailPath() + p.getThumbnailName());
-            map.put("price", price);
-            map.put("quantity", quantity);
-            map.put("currentAmt", p.getCurrentAmount());
-            list.add(map);
-        }
-
-        model.addAttribute("list", list);
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("location", location);
-        model.addAttribute("count", items.size());
+//
+//        Long memberId = null;
+//
+//        List<Cart> items = new ArrayList<>();
+//        Location location = new Location();
+//
+//        // 상품 리스트 갖고 오기, 회원 정보가 없다면 세션에서
+//        if(memberId != null){
+//            items = service.getList(memberId);
+//            location = locationService.getByMemberID(memberId);
+//        }
+//        else {
+//            items = cartList;
+//            location.setId(0);
+//            location.setAddr1("");
+//            location.setAddr2("");
+//        }
+//
+//        // 화면에 뿌려줄 장바구니 정보와 상품 정보 조합하기
+//        List<Map<String, Object>> list = new ArrayList<>();
+//        int totalPrice = 0;
+//
+//        for (Cart i : items) {
+//            long pId = i.getProductId();
+//            ProductView p = productService.get(pId);
+//
+//            //총상품값 계산해서 넣기
+//            int price = p.getPrice();
+//            int quantity = i.getQuantity();
+//            int total = price * quantity;
+//            totalPrice += total;
+//
+//            //장바구니 정보 + 상품 정보 List<Map>으로 만들기
+//            Map<String, Object> map = new HashMap<>();
+//            map.put("id", pId);
+//            map.put("name", p.getPrettyName());
+//            map.put("img", p.getThumbnailPath() + p.getThumbnailName());
+//            map.put("price", price);
+//            map.put("quantity", quantity);
+//            map.put("currentAmt", p.getCurrentAmount());
+//            list.add(map);
+//        }
+//
+//        model.addAttribute("list", list);
+//        model.addAttribute("totalPrice", totalPrice);
+//        model.addAttribute("location", location);
+//        model.addAttribute("count", items.size());
         return "user/cart";
     }
 
