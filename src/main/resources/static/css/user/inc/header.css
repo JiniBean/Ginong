@@ -18,25 +18,25 @@
 }
 
 /* 검색창 스타일 */
-.search-input {
-    width: 0;
-    padding: 10px;
-    border: 1px solid var(--color-main-6);
-    border-radius: 5px;
+/*.search-input {*/
+/*    width: 0;*/
+/*    padding: 10px;*/
+/*    border: 1px solid var(--color-main-6);*/
+/*    border-radius: 5px;*/
 
-    position: absolute;
-    transition: width 0.4s ease, opacity 0.4s ease;
-    outline: none;
-    opacity: 0;
-    right: 3em;
-}
+/*    position: absolute;*/
+/*    transition: width 0.4s ease, opacity 0.4s ease;*/
+/*    outline: none;*/
+/*    opacity: 0;*/
+/*    right: 3em;*/
+/*}*/
 
-.search-input.show {
-    width: 150px;
-    opacity: 1;
-    visibility: visible;
+/*.search-input.show {*/
+/*    width: 150px;*/
+/*    opacity: 1;*/
+/*    visibility: visible;*/
 
-}
+/*}*/
 
 @media (min-width: 780px) {
 

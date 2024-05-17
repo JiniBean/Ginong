@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
-<header class="header w:10p d:flex max-w:10 jc:center h:5 md:h:6 bg-color:base-1 top:1 pos:sticky zi:1">
+<header class="header w:10p d:flex max-w:10 jc:center h:5 md:h:6 bg-color:base-1 top:1 pos:sticky zi:3">
     <div class="d:flex jc:space-between h:5 md:h:6 bd-bottom bd-color:base-2 fl-grow:1 mr:4 ml:4 md:mr:0 md:ml:0">
         <h1 class="d:none ai:center md:d:flex"><a href="/index">
-            <img src="/img/logo-leaf.png" width="140" height="80.77" class="d:none"/>
-            <img src="/img/logo-hat.png" width="140" height="70.41" class="d:inline"/>
+            <img src="/img/logo-leaf.png" width="120" height="80.77" class="d:none"/>
+            <img src="/img/logo-hat.png" width="120" height="70.41" class="d:inline"/>
         </a>
         </h1>
 
@@ -34,13 +34,7 @@
             <nav class="d:flex ">
                 <h1 class="d:none">down</h1>
                 <ul class="d:flex gap:3 pos:relative">
-                    <li class="d:flex gap:2 bd-radius:3 pos:relative">
-                        <form action="/product/list" method="get">
-                            <input class="search-input" type="text" name="q">
-                            <button class="d:none" type="submit">검색</button>
-                        </form>
-                        <a href="javascript:void(0);" class="search-icon icon icon:magnifying_glass icon-size:5">검색</a>
-                    </li>
+                    <li><a href="#" class="icon icon:magnifying_glass icon-size:5">검색</a></li>
                     <li class="d:none md:d:block"><a href="/mypage/index" class=" icon icon:user icon-size:5">마이페이지</a>
                     </li>
                     <li>
