@@ -55,8 +55,8 @@ public class ProductController {
 
         int count = 0;
 
-//        prds = service.getList(page, categoryId, query, sortType);
-//        count = service.count(categoryId, query);
+        prds = service.getList(page, categoryId, query, sortType);
+        count = service.count(categoryId, query);
 
         // 장바구니에 담겨있는 상품 체크
         List<Cart> cartList = new ArrayList<>();
