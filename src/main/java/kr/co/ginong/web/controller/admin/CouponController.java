@@ -28,4 +28,9 @@ public class CouponController {
     public String reg() {
         return "admin/coupon/reg";
     }
+
+    @GetMapping("update")
+    public String update() {
+        return "admin/coupon/update";
+    }
 }
