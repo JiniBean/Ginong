@@ -95,3 +95,13 @@
     -webkit-mask-image: url("../icon/caretDoubleRight.svg");
     mask-image: url("../icon/caretDoubleRight.svg");
 }
+
+.icon\:notePencil::before{
+    -webkit-mask-image: url("../icon/notePencil.svg");
+    mask-image: url("../icon/notePencil.svg");
+}
+
+.icon\:trash::before{
+    -webkit-mask-image: url("../icon/trash.svg");
+    mask-image: url("../icon/trash.svg");
+}

@@ -6,8 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/user/mypage/index.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/js/user/mypage/index.js" defer></script>
+    <link rel="stylesheet" href="/css/user/mypage/index.css">
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -27,70 +28,74 @@
             <div><a href="">회원 정보 관리</a></div>
         </aside>
         <article class="article-mypage d:flex fl-dir:column w:10p md:w:8p md:pl:10 gap:8 md:gap:20">
-            <section class="d:flex h:4 bd-bottom bd-color:base-3 gap:10 py:10">
+            <section class="user-info d:flex bd-color:base-3 gap:10 h:5">
                 <h1 class="d:none">유저이름, 적립금</h1>
-                <div class="d:flex w:5p jc:center ai:center">
+                <div class="d:flex w:5p jc:center ai:center bd-right bd-color:base-3">
                     <div class="d:flex jc:center ai:center ml:8 fl-grow:1">
-                        <a href="" class="d:flex"><span>기농이</span>
+                        <a href="" class="d:flex"><span th:text="${name}">기농이</span>
                         <span class="d:block md:d:none"> 님></span>
                         <span class="d:none md:d:block"> 님 환영합니다!</span></a>
                     </div>
                 </div>
                 <div class="d:flex fl-dir:column md:fl-dir:row w:5p jc:center ai:center">
                     <div class="fl-grow:1 d:flex jc:center ai:center">적립금</div>
-                    <div class="fl-grow:1 d:flex jc:center ai:center"><span>1,500</span> <span>P</span></div>
+                    <div class="fl-grow:1 d:flex jc:center ai:center"><span th:text="${#numbers.formatInteger(amountPoint,0,'COMMA')}">1,500</span> <span>P</span></div>
                 </div>
             </section>
             <section class="d:flex jc:space-around ai:center bd-bottom bd-color:base-3 gap:10 py:10">
                 <h1 class="d:none">사이트 사용 정보</h1>
                 <div class="d:flex fl-dir:column ai:center jc:center gap:2">
-                    <div><a href="">1</a></div>
+                    <div><a href="" th:text="${countOrder}">1</a></div>
                     <div>주문내역</div>
                 </div>
                 <div class="d:flex fl-dir:column ai:center jc:center gap:2">
-                    <div><a href="">0</a></div>
+                    <div><a href="" th:text="${countCoupon}">0</a></div>
                     <div>쿠폰</div>
                 </div>
                 <div class="d:flex fl-dir:column ai:center jc:center gap:2">
-                    <div><a href="">0</a></div>
+                    <div><a href="" th:text="${countReview}">0</a></div>
                     <div>후기</div>
                 </div>
                 <div class="d:flex fl-dir:column ai:center jc:center gap:2">
-                    <div><a href="">0</a></div>
+                    <div><a href="" th:text="${countInquiry}">0</a></div>
                     <div>1:1 문의</div>
                 </div>
             </section>
             <section class="bd-bottom bd-color:base-3">
                 <h1 class="d:none">최근 주문 내역</h1>
                 <div class="d:flex fl-dir:column gap:10 p:5">
-                    <div class="d:flex jc:space-between">
-                        <div>
-                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">최근 주문 내역</span>
-                            <span class="fs:2 md:fs:3 fw:3 color:base-9">(2023.12.25)</span>
-                        </div>
-                        <div>
-                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
-                            <span class="fs:2 md:fs:3 fw:3 color:base-9">101010101010</span>
-                        </div>
+<!--                    <div class="d:flex jc:space-between">-->
+<!--                        <div>-->
+<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">최근 주문 내역</span>-->
+<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9" th:text="${order.date}">(2023.12.25)</span>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>-->
+<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9" th:text="${order.id}">101010101010</span>-->
+<!--                        </div>-->
 
-                    </div>
-                    <div class="d:flex jc:space-between gap:4 p:5">
-                        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-                            <div class="n-item n-item-type:outline-box bd-radius:full
-                            n-list-item-padding:1 ai:center d:flex jc:center bg-color:main-6" style="width: 36px; height: 36px;"></div>
-                            <span class="fs:1 md:fs:3 color:main-6">주문완료</span>
+<!--                    </div>-->
+                    <div class="d:flex fl-dir:column gap:10 p:5">
+                        <div class="d:flex jc:space-between">
+                            <div>
+                                <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ info.orderDate }}</span>
+                                <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
+                            </div>
+                            <div>
+                                <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
+                                <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ info.orderId }}</span>
+                            </div>
+
                         </div>
-                        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-                            <div  class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-                            <span class="fs:1 md:fs:3 color:base-4">배송준비중</span>
-                        </div>
-                        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-                            <div  class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-                            <span class="fs:1 md:fs:3 color:base-4">배송중</span>
-                        </div>
-                        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3">
-                            <div  class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
-                            <span class="fs:1 md:fs:3 color:base-4">배송완료</span>
+                        <div class="d:flex jc:space-between gap:4 p:5">
+                            <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
+                                <div v-if="status.name === info.orderStatus" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center
+            bg-color:main-6" style="width: 36px; height: 36px;"></div>
+                                <div v-else class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
+
+                                <span v-if="status.name === info.orderStatus" class="fs:1 md:fs:3 color:main-6">{{ status.name }}</span>
+                                <span v-else class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

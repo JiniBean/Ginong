@@ -19,4 +19,6 @@ public interface ReviewRepository {
     void delete(long id);
 
     int count(Long categoryId, String query);
+
+    Integer countByMemberId(Long memberId);
 }

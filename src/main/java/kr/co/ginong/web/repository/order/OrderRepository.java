@@ -18,4 +18,7 @@ public interface OrderRepository {
     void update(Long orderId, int orderType);
     void delete(long id);
 
+    Integer countByMemberId(Long memberId);
+
+    Order findRecentByMemberId(Long memberId);
 }

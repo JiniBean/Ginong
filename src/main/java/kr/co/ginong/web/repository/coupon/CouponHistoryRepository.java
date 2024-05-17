@@ -30,4 +30,5 @@ public interface CouponHistoryRepository {
 
     int count(Date usedDate);
 
+    Integer countByMemberId(Long memberId);
 }

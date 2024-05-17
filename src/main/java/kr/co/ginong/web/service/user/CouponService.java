@@ -17,4 +17,5 @@ public interface CouponService {
 
     boolean updateHistory(CouponHistory history);
 
+    Integer getCountCoupon(Long memberId);
 }

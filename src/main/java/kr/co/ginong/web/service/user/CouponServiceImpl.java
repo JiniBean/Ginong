@@ -14,6 +14,7 @@ public class CouponServiceImpl implements CouponService {
     @Autowired
     CouponHistoryRepository historyRepository;
 
+
     public List<CouponHistoryView> getList(Long memberId) {
         List<CouponHistoryView> list = historyRepository.findAll(memberId);
         return list;
@@ -37,6 +38,13 @@ public class CouponServiceImpl implements CouponService {
     public boolean updateHistory(CouponHistory history) {
 
         return historyRepository.update(history);
+    }
+
+    @Override
+    public Integer getCountCoupon(Long memberId) {
+        Integer countCoupon = historyRepository.countByMemberId(memberId);
+
+        return countCoupon;
     }
 
 }

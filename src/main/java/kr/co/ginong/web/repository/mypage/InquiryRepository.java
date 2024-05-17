@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface InquiryRepository {
 
-//    Integer countByMemberId(Long memberId);
+    Integer countByMemberId(Long memberId);
 }

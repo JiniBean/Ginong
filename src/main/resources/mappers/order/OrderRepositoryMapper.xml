@@ -57,4 +57,18 @@
 		type = #{orderType} where id = #{orderId}
 	</update>
 
+	<select id="countByMemberId" resultType="Integer">
+		SELECT IFNULL(COUNT(ID), 0) AS count_order
+		FROM `ORDER`
+		WHERE MEMBER_ID = #{member_Id}
+	</select>
+
+	<select id="findRecentByMemberId" resultType="Order">
+		SELECT *
+		FROM `ORDER`
+		WHERE MEMBER_ID = #{member_Id}
+		ORDER BY DATE DESC
+		LIMIT 1
+	</select>
+
 </mapper>

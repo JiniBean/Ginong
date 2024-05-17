@@ -3,8 +3,16 @@ package kr.co.ginong.web.controller.user;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import kr.co.ginong.web.service.user.MemberService;
+import kr.co.ginong.web.config.security.WebUserDetails;
+import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.order.Order;
+import kr.co.ginong.web.entity.point.PointHistory;
+import kr.co.ginong.web.entity.product.ProductView;
+import kr.co.ginong.web.repository.point.PointHistoryRepository;
+import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.List;
 
 @RequestMapping()
 @Controller
@@ -20,6 +29,24 @@ public class MemberController {
 
     @Autowired
     MemberService service;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    CouponService couponService;
+
+    @Autowired
+    ReviewService reviewService;
+
+    @Autowired
+    InquiryService inquiryService;
+
+    @Autowired
+    PointService pointService;
+
+    @Autowired
+    ProductService productService;
 
     @GetMapping("/signin")
     public String signin() {
@@ -157,7 +184,49 @@ public class MemberController {
     }
 
     @GetMapping("mypage/index")
-    public String mypage(){
+    public String mypage(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
+        // 사용자가 인증되었는지 확인
+        if (authentication != null && authentication.getPrincipal() instanceof WebUserDetails userDetails) {
+            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+        }
+
+        Member member = service.get(memberId);
+
+
+        String name = member.getName();
+        int amountPoint = pointService.getAvailPoint(memberId);
+        Integer countOrder = orderService.getCountOrder(memberId);
+        Integer countCoupon = couponService.getCountCoupon(memberId);
+        Integer countReview = reviewService.getCountReview(memberId);
+        Integer countInquiry = inquiryService.getCountInquiry(memberId);
+        Order order = orderService.getRecentOrder(memberId);
+
+        List<ProductView> pickProductList = productService.getPickProductList();
+
+
+        /*
+        model로 넘겨야할것
+        적립금
+        유저 아이디 for 주문내역, 쿠폰, 후기, 1:1문의 쿼리스트링으로 보내기 위해
+        최근 주문 내역 #주문 번호 #주문 날짜 findById
+        추천 상품
+        찜한 상품
+        */
+
+
+        model.addAttribute("name",name);
+        model.addAttribute("memberId",memberId);
+        model.addAttribute("amountPoint",amountPoint);
+        model.addAttribute("countOrder",countOrder);
+        model.addAttribute("countCoupon",countCoupon);
+        model.addAttribute("countReview",countReview);
+        model.addAttribute("countInquiry",countInquiry);
+        model.addAttribute("pickProductList",pickProductList);
+//        model.addAttribute("order",order);
+
         return "user/mypage/index";
     }
 

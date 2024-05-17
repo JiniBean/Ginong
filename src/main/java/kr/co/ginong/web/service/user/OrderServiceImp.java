@@ -96,7 +96,11 @@ public class OrderServiceImp implements OrderService {
         repository.update(orderId, orderType);
     }
 
-    
+    @Override
+    public Integer getCountOrder(Long memberId) {return  repository.countByMemberId(memberId);}
 
-    
+    @Override
+    public Order getRecentOrder(Long memberId) {return repository.findRecentByMemberId(memberId);}
+
+
 }

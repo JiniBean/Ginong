@@ -52,4 +52,10 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="countByMemberId" resultType="Integer">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE MEMBER_ID = #{memberId}
+	</select>
 </mapper>

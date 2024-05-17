@@ -12,7 +12,7 @@ import java.util.List;
 public class ReviewServiceImp implements ReviewService{
 
     @Autowired
-    ReviewRepository reviewRepository;
+    ReviewRepository repository;
 
 //    @Override
 //    public List<ReviewView> getMemberReviews(Long memberId) {
@@ -25,9 +25,16 @@ public class ReviewServiceImp implements ReviewService{
     @Override
     public List<ReviewView> getProductReviews(Long productId) {
 
-        List<ReviewView> list = reviewRepository.findByProductId(productId);
+        List<ReviewView> list = repository.findByProductId(productId);
 
         return list;
+    }
+
+    @Override
+    public Integer getCountReview(Long memberId) {
+        Integer countReview = repository.countByMemberId(memberId);
+
+        return countReview;
     }
 
 //    @Override

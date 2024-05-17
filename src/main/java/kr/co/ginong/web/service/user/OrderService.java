@@ -25,5 +25,7 @@ public interface OrderService {
     void updateOrderType(Long orderId, int orderType);
 
 
+    Integer getCountOrder(Long memberId);
 
+    Order getRecentOrder(Long memberId);
 }

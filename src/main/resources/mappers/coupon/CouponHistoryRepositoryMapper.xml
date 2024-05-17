@@ -39,4 +39,11 @@
 		where MEMBER_id = #{memberId} and id = #{id} and COUPON_ID = #{couponId};
 	</update>
 
+	<select id="countByMemberId" resultType="Integer">
+		SELECT COUNT(*)
+		FROM COUPON_HISTORY
+		WHERE MEMBER_ID = #{memberId}
+		AND USED_DATE IS NULL
+	</select>
+
 </mapper>
