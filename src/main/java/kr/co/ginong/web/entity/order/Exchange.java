@@ -12,13 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Exchange {
-    private long	id;
-    private long	orderId;
+    private Long	id;
     private String 	desc;
-    private Date	regDate;
-    private int 	quantity;
-    private Date	approvalDate;
     private int 	type;
-    private long	categoryId;
+    private int 	quantity;
+    private Date	regDate;
+    private Date	approvalDate;
+    private Long	categoryId;
 
 }

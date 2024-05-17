@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
-    private long	id;
+    private Long	id;
     private Date	date;
     private int	    type;
-    private long	memberId;
-    private long	locationId;
+    private Long	memberId;
+    private Long	locationId;
+    private Long	cancelId;
 
 }

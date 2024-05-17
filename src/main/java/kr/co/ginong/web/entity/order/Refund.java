@@ -12,12 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Refund {
-    private long	id;
-    private String 	reason;
-    private boolean	state;
+    private Long	id;
+    private String 	desc;
+    private int	    state;
     private Date	reqDate;
     private Date	completeDate;
-    private long	orderId;
-    private long	categoryId;
+    private Long	orderId;
+    private Long    orderItemId;
+    private Long	categoryId;
 
 }

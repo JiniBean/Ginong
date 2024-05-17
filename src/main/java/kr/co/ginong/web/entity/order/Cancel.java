@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cancel {
-    private long id;
-    private long orderId;
+    private Long id;
     private Date date;
 }

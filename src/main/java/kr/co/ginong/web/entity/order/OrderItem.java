@@ -12,10 +12,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItem {
-    private long	id;
+    private Long	id;
     private int		price;
     private int		quantity;
-    private long	productId;
-    private long	orderId;
+    private Long	productId;
+    private Long	orderId;
+    private Long	exchangeId;
+    private Long	refundId;
 
 }
