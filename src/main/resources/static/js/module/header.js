@@ -72,6 +72,8 @@ export default class Header {
     searchBar() {
         const headerSearchIcon = this.#header.querySelector('.h-search-icon'); // 헤더(장바구니쪽)에 붙어 있는 검색 아이콘
         const searchBar = document.querySelector('.search-bar'); // 검색창에 붙어 있는 검색 아이콘
+        const searchInput = document.querySelector('.search-bar input'); // 검색창에 붙어 있는 검색 아이콘
+
 
         headerSearchIcon.addEventListener('click', function(e) {
             // 헤더에 있는 검색 아이콘 클릭 이벤트
@@ -81,6 +83,7 @@ export default class Header {
                 searchBar.classList.remove('d:none');
                 headerSearchIcon.classList.remove('icon:magnifying_glass');
                 headerSearchIcon.classList.add('icon:close');
+                searchInput.focus();
             } else {
                 // 검색 창 화면 제거 및 아이콘 돋보기 로 변경
                 searchBar.classList.add('d:none');
