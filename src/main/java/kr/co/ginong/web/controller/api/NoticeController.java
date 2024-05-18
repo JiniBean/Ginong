@@ -48,7 +48,7 @@ public class NoticeController {
         service.insert(notice);
     }
 
-    @DeleteMapping("{noticeId}")
+    @DeleteMapping("/{noticeId}")
     public void deleteNotice(@PathVariable(name = "noticeId") Long id) {
         service.delete(id);
     }
