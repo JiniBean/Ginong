@@ -24,19 +24,22 @@ window.addEventListener("load", function(){
             return;
         }
 
-        //recentList가 존재하는 경우
+        //recentList가 존재하는 경우 push 안함
         {
             // 객체로 바꾸기
             recentList = JSON.parse(localData);
 
-            //(상품 중복체크) product id가 있는지 체크 - for문돌면서 체크해야함
-            if(detailArray.productId===recentList[0].productId)
-                return;
+            //상품 중복체크
+            for(let num=0; num < recentList.length; num++)
+                if(detailArray.productId===recentList[num].productId){
+                    return;
+                }
 
             //없다면 push
-            recentList.push(detailArray);
+           recentList.push(detailArray);
 
-            localStorage.setItem("recentList",JSON.stringify(recentList));
+          localStorage.setItem("recentList",JSON.stringify(recentList));
+
         }
 
 

@@ -2,12 +2,14 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="user/inc/layout">
+      layout:decorate="user/inc/layout"
+>
 <head>
     <meta charset="UTF-8">
     <title>Product-List</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="module" src="/js/user/recent/list.js" defer></script>
+    <script type="module" src="/js/user/recent/cart.js" defer></script>
 </head>
 <body>
 
@@ -15,7 +17,7 @@
     <section class="d:flex fl-dir:column gap:5" style="margin-top: 20px">
         <h1 class="d:none">최근 본 상품 목록</h1>
         <section class="d:flex js-content:space-between">
-            <div><span class="icon icon:info icon-color:main-6 icon-size:4 csr:pointer">정보아이콘</span><span>품절 상품 제외</span></div>
+            <div class="d:flex ai:center"><span class="icon icon:info icon-color:main-6 icon-size:4 csr:pointer">정보아이콘</span><span>품절 상품 제외</span></div>
             <button
                     class="cursor:pointer md:d:none"
                     @click.prevent="checkVisible=true;btnStatus='complete'"
@@ -29,49 +31,62 @@
                 완료</button>
         </section>
 
-        <section class="d:flex" v-for="item in list">
-            <h1 class="d:none">상품 아이템</h1>
-            <div class="d:flex ai:center">
-                <span class="icon icon:x_circle_fill icon-color:base-6 icon-size:4 csr:pointer mr:3"
-                      :class="[checkVisible ? '' : 'd:none']"
-                      @click.prevent="confirmDelete(item.productId)"
-                >아이콘</span>
-            </div>
-            <div class="d:flex gap:4 w:100p">
-                <div>
-                    <img class="w:3 md:w:5"
-                         src="/img/carrot.png" th:src="@{/img/baechoo.png}"/>
+        <div v-if="list.length > 0">
+            <section class="d:flex" v-for="item in list" :key="item.productId">
+                <h1 class="d:none">상품 아이템</h1>
+                <div class="d:flex ai:center">
+                    <span class="icon icon:x_circle_fill icon-color:base-6 icon-size:4 csr:pointer mr:3"
+                          :class="[checkVisible ? '' : 'd:none']"
+                          @click.prevent="confirmDelete(item.productId)"
+                    >아이콘</span>
                 </div>
-                <div class="d:flex fl-dir:column jc:center gap:4 w:100p md:gap:11">
-                    <div class="d:flex fl-dir:column gap:4 w:100p pl:1 md:font-size:5">
-                        <div class="d:flex jc:space-between ai:center w:100p">
-                            <div v-text="item.title">텃밭 흙 배추, 2개입</div>
-                            <button
-                                    class="cursor:pointer md:d:block d:none"
-                                    @click.prevent="confirmDelete(item.productId)"
-                                    v-if="btnStatus==='delete'">
-                                <span class="icon icon icon:trash icon-color:base-6 icon-size:4 md:icon-size:5 csr:pointer"></span>
-                                </button>
-                        </div>
-                        <div><b>{{Intl.NumberFormat().format(item.price) }}원</b></div>
+                <div class="d:flex gap:4 w:100p">
+                    <div>
+                        <a :href=" 'product/detail?id=' + item.productId">
+                            <img class="w:3 md:w:5"
+                                 src="/img/carrot.png" th:src="@{/img/baechoo.png}"/>
+                        </a>
                     </div>
-                    <div class="d:flex ai:center jc:space-between">
-                        <div>
-                            <span class="icon icon:thumbs_up icon-color:base-6 icon-size:2 md:icon-size:4 csr:pointer">최고예요 아이콘</span>
-                            <span>100</span>
+                    <div class="d:flex fl-dir:column jc:center gap:4 w:100p md:gap:11">
+                        <div class="d:flex fl-dir:column gap:4 w:100p pl:1 md:font-size:5">
+                            <div class="d:flex jc:space-between ai:center w:100p">
+                               <div><a :href=" 'product/detail?id=' + item.productId">{{item.title}}</a></div>
+                                <button
+                                        class="cursor:pointer md:d:block d:none"
+                                        @click.prevent="confirmDelete(item.productId)"
+                                        v-if="btnStatus==='delete'">
+                                    <span class="icon icon icon:trash icon-color:base-6 icon-size:4 md:icon-size:5 csr:pointer"></span>
+                                    </button>
+                            </div>
+                            <div><b>{{Intl.NumberFormat().format(item.price) }}원</b></div>
                         </div>
-                        <div class="d:none md:d:flex md:gap:3">
-                            <button class="n-btn n-btn-type:outline w:4">구매하기</button>
-                            <button class="n-btn n-btn-type:outline w:4">담기</button>
+                        <div class="d:flex ai:center jc:space-between">
+                            <div>
+                                <span class="icon icon:thumbs_up icon-color:base-6 icon-size:2 md:icon-size:4 csr:pointer">최고예요 아이콘</span>
+                                <span>100</span>
+                            </div>
+                            <div class="d:none md:d:flex gap:3">
+                                <button class="n-btn n-btn-type:outline md:w:4 w:1" @click.prevent="addItem(item.productId)">구매하기</button>
+                                <button
+                                        class="n-btn n-btn-type:outline md:w:4 w:1 cart-box"
+                                        :data-id=item.productId
+                                >담기</button>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div v-else>
+            <h1 class="d:none">최근 본 상품이 없을 시</h1>
+            <div class="d:flex ai:center jc:center p:1">
+                최근 본 상품이 없습니다.
+            </div>
+        </div>
 
-                    </div>
-                </div>
-            </div>
-        </section>
     </section>
     <!--pc 버전에만 보임 -->
-    <section class="blog-section w:10p h:10p">
+    <section class="blog-section w:10p h:10p d:none md:d:block">
         <h1 class="d:none">블로그 정보</h1>
         <div class="d:flex fl-dir:column pos:relative">
             <img class="w:10p" th:src="@{/img/blog.jpg}" src="" alt="">

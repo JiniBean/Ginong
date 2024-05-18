@@ -18,13 +18,21 @@ createApp({
             this.list = this.list.filter(item => item.productId !== productId);
 
             // localStorage 업데이트
-            //window.localStorage.setItem('recentList', JSON.stringify(this.list));
+            window.localStorage.removeItem('recentList');
+            window.localStorage.setItem('recentList', JSON.stringify(this.list));
+        },
+        addItem(productId){
+            let url= "/order/info?p="+productId+"&q=1";
+            location.href = url.toString();
         }
     },
     created (){
         const localStorage = window.localStorage;
         const localData = localStorage.getItem("recentList");
 
+        const localDataJson = JSON.parse(localData);
+
         this.list = JSON.parse(localData);
+
     }
 }).mount('main');
