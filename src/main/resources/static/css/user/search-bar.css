@@ -1,0 +1,26 @@
+.search-bar {
+    background-color: var(--color-base-1);
+    width: 100%;
+    min-height: 105px;
+    z-index: 1;
+    position: sticky;
+    top: var(--top-4);
+
+    input {
+        height: 3em;
+        width: 20em;
+        padding: 0.5em;
+        border-bottom: 1px solid black;
+
+        @media (min-width: 780px) {
+            top: var(--top-5);
+            border-bottom: 3px solid black;
+        }
+    }
+
+    @media (min-width: 780px) {
+        top: var(--top-5);
+        min-height: 250px;
+    }
+}
+

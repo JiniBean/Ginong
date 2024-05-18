@@ -70,21 +70,22 @@ export default class Header {
 
     // 검색창 script, 상품만 검색 가능
     searchBar() {
-        const searchIcon = this.#header.querySelector('.search-icon');
-        const searchInput = this.#header.querySelector('.search-input');
-        const searchForm = this.#header.querySelector('form');
+        const headerSearchIcon = this.#header.querySelector('.h-search-icon'); // 헤더(장바구니쪽)에 붙어 있는 검색 아이콘
+        const searchBar = document.querySelector('.search-bar'); // 검색창에 붙어 있는 검색 아이콘
 
-        searchIcon.addEventListener('click', function(e) {
-            e.preventDefault(); // 기본 이벤트 방지
-            if (searchInput.classList.contains('show') && searchInput.value.trim() !== "") {
-                // 검색창이 화면에 출력되지 않은 상태 + 검색어가 검색어가 한 글자라도 포함되어 있는 경우
-                searchForm.submit(); // 검색창에 내용이 있으면 폼 제출
+        headerSearchIcon.addEventListener('click', function(e) {
+            // 헤더에 있는 검색 아이콘 클릭 이벤트
+            e.preventDefault();
+            if (searchBar.classList.contains('d:none')) {
+                // 검색 창 화면 출력 및 아이콘 X 로 변경
+                searchBar.classList.remove('d:none');
+                headerSearchIcon.classList.remove('icon:magnifying_glass');
+                headerSearchIcon.classList.add('icon:close');
             } else {
-                searchInput.classList.toggle('show'); // 검색창에 내용이 없으면 표시 상태 토글
-
-                if (searchInput.classList.contains('show')) {
-                    searchInput.focus(); // 검색창 화면에 표시 시 포커스
-                }
+                // 검색 창 화면 제거 및 아이콘 돋보기 로 변경
+                searchBar.classList.add('d:none');
+                headerSearchIcon.classList.add('icon:magnifying_glass');
+                headerSearchIcon.classList.remove('icon:close');
             }
         });
     }

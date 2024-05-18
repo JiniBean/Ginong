@@ -105,3 +105,8 @@
     -webkit-mask-image: url("../icon/trash.svg");
     mask-image: url("../icon/trash.svg");
 }
+
+.icon\:close::before{
+    -webkit-mask-image: url("../icon/close.svg");
+    mask-image: url("../icon/close.svg");
+}

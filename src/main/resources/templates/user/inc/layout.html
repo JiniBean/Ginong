@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/icon.css">
-    <link rel="stylesheet" href="/css/user/searchBar.css">
+    <link rel="stylesheet" href="/css/user/search-bar.css">
     <link rel="stylesheet" href="/css/user/inc/header.css">
     <link rel="stylesheet" href="/css/component.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.ico">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="module" src="/js/user/inc/layout.js" defer></script>
 </head>
@@ -30,7 +31,7 @@
         <div th:replace="~{user/inc/category}">카테고리</div>
 
         <!-- search-bar -->
-        <div th:replace="~{user/inc/search-bar}">검색창</div>
+        <section th:replace="~{user/inc/search-bar}">검색창</section>
 
         <!-- main 부분 -->
         <div layout:fragment="main">메인</div>
