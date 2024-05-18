@@ -35,7 +35,7 @@
 		</set>
 		<where>
 			<if test="id != null">
-				id = #{noticeId}
+				id = #{id}
 			</if>
 		</where>
    </update>

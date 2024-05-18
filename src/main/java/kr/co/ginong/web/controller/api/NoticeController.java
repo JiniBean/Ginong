@@ -27,7 +27,7 @@ public class NoticeController {
         return service.getList();
     }
 
-    @GetMapping("{noticeId}")
+    @GetMapping("/{noticeId}")
     public Notice detail(@PathVariable(required = false) Long noticeId) {
         return service.getById(noticeId);
     }
@@ -37,11 +37,9 @@ public class NoticeController {
         return service.getCategories();
     }
 
-    @PutMapping("{noticeId}")
+    @PutMapping("/{noticeId}")
     public void updateNotice(@PathVariable Long noticeId, @RequestBody Notice notice) {
-        System.out.println(noticeId+", "+notice);
-        
-        service.update(noticeId, notice);
+        service.update(notice);
     }
 
     @PostMapping()
@@ -51,8 +49,8 @@ public class NoticeController {
     }
 
     @DeleteMapping("{noticeId}")
-    public void deleteNotice(@PathVariable Long noticeId, @RequestBody Notice notice) {
-        service.delete(noticeId, notice);
+    public void deleteNotice(@PathVariable(name = "noticeId") Long id) {
+        service.delete(id);
     }
 
 }

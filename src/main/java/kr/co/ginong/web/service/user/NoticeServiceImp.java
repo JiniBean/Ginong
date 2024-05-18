@@ -38,14 +38,15 @@ public class NoticeServiceImp implements NoticeService {
     public void insert(Notice notice) {
         repository.save(notice);
     }
-   
+
     @Override
-    public void update(Long noticeId, Notice notice) {
-        repository.update(noticeId, notice);
+    public void update(Notice notice) {
+        repository.update(notice);
     }
 
     @Override
-    public void delete(Long noticeId, Notice notice) {
-        repository.delete(noticeId, notice);
+    public void delete(Long id) {
+        repository.delete(id);
     }
+
 }

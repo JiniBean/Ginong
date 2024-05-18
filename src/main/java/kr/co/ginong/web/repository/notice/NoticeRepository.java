@@ -2,6 +2,7 @@ package kr.co.ginong.web.repository.notice;
 
 import kr.co.ginong.web.entity.notice.Notice;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface NoticeRepository {
 
     void save(Notice notice);
     
-    void update(Long noticeId, Notice notice);
+    void update(Notice notice);
 
-    void delete(Long noticeId, Notice notice);
+    void delete(Long id);
 }

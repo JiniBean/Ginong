@@ -13,8 +13,8 @@ public interface NoticeService {
     List<NoticeCategory> getCategories();
 
     void insert(Notice notice);
-    void update(Long noticeId, Notice notice);
-    void delete(Long noticeId, Notice notice);
+    void update(Notice notice);
+    void delete(Long id);
 
     
 }

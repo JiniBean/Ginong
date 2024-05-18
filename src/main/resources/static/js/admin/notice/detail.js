@@ -34,12 +34,14 @@ createApp({
         clickDropdown() {
             this.showDropdown = !this.showDropdown;
         },
+
         clickDropdownElement(c) {
             console.log(c);
             //this.selectedCategory = c;
             this.notice.categoryId = c.id;
             this.showDropdown = !this.showDropdown;
         },
+
         getCategoryName() {
             for (let item of this.category) {
                 if (this.notice.categoryId == item.id)
@@ -47,6 +49,7 @@ createApp({
             }
             return '선택';
         },
+
         goList() {
             location.href = `/admin/notice/list`;
         },
@@ -58,14 +61,23 @@ createApp({
                 body: JSON.stringify(this.notice),
             };
 
-            // let nnnotice = {"id": 0, "title": null, "regDate": null};
-            // let dddotice = {"data":{"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}}
-            // let fffotice = {"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}
+            console.log(requestOptions);
+            console.log("id:", this.notice.id);
+            await fetch(`/api/notices/${this.notice.id}`, requestOptions);
+            this.goList();
+        },
+
+        async deleteNotice() {
+            let requestOptions = {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.notice),
+            };
 
             console.log(requestOptions);
-
+            console.log("id:", this.notice.id);
             await fetch(`/api/notices/${this.notice.id}`, requestOptions);
-            // this.goList();
+            this.goList();
         },
     },
     async created() {
