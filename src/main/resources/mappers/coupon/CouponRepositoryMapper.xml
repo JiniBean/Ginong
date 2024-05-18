@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ginong.web.repository.coupon.CouponRepository">
+
+    <select id="findAll" resultType="Coupon">
+		select
+			*
+		from COUPON
+	</select>
+
+	<select id="findById" resultType="Coupon">
+		select
+		*
+		from COUPON
+		where id = #{id}
+	</select>
+
+<!--	<update id="update" parameterType="CouponHistory">-->
+<!--		update COUPON_HISTORY-->
+<!--		set USED_AMT = #{usedAmt}, USED_DATE = current_timestamp(), ORDER_ID = #{orderId}-->
+<!--		where MEMBER_id = #{memberId} and id = #{id} and COUPON_ID = #{couponId};-->
+<!--	</update>-->
+
+<!--	<select id="countByMemberId" resultType="Integer">-->
+<!--		SELECT COUNT(*)-->
+<!--		FROM COUPON_HISTORY-->
+<!--		WHERE MEMBER_ID = #{memberId}-->
+<!--		AND USED_DATE IS NULL-->
+<!--	</select>-->
+
+</mapper>

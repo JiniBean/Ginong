@@ -16,7 +16,7 @@ public class Coupon {
     private long	couponCategoryId;
     private String	name;
     private long	discountAmount;
-    private long	discountUnit;
+    private String	discountUnit;
     private long	minPaymentAmt;
     private long	maxPaymentAmt;
     private Date	startDate;

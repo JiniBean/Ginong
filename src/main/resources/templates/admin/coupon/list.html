@@ -50,45 +50,45 @@
 
             <section class="d:flex fl-dir:column gap:5 md:gap:10 w:10p" >
                 <h1 class="d:none">상품카드 목록</h1>
-                <div class="fl-grow:1 n-btn n-btn:outline border-color:base-3 box-shadow:1 ml:7 h:4">
-                    <a class="w:10p icon icon-size:4 icon:plus "> 상품 추가</a>
+                <div class="fl-grow:1 n-btn n-btn:outline border-color:base-3 box-shadow:1 ml:7 h:4" @click="goReg()">
+                    <a class="w:10p icon icon-size:4 icon:plus"> 상품 추가</a>
                 </div>
             
-                <div class="d:flex ai:center fl-dir:row gap:3" >
+                <div class="d:flex ai:center fl-dir:row gap:3" v-for="coupon of list">
                     <div>
                         <input type="checkbox" class="n-toggle n-toggle-type:check n-toggle-size:2" name="state">
                     </div>
                     <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
-                        <a href="#" class="d:flex w:10p">
-                            <div class="d:flex fl-dir:column gap:2 w:10p">
-                                <div class="d:flex fl-dir:row jc:space-between ai:center">
-                                    <span class="fw:3">회원 가입 쿠폰</span>
-                                    <div class="n-dropdown ">
-                                        <button id="dropdown-btn" type="button" 
-                                            class="icon icon:dots_three_outline_vertical_fill icon-size:1 cursor:pointer" @click.prevent="clickDropdown()">버튼</button>
-                                        <ul :class="
-                                                [
-                                                    showDropdown ? 'active' : '',
-                                                    'dropdown-list dropdown-transformx'
-                                                ]">                                         
-                                          <li>
-                                            <button>
-                                              <span class="va:middle deco icon-size:1 icon:pencil_simple">수정하기</span>
-                                            </button>
-                                          </li>
-                                          <li>
-                                            <button>
-                                              <span class="va:middle deco icon-size:1 deco-color:accent-2 icon:trash color:accent-2">삭제하기</span>
-                                            </button>
-                                          </li>
-                                        </ul>
-                                    </div>
+
+                        <div class="d:flex fl-dir:column gap:2 w:10p" @click="goDetail(coupon)">
+                            <div class="d:flex fl-dir:row jc:space-between ai:center">
+                                <span class="fw:3"> {{coupon.name}} </span>
+                                <div class="n-dropdown ">
+                                    <button id="dropdown-btn" type="button"
+                                        class="icon icon:dots_three_outline_vertical_fill icon-size:1 cursor:pointer" @click.prevent="clickDropdown(coupon)">버튼</button>
+                                    <ul :class="
+                                            [
+                                                coupon.showDropdown ? 'active' : '',
+                                                'dropdown-list dropdown-transformx'
+                                            ]">
+                                      <li>
+                                        <button>
+                                          <span class="va:middle deco icon-size:1 icon:pencil_simple">수정하기</span>
+                                        </button>
+                                      </li>
+                                      <li>
+                                        <button>
+                                          <span class="va:middle deco icon-size:1 deco-color:accent-2 icon:trash color:accent-2">삭제하기</span>
+                                        </button>
+                                      </li>
+                                    </ul>
                                 </div>
-                                <span>할인 비율/금액 : 10%</span>
-                                <span>기한 : 가입일로부터 7일</span>
-                                <span>상태 : 진행중</span>
                             </div>
-                        </a>
+                            <span>할인 비율/금액 : {{ coupon.discountAmount }}{{ coupon.discountUnit }}</span>
+                            <span>기한 : 가입일로부터 7일</span>
+                            <span>상태 : 진행중</span>
+                        </div>
+
                     </div>
                 </div>
                 

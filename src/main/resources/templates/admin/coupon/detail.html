@@ -7,26 +7,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <script src="/js/admin/notice/detail.js" defer></script> -->
+    <script src="/js/admin/coupon/detail.js" defer></script>
 </head>
 
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:20 max-w:9 w:10p pl:4 pr:4 pt:4 md:pl:0 md:pr:0 md:pb:4">
-    <div class="d:none md:d:flex w:10p jc:center fw:3 fs:4">쿠폰 상세</div>
+    <div class="d:none md:d:flex w:10p jc:center fw:3 fs:4">쿠폰 등록</div>
 
-    <section class="w:10p" id="reg-form">
-        <h1 class="d:none">쿠폰 상세</h1>        
+    <section class="w:10p">
+        <h1 class="d:none">쿠폰 등록</h1>
 
-        <form class="n-form:outline-none d:flex fl-dir:column gap:8 md:gap:13 h:10p">
+        <div class="n-form:outline-none d:flex fl-dir:column gap:8 md:gap:13 h:10p">
             <!-- 쿠폰 카테고리 -->
-            <div id="category" class="n-dropdown category w:5">
+            <div id="coupon-category" class="n-dropdown category w:5">
                 <button type="button" class="dropdown-btn n-btn n-btn:outline w:10p ai:center jc:space-between icon icon:RT icon-size:1 icon-color:main-6 deco-pos:right"
-                        @click.prevent="clickDropdown()">
+                        @click.prevent="clickCouponDropdown()">
                     <span class="fl:fill">{{ getCategoryName() }}</span>
                 </button>
                 <ul :class="
                         [
-                            showDropdown ? 'active' : '',
+                            showCouponDropdown ? 'active' : '',
                             'dropdown-list w:10p'
                         ]" >
                     <li class="d:flex jc:center p:1" v-for="c of category"
@@ -41,20 +41,21 @@
                 <div>쿠폰 이름</div>
                 <input type="text" class="n-textbox n-textbox-type:underline" name="title" />
             </div>
+
             <div class="d:flex fl-dir:column gap:2">
                 <div>할인율/금액</div>
-                <div class="d:flex gap:3">
-                    <div class="d:flex fl-dir:column gap:2"></div>
-                    <input type="text" class="n-textbox n-textbox-type:underline" name="rate" />
+                <div>
+                    <div class="d:flex gap:3">
+                        <input type="text" class="n-textbox n-textbox-type:underline" name="rate" />
                         <!-- 할인율 카테고리? -->
-                        <div id="category" class="n-dropdown category w:5">
+                        <div id="discount-category" class="n-dropdown category w:5">
                             <button type="button" class="dropdown-btn n-btn n-btn:outline w:10p ai:center jc:space-between icon icon:RT icon-size:1 icon-color:main-6 deco-pos:right"
-                                    @click.prevent="clickDropdown()">
+                                    @click.prevent="clickUnitDropdown()">
                                 <span class="fl:fill">{{ getCategoryName() }}</span>
                             </button>
                             <ul :class="
                                     [
-                                        showDropdown ? 'active' : '',
+                                        showUnitDropdown ? 'active' : '',
                                         'dropdown-list w:10p'
                                     ]" >
                                 <li class="d:flex jc:center p:1" v-for="c of category"
@@ -71,43 +72,66 @@
                 <div>최소 구매 금액</div>
                 <input type="text" class="n-textbox n-textbox-type:underline" name="rate" />
             </div>
+
             <div class="d:flex fl-dir:column gap:2">
                 <div>최대 할인 금액</div>
                 <input type="text" class="n-textbox n-textbox-type:underline" name="rate" />
             </div>
+
             <div class="d:flex fl-dir:column gap:2">
-                <label>사용 가능 기한</label>
-                <div class="d:flex fl-dir:row gap:2 ai:center">
-                    <input type="date" class="n-textbox n-textbox-type:underline" name="starDate"
-                        required title="공지 게시일을 선택해주세요" v-model="formattedStartDate" readonly="readonly">
-                    <span>-</span>
-                    <input type="date" class="n-textbox n-textbox-type:underline" name="endDate" 
-                        required title="공지 종료일을 선택해주세요" v-model="formattedEndDate" readonly="readonly">
+                <label>
+                    <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button"/>
+                    기한 직접 설정
+                </label>
+                <div>
+                    <div class="d:flex fl-dir:row gap:2 ai:center">
+                        <input type="date" class="n-textbox n-textbox-type:underline" name="starDate"
+                               required title="쿠폰 사용 게시일을 선택해주세요">
+                        <span>-</span>
+                        <input type="date" class="n-textbox n-textbox-type:underline" name="endDate"
+                               required title="쿠폰 만료일을 선택해주세요">
+                    </div>
                 </div>
             </div>
             <div class="d:flex fl-dir:column gap:2">
+                <label>
+                    <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button"/>
+                    기한 선택 설정
+                </label>
+                <div class="d:flex jc:space-between gap:3">
+                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">보름</button>
+                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">한달</button>
+                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">두달</button>
+                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">세달</button>
+                </div>
+            </div>
+
+            <div class="d:flex fl-dir:column gap:2">
                 <div>쿠폰 발급 수</div>
-                <input type="text" class="n-textbox n-textbox-type:underline" name="rate" v-model="notice.title"/>
+                <!--                <input type="text" class="n-textbox n-textbox-type:underline" name="rate" v-model="coupon.title"/>-->
+                <input type="text" class="n-textbox n-textbox-type:underline" name="release_date"/>
             </div>
             <div class="d:flex fl-dir:column gap:2">
                 <div>쿠폰 사용 수</div>
-                <input type="text" class="n-textbox n-textbox-type:underline" name="rate" v-model="notice.title"/>
+                <!--                <input type="text" class="n-textbox n-textbox-type:underline" name="rate" v-model="notice.title"/>-->
+                <input type="text" class="n-textbox n-textbox-type:underline" name="rate"/>
             </div>
             <div class="d:flex fl-dir:column gap:2">
                 <span>상세 설명</span>
-                <input type="text" class="n-textbox min-h:6" name="title" value="테스트" v-model="notice.content"/>
+                <!--                <input type="text" class="n-textbox min-h:6" name="desc" value="쿠폰 상세 설명" v-model="notice.content"/>-->
+                <input type="text" class="n-textbox min-h:6" name="desc" value="쿠폰 상세 설명" />
             </div>
 
-            <div class = "display:flex flex-direction:row gap:4">
+            <div class="d:flex flex-direction:row gap:4">
                 <span class="d:flex ai:center">상태</span>
                 <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
             </div>
-        
+
             <div class="d:flex fl-dir:row w:10p gap:8 jc:space-between">
                 <button class="n-btn n-btn-color:accent n-btn-size:2 min-w:3 w:10p">삭제</button>
                 <button class="n-btn n-btn-size:2 min-w:3 w:10p">수정</button>
             </div>
-        </form>
+        </div>
     </section>
 </main>
 </body>

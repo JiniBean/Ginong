@@ -6,6 +6,7 @@ createApp({
         return {            
             tabIndex: 0,
             showDropdown: false,
+            list: [],
         }
     },
     methods:{
@@ -22,17 +23,39 @@ createApp({
                 // 취소요청중 취소완료 상태
                 this.loadCancelList();
             }
-
         },
 
         // 점 버튼 누르기
-        clickDropdown() {
-            this.showDropdown = !this.showDropdown;
-        }
+        clickDropdown(coupon) {
+            // 특정 카드의 showDropdown이 true/false로 바뀌어야 함
+            let dropdownStatus = !coupon.showDropdown;
+
+            // 일단 모든 점 버튼 메뉴를 닫음
+            for(let item of this.list) {
+                item.showDropdown = false;
+            }
+            // coupon.showDropdown = !coupon.showDropdown;
+            coupon.showDropdown = dropdownStatus;
+        },
+
+        goReg() {
+            location.href = `/admin/coupon/reg`;
+        },
+
+        goUpdate() {
+            location.href = `/admin/coupon/update`;
+        },
+
+        goDetail(coupon) {
+            let couponId = coupon.id;
+            location.href = `/admin/coupon/detail?couponId=${couponId}`;
+        },
 
     },
     async created() {
-        
+        let response = await fetch(`/api/coupons`);
+        let list = await response.json();
+        this.list = list;
     },
 }).mount('main');
 
