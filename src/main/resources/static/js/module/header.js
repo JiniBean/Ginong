@@ -76,8 +76,16 @@ export default class Header {
 
 
         headerSearchIcon.addEventListener('click', function(e) {
+            // URL 경로를 찾기 위한 코드 => 경로에 따라 상품페이지가 아닐 시, 검색창이 열리지 않도록 하기 위함(현재 상품만 검색 가능)
+            const pathname = window.location.pathname;
+            const splitPathname = pathname.split('/');
+            // console.log(splitPathname); //=> ['', 'notice', 'list']
+            const path = splitPathname[1]; // notice
+
             // 헤더에 있는 검색 아이콘 클릭 이벤트
             e.preventDefault();
+
+            if(path !== 'product') return;
             if (searchBar.classList.contains('d:none')) {
                 // 검색 창 화면 출력 및 아이콘 X 로 변경
                 searchBar.classList.remove('d:none');

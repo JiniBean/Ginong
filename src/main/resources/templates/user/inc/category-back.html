@@ -15,14 +15,23 @@
             <a href="/product/list?c=3" class="h:10p"
                th:class="${{param.c}}==3 ? 'fw:3 fs:3 h:10p': 'fs:3 h:10p'" th:data-id=1>반찬/가공식품류</a>
           </li>
-          <li class="h:10p">
-            <a href="/order/list" class="fs:3 h:10p">주문 내역</a>
+          <li class="h:10p" th:classappend="${active}=='order' ? 'active' : ''">
+            <a href="/order/list" class="fs:3 h:10p"
+               th:classappend="${active}=='order' ? 'fw:3': ''">
+              주문 내역
+            </a>
           </li>
-          <li class="h:10p">
-            <a href="/notice/list" class="fs:3 h:10p">공지사항</a>
+          <li class="h:10p" th:classappend="${active}=='notice' ? 'active' : ''">
+            <a href="/notice/list" class="fs:3 h:10p"
+               th:classappend="${active}=='notice' ? 'fw:3': ''">
+              공지 사항
+            </a>
           </li>
-          <li class="h:10p">
-            <a href="/faq" class="fs:3 h:10p">고객센터</a>
+          <li class="h:10p" th:classappend="${active}=='faq' ? 'active' : ''">
+            <a href="/faq" class="fs:3 h:10p"
+               th:classappend="${active}=='faq' ? 'fw:3': ''">
+              고객센터
+            </a>
           </li>
         </ul>
       </nav>

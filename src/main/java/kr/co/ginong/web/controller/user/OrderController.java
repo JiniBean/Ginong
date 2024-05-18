@@ -310,7 +310,9 @@ public class OrderController {
     }
 
     @GetMapping("list")
-    public String list() {
+    public String list(Model model) {
+        // 카테고리-주문내역 클릭 시, 사용자에게 시각효과를 보여주기 위한 상태값 전달
+        model.addAttribute("active", "order");
         return "user/order/list";
     }
 
