@@ -122,4 +122,9 @@ public class ProductController {
 
         return "user/product/detail";
     }
+    @GetMapping("recent")
+    public String list() {
+        return "user/recent/list";
+    }
+
 }
