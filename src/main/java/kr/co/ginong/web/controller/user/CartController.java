@@ -1,24 +1,17 @@
 package kr.co.ginong.web.controller.user;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import kr.co.ginong.web.entity.cart.Cart;
-import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.entity.order.OrderItem;
-import kr.co.ginong.web.entity.product.ProductView;
-import kr.co.ginong.web.service.user.CartService;
-import kr.co.ginong.web.service.user.LocationService;
-import kr.co.ginong.web.service.user.ProductService;
+import kr.co.ginong.web.service.cart.CartService;
+import kr.co.ginong.web.service.order.LocationService;
+import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("cart")

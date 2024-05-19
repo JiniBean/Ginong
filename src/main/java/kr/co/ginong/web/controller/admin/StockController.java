@@ -2,13 +2,10 @@ package kr.co.ginong.web.controller.admin;
 
 import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.product.*;
-import kr.co.ginong.web.service.user.ProductService;
-import kr.co.ginong.web.service.user.StockService;
+import kr.co.ginong.web.service.product.ProductService;
+import kr.co.ginong.web.service.product.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller("stockController")

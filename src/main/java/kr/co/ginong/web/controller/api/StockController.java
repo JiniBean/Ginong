@@ -1,11 +1,7 @@
 package kr.co.ginong.web.controller.api;
 
-import kr.co.ginong.web.entity.cart.Cart;
 import kr.co.ginong.web.entity.product.StockView;
-import kr.co.ginong.web.service.user.CartService;
-import kr.co.ginong.web.service.user.LocationService;
-import kr.co.ginong.web.service.user.ProductService;
-import kr.co.ginong.web.service.user.StockService;
+import kr.co.ginong.web.service.product.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

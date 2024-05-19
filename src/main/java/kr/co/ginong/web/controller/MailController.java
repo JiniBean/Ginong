@@ -1,8 +1,8 @@
 package kr.co.ginong.web.controller;
 
 import kr.co.ginong.web.entity.member.Member;
-import kr.co.ginong.web.service.MailService;
-import kr.co.ginong.web.service.user.MemberService;
+import kr.co.ginong.web.service.member.MailService;
+import kr.co.ginong.web.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

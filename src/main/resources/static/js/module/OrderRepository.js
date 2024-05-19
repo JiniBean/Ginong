@@ -58,6 +58,8 @@ export default class OrderRepository{
 
     async findExRef(query,sortType,isUser,idx){
         let url = `${baseUrl}/api/order/exrf?`;
+        if(idx===2 && sortType)
+            sortType = 1
 
         if(query)
             url += `q=${query}&`
@@ -74,7 +76,6 @@ export default class OrderRepository{
         if(idx==3)
             url += 'e=true&r=true'
 
-        console.log(url)
         let response = await this.findPromise(url);
         return await response.json();
     }

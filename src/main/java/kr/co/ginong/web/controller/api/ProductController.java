@@ -1,10 +1,7 @@
 package kr.co.ginong.web.controller.api;
 
-import kr.co.ginong.web.dto.Page;
-import kr.co.ginong.web.dto.Pager;
-import kr.co.ginong.web.dto.ProductFilter;
 import kr.co.ginong.web.entity.product.ProductView;
-import kr.co.ginong.web.service.user.ProductService;
+import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -4,14 +4,13 @@ import java.util.List;
 
 import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.order.*;
-import kr.co.ginong.web.service.user.PaymentService;
+import kr.co.ginong.web.service.order.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import kr.co.ginong.web.service.user.LocationService;
-import kr.co.ginong.web.service.user.MemberService;
-import kr.co.ginong.web.service.user.OrderService;
+import kr.co.ginong.web.service.order.LocationService;
+import kr.co.ginong.web.service.order.OrderService;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -37,6 +36,10 @@ public class OrderController {
         if(isUser && userDetails!=null)
             memberId = userDetails.getId();
 
+        List<OrderView> list = service.getList(memberId,query,sort);
+        System.out.println("======================");
+        System.out.println(list);
+        System.out.println("======================");
         return service.getList(memberId,query,sort);
     }
 

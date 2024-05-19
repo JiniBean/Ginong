@@ -42,6 +42,26 @@ createApp({
 
             }
 
+        },
+        resetQuery(){
+            this.query = '';
+        },
+        goDetail(id){
+
+            // switch (this.orderType) {
+            //     case 1:
+            //         this.list = await repository.findAll(this.query,sortType,false);
+            //         break;
+            //     case 2:
+            //         this.list = await repository.findExRef(this.query,sortType,false,1);
+            //         break;
+            //     case 3:
+            //         this.list = await repository.findExRef(this.query,sortType,false,2)
+            //         break;
+            //     case 4:
+            //         this.list = await repository.findCancel(this.query,false)
+            //
+            // }
         }
     },
     mounted(){

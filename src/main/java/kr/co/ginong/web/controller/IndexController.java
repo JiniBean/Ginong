@@ -1,7 +1,7 @@
 package kr.co.ginong.web.controller;
 
 import kr.co.ginong.web.entity.product.ProductView;
-import kr.co.ginong.web.service.user.ProductService;
+import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

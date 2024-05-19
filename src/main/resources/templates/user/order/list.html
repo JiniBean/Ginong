@@ -46,10 +46,11 @@
                         </div>
                         <div class="d:flex fl-dir:row gap:1">
                             <span class="fs:2 md:fs:3">{{ l.prettyName}} </span>
-                            <span v-if="l.count>0">외 {{ l.count}}건</span>
+                            <span v-if="l.count > 0">외 {{ l.count}}건</span>
                         </div>
                         <div class="d:flex fl-dlr:row gap:2"  >
-                            <span class="total-price">{{Intl.NumberFormat().format(l.totalAmt)}}원</span>
+                            <span v-if="l.cancelId != null" class="total-price">{{Intl.NumberFormat().format(l.totalAmt)}}원</span>
+                            <span v-else class="total-price">{{Intl.NumberFormat().format(l.price)}}원</span>
                             <span class="deco icon:caret_right icon-size:1 deco-position:right ai:center color:base-7 ">
                                 상세보기
                             </span>
@@ -59,8 +60,8 @@
                 <div class="d:flex fl-dir:row jc:space-between w:10p gap:2">
                     <button class="n-btn n-btn-type:filled n-btn-size:1 w:3p">1:1 문의</button>
                     <button v-if="tabIndex==0" class="n-btn n-btn-type:filled n-btn-size:1 w:3p">배송조회</button>
-                    <button v-if="tabIndex==0" :disabled="l.categoryId>4" class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="confirmOrder(l)">구매확정</button>
-                    <button v-else class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="addCart(l.id)">장바구니 담기</button>
+                    <button v-if="tabIndex==0" :disabled="l.categoryId>4" :class="{'disabled':l.categoryId>4}" class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="confirmOrder(l)">구매확정</button>
+                    <button v-else class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="addCart(l)">장바구니 담기</button>
                 </div>
                    </div>
         </section>

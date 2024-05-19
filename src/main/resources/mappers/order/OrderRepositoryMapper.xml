@@ -14,7 +14,7 @@
 				AND id in (
 					SELECT oi.order_id from ORDER_ITEM oi
 					left join PRODUCT p on oi.product_id = p.id
-					WHERE p.name LIKE '%#{query}%'
+					WHERE p.name LIKE '%${query}%'
 				)
 			</if>
 			<if test="sort != null">

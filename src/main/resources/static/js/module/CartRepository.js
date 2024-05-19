@@ -14,6 +14,22 @@ export default class CartRepository{
 
     }
 
+    async findAll(){
+        let url = `${baseUrl}/api/cart`;
+
+        let response = await this.findPromise(url)
+
+        // 응답의 상태 코드 확인
+        if (response.status === 200) {
+            //response가 비었는지 확인
+            if (response.headers.get('content-length') === '0') {
+                return null;
+            }
+            let item = await response.json();
+            return item;
+        }
+    }
+
     async findItem(prdId){
         let url = `${baseUrl}/api/cart/${prdId}`;
 

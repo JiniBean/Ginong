@@ -7,13 +7,12 @@ import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberRole;
 import kr.co.ginong.web.entity.order.Location;
-import kr.co.ginong.web.service.user.LocationService;
-import kr.co.ginong.web.service.user.MemberService;
+import kr.co.ginong.web.service.order.LocationService;
+import kr.co.ginong.web.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 

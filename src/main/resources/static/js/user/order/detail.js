@@ -19,22 +19,22 @@ createApp({
         checkAll(e) {
             let checked = e.target.checked
             // this.order.orderItems.forEach(item => item.checked = checked)
-            this.list.forEach(itemList => itemList.checked = checked)
+            this.list.forEach(itemList => itemList.checked = checked);
         }
     },
     async created(){
-    let params = new URLSearchParams(location.search);
-    let orderId = params.get('orderId')
+        let params = new URLSearchParams(location.search);
+        let orderId = params.get('orderId')
 
-    let repository = new Repository();
-    this.list = await repository.findItems(orderId);
-    this.order = this.list[0];
-    this.state = await repository.findCategories();
-    this.payment = await repository.findPayment(orderId)
-    this.location = await repository.findLocation(orderId)
+        let repository = new Repository();
+        this.list = await repository.findItems(orderId);
+        this.order = this.list[0];
+        this.state = await repository.findCategories();
+        this.payment = await repository.findPayment(orderId)
+        this.location = await repository.findLocation(orderId)
 
-    let memberRepository = new MemberRepository();
-    this.member = await memberRepository.findUser();
+        let memberRepository = new MemberRepository();
+        this.member = await memberRepository.findUser();
     },
 }).mount('main');
 

@@ -2,7 +2,7 @@ package kr.co.ginong.web.controller.api;
 
 import kr.co.ginong.web.entity.notice.Notice;
 import kr.co.ginong.web.entity.notice.NoticeCategory;
-import kr.co.ginong.web.service.user.NoticeService;
+import kr.co.ginong.web.service.notice.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

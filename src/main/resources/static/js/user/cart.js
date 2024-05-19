@@ -14,7 +14,14 @@ createApp({
     },
     methods: {
         async deleteHandler(isAll) {
+
+            let isTrue= confirm("정말로 삭제하시겠어요?");
+
+            if(!isTrue)
+                return;
+
             let inputs;
+
             if (isAll)//전체 삭제인지 판별
                 inputs = document.querySelectorAll("input[name='chkId']");
             else // 선택삭제라면 체크된 노드만

@@ -38,6 +38,11 @@ createApp({
         },
         // 구매확정하기
         async confirmOrder(o) {
+
+            let isTrue = confirm("구매확정 후에는 교환과 환불이 어려워요\n정말로 구매확정 하시겠어요?");
+            if(!isTrue)
+                return;
+
             let order={
                 id:o.id,
                 categoryId:5,
@@ -50,25 +55,56 @@ createApp({
                 o.category = '구매확정';
             }
         },
-        async addCart(orderId){
+        // 장바구니 담기
+        async addCart(order){
 
-            //주문 번호로 주문 상세 목록 갖고 오기
-            let repository = new Repository;
-            let items = await repository.findItems(orderId);
-
-            //상품 아이디 배열로 만들기
-            let list = [];
-            items.forEach(i => list.push(i.productId));
-
-            //장바구니에 추가하기
             let cartRepository = new CartRepository;
-            let valid = cartRepository.add(null, list);
+            let valid = false;
 
-            //성공하면 헤더의 장바구니 상품 숫자 바꾸기
+            //주문 취소건이라면
+            if(order.cancelId){
+
+                // 주문 번호로 주문 상세 목록 갖고 오기
+                let repository = new Repository;
+                let items = await repository.findItems(order.id);
+
+                //주문한 상품 아이디들 배열로 만들기
+                let list = [];
+                items.forEach(i => list.push(i.productId));
+
+                //현재 장바구니 리스트 가져오기
+                let cartList = await cartRepository.findAll();
+
+                //장바구니에 해당 상품 있는지 확인
+                cartList.forEach(cart => {
+                    let idx = list.indexOf(cart.productId)
+
+                    //만약 있다면 리스트에서 지워버리기
+                    if(idx>-1)
+                        list.splice(idx,1);
+                })
+
+                //지우고 남은 상품 있다면 장바구니에 저장하기
+                if(list.length >0)
+                    valid = await cartRepository.addList(list);
+            }
+            //교환, 환불건이라면
+            else {
+                //장바구니에 해당 상품 있는지 판별
+                let item = await cartRepository.findItem(order.productId)
+
+                //없으면 장바구니에 추가
+                if(!item)
+                    valid = await cartRepository.add(order.productId)
+            }
+
+            // 성공하면 헤더의 장바구니 상품 숫자 바꾸기
             if(valid){
                 let header = new Header;
                 header.renewCart();
             }
+
+            alert("이미 있는 상품을 제외하고 장바구니에 담았어요!");
 
         }
     },

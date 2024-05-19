@@ -4,9 +4,10 @@ window.addEventListener("load", function () {
 
     //전체 선택 눌렀을 때
     checkAll.onclick = function () {
-      let checkboxes = document.querySelectorAll(".n-toggle-type\\:check");
+      let checkboxes = document.querySelectorAll("input[type='checkbox']");
+
       // 전체 선택 버튼의 상태 값에 따라 모든 체크 박스 체크 상태 바꾸기
-      checkboxes .forEach(check => check.checked = this.checked)
+      checkboxes.forEach(check => check.checked = this.checked)
 
     }
 })
