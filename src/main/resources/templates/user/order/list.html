@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <title>Product-List</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="/js/user/order/list.js" defer></script>
+  <script type="module" src="/js/user/order/list.js" defer></script>
   <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
@@ -17,46 +17,52 @@
         <nav>
             <h1 class="d:none">탭</h1>
             <ul id='tabbar' class="n-tabbar n-tab-grow w:10p">
-                <li :class="tabIndex == 0 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(0)">주문 내역</a></li>
-                <li :class="tabIndex == 1 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(1)">주문 취소 내역</a></li>
+                <li :class="tabIndex == 0 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="getList(0)">주문 내역</a></li>
+                <li :class="tabIndex == 1 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="getList(1)">주문 취소 내역</a></li>
             </ul>
         </nav>
         
         <!-- 주문 내역 카드 -->
-        <section id="orderCard" class="d:flex fl-dir:column gap:2 pt:5 pb:5" v-for="l in list">
-            <span ref="statusElement" class="d:flex flex-grow:1 jc:right color:sub-5 fw:3 status">{{ state[l.type] }}</span>
+        <section id="orderCard" class="d:flex fl-dir:column gap:2 pt:5 pb:5" v-for="l of list">
+
+
+            <div class="d:flex jc:space-between">
+                <div>수령인 : {{l.receiverName}}님</div>
+                <div>
+                    <span v-if="tabIndex==0" ref="statusElement" class="color:sub-5 fw:3 status">{{l.category}}</span>
+                    <span v-else-if="l.cancelId" ref="statusElement" class="d:flex flex-grow:1 jc:right color:sub-5 fw:3 status">취소완료</span>
+                    <span v-else-if="l.exchangeId" ref="statusElement" class="d:flex flex-grow:1 jc:right color:sub-5 fw:3 status">교환{{code[l.exchState]}}</span>
+                    <span v-else ref="statusElement" class="d:flex flex-grow:1 jc:right color:sub-5 fw:3 status">환불{{code[l.rfndState]}}</span>
+                </div>
+            </div>
+
             <div class="d:flex fl-dir:column bd bd-radius:2 bd-color:base-4 pt:2 pb:2 pr:5 pl:5 gap:3">
                 <div class="d:flex fl-dir:row gap:3">
                     <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
-                    <div class="d:flex fl-dir:column jc:center gap:3">
+                    <div class="d:flex fl-dir:column jc:center gap:3 cursor:pointer"  @click="goDetail(l.id)">
                         <div>
-                            <span class="fs:2 md:fs:3 color:base-4">{{ l.date }}</span>
+                            <span class="fs:2 md:fs:3 color:base-4">{{l.date}}</span>
                             <!-- <span class="fs:2 md:fs:3 color:base-4 pl:2">환불</span> -->
                         </div>
                         <div class="d:flex fl-dir:row gap:1">
-                            <span class="fs:2 md:fs:3">{{ itemsMap[l.id] && itemsMap[l.id][0].productName }} </span>
-                            <span v-if="itemsMap[l.id] && itemsMap[l.id].length - 1 === 0"></span>
-                            <span v-else>외 {{ itemsMap[l.id] && itemsMap[l.id].length - 1 }}건</span>
+                            <span class="fs:2 md:fs:3">{{ l.prettyName}} </span>
+                            <span v-if="l.count>0">외 {{ l.count}}건</span>
                         </div>
-                        <div class="d:flex fl-dlr:row gap:2 " >
-                            <span class="total-price">{{ calcTotalPrice(itemsMap[l.id]) }}원</span>
-                            <span class="deco icon:caret_right icon-size:1 deco-position:right ai:center color:base-7"
-                                  @click="goDetail(l)">
+                        <div class="d:flex fl-dlr:row gap:2"  >
+                            <span class="total-price">{{Intl.NumberFormat().format(l.totalAmt)}}원</span>
+                            <span class="deco icon:caret_right icon-size:1 deco-position:right ai:center color:base-7 ">
                                 상세보기
                             </span>
                         </div>
                     </div>
                 </div>
-                <div v-if="l.type < 5" class="d:flex fl-dir:row jc:space-between w:10p gap:2">
-                    <div class="n-btn n-btn-type:filled n-btn-size:1 w:3p">1:1 문의</div>
-                    <div class="n-btn n-btn-type:filled n-btn-size:1 w:3p">배송조회</div>
-                    <div class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click="confirmOrder(l)">구매확정</div>
+                <div class="d:flex fl-dir:row jc:space-between w:10p gap:2">
+                    <button class="n-btn n-btn-type:filled n-btn-size:1 w:3p">1:1 문의</button>
+                    <button v-if="tabIndex==0" class="n-btn n-btn-type:filled n-btn-size:1 w:3p">배송조회</button>
+                    <button v-if="tabIndex==0" :disabled="l.categoryId>4" class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="confirmOrder(l)">구매확정</button>
+                    <button v-else class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="addCart(l.id)">장바구니 담기</button>
                 </div>
-                <div v-else class="d:flex fl-dir:row jc:space-between w:10p gap:2">
-                    <div class="n-btn n-btn-type:filled n-btn-size:1 w:4p">1:1 문의</div>
-                    <div class="n-btn n-btn-type:filled n-btn-size:1 w:4p">장바구니</div>
-                </div>
-            </div>
+                   </div>
         </section>
     </main>
 </body>

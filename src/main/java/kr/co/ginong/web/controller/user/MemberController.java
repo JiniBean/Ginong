@@ -1,14 +1,11 @@
 package kr.co.ginong.web.controller.user;
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.Order;
-import kr.co.ginong.web.entity.point.PointHistory;
 import kr.co.ginong.web.entity.product.ProductView;
-import kr.co.ginong.web.repository.point.PointHistoryRepository;
 import kr.co.ginong.web.service.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -228,6 +225,11 @@ public class MemberController {
 //        model.addAttribute("order",order);
 
         return "user/mypage/index";
+    }
+
+    @GetMapping("mypage/infoUpt")
+    public String infoUpt(){
+        return "/user/mypage/info-update";
     }
 
 }

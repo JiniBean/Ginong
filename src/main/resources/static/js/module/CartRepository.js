@@ -69,6 +69,7 @@ export default class CartRepository{
         }
     }
 
+
     async count(){
         let url = `${baseUrl}/api/cart/c`;
 
@@ -87,10 +88,24 @@ export default class CartRepository{
     }
 
 
-    async add(prdId){
+    //장바구니에 상품 한 개 담을 때
+    async add(prdId,qty){
         let url = `${baseUrl}/api/cart`;
         let method = 'POST';
-        let response= await this.findPromise(url,method, prdId)
+
+        let cart ={
+            productId:prdId,
+            quantity:qty
+        }
+        let response = await this.findPromise(url,method,JSON.stringify(cart))
+        return await response.json();
+    }
+
+    // 장바구니에 여러 개 담을 때
+    async addList(list){
+        let url = `${baseUrl}/api/cart/list`;
+        let method = 'POST';
+        let response = await this.findPromise(url,method, JSON.stringify(list))
         return await response.json();
     }
 

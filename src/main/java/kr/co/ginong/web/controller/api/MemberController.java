@@ -3,18 +3,24 @@ package kr.co.ginong.web.controller.api;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberRole;
+import kr.co.ginong.web.entity.order.Location;
+import kr.co.ginong.web.service.user.LocationService;
 import kr.co.ginong.web.service.user.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 @RestController("apiMemberController")
@@ -23,6 +29,9 @@ public class MemberController {
 
     @Autowired
     MemberService service;
+
+    @Autowired
+    private LocationService locationService;
 
     @GetMapping("checkUserName")
     public ResponseEntity<Boolean> checkUserName(
@@ -144,6 +153,56 @@ public class MemberController {
         }
 
         return ResponseEntity.ok(true);
+    }
+
+    @GetMapping("userInfo")
+    public Member getMember(
+            @AuthenticationPrincipal WebUserDetails userDetails
+    ){
+        Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null)
+            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+
+        Member member = service.get(memberId);
+
+        return member;
+    }
+
+    /* 기본배송지가 아닌 배송지의 목록 불러 옴*/
+    @GetMapping("location/list")
+    public List<Location> getList(
+            @AuthenticationPrincipal WebUserDetails userDetails
+    ){
+        Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null)
+            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+
+        List<Location> list = locationService.getListByMemberID(memberId);
+        System.out.println(list);
+
+        return list;
+    }
+
+    /* 기본배송지 불러 옴*/
+    @GetMapping("location/defaultList")
+    public Location getDefaultList(
+            @AuthenticationPrincipal WebUserDetails userDetails
+    ){
+        Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null)
+            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+
+        Location location = locationService.getByMemberID(memberId);
+
+        System.out.println(location);
+
+        return location;
     }
 
 }

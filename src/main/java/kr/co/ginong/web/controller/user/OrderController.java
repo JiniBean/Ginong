@@ -154,7 +154,7 @@ public class OrderController {
         //주문 번호, location id order 테이블에 넣기
         Order order = Order.builder()
                 .id(id)
-                .type(1)
+                .categoryId(1L)
                 .memberId(memberId)
                 .locationId(locationHistory.getLocationId())
                 .build();

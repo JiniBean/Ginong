@@ -1,6 +1,7 @@
 package kr.co.ginong.web.repository.order;
 
 import kr.co.ginong.web.entity.order.Order;
+import kr.co.ginong.web.entity.order.OrderView;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -8,17 +9,21 @@ import java.util.List;
 
 @Mapper
 public interface OrderRepository {
-    List<Order> findAll();
+    List<OrderView> findAll(Long memberId,String query, Boolean sort);
 
-    List<Order> findById(Long id);
-    List<Order> findByMemberId(Long memberId);
-    List<Order> findCancellationByMemberId(Long memberId);
-    
+    List<OrderView> findCancelAll(Long memberId,String query);
+
+    List<OrderView> findCancel(Long memberId,String query);
+
+    List<OrderView> findExRef(Long memberId,String query,Integer sort,Boolean isEx,Boolean isRef);
+
     boolean save(Order order);
-    void update(Long orderId, int orderType);
+    boolean update(Order order);
     void delete(long id);
 
     Integer countByMemberId(Long memberId);
 
     Order findRecentByMemberId(Long memberId);
+
+    List<OrderView> findItems(Long orderId);
 }

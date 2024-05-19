@@ -1,6 +1,6 @@
 const {createApp} = Vue;
 import Repository from '/js/module/CartRepository.js';
-import Header from './inc/header.js';
+import Header from '/js/module/header.js';
 
 createApp({
     data() {

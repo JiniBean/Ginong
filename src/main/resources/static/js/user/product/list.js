@@ -144,7 +144,7 @@ document.addEventListener('click', function (e) {
     }
 
 
-    async function cartByDB(header) {
+    async function cartByDB() {
         let cartRepository = new CartRepository();
 
         // 해당 상품 아이디로 장바구니 목록에 있는지 체크

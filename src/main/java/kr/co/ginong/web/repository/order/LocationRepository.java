@@ -15,6 +15,9 @@ public interface LocationRepository {
     Location findById(Long id);
 
     Location findByMemberId(long memberId);
+
+    List<Location> findListByMemberId(Long memberId);
+
     LocationHistory findByOrderId(long orderId);
     
     void save(Location location);

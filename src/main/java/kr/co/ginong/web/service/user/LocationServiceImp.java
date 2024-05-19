@@ -6,6 +6,8 @@ import kr.co.ginong.web.repository.order.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LocationServiceImp implements LocationService{
 
@@ -35,5 +37,13 @@ public class LocationServiceImp implements LocationService{
         LocationHistory locationHistory = repository.findByOrderId(orderId);
         return locationHistory;
     }
+
+    @Override
+    public List<Location> getListByMemberID(Long memberId) {
+        List<Location> list = repository.findListByMemberId(memberId);
+        return list;
+    }
+
+
 
 }

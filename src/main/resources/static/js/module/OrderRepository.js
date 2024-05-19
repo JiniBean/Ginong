@@ -1,5 +1,5 @@
 let baseUrl = window.location.origin;
-export default class OderRepository{
+export default class OrderRepository{
 
     findPromise(url,method="GET", data = null){
 
@@ -14,36 +14,108 @@ export default class OderRepository{
 
     }
 
-    async findAll(query,sortType){
+    async findAll(query,sortType,isUser){
         let url = `${baseUrl}/api/order?`;
 
         if(query)
             url += `q=${query}&`
 
         if(sortType)
-            url += `s=${sortType}`
+            url += `s=${sortType}&`
+
+        if(isUser)
+            url += `u=${isUser}`
 
         let response = await this.findPromise(url);
         return await response.json();
     }
 
-    async findAllByOption(idx,query,sortType){
+    async findCancelAll(query,isUser){
 
-        let option = {
-            2:'exch',   //교환
-            3:'rfnd',   //환불
-            4:'cncl'    //취소
-        }
+        let url = `${baseUrl}/api/order/all?`;
 
-        let url = `${baseUrl}/api/order/${option[idx]}`;
+        if(query)
+            url += `q=${query}&`
+        if(isUser)
+            url += `u=${isUser}`
+
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findCancel(query,isUser){
+
+        let url = `${baseUrl}/api/order/cncl?`;
+
+        if(query)
+            url += `q=${query}&`
+        if(isUser)
+            url += `u=${isUser}`
+
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findExRef(query,sortType,isUser,idx){
+        let url = `${baseUrl}/api/order/exrf?`;
 
         if(query)
             url += `q=${query}&`
 
         if(sortType)
-            url += `s=${sortType}`
+            url += `s=${sortType}&`
+
+        if(isUser)
+            url += `u=${isUser}&`
+        if(idx==1)
+            url += 'e=true' //교환
+        if(idx==2)
+            url += 'r=true' //환불
+        if(idx==3)
+            url += 'e=true&r=true'
+
+        console.log(url)
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findItems(id){
+        let url = `${baseUrl}/api/order/${id}`;
+
 
         let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findCategories(){
+        let url = `${baseUrl}/api/order/c`;
+
+
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findPayment(orderId){
+        let url = `${baseUrl}/api/order/p?o=${orderId}`;
+
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findLocation(orderId){
+        let url = `${baseUrl}/api/order/l?o=${orderId}`;
+
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+
+    async updateState(order){
+        let url = `${baseUrl}/api/order/u`;
+        let method = 'POST';
+        let data = order;
+        let response = await this.findPromise(url,method, JSON.stringify(data));
+
         return await response.json();
     }
 

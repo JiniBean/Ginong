@@ -1,11 +1,13 @@
 package kr.co.ginong.web.controller.api;
 
+import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.cart.Cart;
 import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.service.user.CartService;
 import kr.co.ginong.web.service.user.LocationService;
 import kr.co.ginong.web.service.user.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,19 +27,23 @@ public class CartController {
     private LocationService locationService;
 
     @GetMapping
-    public List<Cart> list(){
+    public List<Cart> list(@AuthenticationPrincipal WebUserDetails userDetails) {
 
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-        Long memberId = 2L;
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
        List<Cart> list = service.getList(memberId);
        return list;
     }
 
     @GetMapping("/{prdId}")
-    public Cart list(@PathVariable Long prdId){
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-        Long memberId = 2L;
+    public Cart list(@PathVariable Long prdId,
+                     @AuthenticationPrincipal WebUserDetails userDetails) {
+
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         Cart cart = service.get(memberId, prdId);
 
@@ -72,10 +78,11 @@ public class CartController {
     }
 
     @GetMapping("/c")
-    public Integer count(){
+    public Integer count(@AuthenticationPrincipal WebUserDetails userDetails) {
 
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-        Long memberId = 2L;
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
         return service.getCount(memberId);
     }
 
@@ -91,26 +98,41 @@ public class CartController {
 
 
     @PostMapping
-    public Boolean add(@RequestBody Long prdId){
+    public Boolean add(@RequestBody Cart cart,
+                       @AuthenticationPrincipal WebUserDetails userDetails) {
 
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-        Long memberId = 2L;
-        int qty = 1;
-        Cart cart = Cart.builder().productId(prdId).memberId(memberId).quantity(qty).build();
-        return service.save(cart);
+        Long memberId = null;
+
+        if(userDetails!=null)
+            memberId = userDetails.getId();
+
+        return service.save(memberId, cart, null);
+
+    }
+
+    @PostMapping("list")
+    public Boolean addList(@RequestBody List<Long> list,
+                       @AuthenticationPrincipal WebUserDetails userDetails) {
+
+        Long memberId = null;
+
+        if(userDetails!=null)
+            memberId = userDetails.getId();
+
+        return service.save(memberId, null,list);
 
     }
 
     @PostMapping("/u")
-    public Boolean update(@RequestBody Cart cart){
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-        Long memberId = 2L;
+    public Boolean update(@RequestBody Cart cart,
+                          @AuthenticationPrincipal WebUserDetails userDetails) {
+
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         Long prdId = cart.getProductId();
         Integer qty = cart.getQuantity();
-
-        System.out.println("prdId:"+prdId);
-        System.out.println("qty:"+qty);
 
         if(qty == null || qty == 0)
             return service.edit(memberId, prdId);
@@ -119,10 +141,12 @@ public class CartController {
     }
 
     @DeleteMapping
-    public Boolean delete(@RequestBody List<Long> list) {
-        // 임시로 박아놓음, 로그인 완성 후 수정 예정
-        Long memberId = 2L;
+    public Boolean delete(@RequestBody List<Long> list,
+                          @AuthenticationPrincipal WebUserDetails userDetails) {
 
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         return service.delete(memberId,list);
     }

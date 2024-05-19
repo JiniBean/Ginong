@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <title>Product-List</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="/js/user/order/detail.js" defer></script>
+  <script type="module" src="/js/user/order/detail.js" defer></script>
   <link rel="stylesheet" href="/css/user/product/list.css">
 </head>
 <body>
@@ -18,8 +18,8 @@
     <h1 class="d:none">주문 상세 요약</h1>
     <div class="d:flex jc:center gap:6">
       <span class="fw:3 fs:5">주문 상세 - </span>
-      <span class="fw:3 fs:5">{{itemList[0].productName}}</span>
-      <span v-if="itemList.length >= 2" class="fw:3 fs:5">외 {{(itemList.length)-1}} 건</span>
+      <span class="fw:3 fs:5">{{list[0].prettyName}}</span>
+      <span v-if="list.length >= 2" class="fw:3 fs:5">외 {{(list.length)-1}} 건</span>
     </div>
   </section>
 
@@ -29,23 +29,20 @@
     <div class="d:flex fl-dir:column gap:10 p:5">
       <div class="d:flex jc:space-between">
         <div>
-          <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ info.orderDate }}</span>
+          <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ order.date }}</span>
           <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
         </div>
         <div>
           <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
-          <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ info.orderId }}</span>
+          <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ order.id }}</span>
         </div>
        
       </div>
       <div class="d:flex jc:space-between gap:4 p:5">
         <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
-          <div v-if="status.name === info.orderStatus" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center
-            bg-color:main-6" style="width: 36px; height: 36px;"></div>
-          <div v-else class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
+          <div :class="order.categoryId == status.id?'bg-color:main-6':''" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:cente bg-color:base-4" style="width: 36px; height: 36px;"></div>
 
-          <span v-if="status.name === info.orderStatus" class="fs:1 md:fs:3 color:main-6">{{ status.name }}</span>
-          <span v-else class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
+          <span :class="order.categoryId == status.id?'color:main-6':''" class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
         </div>
       </div>
     </div>
@@ -60,7 +57,7 @@
         전체선택
       </label>
     </div>
-    <div class="d:flex gap:2 md:gap4 w:10p" v-for="item in itemList" :key="item.id">
+    <div class="d:flex gap:2 md:gap4 w:10p" v-for="item in list" :key="item.id">
       <label>
         <input type="checkbox" class="n-toggle n-toggle-type:check-box" v-model="item.checked" />
       </label>
@@ -68,7 +65,7 @@
       <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
         <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
         <div class="d:flex fl-dir:column jc:space-between ai:start md:ai:center md:fl-dir:row gap:2 w:10p">
-          <span class="fs:2 md:w:5p md:fs:3"> {{ item.productName }} ({{item.weight}}{{item.weightCategory}})</span>
+          <span class="fs:2 md:w:5p md:fs:3"> {{item.prettyName}})</span>
           <div>
             <div class="d:flex fl-dir:row pos:relative md:jc:space-between md:ai:center md:pos:none gap:3">
               <span class="fs:2 md:fs:3 fw:3">{{ Number(item.price).toLocaleString() }}원</span>
@@ -76,15 +73,14 @@
               <span class="fs:2 md:fs:3">{{ item.quantity }}개</span>
             </div>
           </div>
-          <div v-if="info.orderStatusId === 4" class="d:flex fl-dir:row md:fl-dir:column gap:2">
+          <div v-if="item.categoryId === 4" class="d:flex fl-dir:row md:fl-dir:column gap:2">
             <div class="n-btn n-btn-type:outline n-btn-size:1">교환</div>
             <div class="n-btn n-btn-type:outline n-btn-size:1">환불</div>
           </div>
-          <div v-else-if="info.orderStatusId === 5" class="d:flex fl-dir:row md:fl-dir:column gap:2">
+          <div v-else-if="item.categoryId === 5" class="d:flex fl-dir:row md:fl-dir:column gap:2">
             <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
             <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base disabled" >배송완료</div>
           </div>
-         <div v-else></div>
         </div>
       </div>
     </div>
@@ -100,7 +96,7 @@
       <div class="n-btn n-btn-size:2 w:10 md:w:10"><a href="">선택상품 다시 담기</a></div>
     </div>
     <div class="d:flex fl-grow:1">
-      <div v-if="info.orderStatusId === 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10" ><a href="">주문 취소</a></div>
+      <div v-if="order.categoryId === 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10" ><a href="">주문 취소</a></div>
       <div v-else></div>
     </div>
   </section>
@@ -116,32 +112,32 @@
       <div class="n-expander-content px:2 gap:4">
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">상품금액</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ Number(info.totalAmt+info.pointAmt+info.couponAmt).toLocaleString() }}원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ Number(payment.totalAmt+payment.pointAmt+payment.couponAmt).toLocaleString() }}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">배송비</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ Number(info.deliveryFee).toLocaleString() }}원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ Number(payment.deliveryFee).toLocaleString() }}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">적립금</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ Number(info.pointAmt).toLocaleString() }}P</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ Number(payment.pointAmt).toLocaleString() }}P</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">쿠폰</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ Number(info.couponAmt).toLocaleString() }}원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ Number(payment.couponAmt).toLocaleString() }}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">결제수단</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ info.paymentName }}</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ payment.category }}</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">총 결제금액</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ Number(info.totalAmt).toLocaleString() }}원</span>
+          <span class="fs:3 md:fs:4 fw:3">{{ Number(payment.totalAmt).toLocaleString() }}원</span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">환불 방법</span>
-          <span v-if="info.refundType = 0"class="fs:3 md:fs:4 fw:3">결제수단으로 환불</span>
-          <span v-if="info.refundType = 1"class="fs:3 md:fs:4 fw:3">적립금 환불</span>
+          <span v-if="!payment.refundType" class="fs:3 md:fs:4 fw:3">결제수단으로 환불</span>
+          <span v-if="payment.refundType" class="fs:3 md:fs:4 fw:3">적립금 환불</span>
         </div>
       </div>
     </div>
@@ -158,19 +154,19 @@
       <div class="n-expander-content px:2 gap:4">
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">수령인</span>
-          <span class="fs:3 md:fs:4 fw:3"> {{ address.receiverName }} </span>
+          <span class="fs:3 md:fs:4 fw:3"> {{ location.receiverName }} </span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">연락처</span>
-          <span class="fs:3 md:fs:4 fw:3"> {{ address.receiverPhone }} </span>
+          <span class="fs:3 md:fs:4 fw:3"> {{ location.receiverPhone }} </span>
         </div>
         <div class="d:flex fl-dir:column p:2" >
           <div class="d:flex fl-dir:row jc:space-between">
             <span class="fs:3 md:fs:4 fw:3">주소</span>
-            <span class="fs:3 md:fs:4 fw:3"> {{ address.addr1 }} </span>
+            <span class="fs:3 md:fs:4 fw:3"> {{ location.addr1 }} </span>
           </div>
           <div class="text-align:end ">
-            <span class="fs:3 md:fs:4 fw:3 "> {{ address.addr2 }} </span>
+            <span class="fs:3 md:fs:4 fw:3 "> {{ location.addr2 }} </span>
           </div>
         </div>
       </div>
@@ -199,7 +195,7 @@
   </section>
   <section>
     <div class="d:flex fl-grow:1">
-      <div v-if="info.orderStatusId != 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10"><a href="">주문내역 삭제</a></div>
+      <div v-if="order.categoryId != 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10"><a href="">주문내역 삭제</a></div>
     </div>
   </section>
 </main>
