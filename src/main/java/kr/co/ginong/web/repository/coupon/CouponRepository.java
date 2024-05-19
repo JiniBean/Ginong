@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface CouponRepository {
     List<Coupon> findAll();
-    Coupon findById();
+    Coupon findById(Long id);
 
 }

@@ -22,6 +22,7 @@
 		where 1=1
 		and member_id = #{memberId}
 		and USED_DATE IS NULL
+		and (END_DATE &gt; NOW() OR END_DATE IS NULL)
 	</select>
 
 	<select id="findAllUnavail" resultType="CouponHistoryView">
@@ -30,7 +31,7 @@
 		from COUPON_HISTORY_VIEW
 		where 1=1
 		and member_id = #{memberId}
-		and USED_DATE IS NOT NULL
+		and (USED_DATE IS NOT NULL OR END_DATE &lt; NOW())
 	</select>
 
 	<update id="update" parameterType="CouponHistory">
