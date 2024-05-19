@@ -15,11 +15,15 @@ public class Payment {
     private Long	id;
     private Date	date;
     private String 	type;
-    private int	    totalAmt;
-    private boolean refundType;
-    private long	memberId;
-    private long	categoryId;
-    private long    deliveryFeeCategoryId;
-    private long	orderId;
-    
+    private Integer totalAmt;
+    private Boolean refundType;
+    private Long	memberId;
+    private Long	categoryId;
+    private Long    deliveryFeeCategoryId;
+    private Long	orderId;
+
+    private Integer couponAmt;
+    private Integer pointAmt;
+    private Integer deliveryFee;
+    private String  categoryName;
 }

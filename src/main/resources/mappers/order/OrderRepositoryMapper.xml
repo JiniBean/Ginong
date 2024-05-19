@@ -3,42 +3,90 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.order.OrderRepository">
-	<select id="findAll" resultType="Order">
-		select
-		*
-		from `ORDER`
+
+	<select id="findAll" resultType="OrderView">
+		SELECT COUNT(ITEM_ID)-1 count, ov.*  from ORDER_VIEW ov
 		<where>
 			<if test="memberId != null">
 				member_id = #{memberId}
 			</if>
+			<if test="query != null">
+				AND id in (
+					SELECT oi.order_id from ORDER_ITEM oi
+					left join PRODUCT p on oi.product_id = p.id
+					WHERE p.name LIKE '%#{query}%'
+				)
+			</if>
+			<if test="sort != null">
+				AND CATEGORY_ID &lt; 3
+			</if>
 		</where>
+		group by id HAVING CANCEL_ID is null
+		ORDER BY `DATE` DESC
+	</select>
+
+	<select id="findCancelAll" resultType="OrderView">
+		SELECT COUNT(ITEM_ID)-1 count, ov.*  from ORDER_VIEW ov
+		WHERE REFUND_ID is not null or EXCHANGE_ID is not null or CANCEL_ID is not null
+		<if test="memberId != null">
+			AND member_id = #{memberId}
+		</if>
+		<if test="query != null">
+			AND id in (
+				SELECT oi.order_id from ORDER_ITEM oi
+				left join PRODUCT p on oi.product_id = p.id
+				WHERE p.name LIKE '%#{query}%'
+			)
+		</if>
+		GROUP BY CANCEL_ID, EXCHANGE_ID , REFUND_ID
+		ORDER BY `DATE` DESC, CNCL_DATE DESC, EXCH_REG_DATE DESC, RFND_REG_DATE DESC
+	</select>
+
+	<select id="findCancel" resultType="OrderView">
+		SELECT COUNT(ITEM_ID)-1 count, ov.*  from ORDER_VIEW ov
+		<where>
+			<if test="memberId != null">
+				member_id = #{memberId}
+			</if>
+			<if test="query != null">
+				AND id in (
+					SELECT oi.order_id from ORDER_ITEM oi
+					left join PRODUCT p on oi.product_id = p.id
+					WHERE p.name LIKE '%#{query}%'
+				)
+			</if>
+		</where>
+		group by id HAVING CANCEL_ID is not null
+		ORDER BY CNCL_DATE DESC,`DATE` DESC
 	</select>
 
 
-	<select id="findById" resultType="Order">
-		select
-		*
-		from `ORDER`
-		where id = #{id}
+	<select id="findExRef" resultType="OrderView">
+		SELECT * from ORDER_VIEW ov
+		<where>
+			<if test="isEx &amp;&amp; sort == null">
+				EXCHANGE_ID is not null
+			</if>
+			<if test="isRef &amp;&amp; sort == null">
+				OR REFUND_ID is not null
+			</if>
+			<if test="isEx &amp;&amp; sort != null">
+				OR EXCH_STATE &lt;= #{sort}
+			</if>
+			<if test="isRef &amp;&amp; sort != null">
+				OR RFND_STATE = 1
+			</if>
+		</where>
+		ORDER BY `DATE` DESC, EXCH_REG_DATE DESC, RFND_REG_DATE DESC
 	</select>
 
-
-	<select id="findByMemberId" resultType="Order">
-		select
-		*
-		from `ORDER`
-		where member_id = #{memberId}
-		and type in (1,2,3,4,5)
-		order by date desc
-	</select>
-
-	<select id="findCancellationByMemberId" resultType="Order">
-		select
-		*
-		from `ORDER`
-		where member_id = #{memberId}
-		and type in (6,7)
-		order by date desc
+	<select id="findItems" resultType="OrderView">
+		SELECT * from ORDER_VIEW ov
+		<where>
+			<if test="orderId">
+				id = #{orderId}
+			</if>
+		</where>
 	</select>
 
 
@@ -53,8 +101,15 @@
 	</insert>
 
 	<update id="update" parameterType="Order">
-		update `ORDER` set
-		type = #{orderType} where id = #{orderId}
+		update `ORDER`
+		<set>
+			<if test="categoryId != null">
+				CATEGORY_ID = #{categoryId}
+			</if>
+		</set>
+		<where>
+			Id = #{id}
+		</where>
 	</update>
 
 	<select id="countByMemberId" resultType="Integer">

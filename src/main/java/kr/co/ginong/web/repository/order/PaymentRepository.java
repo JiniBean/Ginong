@@ -10,7 +10,7 @@ import java.util.List;
 public interface PaymentRepository {
     List<Payment> findAll();
 
-    Payment findById(Long id);
+    Payment findByOrderId(Long orderId);
     
     boolean save(Payment payment);
     boolean update(Payment payment);

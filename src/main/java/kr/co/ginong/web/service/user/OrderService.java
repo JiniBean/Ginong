@@ -3,27 +3,29 @@ package kr.co.ginong.web.service.user;
 import java.util.List;
 
 import kr.co.ginong.web.entity.order.Order;
+import kr.co.ginong.web.entity.order.OrderCategory;
 import kr.co.ginong.web.entity.order.OrderItem;
-import kr.co.ginong.web.entity.order.OrderItemView;
 import kr.co.ginong.web.entity.order.OrderView;
 
 public interface OrderService {
 
-    List<Order> get(Long id);
-    List<Order> getListByMemberId(Long orderId);
-    List<Order> getCanceledListByMemberId(Long orderId);
-    
-    OrderView getOrderInfo(Long orderId);
+    List<OrderView> getList(Long memberId,String query, Boolean sort);
 
-    List<OrderItem> getItems(Long id);
-    List<OrderItemView> getList(Long orderId);
-    List<OrderItemView> getListOfOrderId(List<Long> orderIds);
+    List<OrderView> getAllCancelist(Long memberId,String query);
+
+    List<OrderView> getCancelList(Long memberId,String query);
+
+    List<OrderView> getExRefList(Long memberId,String query,Integer sort, Boolean isEx, Boolean isRef);
+
+    List<OrderView> getItems(Long orderId);
+
+    List<OrderCategory> getCategories();
 
     boolean add(Order order);
     boolean addItems(List<OrderItem> items);
     
-    void updateOrderType(Long orderId, int orderType);
 
+    Boolean edit(Order order);
 
     Integer getCountOrder(Long memberId);
 

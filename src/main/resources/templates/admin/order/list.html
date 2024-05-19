@@ -34,19 +34,24 @@
         <span class="bar"></span>
         <span @click="getList(2,2)" :class="{'color:main-6':sortType==2}">출고 전</span>
     </div>
-    <div @click="getList(1,!sortType)" :class="{'d:none':orderType!=3,'icon-color:main-6':sortType}" class="deco icon:check_circle deco-size:4 icon-size:4 icon-color:base-5" style="height: 24px">승인 전만 보기</div>
+    <div @click="getList(3,1)" :class="{'d:none':orderType!=3,'icon-color:main-6':sortType}" class="deco icon:check_circle deco-size:4 icon-size:4 icon-color:base-5" style="height: 24px">승인 전만 보기</div>
 
-    <section class="d:flex fl-dir:column gap:7 md:gap:10">
+    <section class="d:flex fl-dir:column gap:7 md:gap:10" >
         <h1 class="d:none">주문내역</h1>
-        <div class="d:flex fl-dir:column gap:2">
+        <div class="d:flex fl-dir:column gap:2" v-for="l of list">
             <div v-if="orderType !=4">{{category[orderType]}} 상태 :
-                <span>주문 완료</span>
+                <span v-if="orderType===1" :class="{'color:sub-2': l.categoryId==1}">{{l.category}}</span>
+                <span v-else-if="orderType===2" :class="{'color:sub-2': l.exchState < 3}">{{category[orderType]}}{{code[l.exchState]}}</span>
+                <span v-else-if="orderType===3" :class="{'color:sub-2': l.rfndState==1}">{{category[orderType]}}{{code[l.rfndState]}}</span>
             </div>
             <div class="d:flex fl-dir:column gap:2 md:gap:4 p:4 bd bd-color:base-6 bd-radius:2">
-                <div>주문 정보 : 텃밭</div>
-                <div>주문 번호 : </div>
-                <div>주문 일자 : </div>
-                <div v-if="orderType !=1">{{category[orderType]}} 사유 : </div>
+                <div>주문 정보 : {{l.prettyName}}
+                    <span v-if="l.count>0">외 {{l.count}}건</span>
+                </div>
+                <div>주문 번호 : {{l.id}}</div>
+                <div>주문 일자 : {{l.date}}</div>
+                <div v-if="orderType ==2">교환 사유 : {{l.exchDesc}}</div>
+                <div v-if="orderType ==3">환불 사유 : {{l.rfndDesc}}</div>
             </div>
         </div>
 

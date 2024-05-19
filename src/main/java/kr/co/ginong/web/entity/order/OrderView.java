@@ -6,25 +6,56 @@ import groovy.transform.builder.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderView {
-    private long	orderId;
-    private Date    orderDate;
-    private long    orderStatusId;
-    private String  orderStatus;
-    
-    private int     totalAmt;
-    private long    paymentId;
-    private int     paymentType;
-    private String  paymentName;
-    private int     refundType;
+    private Long	id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date    date;
+    private Long    categoryId;
+    private String  category;
+    private Long	itemId;
+    private Integer count;
+    private Long	productId;
+    private String  prettyName;
+    private String  imgName;
+    private String  imgPath;
+    private Integer price;
+    private Integer quantity;
 
-    private int     deliveryFee;
+    private Long    memberId;
+    private Long    cancelId;
+    private Date    cnclDate;
 
-    private int     couponAmt;
-    private int     pointAmt;
+    private Long    exchangeId;
+    private String  exchDesc;
+    private Integer exchState;
+    private Integer exchQty;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date    exchRegDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date    exchApvlDate;
+    private Long    exchCtgryId;
+    private String  exchCtgryName;
+    private Boolean exchDlvyState;
+
+    private Long    refundID;
+    private String  rfndDesc;
+    private Integer rfndState;
+    private Integer rfndQty;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date    rfndRegDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date    rfndApvlDate;
+    private Long    rfndCtgryId;
+    private String  rfndCtgryName;
+    private Boolean rfndDlvyState;
+
+    private Integer totalAmt;
+    private String  receiverName;
+
 }

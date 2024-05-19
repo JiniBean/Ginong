@@ -15,7 +15,7 @@ public interface CartRepository {
 
     Cart find(Long memberId, Long prdId);
 
-    Boolean save(Cart cart);
+    Boolean save(Long memberId, Cart cart, List<Long> list);
 
     Boolean update(Long memberId, Long prdId, Integer qty);
 

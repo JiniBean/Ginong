@@ -7,11 +7,17 @@ createApp({
             sortType:null,
             list:[],
             query: "",
-            category: {
+            category:{
                 1:'주문',
                 2:'교환',
                 3:'환불',
                 4:'취소'
+            },
+            code:{
+                1:'요청',
+                2:'진행중',
+                3:'완료',
+                4:'거절'
             }
         }
     },
@@ -21,12 +27,20 @@ createApp({
             this.sortType = sortType
             let repository = new Repository;
 
-            if(orderType==1){
-                this.list = await repository.findAll(this.query,this.sortType);
-                return;
-            }
+            switch (orderType) {
+                case 1:
+                    this.list = await repository.findAll(this.query,sortType,false);
+                    break;
+                case 2:
+                    this.list = await repository.findExRef(this.query,sortType,false,1);
+                    break;
+                case 3:
+                    this.list = await repository.findExRef(this.query,sortType,false,2)
+                    break;
+                case 4:
+                    this.list = await repository.findCancel(this.query,false)
 
-            this.list = await repository.findAllByOption(this.orderType,this.query,this.sortType);
+            }
 
         }
     },

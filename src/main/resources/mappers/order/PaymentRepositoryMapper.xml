@@ -4,6 +4,39 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ginong.web.repository.order.PaymentRepository">
 
+	<select id="findAll">
+	SELECT
+		p.*,
+		pc.NAME CATEGORY,
+		pdfc.FEE DELIVERY_FEE ,
+		ch.USED_AMT COUPON_AMT,
+		ph.AMOUNT POINT_AMT
+	from PAYMENT p
+	LEFT JOIN PAYMENT_CATEGORY pc ON p.CATEGORY_ID = pc.ID
+	LEFT JOIN PAYMENT_DELIVERY_FEE_CATEGORY pdfc ON p.DELIVERY_FEE_CATEGORY_ID = pdfc.ID
+	LEFT JOIN COUPON_HISTORY ch on p.ORDER_ID = ch.ORDER_ID
+	LEFT JOIN POINT_HISTORY ph on p.ORDER_ID  = ph.ORDER_ID
+	</select>
+
+	<select id="findByOrderId">
+		SELECT
+			p.*,
+			pc.NAME CATEGORY_NAME,
+			pdfc.FEE DELIVERY_FEE ,
+			ch.USED_AMT COUPON_AMT,
+			ph.AMOUNT POINT_AMT
+		from PAYMENT p
+		LEFT JOIN PAYMENT_CATEGORY pc ON p.CATEGORY_ID = pc.ID
+		LEFT JOIN PAYMENT_DELIVERY_FEE_CATEGORY pdfc ON p.DELIVERY_FEE_CATEGORY_ID = pdfc.ID
+		LEFT JOIN COUPON_HISTORY ch on p.ORDER_ID = ch.ORDER_ID
+		LEFT JOIN POINT_HISTORY ph on p.ORDER_ID  = ph.ORDER_ID
+		<where>
+			<if test="orderId!=null">
+				p.ORDER_ID = #{orderId}
+			</if>
+		</where>
+	</select>
+
 	<insert id="save" parameterType="Payment">
 		INSERT INTO PAYMENT (TOTAL_AMT, REFUND_TYPE, MEMBER_ID, CATEGORY_ID, DELIVERY_FEE_CATEGORY_ID, ORDER_ID)
 		VALUES (

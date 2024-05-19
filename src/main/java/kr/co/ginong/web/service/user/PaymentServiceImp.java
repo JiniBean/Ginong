@@ -10,6 +10,12 @@ public class PaymentServiceImp implements PaymentService{
 
     @Autowired
     private PaymentRepository repository;
+
+    @Override
+    public Payment getByOrderId(Long orderID) {
+        return repository.findByOrderId(orderID);
+    }
+
     @Override
     public boolean add(Payment payment) {
         return repository.save(payment);

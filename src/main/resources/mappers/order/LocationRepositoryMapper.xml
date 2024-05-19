@@ -42,8 +42,7 @@
 	<select id="findByOrderId" resultType="LocationHistory">
 		select
 		*
-		from `ORDER` O LEFT JOIN LOCATION_HISTORY LH
-		ON O.ID = LH.ORDER_ID
+		from LOCATION_HISTORY
 		where ORDER_ID = #{orderId}
 	</select>
 

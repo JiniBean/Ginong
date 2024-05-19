@@ -28,8 +28,8 @@ public class CartServiceImp implements CartService{
     @Override
     public Integer getCount(Long memberId){return repository.count(memberId);}
     @Override
-    public Boolean save(Cart cart) {
-        return repository.save(cart);
+    public Boolean save(Long memberId, Cart cart, List<Long> list) {
+        return repository.save(memberId, cart, list);
     }
 
     @Override
