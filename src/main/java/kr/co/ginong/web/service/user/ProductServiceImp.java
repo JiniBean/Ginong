@@ -1,9 +1,6 @@
 package kr.co.ginong.web.service.user;
 
 
-import kr.co.ginong.web.dto.Pager;
-import kr.co.ginong.web.dto.ProductFilter;
-import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.repository.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import java.util.List;
 
 @Service
 public class ProductServiceImp implements ProductService {
+
 
     @Autowired
     ProductRepository repository;
@@ -26,9 +24,9 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType) {
-        int offset = (page - 1) * size;
-        List<ProductView> list = repository.findAll(categoryId, query, offset, size, sortType);
+    public List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType, Integer rows) {
+        int offset = (page - 1) * rows;
+        List<ProductView> list = repository.findAll(categoryId, query, offset, rows, sortType);
 
         return list;
     }
@@ -81,6 +79,7 @@ public class ProductServiceImp implements ProductService {
         List<ProductView> pickProductList = repository.findAllPickProduct();
         return pickProductList;
     }
+
 
     public int count(Long categoryId, String query) {
         int count = repository.count(categoryId, query);

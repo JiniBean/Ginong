@@ -15,7 +15,7 @@ public interface ProductRepository {
 
     List<ProductView> findAll(int offset, int size);
 
-    List<ProductView> findAll(Long categoryId, String query, int offset, int size, Integer sortType);
+    List<ProductView> findAll(Long categoryId, String query, int offset, int rows, Integer sortType);
 
     List<ProductView> findAllSeasonOut();
 

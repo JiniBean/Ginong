@@ -33,8 +33,9 @@ public class ProductController {
         List<ProductView> list = new ArrayList<>();
 
         int count = 0;
+        if(rows == null) rows = 20;
 
-        list = service.getList(page, categoryId, query, sortType);
+        list = service.getList(page, categoryId, query, sortType, rows);
         count = service.count(categoryId, query);
 
         return list;

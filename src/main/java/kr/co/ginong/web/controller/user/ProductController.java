@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +43,7 @@ public class ProductController {
             , @RequestParam(name = "q", required = false) String query
             , @RequestParam(name = "p", defaultValue = "1") Integer page
             , @RequestParam(name = "s", required = false) Integer sortType
+            , @RequestParam(name = "r", required = false) Integer rows
             , @CookieValue(name = "cartList", required = false) List<Cart> carts
             , @AuthenticationPrincipal WebUserDetails userDetails
             , Model model) {
@@ -54,8 +52,10 @@ public class ProductController {
         List<ProductCategory> categories = categoryService.getList();
 
         int count = 0;
+        if (rows == null) rows = 20;
 
-        prds = service.getList(page, categoryId, query, sortType);
+//        prds = service.getList(page, categoryId, query, sortType);
+        prds = service.getList(page, categoryId, query, sortType, rows);
         count = service.count(categoryId, query);
 
         // 장바구니에 담겨있는 상품 체크
@@ -71,7 +71,6 @@ public class ProductController {
         // 로그인 안했지만 장바구니 목록이 있다면
         else if (carts != null)
             cartList = carts;
-
 
         // 화면에 뿌려줄 상품 정보와 장바구니 정보 조합하기
         List<Map<String, Object>> list = new ArrayList<>();
@@ -104,6 +103,7 @@ public class ProductController {
         model.addAttribute("categories", categories);
         model.addAttribute("count", count);
         model.addAttribute("list", list);
+        model.addAttribute("r", rows);
 
         return "user/product/list";
     }

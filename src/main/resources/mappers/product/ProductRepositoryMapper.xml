@@ -31,7 +31,7 @@
 				order by LIKE_COUNT DESC
 			</when>
 		</choose>
-		limit #{offset}, #{size}
+		limit #{offset}, #{rows}
 	</select>
 
 	<!--  #####################################################################	-->

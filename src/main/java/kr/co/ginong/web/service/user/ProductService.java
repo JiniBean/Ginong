@@ -16,7 +16,9 @@ public interface ProductService {
 
     List<ProductView> getPickProductList();
 
-    List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType);
+//    List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType);
+
+    List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType, Integer rows);
 
     List<ProductView> getSeasonOutList();
 

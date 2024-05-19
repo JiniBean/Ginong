@@ -62,7 +62,8 @@ Cookie.prototype = {
 // ========== 장바구니 담기 =========================================================
 import CartRepository from "/js/module/CartRepository.js";
 import Header from "/js/module/header.js";
-document.addEventListener('click',  function (e) {
+
+document.addEventListener('click', function (e) {
 
 
     const cartBox = e.target.closest(".cart-box"); // 장바구니 아이콘 영역
@@ -81,12 +82,12 @@ document.addEventListener('click',  function (e) {
     let isMember = header.checkUser();
 
     // 로그인 되어있다면 DB로, 아니라면 쿠키로
-    if(isMember)
+    if (isMember)
         cartByDB();
     else
         cartBYCookie();
 
-    function cartBYCookie(){
+    function cartBYCookie() {
         let cookie = new Cookie();
         let cookieList = cookie.get("cartList");
 
@@ -94,41 +95,41 @@ document.addEventListener('click',  function (e) {
         let qty;
 
         //기존 쿠키가 없다면 쿠키에 "cartList" 새로 생성
-        if(!cookieList) {
-            let cart= {
-                prdId : prdId,
-                quantity:1
+        if (!cookieList) {
+            let cart = {
+                prdId   : prdId,
+                quantity: 1
             }
 
             let list = [];
             list.push(cart);
-            cookie.set("cartList",JSON.stringify(list));
+            cookie.set("cartList", JSON.stringify(list));
             qty = cart.quantity;
 
         }
 
         //기존의 쿠키가 있다면 리스트 검사
-        if(cookieList){
+        if (cookieList) {
             for (let c of cookieList)
                 // 만약 클릭한 상품이 이미 있다면 수량+1
-                if(c.prdId===prdId){
+                if (c.prdId === prdId) {
                     let q = c.quantity;
                     c.quantity = ++q;
                     qty = q;
                     check = true;
                 }
             //기존 쿠키가 없다면 기존 리스트에 추가
-            if(!check) {
-                let cart= {
-                    prdId : prdId,
-                    quantity:1
+            if (!check) {
+                let cart = {
+                    prdId   : prdId,
+                    quantity: 1
                 }
                 cookieList.push(cart);
-                cookie.set("cartList",JSON.stringify(list));
+                cookie.set("cartList", JSON.stringify(list));
                 qty = cart.quantity;
                 check = true;
             }
-            cookie.set("cartList",JSON.stringify(cookieList));
+            cookie.set("cartList", JSON.stringify(cookieList));
         }
 
 
@@ -185,7 +186,7 @@ window.addEventListener("load", function () {
     const rowBtn = sortSection.querySelector(".icon\\:list_bullets"); //모바일 버전 가로 정렬 버튼
     const colSection = prdList.querySelector(".menu-card-col"); //세로형 카드 섹션
     const rowSection = prdList.querySelector(".menu-card-row"); //가로형 카드 섹션
-    const pcSection  = document.querySelector(".prd-list-pc"); //PC 카드 섹션
+    const pcSection = document.querySelector(".prd-list-pc"); //PC 카드 섹션
 
     const alignNumberBox = sortSection.querySelector(".align-number");        // 데이터 표시 갯수 체크
 
@@ -287,7 +288,7 @@ window.addEventListener("load", function () {
         });
     }
 
-    alignNumberBox.onchange = function(e) {
+    alignNumberBox.onchange = function (e) {
         // e.stopPropagation();
         // e.preventDefault();
 
@@ -298,7 +299,7 @@ window.addEventListener("load", function () {
 
     function updatePagerLink(size) {
         // console.log(pagerButtons);
-        for(let a of pagerButtons) {
+        for (let a of pagerButtons) {
             // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
             let parts = a.href.split('?'); // ['/list', 'p=1&r=1']
             let params = new URLSearchParams(parts[1] || '');
@@ -332,7 +333,7 @@ window.addEventListener("load", function () {
         colSection.innerHTML = "";
         pcSection.innerHTML = "";
         pagerSection.innerHTML = "";
-        
+
         // 가로형 카드 렌더링
         for (let m of list) {
 
@@ -374,7 +375,7 @@ window.addEventListener("load", function () {
 
             rowSection.insertAdjacentHTML("beforeend", rowSectiondHTML);
         }
-        
+
         // 세로형 카드 렌더링
         for (let m of list) {
 
@@ -417,7 +418,7 @@ window.addEventListener("load", function () {
 
             colSection.insertAdjacentHTML("beforeend", colSectionHTML);
         }
-        
+
         // PC버전 카드 렌더링
         for (let m of list) {
 
@@ -467,7 +468,7 @@ window.addEventListener("load", function () {
         let lastnum = startnum + 4;
         let next = lastnum + 1;
         let prev = Math.max(startnum - 1, 1);
-        let maxPage = Math.ceil(count/size);
+        let maxPage = Math.ceil(count / size);
 
         lastnum = Math.min(maxPage, lastnum);
         next = Math.min(maxPage, next);
@@ -493,7 +494,7 @@ window.addEventListener("load", function () {
                 <ul class="n-pager d:flex">
                     <li><a href="${prevLink}">이전</a></li>`;
 
-        for(let n of sequence) {
+        for (let n of sequence) {
             let cssClass = page == n ? 'active' : '';
             pagerSectionHTML +=
                 `<li class="${cssClass}">
@@ -502,7 +503,7 @@ window.addEventListener("load", function () {
         }
 
         pagerSectionHTML +=
-                    `<li><a href="${nextLink}">다음</a></li>
+            `<li><a href="${nextLink}">다음</a></li>
                 </ul>
             </section>`;
 
@@ -510,4 +511,39 @@ window.addEventListener("load", function () {
 
     }
 });
+
+
+// 페이지 당 상품 수
+window.addEventListener("load", function () {
+    const dropdownBtn = document.querySelector(".dropdown-btn");
+    const dropdownContent = document.querySelector(".dropdown-content");
+    const dropdownLinks = document.querySelectorAll(".dropdown-content a");
+
+    // 드롭다운 클릭 시 아이템 출력
+    dropdownBtn.addEventListener("click", function () {
+        dropdownContent.classList.toggle("show");
+        dropdownBtn.classList.toggle("active");
+    });
+
+    // 드롭다운 링크 클릭 이벤트 추가
+    dropdownLinks.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const rows = this.getAttribute("data-value");
+
+            // 현재 URL에서 쿼리스트링 parameter 가져오기
+            const currentParams = new URLSearchParams(window.location.search);
+
+            const params = new URLSearchParams({
+                c: currentParams.get("c") || '', // 현재 URL에서 카테고리 ID 가져오기, 없으면 '' (empty-string)
+                s: currentParams.get("s") || '', // 정렬 유형 가져오기, 없으면 '' (empty-string)
+                r: rows, // 사용자가 선택한 행 수
+            });
+
+            // get 요청 보내기
+            window.location.href = `/product/list?${params.toString()}`;
+        });
+    });
+});
+
 
