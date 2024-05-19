@@ -3,7 +3,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return{
-            currentTab : 'location',
+            currentTab : 'info',
             birthDate : '',
             memberList : [],
             locationList : [],
