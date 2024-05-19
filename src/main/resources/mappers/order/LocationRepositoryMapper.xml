@@ -30,6 +30,15 @@
 		and STATE = 1
 	</select>
 
+	<!--기본 배송지 외 배송지 목록-->
+	<select id="findListByMemberId" resultType="Location">
+		select
+		*
+		from LOCATION
+		where MEMBER_ID = #{memberId}
+		and STATE = 0
+	</select>
+
 	<select id="findByOrderId" resultType="LocationHistory">
 		select
 		*
