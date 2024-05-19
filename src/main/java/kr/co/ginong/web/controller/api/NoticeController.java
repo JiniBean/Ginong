@@ -44,7 +44,6 @@ public class NoticeController {
 
     @PostMapping()
     public void addNotice(@RequestBody Notice notice) {
-        System.out.println(notice);
         service.insert(notice);
     }
 
