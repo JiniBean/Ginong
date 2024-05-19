@@ -4,14 +4,13 @@ import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponCategory;
 import kr.co.ginong.web.repository.coupon.CouponCategoryRepository;
 import kr.co.ginong.web.repository.coupon.CouponRepository;
-import kr.co.ginong.web.repository.notice.NoticeCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("adminCouponServiceImp")
-public class CouponServiceImp implements CouponService {
+public class AdminCouponServiceImp implements AdminCouponService {
 
     @Autowired
     private CouponRepository repository;
@@ -34,6 +33,6 @@ public class CouponServiceImp implements CouponService {
 
     @Override
     public Coupon getById(Long id) {
-        return repository.findById();
+        return repository.findById(id);
     }
 }
