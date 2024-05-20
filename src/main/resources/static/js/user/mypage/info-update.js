@@ -7,7 +7,8 @@ createApp({
             birthDate : '',
             memberList : [],
             locationList : [],
-            defaultIctList : []
+            defaultIctList : [],
+            addLocation : '/mypage/location'
         }
     }
     ,methods : {
@@ -25,26 +26,59 @@ createApp({
     , async created(){
 
         try {
-            // 세 개의 API 호출을 병렬로 실행
-            const [infoResponse,defaultIctResponse , lctResponse] = await Promise.all([
-                fetch("/api/member/userinfo"),
-                fetch("/api/member/location/defaultList"),
-                fetch("/api/member/location/list")
+
+            const infoResponsePromise = fetch("/api/member/userInfo");
+            const defaultIctResponsePromise = fetch("/api/member/location/defaultList");
+            const lctResponsePromise = fetch("/api/member/location/list");
+
+            // 모든 응답이 완료될 때까지 기다림
+            const [infoResponse, defaultIctResponse, lctResponse] = await Promise.all([
+                infoResponsePromise,
+                defaultIctResponsePromise,
+                lctResponsePromise
             ]);
 
-            // 두 개의 응답을 JSON으로 변환
-            const [infoList, defaultIctList, lctList] = await Promise.all([
-                infoResponse.json(),
-                defaultIctResponse.json(),
-                lctResponse.json()
-            ]);
+            //회원정보
+            {
+                // 각 응답을 JSON으로 변환 및 null 처리
+                const infoList = infoResponse ? await infoResponse.json() : null;
 
-            // 데이터를 Vue 인스턴스의 데이터 속성에 할당
-            this.memberList = infoList;
-            this.locationList = lctList;
-            this.defaultIctList = defaultIctList;
+                if(infoList!=null)
+                    this.memberList = infoList;
+            }
 
-            console.log("================", defaultIctList);
+            // 신규회원인 경우 기본 배송지가 없을 수 있음
+            {
+                let defaultIctList = null;
+
+                // defaultIctResponse가 존재하고 응답이 성공한 경우
+                if (defaultIctResponse && defaultIctResponse.ok) {
+                    const defaultIctListData = await defaultIctResponse.json();
+
+                    if (defaultIctListData.ok)
+                        defaultIctList = defaultIctListData.location;
+                }
+
+                if(defaultIctList!=null)
+                    this.defaultIctList = defaultIctList;
+            }
+
+            //기본 배송지 이외의 배송지 목록
+            {
+                let lctList = null;
+
+                // lctResponse가 존재하고 응답이 성공한 경우
+                if (lctResponse && lctResponse.ok) {
+                    const lctListData = await lctResponse.json();
+
+                    if (lctListData.ok)
+                        lctList = lctListData.list;
+
+                }
+
+                if(lctList!=null)
+                    this.locationList = lctList;
+            }
 
         } catch (error) {
             console.error("Failed to fetch data:", error);

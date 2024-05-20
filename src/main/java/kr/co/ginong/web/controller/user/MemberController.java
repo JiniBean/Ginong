@@ -4,6 +4,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.entity.order.Order;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.coupon.CouponService;
@@ -242,6 +243,25 @@ public class MemberController {
     @GetMapping("mypage/location")
     public String location(){
         return "/user/mypage/location-reg";
+    }
+
+    @PostMapping("mypage/addLocation")
+    public String addLocation(
+            Location location
+            ,@AuthenticationPrincipal WebUserDetails userDetails
+    ){
+        Long memberId = 0L;
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null) {
+            memberId = userDetails.getId();
+        }
+
+        location.setMemberId(memberId);
+
+        //등록하는 것 구현해야함
+
+         return "/user/mypage/location-reg";
     }
 
 }

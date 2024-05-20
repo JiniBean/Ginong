@@ -17,6 +17,7 @@ import kr.co.ginong.web.service.order.LocationService;
 import kr.co.ginong.web.service.order.OrderService;
 import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,7 +27,9 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController("apiMemberController")
@@ -184,7 +187,7 @@ public class MemberController {
 
     /* 기본배송지가 아닌 배송지의 목록 불러 옴*/
     @GetMapping("location/list")
-    public List<Location> getList(
+    public  ResponseEntity<Map<String, Object>> getList(
             @AuthenticationPrincipal WebUserDetails userDetails
     ){
         Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
@@ -193,15 +196,24 @@ public class MemberController {
         if (userDetails != null)
             memberId = userDetails.getId(); //사용하고 싶은 정보 담기
 
-        List<Location> list = locationService.getListByMemberID(memberId);
-        System.out.println(list);
+        List<Location> list  = locationService.getListByMemberID(memberId);
 
-        return list;
+        Map<String, Object> response = new HashMap<>();
+
+        if (list == null) {
+            response.put("ok", false);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        response.put("ok", true);
+        response.put("list", list);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     /* 기본배송지 불러 옴*/
     @GetMapping("location/defaultList")
-    public Location getDefaultList(
+    public  ResponseEntity<Map<String, Object>>  getDefaultList(
             @AuthenticationPrincipal WebUserDetails userDetails
     ){
         Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
@@ -212,9 +224,17 @@ public class MemberController {
 
         Location location = locationService.getByMemberID(memberId);
 
-        System.out.println(location);
+        Map<String, Object> response = new HashMap<>();
 
-        return location;
+        if (location == null) {
+            response.put("ok", false);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        response.put("ok", true);
+        response.put("location", location);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @GetMapping("orderInfo")
@@ -226,10 +246,9 @@ public class MemberController {
         }
         Order recentOrder = orderService.getRecentOrder(memberId);
 
-
-
         return recentOrder;
     }
+
     @GetMapping("categoryList")
     public List<OrderCategory> categories() {
         List<OrderCategory> categoryList = orderService.getCategories();
