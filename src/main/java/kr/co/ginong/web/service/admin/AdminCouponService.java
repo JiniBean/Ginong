@@ -2,6 +2,7 @@ package kr.co.ginong.web.service.admin;
 
 import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponCategory;
+import kr.co.ginong.web.entity.notice.Notice;
 
 import java.util.List;
 
@@ -12,6 +13,13 @@ public interface AdminCouponService {
     Coupon getById(Long id);
 
     List<CouponCategory> getCategories();
+
+    void insert(Coupon coupon);
+    void update(Coupon coupon);
+    void delete(Long id);
+
+    void changeCouponType(List<Long> ids);
+
 
     // coupon 발급 목록 조회
     // List<CouponHistoryView> getHistoryList();

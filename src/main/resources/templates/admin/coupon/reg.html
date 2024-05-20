@@ -74,31 +74,66 @@
 
             <div class="d:flex fl-dir:column gap:2">
                 <label>
-                    <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button"/>
+                    <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button"
+                            value="0" v-model="radioIndex" @click="resetEndDate()"/>
                     기한 직접 설정
                 </label>
-                <div>
+                <div v-if="radioIndex == 0">
                     <div class="d:flex fl-dir:row gap:2 ai:center">
                         <input type="date" class="n-textbox n-textbox-type:underline" name="starDate"
-                            required title="쿠폰 사용 게시일을 선택해주세요" v-model="coupon.startDate">
+                               required title="쿠폰 사용 게시일을 선택해주세요" v-model="coupon.startDate">
                         <span>-</span>
-                        <input type="date" class="n-textbox n-textbox-type:underline" name="endDate" 
-                            required title="쿠폰 만료일을 선택해주세요" v-model="coupon.endDate">
+                        <input type="date" class="n-textbox n-textbox-type:underline" name="endDate"
+                               required title="쿠폰 만료일을 선택해주세요" v-model="coupon.endDate">
                     </div>
                 </div>
             </div>
             <div class="d:flex fl-dir:column gap:2">
                 <label>
-                    <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button"/>
+                    <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button"
+                           value="1" v-model="radioIndex" @click="changeEndDate()"/>
                     기한 선택 설정
                 </label>
-                <div class="d:flex jc:space-between gap:3">
-                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">보름</button>
-                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">한달</button>
-                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">두달</button>
-                    <button class="n-btn n-btn:outline n-btn-size:2 min-w:3 w:10p">세달</button>
+                <div v-if="radioIndex == 1" class="d:flex fl-dir:column gap:3">
+                    <div class="d:flex fl-dir:row gap:2 ai:center">
+                        <input type="date" class="n-textbox n-textbox-type:underline" name="starDate"
+                               required title="쿠폰 사용 게시일을 선택해주세요" v-model="coupon.startDate">
+                        <span>-</span>
+                        <input type="date" class="n-textbox n-textbox-type:underline" name="endDate"
+                               required title="쿠폰 만료일을 선택해주세요" v-model="coupon.endDate" disabled>
+                    </div>
+                    <ul class="w:full d:flex jc:space-between gap:2">
+                        <li>
+                            <label class="n-toggle n-toggle-type:outline-box n-toggle-size:2 py:3 px:10">
+                                15일
+                                <input type="radio" class="d:none" name="category" value="15"
+                                       v-model="periodDays" @change="changeEndDate()"/>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="n-toggle n-toggle-type:outline-box n-toggle-size:2 py:3 px:10">
+                                30일
+                                <input type="radio" class="d:none" name="category" value="30"
+                                       v-model="periodDays" @change="changeEndDate()"/>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="n-toggle n-toggle-type:outline-box n-toggle-size:2 py:3 px:10">
+                                60일
+                                <input type="radio" class="d:none" name="category" value="60"
+                                       v-model="periodDays" @change="changeEndDate()"/>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="n-toggle n-toggle-type:outline-box n-toggle-size:2 py:3 px:10">
+                                90일
+                                <input type="radio" class="d:none" name="category" value="90"
+                                       v-model="periodDays" @change="changeEndDate()"/>
+                            </label>
+                        </li>
+                    </ul>
                 </div>
-            </div>   
+            </div>
             
             <div class="d:flex fl-dir:column gap:2">
                 <div>쿠폰 발급 수</div>
@@ -106,17 +141,16 @@
             </div>
             <div class="d:flex fl-dir:column gap:2">
                 <div>쿠폰 사용 수</div>
-                <input type="text" class="n-textbox n-textbox-type:underline" name="rate"/>
+                <input type="text" class="n-textbox n-textbox-type:underline" name="rate" />
             </div>
             <div class="d:flex fl-dir:column gap:2">
                 <span>상세 설명</span>
-<!--                <input type="text" class="n-textbox min-h:6" name="desc" value="쿠폰 상세 설명" v-model="notice.content"/>-->
                 <input type="text" class="n-textbox min-h:6" name="desc" value="쿠폰 상세 설명" v-model="coupon.desc"/>
             </div>
 
             <div class="d:flex flex-direction:row gap:4">
                 <span class="d:flex ai:center">상태</span>
-                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
+                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state" v-model="coupon.type" true-value="1" false-value="0" />
             </div>
         
             <div class="d:flex fl-dir:row w:10p md:jc:space-between">
@@ -125,7 +159,7 @@
                 </div>
                 <div class="d:flex fl-grow:1 md:fl-grow:0 gap:8">
                     <button class="n-btn n-btn-size:2 min-w:3 w:10p">임시저장</button>
-                    <button class="n-btn n-btn-size:2 min-w:3 w:10p">등록</button>
+                    <button class="n-btn n-btn-size:2 min-w:3 w:10p" @click.prevent="regCoupon()">등록</button>
                 </div>
             </div>
         </div>

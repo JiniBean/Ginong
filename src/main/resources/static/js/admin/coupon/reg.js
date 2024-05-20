@@ -4,18 +4,20 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            coupon: {},
-            couponCategory: [
-                // { id: 1, name: '이벤트' }
-            ],
+            coupon: {
+                startDate: new Date().toISOString().slice(0,10),
+            },
+            couponCategory: [],
             discountCategory: [
                 { id: 1, name: '원' },
                 { id: 2, name: '%' },
             ],
             showCouponDropdown: false,
             showUnitDropdown: false,
-
+            radioIndex: 0,
+            periodDays: 15,
         }
+
     },
     methods:{
         goList() {
@@ -33,7 +35,7 @@ createApp({
         clickCouponDropdownElement(c) {
             console.log(c);
             //this.selectedCategory = c;
-            this.coupon.categoryId = c.id;
+            this.coupon.couponCategoryId = c.id;
             this.showCouponDropdown = !this.showCouponDropdown;
         },
 
@@ -46,7 +48,7 @@ createApp({
 
         getCouponCategoryName() {
             for (let item of this.couponCategory) {
-                if (this.coupon.categoryId == item.id)
+                if (this.coupon.couponCategoryId == item.id)
                     return item.name;
             }
             return '선택';
@@ -58,6 +60,32 @@ createApp({
                     return item.name;
             }
             return '선택';
+        },
+
+        resetEndDate() {
+            this.coupon.endDate = null;
+        },
+
+        changeEndDate() {
+            let timestamp = Date.parse(this.coupon.startDate);  // YYYY-MM-DD -> UNIX TIMESTAMP
+            let startDate = new Date(timestamp);                // UNIX TIMESTAMP -> Date object
+            let endDate = new Date();
+            endDate.setDate(startDate.getDate() + Number.parseInt(this.periodDays));    // periodDays : String -> number
+            this.coupon.endDate = endDate.toISOString().slice(0,10);
+        },
+
+        async regCoupon() {
+            let requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.coupon),
+            };
+
+            console.log(this.coupon);
+            console.log(requestOptions);
+
+            await fetch(`/api/coupons`, requestOptions);
+            this.goList();
         },
 
     },

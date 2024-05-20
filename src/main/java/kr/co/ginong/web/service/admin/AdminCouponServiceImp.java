@@ -18,9 +18,6 @@ public class AdminCouponServiceImp implements AdminCouponService {
     @Autowired
     private CouponCategoryRepository categoryRepository;
 
-
-
-
     @Override
     public List<Coupon> getList() {
         return repository.findAll();
@@ -29,6 +26,26 @@ public class AdminCouponServiceImp implements AdminCouponService {
     @Override
     public List<CouponCategory> getCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public void insert(Coupon coupon) {
+        repository.save(coupon);
+    }
+
+    @Override
+    public void update(Coupon coupon) {
+        repository.update(coupon);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.delete(id);
+    }
+
+    @Override
+    public void changeCouponType(List<Long> ids) {
+        repository.changeCouponType(ids);
     }
 
     @Override

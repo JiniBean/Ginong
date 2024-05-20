@@ -14,17 +14,13 @@ createApp({
             ],
             showCouponDropdown: false,
             showUnitDropdown: false,
-
+            radioIndex: 0,
+            periodDays: 15,
         }
     },
     methods:{
         goList() {
             location.href = `/admin/coupon/list`;
-        },
-
-        goUpdate(coupon) {
-            let couponId = coupon.id;
-            location.href = `/admin/coupon/update?couponId=${couponId}`;
         },
 
         clickCouponDropdown() {
@@ -65,19 +61,30 @@ createApp({
             return '선택';
         },
 
-        async deleteCoupon() {
+        resetEndDate() {
+            this.coupon.endDate = null;
+        },
+
+        changeEndDate() {
+            let timestamp = Date.parse(this.coupon.startDate);  // YYYY-MM-DD -> UNIX TIMESTAMP
+            let startDate = new Date(timestamp);                // UNIX TIMESTAMP -> Date object
+            let endDate = new Date();
+            endDate.setDate(startDate.getDate() + Number.parseInt(this.periodDays));    // periodDays : String -> number
+            this.coupon.endDate = endDate.toISOString().slice(0,10);
+        },
+
+        async updateCoupon() {
             let requestOptions = {
-                method: 'DELETE',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(this.coupon),
             };
 
             console.log(requestOptions);
             console.log("id:", this.coupon.id);
-            // await fetch(`/api/coupons/${this.coupon.id}`, requestOptions);
+            await fetch(`/api/coupons/${this.coupon.id}`, requestOptions);
             // this.goList();
         },
-
     },
     async created() {
         let params = new URLSearchParams(location.search);
