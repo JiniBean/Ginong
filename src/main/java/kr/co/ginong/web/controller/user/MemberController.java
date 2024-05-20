@@ -239,4 +239,9 @@ public class MemberController {
         return "/user/mypage/info-update";
     }
 
+    @GetMapping("mypage/location")
+    public String location(){
+        return "/user/mypage/location-reg";
+    }
+
 }

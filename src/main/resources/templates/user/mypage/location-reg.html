@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=ko
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="user/inc/layout-back"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>고객센터</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module" src="/js/user/mypage/location-reg.js" defer></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script>
+    <script src="/js/module/findLocation.js" defer></script>
+    <link rel="stylesheet" href="/css/user/mypage/index.css">
 </head>
 <body>
-
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0">
+  <section id="location">
+      <h1 class="d:none">배송지 등록 및 수정</h1>
+      <div class="d:flex fl-dir:column gap:10">
+          <div>
+              <div>배송지명</div>
+              <input :value="memberList.userName" type="text" class="n-textbox n-textbox-type:underline" autocomplete="false" />
+          </div>
+          <div>
+              <div>수령인</div>
+              <input :value="memberList.userName" type="text" class="n-textbox n-textbox-type:underline" autocomplete="false" />
+          </div>
+          <div>
+              <div>연락처</div>
+              <input :value="memberList.userName" type="text" class="n-textbox n-textbox-type:underline" autocomplete="false" />
+          </div>
+          <div class="d:flex fl-dir:column gap:4">
+              <div>배송지</div>
+              <div class="d:flex ai:center gap:3">
+                  <input type="text" id="sample6_postcode" class="n-textbox n-textbox-type:underline" placeholder="우편번호">
+                  <button class="btn-address n-btn n-btn-type:outline md:w:7 w:6">주소검색</button>
+              </div>
+              <input type="text" id="sample6_address" class="n-textbox n-textbox-type:underline"  placeholder="주소">
+              <input type="text" id="sample6_detailAddress" class="n-textbox n-textbox-type:underline" placeholder="상세주소">
+<!--              <input type="text" id="sample4_extraAddress" class="n-textbox n-textbox-type:underline" placeholder="참고항목">-->
+              <div class="d:flex ai:center">
+                  <span class="icon icon:checkCircle icon-color:base-6 icon-size:4 csr:pointer">체크 아이콘</span>
+                  <span>기본 배송지로 등록할게요</span>
+              </div>
+          </div>
+          <div id="category" class="d:flex fl-dir:column gap:4">
+              <div>배송 요청사항</div>
+              <div class="custom-dropdown">
+                  <div class="selected-option selected-option-category icon-size:1 deco deco-pos:right icon:RT deco-size:1 deco-color:main-6" style="width:100%" >
+                      요청사항 선택
+                  </div>
+                  <ul class="options option-category-list" style="width:100%">
+                      <li class="option option-category" data-value="1">직접받고 부재 시 문앞</li>
+                      <li class="option option-category" data-value="2">경비실에 보관</li>
+                  </ul>
+              </div>
+          </div>
+          <div class="d:flex fl-dir:column gap:4">
+              <div>공동현관 출입번호</div>
+              <label>
+                  <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button" />
+                  <input type="text" class="n-textbox n-textbox-type:underline pl:0" placeholder="공동현관 출입번호를 입력해 주세요">
+              </label>
+              <label>
+                  <input type="radio" class="n-toggle n-toggle-type:dot n-toggle-size:2" name="check-button" checked/>
+                  비밀번호 없이 출입 가능해요
+              </label>
+          </div>
+          <div>
+              <button class="n-btn w:100p">등록</button>
+          </div>
+      </div>
+  </section>
+</main>
 </body>
 </html>
