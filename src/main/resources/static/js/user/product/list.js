@@ -125,7 +125,7 @@ document.addEventListener('click', function (e) {
                     quantity: 1
                 }
                 cookieList.push(cart);
-                cookie.set("cartList", JSON.stringify(list));
+                cookie.set("cartList", JSON.stringify(cookieList));
                 qty = cart.quantity;
                 check = true;
             }
