@@ -18,7 +18,7 @@ public class Coupon {
     private long	discountAmount;
     private String	discountUnit;
     private long	minPaymentAmt;
-    private long	maxPaymentAmt;
+    private long	maxDiscountAmt;
     private Date	startDate;
     private Date	endDate;
     private int	    releaseAmount;

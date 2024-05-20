@@ -17,17 +17,56 @@
 		where id = #{id}
 	</select>
 
-<!--	<update id="update" parameterType="CouponHistory">-->
-<!--		update COUPON_HISTORY-->
-<!--		set USED_AMT = #{usedAmt}, USED_DATE = current_timestamp(), ORDER_ID = #{orderId}-->
-<!--		where MEMBER_id = #{memberId} and id = #{id} and COUPON_ID = #{couponId};-->
-<!--	</update>-->
 
-<!--	<select id="countByMemberId" resultType="Integer">-->
-<!--		SELECT COUNT(*)-->
-<!--		FROM COUPON_HISTORY-->
-<!--		WHERE MEMBER_ID = #{memberId}-->
-<!--		AND USED_DATE IS NULL-->
-<!--	</select>-->
+	<insert id="save" parameterType="Coupon">
+		INSERT INTO COUPON
+		(COUPON_CATEGORY_ID, NAME, DISCOUNT_AMOUNT, DISCOUNT_UNIT, MIN_PAYMENT_AMT,
+		MAX_DISCOUNT_AMT, START_DATE, END_DATE, RELEASE_AMOUNT, `DESC`, TYPE, REG_DATE)
+		values
+		(#{couponCategoryId}, #{name}, #{discountAmount}, #{discountUnit}, #{minPaymentAmt},
+		#{maxDiscountAmt}, #{startDate}, #{endDate}, #{releaseAmount}, #{desc}, #{type}, #{regDate})
+	</insert>
 
+
+	<update id="update" parameterType="Coupon">
+		UPDATE COUPON
+		<set>
+			<if test="couponCategoryId != null"> COUPON_CATEGORY_ID = #{couponCategoryId}, </if>
+			<if test="name != null"> NAME = #{name}, </if>
+			<if test="discountAmount != null"> DISCOUNT_AMOUNT = #{discountAmount}, </if>
+			<if test="discountUnit != null"> DISCOUNT_UNIT = #{discountUnit}, </if>
+			<if test="minPaymentAmt != null"> MIN_PAYMENT_AMT = #{minPaymentAmt}, </if>
+			<if test="maxDiscountAmt != null"> MAX_DISCOUNT_AMT = #{maxDiscountAmt}, </if>
+			<if test="startDate != null"> START_DATE = #{startDate}, </if>
+			<if test="endDate != null"> END_DATE = #{endDate}, </if>
+			<if test="releaseAmount != null"> RELEASE_AMOUNT = #{releaseAmount}, </if>
+			<if test="desc != null"> `DESC` = #{desc}, </if>
+			<if test="type != null"> TYPE = #{type}, </if>
+			<if test="regDate != null"> REG_DATE = #{regDate}, </if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+
+	<delete id="delete" parameterType="Coupon">
+		delete from COUPON
+		<where>
+			<if test="id != null">
+				id = #{couponId}
+			</if>
+		</where>
+	</delete>
+
+	<update id="changeCouponType" parameterType="coupon">
+		update COUPON
+		set TYPE = 1
+		WHERE id in
+		<foreach collection="ids" item="id" separator="," open="(" close=")">
+			${id}
+		</foreach>
+	</update>
 </mapper>
