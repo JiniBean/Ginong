@@ -29,24 +29,21 @@ public class OrderController {
 
     @GetMapping()
     public List<OrderView> list(@RequestParam(name = "q", required = false) String query,
-                                   @RequestParam(name = "s", required = false) Boolean sort,
-                                   @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
-                                   @AuthenticationPrincipal WebUserDetails userDetails) {
+                                @RequestParam(name = "s", required = false) Boolean sort,
+                                @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
+                                @AuthenticationPrincipal WebUserDetails userDetails) {
         Long memberId = null;
         if(isUser && userDetails!=null)
             memberId = userDetails.getId();
 
-        List<OrderView> list = service.getList(memberId,query,sort);
-        System.out.println("======================");
-        System.out.println(list);
-        System.out.println("======================");
+
         return service.getList(memberId,query,sort);
     }
 
     @GetMapping("cncl")
     public List<OrderView> cancelList(@RequestParam(name = "q", required = false) String query,
-                                         @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
-                                         @AuthenticationPrincipal WebUserDetails userDetails) {
+                                      @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
+                                      @AuthenticationPrincipal WebUserDetails userDetails) {
 
         Long memberId = null;
         if(isUser && userDetails!=null)
@@ -55,11 +52,9 @@ public class OrderController {
         return service.getCancelList(memberId,query);
     }
 
-    @GetMapping("exrf")
-    public List<OrderView> exRefList(@RequestParam(name = "q", required = false) String query,
+    @GetMapping("exch")
+    public List<OrderView> exchangeList(@RequestParam(name = "q", required = false) String query,
                                         @RequestParam(name = "s", required = false) Integer sort,
-                                        @RequestParam(name = "e", required = false) Boolean isEx,
-                                        @RequestParam(name = "r", required = false) Boolean isRef,
                                         @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
                                         @AuthenticationPrincipal WebUserDetails userDetails) {
 
@@ -67,20 +62,22 @@ public class OrderController {
         if(isUser && userDetails!=null)
             memberId = userDetails.getId();
 
-        return service.getExRefList(memberId,query,sort,isEx, isRef);
+        return service.getExchangeList(memberId,query,sort);
     }
 
-    @GetMapping("all")
-    public List<OrderView> allCancelList(@RequestParam(name = "q", required = false) String query,
-                                            @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
-                                            @AuthenticationPrincipal WebUserDetails userDetails) {
+    @GetMapping("rfnd")
+    public List<OrderView> refundList(@RequestParam(name = "q", required = false) String query,
+                                      @RequestParam(name = "s", required = false, defaultValue = "false") Boolean sort,
+                                      @RequestParam(name = "u", required = false, defaultValue = "false") Boolean isUser,
+                                      @AuthenticationPrincipal WebUserDetails userDetails) {
 
         Long memberId = null;
         if(isUser && userDetails!=null)
             memberId = userDetails.getId();
 
-        return service.getAllCancelist(memberId,query);
+        return service.getRefundList(memberId,query,sort);
     }
+
 
     @GetMapping("{orderId}")
     public List<OrderView> items(@PathVariable Long orderId){

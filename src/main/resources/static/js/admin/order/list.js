@@ -32,15 +32,17 @@ createApp({
                     this.list = await repository.findAll(this.query,sortType,false);
                     break;
                 case 2:
-                    this.list = await repository.findExRef(this.query,sortType,false,1);
+                    this.list = await repository.findExchange(this.query,sortType,false);
                     break;
                 case 3:
-                    this.list = await repository.findExRef(this.query,sortType,false,2)
+                    this.list = await repository.findRefund(this.query,sortType,false)
                     break;
                 case 4:
                     this.list = await repository.findCancel(this.query,false)
 
             }
+
+            this.list.forEach(l => l.date=this.formatDate(new Date(l.date)));
 
         },
         resetQuery(){
@@ -62,7 +64,15 @@ createApp({
             //         this.list = await repository.findCancel(this.query,false)
             //
             // }
-        }
+        },
+        formatDate(date) {
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1; // 월은 0부터 시작하기 때문에 1을 더함
+            let day = date.getDate();
+
+            //결과값 2024.05.24
+            return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        },
     },
     mounted(){
         this.getList(1);

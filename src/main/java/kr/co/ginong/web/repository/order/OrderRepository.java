@@ -11,13 +11,9 @@ import java.util.List;
 @Mapper
 public interface OrderRepository {
     List<OrderView> findAll(Long memberId,String query, Boolean sort);
-
-    List<OrderView> findCancelAll(Long memberId,String query);
-
     List<OrderView> findCancel(Long memberId,String query);
-
-    List<OrderView> findExRef(Long memberId,String query,Integer sort,Boolean isEx,Boolean isRef);
-
+    List<OrderView> findRefund(Long memberId, String query, Boolean sort);
+    List<OrderView> findExchange(Long memberId, String query, Integer sort);
     boolean save(Order order);
     boolean update(Order order);
     void delete(long id);
@@ -29,4 +25,5 @@ public interface OrderRepository {
     List<OrderView> findItems(Long orderId);
 
     List<MemberOrderView> findByMemberId(Long memberId);
+
 }

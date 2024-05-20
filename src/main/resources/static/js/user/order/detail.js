@@ -1,7 +1,8 @@
 import Repository from "/js/module/OrderRepository.js";
-import MemberRepository from "../../module/MemberRepository.js";
+import MemberRepository from "/js/module/MemberRepository.js";
+import CartRepository from "/js/module/CartRepository.js";
 
-const { createApp } = Vue
+const { createApp } = Vue;
 
 createApp({
     data() {
@@ -19,6 +20,39 @@ createApp({
         // 전체선택
         checkAll(check) {
             this.isChecked = check;
+        },
+        formatDate(date) {
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1; // 월은 0부터 시작하기 때문에 1을 더함
+            let day = date.getDate();
+
+            //결과값 2024.05.24
+            return `${year}.${month < 10 ? '0' : ''}${month}.${day < 10 ? '0' : ''}${day}`;
+        },
+        async addCart() {
+            let inputs = document.querySelectorAll("input[name='prdIds']:checked");
+            if (!inputs.length) {
+                alert("주문하실 상품을 선택해주세요");
+                return;
+            }
+            let list = [];
+            inputs.forEach(i => list.push(i.value));
+
+            let cartRepository = new CartRepository;
+            let valid = await cartRepository.addList(list);
+            if(valid)
+                location.href='/cart';
+        },
+        goInfo(){
+            let inputs = document.querySelectorAll("input[name='prdIds']:checked");
+            if(!inputs.length){
+                alert("주문하실 상품을 선택해주세요");
+                return;
+            }
+
+            this.$refs.form.submit();
+
+
         }
     },
     async created(){
@@ -34,6 +68,9 @@ createApp({
 
         let memberRepository = new MemberRepository();
         this.member = await memberRepository.findUser();
+
+        this.order.date = this.formatDate(new Date(this.order.date));
+
     },
 }).mount('main');
 

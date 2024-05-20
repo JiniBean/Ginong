@@ -9,6 +9,7 @@ createApp({
         return {
             list: [],
             tabIndex: 0,
+
             code:{
                 1:'요청',
                 2:'진행중',
@@ -25,10 +26,10 @@ createApp({
 
             //취소내역(1)
             if(idx)
-                this.list = await repository.findCancelAll();
+                this.list = await repository.findCancel(null,true);
             //주문내역(0)
             else
-                this.list = await repository.findAll();
+                this.list = await repository.findAll(null,null,true);
 
     },
 

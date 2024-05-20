@@ -328,4 +328,24 @@ public class OrderController {
         return "user/order/detail";
     }
 
+    @PostMapping("detail")
+    public String detail(@RequestParam List<Long> prdIds,
+                         HttpSession session ){
+
+        List<OrderItem> list = new ArrayList<>();
+
+        System.out.println("=================");
+        System.out.println(prdIds.toString());
+        System.out.println("=================");
+        for (Long p: prdIds){
+            OrderItem item = new OrderItem();
+            item.setProductId(p);
+            item.setQuantity(1);
+            list.add(item);
+        }
+
+        session.setAttribute("orderItems", list);
+        return "redirect:info";
+    }
+
 }

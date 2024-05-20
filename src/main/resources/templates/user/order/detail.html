@@ -13,54 +13,51 @@
 </head>
 <body>
 
-<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0">
-<!--  페이지 제목-->
-  <section class="d:none md:d:flex fl-dir:column gap:6 md:gap:8 p:4 bd-bottom bd-color:base-3">
-    <h1 class="d:none">주문 상세 요약</h1>
-    <div class="d:flex jc:center gap:6">
+<main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:9 w:10p">
+  <section>
+    <h1 class="d:none">주문 상태 요약</h1>
+    <!--  페이지 제목-->
+    <div class="d:none md:d:flex p:4 bd-bottom bd-color:base-3 jc:center" style="height: 80px">
       <span class="fw:3 fs:5">주문 상세 - </span>
       <span class="fw:3 fs:5">{{list[0].prettyName}}</span>
       <span v-if="list.length >= 2" class="fw:3 fs:5">외 {{(list.length)-1}} 건</span>
     </div>
-  </section>
 
-<!--  주문일자 및 주문번호, 주문상태 표시-->
-  <section class="d:flex fl-dir:column gap:5 md:gap:8 p:4 bd-bottom bd-color:base-3 bg-color:base-2 md:bg-color:transparent">
-    <h1 class="d:none">주문 상태 요약</h1>
-    <div class="d:flex fl-dir:column gap:10 p:5">
-      <div class="d:flex jc:space-between">
-        <div>
-          <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ order.date }}</span>
-          <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
+    <!--  주문일자 및 주문번호, 주문상태 표시-->
+    <div class="d:flex fl-dir:column gap:5 md:gap:8 p:4 bd-bottom bd-color:base-3 bg-color:base-2 md:bg-color:transparent">
+      <div class="d:flex fl-dir:column gap:5 md:gap:10">
+        <div class="d:flex jc:space-between">
+          <div>
+            <span class="pr:1">{{ order.date }}</span>
+            <span>주문</span>
+          </div>
+          <div>
+            <span class="pr:1">주문번호</span>
+            <span>{{ order.id }}</span>
+          </div>
         </div>
-        <div>
-          <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
-          <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ order.id }}</span>
-        </div>
-       
-      </div>
-      <div class="d:flex jc:space-between gap:4 p:5">
-        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
-          <div :class="order.categoryId == status.id?'bg-color:main-6':''" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:cente bg-color:base-4" style="width: 36px; height: 36px;"></div>
-
-          <span :class="order.categoryId == status.id?'color:main-6':''" class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
+        <div class="d:flex jc:space-between gap:4 p:5">
+          <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
+            <div :class="order.categoryId == status.id?'bg-color:main-6':''" class="bd-radius:full ai:center jc:center bg-color:base-4"></div>
+            <div :class="order.categoryId == status.id?'color:main-6':''" class="fs:1 md:fs:3 color:base-4">{{ status.name }}</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
 <!-- 주문한 상품 내역-->
-  <section class="d:flex fl-dir:column gap:7 md:gap:15 pl:5 pr:5 ">
+<form ref="form" method="post" class="d:flex fl-dir:column gap:8 md:gap:20 ">
+  <section class="d:flex fl-dir:column gap:7 md:gap:15 mr:4 ml:4 md:mr:0 md:ml:0">
     <h1 class="d:none">주문 상품 내역</h1>
     <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p ">
       <label>
-        <input type="checkbox" class="n-toggle n-toggle-type:check-box" @click="checkAll(!isChecked)" />
+        <input type="checkbox" name="all" class="n-toggle n-toggle-type:check-box" @click="checkAll(!isChecked)" />
         전체선택
       </label>
     </div>
     <div class="d:flex fl-dir:column gap:5 md:gap:12">
       <div class="d:flex gap:2 md:gap:4 w:10p" v-for="item in list" :key="item.id">
-        <div><input type="checkbox" class="n-toggle n-toggle-type:check-box" :checked="isChecked" /></div>
+        <div><input type="checkbox" class="n-toggle n-toggle-type:check-box" :checked="isChecked" name="prdIds" :value="item.productId" /></div>
 
         <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
           <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="100px" height="100px">
@@ -90,25 +87,24 @@
       </div>
     </div>
   </section>
-<!--  버튼들-->
-  <section class="d:flex fl-dir:column gap:10">
+  <!--  버튼들-->
+  <section class="d:flex fl-dir:column gap:10 mr:4 ml:4 md:mr:0 md:ml:0">
     <h1 class="d:none">버튼</h1>
     <div>
       <span class="d:flex jc:center color:sub-1 fw:3">품절된 상품은 제외됩니다.</span>
     </div>
     <div class="d:flex jc:center gap:7 md:gap:10">
-      <div class="n-btn n-btn-size:2 w:10 md:w:10"><a href="">선택상품 바로 구매</a></div>
-      <div class="n-btn n-btn-size:2 w:10 md:w:10"><a href="">선택상품 다시 담기</a></div>
+      <button @click.prevent="goInfo" class="n-btn n-btn-size:2 fl-grow:1">선택상품 바로 구매</button>
+      <div @click="addCart" class="n-btn n-btn-size:2 fl-grow:1">선택상품 다시 담기</div>
     </div>
-    <div class="d:flex fl-grow:1" >
-      <div v-if="order.categoryId === 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10" ><a href="">주문 취소</a></div>
-    </div>
+    <div v-if="order.categoryId === 1 && order.cancelId==null" class="fl-grow:1 n-btn n-btn-type:outline n-btn-size:2"><a href="">주문 취소</a></div>
   </section>
+</form>
 
 <!--  결제정보-->
   <section class="">
     <h1 class="d:none">결제정보</h1>
-    <div class="n-expander bd-top bd-color:base-4 bd-width:3 pl:5 pr:5">
+    <div class="n-expander bd-top bd-color:base-4 bd-width:3 mr:4 ml:4 md:mr:0 md:ml:0">
       <div class="n-expander-title bd-bottom bd-color:base-4 bd-width:1 fs:5 md:fs:6 fw:3">
         <input type="checkbox" class="n-expander-trigger" checked/>
         결제 정보
@@ -150,7 +146,7 @@
 <!--  배송지 정보-->
   <section class="">
     <h1 class="d:none">배송지 정보</h1>
-    <div class="n-expander bd-top bd-color:base-4 bd-width:3 pl:5 pr:5">
+    <div class="n-expander bd-top bd-color:base-4 bd-width:3 mr:4 ml:4 md:mr:0 md:ml:0">
       <div class="n-expander-title bd-bottom bd-color:base-4 bd-width:1 fs:5 md:fs:6 fw:3">
         <input type="checkbox" class="n-expander-trigger" checked/>
         배송지 정보
@@ -180,7 +176,7 @@
 <!--  주문자 정보-->
   <section class="">
     <h1 class="d:none">주문자 정보</h1>
-    <div class="n-expander bd-top bd-color:base-4 bd-width:3 pl:5 pr:5">
+    <div class="n-expander bd-top bd-color:base-4 bd-width:3 mr:4 ml:4 md:mr:0 md:ml:0">
       <div class="n-expander-title bd-bottom bd-color:base-4 bd-width:1 fs:5 md:fs:6 fw:3">
         <input type="checkbox" class="n-expander-trigger" checked/>
         주문자 정보

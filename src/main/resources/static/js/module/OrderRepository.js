@@ -56,10 +56,8 @@ export default class OrderRepository{
         return await response.json();
     }
 
-    async findExRef(query,sortType,isUser,idx){
-        let url = `${baseUrl}/api/order/exrf?`;
-        if(idx===2 && sortType)
-            sortType = 1
+    async findExchange(query,sortType,isUser){
+        let url = `${baseUrl}/api/order/exch?`;
 
         if(query)
             url += `q=${query}&`
@@ -69,12 +67,22 @@ export default class OrderRepository{
 
         if(isUser)
             url += `u=${isUser}&`
-        if(idx==1)
-            url += 'e=true' //교환
-        if(idx==2)
-            url += 'r=true' //환불
-        if(idx==3)
-            url += 'e=true&r=true'
+
+        let response = await this.findPromise(url);
+        return await response.json();
+    }
+
+    async findRefund(query,sortType,isUser){
+        let url = `${baseUrl}/api/order/rfnd?`;
+
+        if(query)
+            url += `q=${query}&`
+
+        if(sortType)
+            url += `s=${sortType}&`
+
+        if(isUser)
+            url += `u=${isUser}&`
 
         let response = await this.findPromise(url);
         return await response.json();

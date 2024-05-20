@@ -25,22 +25,6 @@
 		ORDER BY `DATE` DESC
 	</select>
 
-	<select id="findCancelAll" resultType="OrderView">
-		SELECT COUNT(ITEM_ID)-1 count, ov.*  from ORDER_VIEW ov
-		WHERE REFUND_ID is not null or EXCHANGE_ID is not null or CANCEL_ID is not null
-		<if test="memberId != null">
-			AND member_id = #{memberId}
-		</if>
-		<if test="query != null">
-			AND id in (
-				SELECT oi.order_id from ORDER_ITEM oi
-				left join PRODUCT p on oi.product_id = p.id
-				WHERE p.name LIKE '%#{query}%'
-			)
-		</if>
-		GROUP BY CANCEL_ID, EXCHANGE_ID , REFUND_ID
-		ORDER BY `DATE` DESC, CNCL_DATE DESC, EXCH_REG_DATE DESC, RFND_REG_DATE DESC
-	</select>
 
 	<select id="findCancel" resultType="OrderView">
 		SELECT COUNT(ITEM_ID)-1 count, ov.*  from ORDER_VIEW ov
@@ -52,7 +36,7 @@
 				AND id in (
 					SELECT oi.order_id from ORDER_ITEM oi
 					left join PRODUCT p on oi.product_id = p.id
-					WHERE p.name LIKE '%#{query}%'
+					WHERE p.name LIKE '%${query}%'
 				)
 			</if>
 		</where>
@@ -61,23 +45,38 @@
 	</select>
 
 
-	<select id="findExRef" resultType="OrderView">
+	<select id="findRefund" resultType="OrderView">
 		SELECT * from ORDER_VIEW ov
 		<where>
-			<if test="isEx &amp;&amp; sort == null">
-				EXCHANGE_ID is not null
+			REFUND_ID is not null
+			<if test="memberId != null">
+				AND member_id = #{memberId}
 			</if>
-			<if test="isRef &amp;&amp; sort == null">
-				OR REFUND_ID is not null
+			<if test="query != null">
+				AND prettyName LIKE '%${query}%'
 			</if>
-			<if test="isEx &amp;&amp; sort != null">
-				OR EXCH_STATE &lt;= #{sort}
-			</if>
-			<if test="isRef &amp;&amp; sort != null">
-				OR RFND_STATE = 1
+			<if test="sort">
+				AND RFND_STATE = 1
 			</if>
 		</where>
-		ORDER BY `DATE` DESC, EXCH_REG_DATE DESC, RFND_REG_DATE DESC
+		ORDER BY RFND_REG_DATE DESC
+	</select>
+
+	<select id="findExchange" resultType="OrderView">
+		SELECT * from ORDER_VIEW ov
+		<where>
+			EXCHANGE_ID is not null
+			<if test="memberId != null">
+				AND member_id = #{memberId}
+			</if>
+			<if test="query != null">
+				AND prettyName LIKE '%${query}%'
+			</if>
+			<if test="sort != null">
+				AND EXCH_STATE = #{sort}
+			</if>
+		</where>
+		ORDER BY EXCH_REG_DATE DESC
 	</select>
 
 	<select id="findItems" resultType="OrderView">

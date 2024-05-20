@@ -32,18 +32,18 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public List<OrderView> getAllCancelist(Long memberId, String query) {
-        return repository.findCancelAll(memberId,query);
-    }
-
-    @Override
     public List<OrderView> getCancelList(Long memberId, String query) {
         return repository.findCancel(memberId, query);
     }
 
     @Override
-    public List<OrderView> getExRefList(Long memberId, String query, Integer sort, Boolean isEx, Boolean isRef) {
-        return repository.findExRef(memberId, query, sort, isEx, isRef);
+    public List<OrderView> getExchangeList(Long memberId, String query, Integer sort) {
+        return repository.findExchange(memberId,query,sort);
+    }
+
+    @Override
+    public List<OrderView> getRefundList(Long memberId, String query, Boolean sort) {
+        return repository.findRefund(memberId,query,sort);
     }
 
     @Override
