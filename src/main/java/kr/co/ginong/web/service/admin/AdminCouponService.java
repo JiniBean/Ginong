@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AdminCouponService {
 
-    List<Coupon> getList();
+    List<Coupon> getList(String query);
 
     Coupon getById(Long id);
 

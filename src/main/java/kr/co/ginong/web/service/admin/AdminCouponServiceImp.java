@@ -12,6 +12,7 @@ import java.util.List;
 @Service("adminCouponServiceImp")
 public class AdminCouponServiceImp implements AdminCouponService {
 
+
     @Autowired
     private CouponRepository repository;
 
@@ -19,8 +20,8 @@ public class AdminCouponServiceImp implements AdminCouponService {
     private CouponCategoryRepository categoryRepository;
 
     @Override
-    public List<Coupon> getList() {
-        return repository.findAll();
+    public List<Coupon> getList(String query) {
+        return repository.findAll(query);
     }
 
     @Override

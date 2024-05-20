@@ -74,8 +74,9 @@ createApp({
 
             console.log(requestOptions);
             console.log("id:", this.coupon.id);
-            // await fetch(`/api/coupons/${this.coupon.id}`, requestOptions);
-            // this.goList();
+
+            await fetch(`/api/coupons/${this.coupon.id}`, requestOptions);
+            this.goList();
         },
 
     },

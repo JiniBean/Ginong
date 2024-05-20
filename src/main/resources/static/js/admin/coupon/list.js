@@ -7,6 +7,7 @@ createApp({
             tabIndex: 0,
             showDropdown: false,
             list: [],
+            query: "",
         }
     },
     methods:{
@@ -58,8 +59,22 @@ createApp({
             location.href = `/admin/coupon/detail?couponId=${couponId}`;
         },
 
+        async deleteCoupon(coupon) {
+            let requestOptions = {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(coupon),
+            };
+
+            console.log(requestOptions);
+            console.log("id:", coupon.id);
+
+            await fetch(`/api/coupons/${coupon.id}`, requestOptions);
+            this.loadData();
+        },
+
         async loadData() {
-            let response = await fetch(`/api/coupons`);
+            let response = await fetch(`/api/coupons?query=${this.query}`);
             let list = await response.json();
             this.list = list;
 

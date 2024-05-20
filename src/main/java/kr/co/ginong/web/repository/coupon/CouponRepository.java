@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface CouponRepository {
-    List<Coupon> findAll();
+    List<Coupon> findAll(String query);
     Coupon findById(Long id);
     void save(Coupon coupon);
 

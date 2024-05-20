@@ -21,8 +21,8 @@ public class CouponController {
     private CouponService couponService;
 
     @GetMapping
-    public List<Coupon> list() {
-        return adminService.getList();
+    public List<Coupon> list(@RequestParam(required = false) String query) {
+        return adminService.getList(query);
     }
 
     @GetMapping("coupon-category")
