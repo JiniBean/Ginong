@@ -33,6 +33,35 @@
 		</choose>
 		limit #{offset}, #{rows}
 	</select>
+	
+	<select id="findAllCartItems" resultType="Map">
+		SELECT
+		      P.ID AS PRODUCT_ID
+		    , P.NAME AS PRODUCT_NAME
+		    , concat(P.NAME, ', ', P.QUANTITY, QC.NAME, ' (', P.WEIGHT, WC.NAME, ')') AS PRETTY_PRODUCT_NAME
+		    , P.PRICE AS PRODUCT_PRICE
+		    , P.DISCOUNT_RATE
+		    , P.PRICE * (P.DISCOUNT_RATE / 100) AS DISCOUNT_PRICE
+		    , S.CUR_AMT AS STOCK_QUANTITY
+		    , CONCAT(P.THUMBNAIL_PATH, "/", P.THUMBNAIL_NAME) AS IMG
+		FROM PRODUCT P
+		LEFT JOIN
+			(
+				SELECT PRODUCT_ID
+				, SUM(PLMA * AMOUNT) AS CUR_AMT
+				FROM STOCK
+				GROUP BY PRODUCT_ID
+			) S
+			ON P.ID = S.PRODUCT_ID
+		LEFT JOIN QUANTITY_CATEGORY QC
+			ON P.QUANTITY_CATEGORY_ID = QC.ID
+		LEFT JOIN WEIGHT_CATEGORY WC
+			ON P.WEIGHT_CATEGORY_ID = WC.ID
+		WHERE P.ID IN
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 
 	<!--  #####################################################################	-->
 	<select id="findAllSeasonOut" resultType="ProductView">

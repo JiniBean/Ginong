@@ -47,11 +47,7 @@ export default class CartRepository{
     }
 
     async findAvailableQty(memberId){
-
-        // memberId가 null이면 memberId = 2L => 테스트용
-        if(memberId == null) memberId = 2;
-
-        let url = `${baseUrl}/api/cart/available-qty/${memberId}`;
+        let url = `${baseUrl}/api/cart/available-qty`;
 
         let response = await this.findPromise(url);
 

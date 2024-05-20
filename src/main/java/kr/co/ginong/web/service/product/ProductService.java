@@ -6,6 +6,7 @@ import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
     ProductView get(Long productId);
@@ -19,6 +20,8 @@ public interface ProductService {
 //    List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType);
 
     List<ProductView> getList(Integer page, Long categoryId, String query, Integer sortType, Integer rows);
+
+    List<Map<String, Object>> getCartList(List<Long> ids);
 
     List<ProductView> getSeasonOutList();
 

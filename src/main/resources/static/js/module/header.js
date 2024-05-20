@@ -64,7 +64,7 @@ export default class Header {
     //로그인 되어있는지 판별하기
     checkUser(){
         if(this.#user)
-            return this.#user.textContent
+            return true;
         return false;
     }
 

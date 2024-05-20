@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductServiceImp implements ProductService {
@@ -84,6 +85,11 @@ public class ProductServiceImp implements ProductService {
     public int count(Long categoryId, String query) {
         int count = repository.count(categoryId, query);
         return count;
+    }
+
+    @Override
+    public List<Map<String, Object>> getCartList(List<Long> ids) {
+        return repository.findAllCartItems(ids);
     }
 
 

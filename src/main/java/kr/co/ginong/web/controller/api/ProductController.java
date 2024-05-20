@@ -3,13 +3,11 @@ package kr.co.ginong.web.controller.api;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController("apiProductController")
 @RequestMapping("user/api/product")
@@ -36,6 +34,11 @@ public class ProductController {
         count = service.count(categoryId, query);
 
         return list;
+    }
+
+    @PostMapping("cart-list")
+    public List<Map<String, Object>> cartList(@RequestBody List<Long> ids){
+        return service.getCartList(ids);
     }
 
 

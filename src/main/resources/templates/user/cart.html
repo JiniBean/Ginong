@@ -70,7 +70,8 @@
                 </div>
 
                 <!-- 결제 정보 영역 -->
-                <div th:if="${count > 0}" class="d:flex fl-dir:column gap:8 md:gap:10 p:4 pb:6">
+<!--                <div th:if="${count > 0}" class="d:flex fl-dir:column gap:8 md:gap:10 p:4 pb:6">-->
+                <div v-if="isCartEmpty" class="d:flex fl-dir:column gap:8 md:gap:10 p:4 pb:6">
                     <div class="d:flex fl-dir:column gap:6 md:gap:8">
                         <div class="d:flex fl-dir:column gap:3 md:gap:5">
                             <div class="d:flex jc:space-between">

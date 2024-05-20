@@ -51,12 +51,9 @@ public class CartController {
     }
 
 
-    @GetMapping("/available-qty/{memberId}")
-    public List<Map<String, Object>> availableQtyList(@PathVariable Long memberId){
-
-        // memberId가 null이면 memberId = 2L => 테스트용
-        if(memberId == null) memberId = 2L;
-
+//    @GetMapping("/available-qty/{memberId}")
+    @GetMapping("/available-qty")
+    public List<Map<String, Object>> availableQtyList(@AuthenticationPrincipal WebUserDetails userDetails){
         // service.getAvailableQtyList(memberId) 설명
 
         // DB 결과집합 예시
@@ -67,13 +64,19 @@ public class CartController {
         //         96|  돈사밭 배추|   8500|            2|           172|       valid|/img/cabbage.jpg|
 
         // 위 결과 집합을 다음과 같이 반환 ( List<Map<String, Object>> )
-
         // [
         // { "PRODUCT_PRICE": 5000, "IMG": "/img/carrot.png", "STOCK_STATUS": "valid", "CART_QUANTITY": 8, "PRODUCT_ID": 94, "PRODUCT_NAME": "텃밭 흙 당근", "STOCK_QUANTITY": 277},
         // { "PRODUCT_PRICE": 4500, "IMG": "/img/photato.jpg", "STOCK_STATUS": "valid", "CART_QUANTITY": 4, "PRODUCT_ID": 95, "PRODUCT_NAME": "텃밭 흙 감자", "STOCK_QUANTITY": 70},
         // { "PRODUCT_PRICE": 8500, "IMG": "/img/cabbage.jpg", "STOCK_STATUS": "valid", "CART_QUANTITY": 2, "PRODUCT_ID": 96, "PRODUCT_NAME": "돈사밭 배추", "STOCK_QUANTITY": 172}
         // ]
 
+        // WebUserDetails 에서 memberId 가져오기
+        Long memberId = null;
+        if(userDetails != null)
+            memberId = userDetails.getId();
+        System.out.println("################################################");
+        System.out.println(service.getAvailableQtyList(memberId));
+        System.out.println("################################################");
         return service.getAvailableQtyList(memberId);
     }
 

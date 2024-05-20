@@ -1,6 +1,7 @@
 package kr.co.ginong.web.repository.product;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.ginong.web.entity.product.Stock;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,6 +17,8 @@ public interface ProductRepository {
     List<ProductView> findAll(int offset, int size);
 
     List<ProductView> findAll(Long categoryId, String query, int offset, int rows, Integer sortType);
+
+    List<Map<String, Object>> findAllCartItems(List<Long> ids);
 
     List<ProductView> findAllSeasonOut();
 
