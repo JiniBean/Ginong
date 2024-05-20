@@ -4,6 +4,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.ginong.web.entity.cart.Cart;
+import kr.co.ginong.web.service.cart.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -11,6 +14,8 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -26,6 +31,10 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
     public void setMaxAge(int maxAge) {
         this.maxAge = maxAge;
     }
+
+    @Autowired
+    CartService cartService;
+
     @Override               //인증에 성공 했을때 처리할 로직 작성할 메소드
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -41,12 +50,38 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
             response.addCookie(cookie);                                                         //HttpServletResponse response에 cookie 추가
         }
         else {                                                                                  //signin 페이지 아이디 저장 체크 박스를 누르지 않는다면
-            Cookie cookie = new Cookie(COOKIE_NAME, "");                                 //빈 문자열의 cookie 를 생성, 생명주기도 없는체 만든다.
+            Cookie cookie = new Cookie(COOKIE_NAME, "");                                        //빈 문자열의 cookie 를 생성, 생명주기도 없는체 만든다.
             cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
         String targetUrl = determineTargetUrl(request);                                         //기존 가려고 했던 페이지로 로그인 완료 후 가기 위한 메소드 호출
         getRedirectStrategy().sendRedirect(request, response, targetUrl);                       //determineTargetUrl 에서 얻어온 url 로 리다이렉트 해준다.
+
+        // ######### 로그인 시 쿠키에 장바구니 데이터가 있다면 DB에 업데이트 하는 기능 ##############
+//        // 쿠키에서 장바구니 데이터 가져오기
+//        Cookie[] cookies = request.getCookies();
+//        String cartData = Arrays.stream(cookies)
+//                .filter(c -> "cartList".equals(c.getName()))
+//                .findFirst()
+//                .map(Cookie::getValue)
+//                .orElse(null);
+//
+//        if (cartData != null) {
+//            // 쿠키 데이터를 자바 객체로 변환
+//            List<Cart> cartList = parseCartData(cartData);
+//
+//            // 데이터베이스 업데이트 로직 호출
+//            updateDatabaseWithCartData(authentication, cartList);
+//            Long userId = ((WebUserDetails) authentication.getPrincipal()).getId();
+////            cartService.save()
+////            Boolean save(Long memberId, Cart cart, List<Long> list);
+//
+//            // 쿠키 삭제
+//            Cookie cookie = new Cookie("cartList", "");
+//            cookie.setMaxAge(0);
+//            response.addCookie(cookie);
+//        }
+//        // ######### 로그인 시 쿠키에 장바구니 데이터가 있다면 DB에 업데이트 하는 기능 ##############
 
         super.onAuthenticationSuccess(request, response, authentication);                       //onAuthenticationSuccess 에 정의 된 나머지 동작들을 수행
     }

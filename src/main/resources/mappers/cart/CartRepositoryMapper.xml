@@ -20,7 +20,7 @@
              , concat(P.NAME, ', ', P.QUANTITY, QC.NAME, ' (', P.WEIGHT, WC.NAME, ')') AS PRETTY_PRODUCT_NAME
              , P.PRICE AS PRODUCT_PRICE                                <!-- 상품 가격 -->
              , P.DISCOUNT_RATE                                         <!-- 상품 할인율 -->
-             , P.PRICE * (P.DISCOUNT_RATE / 100) AS DISCOUNT_PRICE     <!-- 상품 할인가격 -->
+             , P.PRICE - (P.PRICE * (P.DISCOUNT_RATE / 100)) AS DISCOUNT_PRICE     <!-- 상품 할인가격 -->
              , C.QUANTITY AS CART_QUANTITY                             <!-- 장바구니 수량 -->
              , S.CUR_AMT AS STOCK_QUANTITY                             <!-- 재고 수량 -->
              , CASE                                                    <!-- (재고수량-장바구니수량) > 0 이면 구매가능(valid) 반환 -->
