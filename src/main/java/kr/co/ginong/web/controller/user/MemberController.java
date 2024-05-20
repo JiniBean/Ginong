@@ -6,18 +6,15 @@ import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.entity.order.Order;
-import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.coupon.CouponService;
 import kr.co.ginong.web.service.member.MemberService;
-import kr.co.ginong.web.service.mypage.InquiryService;
+import kr.co.ginong.web.service.inquiry.InquiryService;
 import kr.co.ginong.web.service.mypage.ReviewService;
 import kr.co.ginong.web.service.order.OrderService;
 import kr.co.ginong.web.service.point.PointService;
 import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.util.List;
 
 @RequestMapping()
 @Controller

@@ -27,14 +27,28 @@ createApp({
     },
     methods: {
         async fetchProducts() {
-            let response = await fetch(`/api/member/orderInfo`);
-            let info = await response.json();
-            this.info = info;
+            let response;
+            try {
+                response = await fetch(`/api/member/orderInfo`);
+                if (response.ok) {
+                    let info = await response.json();
+                    if (info) {
+                        this.info = info;
+                    } else {
+                        this.info = null;
+                    }
+                } else {
+                    this.info = null;
+                }
+            } catch (error) {
+                this.info = null;
+            }
+            console.log(this.info);
+
 
             response = await fetch(`/api/member/categoryList`);
             let state = await response.json();
             this.state = state;
-
 
             response = await fetch(`/api/member/pickProductList`);
             let pickProductList = await response.json();
