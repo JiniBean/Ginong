@@ -4,12 +4,7 @@ createApp({
     data() {
         return {
             notice: {
-                // title: '공지3',
-                // regDate: '2024-05-22',
-                // startDate: '2024-05-25',
-                // endDate: '2024-05-31',
-                // content: '공지입니다',
-                // categoryId: '1',
+                regDate: new Date().toISOString().slice(0,10),
             },
             category: [
                 // { id: 1, name: '이벤트' }
