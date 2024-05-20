@@ -53,7 +53,7 @@
 				AND member_id = #{memberId}
 			</if>
 			<if test="query != null">
-				AND prettyName LIKE '%${query}%'
+				AND PRETTY_NAME LIKE '%${query}%'
 			</if>
 			<if test="sort">
 				AND RFND_STATE = 1
@@ -70,7 +70,7 @@
 				AND member_id = #{memberId}
 			</if>
 			<if test="query != null">
-				AND prettyName LIKE '%${query}%'
+				AND PRETTY_NAME LIKE '%${query}%'
 			</if>
 			<if test="sort != null">
 				AND EXCH_STATE = #{sort}

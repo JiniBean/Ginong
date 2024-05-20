@@ -23,8 +23,11 @@ createApp({
     },
     methods:{
         async getList(orderType, sortType){
+            if(this.orderType !== orderType)
+                this.query = null;
             this.orderType = orderType;
             this.sortType = sortType
+
             let repository = new Repository;
 
             switch (orderType) {
@@ -44,9 +47,6 @@ createApp({
 
             this.list.forEach(l => l.date=this.formatDate(new Date(l.date)));
 
-        },
-        resetQuery(){
-            this.query = '';
         },
         goDetail(id){
 

@@ -14,10 +14,10 @@
 <main layout:fragment="main" class=" d:flex fl-dir:column gap:8 md:gap:13 md:pt:1 md:pb:4 max-w:9 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
 
     <div class="n-tabbar d:flex h:2 md:h:4 w:10p">
-        <div @click="getList(1) , resetQuery()" :class="{active :orderType==1}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">주문</div>
-        <div @click="getList(2) , resetQuery()" :class="{active :orderType==2}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">교환</div>
-        <div @click="getList(3) , resetQuery()" :class="{active :orderType==3}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">환불</div>
-        <div @click="getList(4) , resetQuery()" :class="{active :orderType==4}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">취소</div>
+        <div @click="getList(1)" :class="{active :orderType==1}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">주문</div>
+        <div @click="getList(2)" :class="{active :orderType==2}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">교환</div>
+        <div @click="getList(3)" :class="{active :orderType==3}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">환불</div>
+        <div @click="getList(4)" :class="{active :orderType==4}" class="n-tab d:flex ai:center jc:center fl-grow:1 h:10p">취소</div>
     </div>
 
     <section class="d:flex jc:center w:10p">
