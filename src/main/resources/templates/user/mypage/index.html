@@ -5,9 +5,9 @@
       layout:decorate="user/inc/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Mypage-Index</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="/js/user/mypage/index.js" defer></script>
+    <script type="module" src="/js/user/mypage/index.js" defer></script>
     <link rel="stylesheet" href="/css/user/mypage/index.css">
 </head>
 <body>
@@ -17,15 +17,15 @@
         <aside class="aside-mypage d:none md:d:block md:d:flex fl-dir:column md:min-w:4 ai:center gap:8">
             <h1 class="d:none">사이드메뉴</h1>
             <div class="d:flex jc:center ai:center h:4 fw:3 fs:6">마이페이지</div>
-            <div><a href="">배송지 관리</a></div>
-            <div><a href="">주문내역</a></div>
+            <div><a href="/mypage/location/list" th:href="@{location/list(id=${memberId})}">배송지 관리</a></div>
+            <div><a href="/mypage/order/list" th:href="@{order/list(id=${memberId})}">주문내역</a></div>
             <div><a href="">자주구매 한 상품</a></div>
-            <div><a href="/product/recent">최근 본 상품</a></div>
-            <div><a href="">구매 후기</a></div>
-            <div><a href="">주문 취소 내역</a></div>
-            <div><a href="">교환/ 환불 내역</a></div>
+            <div><a href="/product/recent" th:href="@{/product/recent(id=${memberId})}">최근 본 상품</a></div>
+            <div><a href="/mypage/review/wirte_list" th:href="@{review/wirte_list(id=${memberId})}">구매 후기</a></div>
+            <div><a href="/mypage/cancle/list" th:href="@{cancle/list(id=${memberId})}">주문 취소 내역</a></div>
+            <div><a href="/mypage/order/exchange" th:href="@{order/exchange(id=${memberId})}">교환/ 환불 내역</a></div>
             <div><a href="">상품 문의 내역</a></div>
-            <div><a href="">회원 정보 관리</a></div>
+            <div><a href="/mypage/user_info/update" th:href="@{user_info/update(id=${memberId})}">회원 정보 관리</a></div>
         </aside>
         <article class="article-mypage d:flex fl-dir:column w:10p md:w:8p md:pl:10 gap:8 md:gap:20">
             <section class="user-info d:flex bd-color:base-3 gap:10 h:5">
@@ -62,65 +62,47 @@
                     <div>1:1 문의</div>
                 </div>
             </section>
-            <section class="bd-bottom bd-color:base-3">
-                <h1 class="d:none">최근 주문 내역</h1>
+            <section class="d:flex fl-dir:column gap:5 md:gap:8 p:4 bd-bottom bd-color:base-3 bg-color:base-2 md:bg-color:transparent">
+                <h1 class="d:none">최근 주문 상태</h1>
                 <div class="d:flex fl-dir:column gap:10 p:5">
-<!--                    <div class="d:flex jc:space-between">-->
-<!--                        <div>-->
-<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">최근 주문 내역</span>-->
-<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9" th:text="${order.date}">(2023.12.25)</span>-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>-->
-<!--                            <span class="fs:2 md:fs:3 fw:3 color:base-9" th:text="${order.id}">101010101010</span>-->
-<!--                        </div>-->
-
-<!--                    </div>-->
-                    <div class="d:flex fl-dir:column gap:10 p:5">
-                        <div class="d:flex jc:space-between">
-                            <div>
-                                <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ info.orderDate }}</span>
-                                <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
-                            </div>
-                            <div>
-                                <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
-                                <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ info.orderId }}</span>
-                            </div>
-
+                    <div class="d:flex jc:space-between">
+                        <div>
+                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ info.date }}</span>
+                            <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
                         </div>
-                        <div class="d:flex jc:space-between gap:4 p:5">
-                            <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
-                                <div v-if="status.name === info.orderStatus" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center
-            bg-color:main-6" style="width: 36px; height: 36px;"></div>
-                                <div v-else class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:center bg-color:base-4" style="width: 21px; height: 21px;"></div>
+                        <div>
+                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">주문번호</span>
+                            <span class="fs:2 md:fs:3 fw:3 color:base-9">{{ info.id }}</span>
+                        </div>
 
-                                <span v-if="status.name === info.orderStatus" class="fs:1 md:fs:3 color:main-6">{{ status.name }}</span>
-                                <span v-else class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
-                            </div>
+                    </div>
+                    <div class="d:flex jc:space-between gap:4 p:5">
+                        <div class="d:flex fl-dir:column ai:center gap:2 md:gap:3" v-for="status in state" :key="status.id" >
+                            <div :class="info.categoryId == status.id?'bg-color:main-6':''" class="n-item n-item-type:outline-box bd-radius:full n-list-item-padding:1 ai:center d:flex jc:cente bg-color:base-4" style="width: 36px; height: 36px;"></div>
+
+                            <span :class="info.categoryId == status.id?'color:main-6':''" class="fs:1 md:fs:3 color:base-4">{{ status.name }}</span>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="d:flex fl-dir:column gap:10 p:5 bd-bottom bd-color:base-3">
+            <section class="d:flex fl-dir:column gap:10 p:5">
                 <h1 class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">추천 상품</h1>
-                <div class="d:flex jc:space-around ai:center">
-                    <div class="icon icon:caretDoubleLeft icon-size:3 icon-color:main-6"> </div>
-                    <nav class="d:flex fl-dir:column gap:6 ai:center jc:center">
-                        <h1 class="d:none">제품 카드</h1>
-                        <div><img src="/img/baechoo.png" alt="사진1" style="width: 90px; height: 90px;"></div>
-                        <div>텃밭 흙 당금, 2개입</div>
-                    </nav>
-                    <nav class="d:flex fl-dir:column gap:6 ai:center jc:center">
-                        <h1 class="d:none">제품 카드</h1>
-                        <div><img src="/img/carrot.png" alt="사진1" style="width: 90px; height: 90px;"></div>
-                        <div>텃밭 흙 당금, 2개입</div>
-                    </nav>
-                    <nav class="d:flex fl-dir:column gap:6 ai:center jc:center">
-                        <h1 class="d:none">제품 카드</h1>
-                        <div><img src="/img/gaam.jpg" alt="사진1" style="width: 90px; height: 90px;"></div>
-                        <div>텃밭 흙 당금, 2개입</div>
-                    </nav>
-                    <div class="icon icon:caretDoubleRight icon-size:3 icon-color:main-6"></div>
+                <div class="Wrapper d:flex of:hidden jc:space-between ai:center">
+                     <div class="arrow left" v-on:click="pre" v-bind:class="{ hidden: selected == 0 }">
+                        <i class="icon icon:caretDoubleLeft left icon-size:3 icon-color:main-6 zi:2"></i>
+                    </div>
+                    <div class="imageContainer">
+                        <div class="imageWrapper" v-bind:style="{ transform: 'translateX(-' + selected * 33.3 + '%)' }">
+                            <div class="d:flex fl-dir:column gap:5 px:8" v-for="(img, index) in images" :key="index" style="width:33%;">
+                                <div class="image gap:10 d:flex" v-bind:style="{ 'background-image': 'url(' + img + ')' }"></div>
+                                <div >{{ names[index] }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow right" v-on:click="next" v-bind:class="{ hidden: selected >= length }">
+                        <i class="icon icon:caretDoubleRight right icon-size:3 icon-color:main-6 zi:2"></i>
+                    </div>
                 </div>
             </section>
             <section class="d:flex fl-dir:column gap:10 p:5">

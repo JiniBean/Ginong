@@ -15,6 +15,7 @@ import kr.co.ginong.web.service.point.PointService;
 import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -187,12 +188,12 @@ public class MemberController {
     }
 
     @GetMapping("mypage/index")
-    public String mypage(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String mypage(Model model
+                        ,@AuthenticationPrincipal WebUserDetails userDetails){
 
         Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
         // 사용자가 인증되었는지 확인
-        if (authentication != null && authentication.getPrincipal() instanceof WebUserDetails userDetails) {
+        if (userDetails != null) {
             memberId = userDetails.getId(); //사용하고 싶은 정보 담기
         }
 
@@ -205,9 +206,9 @@ public class MemberController {
         Integer countCoupon = couponService.getCountCoupon(memberId);
         Integer countReview = reviewService.getCountReview(memberId);
         Integer countInquiry = inquiryService.getCountInquiry(memberId);
-        Order order = orderService.getRecentOrder(memberId);
+        Order recentOrder = orderService.getRecentOrder(memberId);
 
-        List<ProductView> pickProductList = productService.getPickProductList();
+//        List<ProductView> pickProductList = productService.getPickProductList();
 
 
         /*
@@ -227,7 +228,7 @@ public class MemberController {
         model.addAttribute("countCoupon",countCoupon);
         model.addAttribute("countReview",countReview);
         model.addAttribute("countInquiry",countInquiry);
-        model.addAttribute("pickProductList",pickProductList);
+//        model.addAttribute("pickProductList",pickProductList);
 //        model.addAttribute("order",order);
 
         return "user/mypage/index";

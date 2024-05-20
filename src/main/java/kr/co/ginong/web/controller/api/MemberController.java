@@ -7,14 +7,21 @@ import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberRole;
 import kr.co.ginong.web.entity.order.Location;
-import kr.co.ginong.web.service.order.LocationService;
+import kr.co.ginong.web.entity.order.Order;
+import kr.co.ginong.web.entity.order.OrderCategory;
+import kr.co.ginong.web.entity.order.OrderView;
+import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.member.MemberService;
+import kr.co.ginong.web.service.order.LocationService;
+
+import kr.co.ginong.web.service.order.OrderService;
+import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +38,12 @@ public class MemberController {
 
     @Autowired
     private LocationService locationService;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    ProductService productService;
 
     @GetMapping("checkUserName")
     public ResponseEntity<Boolean> checkUserName(
@@ -202,6 +215,36 @@ public class MemberController {
         System.out.println(location);
 
         return location;
+    }
+
+    @GetMapping("orderInfo")
+    public Order getOrderInfo(@AuthenticationPrincipal WebUserDetails userDetails){
+        Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null) {
+            memberId = userDetails.getId(); //사용하고 싶은 정보 담기
+        }
+        Order recentOrder = orderService.getRecentOrder(memberId);
+
+
+
+        return recentOrder;
+    }
+    @GetMapping("categoryList")
+    public List<OrderCategory> categories() {
+        List<OrderCategory> categoryList = orderService.getCategories();
+
+        return categoryList;
+    }
+
+
+
+    @GetMapping("pickProductList")
+    public List<ProductView> getPickProductList(){
+
+        List<ProductView> pickProductList = productService.getPickProductList();
+
+        return pickProductList;
     }
 
 }
