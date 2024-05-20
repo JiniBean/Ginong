@@ -167,7 +167,7 @@ public class MemberController {
         return ResponseEntity.ok(true);
     }
 
-    @GetMapping("userInfo")
+    @GetMapping("userinfo")
     public Member getMember(
             @AuthenticationPrincipal WebUserDetails userDetails
     ){
