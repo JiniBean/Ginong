@@ -9,7 +9,10 @@ function Cookie() {
             let tmp = c.split("=");
             let key = tmp[0];
             let value = tmp[1];
-            this.map[key] = JSON.parse(value);
+            if(key==='cartList')
+                this.map[key] = JSON.parse(value);
+            else
+                this.map[key] = value;
         }
     }
 

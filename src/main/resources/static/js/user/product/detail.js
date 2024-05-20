@@ -1,4 +1,144 @@
+function Cookie() {
+    this.map = {};
+
+    if (document.cookie) {
+        let cookieDecoded = decodeURIComponent(document.cookie);
+        let tokens = cookieDecoded.split(";");
+
+        for (let c of tokens) {
+            let tmp = c.split("=");
+            let key = tmp[0];
+            let value = tmp[1];
+            if(key==='cartList')
+                this.map[key] = JSON.parse(value);
+            else
+                this.map[key] = value;
+        }
+    }
+
+}
+
+Cookie.prototype = {
+    get: function (name) {
+        return this.map[name];
+    },
+
+    save: function () {
+        // document.cookie = "menus=hh; path=/;";
+        let list = this.map["cartList"];
+        let size = list.length;
+        let lastIdx = size - 1;
+
+        let str = "[";
+
+        for (m of list) {
+            str += JSON.stringify(m);
+            if (m !== list[lastIdx]) str += ",";
+        }
+
+        str = "]";
+        let encoded = encodeURIComponent(str);
+        document.cookie = `menus=${encoded}; path=/;`;
+
+    },
+
+    remove: function (name) {
+
+    },
+
+    add: function (name, value) {
+
+    },
+
+    addItem: function (name, item) {
+        let list = this.map[name];
+        list.push(item);
+    },
+
+    set: function (name, value) {
+        let s = `${name}=${value}; path=/; SameSite=None; Secure`;
+        document.cookie = s;
+    }
+}
+
+function cartBYCookie(prdId, qty,header) {
+    let cookie = new Cookie();
+    let cookieList = cookie.get("cartList");
+
+    let check = false;
+
+    //기존 쿠키가 없다면 쿠키에 "cartList" 새로 생성
+    if (!cookieList) {
+        let cart = {
+            prdId   : prdId,
+            quantity: qty
+        }
+
+        let list = [];
+        list.push(cart);
+        cookie.set("cartList", JSON.stringify(list));
+        qty = cart.quantity;
+
+    }
+
+    //기존의 쿠키가 있다면 리스트 검사
+    if (cookieList) {
+        for (let c of cookieList)
+            // 만약 클릭한 상품이 이미 있다면 기존 수량 + 선택수량
+            if (c.prdId === prdId) {
+                let q = c.quantity;
+                c.quantity = q+qty;
+                check = true;
+            }
+        //기존 쿠키가 없다면 기존 리스트에 추가
+        if (!check) {
+            let cart = {
+                prdId   : prdId,
+                quantity: qty
+            }
+            cookieList.push(cart);
+            cookie.set("cartList", JSON.stringify(cookieList));
+            qty = cart.quantity;
+            check = true;
+        }
+        cookie.set("cartList", JSON.stringify(cookieList));
+    }
+
+    //헤더 바꾸기
+    header.renewCart();
+    return true;
+}
+
+async function cartByDB(prdId,qty,header) {
+    let cartRepository = new CartRepository();
+
+    // 해당 상품 아이디로 장바구니 목록에 있는지 체크
+    let valid = false;
+    let item = await cartRepository.findItem(prdId);
+
+    // 없다면 추가, 있다면 수량 증가
+    if (item == null)
+        valid = await cartRepository.add(prdId,qty);
+    else
+        qty = item.quantity + qty;
+        valid = await cartRepository.updateQty(prdId,qty);
+
+    // DB 저장 잘 됐다면 헤더와 상품 카드의 장바구니 바꾸기
+    if (valid) {
+        //해당 상품 수량 DB에서 다시 갖고오기
+        await cartRepository.findItem(prdId);
+
+        //헤더 바꾸기
+        await header.renewCart();
+        return true;
+    }
+}
+
+import CartRepository from "/js/module/CartRepository.js";
+import Header from '/js/module/header.js';
+
 /* (최근 본 상품)  local storage에 상품 id값 저장 */
+
 window.addEventListener("load", function(){
 
     let productId = document.querySelector(".product-id").value;
@@ -110,79 +250,26 @@ window.addEventListener("load", function(){
     }
 
     quantityInput.oninput = function (e){
-        console.log("ddd");
     };
 
-
-});
-
-/* 모바일 버전 하단 navi */
-window.addEventListener("load", function(){
-
-    //popup open
-    let navi = this.document.querySelector(".navi");
-
-    //popup close
-
-    let orderInfo = this.document.querySelector("#order-info");
-    let close = orderInfo.getElementsByClassName("close")[0];
-
-    let productId = navi.querySelector(".product-id").value;
-    let numberBox = orderInfo.querySelector(".numberBox");
-    let quantityInput = numberBox.querySelector(".quantity-input");
-
-    navi.onclick = function(e){
-        if(e.target.tagName!='BUTTON')
-            return;
-
-        if(!orderInfo.classList.contains("on")) {
-            orderInfo.classList.remove("d:none");
-            orderInfo.classList.add("on");
-            return;
-        }
-
-        let state = e.target.dataset.btn;
-
-        switch (state) {
-            case 'cart' :
-                //구현해야함
-                break;
-            case 'order' :
-                let url = new URL ("/order/info", location.origin);
-
-                let quantity = parseInt(quantityInput.value);
-
-                url = url + "?p=" + productId + "&q=" + quantity;
-
-                location.href = url.toString();
-
-                break;
-        }
-
-    }
-
-    //popup close
-    close.onclick = function(){
-        orderInfo.classList.add("d:none");
-        orderInfo.classList.remove("on");
-    }
 
 });
 
 
 // 구매하기 및 장바구니 PC 버전
 window.addEventListener("load", function() {
+
     let payBox = document.querySelector(".l-pay-box");
     let orderBtn = payBox.querySelector(".l-order");
     /*cartBtn 추후 구현 예정*/
     let cartBtn = payBox.querySelector(".l-cart");
     let productId = payBox.querySelector(".l-product-id").value;
 
-    let quantityInput =this.document.getElementsByClassName("l-quantity-input")[0];
+    let quantityInput = document.querySelector(".l-quantity-input").value;
+    let quantity = parseInt(quantityInput);;
 
     orderBtn.onclick = function (){
 
-        let quantity = parseInt(quantityInput.value);
 
         let url = new URL ("/order/info", location.origin);
 
@@ -190,6 +277,23 @@ window.addEventListener("load", function() {
 
         location.href = url.toString();
     };
+
+    cartBtn.onclick = function () {
+        let header = new Header();
+        let vaild = false;
+
+        //로그인 되어있는지 판별
+        let isMember = header.checkUser();
+
+        // 로그인 되어있다면 DB로, 아니라면 쿠키로
+        if(isMember)
+           vaild = cartByDB(productId, quantity, header);
+        else
+            vaild = cartBYCookie(productId, quantity, header);
+
+        if(vaild)
+            alert("장바구니에 담았어요!");
+    }
 
 });
 
@@ -257,17 +361,76 @@ window.addEventListener("load", function(){
 });
 
 // ===================================================================================================
+// /* 모바일 버전 하단 navi */
+window.addEventListener("load", function(){
+
+
+
+    //popup open
+    let navi = this.document.querySelector(".navi");
+
+    //popup close
+
+    let orderInfo = this.document.querySelector("#order-info");
+    let close = orderInfo.getElementsByClassName("close")[0];
+
+    let productId = navi.querySelector(".product-id").value;
+    let numberBox = orderInfo.querySelector(".numberBox");
+    let quantityInput = numberBox.querySelector(".quantity-input");
+
+    navi.onclick = function(e){
+        if(e.target.tagName!='BUTTON')
+            return;
+
+        if(!orderInfo.classList.contains("on")) {
+            orderInfo.classList.remove("d:none");
+            orderInfo.classList.add("on");
+            return;
+        }
+
+        let state = e.target.dataset.btn;
+
+        switch (state) {
+            case 'cart' :
+
+                break;
+
+            case 'order' :
+                let url = new URL ("/order/info", location.origin);
+
+                let quantity = parseInt(quantityInput.value);
+
+                url = url + "?p=" + productId + "&q=" + quantity;
+
+                location.href = url.toString();
+
+                break;
+        }
+
+    }
+
+    //popup close
+    close.onclick = function(){
+        orderInfo.classList.add("d:none");
+        orderInfo.classList.remove("on");
+    }
+
+});
 
 /* pc 버전 하단 navi */
 window.addEventListener("load", function(){
 
+    //popup open
+    let navi = this.document.querySelector(".navi");
     let orderInfo = this.document.querySelector("#order-info");
+    let productId = navi.querySelector(".product-id").value;
+    let numberBox = orderInfo.querySelector(".numberBox");
+    let quantityInput = numberBox.querySelector(".quantity-input").value;
+    let quantity = parseInt(quantityInput);
 
     //popup close
     let close = orderInfo.getElementsByClassName("close")[0];
 
-    //popup open
-    let navi = this.document.querySelector(".navi");
 
     navi.onclick = function(e){
         if(e.target.tagName!='BUTTON')
@@ -281,20 +444,31 @@ window.addEventListener("load", function(){
 
             switch (state) {
                 case 'cart' :
+                    let header = new Header();
+                    let vaild = false;
+
+                    //로그인 되어있는지 판별
+                    let isMember = header.checkUser();
+
+                    // 로그인 되어있다면 DB로, 아니라면 쿠키로
+                    if(isMember)
+                        vaild = cartByDB(productId, quantity, header);
+                    else
+                        vaild = cartBYCookie(productId, quantity, header);
+
+                    if(vaild)
+                        alert("장바구니에 담았어요!");
                     break;
                 case 'order' :
                     let url = new URL ("/order/info", location.origin);
 
-                    let productId = navi.querySelector(".product-id").value;
-                    let numberBox = orderInfo.querySelector(".numberBox");
-                    let quantityInput = numberBox.querySelector(".quantity-input").value;
-                    let quantity = parseInt(quantityInput);
+
 
                     url = url + "?p=" + productId + "&q=" + quantity;
 
                     console.log(url);
 
-                    location.href = url.toString();
+                    // location.href = url.toString();
 
                     break;
             }
