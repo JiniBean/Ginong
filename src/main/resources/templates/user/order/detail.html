@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script type="module" src="/js/user/order/detail.js" defer></script>
   <link rel="stylesheet" href="/css/user/product/list.css">
+  <link rel="stylesheet" href="/css/user/order/detail.css">
 </head>
 <body>
 
@@ -49,37 +50,41 @@
   </section>
 
 <!-- 주문한 상품 내역-->
-  <section class="d:flex fl-dir:column gap:4 pl:5 pr:5 ">
+  <section class="d:flex fl-dir:column gap:7 md:gap:15 pl:5 pr:5 ">
     <h1 class="d:none">주문 상품 내역</h1>
     <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p ">
       <label>
-        <input type="checkbox" class="n-toggle n-toggle-type:check-box" @change="checkAll" />
+        <input type="checkbox" class="n-toggle n-toggle-type:check-box" @click="checkAll(!isChecked)" />
         전체선택
       </label>
     </div>
-    <div class="d:flex gap:2 md:gap4 w:10p" v-for="item in list" :key="item.id">
-      <label>
-        <input type="checkbox" class="n-toggle n-toggle-type:check-box" v-model="item.checked" />
-      </label>
-      
-      <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
-        <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
-        <div class="d:flex fl-dir:column jc:space-between ai:start md:ai:center md:fl-dir:row gap:2 w:10p">
-          <span class="fs:2 md:w:5p md:fs:3"> {{item.prettyName}})</span>
-          <div>
-            <div class="d:flex fl-dir:row pos:relative md:jc:space-between md:ai:center md:pos:none gap:3">
-              <span class="fs:2 md:fs:3 fw:3">{{ Number(item.price).toLocaleString() }}원</span>
-              <span class="md:d:none bar"></span>
-              <span class="fs:2 md:fs:3">{{ item.quantity }}개</span>
+    <div class="d:flex fl-dir:column gap:5 md:gap:12">
+      <div class="d:flex gap:2 md:gap:4 w:10p" v-for="item in list" :key="item.id">
+        <div><input type="checkbox" class="n-toggle n-toggle-type:check-box" :checked="isChecked" /></div>
+
+        <div class="d:flex ai:center gap:2 md:gap:4 w:10p">
+          <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="100px" height="100px">
+          <div class="d:flex fl-dir:column jc:space-between ai:start md:ai:center md:fl-dir:row gap:2 md:gap:3 w:10p h:10p pt:1 pb:1 md:pt:0 md:pb:0">
+            <div class="d:flex fl-grow:1 fl-dir:column jc:space-between gap:1 md:ai:center md:fl-dir:row md:h:10p">
+              <div class="fs:2 fl-grow:1 md:w:5p md:fs:3" v-text="item.prettyName"> </div>
+              <div class="d:flex fl-dir:row pos:relative md:jc:space-between md:ai:center md:pos:none gap:3">
+                <span class="fs:2 md:fs:3 fw:3">{{ Number(item.price).toLocaleString() }}원</span>
+                <span class="md:d:none bar"></span>
+                <span class="fs:2 md:fs:3">{{ item.quantity }}개</span>
+              </div>
             </div>
-          </div>
-          <div v-if="item.categoryId === 4" class="d:flex fl-dir:row md:fl-dir:column gap:2">
-            <div class="n-btn n-btn-type:outline n-btn-size:1">교환</div>
-            <div class="n-btn n-btn-type:outline n-btn-size:1">환불</div>
-          </div>
-          <div v-else-if="item.categoryId === 5" class="d:flex fl-dir:row md:fl-dir:column gap:2">
-            <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
-            <div class="n-btn n-btn-type:outline n-btn-size:1 n-btn-color:base disabled" >배송완료</div>
+            <div class="button">
+              <div :class="{'d:none':item.cancelId},{'d:none':item.exchId},{'d:none':item.rfndId}">
+                <div v-if="item.categoryId === 4" class="d:flex fl-dir:row md:fl-dir:column gap:2">
+                  <div class="n-btn n-btn-type:outline n-btn-size:1">교환</div>
+                  <div class="n-btn n-btn-type:outline n-btn-size:1">환불</div>
+                </div>
+                <div v-else-if="item.categoryId === 5" class="d:flex fl-dir:row md:fl-dir:column gap:2">
+                  <div class="n-btn n-btn-type:outline n-btn-size:1">후기쓰기</div>
+                  <button class="n-btn n-btn-type:outline n-btn-size:1 " disabled >배송완료</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -95,9 +100,8 @@
       <div class="n-btn n-btn-size:2 w:10 md:w:10"><a href="">선택상품 바로 구매</a></div>
       <div class="n-btn n-btn-size:2 w:10 md:w:10"><a href="">선택상품 다시 담기</a></div>
     </div>
-    <div class="d:flex fl-grow:1">
+    <div class="d:flex fl-grow:1" >
       <div v-if="order.categoryId === 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10" ><a href="">주문 취소</a></div>
-      <div v-else></div>
     </div>
   </section>
 
@@ -184,18 +188,13 @@
       <div class="n-expander-content px:2 gap:4">
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">주문인</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ member.name }}</span>
+          <span class="fs:3 md:fs:4 fw:3" v-text="member.name"></span>
         </div>
         <div class="d:flex fl-dir:row jc:space-between w:10p p:2" >
           <span class="fs:3 md:fs:4 fw:3">연락처</span>
-          <span class="fs:3 md:fs:4 fw:3">{{ member.phone }}</span>
+          <span class="fs:3 md:fs:4 fw:3" v-text="member.phone"></span>
         </div>
       </div>
-    </div>
-  </section>
-  <section>
-    <div class="d:flex fl-grow:1">
-      <div v-if="order.categoryId != 1" class="n-btn n-btn-type:outline n-btn-size:2 w:10 md:w:10"><a href="">주문내역 삭제</a></div>
     </div>
   </section>
 </main>

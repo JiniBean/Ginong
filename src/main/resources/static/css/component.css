@@ -1,7 +1,7 @@
 /* button.css */
 .n-btn {
     /* btn-size:1 */
-    --btn-height-1: 30px;
+    --btn-height-1: 26px;
     --btn-padding-1: 4px 12px;
     --btn-font-size-1: 14px;
     --btn-border-radius-1: 5px;
@@ -50,6 +50,10 @@
 
 .n-btn-type\:outline:hover{
     border-color: #FA6400;
+}
+
+.n-btn:disabled:hover{
+    border-color:transparent;
 }
 
 @media (min-width: 780px) {

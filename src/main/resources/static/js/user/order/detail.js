@@ -1,5 +1,5 @@
 import Repository from "/js/module/OrderRepository.js";
-import MemberRepository from "/js/module/MemberRepository.js";
+import MemberRepository from "../../module/MemberRepository.js";
 
 const { createApp } = Vue
 
@@ -7,19 +7,18 @@ createApp({
     data() {
         return {
             list: [],
-            order: [],
-            payment: [],
-            location: [],
+            order: {},
+            payment: {},
+            location: {},
             state:[],
-            member: []
+            member: {},
+            isChecked:false
         }
     },
     methods:{
         // 전체선택
-        checkAll(e) {
-            let checked = e.target.checked
-            // this.order.orderItems.forEach(item => item.checked = checked)
-            this.list.forEach(itemList => itemList.checked = checked);
+        checkAll(check) {
+            this.isChecked = check;
         }
     },
     async created(){
