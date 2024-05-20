@@ -1,5 +1,6 @@
 package kr.co.ginong.web.repository.order;
 
+import kr.co.ginong.web.entity.member.MemberOrderView;
 import kr.co.ginong.web.entity.order.Order;
 import kr.co.ginong.web.entity.order.OrderView;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,4 +27,6 @@ public interface OrderRepository {
     Order findRecentByMemberId(Long memberId);
 
     List<OrderView> findItems(Long orderId);
+
+    List<MemberOrderView> findByMemberId(Long memberId);
 }

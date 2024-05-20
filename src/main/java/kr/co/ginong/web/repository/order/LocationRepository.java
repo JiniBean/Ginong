@@ -19,11 +19,12 @@ public interface LocationRepository {
     List<Location> findListByMemberId(Long memberId);
 
     LocationHistory findByOrderId(long orderId);
-    
+
     void save(Location location);
     void saveHistory(LocationHistory locationHistory);
     void delete(long id);
-    void updateLocation(Location updatedLocationInfo);
+
+    void updateLocationByMemberId(Location updatedLocationInfo);
 
     int count(Long categoryId, String query);
 

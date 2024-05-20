@@ -6,48 +6,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <script src="/js/admin/member/orderList.js"></script>-->
+    <link rel="stylesheet" href="/css/admin/member/orderList.css">
     <title>Document</title>
 </head>
+
 <body>
 <main layout:fragment="main"
       class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
 
+    <!--상단탭-->
+    <ul class="n-tabbar d:flex jc:space-between ai:center h:2 md:h:4 w:10p">
+        <li th:classappend="${{param.c}}==1 ? 'active' : ''" class="fl-grow:1 h:10p">
+            <a href="" class="h:10p">기본 정보</a>
+<!--            <a th:href="@{/admin/member/detail(memberId=${orderList.memberId}, c=1)}" class="h:10p">기본 정보</a>-->
+        </li>
+        <li th:classappend="${{param.c}}==2 ? 'active' : ''" class="fl-grow:1 h:10p">
+            <a href="" class="h:10p">주문 내역</a>
+<!--            <a th:href="@{/admin/member/orderList(memberId=${orderList.memberId}, c=2)}" class="h:10p">주문 내역</a>-->
+        </li>
+    </ul>
 
-    <section class="d:flex fl-dir:column gap:8 md:gap:13 w:10p">
+    <section class="d:flex fl-dir:column gap:5  w:10p">
         <h1 class="d:none">주문 목록</h1>
-        <div class="d:flex jc:space-between fw:2 ai:center w:10p">
-            <div>
-                <span>주문일자/번호</span>
-                <span>202041111</span>/
-                <span>2403011115</span>
+
+        <section class="d:flex fl-dir:column gap:7 md:gap:10" th:each="o : ${orderList}">
+            <h1 class="d:none">적립금</h1>
+
+            <div class="d:flex fl-dir:column gap:2">
+
+                <div class="d:flex jc:space-between fw:2 ai:center w:10p">
+                    <div>
+                        <span>주문일자/번호</span>
+                        <span th:text="${#dates.format(o.orderDate, 'yyyyMMdd')}">202041111</span>
+                        <span>/</span>
+                        <span th:text="${o.orderId}">2403011115</span>
+                    </div>
+                    <div>
+                        <span th:text="${o.orderCategoryName}">주문완료</span>
+                    </div>
+                </div>
+
+                <div class="d:flex fl-dir:column gap:2 md:gap:4 p:4 bd bd-color:base-3 bd-radius:2 ">
+                    <div class="d:flex jc:space-between" th:each="o: ${orderList}">
+                        <span th:text="${o.productName}">텃밭 흙 당근,2개입</span>
+                        <span th:text="${o.productQuantity}">1</span>
+                        <span th:text="${o.productPrice}">2,000</span>
+                    </div>
+                    <div class="d:flex jc:space-between border-top md:gap:4 p:2">
+                        <span>총계</span>
+                        <span>1</span>
+                        <span>2,000</span>
+<!--                        <span th:text="${orderList.stream().mapToInt(o => o.getProductQuantity()).sum()}"></span>-->
+<!--                        <span th:text="${orderList.stream().mapToInt(o => o.getProductPrice()).sum()}"></span>-->
+                    </div>
+                </div>
             </div>
-            <div>
-                <span class="fw:3">주문완료</span>
-            </div>
-        </div>
-        <section>
-            <h1 class="d:none">주문 목록 상세</h1>
-            <table class="n-table n-row-height:2 n-table-border n-table-hover">
-                <tbody>
-                <tr>
-                    <th class="d:none" scope="row">1</th>
-                    <td>Tom</td>
-                    <td>male</td>
-                    <td>2020-11-01</td>
-                </tr>
-                <tr>
-                    <th class="d:none" scope="row">2</th>
-                    <td>Olivia</td>
-                    <td>female</td>
-                    <td>2021-03-01</td>
-                </tr>
-                </tbody>
-            </table>
         </section>
+
     </section>
-
-
 </main>
 </body>
 </html>

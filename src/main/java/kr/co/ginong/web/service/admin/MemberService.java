@@ -1,6 +1,7 @@
 package kr.co.ginong.web.service.admin;
 
 import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.member.MemberOrderView;
 import kr.co.ginong.web.entity.member.MemberView;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface MemberService {
     int getTotalMemberCount();
 
     void update(MemberView member);
+
+    List<MemberOrderView> getOrderList(Long memberId);
 }

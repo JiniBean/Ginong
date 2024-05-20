@@ -18,5 +18,5 @@ public interface AdminMemberRepository {
 
     int getTotalMemberCount();
 
-    void updateMember(Member updatedMemberInfo);
+    void updateMemberByMemberId(Member updatedMemberInfo);
 }

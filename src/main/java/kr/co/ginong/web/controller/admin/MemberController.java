@@ -1,10 +1,11 @@
 package kr.co.ginong.web.controller.admin;
 
 import kr.co.ginong.web.entity.member.Member;
+import kr.co.ginong.web.entity.member.MemberOrderView;
 import kr.co.ginong.web.entity.member.MemberView;
+import kr.co.ginong.web.entity.order.OrderView;
 import kr.co.ginong.web.service.admin.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller("adminMemberController")
@@ -71,8 +70,15 @@ public class MemberController {
     }
 
 
-    @GetMapping("/order_list")
-    public String orderList(){
+    @GetMapping("/order")
+    public String orderList( @RequestParam(name = "id", required = false) Long memberId,
+                             Model model){
+        List<MemberOrderView> orderList = new ArrayList<>();
+
+        orderList = service.getOrderList(memberId);
+
+        model.addAttribute("orderList", orderList);
+
 
         return "admin/member/orderList";
     }

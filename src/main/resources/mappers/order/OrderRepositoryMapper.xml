@@ -126,4 +126,10 @@
 		LIMIT 1
 	</select>
 
+	<select id="findByMemberId" resultType="MemberOrderView">
+		SELECT *
+		FROM `MEMBER_ORDER_VIEW`
+		WHERE MEMBER_ID = #{member_Id}
+	</select>
+
 </mapper>

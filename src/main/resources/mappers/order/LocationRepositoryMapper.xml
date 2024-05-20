@@ -53,13 +53,12 @@
 	</insert>
 
 
-	<update id="updateLocation" parameterType="memberView">
+	<update id="updateLocationByMemberId" parameterType="location">
 		UPDATE LOCATION
 		<set>
 			<if test="addr1 != null"> addr1 = #{addr1}, </if>
 			<if test="addr2 != null"> addr2 = #{addr2}, </if>
 		</set>
-		WHERE memberId = #{id}
 	</update>
 
 </mapper>

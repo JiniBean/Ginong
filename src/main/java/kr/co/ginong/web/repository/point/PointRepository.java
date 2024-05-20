@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PointRepository {
 
-    void updatePoint(Point updatedPointInfo);
+    void updatePointByMemberId(Point updatedPointInfo);
 }

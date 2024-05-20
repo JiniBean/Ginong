@@ -60,18 +60,19 @@
         MEMBER;
     </select>
 
-    <update id="updateMember" parameterType="memberView">
+    <update id="updateMemberByMemberId" parameterType="memberView">
         UPDATE MEMBER
         <set>
-            <if test="name != null"> name = #{name}, </if>
-            <if test="userName != null"> userName = #{userName}, </if>
+            <if test="name != null"> NAME = #{name}, </if>
+            <if test="userName != null"> USER_NAME = #{userName}, </if>
         </set>
         WHERE id = #{id}
     </update>
 
-
-
-
-
+    <select id="findByMemberId" resultType="MemberOrderView">
+        select *
+        from MEMBER_ORDER_VIEW
+        WHERE MEMBER_ID = #{member_id}
+    </select>
 
 </mapper>
