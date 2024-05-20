@@ -23,7 +23,7 @@ Cookie.prototype = {
     },
 
     getCount: function (name){
-        return this.map[name].size();
+        return this.map[name].length;
     }
 
 }
