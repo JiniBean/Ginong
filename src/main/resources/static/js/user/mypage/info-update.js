@@ -27,7 +27,7 @@ createApp({
         try {
             // 세 개의 API 호출을 병렬로 실행
             const [infoResponse,defaultIctResponse , lctResponse] = await Promise.all([
-                fetch("/api/member/userInfo"),
+                fetch("/api/member/userinfo"),
                 fetch("/api/member/location/defaultList"),
                 fetch("/api/member/location/list")
             ]);
