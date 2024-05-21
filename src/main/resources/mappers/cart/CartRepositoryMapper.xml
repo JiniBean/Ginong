@@ -79,6 +79,15 @@
         </if>
     </insert>
 
+    <insert id="saveWhenLogIn">
+        INSERT INTO CART (PRODUCT_ID, MEMBER_ID, QUANTITY)
+        VALUES
+        <foreach collection="carts" item="cart" separator=",">
+            (#{cart.productId}, #{cart.memberId}, #{cart.quantity})
+        </foreach>
+    </insert>
+
+
     <update id="update" parameterType="Long">
         UPDATE CART
         <set>
@@ -91,6 +100,17 @@
         </set>
         WHERE MEMBER_ID = #{memberId}
         AND PRODUCT_ID = #{prdId};
+    </update>
+
+    <!-- 일괄 업데이트를 위한 매핑 -->
+    <update id="updateWhenLogIn" parameterType="List">
+        <foreach collection="list" item="cart" index="index" separator=";">
+            UPDATE CART
+            SET   quantity = #{cart.quantity},
+            WHERE 1=1
+              AND id       = #{cart.id}
+              AND memberId = #{cart.memberId}
+        </foreach>
     </update>
 
     <delete id="delete">

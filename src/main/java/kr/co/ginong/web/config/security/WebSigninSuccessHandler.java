@@ -32,8 +32,6 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
         this.maxAge = maxAge;
     }
 
-    @Autowired
-    CartService cartService;
 
     @Override               //인증에 성공 했을때 처리할 로직 작성할 메소드
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -56,32 +54,6 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
         }
         String targetUrl = determineTargetUrl(request);                                         //기존 가려고 했던 페이지로 로그인 완료 후 가기 위한 메소드 호출
         getRedirectStrategy().sendRedirect(request, response, targetUrl);                       //determineTargetUrl 에서 얻어온 url 로 리다이렉트 해준다.
-
-        // ######### 로그인 시 쿠키에 장바구니 데이터가 있다면 DB에 업데이트 하는 기능 ##############
-//        // 쿠키에서 장바구니 데이터 가져오기
-//        Cookie[] cookies = request.getCookies();
-//        String cartData = Arrays.stream(cookies)
-//                .filter(c -> "cartList".equals(c.getName()))
-//                .findFirst()
-//                .map(Cookie::getValue)
-//                .orElse(null);
-//
-//        if (cartData != null) {
-//            // 쿠키 데이터를 자바 객체로 변환
-//            List<Cart> cartList = parseCartData(cartData);
-//
-//            // 데이터베이스 업데이트 로직 호출
-//            updateDatabaseWithCartData(authentication, cartList);
-//            Long userId = ((WebUserDetails) authentication.getPrincipal()).getId();
-////            cartService.save()
-////            Boolean save(Long memberId, Cart cart, List<Long> list);
-//
-//            // 쿠키 삭제
-//            Cookie cookie = new Cookie("cartList", "");
-//            cookie.setMaxAge(0);
-//            response.addCookie(cookie);
-//        }
-//        // ######### 로그인 시 쿠키에 장바구니 데이터가 있다면 DB에 업데이트 하는 기능 ##############
 
         super.onAuthenticationSuccess(request, response, authentication);                       //onAuthenticationSuccess 에 정의 된 나머지 동작들을 수행
     }

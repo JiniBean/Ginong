@@ -15,11 +15,15 @@ public interface CartService {
 
     Integer getCount(Long memberId);
 
+    Boolean saveWhenLogin(List<Cart> carts);
+
     Boolean save(Long memberId, Cart cart, List<Long> list);
 
     Boolean edit(Long memberId, Long prdId);
 
     Boolean edit(Long memberId, Long prdId, Integer qty);
+
+    Boolean editWhenLogin (List<Cart> carts);
 
     Boolean delete(Long memberId, Long prdId);
 

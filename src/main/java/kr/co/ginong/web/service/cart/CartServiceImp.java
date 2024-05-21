@@ -21,34 +21,29 @@ public class CartServiceImp implements CartService{
     public List<Map<String, Object>> getAvailableQtyList(Long memberId) { return repository.findAvailableQty(memberId); }
 
     @Override
-    public Cart get(Long memberId, Long prdId) {
-        return repository.find(memberId,prdId);
-    }
+    public Cart get(Long memberId, Long prdId) { return repository.find(memberId,prdId); }
 
     @Override
     public Integer getCount(Long memberId){return repository.count(memberId);}
-    @Override
-    public Boolean save(Long memberId, Cart cart, List<Long> list) {
-        return repository.save(memberId, cart, list);
-    }
 
     @Override
-    public Boolean edit(Long memberId, Long prdId) {
-        return repository.update(memberId,prdId, null);
-    }
+    public Boolean save(Long memberId, Cart cart, List<Long> list) { return repository.save(memberId, cart, list); }
 
     @Override
-    public Boolean edit(Long memberId, Long prdId, Integer qty) {
-        return repository.update(memberId,prdId, qty);
-    }
+    public Boolean saveWhenLogin(List<Cart> carts) { return repository.saveWhenLogin(carts); }
 
     @Override
-    public Boolean delete(Long memberId, Long prdId) {
-        return repository.delete(memberId, prdId, null);
-    }
+    public Boolean edit(Long memberId, Long prdId) { return repository.update(memberId,prdId, null); }
 
     @Override
-    public Boolean delete( Long memberId, List<Long> list) {
-        return repository.delete(memberId, null, list);
-    }
+    public Boolean edit(Long memberId, Long prdId, Integer qty) { return repository.update(memberId,prdId, qty); }
+
+    @Override
+    public Boolean editWhenLogin (List<Cart> carts) { return  repository.updateWhenLogin(carts); }
+
+    @Override
+    public Boolean delete(Long memberId, Long prdId) { return repository.delete(memberId, prdId, null); }
+
+    @Override
+    public Boolean delete( Long memberId, List<Long> list) {  return repository.delete(memberId, null, list); }
 }

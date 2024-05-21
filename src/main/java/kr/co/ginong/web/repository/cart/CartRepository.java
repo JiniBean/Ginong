@@ -17,9 +17,14 @@ public interface CartRepository {
 
     Boolean save(Long memberId, Cart cart, List<Long> list);
 
+    Boolean saveWhenLogin(List<Cart> carts);
+
     Boolean update(Long memberId, Long prdId, Integer qty);
+
+    Boolean updateWhenLogin(List<Cart> carts);
 
     Integer count(Long memberId);
 
     Boolean delete(Long memberId, Long prdId, List<Long> list);
+
 }
