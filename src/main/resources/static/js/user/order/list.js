@@ -25,11 +25,19 @@ createApp({
             let repository = new Repository;
 
             //취소내역(1)
-            if(idx)
+            if(idx){
                 this.list = await repository.findCancel(null,true);
+                this.list.forEach(l=> {
+                    l.cnclDate = this.formatDate(new Date(l.cnclDate))
+                })
+            }
             //주문내역(0)
-            else
+            else{
                 this.list = await repository.findAll(null,null,true);
+                this.list.forEach(l=> {
+                    l.date = this.formatDate(new Date(l.date))
+                })
+            }
 
     },
 
@@ -50,7 +58,7 @@ createApp({
             }
             let repository = new Repository;
 
-            let s = await repository.updateState(order);
+            let s = await repository.update(order);
             if (s){
                 o.categoryId = 5;
                 o.category = '구매확정';
@@ -107,7 +115,15 @@ createApp({
 
             alert("이미 있는 상품을 제외하고 장바구니에 담았어요!");
 
-        }
+        },
+        formatDate(date) {
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1; // 월은 0부터 시작하기 때문에 1을 더함
+            let day = date.getDate();
+
+            //결과값 2024.05.24
+            return `${year}.${month < 10 ? '0' : ''}${month}.${day < 10 ? '0' : ''}${day}`;
+        },
     },
     mounted() {
         this.getList(0);

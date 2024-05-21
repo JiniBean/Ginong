@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>기농이네 관리자</title>
+    <script src="/js/admin/order/detail.js"></script>
 </head>
 
 <body>
@@ -101,16 +102,19 @@
             </div>
         </div>
     </section>
-    <section>
-        <form>
-            <div>
-                <label> 운송장 번호를 입력해주세요
-                <input type="text" >
-            </label></div>
-            <div><button class="n-btn w:10p">출고</button></div>
+    <button th:disabled="${list[0].trackingNum}" id="modal-btn" class="n-btn w:10p">출고</button>
+
+
+    <section id="modal" class="n-modal w:7 d:none" tabindex="-1" >
+        <form method="post" class="d:flex fl-dir:column gap:3">
+            <h1 class="n-font:subtitle text-align:center">운송장 번호를 입력해주세요</h1>
+            <div><input type="text" name="trackingNum" class="n-textbox"></div>
+            <div class="mt:4 d:flex jc:space-between gap:2">
+                <button id="close-btn" type="submit" class="n-btn n-btn-type:outline n-btn-size:2 h:1 fl-grow:1">취소</button>
+                <button id="submit-btn" type="submit" class="n-btn n-btn-size:2 h:1 fl-grow:1">확인</button>
+            </div>
         </form>
     </section>
-
 
 </main>
 

@@ -51,7 +51,20 @@ createApp({
             }
 
             this.$refs.form.submit();
-
+        },
+        async cancel(order) {
+            let isTrue = confirm("정말로 취소하시겠어요?");
+            if (!isTrue)
+                return;
+            let repository = new Repository;
+            let data = {
+                id: order.id
+            }
+            let valid = await repository.addCancel(data);
+            if(valid){
+                alert("주문이 취소되었어요");
+                this.$refs.btn.disabled = true;
+            }
 
         }
     },

@@ -97,7 +97,7 @@
       <button @click.prevent="goInfo" class="n-btn n-btn-size:2 fl-grow:1">선택상품 바로 구매</button>
       <div @click="addCart" class="n-btn n-btn-size:2 fl-grow:1">선택상품 다시 담기</div>
     </div>
-    <div v-if="order.categoryId === 1 && order.cancelId==null" class="fl-grow:1 n-btn n-btn-type:outline n-btn-size:2"><a href="">주문 취소</a></div>
+    <button v-if="order.categoryId === 1 && order.cancelId==null" @click.prevent="cancel(order)" ref="btn" class="fl-grow:1 n-btn n-btn-type:outline n-btn-size:2">주문 취소</button>
   </section>
 </form>
 

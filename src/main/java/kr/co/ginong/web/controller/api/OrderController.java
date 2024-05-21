@@ -1,6 +1,9 @@
 package kr.co.ginong.web.controller.api;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 
 import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.order.*;
@@ -114,7 +117,39 @@ public class OrderController {
     @PostMapping("/u")
     public Boolean update(@RequestBody Order order) {
 
-        return service.edit(order);
+            return service.edit(order);
+    }
+
+    @PostMapping("/cancel")
+    public Boolean addCancel(@RequestBody Order order) {
+
+        //난수 제작 :날짜+4자리난수+4자리난수
+        //오늘 날짜 제작
+        LocalDate currentDate = LocalDate.now();
+
+        // 날짜를 문자열로 변환하기 (yyyyMMdd 형식)
+        String dateString = currentDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        //난수 두세트 제작
+        Random random = new Random();
+        int randomNum1 = random.nextInt(10000);
+        int randomNum2 = random.nextInt(10000);
+        String randomNumber1 = String.format("%04d", randomNum1);
+        String randomNumber2 = String.format("%04d", randomNum2);
+
+        String str = dateString + randomNumber1 + randomNumber2;
+        Long id = Long.parseLong(str);
+
+        boolean valid = service.addCancel(id);
+        System.out.println("========================");
+        System.out.println(valid);
+        System.out.println("========================");
+        if(valid){
+            order.setCancelId(id);
+            return service.edit(order);
+        }
+
+
+        return false;
     }
 
 }

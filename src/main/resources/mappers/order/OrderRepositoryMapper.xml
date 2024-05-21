@@ -132,11 +132,17 @@
 		update `ORDER`
 		<set>
 			<if test="categoryId != null">
-				CATEGORY_ID = #{categoryId}
+				CATEGORY_ID = #{categoryId},
+			</if>
+			<if test="trackingNum != null">
+				TRACKING_NUM = #{trackingNum},
+			</if>
+			<if test="cancelId != null">
+				CANCEL_ID = #{cancelId}
 			</if>
 		</set>
 		<where>
-			Id = #{id}
+			ID = #{id}
 		</where>
 	</update>
 

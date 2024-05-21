@@ -4,6 +4,7 @@ package kr.co.ginong.web.service.order;
 import java.util.List;
 
 import kr.co.ginong.web.entity.order.OrderCategory;
+import kr.co.ginong.web.repository.order.CancelRepository;
 import kr.co.ginong.web.repository.order.OrderCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class OrderServiceImp implements OrderService {
 
     @Autowired
     private OrderCategoryRepository categoryRepository;
+
+    @Autowired
+    private CancelRepository cancelRepository;
 
     @Override
     public List<OrderView> getList(Long memberId, String query, Boolean sort) {
@@ -101,6 +105,11 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public Order getRecentOrder(Long memberId) {return repository.findRecentByMemberId(memberId);}
+
+    @Override
+    public boolean addCancel(Long cancelId) {
+        return cancelRepository.save(cancelId);
+    }
 
 
 }

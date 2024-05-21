@@ -119,12 +119,18 @@ export default class OrderRepository{
     }
 
 
-    async updateState(order){
+    async update(order){
         let url = `${baseUrl}/api/order/u`;
         let method = 'POST';
-        let data = order;
-        let response = await this.findPromise(url,method, JSON.stringify(data));
+        let response = await this.findPromise(url,method, JSON.stringify(order));
 
+        return await response.json();
+    }
+
+    async addCancel(order){
+        let url = `${baseUrl}/api/order/cancel`;
+        let method = 'POST';
+        let response = await this.findPromise(url,method,JSON.stringify(order));
         return await response.json();
     }
 

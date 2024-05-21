@@ -2,6 +2,7 @@ package kr.co.ginong.web.controller.admin;
 
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.LocationHistory;
+import kr.co.ginong.web.entity.order.Order;
 import kr.co.ginong.web.entity.order.OrderView;
 import kr.co.ginong.web.entity.order.Payment;
 import kr.co.ginong.web.service.member.MemberService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -90,5 +92,13 @@ public class OrderController {
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("totalQty", totalQty);
         return "admin/order/detail";
+    }
+
+    @PostMapping("detail")
+    public String detail(Long id, String trackingNum){
+
+        Order order = Order.builder().id(id).trackingNum(trackingNum).categoryId(3L).build();
+        Boolean valid = service.edit(order);
+        return "redirect:list";
     }
 }

@@ -41,7 +41,8 @@
                     <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
                     <div class="d:flex fl-dir:column jc:center gap:3 cursor:pointer"  @click="goDetail(l.id)">
                         <div>
-                            <span class="fs:2 md:fs:3 color:base-4">{{l.date}}</span>
+                            <span v-if="!l.cancelId" class="fs:2 md:fs:3 color:base-4">{{l.date}} 주문</span>
+                            <span v-else class="fs:2 md:fs:3 color:base-4">{{l.cnclDate}} 취소</span>
                         </div>
                         <div class="d:flex fl-dir:row gap:1">
                             <span class="fs:2 md:fs:3">{{ l.prettyName}} </span>
@@ -58,7 +59,8 @@
                 </div>
                 <div class="d:flex fl-dir:row jc:space-between w:10p gap:2">
                     <button class="n-btn n-btn-type:filled n-btn-size:1 w:3p">1:1 문의</button>
-                    <button v-if="tabIndex==0" class="n-btn n-btn-type:filled n-btn-size:1 w:3p">배송조회</button>
+                    <div v-if="tabIndex==0" class="n-btn n-btn-type:filled n-btn-size:1 w:3p"><a href="
+https://rest.sweettracker.net/tracking?t_key=SWEETTRACKER&t_code=04&t_invoice=582634527700">배송조회</a></div>
                     <button v-if="tabIndex==0" :disabled="l.categoryId>4" :class="{'disabled':l.categoryId>4}" class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="confirmOrder(l)">구매확정</button>
                     <button v-else class="n-btn n-btn-type:filled n-btn-size:1 w:3p" @click.prevent="addCart(l)">장바구니 담기</button>
                 </div>

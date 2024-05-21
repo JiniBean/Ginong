@@ -20,7 +20,7 @@ public class OrderView {
     private String  category;
     private Long	itemId;
     private Integer count;
-    private Integer trackingNum;
+    private String trackingNum;
     private Long	productId;
     private String  prettyName;
     private String  imgName;
