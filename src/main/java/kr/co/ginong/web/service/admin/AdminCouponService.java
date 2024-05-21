@@ -2,7 +2,6 @@ package kr.co.ginong.web.service.admin;
 
 import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponCategory;
-import kr.co.ginong.web.entity.notice.Notice;
 
 import java.util.List;
 

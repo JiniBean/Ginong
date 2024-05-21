@@ -1,7 +1,6 @@
 package kr.co.ginong.web.repository.coupon;
 
 import kr.co.ginong.web.entity.coupon.Coupon;
-import kr.co.ginong.web.entity.notice.Notice;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
