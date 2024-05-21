@@ -24,7 +24,7 @@
           <li class="h:10p" th:classappend="${active}=='notice' ? 'active' : ''">
             <a href="/notice/list" class="fs:3 h:10p"
                th:classappend="${active}=='notice' ? 'fw:3': ''">
-              공지 사항
+              공지사항
             </a>
           </li>
           <li class="h:10p" th:classappend="${active}=='faq' ? 'active' : ''">
@@ -38,7 +38,7 @@
       </nav>
 
 
-    <nav class="category d:flex md:d:none w:10p bg-color:base-1 top:2 pos:sticky zi:2">
+    <nav class="category d:flex md:d:none w:10p bg-color:base-1 top:2 pos:fixed zi:2">
         <h1 class="d:none">모바일 카테고리</h1>
         <ul class="n-tabbar d:flex h:2 jc:space-between fl-grow:1 mr:4 ml:4 md:mr:0 md:ml:0 ">
           <li class="h:10p" th:classappend="${{param.c}}==1 ? 'active' : ''">
