@@ -22,6 +22,9 @@ createApp({
             // yyyy-MM-dd 형식으로 반환
             return `${year}-${month}-${day}`;
         }
+        ,updateLocation(locationId){
+            location.href=`location-uptform?locationId=${locationId}`;
+        }
         ,confirmDelete(locationId) {
             if(confirm("정말 삭제하시겠습니까?"))
                 this.removeItem(locationId);
@@ -42,7 +45,7 @@ createApp({
         //url의 param값에 따른 tab영역 설정
         setInitialTab() {
             const urlParams = new URLSearchParams(window.location.search);
-            const tab = urlParams.get('currentTab');
+            const tab = urlParams.get('t');
 
             if (tab)
                 this.currentTab = tab;
@@ -114,7 +117,6 @@ createApp({
             console.error("Failed to fetch data:", error);
         }
 
-        //탭 관리
 
     }
 }).mount('main');

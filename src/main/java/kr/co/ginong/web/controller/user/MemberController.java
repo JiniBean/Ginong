@@ -10,6 +10,7 @@ import kr.co.ginong.web.service.coupon.CouponService;
 import kr.co.ginong.web.service.inquiry.InquiryService;
 import kr.co.ginong.web.service.member.MemberService;
 import kr.co.ginong.web.service.mypage.ReviewService;
+import kr.co.ginong.web.service.order.LocationService;
 import kr.co.ginong.web.service.order.OrderService;
 import kr.co.ginong.web.service.point.PointService;
 import kr.co.ginong.web.service.product.ProductService;
@@ -48,6 +49,9 @@ public class MemberController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    private LocationService locationService;
 
     @GetMapping("/signin")
     public String signin() {
@@ -231,28 +235,53 @@ public class MemberController {
         return "user/mypage/index";
     }
 
-    @GetMapping("mypage/infoUpt")
-    public String infoUpt(Model model){
+    @GetMapping("mypage/info-detail")
+    public String infoDetail(
+            Model model
+    ){
 
         String pageName="회원 정보 수정";
 
         model.addAttribute("pageName", pageName);
-        return "/user/mypage/info-update";
+
+        return "user/mypage/info-detail";
     }
 
-    @GetMapping("mypage/location")
-    public String location(Model model){
+    @GetMapping("mypage/location-regform")
+    public String regLocation(Model model){
 
         String pageName="배송지 등록";
 
         model.addAttribute("pageName", pageName);
-        return "/user/mypage/location-reg";
+
+        return "user/mypage/location-regform";
     }
 
-    @PostMapping("mypage/addLocation")
+    @GetMapping("mypage/location-uptform")
+    public String updateLocation(
+            Model model
+           // ,@AuthenticationPrincipal WebUserDetails userDetails
+            ,@RequestParam(name="locationId") Long locationId
+    ){
+        //TO-DO
+        //locationId를 param값으로 보내는 대신 아이디와 대조하여 URL 파라미터 조작 방지 해야함
+        //locationId값과 user id를 함께 보내서 검증해야 함
+
+        Location location = locationService.getByID(locationId);
+        model.addAttribute("locationInf" , location);
+
+        String pageName="배송지 수정";
+        model.addAttribute("pageName", pageName);
+
+        return "user/mypage/location-uptform";
+    }
+
+    //배송지 정보 데이터베이스에 저장
+    @PostMapping("mypage/add-location")
     public String addLocation(
             Location location
             ,@AuthenticationPrincipal WebUserDetails userDetails
+            ,@RequestParam(name="gatePwdValue", required=false) String gatePwdValue
     ){
         Long memberId = 0L;
 
@@ -261,11 +290,27 @@ public class MemberController {
             memberId = userDetails.getId();
         }
 
+        //공동현관 출입번호 설정
+        switch (location.getGatePwd()){
+            case "isNull" : //비밀번호 없이 출입시
+                location.setGatePwd(null);
+                break;
+            case "on": // 직접입력한 현관 출입 번호 설정
+                location.setGatePwd(gatePwdValue);
+                break;
+        }
+
+        //회원정보 setting
         location.setMemberId(memberId);
 
-        //등록하는 것 구현해야함
+        //배송지 데이터베이스에 등록
+        Integer isDone = locationService.addLocation(location);
 
-         return "/user/mypage/location-reg";
+        if(isDone<0)
+            return "/user/mypage/location-regform";
+
+        return "redirect:/mypage/info-detail?t=location";
+
     }
 
 }

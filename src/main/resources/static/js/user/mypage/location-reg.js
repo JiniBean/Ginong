@@ -18,8 +18,9 @@ list.onclick = function (e) {
     btn.textContent = e.target.textContent;
 
     //input에 값 넣어주기
-    input.value = e.target.dataset.id  // 필요한 값 dataset으로 꺼내옴
+    input.value = e.target.dataset.note  // 필요한 값 dataset으로 꺼내옴
 
     //리스트 숨기기
     list.classList.remove("active");
 }
+

@@ -47,13 +47,14 @@ public class LocationServiceImp implements LocationService{
     @Override
     public Integer removeLocationById(Long locationId) {
         int state =  repository.deleteLocation(locationId);
-        System.out.println(state);
-
         return state;
     }
 
-
-
+    @Override
+    public Integer addLocation(Location location) {
+        int state =  repository.insertLocation(location);
+        return state;
+    }
 
 
 }

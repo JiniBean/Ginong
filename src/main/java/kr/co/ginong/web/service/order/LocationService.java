@@ -15,4 +15,6 @@ public interface LocationService {
     void addHistory(LocationHistory locationHistory);
 
     Integer removeLocationById(Long locationId);
+
+    Integer addLocation(Location location);
 }

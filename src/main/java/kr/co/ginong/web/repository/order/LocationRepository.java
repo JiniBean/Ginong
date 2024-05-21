@@ -30,4 +30,5 @@ public interface LocationRepository {
 
     int deleteLocation(Long locationId);
 
+    int insertLocation(Location location);
 }
