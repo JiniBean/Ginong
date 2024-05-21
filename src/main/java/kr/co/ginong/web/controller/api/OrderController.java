@@ -100,7 +100,7 @@ public class OrderController {
 
     @GetMapping("l")
     public LocationHistory locationHistory(@RequestParam(name = "o") Long orderId){
-        return locationService.getByOrderID(orderId);
+        return locationService.getHistoryByOrderID(orderId);
     }
 
     @GetMapping("delivery-status")

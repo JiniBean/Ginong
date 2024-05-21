@@ -17,11 +17,12 @@
     </select>
 
     <select id="findByOrderId" resultType="Member">
-        select
-		*
-		from `ORDER` O LEFT JOIN MEMBER M
-		ON O.MEMBER_ID = M.ID
-		where O.ID = #{orderId}
+        SELECT *
+        FROM `MEMBER`
+        WHERE ID = (
+            SELECT MEMBER_ID FROM `ORDER` o
+            WHERE ID = #{orderId}
+        );
     </select>
 
 

@@ -36,10 +36,13 @@ public class OrderServiceImp implements OrderService {
         return repository.findCancel(memberId, query);
     }
 
+
     @Override
     public List<OrderView> getExchangeList(Long memberId, String query, Integer sort) {
         return repository.findExchange(memberId,query,sort);
     }
+
+
 
     @Override
     public List<OrderView> getRefundList(Long memberId, String query, Boolean sort) {
@@ -50,6 +53,21 @@ public class OrderServiceImp implements OrderService {
     public List<OrderView> getItems(Long orderId) {
         return repository.findItems(orderId);
     }
+
+    @Override
+    public List<OrderView> getItemsByCancelId(Long cancelId) {
+        return repository.findItemsByCancelId(cancelId);
+    }
+    @Override
+    public OrderView getByExchangeId(Long exchangeId) {
+        return repository.findByExchangeId(exchangeId);
+    }
+
+    @Override
+    public OrderView getByRefundId(Long refundId) {
+        return repository.findByRefundId(refundId);
+    }
+
 
     @Override
     public List<OrderCategory> getCategories() {

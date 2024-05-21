@@ -88,6 +88,35 @@
 		</where>
 	</select>
 
+	<select id="findByExchangeId" resultType="OrderView">
+		SELECT * from ORDER_VIEW ov
+		<where>
+			<if test="exchangeId">
+				EXCHANGE_ID = #{exchangeId}
+			</if>
+		</where>
+	</select>
+
+	<select id="findByRefundId" resultType="OrderView">
+		SELECT * from ORDER_VIEW ov
+		<where>
+			<if test="refundId">
+				REFUND_ID = #{refundId}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="findItemsByCancelId" resultType="OrderView">
+		SELECT * from ORDER_VIEW ov
+		<where>
+			<if test="refundId">
+				REFUND_ID = #{cancelId}
+			</if>
+		</where>
+	</select>
+
+
 
 	<insert id="save" parameterType="Order">
 		insert into `ORDER`(ID,`DATE`, `TYPE`, MEMBER_ID, LOCATION_ID)

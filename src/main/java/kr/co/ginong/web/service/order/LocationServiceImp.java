@@ -33,7 +33,7 @@ public class LocationServiceImp implements LocationService{
     }
 
     @Override
-    public LocationHistory getByOrderID(Long orderId) {
+    public LocationHistory getHistoryByOrderID(Long orderId) {
         LocationHistory locationHistory = repository.findByOrderId(orderId);
         return locationHistory;
     }

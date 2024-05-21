@@ -16,6 +16,7 @@ public class Order {
     private Long	id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date	date;
+    private Integer trackingNum;
     private Long	memberId;
     private Long	categoryId;
     private Long	locationId;

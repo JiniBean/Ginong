@@ -20,6 +20,7 @@ public class OrderView {
     private String  category;
     private Long	itemId;
     private Integer count;
+    private Integer trackingNum;
     private Long	productId;
     private String  prettyName;
     private String  imgName;
@@ -43,7 +44,7 @@ public class OrderView {
     private String  exchCtgryName;
     private Boolean exchDlvyState;
 
-    private Long    refundID;
+    private Long    refundId;
     private String  rfndDesc;
     private Integer rfndState;
     private Integer rfndQty;

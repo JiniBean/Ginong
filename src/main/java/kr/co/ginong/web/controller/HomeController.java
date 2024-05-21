@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = {"/", "/index", "/home"})
-public class IndexController {
+public class HomeController {
 
     @Autowired
     private ProductService service;

@@ -26,8 +26,11 @@ public class StockController {
     ProductService productService;
 
     @GetMapping("list")
-    public String list(){
+    public String list(Model model){
 
+        String pageName="재고 관리";
+
+        model.addAttribute("pageName", pageName);
         return "admin/stock/list";
     }
 
@@ -37,6 +40,9 @@ public class StockController {
         List<StockView> list = service.getByPrdId(prdId);
         ProductView prd = productService.get(prdId);
 
+        String pageName="재고 상세";
+
+        model.addAttribute("pageName", pageName);
         model.addAttribute("list", list);
         model.addAttribute("prd", prd);
         return "admin/stock/detail";
@@ -49,6 +55,9 @@ public class StockController {
         StockView view =  list.get(0);
         List<StockCategory> categories = service.getCategories();
 
+        String pageName="재고 등록";
+
+        model.addAttribute("pageName", pageName);
         model.addAttribute("view", view);
         model.addAttribute("categories", categories);
         return "admin/stock/reg";
@@ -75,6 +84,9 @@ public class StockController {
 
         StockView stock = service.getById(id);
 
+        String pageName="재고 수정";
+
+        model.addAttribute("pageName", pageName);
         model.addAttribute("view", stock);
         return "admin/stock/update";
     }

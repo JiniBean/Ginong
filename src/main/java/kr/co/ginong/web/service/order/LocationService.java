@@ -11,7 +11,7 @@ public interface LocationService {
     List<Location> getListByMemberID(Long memberId);
 
     Location getByID(Long id);
-    LocationHistory getByOrderID(Long orderId);
+    LocationHistory getHistoryByOrderID(Long orderId);
     void addHistory(LocationHistory locationHistory);
 
     Integer removeLocationById(Long locationId);
