@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ginong.web.repository.inquiry.InquiryRepository">
+    <select id="countByMemberId" resultType="Integer">
+		SELECT COUNT(*)
+		FROM INQUIRY
+		WHERE MEMBER_ID = #{memberId}
+
+	</select>
+	<select id="findByMemberId" resultType="Inquiry">
+		SELECT *
+		FROM INQUIRY
+		WHERE MEMBER_ID = #{memberId}
+		ORDER BY REG_DATE DESC
+	</select>
+	<select id="findAllCategory" resultType="InquiryCategory">
+		SELECT *
+		FROM INQUIRY_CATEGORY
+	</select>
+	<select id="findById" resultType="Inquiry">
+		SELECT *
+		FROM INQUIRY
+		WHERE ID= #{inquiryId};
+	</select>
+
+	<insert id="save" parameterType="Inquiry">
+		INSERT INTO INQUIRY
+		(TITLE, CONTENT, CATEGORY_ID, MEMBER_ID)
+		VALUES(#{title}, #{content}, #{categoryId}, #{memberId})
+	</insert>
+
+	<update id="update" parameterType="Inquiry">
+		UPDATE INQUIRY
+		SET TITLE=#{title}, CONTENT=#{content}, CATEGORY_ID=#{categoryId}, REG_DATE=current_timestamp()
+		WHERE ID=#{id};
+	</update>
+
+	<delete id="deleteById" parameterType="Inquiry">
+		DELETE FROM INQUIRY
+		WHERE ID = #{inquiryId};
+	</delete>
+
+</mapper>

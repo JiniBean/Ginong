@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class InquiryController {
 
     @GetMapping("list")
-    String list() {
-        return "/user/inquiry/list";
-    }
+    String list() { return "/user/inquiry/list"; }
 
+    @GetMapping("detail")
+    String detail(){ return "/user/inquiry/detail"; }
+    @GetMapping("reg")
+    String reg(){ return "/user/inquiry/reg"; }
+
+    @GetMapping("update")
+    String update(){ return "/user/inquiry/update"; }
 
 }
