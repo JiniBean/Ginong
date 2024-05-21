@@ -98,7 +98,8 @@
                     <div class="imageContainer">
                         <div class="imageWrapper" v-bind:style="{ transform: 'translateX(-' + selected * 33.3 + '%)' }">
                             <div class="d:flex fl-dir:column gap:5 px:8" v-for="(img, index) in images" :key="index" style="width:33%;">
-                                <div class="image gap:10 d:flex" v-bind:style="{ 'background-image': 'url(' + img + ')' }"></div>
+                                <div class="image gap:10 d:flex csr:pointer" v-bind:style="{ 'background-image': 'url(' + img + ')' }"
+                                     @click.prevent="goProductDetail(ids[index])"></div>
                                 <div >{{ names[index] }}</div>
                             </div>
                         </div>

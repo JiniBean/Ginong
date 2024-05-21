@@ -25,7 +25,15 @@ public class InquiryController {
             memberId = userDetails.getId();
         List<Inquiry> list = service.getList(memberId);
 
+
         return list;
+    }
+    @GetMapping("memberId")
+    public Long memberId(@AuthenticationPrincipal WebUserDetails userDetails){
+        Long memberId = 0L;
+        if (userDetails != null)
+            memberId = userDetails.getId();
+        return memberId;
     }
     @GetMapping("/{inquiryId}")
     public Inquiry detail(@PathVariable Long inquiryId){return service.getById(inquiryId);}

@@ -5,17 +5,8 @@ createApp({
     data() {
         return {
             info: [],
-            images: [
-                '/img/baechoo.png'
-                ,'/img/blueBerry.jpg'
-                ,'/img/carrot.png'
-                ,'/img/gochujang.jpg'
-                ,'/img/gochujangCucumber.jpg'
-                ,'/img/greenOnionKimchi.png'
-                ,'/img/pineapple.jpg'
-                ,'/img/saltedFish.png'
-                ,'/img/seasonedCucumber.jpg'
-            ],
+            ids: [],
+            images: [],
             names: [],
             state: [],
             length: 1,
@@ -26,6 +17,10 @@ createApp({
         await this.fetchProducts();
     },
     methods: {
+        goProductDetail(id){
+            let productId = id;
+            location.href = `/product/detail?id=${productId}`;
+        },
         async fetchProducts() {
             let response;
             try {
@@ -57,7 +52,8 @@ createApp({
         processProducts(pickProductList) {
             const limitedProductList = pickProductList.slice(0, 9);
             limitedProductList.forEach(product => {
-                // this.images.push(product.thumbnailPath+'/'+product.thumbnailName);
+                this.ids.push(product.id);
+                this.images.push(product.thumbnailPath+'/'+product.thumbnailName);
                 this.names.push(product.name);
             });
             this.length = Math.ceil(this.images.length / 3)-1;

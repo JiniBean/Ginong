@@ -32,9 +32,9 @@ createApp({
         },
     },
     async created() {
-        let response = await fetch(`/api/inquiries/list`);
-        let list = await response.json();
-        this.inquiry.memberId = list[0].memberId;
+        let response = await fetch(`/api/inquiries/memberId`);
+        let memberId = await response.json();
+        this.inquiry.memberId = memberId;
     }
 }).mount('main');
 
