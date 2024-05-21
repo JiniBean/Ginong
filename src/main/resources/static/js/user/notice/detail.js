@@ -9,7 +9,9 @@ createApp({
         }
     },
     methods: {
-        
+        goList() {
+            location.href = `/notice/list`;
+        },
     },
     async created() {
         let params = new URLSearchParams(location.search);
