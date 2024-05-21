@@ -3,7 +3,6 @@ package kr.co.ginong.web.controller.api;
 import kr.co.ginong.web.entity.coupon.Coupon;
 import kr.co.ginong.web.entity.coupon.CouponCategory;
 import kr.co.ginong.web.entity.coupon.CouponHistoryView;
-import kr.co.ginong.web.entity.notice.Notice;
 import kr.co.ginong.web.service.admin.AdminCouponService;
 import kr.co.ginong.web.service.coupon.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;

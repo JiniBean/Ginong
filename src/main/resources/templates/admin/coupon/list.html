@@ -26,9 +26,7 @@
 
             <section class="d:flex jc:center w:10p">
                 <h1 class="d:none">검색폼</h1>
-                <form class="pos:relative w:10p md:w:8 h:2">
-                    <!-- <input type="text" @keyup.enter="getList" v-model="query" class="n-textbox border-color:main-6 bd-radius:4 pr:1 pl:4" placeholder="검색어를 입력해 주세요">
-                    <button @click.prevent="getList" class="pos:absolute m-right:1 icon cursor:pointer icon:magnifying_glass icon-size:4 icon-color:base-5" style="top:2px; right:4px;">검색 버튼</button> -->
+                <form class="pos:relative w:10p md:w:8 h:2">                    
                     <input type="text" class="n-textbox border-color:main-6 bd-radius:4 pr:1 pl:4" placeholder="검색어를 입력해 주세요" @keyup.enter="loadData()" v-model="query">
                     <button class="pos:absolute m-right:1 icon cursor:pointer icon:magnifying_glass icon-size:4 icon-color:base-5" style="top:2px; right:4px;" @click.prevent="loadData()">검색 버튼</button>
                 </form>
