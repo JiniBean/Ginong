@@ -109,7 +109,7 @@
     <!--배송지 정보 수정 영역-->
     <section class="d:flex fl-dir:column gap:5 " v-if="currentTab === 'location'">
         <h1 class="d:none">배송지 정보 수정</h1>
-        <section class="d:flex fl-dir:column n-item color:color-base-4 fl-grow:1 gap:5 border-color:base-4" v-if="defaultIctList !== undefined">
+        <section class="d:flex fl-dir:column n-item color:color-base-4 fl-grow:1 gap:5 border-color:base-4" v-if="defaultIctList.zipCode!==undefined">
             <div>
                 <span class="icon icon icon:map_pin_fill icon-color:main-6">배송지 아이콘</span>
                 <span>{{ defaultIctList.label + ' [기본 배송지]' }}</span>
@@ -125,6 +125,9 @@
             <div>
                 <button class="n-btn n-btn:outline w:3 color:main-6 h:3">수정</button>
             </div>
+        </section>
+        <section v-else>
+            기본 배송지를 추가해주세요.
         </section>
 
         <section>
@@ -153,17 +156,13 @@
                 <div class="d:flex gap:3">
                     <div class="d:flex gap:3">
                         <button class="n-btn n-btn:outline w:3 color:main-6 h:3">수정</button>
-                        <button class="n-btn n-btn:outline w:3 color:main-6 h:3">삭제</button>
+                        <button class="n-btn n-btn:outline w:3 color:main-6 h:3" @click.prevent="confirmDelete(item.id)">삭제</button>
                     </div>
                     <button class="n-btn w:4 h:3">기본 배송지로 변경</button>
                 </div>
             </div>
         </section>
     </section>
-
-    <div class="p:10 md:gap:11">
-
-    </div>
 </main>
 </body>
 </html>

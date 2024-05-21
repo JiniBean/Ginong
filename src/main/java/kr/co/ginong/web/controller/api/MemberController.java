@@ -237,6 +237,20 @@ public class MemberController {
 
     }
 
+    //배송지 삭제
+    @GetMapping("location/removeItem")
+    public ResponseEntity<Boolean>  removeItem(
+            Long locationId
+    ){
+        Integer state = locationService.removeLocationById(locationId);
+
+        if(state<0)
+            return ResponseEntity.badRequest().body(false);
+
+        return ResponseEntity.ok(true);
+
+    }
+
     @GetMapping("orderInfo")
     public Order getOrderInfo(@AuthenticationPrincipal WebUserDetails userDetails){
         Long memberId = 0L; //사용하고 싶은 자료형으로 초기값 설정

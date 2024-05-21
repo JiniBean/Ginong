@@ -9,8 +9,8 @@
     <title>고객센터</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="module" src="/js/user/mypage/location-reg.js" defer></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script>
-    <script src="/js/module/findLocation.js" defer></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/module/findLocation.js"></script>
     <link rel="stylesheet" href="/css/user/mypage/index.css">
 </head>
 <body>
@@ -33,12 +33,12 @@
           <div class="d:flex fl-dir:column gap:4">
               <div>배송지</div>
               <div class="d:flex ai:center gap:3">
-                  <input type="text" id="sample6_postcode" class="n-textbox n-textbox-type:underline" placeholder="우편번호" value="234567" name="zipCode">
-                  <button class="btn-address n-btn n-btn-type:outline md:w:7 w:6">주소검색</button>
+                  <input type="text" id="sample6_postcode" class="n-textbox n-textbox-type:underline" placeholder="우편번호" name="zipCode">
+                  <input type="button" class="btn-address n-btn n-btn-type:outline md:w:7 w:6" value="주소찾기">
               </div>
-              <input type="text" id="sample6_address" class="n-textbox n-textbox-type:underline"  placeholder="주소"  value="경기도 백범로 8" name="addr1">
-              <input type="text" id="sample6_detailAddress" class="n-textbox n-textbox-type:underline" placeholder="상세주소" value="123호" name="addr2">
-<!--              <input type="text" id="sample4_extraAddress" class="n-textbox n-textbox-type:underline" placeholder="참고항목">-->
+              <input type="text" id="sample6_address" class="n-textbox n-textbox-type:underline"  placeholder="주소"  name="addr1">
+              <input type="text" id="sample6_detailAddress" class="n-textbox n-textbox-type:underline" placeholder="상세주소" name="addr2">
+<!--              <input type="text" id="sample6_extraAddress" class="n-textbox n-textbox-type:underline" placeholder="참고항목">-->
               <div class="d:flex ai:center">
                   <label>
                       <span class="icon icon:checkCircle icon-color:base-6 icon-size:4 csr:pointer"></span>

@@ -44,6 +44,16 @@ public class LocationServiceImp implements LocationService{
         return list;
     }
 
+    @Override
+    public Integer removeLocationById(Long locationId) {
+        int state =  repository.deleteLocation(locationId);
+        System.out.println(state);
+
+        return state;
+    }
+
+
+
 
 
 }

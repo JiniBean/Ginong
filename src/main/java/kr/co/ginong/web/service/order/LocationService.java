@@ -13,4 +13,6 @@ public interface LocationService {
     Location getByID(Long id);
     LocationHistory getByOrderID(Long orderId);
     void addHistory(LocationHistory locationHistory);
+
+    Integer removeLocationById(Long locationId);
 }

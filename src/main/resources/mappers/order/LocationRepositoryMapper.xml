@@ -61,4 +61,8 @@
 		</set>
 	</update>
 
+	<delete id="deleteLocation">
+		DELETE FROM LOCATION WHERE ID= #{locationId}
+	</delete>
+
 </mapper>

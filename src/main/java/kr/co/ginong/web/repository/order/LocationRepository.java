@@ -28,4 +28,6 @@ public interface LocationRepository {
 
     int count(Long categoryId, String query);
 
+    int deleteLocation(Long locationId);
+
 }

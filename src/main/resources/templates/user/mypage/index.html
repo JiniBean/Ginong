@@ -17,7 +17,7 @@
         <aside class="aside-mypage d:none md:d:block md:d:flex fl-dir:column md:min-w:4 ai:center gap:8">
             <h1 class="d:none">사이드메뉴</h1>
             <div class="d:flex jc:center ai:center h:4 fw:3 fs:6">마이페이지</div>
-            <div><a href="/mypage/location/list" th:href="@{location/list(id=${memberId})}">배송지 관리</a></div>
+            <div><a href="/mypage/location/list" th:href="@{infoUpt(currentTab='location')}">배송지 관리</a></div>
             <div><a href="/order/list" th:href="@{/order/list(id=${memberId})}">주문내역</a></div>
             <div><a href="">자주구매 한 상품</a></div>
             <div><a href="/product/recent" th:href="@{/product/recent(id=${memberId})}">최근 본 상품</a></div>
