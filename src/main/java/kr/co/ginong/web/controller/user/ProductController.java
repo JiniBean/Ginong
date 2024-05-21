@@ -127,7 +127,12 @@ public class ProductController {
         return "user/product/detail";
     }
     @GetMapping("recent")
-    public String list() {
+    public String list(Model model) {
+
+        String pageName="최근 본 상품";
+
+        //모델 및 세션
+        model.addAttribute("pageName", pageName);
         return "user/recent/list";
     }
 

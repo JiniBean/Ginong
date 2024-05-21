@@ -12,6 +12,9 @@ public class PointController {
     @GetMapping("/point")
     public String point(Model model) {
 
+        String pageName="적립금 내역";
+
+        model.addAttribute("pageName", pageName);
         return "user/mypage/point";
     }
 

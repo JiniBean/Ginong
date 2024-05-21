@@ -1,6 +1,7 @@
 package kr.co.ginong.web.controller.user;
 
 import jakarta.servlet.http.HttpSession;
+import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.coupon.CouponHistory;
 import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 import kr.co.ginong.web.entity.member.Member;
@@ -16,6 +17,7 @@ import kr.co.ginong.web.service.order.PaymentService;
 import kr.co.ginong.web.service.point.PointService;
 import kr.co.ginong.web.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,8 +63,11 @@ public class OrderController {
             , @RequestParam(name = "p", required = false) Long prdId
             , @RequestParam(name = "q", required = false) Integer qty
             , HttpSession session
-    ) {
+            ,@AuthenticationPrincipal WebUserDetails userDetails) {
 
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
         List<OrderItem> items = new ArrayList<>();
 
         //상품정보 가져오기
@@ -103,31 +108,29 @@ public class OrderController {
 
 
         //================================================================
-        String name = "dmswls"; //로그인 구현 전이라 박아놓은 MEMBER_NAME
-
-        Member member = memberService.get(name);
-        Long mId = member.getId();
 
 
         //배송지정보 가져오기
         Long lId = (Long) session.getAttribute("locationId");
 
         Location location = new Location();
+
         if (lId == null)
-            location = locationService.getByMemberID(mId);
+            location = locationService.getByMemberID(memberId);
         else
             location = locationService.getByID(lId);
 
+        String pageName="주문하기";
+
         //모델 및 세션
+        model.addAttribute("pageName", pageName);
         model.addAttribute("location", location);
-        model.addAttribute("member", member);
         model.addAttribute("items", list);
         model.addAttribute("totalPrice", totalPrice);
 
         session.setAttribute("totalPrice", totalPrice);
         session.setAttribute("orderItems", items);
         session.setAttribute("orderItemsList", list);
-        session.setAttribute("memberId", mId);
 
         return "user/order/info";
     }
@@ -135,12 +138,15 @@ public class OrderController {
     @PostMapping("info")
     public String info(
             LocationHistory locationHistory
-            , HttpSession session
-    ) {
+            ,HttpSession session
+            ,@AuthenticationPrincipal WebUserDetails userDetails) {
+
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         //세션에서 주문 목록 가져오기
         List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
-        Long memberId = (Long) session.getAttribute("memberId");
 
         //난수 제작 :날짜+4자리난수+4자리난수
         //오늘 날짜 제작
@@ -199,13 +205,17 @@ public class OrderController {
     @GetMapping("pay")
     public String pay(
             HttpSession session
-            , Model model
-    ) {
+            ,Model model
+            ,@AuthenticationPrincipal WebUserDetails userDetails) {
+
+
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         //세션에서 회원번호 및 화면에 뿌려줄 주문 정보 가져오기
         List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
         int totalPrice = (int) session.getAttribute("totalPrice");
-        Long memberId = (Long) session.getAttribute("memberId");
 
         // DB에서 사용가능한 쿠폰 리스트 가져오기
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
@@ -213,8 +223,10 @@ public class OrderController {
         // 잔여 적립금 조회
         int point = pointService.getAvailPoint(memberId);
 
-        // 모델
-        model.addAttribute("items", items);
+        String pageName="결제하기";
+
+        //모델 및 세션
+        model.addAttribute("pageName", pageName);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("point", point);
         model.addAttribute("couponList", couponList);
@@ -229,13 +241,16 @@ public class OrderController {
             , Payment payment
             , Integer point
             , HttpSession session
-    ){
+            ,@AuthenticationPrincipal WebUserDetails userDetails) {
+
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         //TODO 간편결제 API 구현 필요
 
         //session에서 주문 번호와 회원 번호 가져오기
         Long orderId = (Long) session.getAttribute("orderId");
-        Long memberId = (Long) session.getAttribute("memberId");
 
         //결제정보 결제 테이블에 저장하기
         payment.setOrderId(orderId);
@@ -283,7 +298,12 @@ public class OrderController {
 
 
     @GetMapping("complete")
-    public String complete(HttpSession session, Model model) {
+    public String complete(HttpSession session, Model model
+            ,@AuthenticationPrincipal WebUserDetails userDetails) {
+
+        Long memberId = null;
+        if(userDetails!=null)
+            memberId = userDetails.getId();
 
         //주문 정보 가져오기
         List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
@@ -295,7 +315,6 @@ public class OrderController {
 
 
         // 사용자 이름 가져오기
-        Long memberId = (Long) session.getAttribute("memberId");
         Member member = memberService.get(memberId);
         String name = member.getName();
 
@@ -324,7 +343,11 @@ public class OrderController {
     }
 
     @GetMapping("detail")
-    public String detail() {
+    public String detail(Model model) {
+
+        String pageName="주문 상세 내역";
+
+        model.addAttribute("pageName", pageName);
         return "user/order/detail";
     }
 
@@ -334,9 +357,6 @@ public class OrderController {
 
         List<OrderItem> list = new ArrayList<>();
 
-        System.out.println("=================");
-        System.out.println(prdIds.toString());
-        System.out.println("=================");
         for (Long p: prdIds){
             OrderItem item = new OrderItem();
             item.setProductId(p);

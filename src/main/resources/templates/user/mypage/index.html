@@ -18,7 +18,7 @@
             <h1 class="d:none">사이드메뉴</h1>
             <div class="d:flex jc:center ai:center h:4 fw:3 fs:6">마이페이지</div>
             <div><a href="/mypage/location/list" th:href="@{location/list(id=${memberId})}">배송지 관리</a></div>
-            <div><a href="/mypage/order/list" th:href="@{order/list(id=${memberId})}">주문내역</a></div>
+            <div><a href="/order/list" th:href="@{/order/list(id=${memberId})}">주문내역</a></div>
             <div><a href="">자주구매 한 상품</a></div>
             <div><a href="/product/recent" th:href="@{/product/recent(id=${memberId})}">최근 본 상품</a></div>
             <div><a href="/mypage/review/wirte_list" th:href="@{review/wirte_list(id=${memberId})}">구매 후기</a></div>
@@ -46,7 +46,7 @@
             <section class="d:flex jc:space-around ai:center bd-bottom bd-color:base-3 gap:10 py:10">
                 <h1 class="d:none">사이트 사용 정보</h1>
                 <div class="d:flex fl-dir:column ai:center jc:center gap:2">
-                    <div><a href="" th:text="${countOrder}">1</a></div>
+                    <div><a href="/order/list" th:text="${countOrder}">1</a></div>
                     <div>주문내역</div>
                 </div>
                 <div class="d:flex fl-dir:column ai:center jc:center gap:2">

@@ -232,12 +232,20 @@ public class MemberController {
     }
 
     @GetMapping("mypage/infoUpt")
-    public String infoUpt(){
+    public String infoUpt(Model model){
+
+        String pageName="회원 정보 수정";
+
+        model.addAttribute("pageName", pageName);
         return "/user/mypage/info-update";
     }
 
     @GetMapping("mypage/location")
-    public String location(){
+    public String location(Model model){
+
+        String pageName="배송지 등록";
+
+        model.addAttribute("pageName", pageName);
         return "/user/mypage/location-reg";
     }
 

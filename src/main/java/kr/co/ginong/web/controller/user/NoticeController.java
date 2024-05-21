@@ -18,7 +18,12 @@ public class NoticeController {
     }
 
     @GetMapping("detail")
-    public String detail() {
+    public String detail(Model model) {
+
+        String pageName="공지사항";
+
+        //모델 및 세션
+        model.addAttribute("pageName", pageName);
         return "user/notice/detail";
     }
 
