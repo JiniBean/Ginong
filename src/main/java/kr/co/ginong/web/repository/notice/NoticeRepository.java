@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface NoticeRepository {
 
-    List<Notice> findAll();
+    List<Notice> findAll(String query);
 
     Notice findById(Long id);
 

@@ -6,7 +6,7 @@ import kr.co.ginong.web.entity.notice.NoticeCategory;
 import java.util.List;
 
 public interface NoticeService {
-    List<Notice> getList();
+    List<Notice> getList(String query);
 
     Notice getById(Long id);
 

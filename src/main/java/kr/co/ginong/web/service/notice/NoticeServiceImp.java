@@ -18,8 +18,8 @@ public class NoticeServiceImp implements NoticeService {
     private NoticeCategoryRepository categoryRepository;
 
     @Override
-    public List<Notice> getList() {
-        List<Notice> list = repository.findAll();
+    public List<Notice> getList(String query) {
+        List<Notice> list = repository.findAll(query);
         return list;
     }
 

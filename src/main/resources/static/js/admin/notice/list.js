@@ -4,6 +4,7 @@ createApp({
     data() {
         return {
             list: [],
+            query: "",
         }
     },
     methods: {
@@ -15,22 +16,26 @@ createApp({
         goReg() {
             location.href = `/admin/notice/reg`;
         },
+
+        async loadData() {
+            let response = await fetch(`/api/notices?query=${this.query}`);
+            let list = await response.json();
+            this.list = list;
+    
+            for (let notice of list) {
+                let dateIdx = notice.startDate.search("T");
+                let subDate = notice.startDate.substring(0, dateIdx);
+                notice.startDate = subDate;
+    
+                dateIdx = notice.endDate.search("T");
+                subDate = notice.endDate.substring(0, dateIdx);
+                notice.endDate = subDate;
+    
+            }
+        }
     },
     async created() {
-        let response = await fetch(`/api/notices`);
-        let list = await response.json();
-        this.list = list;
-
-        for (let notice of list) {
-            let dateIdx = notice.startDate.search("T");
-            let subDate = notice.startDate.substring(0, dateIdx);
-            notice.startDate = subDate;
-
-            dateIdx = notice.endDate.search("T");
-            subDate = notice.endDate.substring(0, dateIdx);
-            notice.endDate = subDate;
-
-        }
+        await this.loadData();
     }
 }).mount('main');
 

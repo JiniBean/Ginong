@@ -8,6 +8,9 @@
 		SELECT
 		*
 		FROM NOTICE
+		<where>
+			<if test="query != null and query != ''"> title like CONCAT('%',#{query},'%')</if>
+		</where>
 		ORDER BY ID DESC;
 	</select>
 	

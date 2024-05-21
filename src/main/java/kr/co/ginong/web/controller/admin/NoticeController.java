@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin/notice")
 public class NoticeController {
 
-    // @Autowired
-    // private NoticeService service;
-
     @GetMapping("list")
     public String list(Model model) {
         String pageName = "공지 관리";
@@ -20,12 +17,6 @@ public class NoticeController {
     }
 
     @GetMapping("detail")
-    // public String detail(@RequestParam(name="noticeId") Long noticeId, Model model) {
-    //     Notice notice = service.getById(noticeId);
-
-    //     model.addAttribute("notice", notice);
-    //     return "admin/notice/detail";
-    // }
     public String detail(Model model) {
         String pageName = "공지 수정";
         model.addAttribute("pageName", pageName);
