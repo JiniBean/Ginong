@@ -18,4 +18,5 @@ public interface PointHistoryRepository {
     void update(PointHistory pointHistory);
     void delete(long id);
 
+    PointHistoryView findById(Long memberId);
 }

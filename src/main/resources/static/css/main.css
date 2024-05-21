@@ -1,5 +1,5 @@
 /*부모 태그에 pos:relative 클래스 줘야함*/
-/*========== .bar =================*/  /* 텍스트 구분 선(세로) user/product/list.html 참고 */
+/*========== .bar =================*/  /* 텍스트 구분 선(세로) user/product/HistoryList.html 참고 */
 .bar:before {
     content: '';
     width: 2px;

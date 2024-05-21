@@ -69,7 +69,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="findByMemberId" resultType="MemberOrderView">
+    <select id="findByMemberId" resultType="OrderView">
         select *
         from MEMBER_ORDER_VIEW
         WHERE MEMBER_ID = #{member_id}

@@ -16,11 +16,11 @@
 
     <!--상단탭-->
     <ul class="n-tabbar d:flex jc:space-between ai:center h:2 md:h:4 w:10p">
-        <li th:classappend="${{param.c}}==1 ? 'active' : ''" class="fl-grow:1 h:10p">
-            <a href="" class="h:10p">기본 정보</a>
+        <li th:classappend="${param.c == 1} ? 'active' : ''" class="fl-grow:1 h:10p"  id="tab1">
+            <a th:href="@{/admin/member/detail(id=${param.id})}" class="h:10p">기본 정보</a>
         </li>
-        <li th:classappend="${{param.c}}==2 ? 'active' : ''" class="fl-grow:1 h:10p">
-            <a href="" class="h:10p">주문 내역</a>
+        <li th:classappend="${param.c == 2} ? 'active' : ''" class="fl-grow:1 h:10p"  id="tab2">
+            <a th:href="@{/admin/member/order(id=${param.id})}" class="h:10p">주문 내역</a>
         </li>
     </ul>
 
@@ -104,18 +104,18 @@
                   </section>
 
 
-<!--            <section>-->
-<!--                <h1 class="d:none n-textbox n-textbox-type:underline">우편 번호</h1>-->
-<!--                <input type="text" class="postcode" placeholder="우편번호">-->
-<!--                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>-->
-<!--            </section>-->
-<!--            <section>-->
-<!--                <h1 class="d:none">주소</h1>-->
-<!--                <input type="text" class="roadAddress " placeholder="도로명주소" th:value="${member.addr1}">-->
-<!--                <input type="text" class="jibunAddress" placeholder="지번주소">-->
-<!--                <span class="guide" style="color:#999;display:none"></span>-->
-<!--                <input type="text" class="detailAddress" placeholder="상세주소" th:value="${member.addr2}">-->
-<!--            </section>-->
+            <section>
+                <h1 class="d:none n-textbox n-textbox-type:underline">우편 번호</h1>
+                <input type="text" class="postcode" placeholder="우편번호">
+                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+            </section>
+            <section>
+                <h1 class="d:none">주소</h1>
+                <input type="text" class="roadAddress " placeholder="도로명주소" th:value="${member.addr1}">
+                <input type="text" class="jibunAddress" placeholder="지번주소">
+                <span class="guide" style="color:#999;display:none"></span>
+                <input type="text" class="detailAddress" placeholder="상세주소" th:value="${member.addr2}">
+            </section>
 
 
             <!-- 이메일 입력 섹션 -->

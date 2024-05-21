@@ -1,7 +1,6 @@
 package kr.co.ginong.web.service.admin;
 
 import kr.co.ginong.web.entity.member.Member;
-import kr.co.ginong.web.entity.member.MemberOrderView;
 import kr.co.ginong.web.entity.member.MemberView;
 import kr.co.ginong.web.entity.order.Location;
 import kr.co.ginong.web.entity.order.OrderView;
@@ -103,9 +102,9 @@ public class MemberServiceImp implements MemberService {
     }
 
     @Override
-    public List<MemberOrderView> getOrderList(Long memberId) {
+    public List<OrderView> getOrderList(Long memberId) {
 
-        List<MemberOrderView> orderList = orderRepository.findByMemberId(memberId);
+        List<OrderView> orderList = orderRepository.findByMemberId(memberId);
 
         return orderList;
     }

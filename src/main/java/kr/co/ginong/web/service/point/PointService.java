@@ -12,6 +12,7 @@ public interface PointService {
 
     int getAvailPoint(Long memberId);
 
-
     boolean addHistory(PointHistory pointHistory);
+
+    PointHistoryView getById(Long id);
 }

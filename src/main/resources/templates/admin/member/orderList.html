@@ -16,15 +16,15 @@
 
     <!--상단탭-->
     <ul class="n-tabbar d:flex jc:space-between ai:center h:2 md:h:4 w:10p">
-        <li th:classappend="${{param.c}}==1 ? 'active' : ''" class="fl-grow:1 h:10p">
-            <a href="" class="h:10p">기본 정보</a>
-<!--            <a th:href="@{/admin/member/detail(memberId=${orderList.memberId}, c=1)}" class="h:10p">기본 정보</a>-->
+        <li th:classappend="${param.c == 1} ? 'active' : ''" class="fl-grow:1 h:10p">
+            <a th:href="@{/admin/member/detail(id=${param.id})}" class="h:10p">기본 정보</a>
         </li>
-        <li th:classappend="${{param.c}}==2 ? 'active' : ''" class="fl-grow:1 h:10p">
-            <a href="" class="h:10p">주문 내역</a>
-<!--            <a th:href="@{/admin/member/orderList(memberId=${orderList.memberId}, c=2)}" class="h:10p">주문 내역</a>-->
+        <li th:classappend="${param.c == 2} ? 'active' : ''" class="fl-grow:1 h:10p">
+            <a th:href="@{/admin/member/order(id=${param.id})}" class="h:10p">주문 내역</a>
         </li>
     </ul>
+
+
 
     <section class="d:flex fl-dir:column gap:5  w:10p">
         <h1 class="d:none">주문 목록</h1>
@@ -37,20 +37,21 @@
                 <div class="d:flex jc:space-between fw:2 ai:center w:10p">
                     <div>
                         <span>주문일자/번호</span>
-                        <span th:text="${#dates.format(o.orderDate, 'yyyyMMdd')}">202041111</span>
+<!--                        <span th:text="${#dates.format(o.orderDate, 'yyyyMMdd')}">202041111</span>-->
+                        <span th:text="${o.date}">202041111</span>
                         <span>/</span>
-                        <span th:text="${o.orderId}">2403011115</span>
+                        <span th:text="${o.id}">2403011115</span>
                     </div>
                     <div>
-                        <span th:text="${o.orderCategoryName}">주문완료</span>
+                        <span th:text="${o.category}">주문완료</span>
                     </div>
                 </div>
 
                 <div class="d:flex fl-dir:column gap:2 md:gap:4 p:4 bd bd-color:base-3 bd-radius:2 ">
                     <div class="d:flex jc:space-between" th:each="o: ${orderList}">
-                        <span th:text="${o.productName}">텃밭 흙 당근,2개입</span>
-                        <span th:text="${o.productQuantity}">1</span>
-                        <span th:text="${o.productPrice}">2,000</span>
+                        <span th:text="${o.prettyName}">텃밭 흙 당근,2개입</span>
+                        <span th:text="${o.quantity}">1</span>
+                        <span th:text="${o.price}">2,000</span>
                     </div>
                     <div class="d:flex jc:space-between border-top md:gap:4 p:2">
                         <span>총계</span>

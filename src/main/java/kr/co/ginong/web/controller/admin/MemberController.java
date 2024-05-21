@@ -1,7 +1,6 @@
 package kr.co.ginong.web.controller.admin;
 
 import kr.co.ginong.web.entity.member.Member;
-import kr.co.ginong.web.entity.member.MemberOrderView;
 import kr.co.ginong.web.entity.member.MemberView;
 import kr.co.ginong.web.entity.order.OrderView;
 import kr.co.ginong.web.service.admin.MemberService;
@@ -73,12 +72,11 @@ public class MemberController {
     @GetMapping("/order")
     public String orderList( @RequestParam(name = "id", required = false) Long memberId,
                              Model model){
-        List<MemberOrderView> orderList = new ArrayList<>();
+        List<OrderView> orderList = new ArrayList<>();
 
         orderList = service.getOrderList(memberId);
 
         model.addAttribute("orderList", orderList);
-
 
         return "admin/member/orderList";
     }

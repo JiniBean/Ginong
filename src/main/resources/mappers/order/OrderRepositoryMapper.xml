@@ -125,9 +125,9 @@
 		LIMIT 1
 	</select>
 
-	<select id="findByMemberId" resultType="MemberOrderView">
+	<select id="findByMemberId" resultType="OrderView">
 		SELECT *
-		FROM `MEMBER_ORDER_VIEW`
+		FROM `ORDER_VIEW`
 		WHERE MEMBER_ID = #{member_Id}
 	</select>
 

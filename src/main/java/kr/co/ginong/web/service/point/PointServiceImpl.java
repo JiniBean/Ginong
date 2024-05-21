@@ -3,6 +3,7 @@ package kr.co.ginong.web.service.point;
 import kr.co.ginong.web.entity.point.PointHistory;
 import kr.co.ginong.web.entity.point.PointHistoryView;
 import kr.co.ginong.web.repository.point.PointHistoryRepository;
+import kr.co.ginong.web.repository.point.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,12 @@ public class PointServiceImpl implements PointService{
     @Override
     public boolean addHistory(PointHistory pointHistory) {
         return historyRepository.save(pointHistory);
+    }
+
+    @Override
+    public PointHistoryView getById(Long id) {
+
+        return historyRepository.findById(id);
     }
 
 

@@ -1,12 +1,10 @@
 package kr.co.ginong.web.controller.api;
 
+import kr.co.ginong.web.entity.point.Point;
 import kr.co.ginong.web.entity.point.PointHistoryView;
 import kr.co.ginong.web.service.point.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ public class PointController {
     @Autowired
     private PointService pointService;
 
-    @GetMapping("list")
+    @GetMapping("history/list")
     public List<PointHistoryView> list(
             @RequestParam(name = "id", required = false) Long memberId
     ) {
@@ -31,4 +29,9 @@ public class PointController {
 
     }
 
+    @GetMapping("history/detail/{id}")
+    public PointHistoryView detail(@PathVariable(name = "id") Long id) {
+
+        return pointService.getById(id);
+    }
 }
