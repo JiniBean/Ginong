@@ -31,6 +31,7 @@ public class StockController {
         String pageName="재고 관리";
 
         model.addAttribute("pageName", pageName);
+        model.addAttribute("active", "stock");
         return "admin/stock/list";
     }
 

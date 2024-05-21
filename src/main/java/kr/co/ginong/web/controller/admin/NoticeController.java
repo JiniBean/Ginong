@@ -13,6 +13,7 @@ public class NoticeController {
     public String list(Model model) {
         String pageName = "공지 관리";
         model.addAttribute("pageName", pageName);
+        model.addAttribute("active", "notice");
         return "admin/notice/list";
     }
 

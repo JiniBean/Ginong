@@ -19,6 +19,7 @@ public class PointController {
     public String detail(Model model) {
         String pageName = "포인트 상세";
         model.addAttribute("pageName", pageName);
+        model.addAttribute("active", "point");
         return "admin/point/HistoryDetail";
     }
 

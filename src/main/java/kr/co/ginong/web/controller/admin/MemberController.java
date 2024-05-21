@@ -44,7 +44,7 @@ public class MemberController {
         model.addAttribute("count", count);
         model.addAttribute("members", list);
         model.addAttribute("totalMemberCount", totalMemberCount);
-
+        model.addAttribute("active", "member");
         return "admin/member/list";
     }
 

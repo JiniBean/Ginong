@@ -39,6 +39,7 @@ public class OrderController {
         String pageName="주문 관리";
 
         model.addAttribute("pageName", pageName);
+        model.addAttribute("active", "order");
         return "admin/order/list";
     }
 

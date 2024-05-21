@@ -40,6 +40,7 @@ public class ProductController {
 
         model.addAttribute("count", count);
         model.addAttribute("list", list);
+        model.addAttribute("active", "product");
         return "admin/product/list";
     }
 

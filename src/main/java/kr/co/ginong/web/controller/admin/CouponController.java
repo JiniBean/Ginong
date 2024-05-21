@@ -18,6 +18,7 @@ public class CouponController {
     public String list(Model model) {
         String pageName = "쿠폰 관리";
         model.addAttribute("pageName", pageName);
+        model.addAttribute("active", "coupon");
         return "admin/coupon/list";
     }
 
