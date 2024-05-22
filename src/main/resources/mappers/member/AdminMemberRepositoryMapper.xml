@@ -21,16 +21,16 @@
                 and NAME like '%${query}%'
             </if>
             <if test="query != null">
-                and USER_NAME like '%${query}%'
+                or USER_NAME like '%${query}%'
             </if>
             <if test="query != null">
-                and PHONE like '%${query}%'
+                or PHONE like '%${query}%'
             </if>
             <if test="query != null">
-                and BIRTH_DATE like '%${query}%'
+                or BIRTH_DATE like '%${query}%'
             </if>
             <if test="query != null">
-                and STATE like '%${query}%'
+                or STATE like '%${query}%'
             </if>
         </where>
         limit #{offset}, #{size}
