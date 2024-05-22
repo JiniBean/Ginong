@@ -66,9 +66,6 @@ createApp({
                 body: JSON.stringify(coupon),
             };
 
-            console.log(requestOptions);
-            console.log("id:", coupon.id);
-
             await fetch(`/api/coupons/${coupon.id}`, requestOptions);
             this.loadData();
         },
@@ -112,7 +109,6 @@ createApp({
                 body: JSON.stringify(ids)
             }
 
-            console.log(requestOptions);
             // fetch api를 호출한다
             await fetch(`/api/coupons/enable`, requestOptions);
 

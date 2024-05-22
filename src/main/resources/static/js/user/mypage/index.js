@@ -38,8 +38,6 @@ createApp({
             } catch (error) {
                 this.info = null;
             }
-            console.log(this.info);
-
 
             response = await fetch(`/api/member/categoryList`);
             let state = await response.json();

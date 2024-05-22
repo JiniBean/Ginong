@@ -32,14 +32,12 @@ createApp({
         },
 
         clickCouponDropdownElement(c) {
-            console.log(c);
             //this.selectedCategory = c;
             this.coupon.categoryId = c.id;
             this.showCouponDropdown = !this.showCouponDropdown;
         },
 
         clickUnitDropdownElement(c) {
-            console.log(c);
             //this.selectedCategory = c;
             this.coupon.discountUnit = c.name;
             this.showUnitDropdown = !this.showUnitDropdown;
@@ -80,8 +78,6 @@ createApp({
                 body: JSON.stringify(this.coupon),
             };
 
-            console.log(requestOptions);
-            console.log("id:", this.coupon.id);
             await fetch(`/api/coupons/${this.coupon.id}`, requestOptions);
             // this.goList();
         },
@@ -92,7 +88,6 @@ createApp({
 
         let response = await fetch(`/api/coupons/${couponId}`);
         let coupon = await response.json();
-        console.log(coupon);
         this.coupon = coupon;
 
         response = await fetch(`/api/coupons/coupon-category`);

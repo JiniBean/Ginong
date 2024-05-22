@@ -222,8 +222,6 @@ window.addEventListener("load", function () {
         };
         reader.readAsDataURL(file);
 
-        console.log(e.dataTransfer.types);
-
     };
 
 
@@ -253,12 +251,8 @@ window.addEventListener("load", function () {
 
             }
             reader.readAsDataURL(file);
-
-            console.log("file : ", file.name);
         }
 
-        console.log("Hello!");
-        //console.log(previewImages);
     };
 
 
@@ -345,8 +339,6 @@ window.addEventListener("load", function () {
         // 임시저장 버튼이 아닌 경우 return
         if (!e.target.classList.contains("temp-save")) return;
 
-        console.log("tmp-save clicked!")
-
         let item = {
             categoryId          : categoryId.value,
             name                : name.value,
@@ -360,9 +352,6 @@ window.addEventListener("load", function () {
             desc                : desc.value,
             state               : stateChecked
         };
-
-        for (let i in item)
-            console.log("i = ", item[i])
 
         let cookie = new Cookie();
 
@@ -378,7 +367,6 @@ window.addEventListener("load", function () {
     // 상태 체크박스 변화 감지
     state.addEventListener('change', function () {
         stateChecked = state.checked;
-        console.log("stateChecked = ", stateChecked)
     });
 
 

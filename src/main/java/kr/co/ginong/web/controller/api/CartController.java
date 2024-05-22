@@ -74,9 +74,6 @@ public class CartController {
         Long memberId = null;
         if(userDetails != null)
             memberId = userDetails.getId();
-        System.out.println("################################################");
-        System.out.println(service.getAvailableQtyList(memberId));
-        System.out.println("################################################");
         return service.getAvailableQtyList(memberId);
     }
 

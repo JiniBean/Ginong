@@ -39,14 +39,12 @@ window.addEventListener("DOMContentLoaded", function(e){
     function checkPwd(isValid){
 
         if(!isValid){ //사용불가
-            console.log("사용불가" , isValid);
             disableDiv.classList.remove("d:none");
             usableDiv.classList.add("d:none");
             return false;
         }
 
         //사용가능
-        console.log("사용가능" , isValid);
         disableDiv.classList.add("d:none");
         usableDiv.classList.remove("d:none");
 

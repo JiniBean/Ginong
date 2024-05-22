@@ -21,7 +21,7 @@
         <section>
             <h1 class="d:none">공지 목록</h1>
             <div class="d:flex fl-dir:column bd-bottom bd-color:base-2 p:2 md:p:4 gap:2" v-for="notice of list">
-                <div class="d:flex fl-dir:row" @click="goDetail(notice)">
+                <div class="d:flex fl-dir:row cursor:pointer" @click="goDetail(notice)">
                     <span class="fs:2 md:fs:3">{{ notice.title }}</span>
                     <span></span>
                 </div>

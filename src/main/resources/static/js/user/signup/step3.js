@@ -76,7 +76,6 @@ window.addEventListener("load", function(e){
 
             //사용자가 입력한 값
             let userNameValue = userName.value;
-            console.log("==========",userNameValue);
             checkUserName(userNameValue);
 
         },500);
@@ -170,14 +169,12 @@ window.addEventListener("load", function(e){
     function checkPwd(isValid){
 
         if(!isValid){ //사용불가
-            console.log("사용불가" , isValid);
             disableDiv.classList.remove("d:none");
             usableDiv.classList.add("d:none");
             return false;
         }
 
         //사용가능
-        console.log("사용가능" , isValid);
         disableDiv.classList.add("d:none");
         usableDiv.classList.remove("d:none");
 
@@ -372,8 +369,6 @@ window.addEventListener("load", function(e){
         const cookieData = JSON.stringify({
             userInfo: userInfoData
         });
-
-        console.log(cookieData);
 
         xhr.open(method,url);
         xhr.setRequestHeader('Content-Type', 'application/json');

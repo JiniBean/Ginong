@@ -70,8 +70,6 @@ document.addEventListener('click',  function (e) {
 
     const cartBox = e.target.closest(".cart-box"); // 장바구니 아이콘 영역
 
-    console.log(cartBox);
-
     if (!cartBox)
         return;
 

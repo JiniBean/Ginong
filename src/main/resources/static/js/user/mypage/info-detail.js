@@ -22,6 +22,9 @@ createApp({
             // yyyy-MM-dd 형식으로 반환
             return `${year}-${month}-${day}`;
         }
+        ,cancel(){
+            location.href=`index`;
+        }
         ,updateLocation(locationId){
             location.href=`location-uptform?locationId=${locationId}`;
         }
@@ -120,3 +123,5 @@ createApp({
 
     }
 }).mount('main');
+
+//===============================================================================

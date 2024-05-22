@@ -243,8 +243,6 @@ window.addEventListener("load", function(e){
             let phone=undefined;
             let birthDate=undefined;
 
-            console.log("===쿠키있음=======");
-
             const cookieString = document.cookie;
 
             const cookies={};
@@ -269,7 +267,6 @@ window.addEventListener("load", function(e){
                 // JSON 객체로 변환
                 try {
                     userInfoData = JSON.parse(decodedValue);
-                    console.log("JSON 객체 출력  ",userInfoData); // JSON 객체 출력
 
                     name = userInfoData[1].name;
                     email = userInfoData[1].email;

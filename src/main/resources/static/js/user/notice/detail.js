@@ -15,7 +15,6 @@ createApp({
     },
     async created() {
         let params = new URLSearchParams(location.search);
-        console.log(params.get('noticeId'));
         let noticeId = params.get('noticeId');
 
         let response = await fetch(`/api/notices/${noticeId}`);

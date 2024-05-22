@@ -466,10 +466,6 @@ window.addEventListener("load", function(){
 
                     url = url + "?p=" + productId + "&q=" + quantity;
 
-                    console.log(url);
-
-                    // location.href = url.toString();
-
                     break;
             }
         }
@@ -536,7 +532,6 @@ window.addEventListener("load", function () {
 
 
         if (e.target.innerText == '상품정보') {
-            console.log('상품정보 출력');
 
             mInfoSection.classList.remove("d:none");
 
@@ -547,7 +542,6 @@ window.addEventListener("load", function () {
 
 
         } else if(e.target.innerText == '후기') {
-            console.log('후기 정보 출력');
 
             mReviewSection.classList.remove("d:none");
             pcReviewSection.classList.remove("md:d:none");
@@ -558,7 +552,7 @@ window.addEventListener("load", function () {
 
 
         } else {
-            console.log('QNA 정보 출력');
+            //QNA 정보 출력
 
             mQnaSection.classList.remove("d:none");
             pcQnaSection.classList.remove("md:d:none");

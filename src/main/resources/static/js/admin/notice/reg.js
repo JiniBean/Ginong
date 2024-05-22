@@ -20,7 +20,6 @@ createApp({
         },
 
         clickDropdownElement(c) {
-            console.log(c);
             //this.selectedCategory = c;
             this.notice.categoryId = c.id;
             this.showDropdown = !this.showDropdown;
@@ -49,8 +48,6 @@ createApp({
             // let dddotice = {"data":{"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}}
             // let fffotice = {"title":"공지3","regDate":"2024-05-22","startDate":"2024-05-25"}
 
-            console.log(this.notice);
-            console.log(requestOptions);
 
             await fetch(`/api/notices`, requestOptions);
             this.goList();
