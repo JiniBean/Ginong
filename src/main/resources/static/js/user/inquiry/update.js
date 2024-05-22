@@ -5,7 +5,8 @@ createApp({
         return {
             inquiry: {
                 categoryId: null
-            }
+            },
+            categoryList:[]
         }
     },
     computed: {
@@ -17,19 +18,25 @@ createApp({
         },
 
         async updateInquiry() {
-            let requestOptions = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.inquiry),
-            };
+            if (this.inquiry.title && this.inquiry.categoryId && this.inquiry.content) {
+                let requestOptions = {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(this.inquiry),
+                };
 
-            console.log(this.inquiry);
-            console.log(requestOptions);
+                await fetch(`/api/inquiries/${this.inquiry.id}`, requestOptions);
 
-            await fetch(`/api/inquiries/${this.inquiry.id}`, requestOptions);
+                this.goList();
+            } else {
+                alert('모든 입력 항목을 채워주세요.');
+            }
 
-            this.goList();
         },
+        getCategoryName(categoryId) {
+            let category = this.categoryList.find(c => c.id === categoryId);
+            return category ? category.name : 'Unknown';
+        }
     },
     async created() {
         let params = new URLSearchParams(location.search);
@@ -40,6 +47,9 @@ createApp({
         console.log(inquiry);
         this.inquiry = inquiry;
 
+        response = await fetch(`/api/inquiries/category`);
+        let categoryList = await response.json();
+        this.categoryList = categoryList;
     }
 }).mount('main');
 

@@ -17,18 +17,19 @@ createApp({
         },
 
         async regInquiry() {
-            let requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.inquiry),
-            };
+            if (this.inquiry.title && this.inquiry.categoryId && this.inquiry.content) {
+                let requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(this.inquiry),
+                };
+                await fetch(`/api/inquiries`, requestOptions);
 
-            console.log(this.inquiry);
-            console.log(requestOptions);
+                this.goList();
+            } else {
+                alert('모든 입력 항목을 채워주세요.');
+            }
 
-            await fetch(`/api/inquiries`, requestOptions);
-
-            this.goList();
         },
     },
     async created() {
