@@ -92,10 +92,10 @@
                 <div><img src="/img/Meongmeong.jpg" th:src="|${productView.thumbnailPath}/${productView.thumbnailName}|" alt="" style="width: 414px; height:
             414px;"></div>
                 <div class="d:flex jc:space-between">
-                    <div>
-                        <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
+                    <div th:each="img:${productImgs}">
+                        <a href=""><img src="/img/Meongmeong.jpg" th:src="${img.imgPath}" alt="사진1" style="width: 90px; height: 90px;"></a>
                     </div>
-                    <div>
+                    <!-- <div>
                         <a href=""><img src="/img/Meongmeong.jpg" alt="사진2" style="width: 90px; height: 90px;"></a>
                     </div>
                     <div>
@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <a href=""><img src="/img/Meongmeong.jpg" alt="사진4" style="width: 90px; height: 90px;"></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <section class="d:flex fl-dir:column jc:space-between w:10p gap:7">

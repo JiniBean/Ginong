@@ -4,6 +4,7 @@ import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.cart.Cart;
 import kr.co.ginong.web.entity.mypage.ReviewView;
 import kr.co.ginong.web.entity.product.ProductCategory;
+import kr.co.ginong.web.entity.product.ProductImg;
 import kr.co.ginong.web.entity.product.ProductQnaView;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.cart.CartService;
@@ -120,10 +121,12 @@ public class ProductController {
         ProductView productView = service.get(productId);
         List<ReviewView> reviewView = reviewService.getProductReviews(productId);
         List<ProductQnaView> qnaView= qnaService.getProductQna(productId);
+        List<ProductImg> productImgs = service.getImgs(productId);
 
         model.addAttribute("productView", productView);
         model.addAttribute("reviewView", reviewView);
         model.addAttribute("qnaView", qnaView);
+        model.addAttribute("productImgs", productImgs);
 
         return "user/product/detail";
     }

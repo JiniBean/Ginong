@@ -1,7 +1,9 @@
 package kr.co.ginong.web.service.product;
 
 
+import kr.co.ginong.web.entity.product.ProductImg;
 import kr.co.ginong.web.entity.product.ProductView;
+import kr.co.ginong.web.repository.product.ProductImgRepository;
 import kr.co.ginong.web.repository.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class ProductServiceImp implements ProductService {
 
     @Autowired
     ProductRepository repository;
+
+    @Autowired
+    ProductImgRepository imgRepository;
 
     final int size = 12;
 
@@ -92,5 +97,9 @@ public class ProductServiceImp implements ProductService {
         return repository.findAllCartItems(ids);
     }
 
+    @Override
+    public List<ProductImg> getImgs(Long id) {
+        return imgRepository.findById(id);
 
+    }
 }

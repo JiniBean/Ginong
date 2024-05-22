@@ -3,6 +3,7 @@ package kr.co.ginong.web.service.product;
 import kr.co.ginong.web.dto.Pager;
 import kr.co.ginong.web.dto.ProductFilter;
 import kr.co.ginong.web.entity.product.Product;
+import kr.co.ginong.web.entity.product.ProductImg;
 import kr.co.ginong.web.entity.product.ProductView;
 
 import java.util.List;
@@ -32,5 +33,7 @@ public interface ProductService {
     List<ProductView> getCommingSoonList(Integer page, Long categoryId, String query, Integer sortType);
 
     int count(Long categoryId, String query);
+
+    List<ProductImg> getImgs(Long id);
 
 }
