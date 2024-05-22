@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("adminCouponController")
 @RequestMapping("admin/coupon")
-public class CouponController {
+public class
+CouponController {
 
     // @Autowired
     // private NoticeService service;

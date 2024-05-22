@@ -16,6 +16,7 @@ public class PointController {
     @Autowired
     private PointService pointService;
 
+
     @GetMapping("history/list")
     public List<PointHistoryView> list(
             @RequestParam(name = "id", required = false) Long memberId
@@ -34,4 +35,10 @@ public class PointController {
 
         return pointService.getById(id);
     }
+//
+//    @GetMapping("payment/list")
+//    public List<PointHistoryView> paymentList(@RequestParam(required = false) String query){
+//
+//        return pointService.getpaymentList(query);
+//    }
 }

@@ -19,8 +19,8 @@ public class HomeController {
 
     @GetMapping
     String index(Model model) {
-        List<ProductView> seasonOutList = service.getSeasonOutList();
         List<ProductView> commingSoonList = service.getCommingSoonList();
+        List<ProductView> seasonOutList = service.getSeasonOutList();
 
         // todo findAllBestProduct / 베스트 상품 기능 만들기 / 판매일, 누적 판매량 필요 / 월 단위로 어떻게 끊을지 생각해보기
         List<ProductView> bestProductList; // 미개발

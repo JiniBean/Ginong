@@ -71,7 +71,7 @@
 
     <select id="findByMemberId" resultType="OrderView">
         select *
-        from MEMBER_ORDER_VIEW
+        from ORDER_VIEW
         WHERE MEMBER_ID = #{member_id}
     </select>
 

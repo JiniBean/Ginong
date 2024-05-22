@@ -14,7 +14,9 @@
 </head>
 <body>
 <main layout:fragment="main" class="d:flex fl-dir:column gap:8 md:gap:20 max-w:10 w:10p pr:4 pl:4 md:pr:0 md:pl:0 ">
-    <section class="recommand-section md:d:none d:flex fl-dir:column gap:4" style="height: 194px; margin-top:50px">
+
+    <!------------------------------------------------모바일------------------------------------------------>
+    <section class="recommand-section md:d:none d:flex fl-dir:column gap:4" style="height: 194px">
         <h1 class="d:none ">추천 상품 목록 - 모바일</h1>
         <nav class="w:10p">
             <h1 class="d:none">추천 상품 선택 목록</h1>
@@ -31,7 +33,7 @@
             <h1 class="d:none">베스트 상품 정보</h1>
             <div class="bg-color:base-5 w:10p pos:relative bd-radius:1" style="height: 144px">
                 <img class="w:10p h:10p"
-                     th:src="@{/img/gaam.jpg}" src="/img/carrot.png"/>
+                     th:src="${saleProduct.thumbnailPath +'/'+ saleProduct.thumbnailName}"/>
                 <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
                      style="height: 40px; background-color: rgba(51, 51, 51, 0.7);">
                     <span class="color:base-1" th:text="${saleProduct.name + ', ' + saleProduct.quantity + saleProduct.quantityCategory + '(' + saleProduct.weight + saleProduct.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
@@ -39,10 +41,10 @@
             </div>
         </section>
         <section v-if="selectedProduct === 'sale'">
-            <h1 class="d:none">특가 상품 정보</h1>
+            <h1 class="d:none">시즌 아웃 상품 정보</h1>
             <div class="bg-color:base-5 w:10p pos:relative bd-radius:1" style="height: 144px">
                 <img class="w:10p h:10p"
-                     th:src="@{/img/baechoo.png}" src="/img/carrot.png"/>
+                     th:src="${pickProduct.thumbnailPath +'/'+ pickProduct.thumbnailName}" src="/img/carrot.png"/>
                 <div class="w:10p pos:absolute bottom:0 d:flex jc:center ai:center"
                      style="height: 40px; background-color: rgba(51, 51, 51, 0.7);">
                     <span class="color:base-1" th:text="${saleProduct.name + ', ' + saleProduct.quantity + saleProduct.quantityCategory + '(' + saleProduct.weight + saleProduct.weightCategory + ')'}">텃밭 흙 당근, 2개입</span>
@@ -64,7 +66,7 @@
 
     <section class="d:none md:d:flex gap:4" style="height: 290px">
         <h1 class="d:none">추천 상품 목록 - PC</h1>
-        <section class="d:flex jc:space-between w:10p" style="margin-top: 20px">
+        <section class="d:flex jc:space-between w:10p ">
             <section class="d:flex fl-dir:column ai:center  gap:10">
                 <h1 class="fs:5 fw:3">베스트</h1>
                 <a href="">

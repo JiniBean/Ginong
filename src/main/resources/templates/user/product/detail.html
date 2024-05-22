@@ -27,7 +27,7 @@
         </nav>
 
         <div class="d:flex fl-dir:column gap:5">
-            <div><img class="display:flex w:10p " th:src="|${productView.thumbnailPath}/${productView.thumbnailName}|" src="/img/Meongmeong.jpg" alt="">
+            <div><img class="display:flex w:10p " th:src="@{/img/Meongmeong.jpg}" src="/img/Meongmeong.jpg" alt="">
             </div>
             <div class="d:none">
                 <div><a href="">사진1</a></div>
@@ -89,13 +89,13 @@
         </nav>
         <div class="d:flex gap:9">
             <div class="d:flex fl-dir:column jc:space-between">
-                <div><img src="/img/Meongmeong.jpg" th:src="|${productView.thumbnailPath}/${productView.thumbnailName}|" alt="" style="width: 414px; height:
+                <div><img src="/img/Meongmeong.jpg" th:src="@{/img/Meongmeong.jpg}" alt="" style="width: 414px; height:
             414px;"></div>
                 <div class="d:flex jc:space-between">
-                    <div th:each="img:${productImgs}">
-                        <a href=""><img src="/img/Meongmeong.jpg" th:src="${img.imgPath}" alt="사진1" style="width: 90px; height: 90px;"></a>
+                    <div>
+                        <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
                     </div>
-                    <!-- <div>
+                    <div>
                         <a href=""><img src="/img/Meongmeong.jpg" alt="사진2" style="width: 90px; height: 90px;"></a>
                     </div>
                     <div>
@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <a href=""><img src="/img/Meongmeong.jpg" alt="사진4" style="width: 90px; height: 90px;"></a>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <section class="d:flex fl-dir:column jc:space-between w:10p gap:7">

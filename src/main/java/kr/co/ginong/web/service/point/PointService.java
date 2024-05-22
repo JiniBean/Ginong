@@ -15,4 +15,7 @@ public interface PointService {
     boolean addHistory(PointHistory pointHistory);
 
     PointHistoryView getById(Long id);
+
+//    List<PointHistoryView> getpaymentList(String query);
+
 }

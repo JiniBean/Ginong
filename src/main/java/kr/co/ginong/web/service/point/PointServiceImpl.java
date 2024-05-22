@@ -45,4 +45,10 @@ public class PointServiceImpl implements PointService{
     }
 
 
+//    @Override
+//    public List<PointHistoryView> getpaymentList(String query) {
+//        return historyRepository.findAll(query);
+//    }
+
+
 }
