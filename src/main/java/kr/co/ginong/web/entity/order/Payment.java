@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Payment {
     private Long	id;
     private Date	date;
-    private String 	type;
+    private Integer type;
     private Integer totalAmt;
     private Boolean refundType;
     private Long	memberId;

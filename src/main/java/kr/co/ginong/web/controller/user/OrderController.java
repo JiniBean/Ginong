@@ -150,6 +150,7 @@ public class OrderController {
 
         //세션에서 주문 목록 가져오기
         List<OrderItem> items = (List<OrderItem>) session.getAttribute("orderItems");
+        List<Map<String, Object>> itemsList = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
 
         //난수 제작 :날짜+4자리난수+4자리난수
         //오늘 날짜 제작
@@ -175,33 +176,27 @@ public class OrderController {
                 .locationId(locationHistory.getLocationId())
                 .build();
 
+        // 주문 목록 상세목록에 주문번호 저장하기
+        for (OrderItem i : items)
+            i.setOrderId(id);
 
-        //주문 테이블 저장하기
-        boolean vaild = service.add(order);
+        for ( Map<String, Object>  i: itemsList )
+            i.put("orderId",id);
 
-        // 주문 테이블 저장 성공 했을 때 주문 목록 저장 및 장바구니에서 삭제
-
-        List<Long> cartList = new ArrayList<>();
-        if (vaild){
-            for (OrderItem i : items){
-                i.setOrderId(id);
-                cartList.add(i.getProductId());
-            }
-            service.addItems(items);
-            cartService.delete(memberId, cartList);
-        }
 
         //LOCATION_HISTORY 테이블에 넣기
         locationHistory.setCategoryId(1);
         locationHistory.setMemberId(memberId);
         locationHistory.setOrderId(id);
 
-        locationService.addHistory(locationHistory);
+
 
         //세션에 주문 아이템 정보 업데이트
+        session.setAttribute("order", order);
         session.setAttribute("orderItems", items);
-        session.setAttribute("orderItems", items);
-        session.setAttribute("orderId", id);
+        session.setAttribute("orderItemsList", itemsList);
+        session.setAttribute("locationHistory", locationHistory);
+
 
         return "redirect:pay";
     }
@@ -231,6 +226,7 @@ public class OrderController {
 
         //모델 및 세션
         model.addAttribute("pageName", pageName);
+        model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("point", point);
         model.addAttribute("couponList", couponList);
@@ -308,6 +304,11 @@ public class OrderController {
         Long memberId = null;
         if(userDetails!=null)
             memberId = userDetails.getId();
+
+//        장바구니 삭제하기
+//        List<Long> cartList = new ArrayList<>();
+//        cartList.add(i.getProductId());
+//        locationService.addHistory(locationHistory);
 
         //주문 정보 가져오기
         List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");

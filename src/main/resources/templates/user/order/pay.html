@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <title>기농이네 - 순수한 땅, 순수한 먹거리</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
-    <script src="/js/user/order/pay.js"></script>
+    <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+    <script type="module" src="/js/user/order/pay.js" defer></script>
 </head>
 <body>
 
@@ -41,7 +42,7 @@
                 <span class="fw:3">총 상품 금액</span>
                 <span id="total-price" class="color:main-6 fw:3"
                       th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}"
-                      th:data-total="${totalPrice}">
+                      th:data-total="${totalPrice}" th:data-size="${items.size()}" th:data-oname="${items[0].name}" th:data-oid="${items[0].orderId}">
                     15,000</span>
             </div>
         </section>
@@ -54,7 +55,7 @@
                     <div class="color:main-6"><span th:text="${couponList.size}">0</span><span>장</span></div>
                 </div>
                 <div class="n-dropdown">
-                    <button id="dropdown-btn" type="button"
+                    <button id="dropdown-btn" type="button" th:disabled="${couponList.size < 1}"
                             class="n-btn n-btn:outline w:10p ai:center jc:space-between deco deco-size:1 icon:RT icon-size:1 icon-color:main-6 deco-pos:right">
                         <span class="fl:fill" th:text="${'사용할 수 있는 쿠폰 ' + couponList.size + '장'}">
                               사용할 수 있는 쿠폰 0장
@@ -68,11 +69,7 @@
                             <span th:text="${c.discountAmount + c.discountUnit}">50원</span>
                         </li>
                     </ul>
-                    <div class="d:none">
-                        <input class="coupon-input-id" type="hidden" name="id">
-                        <input class="coupon-input-cid" type="hidden" name="cid">
-                        <input class="coupon-input-amt" type="hidden" name="usedAmt">
-                    </div>
+
                 </div>
             </section>
 
@@ -82,7 +79,7 @@
                     <div class="fw:3">보유 적립금</div>
                     <div class="fw:3 color:main-6">
                         <span class="remain-point d:block txt-al:end" style="width: 80px"
-                              th:text="${#numbers.formatInteger(point,3,'COMMA') + ' P'}" th:data-point="${point}">0
+                              th:text="${poin>=1000?#numbers.formatInteger(point,3,'COMMA') + ' P':point+ ' P'}" th:data-point="${point}">0
                         </span>
                     </div>
                 </div>
@@ -93,7 +90,7 @@
                             <span class="color:main-6 fw:3 as:end mb:1">P</span>
                         </div>
                         <div>
-                            <button type="button" class="use-point-btn n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3" style="width: 153px">
+                            <button th:disabled="${point<1000}" type="button" class="use-point-btn n-btn n-btn-type:outline n-btn-size:2 md:n-btn-size:3" style="width: 153px">
                                 전액사용
                             </button>
                         </div>
@@ -105,46 +102,48 @@
                 </div>
             </section>
 
-            <section id="test" class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">
-                <h1 class="fs:3 md:fs:4 fw:3 w:10p">결제 수단</h1>
-                <div class="d:flex w:6 md:w:7 gap:4 jc:center gap:4 md:gap:7 fl-flow:wrap">
-                    <label class="n-toggle n-toggle-type:outline-box ai:center jc:center ac:center w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
-                        카카오페이
-                        <input type="radio" name="categoryId" value="1" class="d:none" checked>
-                    </label>
-                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3 ">
-                        네이버페이
-                        <input type="radio" name="categoryId"  value="2" class="d:none">
-                    </label>
-                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
-                        토스페이
-                        <input type="radio" name="categoryId" value="3" class="d:none">
-                    </label>
-                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">
-                        페이코
-                        <input type="radio" name="categoryId" value="4" class="d:none">
-                    </label>
-                </div>
-            </section>
+<!--            <section id="test" class="d:flex fl-dir:column ai:center gap:6 md:gap:12 w:10p">-->
+<!--                <h1 class="fs:3 md:fs:4 fw:3 w:10p">결제 수단</h1>-->
+<!--                <div class="d:flex w:6 md:w:7 gap:4 jc:center gap:4 md:gap:7 fl-flow:wrap">-->
+<!--                    <label class="n-toggle n-toggle-type:outline-box ai:center jc:center ac:center w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">-->
+<!--                        카카오페이-->
+<!--                        <input type="radio" name="categoryId" value="1" class="d:none" checked>-->
+<!--                    </label>-->
+<!--                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3 ">-->
+<!--                        네이버페이-->
+<!--                        <input type="radio" name="categoryId"  value="2" class="d:none">-->
+<!--                    </label>-->
+<!--                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">-->
+<!--                        토스페이-->
+<!--                        <input type="radio" name="categoryId" value="3" class="d:none">-->
+<!--                    </label>-->
+<!--                    <label class="n-toggle n-toggle-type:outline-box w:3 md:w:4 h:2 md:h:4 fw:3 md:fs:3">-->
+<!--                        페이코-->
+<!--                        <input type="radio" name="categoryId" value="4" class="d:none">-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </section>-->
+            <div id="payment-method" tabindex=-1></div>
 
             <section class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
                 <h1 class="fs:3 md:fs:4 fw:3">미출고 시 환불 방법</h1>
                 <div class="d:flex fl-dir:column gap:4 ml:4">
                     <div>
                         <label>
-                            <input type="radio" name="refundType" id="1" value="true" checked class="n-toggle n-toggle-type:dot ">
+                            <input type="radio" name="refundType" id="refund-point" value="true" checked class="n-toggle n-toggle-type:dot ">
                             적립금으로 환불
                         </label>
                         <span class="color:base-6 fs:1 md:fs:2 ml:8 ">미출고시 환불 금액의 5% 추가 적립됩니다.</span>
                     </div>
                     <div>
                         <label>
-                            <input type="radio" name="refundType" id="2" value="false" class="n-toggle n-toggle-type:dot">
+                            <input type="radio" name="refundType" id="refund-payment" value="false" class="n-toggle n-toggle-type:dot">
                             결제수단으로 환불
                         </label>
                     </div>
                 </div>
             </section>
+
 
             <section id="payment-summary" class="d:flex fl-dir:column gap:10 md:gap:20">
                 <div class="d:flex fl-dir:column gap:6 md:gap:12 w:10p">
@@ -171,7 +170,6 @@
                             <div><span class="dlvry" th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}"
                                        th:data-cost="${totalPrice > 30000 ? 0 : 5000}">15,000</span> <span>원</span>
                             </div>
-                            <input type="hidden" name="deliveryFeeCategoryId" th:value="${totalPrice > 30000 ? 2 : 1}">
                         </div>
                     </div>
                 </div>
@@ -182,24 +180,38 @@
                         <span class="total fs:3 md:fs:4 fw:3 color:main-6"
                               th:text="${totalPrice > 30000 ? #numbers.formatInteger(totalPrice,3,'COMMA') : #numbers.formatInteger(totalPrice+5000,3,'COMMA') }">15,000</span><span
                             class="fs:3 md:fs:4 fw:3"> 원</span>
-                        <input type="hidden" name="totalAmt" class="total-input" th:value="${totalPrice > 30000 ?totalPrice : totalPrice+5000 }">
                     </div>
                 </div>
             </section>
 
             <section class="d:flex fl-dir:column gap:4 md:gap:8 w:10p">
                 <h1 class="d:none">주문 동의 및 버튼</h1>
-                <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">
-                    <label>
-                        <input type="checkbox" class="n-toggle n-toggle-type:check-box 	bd-radius:full" required/>
-                        주문 내용을 확인하였으며 약관에 동의합니다.
-                    </label>
-                </div>
-                <div class="d:flex gap:8 md:gap:10 w:10p">
+<!--                <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">-->
+<!--                    <label>-->
+<!--                        <input type="checkbox" class="n-toggle n-toggle-type:check-box 	bd-radius:full" required/>-->
+<!--                        주문 내용을 확인하였으며 약관에 동의합니다.-->
+<!--                    </label>-->
+<!--                </div>-->
+                <div id="agreement"></div>
+                <div class="d:flex gap:8 md:gap:10 w:10p ">
                     <button class="n-btn n-btn:outline n-btn-size:2 fl-grow:1 fw:3">이전으로</button>
-                    <button class="n-btn n-btn-size:2 fl-grow:1 fw:3">결제하기</button>
+                    <button  id="payment-button" class="n-btn n-btn-size:2 fl-grow:1 fw:3">결제하기</button>
                 </div>
             </section>
+
+<!--            <div class="wrapper">-->
+<!--                <div class="box_section" style="padding: 40px 30px 50px 30px;margin-top: 30px;margin-bottom: 50px;">-->
+<!--                    &lt;!&ndash; 결제 UI &ndash;&gt;-->
+<!--                    <div id="payment-method"></div>-->
+<!--                    &lt;!&ndash; 이용약관 UI &ndash;&gt;-->
+
+<!--                    <div class="result wrapper">-->
+<!--                        <button class="button" id="payment-button" style="margin-top: 30px">-->
+<!--                            결제하기-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </form>
     </section>

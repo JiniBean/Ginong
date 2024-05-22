@@ -119,11 +119,11 @@
 
 
 	<insert id="save" parameterType="Order">
-		insert into `ORDER`(ID,`DATE`, `TYPE`, MEMBER_ID, LOCATION_ID)
+		insert into `ORDER`(ID,`DATE`, CATEGORY_ID, MEMBER_ID, LOCATION_ID)
 		VALUES(
 		#{id}
 		,current_timestamp()
-		,#{type}
+		,#{categoryId}
 		,#{memberId}
 		,#{locationId})
 	</insert>
