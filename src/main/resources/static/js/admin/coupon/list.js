@@ -41,7 +41,6 @@ createApp({
             for(let item of this.list) {
                 item.showDropdown = false;
             }
-            // coupon.showDropdown = !coupon.showDropdown;
             coupon.showDropdown = dropdownStatus;
         },
 

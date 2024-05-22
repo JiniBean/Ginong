@@ -79,7 +79,7 @@ createApp({
             };
 
             await fetch(`/api/coupons/${this.coupon.id}`, requestOptions);
-            // this.goList();
+            this.goList();
         },
     },
     async created() {
