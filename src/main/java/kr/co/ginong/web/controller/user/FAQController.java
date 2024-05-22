@@ -10,8 +10,15 @@ public class FAQController {
 
     @GetMapping("faq")
     String faq (Model model){
+
+        String pageName="고객센터";
+
+        //모델 및 세션
+        model.addAttribute("pageName", pageName);
+
         // 카테고리-고객센터 클릭 시, 사용자에게 시각효과를 보여주기 위한 상태값 전달
         model.addAttribute("active","faq");
+
         return "user/faq";
     }
 }
