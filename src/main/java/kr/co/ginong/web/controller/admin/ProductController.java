@@ -107,9 +107,9 @@ public class ProductController {
 //    @PutMapping("{productId}")
     public String update(Product product) {
         System.out.println("############################################"+product);
-        System.out.println("product"+product);
-        System.out.println("############################################"+product);
+        
         service.update(product);
+        
         return "redirect:/admin/product/list";
     }
 

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기농이네 관리자</title>
+    <title>Document</title>
     <link rel="stylesheet" href="/css/dropdown.css">
     <link rel="stylesheet" href="/css/admin/product/reg.css">
     <link rel="stylesheet" href="/css/admin/product/update.css">
@@ -30,7 +30,7 @@
                         <li class="option option-category" data-value="3">가공식품</li>
                     </ul>
                 </div>
-                <input type="hidden" class="selected-category" name="categoryId" value="1">
+                <input type="hidden" class="selected-category" name="categoryId" value="1" th:value="${productView.categoryId}">
             </div>
             
             <fieldset class ="d:flex fl-dir:column gap:8">
