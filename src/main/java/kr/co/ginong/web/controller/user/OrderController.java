@@ -68,6 +68,8 @@ public class OrderController {
         Long memberId = null;
         if(userDetails!=null)
             memberId = userDetails.getId();
+
+        Member member = memberService.get(memberId);
         List<OrderItem> items = new ArrayList<>();
 
         //상품정보 가져오기
@@ -127,6 +129,7 @@ public class OrderController {
         model.addAttribute("location", location);
         model.addAttribute("items", list);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("member", member);
 
         session.setAttribute("totalPrice", totalPrice);
         session.setAttribute("orderItems", items);
@@ -196,6 +199,7 @@ public class OrderController {
         locationService.addHistory(locationHistory);
 
         //세션에 주문 아이템 정보 업데이트
+        session.setAttribute("orderItems", items);
         session.setAttribute("orderItems", items);
         session.setAttribute("orderId", id);
 
