@@ -216,6 +216,8 @@ public class OrderController {
         List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
         int totalPrice = (int) session.getAttribute("totalPrice");
 
+        Member member = memberService.get(memberId);
+
         // DB에서 사용가능한 쿠폰 리스트 가져오기
         List<CouponHistoryView> couponList = couponService.getAvailList(memberId);
 
@@ -230,6 +232,7 @@ public class OrderController {
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("point", point);
         model.addAttribute("couponList", couponList);
+        model.addAttribute("member", member);
         return "user/order/pay";
     }
 

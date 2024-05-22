@@ -36,6 +36,6 @@ public interface OrderService {
 
     Order getRecentOrder(Long memberId);
 
-    boolean addCancel(Long cancelId);
+    boolean addCancel(Order order);
 
 }

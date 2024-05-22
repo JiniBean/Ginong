@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponHistory {
-    private long    id;
-    private int     usedAmt;
+    private Long    id;
+    private Integer usedAmt;
     private Date    issuedDate;
     private Date    usedDate;
-    private long    couponId;
-    private long    memberId;
-    private long    orderId;
+    private Long    couponId;
+    private Long    memberId;
+    private Long    orderId;
 
 }

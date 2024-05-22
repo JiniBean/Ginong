@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointHistory {
-    private long	id;
-    private int     plma;
-    private int 	amount;
+    private Long	id;
+    private Integer plma;
+    private Integer amount;
     private Date	date;
-    private long	pointId;
-    private long	memberId;
-    private long    orderId;
+    private Long	pointId;
+    private Long	memberId;
+    private Long    orderId;
 }

@@ -8,7 +8,7 @@
     <title>기농이네 - 순수한 땅, 순수한 먹거리</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
-    <script type="module" src="/js/user/order/pay.js" defer></script>
+    <script type="text/javascript" src="/js/user/order/pay.js"></script>
 </head>
 <body>
 
@@ -42,7 +42,8 @@
                 <span class="fw:3">총 상품 금액</span>
                 <span id="total-price" class="color:main-6 fw:3"
                       th:text="${#numbers.formatInteger(totalPrice,3,'COMMA') + '원'}"
-                      th:data-total="${totalPrice}" th:data-size="${items.size()}" th:data-oname="${items[0].name}" th:data-oid="${items[0].orderId}">
+                      th:data-total="${totalPrice}" th:data-size="${items.size()}" th:data-oname="${items[0].name}" th:data-oid="${items[0].orderId}"
+                      th:data-memberId="${member.id}" th:data-memberName="${member.name}" th:data-memberEmail="${member.email}" th:data-memberPhone="${member.phone}">
                     15,000</span>
             </div>
         </section>
@@ -66,7 +67,9 @@
                             th:data-amut="${c.discountAmount}" th:data-unit="${c.discountUnit}" th:data-cid="${c.couponId}">
                             <span th:text="${c.couponName}">회원 가입 감사 쿠폰</span>
 
-                            <span th:text="${c.discountAmount + c.discountUnit}">50원</span>
+                            <span th:if="${{c.discountUnit}} == '%'" th:text="${c.discountAmount + c.discountUnit}">50원</span>
+
+                            <span th:else th:text="${#numbers.formatInteger(c.discountAmount,3,'COMMA') + c.discountUnit}">50원</span>
                         </li>
                     </ul>
 
@@ -79,7 +82,7 @@
                     <div class="fw:3">보유 적립금</div>
                     <div class="fw:3 color:main-6">
                         <span class="remain-point d:block txt-al:end" style="width: 80px"
-                              th:text="${poin>=1000?#numbers.formatInteger(point,3,'COMMA') + ' P':point+ ' P'}" th:data-point="${point}">0
+                              th:text="${point >=1000?#numbers.formatInteger(point,3,'COMMA') + ' P':point+ ' P'}" th:data-point="${point}">0
                         </span>
                     </div>
                 </div>
@@ -167,8 +170,9 @@
                         </div>
                         <div class="d:flex jc:space-between">
                             <div>배송비</div>
-                            <div><span class="dlvry" th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}"
-                                       th:data-cost="${totalPrice > 30000 ? 0 : 5000}">15,000</span> <span>원</span>
+                            <div>
+                                <span class="dlvry" th:text="${totalPrice > 30000 ? 0 :#numbers.formatInteger(5000,3,'COMMA')}">15,000</span>
+                                <span>원</span>
                             </div>
                         </div>
                     </div>
@@ -186,32 +190,13 @@
 
             <section class="d:flex fl-dir:column gap:4 md:gap:8 w:10p">
                 <h1 class="d:none">주문 동의 및 버튼</h1>
-<!--                <div class="d:flex fl-dir:column gap:2 md:gap:4 w:10p">-->
-<!--                    <label>-->
-<!--                        <input type="checkbox" class="n-toggle n-toggle-type:check-box 	bd-radius:full" required/>-->
-<!--                        주문 내용을 확인하였으며 약관에 동의합니다.-->
-<!--                    </label>-->
-<!--                </div>-->
+
                 <div id="agreement"></div>
                 <div class="d:flex gap:8 md:gap:10 w:10p ">
-                    <button class="n-btn n-btn:outline n-btn-size:2 fl-grow:1 fw:3">이전으로</button>
-                    <button  id="payment-button" class="n-btn n-btn-size:2 fl-grow:1 fw:3">결제하기</button>
+                    <a href="javascript:history.back()" class="n-btn n-btn:outline n-btn-size:2 fl-grow:1 fw:3">이전으로</a>
+                    <button id="payment-button" class="n-btn n-btn-size:2 fl-grow:1 fw:3">결제하기</button>
                 </div>
             </section>
-
-<!--            <div class="wrapper">-->
-<!--                <div class="box_section" style="padding: 40px 30px 50px 30px;margin-top: 30px;margin-bottom: 50px;">-->
-<!--                    &lt;!&ndash; 결제 UI &ndash;&gt;-->
-<!--                    <div id="payment-method"></div>-->
-<!--                    &lt;!&ndash; 이용약관 UI &ndash;&gt;-->
-
-<!--                    <div class="result wrapper">-->
-<!--                        <button class="button" id="payment-button" style="margin-top: 30px">-->
-<!--                            결제하기-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
 
         </form>
     </section>
