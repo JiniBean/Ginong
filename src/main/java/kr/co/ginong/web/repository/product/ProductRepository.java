@@ -18,6 +18,10 @@ public interface ProductRepository {
 
     List<ProductView> findAll(Long categoryId, String query, int offset, int rows, Integer sortType);
 
+    List<ProductView> findAllforAdmin(int offset, int size);
+
+    List<ProductView> findAllforAdmin(Long categoryId, String query, int offset, int rows, Integer sortType);
+
     List<Map<String, Object>> findAllCartItems(List<Long> ids);
 
     List<ProductView> findAllSeasonOut();

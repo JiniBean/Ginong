@@ -31,10 +31,10 @@ public class ProductController {
         int count = 0;
 
         if (query != null) {
-            list = service.getList(page, query);
+            list = service.getListforAdmin(page, query);
             count = service.getCount(query);
         } else {
-            list = service.getList(page);
+            list = service.getListforAdmin(page);
             count = service.getCount();
         }
 

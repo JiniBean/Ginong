@@ -16,14 +16,25 @@ public class ProductServiceImp implements ProductService {
 
     int size = 20;
 
-    @Override
-    public List<ProductView> getList(int page) {
-        return getList(page, null);
+    // @Override
+    // public List<ProductView> getList(int page) {
+    //     return getList(page, null);
+    // }
+
+    // public List<ProductView> getList(int page, String query) {
+    //     int offset = (page-1) * size;
+    //     List<ProductView> list = repository.findAll(null, query, offset, size, null);
+
+    //     return list;
+    // }
+
+    public List<ProductView> getListforAdmin(int page) {
+        return getListforAdmin(page, null);
     }
 
-    public List<ProductView> getList(int page, String query) {
+    public List<ProductView> getListforAdmin(int page, String query) {
         int offset = (page-1) * size;
-        List<ProductView> list = repository.findAll(null, query, offset, size, null);
+        List<ProductView> list = repository.findAllforAdmin(null, query, offset, size, null);
 
         return list;
     }

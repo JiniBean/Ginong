@@ -7,8 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface ProductService {
-    List<ProductView> getList(int page, String query);
-    List<ProductView> getList(int page);
+    // List<ProductView> getList(int page, String query);
+    // List<ProductView> getList(int page);
+
+    List<ProductView> getListforAdmin(int page, String query);
+    List<ProductView> getListforAdmin(int page);
 
     int getCount(String query);
     int getCount();

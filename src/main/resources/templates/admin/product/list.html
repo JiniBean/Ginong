@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>기농이네 관리자</title>
     <link rel="stylesheet" href="/css/user/product/list.css">
     <script type="module" src="/js/admin/product/list.js"></script>
 </head>
@@ -49,8 +49,10 @@
                 </div>
                 <div class="d:flex n-item color:color-base-4 fl-grow:1 gap:2">
                     <a href="#" th:href="@{/admin/product/update(id=${p.id})}" class="d:flex w:10p gap:2">
-                        <div>
-                            <img src="/img/carrot.png" alt="상품썸네일">
+                        <div class="h:5 w:3">
+                            <!-- <img src="/img/carrot.png" alt="상품썸네일"> -->
+                            <img src="/img/carrot.png" th:src="|${p.thumbnailPath}/${p.thumbnailName}|" class="w:10p h:10p" alt="상품썸네일">
+
                         </div>
                         <div class="d:flex fl-dir:column gap:2 w:10p">
                             <div th:text="${p.name}">흙당근 2개입</div>

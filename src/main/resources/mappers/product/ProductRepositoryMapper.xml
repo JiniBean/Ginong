@@ -22,6 +22,30 @@
 			<if test="query != null">
 				AND name like '%${query}%'
 			</if>
+			AND state = 1
+		</where>
+		<choose>
+			<when test="sortType == 1">
+				order by PRICE
+			</when>
+			<when test="sortType == 2">
+				order by LIKE_COUNT DESC
+			</when>
+		</choose>
+		limit #{offset}, #{rows}
+	</select>
+
+	<select id="findAllforAdmin" resultType="ProductView">
+		select
+		 *
+		from PRODUCT_VIEW
+		<where>
+			<if test="categoryId != null">
+				category_id = #{categoryId}
+			</if>
+			<if test="query != null">
+				AND name like '%${query}%'
+			</if>
 		</where>
 		<choose>
 			<when test="sortType == 1">

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>기농이네 관리자</title>
     <link rel="stylesheet" href="/css/dropdown.css">
     <link rel="stylesheet" href="/css/admin/product/reg.css">
     <link rel="stylesheet" href="/css/admin/product/update.css">
@@ -114,7 +114,7 @@
             </div>
             <div class = "display:flex flex-direction:row gap:4">
                 <span class="d:flex ai:center">상태</span>
-                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state"/>
+                <input type="checkbox" class="n-toggle n-toggle-type:slide" name="state" th:field="${productView.state}"/>
             </div>
             <div class = "display:flex flex-direction:row w:10p gap:8">
                 <button type="submit" formaction="/admin/product/delete" class="n-btn n-btn-color:accent n-btn-size:2 min-w:3 w:10p">삭제</button>
