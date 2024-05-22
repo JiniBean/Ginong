@@ -92,6 +92,7 @@ public class ProductController {
             map.put("price", p.getPrice());
             map.put("likeCount", p.getLikeCount());
             map.put("thumbnailPath", p.getThumbnailPath());
+            map.put("thumbnailName", p.getThumbnailName());
 
             // 담은 개수 초기화
             map.put("cartQty", null);
