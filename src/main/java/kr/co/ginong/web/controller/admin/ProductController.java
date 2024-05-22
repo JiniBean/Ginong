@@ -42,6 +42,9 @@ public class ProductController {
         model.addAttribute("list", list);
         model.addAttribute("active", "product");
 
+        String pageName="상품관리";
+        model.addAttribute("pageName", pageName);
+
         return "admin/product/list";
     }
 
@@ -71,6 +74,9 @@ public class ProductController {
 
         model.addAttribute("prd", product);
 
+        String pageName="상품등록";
+        model.addAttribute("pageName", pageName);
+
         return "admin/product/reg";
     }
 
@@ -99,6 +105,9 @@ public class ProductController {
         ProductView productView = service.get(productId);
 
         model.addAttribute("productView", productView);
+
+        String pageName="상품수정";
+        model.addAttribute("pageName", pageName);
 
         return "admin/product/update";
     }

@@ -45,6 +45,10 @@ public class MemberController {
         model.addAttribute("members", list);
         model.addAttribute("totalMemberCount", totalMemberCount);
         model.addAttribute("active", "member");
+
+        String pageName="회원관리";
+        model.addAttribute("pageName", pageName);
+
         return "admin/member/list";
     }
 
@@ -55,6 +59,8 @@ public class MemberController {
 
         MemberView member = service.get(memberId);
 
+        String pageName="회원상세-"+member.getName();
+        model.addAttribute("pageName", pageName);
         model.addAttribute("member", member);
 
         return "admin/member/detail";
