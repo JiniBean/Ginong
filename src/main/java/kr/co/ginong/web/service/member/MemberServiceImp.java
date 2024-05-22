@@ -45,8 +45,6 @@ public class MemberServiceImp implements MemberService{
     @Override
     public boolean addRoute(Long memberId, String joinRoute) {
 
-        System.out.println("joinRoute = "+joinRoute);
-
         String name = switch (joinRoute) {
             case "blog" -> "블로그";
             case "internet" -> "인터넷";

@@ -140,9 +140,7 @@ public class OrderController {
         Long id = Long.parseLong(str);
 
         boolean valid = service.addCancel(id);
-        System.out.println("========================");
-        System.out.println(valid);
-        System.out.println("========================");
+
         if(valid){
             order.setCancelId(id);
             return service.edit(order);

@@ -41,6 +41,7 @@ public class ProductController {
         model.addAttribute("count", count);
         model.addAttribute("list", list);
         model.addAttribute("active", "product");
+
         return "admin/product/list";
     }
 
@@ -85,7 +86,6 @@ public class ProductController {
         product.setMemberId(1L);
         product.setThumbnailName(imgName);
         product.setThumbnailPath("/img");
-        System.out.println(product);
 
         service.save(product);//, madeDate, amount);
 
@@ -106,8 +106,7 @@ public class ProductController {
     @PostMapping("update")
 //    @PutMapping("{productId}")
     public String update(Product product) {
-        System.out.println("############################################"+product);
-        
+
         service.update(product);
         
         return "redirect:/admin/product/list";

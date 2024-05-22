@@ -67,9 +67,6 @@ public class MemberController {
             @RequestBody String params
     ) {
 
-
-        System.out.println(params);
-
         if(params.isBlank())
             return ResponseEntity.badRequest().body(false);
 
@@ -78,8 +75,6 @@ public class MemberController {
 
         // "userInfo" 키에 해당하는 값을 추출하여 JsonArray 객체로 변환
         JsonArray userInfoArray = jsonObject.getAsJsonArray("userInfo");
-
-        System.out.println(userInfoArray);
 
         //step1
         jsonObject = (JsonObject) userInfoArray.get(0);
