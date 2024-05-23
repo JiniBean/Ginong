@@ -83,15 +83,15 @@
         <div class="d:flex fl-dir:column gap:3 md:gap:4">
             <div class="d:flex fl-dir:column gap:1 md:gap:2">
                 <div class="fw:3">결제정보</div>
-                <div class="n-textbox n-textbox-type:underline d:flex jc:space-between ai:center h:2" th:each="o:${list}">
+                <div class="n-textbox n-textbox-type:underline d:flex jc:space-between ai:center h:2" >
                     <span>총 상품 금액</span>
                     <span th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA')}">당근</span>
                 </div>
-                <div class="n-textbox n-textbox-type:underline d:flex jc:space-between ai:center h:2" th:each="o:${list}">
+                <div class="n-textbox n-textbox-type:underline d:flex jc:space-between ai:center h:2" >
                     <span>적립금 사용금액</span>
                     <span class="color:sub-1" th:text="${#numbers.formatInteger(payment.pointAmt, 3, 'COMMA')}">당근</span>
                 </div>
-                <div class="n-textbox n-textbox-type:underline d:flex jc:space-between ai:center h:2" th:each="o:${list}">
+                <div class="n-textbox n-textbox-type:underline d:flex jc:space-between ai:center h:2" >
                     <span>쿠폰 사용금액</span>
                     <span class="color:sub-1" th:text="${#numbers.formatInteger(payment.couponAmt, 3, 'COMMA')}">당근</span>
                 </div>
