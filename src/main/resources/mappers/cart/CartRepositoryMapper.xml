@@ -79,10 +79,10 @@
         </if>
     </insert>
 
-    <insert id="saveWhenLogIn">
+    <insert id="saveWhenLogin" parameterType="list">
         INSERT INTO CART (PRODUCT_ID, MEMBER_ID, QUANTITY)
         VALUES
-        <foreach collection="carts" item="cart" separator=",">
+        <foreach collection="list" item="cart" separator=",">
             (#{cart.productId}, #{cart.memberId}, #{cart.quantity})
         </foreach>
     </insert>
@@ -103,10 +103,10 @@
     </update>
 
     <!-- 일괄 업데이트를 위한 매핑 -->
-    <update id="updateWhenLogIn" parameterType="List">
-        <foreach collection="list" item="cart" index="index" separator=";">
+    <update id="updateWhenLogin" parameterType="list">
+        <foreach collection="list" item="cart" separator=";">
             UPDATE CART
-            SET   quantity = #{cart.quantity},
+            SET   quantity = #{cart.quantity}
             WHERE 1=1
               AND id       = #{cart.id}
               AND memberId = #{cart.memberId}

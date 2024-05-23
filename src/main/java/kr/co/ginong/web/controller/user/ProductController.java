@@ -49,7 +49,6 @@ public class ProductController {
             , @RequestParam(name = "p", defaultValue = "1") Integer page
             , @RequestParam(name = "s", required = false) Integer sortType
             , @RequestParam(name = "r", required = false) Integer rows
-            , @CookieValue(name = "cartList", required = false) List<Cart> carts
             , @AuthenticationPrincipal WebUserDetails userDetails
             , Model model) {
 
@@ -73,9 +72,6 @@ public class ProductController {
             memberId = userDetails.getId();
             cartList = cartService.getList(memberId);
         }
-        // 로그인 안했지만 장바구니 목록이 있다면
-        else if (carts != null)
-            cartList = carts;
 
         // 화면에 뿌려줄 상품 정보와 장바구니 정보 조합하기
         List<Map<String, Object>> list = new ArrayList<>();

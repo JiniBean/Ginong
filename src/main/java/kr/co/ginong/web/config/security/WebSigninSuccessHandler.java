@@ -78,7 +78,7 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
 
 
     protected String determineTargetUrl(HttpServletRequest request) {                            // 사용자가 원래 가려고 했던 페이지를 가져오는 로직 구현
-        String targetUrl = "/"; // 기본 페이지 설정
+        String targetUrl = "/cart/add"; // 기본 페이지 설정
 
         SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, null);     // 세션에서 원래의 요청 URL 가져오기
         if (savedRequest != null) {                                                             // 세션에서 저장된 targetUrl이 있다면 그것을 반환

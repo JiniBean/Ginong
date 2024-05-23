@@ -56,7 +56,7 @@ Cookie.prototype = {
     },
 
     set: function (name, value) {
-        let s = `${name}=${value}; path=/; SameSite=None; Secure`;
+        let s = `${name}=${value}; path=/;`;
         document.cookie = s;
     }
 }
