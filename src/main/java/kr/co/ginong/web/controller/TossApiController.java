@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Controller
-public class PaymentApiController {
+public class TossApiController {
 
     @RequestMapping(value = "/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
