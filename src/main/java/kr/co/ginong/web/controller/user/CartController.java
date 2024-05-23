@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.ginong.web.config.security.WebUserDetails;
 import kr.co.ginong.web.entity.cart.Cart;
@@ -16,13 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,6 +90,7 @@ public class CartController {
 
     @GetMapping("/add")
     public String addCart(HttpServletRequest req
+                        , HttpServletResponse res
                         , @AuthenticationPrincipal WebUserDetails userDetails
                          ) throws UnsupportedEncodingException, JsonProcessingException {
 
@@ -96,6 +100,8 @@ public class CartController {
 
         // 쿠키 장바구니 조회
         List<Cart> cartListCookie = getCartCookie(req, memberId);
+
+        boolean isUpdateOrInsert = false;  // 플래그를 사용하여 업데이트 또는 인서트 확인
 
         // 쿠키에 장바구니 데이터 없으면 skip
         if (!cartListCookie.isEmpty()) {
@@ -120,8 +126,22 @@ public class CartController {
                 }
             }
 
-            if (!cartInsert.isEmpty()) service.saveWhenLogin(cartInsert);
-            if (!cartUpdate.isEmpty()) service.editWhenLogin(cartUpdate);
+            if (!cartInsert.isEmpty()) {
+                service.saveWhenLogin(cartInsert);
+                isUpdateOrInsert = true;
+            }
+            if (!cartUpdate.isEmpty()) {
+                service.editWhenLogin(cartUpdate);
+                isUpdateOrInsert = true;
+            }
+        }
+
+        // 업데이트 또는 인서트가 수행되었다면 쿠키를 삭제
+        if (isUpdateOrInsert) {
+            Cookie cookie = new Cookie("cartList", "");
+            cookie.setPath("/");
+            cookie.setMaxAge(0);
+            res.addCookie(cookie);
         }
 
         return "redirect:/index";
