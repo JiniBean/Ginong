@@ -30,4 +30,11 @@
 		</where>
 	</select>
 
+	<insert id="save" parameterType="ProductImg">
+		INSERT INTO PRODUCT_IMG
+		(name, img_path, product_id)
+		VALUES
+		(#{name}, #{imgPath}, #{productId})
+	</insert>
+
 </mapper>

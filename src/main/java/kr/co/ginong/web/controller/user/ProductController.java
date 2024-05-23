@@ -128,6 +128,7 @@ public class ProductController {
         model.addAttribute("qnaView", qnaView);
         model.addAttribute("productImgs", productImgs);
 
+        System.out.println(productView.toString());
         return "user/product/detail";
     }
     @GetMapping("recent")

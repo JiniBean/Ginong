@@ -2,8 +2,12 @@ package kr.co.ginong.web.controller.admin;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
 import kr.co.ginong.web.entity.product.Product;
+import kr.co.ginong.web.entity.product.ProductImg;
 import kr.co.ginong.web.entity.product.ProductView;
+import kr.co.ginong.web.service.admin.ProductImgService;
 import kr.co.ginong.web.service.admin.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +26,9 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService service;
+
+    @Autowired
+    private ProductImgService imgService;
 
     @GetMapping("list")
     public String list(@RequestParam(name = "q", required = false) String query
@@ -82,19 +90,48 @@ public class ProductController {
 
     @PostMapping("reg")
     public String save(Product product
-            , @RequestParam("img-file") MultipartFile imgFile) {
+            , @RequestParam("img-file") List<MultipartFile> imgFile
+            , HttpServletRequest request) throws IOException {
         // , Date madeDate
         // , String amount){
         //product 및 productCategory ... product img 를 받아와야 함 - 구조체 만들기
         /*product 데이터 넣는 곳*/
-        String imgName = imgFile.getOriginalFilename();
 
+        // 상품 등록 시 추가한 이미지 리스트
+        String imgName = imgFile.get(0).getOriginalFilename();
+
+        // 썸네일 저장
         product.setMemberId(1L);
         product.setThumbnailName(imgName);
         product.setThumbnailPath("/img");
+        
+        service.save(product);//, madeDate, amount)
 
-        service.save(product);//, madeDate, amount);
+        for (int i=0; i<imgFile.size(); i++) {
+            if (!imgFile.get(i).isEmpty()) {
+                imgName = imgFile.get(i).getOriginalFilename();
+                
+                String path = "/img";
+                String realPath = request.getServletContext().getRealPath(path);
 
+                System.out.println(realPath);
+                
+                File file = new File(realPath);
+                if(!file.exists())
+                    file.mkdirs();              
+
+                File filePath = new File(realPath+File.separator+imgName);                
+                imgFile.get(i).transferTo(filePath);
+
+                ProductImg productImg = ProductImg
+                                        .builder()
+                                        .productId(product.getId())
+                                        .imgPath(path)
+                                        .name(imgName).build();
+
+                imgService.add(productImg);
+            }
+        }
 
         return "redirect:list";
     }
