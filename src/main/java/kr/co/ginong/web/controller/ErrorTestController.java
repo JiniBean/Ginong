@@ -11,10 +11,10 @@ public class ErrorTestController {
     // 추후 배포시 삭제해도 무방합니다.
 
     // 주문처리 실패
-    @GetMapping("/100")
-    public String trigger100() {
-        return "/error/order-failed";
-    }
+//    @GetMapping("/100")
+//    public String trigger100() {
+//        return "/error/order-failed";
+//    }
 
     @GetMapping("/400")
     public String trigger400() {
