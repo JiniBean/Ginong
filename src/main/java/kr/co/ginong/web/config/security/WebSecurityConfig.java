@@ -29,10 +29,6 @@ public class WebSecurityConfig{
 	@Autowired
 	private WebOAuth2UserDetailsService oAuth2UserDetailsService;
 
-	@Autowired
-	private HttpCookieOAuth2AuthorizationRequestRepository cookieOAuth2AuthorizationRequestRepository;
-
-
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){
@@ -59,14 +55,9 @@ public class WebSecurityConfig{
 				.failureHandler(new WebSigninFailureHandler())				//로그인 실패 시 처리 로직
 				)
 		.oauth2Login(config->config
-				.authorizationEndpoint(authorization -> authorization
-				.baseUri("/oauth2/authorization")
-				.authorizationRequestRepository(cookieOAuth2AuthorizationRequestRepository) // 인증 요청을 쿠키에 저장하고 검색
-				)
 				.userInfoEndpoint(userInfo->userInfo
 				.userService(oAuth2UserDetailsService))
 				.successHandler(webSigninSuccessHandler())
-
 				)
 		.logout((logout)->logout
 				.logoutUrl("/logout")
