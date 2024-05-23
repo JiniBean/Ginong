@@ -1,38 +1,42 @@
 const { createApp } = Vue;
-import Repository from "/js/module/StockRepository.js";
 createApp({
     data(){
         return{
-            current:false,
-            amount:false,
-            stockList:[],
+            orderStats:[],
+            stockStats:[],
+            inquiryStats:[],
             inquiryList:[],
-
+            baseUrl:window.location.origin,
+            list : [],
             query: ""
         }
     },
     methods:{
-        currentHandler(){
-            this.current = !this.current;
-            this.amount = null;
-            this.getList();
-
-        },
-        amountHandler(){
-            this.amount = !this.amount;
-            this.current = false;
-            this.getList();
-        },
         moveStock(id){
             //클릭한 상품의 상품 id를 인자로 받음
             location.href = `/stock/detail?p=${id}`;
         },
-        async getList(){
-            let repository = new Repository;
-            this.list = await repository.findAll(this.query, this.amount, this.current);
+        moveInquiry(){
+
+        },
+        async getOrderStats(){
+            let res = await fetch('/api/stats/order');
+            this.orderStats = await res.json();
+            console.log(this.orderStats);
+        },
+        async getStockStats(){
+            let res = await fetch('/api/stats/stock');
+            this.orderStats = await res.json();
+            console.log(this.orderStats);
+        },
+        async getInquiryStats(){
+            let res = await fetch('/api/stats/inquiry');
+            this.orderStats = await res.json();
+            console.log(this.orderStats);
         }
     },
     mounted(){
-        this.getList();
+        this.getOrderStats();
+        console.log(this.orderStats);
     }
 }).mount('main');

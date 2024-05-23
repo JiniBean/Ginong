@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>기농이네 관리자</title>
-    <script src="/js/admin/index.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="/js/admin/index.js" defer></script>
 
 </head>
 <body>
@@ -16,28 +17,27 @@
     <section class="d:flex jc:center w:10p">
         <h1 class="d:none">검색폼</h1>
         <form class="pos:relative w:10p md:w:8 h:2">
-            <input type="text" @keyup.enter="getList" v-model="query" class="n-textbox border-color:main-6 bd-radius:4 pr:1 pl:4" placeholder="검색어를 입력해 주세요">
-            <button @click.prevent="getList" class="pos:absolute m-right:1 icon cursor:pointer icon:magnifying_glass icon-size:4 icon-color:base-5" style="top:2px; right:4px;">검색 버튼</button>
+            <input type="text" @keyup.enter="getOrderStats" v-model="query" class="n-textbox border-color:main-6 bd-radius:4 pr:1 pl:4" placeholder="검색어를 입력해 주세요">
+            <button @click.prevent="getOrderStats" class="pos:absolute m-right:1 icon cursor:pointer icon:magnifying_glass icon-size:4 icon-color:base-5" style="top:2px; right:4px;">검색 버튼</button>
         </form>
     </section>
     <section class="d:flex fl-dir:column gap:4 md:gap:6">
-        <div class="d:flex jc:space-between">
-            <h1 class="fw:3 fs:3 md:fs:4">주문 건수</h1>
-            <div>3건</div>
-        </div>
+        <h1 class="fw:3 fs:3 md:fs:4">주문 건수</h1>
         <table class="n-table n-table-hover n-table-border:bottom txt-al:center" >
             <thead class="bg-color:base-3 txt-al:center">
             <tr>
+                <th scope="col" class="w:auto txt-al:center">연간</th>
                 <th scope="col" class="w:auto txt-al:center">월간</th>
                 <th scope="col" class="w:auto txt-al:center">주간</th>
                 <th scope="col" class="w:auto txt-al:center">일간</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="s in list">
-                <th scope="row" class="w:auto txt-al:center" v-text="s.name">텃밭 흙당근</th>
-                <th class="w:auto txt-al:center" v-text="s.name">텃밭 흙당근</th>
-                <th class="w:auto txt-al:center" v-text="s.name">텃밭 흙당근</th>
+            <tr >
+                <th scope="row" class="w:auto txt-al:center" v-text="orderStats.year">텃밭 흙당근</th>
+                <th class="w:auto txt-al:center" v-text="orderStats.month">텃밭 흙당근</th>
+                <th class="w:auto txt-al:center" v-text="orderStats.week">텃밭 흙당근</th>
+                <th class="w:auto txt-al:center" v-text="orderStats.day">텃밭 흙당근</th>
             </tr>
             </tbody>
         </table>
@@ -54,7 +54,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="s in stockList" @click="moveStock(s.productId)">
+                <tr v-for="s in stockStats" @click="moveStock(s.productId)">
                     <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
                     <td class="txt-al:center w:4 md:w:5" v-text="s.currentAmount">300</td>
                     <td class="txt-al:center w:4 md:w:5" v-text="s.currentAmount">300</td>
@@ -79,7 +79,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="s in inquiryList" @click="move(s.productId)">
+                <tr v-for="s in inquiryStats" @click="move(s.productId)">
                     <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
                     <td class="txt-al:center md:w:5" style="width: 200px" v-text="s.currentAmount">300</td>
                     <td class="txt-al:center w:4 md:w:5" v-text="s.currentAmount">300</td>

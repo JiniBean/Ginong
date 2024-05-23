@@ -5,6 +5,7 @@ import kr.co.ginong.web.entity.order.OrderView;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Mapper
@@ -29,5 +30,8 @@ public interface OrderRepository {
 
     List<OrderView> findByMemberId(Long memberId);
 
+
+//    ----------- 통계 관련 메소드 -------------------
+    Map<String, Object> countStatus();
 
 }
