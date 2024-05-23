@@ -322,7 +322,7 @@ public class OrderController {
 
         String error = service.saveOrderData(list);
         if(error.isEmpty())
-            return "user/order/complete?id="+list.getOrder().getId();
+            return "redirect:complete?id="+list.getOrder().getId();
 
         return "redirect:fail?message=주문정보를 저장하는데 실패했습니다&code="+error;
 
