@@ -27,6 +27,7 @@ public class ProductView {
     private String  categoryName;
     private String  seasonStartDate;
     private String  seasonEndDate;
+    private String  descriptionName;
 
     private Long    categoryId;
     private String  storageType;

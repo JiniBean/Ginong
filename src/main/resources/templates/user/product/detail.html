@@ -27,7 +27,7 @@
         </nav>
 
         <div class="d:flex fl-dir:column gap:5">
-            <div><img class="display:flex w:10p " th:src="@{/img/Meongmeong.jpg}" src="/img/Meongmeong.jpg" alt="">
+            <div><img class="display:flex w:10p " th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}">
             </div>
             <div class="d:none">
                 <div><a href="">사진1</a></div>
@@ -89,20 +89,23 @@
         </nav>
         <div class="d:flex gap:9">
             <div class="d:flex fl-dir:column jc:space-between">
-                <div><img src="/img/Meongmeong.jpg" th:src="@{/img/Meongmeong.jpg}" alt="" style="width: 414px; height:
+                <div><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" alt="" style="width: 414px; height:
             414px;"></div>
                 <div class="d:flex jc:space-between">
                     <div>
-                        <a href=""><img src="/img/Meongmeong.jpg" alt="사진1" style="width: 90px; height: 90px;"></a>
+                        <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" alt="사진1" style="width: 90px; height: 90px;"></a>
                     </div>
                     <div>
-                        <a href=""><img src="/img/Meongmeong.jpg" alt="사진2" style="width: 90px; height: 90px;"></a>
+                        <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" alt="사진2" style="width: 90px; height: 90px;"></a>
+
                     </div>
                     <div>
-                        <a href=""><img src="/img/Meongmeong.jpg" alt="사진3" style="width: 90px; height: 90px;"></a>
+                        <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" alt="사진3" style="width: 90px; height: 90px;"></a>
+
                     </div>
                     <div>
-                        <a href=""><img src="/img/Meongmeong.jpg" alt="사진4" style="width: 90px; height: 90px;"></a>
+                        <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" alt="사진3" style="width: 90px; height: 90px;"></a>
+
                     </div>
                 </div>
             </div>
@@ -188,7 +191,8 @@
 
     <section class="d:flex jc:center mr:4 ml:4 md:mr:0 md:ml:0 m-info">
         <h1 class="d:none">상품정보</h1>
-        <div><img src="/img/test.gif" alt="상품 상세정보" class="w:10p"/></div>
+<!--        <div><img src="/img/test.gif" alt="상품 상세정보" class="w:10p"/></div>-->
+        <div><img th:src="${productView.thumbnailPath +'/'+ productView.descriptionName}" alt="상품 상세정보" class="w:10p"/></div>
     </section>
 
     <!--=======================상품 후기 모바일 버전==================================-->
@@ -203,13 +207,13 @@
             </div>
             <div class="d:flex fl-dir:row gap:5">
                 <div>
-                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="100px" width="100%"/></a>
+                    <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" height="100px" width="100%"/></a>
                 </div>
                 <div>
-                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="100px" width="100%"/></a>
+                    <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" height="100px" width="100%"/></a>
                 </div>
                 <div>
-                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="100px" width="100%"/></a>
+                    <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" height="100px" width="100%"/></a>
                 </div>
 
             </div>
@@ -248,13 +252,13 @@
             </div>
             <div class="d:flex fl-dir:row gap:5">
                 <div>
-                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="150px" width="100%"/></a>
+                    <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" height="150px" width="100%"/></a>
                 </div>
                 <div>
-                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="150px" width="100%"/></a>
+                    <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" height="150px" width="100%"/></a>
                 </div>
                 <div>
-                    <a href=""><img th:src="@{/img/Meongmeong.jpg}" height="150px" width="100%"/></a>
+                    <a href=""><img th:src="${productView.thumbnailPath + '/'+ productView.thumbnailName}" height="150px" width="100%"/></a>
                 </div>
             </div>
         </section>

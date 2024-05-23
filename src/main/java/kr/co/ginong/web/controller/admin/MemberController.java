@@ -82,13 +82,6 @@ public class MemberController {
 
         orderList = service.getOrderList(memberId);
 
-        System.out.println(orderList);
-        System.out.println(orderList);
-        System.out.println(orderList);
-        System.out.println(orderList);
-        System.out.println(orderList);
-        System.out.println(orderList);
-
         model.addAttribute("orderList", orderList);
 
         return "admin/member/orderList";
