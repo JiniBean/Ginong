@@ -26,6 +26,9 @@ public class WebSecurityConfig{
 	@Autowired
 	private MemberRepository memberRepository;
 
+	@Autowired
+	private WebOAuth2UserDetailsService oAuth2UserDetailsService;
+
 
 
 	@Bean
@@ -51,6 +54,11 @@ public class WebSecurityConfig{
 				.permitAll()
 				.successHandler(webSigninSuccessHandler())					//로그인 성공 시 처리 로직
 				.failureHandler(new WebSigninFailureHandler())				//로그인 실패 시 처리 로직
+				)
+		.oauth2Login(config->config
+				.userInfoEndpoint(userInfo->userInfo
+				.userService(oAuth2UserDetailsService))
+				.successHandler(webSigninSuccessHandler())
 				)
 		.logout((logout)->logout
 				.logoutUrl("/logout")

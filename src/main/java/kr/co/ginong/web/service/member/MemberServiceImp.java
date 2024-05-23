@@ -86,6 +86,13 @@ public class MemberServiceImp implements MemberService{
         repository.insertAuthorityByUserId(memberRole);
     }
 
+    @Override
+    public Member getSocialMember(String email) {
+        Member socialMember = repository.findByEmail(email);
+
+        return socialMember;
+    }
+
 
     @Override
     public void changePwd(String pwd, String userName) {

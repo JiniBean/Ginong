@@ -2,11 +2,13 @@ package kr.co.ginong.web.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-public class WebUserDetails implements UserDetails {
+public class WebUserDetails implements UserDetails, OAuth2User {
 
     private Long    id;
     private String  name;
@@ -16,6 +18,7 @@ public class WebUserDetails implements UserDetails {
     private String  phone;
     private boolean state;
     private List<GrantedAuthority> authorities;
+    private Map<String, Object> attributes;
 
 
     public long getId() {return id;}
@@ -50,6 +53,16 @@ public class WebUserDetails implements UserDetails {
 
 
     public void setAuthorities(List<GrantedAuthority> authorities) {this.authorities = authorities;}
+
+
+    public void setAttributes(Map<String, Object> attributes) {
+        this.attributes = attributes;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {return authorities;}

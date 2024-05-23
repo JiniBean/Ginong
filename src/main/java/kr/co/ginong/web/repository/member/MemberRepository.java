@@ -24,4 +24,6 @@ public interface MemberRepository {
     Member findByUsername(String username);
 
     void insertAuthorityByUserId(MemberRole memberRole);
+
+    Member findByEmail(String email);
 }

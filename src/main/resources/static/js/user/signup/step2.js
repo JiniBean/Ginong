@@ -1,3 +1,39 @@
+// ========================social login 여부 확인 후 email 부분 변경====================
+document.addEventListener('DOMContentLoaded', function() {
+    const {createApp} = Vue;
+    createApp({
+        data() {
+            return {
+                socialuserinfo: {}
+            }
+        },
+        async created() {
+            await this.fetchProducts();
+        },
+        methods: {
+            async fetchProducts() {
+                let response;
+                try {
+                    response = await fetch(`/api/member/socialuserinfo`);
+                    if (response.ok) {
+                        let socialuserinfo = await response.json();
+                        if (socialuserinfo) {
+                            this.socialuserinfo = socialuserinfo;
+                        } else {
+                            this.socialuserinfo = null;
+                        }
+                    } else {
+                        this.socialuserinfo = null;
+                    }
+                } catch (error) {
+                    this.socialuserinfo = null;
+                }
+                console.log(this.socialuserinfo);
+            }
+        }
+    }).mount('main');
+});
+
 //============================================  모바일  ============================================
 
 //세션에 임시저장한 값 가져오기
@@ -41,6 +77,7 @@ window.addEventListener("load", function(e){
             let age = today.getFullYear() - birthDateValue.getFullYear();
             let verifyAge = sec1.querySelector(".verify-age");
             let nextBtn = document.querySelector(".next-button");
+
 
             if(age < 14){
                 verifyAge.classList.remove("d:none");

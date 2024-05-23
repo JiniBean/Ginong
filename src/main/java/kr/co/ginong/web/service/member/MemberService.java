@@ -19,4 +19,6 @@ public interface MemberService {
     Member searchId(String email, String name);
 
     void grantAuthority(MemberRole memberRole);
+
+    Member getSocialMember(String email);
 }

@@ -96,6 +96,11 @@
         </where>
     </update>
 
-
+    <select id="findByEmail" resultType="Member">
+        SELECT
+        *
+        from MEMBER
+        WHERE EMAIL = #{email}
+    </select>
 
 </mapper>

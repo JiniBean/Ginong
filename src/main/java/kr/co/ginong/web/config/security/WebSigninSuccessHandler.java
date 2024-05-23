@@ -7,12 +7,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.ginong.web.service.cart.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.WebUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -25,6 +35,8 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
 
     private int maxAge = DEFAULT_MAX_AGE;                                   //쿠키의 생명주기 설정
 
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
     public void setMaxAge(int maxAge) {
         this.maxAge = maxAge;
     }
@@ -36,24 +48,32 @@ public class WebSigninSuccessHandler extends SavedRequestAwareAuthenticationSucc
     @Override               //인증에 성공 했을때 처리할 로직 작성할 메소드
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
+        String targetUrl="/";
+        WebUserDetails userDetails = (WebUserDetails) authentication.getPrincipal();
+        if(userDetails.getAuthorities() == null) {
 
-        String remember = request.getParameter(REQUEST_PARAM_NAME);                             //signin 페이지에 아이디 저장 체크 박스를 누르면 "on"이 들어옴
-        if ("on".equals(remember)) {                                                            //체크박스를 체크 했으면
-            String username = ((WebUserDetails) authentication.getPrincipal()).getUsername();   //로그인시 사용했던 username 을 꺼내온다.
-            Cookie cookie = new Cookie(COOKIE_NAME, username);                                  //Cookie 생성 후 saved_username 이라는 이름으로 username 을 담아준다.
-            cookie.setMaxAge(maxAge);                                                           //생명주기를 2주로 설정
-            cookie.setPath("/signin");                                                          //saved_username cookie 를 사용할 url 설정
-            response.addCookie(cookie);                                                         //HttpServletResponse response에 cookie 추가
+            targetUrl = "/signup/social";
+            redirectStrategy.sendRedirect(request,response,targetUrl);
         }
-        else {                                                                                  //signin 페이지 아이디 저장 체크 박스를 누르지 않는다면
-            Cookie cookie = new Cookie(COOKIE_NAME, "");                                        //빈 문자열의 cookie 를 생성, 생명주기도 없는체 만든다.
-            cookie.setMaxAge(0);
-            response.addCookie(cookie);
+//        ========================================일반 login(권한이 있다면)=========================================
+        else{
+            String remember = request.getParameter(REQUEST_PARAM_NAME);                             //signin 페이지에 아이디 저장 체크 박스를 누르면 "on"이 들어옴
+            if ("on".equals(remember)) {                                                            //체크박스를 체크 했으면
+                String username = ((WebUserDetails) authentication.getPrincipal()).getUsername();   //로그인시 사용했던 username 을 꺼내온다.
+                Cookie cookie = new Cookie(COOKIE_NAME, username);                                  //Cookie 생성 후 saved_username 이라는 이름으로 username 을 담아준다.
+                cookie.setMaxAge(maxAge);                                                           //생명주기를 2주로 설정
+                cookie.setPath("/signin");                                                          //saved_username cookie 를 사용할 url 설정
+                response.addCookie(cookie);                                                         //HttpServletResponse response에 cookie 추가
+            } else {                                                                                  //signin 페이지 아이디 저장 체크 박스를 누르지 않는다면
+                Cookie cookie = new Cookie(COOKIE_NAME, "");                                        //빈 문자열의 cookie 를 생성, 생명주기도 없는체 만든다.
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+            targetUrl = determineTargetUrl(request);                                         //기존 가려고 했던 페이지로 로그인 완료 후 가기 위한 메소드 호출
+            getRedirectStrategy().sendRedirect(request, response, targetUrl);                       //determineTargetUrl 에서 얻어온 url 로 리다이렉트 해준다.
+            super.onAuthenticationSuccess(request, response, authentication);                       //onAuthenticationSuccess 에 정의 된 나머지 동작들을 수행
         }
-        String targetUrl = determineTargetUrl(request);                                         //기존 가려고 했던 페이지로 로그인 완료 후 가기 위한 메소드 호출
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);                       //determineTargetUrl 에서 얻어온 url 로 리다이렉트 해준다.
 
-        super.onAuthenticationSuccess(request, response, authentication);                       //onAuthenticationSuccess 에 정의 된 나머지 동작들을 수행
     }
 
 

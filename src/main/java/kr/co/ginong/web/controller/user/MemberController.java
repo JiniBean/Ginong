@@ -113,6 +113,10 @@ public class MemberController {
         model.addAttribute("name", name);
         return "user/signup/step4";
     }
+    @GetMapping("signup/social")
+    public String social() {
+        return "user/signup/social";
+    }
 
 
     @GetMapping("signup/index")

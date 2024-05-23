@@ -180,6 +180,19 @@ public class MemberController {
         return member;
     }
 
+    @GetMapping("socialuserinfo")
+    public Map<String,Object> getSocialMember(
+            @AuthenticationPrincipal WebUserDetails userDetails
+    ){
+        Map<String,Object> response = new HashMap<>(); //사용하고 싶은 자료형으로 초기값 설정
+
+        // 사용자가 인증되었는지 확인
+        if (userDetails != null)
+            response.put("email",userDetails.getEmail()); //사용하고 싶은 정보 담기
+        System.out.println(response);
+        return response;
+    }
+
     /* 기본배송지가 아닌 배송지의 목록 불러 옴*/
     @GetMapping("location/list")
     public  ResponseEntity<Map<String, Object>> getList(
