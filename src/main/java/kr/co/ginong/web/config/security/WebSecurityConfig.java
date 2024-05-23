@@ -60,6 +60,7 @@ public class WebSecurityConfig{
 				)
 		.oauth2Login(config->config
 				.authorizationEndpoint(authorization -> authorization
+				.baseUri("/oauth2/authorization")
 				.authorizationRequestRepository(cookieOAuth2AuthorizationRequestRepository) // 인증 요청을 쿠키에 저장하고 검색
 				)
 				.userInfoEndpoint(userInfo->userInfo
