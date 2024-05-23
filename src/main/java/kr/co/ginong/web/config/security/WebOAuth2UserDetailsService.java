@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WebOAuth2UserDetailsService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -30,12 +31,38 @@ public class WebOAuth2UserDetailsService implements OAuth2UserService<OAuth2User
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> service = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = service.loadUser(userRequest);
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
 
-        String email = oAuth2User.getAttribute("email");
-        String username = oAuth2User.getAttribute("name");
+        String email = "";
+        String username = "";
+
+//        ========================구글 로그인======================
+        if ("google".equals(registrationId)) {
+            email = oAuth2User.getAttribute("email");
+            username = oAuth2User.getAttribute("name");
+        }
+//        =========================네이버 로그인=======================
+        else if ("naver".equals(registrationId)) {
+            Map<String, Object> attributes = oAuth2User.getAttributes();
+            Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+            email = (String) response.get("email");
+            username = (String) response.get("name");
+        }
+//        =========================카카오 로그인===========================
+        else if("kakao".equals(registrationId)) {
+            Map<String, Object> attributes = oAuth2User.getAttributes();
+
+            Map<String, Object> responseName = (Map<String, Object>) attributes.get("properties");
+            Map<String, Object> responseEmail = (Map<String, Object>) attributes.get("kakao_account");
+
+            email = (String) responseEmail.get("email");
+            username = (String) responseName.get("nickname");
+        }
 
         Member member = repository.findByEmail(email);
 
+        System.out.println("member: " + member);
         WebUserDetails userDetails = new WebUserDetails();
         if(member == null) {
             userDetails.setAttributes(oAuth2User.getAttributes());

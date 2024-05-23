@@ -112,7 +112,8 @@ window.addEventListener("load", function(e){
     let verifyName = sec1.querySelector(".verify-name");
     let phone = sec1.querySelector(".phone");
     let verifyPhone = sec1.querySelector(".verify-phone");
-
+    let birthDate = sec1.querySelector(".birthDate")
+    let verifyBirth = sec1.querySelector(".verify-birth")
 
     //이전 버튼
     prevBtn.onclick = function (e){
@@ -156,6 +157,12 @@ window.addEventListener("load", function(e){
         if(!phone.value){
             phone.setAttribute('autofocus',true);
             verifyPhone.classList.remove("d:none");
+            return;
+        }
+
+        if(!birthDate.value){
+            birthDate.setAttribute('autofocus',true);
+            verifyBirth.classList.remove("d:none");
             return;
         }
 
