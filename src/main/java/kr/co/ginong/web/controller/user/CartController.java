@@ -132,8 +132,8 @@ public class CartController {
     protected List<Cart> getCartCookie(HttpServletRequest request, Long userId) throws UnsupportedEncodingException, JsonProcessingException {
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
-            System.err.println("쿠키가 없습니다");
-            return null;
+            // 쿠키가 존재 하지 않는 경우.
+            return new ArrayList<>();
         }
 
         for (Cookie cookie : cookies) {
@@ -160,8 +160,8 @@ public class CartController {
             }
         }
 
-        System.err.println("cartList 쿠키를 찾을 수 없습니다");
-        return null;
+        //cartList 가 없는 경우
+        return new ArrayList<>();
     }
 
 }
