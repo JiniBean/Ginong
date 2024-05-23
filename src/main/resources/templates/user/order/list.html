@@ -38,7 +38,7 @@
 
             <div class="d:flex fl-dir:column bd bd-radius:2 bd-color:base-4 pt:2 pb:2 pr:5 pl:5 gap:3">
                 <div class="d:flex fl-dir:row gap:3">
-                    <img class="bd-radius:1" th:src="@{/img/Meongmeong.jpg}" src="" alt="상품 썸네일" width="120px" height="120px">
+                    <img class="bd-radius:1" :src="`${l.imgPath}/${l.imgName}`" alt="상품 썸네일" width="120px" height="120px">
                     <div class="d:flex fl-dir:column jc:center gap:3 cursor:pointer"  @click="goDetail(l.id)">
                         <div>
                             <span v-if="!l.cancelId" class="fs:2 md:fs:3 color:base-4">{{l.date}} 주문</span>
