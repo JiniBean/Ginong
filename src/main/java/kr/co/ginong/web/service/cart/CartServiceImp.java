@@ -4,6 +4,7 @@ import kr.co.ginong.web.entity.cart.Cart;
 import kr.co.ginong.web.repository.cart.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,17 @@ public class CartServiceImp implements CartService{
     public Boolean edit(Long memberId, Long prdId, Integer qty) { return repository.update(memberId,prdId, qty); }
 
     @Override
-    public Boolean editWhenLogin (List<Cart> carts) { return  repository.updateWhenLogin(carts); }
+    @Transactional
+    public Boolean editWhenLogin(List<Cart> carts) {
+        // 비회원 로그인 시 장바구니에(쿠키/DB) 같은 상품이 존재할 때, 쿠키에 있는 상품 개수로 업데이트 하는 기능
+        // mapper에서 foreach로 update 하려고 했으나, sql 구문 오류로 인해서 서비스단에서 foreach 돌리는 방식으로 변경했습니다.
+        for (Cart cart : carts) {
+            if (!repository.update(cart.getMemberId(), cart.getProductId(), cart.getQuantity())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public Boolean delete(Long memberId, Long prdId) { return repository.delete(memberId, prdId, null); }

@@ -102,16 +102,12 @@
         AND PRODUCT_ID = #{prdId};
     </update>
 
-    <!-- 일괄 업데이트를 위한 매핑 -->
-    <update id="updateWhenLogin" parameterType="list">
-        <foreach collection="list" item="cart" separator=";">
-            UPDATE CART
-            SET   quantity = #{cart.quantity}
-            WHERE 1=1
-              AND id       = #{cart.id}
-              AND memberId = #{cart.memberId}
-        </foreach>
+    <update id="updateCartQuantity" parameterType="Cart">
+        UPDATE CART
+        SET QUANTITY = #{quantity}
+        WHERE ID = #{id} AND MEMBER_ID = #{memberId};
     </update>
+
 
     <delete id="delete">
         DELETE FROM CART
