@@ -198,10 +198,10 @@ window.addEventListener("load",  function () {
     const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
 
 // ------  결제 UI 렌더링 ------
-    payment.totalAmt = payment.totalAmt || totalProductPrice - dlvryAmt;
+    let amount= payment.totalAmt || totalProductPrice - dlvryAmt;
+    let value ={value: amount}
     paymentMethodWidget = paymentWidget.renderPaymentMethods(
-        "#payment-method",
-        {value: payment.totalAmt},
+        "#payment-method", value,
         {variantKey: "DEFAULT"}
     );
 // ------  이용약관 UI 렌더링 ------
@@ -211,6 +211,9 @@ window.addEventListener("load",  function () {
 // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
     button.onclick= function (e) {
         e.preventDefault();
+
+        payment.totalAmt = payment.totalAmt || totalProductPrice - dlvryAmt;
+        value.value = payment.totalAmt;
         // request 정보
         let orderName = prdTotalSpan.dataset.oname
         let orderSize = prdTotalSpan.dataset.size
@@ -229,7 +232,7 @@ window.addEventListener("load",  function () {
         paymentWidget.requestPayment({
             orderId: orderId,
             orderName: orderName,
-            successUrl: window.location.origin + "/order/complete",
+            successUrl: window.location.origin + "/order/confirm",
             failUrl: window.location.origin + "/order/fail",
             customerEmail:memberEmail,
             customerName: memberName,

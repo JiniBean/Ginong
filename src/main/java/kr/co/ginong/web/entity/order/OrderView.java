@@ -14,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 public class OrderView {
     private Long	id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date    date;
     private Long    categoryId;
     private String  category;
@@ -36,9 +35,7 @@ public class OrderView {
     private String  exchDesc;
     private Integer exchState;
     private Integer exchQty;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date    exchRegDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date    exchApvlDate;
     private Long    exchCtgryId;
     private String  exchCtgryName;
@@ -48,9 +45,7 @@ public class OrderView {
     private String  rfndDesc;
     private Integer rfndState;
     private Integer rfndQty;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date    rfndRegDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date    rfndApvlDate;
     private Long    rfndCtgryId;
     private String  rfndCtgryName;
