@@ -7,6 +7,7 @@ import kr.co.ginong.web.entity.coupon.CouponHistoryView;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.order.*;
 import kr.co.ginong.web.entity.point.PointHistory;
+import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductView;
 import kr.co.ginong.web.service.cart.CartService;
 import kr.co.ginong.web.service.coupon.CouponService;
@@ -111,7 +112,6 @@ public class OrderController {
 
         //================================================================
 
-
         //배송지정보 가져오기
         Long lId = (Long) session.getAttribute("locationId");
 
@@ -189,14 +189,14 @@ public class OrderController {
         locationHistory.setMemberId(memberId);
         locationHistory.setOrderId(id);
 
-
+        OrderData orderData = new OrderData();
+        orderData.setOrderItem(items);
+        orderData.setOrder(order);
+        orderData.setLocationHistory(locationHistory);
 
         //세션에 주문 아이템 정보 업데이트
-        session.setAttribute("order", order);
-        session.setAttribute("orderItems", items);
         session.setAttribute("orderItemsList", itemsList);
-        session.setAttribute("locationHistory", locationHistory);
-
+        session.setAttribute("orderData", orderData);
 
         return "redirect:pay";
     }
@@ -236,102 +236,135 @@ public class OrderController {
         return "user/order/pay";
     }
 
-    @PostMapping("pay")
-    public String pay(
-            @RequestParam(name = "id", required = false) Long chid,
-            @RequestParam(name = "cid", required = false) Long cid,
-            @RequestParam(name = "usedAmt", required = false) Integer usedAmt
-            , Payment payment
-            , Integer point
-            , HttpSession session
-            ,@AuthenticationPrincipal WebUserDetails userDetails) {
+//    @PostMapping("pay")
+//    public String pay(
+//            @RequestParam(name = "id", required = false) Long chid,
+//            @RequestParam(name = "cid", required = false) Long cid,
+//            @RequestParam(name = "usedAmt", required = false) Integer usedAmt
+//            , Payment payment
+//            , Integer point
+//            , HttpSession session
+//            ,@AuthenticationPrincipal WebUserDetails userDetails) {
+//
+//        Long memberId = null;
+//        if(userDetails!=null)
+//            memberId = userDetails.getId();
+//
+//        //session에서 주문 번호와 회원 번호 가져오기
+//        Long orderId = (Long) session.getAttribute("orderId");
+//
+//        //결제정보 결제 테이블에 저장하기
+//        payment.setOrderId(orderId);
+//        payment.setMemberId(memberId);
+//        boolean pymt = paymentService.add(payment);
+//
+//        //쿠폰 사용내역 업데이트
+//        boolean cupn = false;
+//        if(chid != null){
+//            CouponHistory couponHistory = CouponHistory.builder()
+//                    .id(chid)
+//                    .usedAmt(usedAmt)
+//                    .couponId(cid)
+//                    .orderId(orderId)
+//                    .memberId(memberId).build();
+//            cupn = couponService.updateHistory(couponHistory);
+//        }
+//        else
+//            cupn = true;
+//
+//
+//        //포인트 사용내역 저장
+//        boolean pnt = false;
+//        if(point != null && point >= 1000){
+//           PointHistory pointHistory
+//                   = PointHistory.builder()
+//                   .plma(-1)
+//                   .amount(point)
+//                   .memberId(memberId)
+//                   .orderId(orderId)
+//                   .build();
+//           pnt = pointService.addHistory(pointHistory);
+//        }
+//        else
+//            pnt = true;
+//
+//        //결제금액 세션으로 넘기기
+//        int totalAmt = payment.getTotalAmt();
+//        session.setAttribute("totalAmt", totalAmt);
+//
+//        if(pymt && pnt && cupn)
+//            return "redirect:complete";
+//        return null;
+//    }
 
+    @GetMapping("confirm")
+    public String confirm() throws InterruptedException {
+
+
+
+        return "user/order/confirm";
+    }
+
+    @GetMapping("success")
+    public String success(HttpSession session,
+            @AuthenticationPrincipal WebUserDetails userDetails) {
+
+        // 사용자 이름 가져오기
         Long memberId = null;
         if(userDetails!=null)
             memberId = userDetails.getId();
 
-        //TODO 간편결제 API 구현 필요
+        OrderData list = (OrderData) session.getAttribute("orderData");
+        list.getPayment().setMemberId(memberId);
+        list.getPayment().setCategoryId(1L);
+        list.getCouponHistory().setMemberId(memberId);
+        list.getPointHistory().setMemberId(memberId);
 
-        //session에서 주문 번호와 회원 번호 가져오기
-        Long orderId = (Long) session.getAttribute("orderId");
+        String error = service.saveOrderData(list);
+        if(error.isEmpty())
+            return "user/order/complete?id="+list.getOrder().getId();
 
-        //결제정보 결제 테이블에 저장하기
-        payment.setOrderId(orderId);
-        payment.setMemberId(memberId);
-        boolean pymt = paymentService.add(payment);
+        return "redirect:fail?message=주문정보를 저장하는데 실패했습니다&code="+error;
 
-        //쿠폰 사용내역 업데이트
-        boolean cupn = false;
-        if(chid != null){
-            CouponHistory couponHistory = CouponHistory.builder()
-                    .id(chid)
-                    .usedAmt(usedAmt)
-                    .couponId(cid)
-                    .orderId(orderId)
-                    .memberId(memberId).build();
-            cupn = couponService.updateHistory(couponHistory);
-        }
-        else
-            cupn = true;
+    }
+
+    @GetMapping("fail")
+    public String fail(@RequestParam(name = "message") String msg,
+                       @RequestParam(name = "code") String code,
+                       Model model) {
 
 
-        //포인트 사용내역 저장
-        boolean pnt = false;
-        if(point != null && point >= 1000){
-           PointHistory pointHistory
-                   = PointHistory.builder()
-                   .plma(-1)
-                   .amount(point)
-                   .memberId(memberId)
-                   .orderId(orderId)
-                   .build();
-           pnt = pointService.addHistory(pointHistory);
-        }
-        else
-            pnt = true;
-
-        //결제금액 세션으로 넘기기
-        int totalAmt = payment.getTotalAmt();
-        session.setAttribute("totalAmt", totalAmt);
-
-        if(pymt && pnt && cupn)
-            return "redirect:complete";
-        return null;
+        model.addAttribute("msg", msg);
+        model.addAttribute("code", code);
+        return "user/order/fail";
     }
 
 
     @GetMapping("complete")
-    public String complete(HttpSession session, Model model
+    public String complete(@RequestParam(name = "id") Long id,
+                           HttpSession session, Model model
             ,@AuthenticationPrincipal WebUserDetails userDetails) {
 
+        // 사용자 이름 가져오기
         Long memberId = null;
         if(userDetails!=null)
             memberId = userDetails.getId();
 
-//        장바구니 삭제하기
-//        List<Long> cartList = new ArrayList<>();
-//        cartList.add(i.getProductId());
-//        locationService.addHistory(locationHistory);
-
-        //주문 정보 가져오기
-        List<Map<String, Object>> items = (List<Map<String, Object>>) session.getAttribute("orderItemsList");
-        Map<String, Object> item = items.get(0); //주문 목록 중 첫번째 상품
-        int size = items.size()-1; //외 N건
-
-        Long orderId = (Long) session.getAttribute("orderId");
-        int totalAmt = (int) session.getAttribute("totalAmt");//총 결제금액
-
-
-        // 사용자 이름 가져오기
         Member member = memberService.get(memberId);
         String name = member.getName();
 
+        //주문 정보 가져오기
+        List<OrderView> list = service.getItems(id);
+        OrderView item = list.get(0);
+
+        //상품 정보 가져오기
+        ProductView product = productService.get(item.getProductId());
+
         // 모델
         model.addAttribute("item", item);
-        model.addAttribute("size", size);
-        model.addAttribute("totalAmt", totalAmt);
+        model.addAttribute("size", list.size());
         model.addAttribute("name", name);
-        model.addAttribute("orderId", orderId);
+        model.addAttribute("product", product);
 
         //세션에 있는 주문 관련 정보들 지우기
         session.removeAttribute("orderId");
@@ -339,6 +372,7 @@ public class OrderController {
         session.removeAttribute("totalAmt");
         session.removeAttribute("orderItems");
         session.removeAttribute("orderItemsList");
+        session.removeAttribute("orderData");
 
         return "user/order/complete";
     }
@@ -375,5 +409,6 @@ public class OrderController {
         session.setAttribute("orderItems", list);
         return "redirect:info";
     }
+
 
 }

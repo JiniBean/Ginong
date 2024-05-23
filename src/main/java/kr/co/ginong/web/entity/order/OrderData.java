@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,4 +20,10 @@ public class OrderData {
     private CouponHistory couponHistory;
 
     private PointHistory pointHistory;
+
+    private Order order;
+
+    private List<OrderItem> orderItem;
+
+    private LocationHistory locationHistory;
 }
