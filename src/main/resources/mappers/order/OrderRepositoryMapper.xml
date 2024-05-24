@@ -203,4 +203,10 @@
 		) y ON 1 = 1;
 	</select>
 
+	<select id="findBySalesVolume" resultType="OrderView">
+		SELECT COUNT(*) AS COUNT, PRETTY_NAME AS NAME 
+		FROM ORDER_VIEW
+		GROUP BY PRODUCT_ID
+		ORDER BY COUNT DESC;
+	</select>
 </mapper>
