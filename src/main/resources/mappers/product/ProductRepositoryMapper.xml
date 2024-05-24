@@ -123,7 +123,7 @@
 		select
 		*
 		from PRODUCT_VIEW
-		order by LIKE_COUNT asc
+		order by LIKE_COUNT
 	</select>
 
 

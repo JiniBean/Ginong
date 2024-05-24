@@ -4,6 +4,7 @@ import kr.co.ginong.web.entity.point.Point;
 import kr.co.ginong.web.entity.point.PointHistoryView;
 import kr.co.ginong.web.service.point.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class PointController {
 
         return pointService.getById(id);
     }
+
+
+
+
 //
 //    @GetMapping("payment/list")
 //    public List<PointHistoryView> paymentList(@RequestParam(required = false) String query){

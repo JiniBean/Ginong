@@ -59,6 +59,7 @@
 			<if test="addr1 != null"> addr1 = #{addr1}, </if>
 			<if test="addr2 != null"> addr2 = #{addr2}, </if>
 		</set>
+		WHERE MEMBER_ID = #{memberId}
 	</update>
 
 	<delete id="deleteLocation">
