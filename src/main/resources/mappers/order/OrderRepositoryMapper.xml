@@ -169,37 +169,37 @@
 
 	<select id="countStatus" >
 		SELECT
-		d.count day,
-		w.count week,
-		m.count month,
-		y.count year
+			IFNULL(d.count,0) day,
+			IFNULL(w.count,0) week,
+			IFNULL(m.count,0) month,
+			IFNULL(y.count,0) year
 		FROM (
-		SELECT DATE(DATE) day , COUNT(*)count
-		FROM `ORDER`
-		WHERE CANCEL_ID IS NULL
-		AND DATE(DATE) = CURRENT_DATE()
-		GROUP BY day
+			SELECT DATE(DATE) day , COUNT(*)count
+			FROM `ORDER`
+			WHERE CANCEL_ID IS NULL
+			AND DATE(DATE) = CURRENT_DATE()
+			GROUP BY day
 		)d
-		JOIN (
-		SELECT YEAR(DATE) y, MONTH(DATE)m, WEEK(DATE)w, COUNT(*)count
-		FROM `ORDER`
-		WHERE CANCEL_ID IS NULL
-		GROUP BY y, m, w
-		HAVING w = WEEK(CURRENT_TIMESTAMP)
+		RIGHT JOIN (
+			SELECT YEAR(DATE) y, MONTH(DATE)m, WEEK(DATE)w, COUNT(*)count
+			FROM `ORDER`
+			WHERE CANCEL_ID IS NULL
+			GROUP BY y, m, w
+			HAVING w = WEEK(CURRENT_TIMESTAMP)
 		) w ON 1 = 1
-		JOIN (
-		SELECT YEAR(DATE) AS year, MONTH(DATE) AS month, COUNT(*) AS count
-		FROM `ORDER`
-		WHERE CANCEL_ID IS NULL
-		GROUP BY year, month
-		HAVING month = MONTH(CURRENT_TIMESTAMP)
+		RIGHT JOIN (
+			SELECT YEAR(DATE) AS year, MONTH(DATE) AS month, COUNT(*) AS count
+			FROM `ORDER`
+			WHERE CANCEL_ID IS NULL
+			GROUP BY year, month
+			HAVING month = MONTH(CURRENT_TIMESTAMP)
 		) m ON 1 = 1
-		JOIN (
-		SELECT YEAR(DATE) AS year, COUNT(*) AS count
-		FROM `ORDER`
-		WHERE CANCEL_ID IS NULL
-		AND YEAR(DATE) = YEAR(CURRENT_TIMESTAMP)
-		GROUP BY year
+		RIGHT JOIN (
+			SELECT YEAR(DATE) AS year, COUNT(*) AS count
+			FROM `ORDER`
+			WHERE CANCEL_ID IS NULL
+			AND YEAR(DATE) = YEAR(CURRENT_TIMESTAMP)
+			GROUP BY year
 		) y ON 1 = 1;
 	</select>
 

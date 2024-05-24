@@ -6,11 +6,13 @@ import java.util.Map;
 import kr.co.ginong.web.entity.member.JoinRoute;
 import kr.co.ginong.web.entity.order.OrderView;
 
-public interface OrderStatisticsService {
+public interface StatisticsService {
 
-    Map<String, Object> getStatus();
+    Map<String, Object> getOrderStatus();
 
     List<OrderView> getBestSeller();
 
     List<JoinRoute> getJoinRoute();
+
+    List<Map<String, Object>> getStockStatus();
 }

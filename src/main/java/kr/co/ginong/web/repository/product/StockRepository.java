@@ -5,6 +5,7 @@ import kr.co.ginong.web.entity.product.StockView;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StockRepository {
@@ -19,4 +20,8 @@ public interface StockRepository {
     boolean update(Stock stock);
 
     Boolean delete(List<Long> ids);
+
+    //    ----------- 통계 관련 메소드 -------------------
+    List<Map<String, Object>> countStatus();
+
 }

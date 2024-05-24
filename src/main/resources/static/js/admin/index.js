@@ -22,21 +22,22 @@ createApp({
         async getOrderStats(){
             let res = await fetch('/api/stats/order');
             this.orderStats = await res.json();
-            console.log(this.orderStats);
         },
         async getStockStats(){
             let res = await fetch('/api/stats/stock');
-            this.orderStats = await res.json();
-            console.log(this.orderStats);
+            this.stockStats = await res.json();
         },
         async getInquiryStats(){
             let res = await fetch('/api/stats/inquiry');
-            this.orderStats = await res.json();
-            console.log(this.orderStats);
+            this.inquiryStats = await res.json();
         }
     },
     mounted(){
         this.getOrderStats();
-        console.log(this.orderStats);
+
+        this.getStockStats();
+
+        console.log(this.orderStats.toString())
+        console.log(this.stockStats.toString())
     }
 }).mount('main');
