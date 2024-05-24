@@ -14,7 +14,7 @@ createApp({
     methods:{
         moveStock(id){
             //클릭한 상품의 상품 id를 인자로 받음
-            location.href = `/stock/detail?p=${id}`;
+            location.href = `admin/stock/detail?p=${id}`;
         },
         moveInquiry(){
 

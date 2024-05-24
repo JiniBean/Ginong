@@ -44,7 +44,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr >
+            <tr>
                 <th scope="row" class="w:auto txt-al:center">{{orderStats.year}}</th>
                 <th class="w:auto txt-al:center">{{orderStats.month}}</th>
                 <th class="w:auto txt-al:center">{{orderStats.week}}</th>
@@ -61,15 +61,15 @@
             <thead class="bg-color:base-3 txt-al:center">
                 <tr>
                     <th scope="col" class="w:auto txt-al:center">상품명</th>
-                    <th scope="col" class="txt-al:center" style="width: 200px">현 재고</th>
-                    <th scope="col" class="txt-al:center" style="width: 200px">주문건수</th>
+                    <th scope="col" class="txt-al:center w:4" >현 재고</th>
+                    <th scope="col" class="txt-al:center w:4">직전 변동량</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="s in stockStats" @click="moveStock(s.productId)">
-                    <th scope="row" class="w:auto">{{s.name}}</th>
-                    <td class="txt-al:center" style="width: 200px">{{s.amount}}</td>
-                    <td class="txt-al:center" style="width: 200px">{{s.currentAmount}}</td>
+                <tr v-for="s in stockStats" @click="moveStock(s.PRODUCT_ID)">
+                    <th scope="row" class="w:auto">{{s.NAME}}</th>
+                    <td class="txt-al:center w:4">{{s.amount}}</td>
+                    <td :class="{'color:sub-2':s.current_amount<0}" class="txt-al:center color:sub-5 w:4" >{{s.current_amount}}</td>
                 </tr>
                 <tr v-if="stockStats.length<1">
                     <td colspan="3" class="txt-al:center">내역이 없습니다.</td>
@@ -90,7 +90,7 @@
                 <tr v-for="s in stockStats" @click="moveStock(s.PRODUCT_ID)">
                     <th scope="row" class="w:auto">{{s.NAME}}</th>
                     <td class="txt-al:center w:5">{{s.amount}}</td>
-                    <td class="txt-al:center w:5">{{s.current_amount}}</td>
+                    <td :class="{'color:sub-2':s.current_amount<0}" class="txt-al:center color:sub-5 w:5">{{s.current_amount}}</td>
                     <td class="txt-al:center w:5">{{s.category}}</td>
                 </tr>
                 <tr v-if="stockStats.length<1">
