@@ -204,9 +204,10 @@
 	</select>
 
 	<select id="findBySalesVolume" resultType="OrderView">
-		SELECT COUNT(*) AS COUNT, PRETTY_NAME AS NAME 
+		SELECT COUNT(*) AS COUNT, PRETTY_NAME
 		FROM ORDER_VIEW
 		GROUP BY PRODUCT_ID
-		ORDER BY COUNT DESC;
+		ORDER BY COUNT DESC
+		LIMIT 10;
 	</select>
 </mapper>

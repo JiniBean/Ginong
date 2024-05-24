@@ -3,6 +3,7 @@ package kr.co.ginong.web.service.statistics;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.ginong.web.entity.member.JoinRoute;
 import kr.co.ginong.web.entity.order.OrderView;
 
 public interface OrderStatisticsService {
@@ -11,4 +12,5 @@ public interface OrderStatisticsService {
 
     List<OrderView> getBestSeller();
 
+    List<JoinRoute> getJoinRoute();
 }

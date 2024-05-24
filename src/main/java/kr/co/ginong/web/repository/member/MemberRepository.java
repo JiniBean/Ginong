@@ -1,8 +1,11 @@
 package kr.co.ginong.web.repository.member;
 
+import kr.co.ginong.web.entity.member.JoinRoute;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberRole;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface MemberRepository {
@@ -26,4 +29,6 @@ public interface MemberRepository {
     void insertAuthorityByUserId(MemberRole memberRole);
 
     Member findByEmail(String email);
+
+    List<JoinRoute> getJoinRoute();
 }

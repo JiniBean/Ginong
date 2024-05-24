@@ -1,5 +1,6 @@
 package kr.co.ginong.web.controller.api;
 
+import kr.co.ginong.web.entity.member.JoinRoute;
 import kr.co.ginong.web.entity.order.OrderView;
 import kr.co.ginong.web.service.statistics.OrderStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,13 @@ public class StatisticsController {
         return orderService.getStatus();
 
     }
-
     @GetMapping("best-seller")
     public List<OrderView> getBestSeller() {
         return orderService.getBestSeller();
+    }
+
+    @GetMapping("join-route")
+    public List<JoinRoute> getJoinRoute() {
+        return orderService.getJoinRoute();
     }
 }

@@ -103,4 +103,10 @@
         WHERE EMAIL = #{email}
     </select>
 
+    <select id="getJoinRoute" resultType="Member">
+        SELECT NAME, COUNT(*) AS COUNT FROM JOIN_ROUTE
+        GROUP BY NAME
+        ORDER BY COUNT DESC;
+    </select>
+
 </mapper>
