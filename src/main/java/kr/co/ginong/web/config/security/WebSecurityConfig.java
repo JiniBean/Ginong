@@ -30,7 +30,6 @@ public class WebSecurityConfig{
 	private WebOAuth2UserDetailsService oAuth2UserDetailsService;
 
 
-
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		PasswordEncoder encoder = new BCryptPasswordEncoder();

@@ -21,7 +21,7 @@ public interface LocationRepository {
     LocationHistory findByOrderId(long orderId);
 
     void save(Location location);
-    void saveHistory(LocationHistory locationHistory);
+    boolean saveHistory(LocationHistory locationHistory);
     void delete(long id);
 
     void updateLocationByMemberId(Location updatedLocationInfo);

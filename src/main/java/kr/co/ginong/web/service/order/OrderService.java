@@ -2,10 +2,7 @@ package kr.co.ginong.web.service.order;
 
 import java.util.List;
 
-import kr.co.ginong.web.entity.order.Order;
-import kr.co.ginong.web.entity.order.OrderCategory;
-import kr.co.ginong.web.entity.order.OrderItem;
-import kr.co.ginong.web.entity.order.OrderView;
+import kr.co.ginong.web.entity.order.*;
 
 public interface OrderService {
 
@@ -38,4 +35,5 @@ public interface OrderService {
 
     boolean addCancel(Order order);
 
+    String saveOrderData(OrderData list);
 }

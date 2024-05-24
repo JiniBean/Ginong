@@ -106,7 +106,7 @@ document.addEventListener('click', function (e) {
 
             let list = [];
             list.push(cart);
-            cookie.set("cartList", JSON.stringify(list));
+            document.cookie = `cartList=${encodeURIComponent(JSON.stringify(list))}; path=/`;
             qty = cart.quantity;
 
         }
@@ -128,11 +128,11 @@ document.addEventListener('click', function (e) {
                     quantity: 1
                 }
                 cookieList.push(cart);
-                cookie.set("cartList", JSON.stringify(cookieList));
+                document.cookie = `cartList=${encodeURIComponent(JSON.stringify(cookieList))}; path=/`;
                 qty = cart.quantity;
                 check = true;
             }
-            cookie.set("cartList", JSON.stringify(cookieList));
+            document.cookie = `cartList=${encodeURIComponent(JSON.stringify(cookieList))}; path=/`;
         }
 
 

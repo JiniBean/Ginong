@@ -14,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 public class Order {
     private Long	id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date	date;
     private String  trackingNum;
     private Long	memberId;

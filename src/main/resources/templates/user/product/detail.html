@@ -322,7 +322,7 @@
                             <span th:text="${q.content}">햄버거에 넣어도 맛있을까요??</span>
                         </div>
                         <div class="bg-color:main-1 d:flex fl-dir:column gap:1 p:1"
-                             th:text="${q.answer}">
+                             th:text="${q.answer}" th:if="${q.answer != null}">
                             <span class="fw:3" >기농이네 답변</span>
                             <div class="">
                                 안녕하세요.<br/>기농이네입니다.<br/>문의 주셔서
@@ -371,7 +371,7 @@
                           th:text="${#dates.format(q.regDate, 'yyyy.MM.dd')}">2024.03.21</span>
                     <input type="checkbox" class="n-expander-trigger"/>
                 </div>
-                <div class="bg-color:main-1 d:flex fl-dir:column n-expander-content ">
+                <div class="bg-color:main-1 d:flex fl-dir:column n-expander-content" th:if="${q.answer != null}">
                     <div class="p:8">
                         <span class="fw:3">기농이네 답변</span>
                         <div class=""

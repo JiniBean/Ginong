@@ -127,16 +127,16 @@ public class OrderController {
     }
 
     @PostMapping("/tmp")
-    public void temp (@RequestBody OrderData list,
+    public void temp (@RequestBody OrderData tmp,
                       HttpSession session){
 
-        Payment payment = list.getPayment();
-        PointHistory pointHistory = list.getPointHistory();
-        CouponHistory couponHistory = list.getCouponHistory();
 
-        session.setAttribute("payment", payment);
-        session.setAttribute("pointHistory", pointHistory);
-        session.setAttribute("couponHistory", couponHistory);
+        OrderData list = (OrderData) session.getAttribute("orderData");
+        list.setPayment(tmp.getPayment());
+        list.setCouponHistory(tmp.getCouponHistory());
+        list.setPointHistory(tmp.getPointHistory());
+
+        session.setAttribute("orderData", list);
 
     }
     @PostMapping("/cancel")

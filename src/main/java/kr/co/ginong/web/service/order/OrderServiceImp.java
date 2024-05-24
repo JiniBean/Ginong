@@ -3,20 +3,20 @@ package kr.co.ginong.web.service.order;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import kr.co.ginong.web.entity.order.OrderCategory;
-import kr.co.ginong.web.repository.order.CancelRepository;
-import kr.co.ginong.web.repository.order.OrderCategoryRepository;
+import kr.co.ginong.web.entity.coupon.CouponHistory;
+import kr.co.ginong.web.entity.order.*;
+import kr.co.ginong.web.entity.point.PointHistory;
+import kr.co.ginong.web.repository.cart.CartRepository;
+import kr.co.ginong.web.repository.coupon.CouponHistoryRepository;
+import kr.co.ginong.web.repository.order.*;
+import kr.co.ginong.web.repository.point.PointHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.ginong.web.entity.order.Order;
-import kr.co.ginong.web.entity.order.OrderItem;
-import kr.co.ginong.web.entity.order.OrderView;
-import kr.co.ginong.web.repository.order.OrderItemRepository;
-import kr.co.ginong.web.repository.order.OrderRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -33,6 +33,23 @@ public class OrderServiceImp implements OrderService {
 
     @Autowired
     private CancelRepository cancelRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private CouponHistoryRepository couponHistoryRepository;
+
+    @Autowired
+    private PointHistoryRepository pointHistoryRepository;
+
+
 
     @Override
     public List<OrderView> getList(Long memberId, String query, Boolean sort) {
@@ -138,6 +155,55 @@ public class OrderServiceImp implements OrderService {
         }
 
         return false;
+    }
+
+    @Override
+    @Transactional
+    public String saveOrderData(OrderData list) {
+
+        Payment payment = list.getPayment();
+        PointHistory pointHistory = list.getPointHistory();
+        CouponHistory couponHistory = list.getCouponHistory();
+        Order order = list.getOrder();
+        List<OrderItem> orderItem = list.getOrderItem();
+        LocationHistory locationHistory = list.getLocationHistory();
+
+        List<Long> cartList = new ArrayList<>();
+        for (OrderItem i:orderItem)
+            cartList.add(i.getProductId());
+
+        boolean o = repository.save(order);
+        boolean oi = itemRepository.save(orderItem);
+        boolean l = locationRepository.saveHistory(locationHistory);
+        boolean p = paymentRepository.save(payment);
+
+
+        boolean ph = pointHistory.getAmount() < 1 ? true : pointHistoryRepository.save(pointHistory);
+
+        boolean ch = couponHistory.getCouponId() < 1 ? true :couponHistoryRepository.update(couponHistory);
+        cartRepository.delete(order.getMemberId(), null,cartList);
+        String error = "";
+
+        if(!o)
+            error += "O-";
+
+        if(!oi)
+            error += "OI-";
+
+        if(!l)
+            error += "L-";
+
+        if(!p)
+            error += "P-";
+
+        if(!ph)
+            error += "PH-";
+
+        if(!ch)
+            error += "CH-";
+
+
+        return error;
     }
 
 

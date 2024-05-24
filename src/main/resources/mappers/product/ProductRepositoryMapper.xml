@@ -119,6 +119,13 @@
 		order by LIKE_COUNT desc
 	</select>
 
+	<select id="findAllBestProduct" resultType="ProductView">
+		select
+		*
+		from PRODUCT_VIEW
+		order by LIKE_COUNT asc
+	</select>
+
 
 	<!--  #####################################################################	-->
 
