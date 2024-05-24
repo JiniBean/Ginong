@@ -28,6 +28,7 @@ public class Stock {
     private Long	memberId;
     private Long	productId;
     private Long	categoryId;
+    private Long	orderId;
 
 
 }

@@ -13,7 +13,8 @@ public interface StockRepository {
     StockView findById(Long id);
     List<StockView> findAll(String query,Boolean amount, Boolean current);
 
-    Boolean save(Stock stock);
+    boolean save(Stock stock);
+    boolean saveByOrder(List<Stock> list);
 
     boolean update(Stock stock);
 

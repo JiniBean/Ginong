@@ -10,10 +10,12 @@ import java.util.Random;
 import kr.co.ginong.web.entity.coupon.CouponHistory;
 import kr.co.ginong.web.entity.order.*;
 import kr.co.ginong.web.entity.point.PointHistory;
+import kr.co.ginong.web.entity.product.Stock;
 import kr.co.ginong.web.repository.cart.CartRepository;
 import kr.co.ginong.web.repository.coupon.CouponHistoryRepository;
 import kr.co.ginong.web.repository.order.*;
 import kr.co.ginong.web.repository.point.PointHistoryRepository;
+import kr.co.ginong.web.repository.product.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,9 @@ public class OrderServiceImp implements OrderService {
 
     @Autowired
     private PointHistoryRepository pointHistoryRepository;
+
+    @Autowired
+    private StockRepository stockRepository;
 
 
 
@@ -169,14 +174,23 @@ public class OrderServiceImp implements OrderService {
         LocationHistory locationHistory = list.getLocationHistory();
 
         List<Long> cartList = new ArrayList<>();
-        for (OrderItem i:orderItem)
+        List<Stock> stockList = new ArrayList<>();
+        for (OrderItem i:orderItem){
+            Stock stock = new Stock();
+            stock.setPlma(-1);
+            stock.setAmount(i.getQuantity());
+            stock.setDesc("주문번호 "+i.getOrderId());
+            stock.setCategoryId(2L);
+            stock.setProductId(i.getProductId());
+            stock.setOrderId(i.getOrderId());
+            stockList.add(stock);
             cartList.add(i.getProductId());
-
+        }
         boolean o = repository.save(order);
         boolean oi = itemRepository.save(orderItem);
         boolean l = locationRepository.saveHistory(locationHistory);
         boolean p = paymentRepository.save(payment);
-
+        boolean s = stockRepository.saveByOrder(stockList);
 
         boolean ph = pointHistory.getAmount() < 1 ? true : pointHistoryRepository.save(pointHistory);
 
@@ -196,11 +210,15 @@ public class OrderServiceImp implements OrderService {
         if(!p)
             error += "P-";
 
+        if(!s)
+            error += "S-";
+
         if(!ph)
             error += "PH-";
 
         if(!ch)
             error += "CH-";
+
 
 
         return error;

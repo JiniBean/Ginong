@@ -15,7 +15,10 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script type="text/javascript" src="/js/admin/index.js" defer></script>
     <script type="text/javascript" src="/js/admin/highchart.js" defer></script>
-    
+
+    <link rel="stylesheet" href="/css/admin/index.css">
+
+
 </head>
 <body>
 <main layout:fragment="main" class=" d:flex fl-dir:column gap:11 md:gap:15 w:10p pt:8 md:pt:13 max-w:10 pr:4 pl:4 md:pr:0 md:pl:0 ">
@@ -72,8 +75,8 @@
 
     <section class="d:flex fl-dir:column gap:4 md:gap:6">
         <div class="d:flex jc:space-between">
-            <h1 class="fw:3 fs:3 md:fs:4">문의 현황</h1>
-            <div class="color:sub-6">답변 대기중 3건</div>
+            <h1 class="fw:3 fs:3 md:fs:4">답변 대기중 문의</h1>
+            <div class="color:sub-6">총 3건</div>
         </div>
         <table class="n-table n-table-hover n-table-border:bottom txt-al:center" >
             <thead class="bg-color:base-3 txt-al:center">
@@ -89,7 +92,9 @@
                     <th scope="row" class="w:auto" v-text="s.name">텃밭 흙당근</th>
                     <td class="txt-al:center md:w:5" style="width: 200px" v-text="s.currentAmount">300</td>
                     <td class="txt-al:center w:4 md:w:5" v-text="s.currentAmount">300</td>
-                    <td class="d:none md:d:table-cell txt-al:center w:5" v-text="s.quantity + s.quantityCategoryName" >3~4개</td>
+                </tr>
+                <tr v-if="inquiryStats.length<1">
+                    <td colspan="3" class="txt-al:center">내역이 없습니다.</td>
                 </tr>
             </tbody>
         </table>

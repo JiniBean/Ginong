@@ -17,7 +17,7 @@
 		FROM STOCK_VIEW
 		<where>
 			<if test="productId!=null"> PRODUCT_ID = #{productId}</if>
-			order by io_date desc
+			order by reg_date desc
 		</where>
 	</select>
 
@@ -34,6 +34,14 @@
 	<insert id="save" parameterType="Stock">
 		INSERT INTO STOCK (PLMA, AMOUNT, MADE_DATE, IO_DATE, `DESC`, MEMBER_ID, PRODUCT_ID, CATEGORY_ID)
 		values ( #{plma}, #{amount} , #{madeDate}, #{ioDate}, #{desc}, #{memberId}, #{productId}, #{categoryId}  )
+	</insert>
+
+	<insert id="saveByOrder" parameterType="Stock">
+		INSERT INTO STOCK (PLMA, AMOUNT, `DESC`, PRODUCT_ID, CATEGORY_ID, ORDER_ID)
+		values
+		<foreach collection="list" item="s" separator=",">
+			( #{s.plma}, #{s.amount}, #{s.desc}, #{s.productId}, #{s.categoryId} , #{s.orderId} )
+		</foreach>
 	</insert>
 
 	<update id="update" parameterType="Stock">
