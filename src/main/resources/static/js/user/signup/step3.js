@@ -354,9 +354,8 @@ window.addEventListener("load", function(e){
                const name = sessionStorage.getItem("name");
 
                //쿠키 삭제하기
-               cookie.remove("userInfo");
-
-               document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/signup';
+               document.cookie ='userInfo=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/signup';
+               //cookie.remove("userInfo");
 
                location.href=`/signup/step4?name=${name}`;
 
@@ -374,6 +373,10 @@ window.addEventListener("load", function(e){
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(cookieData);
 
+
+    }
+
+    function deleteCookie(){
 
     }
 
