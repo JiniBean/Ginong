@@ -108,7 +108,10 @@ public class MemberController {
     @GetMapping("signup/step4")
     public String step4(
             @RequestParam("name") String name
+            , Model model
     ) {
+        model.addAttribute("name", name);
+
         return "user/signup/step4";
     }
 

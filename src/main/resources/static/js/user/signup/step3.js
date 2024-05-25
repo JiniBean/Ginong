@@ -356,7 +356,7 @@ window.addEventListener("load", function(e){
                //쿠키 삭제하기
                cookie.remove("userInfo");
 
-
+               document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/signup';
 
                location.href=`/signup/step4?name=${name}`;
 

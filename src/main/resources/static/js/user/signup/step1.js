@@ -88,7 +88,10 @@ window.addEventListener("load", function(e){
 
     if(cookie.get("userInfo")){
 
-        const agree = cookie.get("userInfo")[0].agree;
+        const agree="N";
+
+        if(cookie.get("userInfo")[0]!==undefined)
+            this.agree= cookie.get("userInfo")[0].agree;
 
         // 선택 + 전체약관동의 체크해줌
         if(agree=="Y") {
@@ -99,6 +102,7 @@ window.addEventListener("load", function(e){
             checkAll.classList.replace("icon:checkCircle","icon:check_circle_fill");
             checkAll.classList.replace("icon-color:base-6","icon-color:main-6");
             checkAll.classList.add("checked");
+
         }
 
         //이전에서 왔다면 필수체크
