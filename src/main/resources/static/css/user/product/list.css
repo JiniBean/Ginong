@@ -42,15 +42,34 @@
 .n-pager li.active>*, .n-pager .n-page.active {
     background-color: var(--color-main-6);
 }
+div:has(div.cart-section):hover >.cart-section{
+    background-color: rgb(0,0,0,0.3);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+div:has(div.cart-section):hover >.cart-section > div{
+    background-color: rgb(255,255,255,0.5);
+}
+div:has(div.cart-section):hover >.cart-section > div > .icon\:shopping_cart_simple::before{
+    background-color: var(--color-base-9)
+}
+
+.icon\:shopping_cart_simple:hover::before,
+.icon\:shopping_cart_simple:active::before {
+    background-color: var(--color-base-9)
+
+}
+
 
 @media (min-width: 768px) {
     .cart-section{
         height: 60px;
     }
 
-    div:has(div.cart-section):hover > div.cart-section{
-        background-color: rgb(255,255,255,0.5);
+    .cart-section > div:hover {
+        background-color: var(--color-icon-bg);
     }
+
 
     .cart-section > div{
         background-color: var(--color-base-1);
@@ -58,8 +77,8 @@
         height: 44px;
     }
 
-    .cart-section > div:hover {
-        background-color: var(--color-icon-bg);
+    div:has(div.cart-section):hover > div.cart-section{
+        background-color: rgb(255,255,255,0.5);
     }
 
     .cart-section > div:active {
@@ -73,7 +92,7 @@
 
     .icon\:shopping_cart_simple:hover::before,
     .icon\:shopping_cart_simple:active::before {
-        background-color: var(--color-base-1) !important;
+        background-color: var(--color-base-1)
 
     }
 

@@ -24,10 +24,6 @@ function Cookie() {
 Cookie.prototype = {
     get: function (name) {
         return this.map[name];
-    },
-
-    getCount: function (name){
-        return this.map[name].length;
     }
 
 }
@@ -55,13 +51,13 @@ export default class Header {
         else {
             // 쿠키에 있는 상품 개수 가져오기
             let cookie = new Cookie();
-            count = cookie.getCount("cartList");
+            count = cookie.get("cartList");
         }
 
         // 있다면 장바구니에 개수 표시
         if(count > 0){
             this.#cartCircle.classList.remove("d:none")
-            this.#cartCircle.textContent = count;
+            this.#cartCircle.textContent = count.length;
         }
     }
 

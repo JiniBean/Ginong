@@ -280,25 +280,25 @@ window.addEventListener("load", function () {
     // }
 
     /* 상품 display 갯수 선택, default 20*/
-    function loadData() {
-        let alignNumber = alignNumberBox.value;
+    // function loadData() {
+    //     let alignNumber = alignNumberBox.value;
+    //
+    //     let url = `${baseUrl}/user/api/product?p=${p}&c=${c}&r=${alignNumber}`;
+    //
+    //     request(url, function (list) {
+    //         bind(list);
+    //         updatePagerLink(alignNumber);
+    //     });
+    // }
 
-        let url = `${baseUrl}/user/api/product?p=${p}&c=${c}&r=${alignNumber}`;
+    // alignNumberBox.onchange = function (e) {
+    //     // e.stopPropagation();
+    //     // e.preventDefault();
+    //
+    //     loadData();
+    // }
 
-        request(url, function (list) {
-            bind(list);
-            updatePagerLink(alignNumber);
-        });
-    }
-
-    alignNumberBox.onchange = function (e) {
-        // e.stopPropagation();
-        // e.preventDefault();
-
-        loadData();
-    }
-
-    loadData();
+    // loadData();
 
     function updatePagerLink(size) {
         // console.log(pagerButtons);
