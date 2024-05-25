@@ -14,8 +14,10 @@ createApp({
         }
     },
     async created(){
-        await this.fetchProducts();
+        await this.fetchProducts()
+
     },
+
     methods: {
         goProductDetail(id){
             let productId = id;
@@ -28,7 +30,7 @@ createApp({
                 if (response.ok) {
                     let info = await response.json();
                     if (info) {
-                        this.info = info;
+                        this.info = info
                     } else {
                         this.info = null;
                     }
@@ -65,6 +67,14 @@ createApp({
             if (this.selected >= 1) {
                 this.selected -= 1;
             }
-        }
+        },
+        formatDate(date) {
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1; // 월은 0부터 시작하기 때문에 1을 더함
+            let day = date.getDate();
+
+            //결과값 2024-05-24
+            return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        },
     }
 }).mount('main');

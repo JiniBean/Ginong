@@ -67,7 +67,7 @@
                 <div v-if="info" class="d:flex fl-dir:column gap:10 p:5">
                     <div class="d:flex jc:space-between">
                         <div>
-                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ info.date }}</span>
+                            <span class="fs:2 md:fs:3 fw:3 color:base-9 pr:1">{{ formatDate(new Date(info.date)) }}</span>
                             <span class="fs:2 md:fs:3 fw:3 color:base-9">주문</span>
                         </div>
                         <div>
