@@ -83,9 +83,7 @@ function drawJoinRoutePieChart(series) {
 function drawResultOfSalesLineChart(inputData) {
     const oddColors = colors.filter((color, index) => index % 2 == 1);
 
-    console.log("카테고리", inputData.categories);
     let categories = inputData.categories;
-    console.log("시리즈", inputData.series);
     let series = inputData.series;
 
 
@@ -163,10 +161,7 @@ fetch('/api/stats/join-route')
 fetch('/api/stats/calculate-sales')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         data = parseOrderChartData(data);
-
-
         drawResultOfSalesLineChart(data);
     }).catch(error => {
     console.error('데이터 가져오는 중 오류 발생:', error);
