@@ -85,6 +85,7 @@ function drawResultOfSalesLineChart(inputData) {
 
     console.log("카테고리", inputData.categories);
     let categories = inputData.categories;
+    console.log("시리즈", inputData.series);
     let series = inputData.series;
 
 
@@ -124,35 +125,6 @@ function drawResultOfSalesLineChart(inputData) {
             }
         },
         series
-        // series: [{
-        //     name: 'Tokyo',
-        //     marker: {
-        //         symbol: 'square'
-        //     },
-        //     data: [5.2, 5.7, 8.7, 13.9, 18.2, 21.4, 25.0, {
-        //         y: 26.4,
-        //         marker: {
-        //             symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)'
-        //         },
-        //         accessibility: {
-        //             description: 'Sunny symbol, this is the warmest point in the ' +
-        //                 'chart.'
-        //         }
-        //     }, 22.8, 17.5, 12.1, 7.6]
-        //
-        // }, {
-        //     name: 'Bergen',
-        //     data: [{
-        //         y: 1.5,
-        //         marker: {
-        //             symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'
-        //         },
-        //         accessibility: {
-        //             description: 'Snowy symbol, this is the coldest point in the ' +
-        //                 'chart.'
-        //         }
-        //     }, 1.6, 3.3, 5.9, 10.5, 13.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6]
-        // }]
     });
 }
 
@@ -191,94 +163,31 @@ fetch('/api/stats/join-route')
 fetch('/api/stats/calculate-sales')
     .then(response => response.json())
     .then(data => {
-        data = parseOrderChartData(data);
         console.log(data);
+        data = parseOrderChartData(data);
+
 
         drawResultOfSalesLineChart(data);
     }).catch(error => {
     console.error('데이터 가져오는 중 오류 발생:', error);
 });
 
+// 하루 중에 발생한 구매/취소/환불/교환 건수가 없을 경우, 없는 데이터를 0으로 맞춰주기 위한 작업중
 function parseOrderChartData(data) {
-    data = [
-        {
-            "DATE" : "2024-01-20",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 3
-        },
-        {
-            "DATE" : "2024-02-04",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 2
-        },
-        {
-            "DATE" : "2024-04-24",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 2
-        },
-        {
-            "DATE" : "2024-05-04",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 3
-        },
-        {
-            "DATE" : "2024-05-17",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 3
-        },
-        {
-            "DATE" : "2024-05-18",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 2
-        },
-        {
-            "DATE" : "2024-05-19",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 4
-        },
-        {
-            "DATE" : "2024-05-22",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 2
-        },
-        {
-            "DATE" : "2024-05-23",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 9
-        },
-        {
-            "DATE" : "2024-05-24",
-            "CATEGORY" : "주문건수",
-            "COUNT" : 4
-        },
-        {
-            "DATE" : "2024-02-04",
-            "CATEGORY" : "취소건수",
-            "COUNT" : 2
-        },
-        {
-            "DATE" : "2024-05-22",
-            "CATEGORY" : "취소건수",
-            "COUNT" : 1
-        }
-    ]
-
     // xAxis.categories = ['2024-01-20', '2024-02-04', ...]
-    let categories = [ ...new Set(data.map(e => e.DATE)) ];
+    let categories = [ ...new Set(data.map(e => e.date.slice(0,10)))];
 
     // series[][name] = ['주문건수', '취소건수', '환불건수', '교환건수']
-    let labels = [ ...new Set(data.map(e => e.CATEGORY)) ];
+    let labels = [ ...new Set(data.map(e => e.category)) ];
 
     let series = []
     for (let label of labels) {
         // [{"DATE":"2024-02-04","CATEGORY":"취소건수","COUNT":2},{"DATE":"2024-05-22","CATEGORY":"취소건수","COUNT":1}]
-        let labelData = data.filter(e => e.CATEGORY == label);
-        labelData.find(e => e.DATE == "2024-01-04")
+        let labelData = data.filter(e => e.category == label);
         series.push({
-
             data: categories
-                    .map(date => labelData.find(e => e.DATE == date)) // date == '2024-02-04'
-                    .map(e => e && e.COUNT || 0), // [0, 2, 0, 0, 0, 0, 0, 1, 0, 0]
+                    .map(date => labelData.find(e => e.date.slice(0,10) == date)) // date == '2024-02-04'
+                    .map(e => e && e.count || 0), // [0, 2, 0, 0, 0, 0, 0, 1, 0, 0]
             name: label
         })
     }
