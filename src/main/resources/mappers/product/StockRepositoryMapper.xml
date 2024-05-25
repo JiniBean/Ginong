@@ -74,15 +74,24 @@
 	</delete>
 
 	<select id="countStatus">
-		SELECT s.PRODUCT_ID, p.NAME , s.amount, sr.current_amount, sc.NAME category
+		SELECT
+			s.PRODUCT_ID productId,
+			p.NAME name,
+			s.amount,
+			sr.current_amount as current,
+			sc.NAME category
 		FROM (
-		SELECT sum(PLMA*AMOUNT)amount, PRODUCT_ID
-		FROM STOCK GROUP BY PRODUCT_ID HAVING amount &lt;= 10
-		ORDER BY amount)s
+			SELECT sum(PLMA*AMOUNT)amount, PRODUCT_ID
+			FROM STOCK GROUP BY PRODUCT_ID HAVING amount &lt;= 10
+			ORDER BY amount)s
 		JOIN(
-		SELECT PRODUCT_ID, PLMA*AMOUNT current_amount , CATEGORY_ID, REG_DATE
-		FROM STOCK
-		WHERE ID in (SELECT max(ID)id from STOCK GROUP BY PRODUCT_ID)
+			SELECT
+				PRODUCT_ID,
+				PLMA*AMOUNT current_amount ,
+				CATEGORY_ID,
+				REG_DATE
+			FROM STOCK
+			WHERE ID in ( SELECT max(ID)id from STOCK GROUP BY PRODUCT_ID)
 		)sr on s.PRODUCT_ID = sr.PRODUCT_ID
 		JOIN STOCK_CATEGORY sc on sr.CATEGORY_ID = sc.ID
 		JOIN PRODUCT p on s.PRODUCT_ID = p.ID;

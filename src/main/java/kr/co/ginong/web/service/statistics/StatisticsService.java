@@ -15,4 +15,6 @@ public interface StatisticsService {
     List<JoinRoute> getJoinRoute();
 
     List<Map<String, Object>> getStockStatus();
+
+    List<Map<String, Object>> getInquiryStatus();
 }

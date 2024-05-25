@@ -42,4 +42,27 @@
 		WHERE ID = #{inquiryId};
 	</delete>
 
+
+	<select id="countStatus" >
+		SELECT
+			i.ID as id,
+			i.TITLE as content,
+			i.REG_DATE as date,
+			ic.NAME as category,
+			CONCAT('1:1 문의') as 'case'
+		FROM INQUIRY i
+		LEFT JOIN INQUIRY_CATEGORY ic on i.CATEGORY_ID  = ic.ID
+		WHERE i.STATE = 0
+		UNION ALL
+		SELECT
+			pq.ID,
+			pq.CONTENT,
+			pq.REG_DATE,
+			pqc.NAME as category,
+			CONCAT('상품 문의') as 'case'
+		FROM PRODUCT_QNA pq
+		LEFT JOIN PRODUCT_QNA_CATEGORY pqc on pq.CATEGORY_ID = pqc.ID
+		WHERE pq.ANSWER_STATE = 0
+		ORDER BY date desc
+	</select>
 </mapper>

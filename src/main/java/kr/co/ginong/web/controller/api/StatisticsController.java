@@ -19,19 +19,23 @@ public class StatisticsController {
     private StatisticsService service;
 
     @GetMapping("order")
-    public Map<String, Object> orderStatus(){
+    public Map<String, Object> orderStats(){
 
         return service.getOrderStatus();
 
     }
 
     @GetMapping("stock")
-    public List<Map<String, Object>> stockStatus(){
+    public List<Map<String, Object>> stockStats(){
 
-        System.out.println("=======================");
-        System.out.println(service.getStockStatus());
-        System.out.println("=======================");
         return service.getStockStatus();
+
+    }
+
+    @GetMapping("inquiry")
+    public List<Map<String, Object>> inquiryStats(){
+
+        return service.getInquiryStatus();
 
     }
 

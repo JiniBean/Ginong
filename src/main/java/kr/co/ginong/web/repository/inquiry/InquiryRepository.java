@@ -5,6 +5,7 @@ import kr.co.ginong.web.entity.inquiry.InquiryCategory;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface InquiryRepository {
@@ -23,4 +24,6 @@ public interface InquiryRepository {
 
 
     void deleteById(Long inquiryId);
+
+    List<Map<String, Object>> countStatus();
 }
