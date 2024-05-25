@@ -9,7 +9,7 @@ createApp({
         return {
             list: [],
             tabIndex: 0,
-
+            query: null,
             code:{
                 1:'요청',
                 2:'진행중',
@@ -19,27 +19,29 @@ createApp({
         }
     },
     methods:{
-        async getList(idx) {
+        async getList(idx, isReset) {
             //클릭한 인덱스로 탭 바꾸기(active)
+
+            if(isReset)
+                this.query = '';
             this.tabIndex = idx;
             let repository = new Repository;
 
             //취소내역(1)
             if(idx){
-                this.list = await repository.findCancel(null,true);
+                this.list = await repository.findCancel(this.query,true);
                 this.list.forEach(l=> {
                     l.cnclDate = this.formatDate(new Date(l.cnclDate))
                 })
             }
             //주문내역(0)
             else{
-                this.list = await repository.findAll(null,null,true);
+                this.list = await repository.findAll(this.query,null,true);
                 this.list.forEach(l=> {
                     l.date = this.formatDate(new Date(l.date))
                 })
             }
-
-    },
+        },
 
         // 주문 상세내역 페이지로 이동하기
         goDetail(orderId) {
@@ -123,10 +125,10 @@ createApp({
 
             //결과값 2024.05.24
             return `${year}.${month < 10 ? '0' : ''}${month}.${day < 10 ? '0' : ''}${day}`;
-        },
+        }
     },
-    mounted() {
-        this.getList(0);
+    created() {
+        this.getList();
     }
 }).mount('main');
 
