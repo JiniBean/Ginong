@@ -21,6 +21,21 @@ main{
     color:var(--color-base-9);
 }
 
+aside>ul>li{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+
+aside>ul>li:hover{
+    background-color: var(--color-base-2);
+}
+
 @media (min-width: 780px) {
     body {
 
@@ -31,7 +46,14 @@ main{
     *{
         font-size : var(--font-size-3);
     }
+
+    footer{
+        border-top: var(--color-base-2) 2px solid;
+    }
 }
+
+
+
 
 
 
