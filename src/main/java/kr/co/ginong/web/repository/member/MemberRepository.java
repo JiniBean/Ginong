@@ -1,6 +1,6 @@
 package kr.co.ginong.web.repository.member;
 
-import kr.co.ginong.web.entity.member.JoinRoute;
+import kr.co.ginong.web.entity.member.JoinRouteStatsView;
 import kr.co.ginong.web.entity.member.Member;
 import kr.co.ginong.web.entity.member.MemberRole;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,5 +30,5 @@ public interface MemberRepository {
 
     Member findByEmail(String email);
 
-    List<JoinRoute> getJoinRoute();
+    List<JoinRouteStatsView> getJoinRoute();
 }

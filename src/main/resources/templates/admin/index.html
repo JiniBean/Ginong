@@ -151,15 +151,19 @@
     </section>
 
     <!-- ============================== 통계 ============================== -->
-    <section class="n-item d:flex fl-dir:column d:gap:3 md:gap:5">
-        <h1 class="pb:2 bd-bottom bd-color:base-3 d:none"><b>그래프 모음</b></h1>
-        <div id="bestseller-container" class="n-item:shadow w:10p">
-            베스트셀러 그래프
-        </div>
+    <section>
+        <h1 class="d:none"><b>그래프 모음</b></h1>
+        <div class="d:flex fl-dir:column d:gap:3 md:gap:5">
+            <div id="bestseller-container" class="n-item:shadow w:10p">
+                베스트셀러 그래프
+            </div>
 
-        <div class="d:flex d:gap:2 md:gap:4">
-            <div id="join-route-container" class="n-item:shadow w:5p">
+            <div id="join-route-container" class="n-item:shadow w:10p">
                 회원가입 경로 집계 그래프
+            </div>
+
+            <div id="sales-container" class="n-item:shadow w:10p">
+                일별 구매/취소/환불/교환 건수 집계 그래프
             </div>
         </div>
     </section>

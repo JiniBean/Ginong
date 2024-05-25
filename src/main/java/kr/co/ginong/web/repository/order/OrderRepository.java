@@ -30,9 +30,9 @@ public interface OrderRepository {
 
     List<OrderView> findByMemberId(Long memberId);
 
-    List<OrderView> findBySalesVolume();
 
 //    ----------- 통계 관련 메소드 -------------------
     Map<String, Object> countStatus();
-
+    List<OrderView> findBySalesVolume();
+    List<OrderView> calculateSalesOfDays();
 }

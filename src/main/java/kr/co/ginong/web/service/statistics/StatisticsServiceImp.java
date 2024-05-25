@@ -1,6 +1,6 @@
 package kr.co.ginong.web.service.statistics;
 
-import kr.co.ginong.web.entity.member.JoinRoute;
+import kr.co.ginong.web.entity.member.JoinRouteStatsView;
 import kr.co.ginong.web.entity.order.OrderView;
 import kr.co.ginong.web.repository.inquiry.InquiryRepository;
 import kr.co.ginong.web.repository.order.OrderRepository;
@@ -42,15 +42,18 @@ public class StatisticsServiceImp implements StatisticsService {
         return inquiryRepository.countStatus();
     }
 
+    @Override
     public List<OrderView> getBestSeller() {
         return orderRepository.findBySalesVolume();
     }
 
     @Override
-    public List<JoinRoute> getJoinRoute() {
+    public List<JoinRouteStatsView> getJoinRoute() {
         return memberRepository.getJoinRoute();
     }
 
-
+    public List<OrderView> getResultOfSales() {
+        return orderRepository.calculateSalesOfDays();
+    }
 }
 

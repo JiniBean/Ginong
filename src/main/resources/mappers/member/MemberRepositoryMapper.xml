@@ -103,8 +103,8 @@
         WHERE EMAIL = #{email}
     </select>
 
-    <select id="getJoinRoute" resultType="Member">
-        SELECT NAME, COUNT(*) AS COUNT FROM JOIN_ROUTE
+    <select id="getJoinRoute" resultType="JoinRouteStatsView">
+        SELECT NAME, COUNT FROM JOIN_ROUTE_STATS_VIEW
         GROUP BY NAME
         ORDER BY COUNT DESC;
     </select>
