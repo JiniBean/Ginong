@@ -86,7 +86,7 @@ window.addEventListener("load", function(e){
     // 만약 쿠키의 값이 있다면 이 함수 실행
     let cookie = new Cookie();
 
-    if(document.cookie){
+    if(cookie.get("userInfo")){
 
         const agree = cookie.get("userInfo")[0].agree;
 

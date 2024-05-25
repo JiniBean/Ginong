@@ -10,6 +10,7 @@ function Cookie() {
         for (let c of tokens) {
             let tmp = c.split("=");
             let key = tmp[0];
+            key = key.trimStart();
             let value = tmp[1];
             this.map[key] = JSON.parse(value);
         }
