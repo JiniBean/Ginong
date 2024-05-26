@@ -52,12 +52,13 @@ export default class Header {
             // 쿠키에 있는 상품 개수 가져오기
             let cookie = new Cookie();
             count = cookie.get("cartList");
+            count = count.length;
         }
 
         // 있다면 장바구니에 개수 표시
         if(count > 0){
             this.#cartCircle.classList.remove("d:none")
-            this.#cartCircle.textContent = count.length;
+            this.#cartCircle.textContent = count;
         }
     }
 
