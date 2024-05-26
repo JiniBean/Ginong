@@ -119,11 +119,24 @@
 		order by LIKE_COUNT desc
 	</select>
 
-	<select id="findAllBestProduct" resultType="ProductView">
-		select
-		*
-		from PRODUCT_VIEW
-		order by LIKE_COUNT
+	<select id="findAllBestProduct" resultType="Map">
+		SELECT
+			id AS ID,
+			PRETTY_NAME AS prettyName,
+			PRICE AS price,
+			thumbnail_path AS thumbnailPath,
+			thumbnail_name AS thumbnailName,
+			o.count AS count
+		FROM PRODUCT_VIEW p
+		join (
+			SELECT
+				PRODUCT_ID,
+				sum(QUANTITY) AS count
+			FROM ORDER_ITEM
+			GROUP BY PRODUCT_ID
+			ORDER BY COUNT DESC LIMIT 1
+		)o
+		ON p.ID = o.PRODUCT_ID ;
 	</select>
 
 

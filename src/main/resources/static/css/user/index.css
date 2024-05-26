@@ -138,12 +138,19 @@
     height: 36px;
 }
 
-.cart-section > div:active {
+.cacrt-section > div:active {
     background-color: var(--color-main-6);
 }
-
+.card{
+    width: 179px;
+}
 @media (min-width: 768px) {
+
     /* 상품카드 영역 (시즌아웃임박 / 커밍순) */
+
+    .card{
+        width: 280px;
+    }
     .product-card {
         gap: var(--gap-5);
         font-size: var(--font-size-3);

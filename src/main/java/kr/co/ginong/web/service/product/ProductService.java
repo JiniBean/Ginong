@@ -1,8 +1,5 @@
 package kr.co.ginong.web.service.product;
 
-import kr.co.ginong.web.dto.Pager;
-import kr.co.ginong.web.dto.ProductFilter;
-import kr.co.ginong.web.entity.product.Product;
 import kr.co.ginong.web.entity.product.ProductImg;
 import kr.co.ginong.web.entity.product.ProductView;
 
@@ -12,7 +9,7 @@ import java.util.Map;
 public interface ProductService {
     ProductView get(Long productId);
 
-    List<ProductView> getBestProductList();
+    Map<String, Object> getBestProductList();
 
     List<ProductView> getSaleProductList();
 

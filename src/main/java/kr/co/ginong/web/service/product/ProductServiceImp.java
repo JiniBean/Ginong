@@ -69,8 +69,8 @@ public class ProductServiceImp implements ProductService {
 
     // todo 추후 limit 추가하여 베스트,특가,추천 상품 top(x) 까지 출력될 수 있게 만들기
     @Override
-    public List<ProductView> getBestProductList() {
-        List<ProductView> bestProductList = repository.findAllBestProduct();
+    public Map<String, Object> getBestProductList() {
+        Map<String,Object> bestProductList = repository.findAllBestProduct();
         return bestProductList;
     }
 

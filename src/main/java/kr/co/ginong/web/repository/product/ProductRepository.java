@@ -36,7 +36,7 @@ public interface ProductRepository {
 
     List<ProductView> findAllCommingSoon(Long categoryId, String query, int offset, int size, Integer sortType);
 
-    List<ProductView> findAllBestProduct();
+    Map<String,Object> findAllBestProduct();
 
     List<ProductView> findAllSaleProduct();
 
