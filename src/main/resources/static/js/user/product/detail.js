@@ -70,13 +70,14 @@ function cartBYCookie(prdId, qty,header) {
     //기존 쿠키가 없다면 쿠키에 "cartList" 새로 생성
     if (!cookieList) {
         let cart = {
-            prdId   : prdId,
-            quantity: qty
+            prdId   : parseInt(prdId),
+            quantity: parseInt(qty)
         }
 
         let list = [];
         list.push(cart);
-        cookie.set("cartList", JSON.stringify(list));
+        // cookie.set("cartList", JSON.stringify(list));
+        document.cookie = `cartList=${encodeURIComponent(JSON.stringify(list))}; path=/`;
         qty = cart.quantity;
 
     }
@@ -93,15 +94,15 @@ function cartBYCookie(prdId, qty,header) {
         //기존 쿠키가 없다면 기존 리스트에 추가
         if (!check) {
             let cart = {
-                prdId   : prdId,
-                quantity: qty
+                prdId   : parseInt(prdId),
+                quantity:  parseInt(qty)
             }
             cookieList.push(cart);
-            cookie.set("cartList", JSON.stringify(cookieList));
+            document.cookie = `cartList=${encodeURIComponent(JSON.stringify(cookieList))}; path=/`;
             qty = cart.quantity;
             check = true;
         }
-        cookie.set("cartList", JSON.stringify(cookieList));
+        document.cookie = `cartList=${encodeURIComponent(JSON.stringify(cookieList))}; path=/`;
     }
 
     //헤더 바꾸기
@@ -266,7 +267,7 @@ window.addEventListener("load", function() {
     let productId = payBox.querySelector(".l-product-id").value;
 
     let quantityInput = document.querySelector(".l-quantity-input").value;
-    let quantity = parseInt(quantityInput);;
+    let quantity = parseInt(quantityInput);
 
     orderBtn.onclick = function (){
 

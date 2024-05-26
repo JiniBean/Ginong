@@ -82,6 +82,11 @@ createApp({
                     discountRate : item.DISCOUNT_RATE,
                     disCountPrice: item.DISCOUNT_PRICE
                 }));
+
+                // 회원인 경우 배송지 데이터 가져오기
+                const locationData = await repository.findLocationByMemberId();
+                this.location = locationData;
+
             } else {
                 // 비-로그인 => 쿠키에서 상품 ID 출력하여 해당 상품 정보 출력
                 // 비회원의 경우 쿠키에서 장바구니 정보를 가져오는데, 쿠키에는 상품ID와 개수만 존재 합니다.
@@ -106,11 +111,12 @@ createApp({
                         disCountPrice: product.DISCOUNT_PRICE
                     };
                 });
-
+                // 비회원인 경우 배송지 데이터 빈 값으로 초기화
+                this.location = locationData;
             }
 
-            const locationData = await repository.findLocationByMemberId();
-            this.location = locationData;
+
+
         },
 
         submitHandler(e) {
@@ -168,18 +174,28 @@ createApp({
             return this.cartDataList
                 .reduce((sum, item) => sum + (item.productPrice * item.cartQuantity), 0);
         },
+        // totalDiscount() {
+        //     // 할인된 금액이 존재하는 경우, 각 항목의 할인된 가격과 원래 가격의 차이를 합산
+        //     return this.cartDataList.reduce((sum, item) => sum + ((item.disCountPrice > 0 ? item.disCountPrice : item.productPrice) - item.productPrice), 0);
+        // },
         totalDiscount() {
-            // 할인된 금액이 존재하는 경우, 각 항목의 할인된 가격과 원래 가격의 차이를 합산
-            return this.cartDataList.reduce((sum, item) => sum + ((item.disCountPrice > 0 ? item.disCountPrice : item.productPrice) - item.productPrice), 0);
+            // 할인된 금액이 존재하는 경우, 각 항목의 할인된 가격과 원래 가격의 차이를 수량만큼 합산
+            return this.cartDataList.reduce((sum, item) => {
+                let discountPerItem = item.disCountPrice > 0 ? item.productPrice - item.disCountPrice : 0;
+                return sum + (discountPerItem * item.cartQuantity);
+            }, 0);
         },
+
+
+
         deliveryPrice() {
             // 배송비: 50,000원↑ 0 else 3000원
-            let price = this.totalPrice + this.totalDiscount;
+            let price = this.totalPrice - this.totalDiscount;
             return price >= 50000 ? 0 : 3000;
         },
         finalPrice() {
             // 총 주문 금액
-            return (this.totalPrice + this.totalDiscount) + this.deliveryPrice;
+            return (this.totalPrice - this.totalDiscount) + this.deliveryPrice;
         },
         isCartEmpty() {
             return this.cartDataList.length === 0;

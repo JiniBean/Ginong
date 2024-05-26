@@ -104,7 +104,7 @@ document.addEventListener('click',  function (e) {
 
             let list = [];
             list.push(cart);
-            cookie.set("cartList",JSON.stringify(list));
+            document.cookie = `cartList=${encodeURIComponent(JSON.stringify(list))}; path=/`;
             qty = cart.quantity;
 
             return;
