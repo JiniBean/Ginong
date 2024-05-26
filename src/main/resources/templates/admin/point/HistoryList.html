@@ -14,14 +14,11 @@
 <body>
 <main layout:fragment="main"
       class="d:flex fl-dir:column gap:8 md:gap:13 max-w:9 w:10p pt:8 md:pt:13  pr:4 pl:4 md:pr:0 md:pl:0 ">
-
     <nav>
         <h1 class="d:none">탭</h1>
         <ul id='tabbar' class="n-tabbar n-tab-grow w:10p">
-            <li :class="tabIndex == 0 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(0)">쿠폰</a>
-            </li>
-            <li :class="tabIndex == 1 ? 'active' : ''"><a href="#" class="h:3 md:h:4" @click="clickTab(1)">적립금</a>
-            </li>
+            <li :class="tabIndex == 1 ? 'active' : ''"><a href="/admin/coupon/list" class="h:3 md:h:4" @click="clickTab(0)">쿠폰</a></li>
+            <li :class="tabIndex == 0 ? 'active' : ''"><a href="/admin/point/history/list" class="h:3 md:h:4" @click="clickTab(1)">적립금</a></li>
         </ul>
     </nav>
 
@@ -53,9 +50,9 @@
             </div>
         </div>
     </section>
-    <section class="d:flex fl-dir:column gap:7 md:gap:10" v-for="l in list" :key="l.id" @click="redirectToDetail(l.id)">
+    <section class="d:flex fl-dir:column gap:7 md:gap:10" v-for="l in list" :key="l.id" @click="redirectToDetail(l.memberId)">
         <h1 class="d:none">적립금</h1>
-        <div class="d:flex fl-dir:column gap:2">
+        <div class="d:flex fl-dir:column gap:2"> ㅅ
             <div>
                 <span>{{ formatDate(l.pointHistoryDate) }}</span>
             </div>
